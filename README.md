@@ -1,7 +1,8 @@
-Orion plus Game Engine
+MirageBasic Game Engine
 =================
 
 Simple 2D ORPG Game Engine written in VB.Net
+Based on the Orion+ conversion.
 
 Home: http://www.ascensionforums.com
 
