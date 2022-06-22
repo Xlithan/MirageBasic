@@ -1,0 +1,37 @@
+Thumbs.db
+*.obj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*.psd
+*_p.c
+*.ncb
+*.suo
+*.sln.docstates
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+[Bb]in
+[Dd]ebug*/
+*.lib
+*.sbr
+obj/
+[Rr]elease*/
+_ReSharper*/
+[Tt]est[Rr]esult*
+*.vssscc
+$tf*/
+*.db
+[Tt]est*/
+Build/
+Source/Editors/Source/Forms/Forms.rar
+Source/Server/My Project/app.manifest
+/.vs/Orion+ Game Engine/v16/Server/sqlite3/db.lock
+/.vs/Orion+ Game Engine/v16/Server/sqlite3/storage.ide
