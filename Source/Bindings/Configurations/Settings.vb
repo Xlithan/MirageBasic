@@ -25,11 +25,11 @@ Public Class SettingsDef
     <XmlIgnore()> Public Port As Integer = 7001
 
     <XmlIgnore()> Public GameName As String = "MirageBasic"
-    <XmlIgnore()> Public Website As String = "http://ascensiongamedev.com/index.php"
+    <XmlIgnore()> Public Website As String = "http://ms.draignet.uk"
 
 #ElseIf SERVER Then
     Public GameName As String = "MirageBasic"
-    Public Website As String = "http://ascensiongamedev.com/index.php"
+    Public Website As String = "http://ms.draignet.uk"
 
     Public Welcome As String = "Welcome to MirageBasic, enjoy your stay!"
     Public Port As Integer = 7001

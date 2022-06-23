@@ -747,12 +747,12 @@ Partial Class FrmMenu
         Me.Controls.Add(Me.btnRegister)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.pnlLogin)
+        Me.Controls.Add(Me.pnlMainMenu)
         Me.Controls.Add(Me.pnlCharSelect)
         Me.Controls.Add(Me.pnlNewChar)
         Me.Controls.Add(Me.pnlCredits)
         Me.Controls.Add(Me.pnlRegister)
-        Me.Controls.Add(Me.pnlLogin)
-        Me.Controls.Add(Me.pnlMainMenu)
         Me.DoubleBuffered = True
         Me.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ForeColor = System.Drawing.Color.Black
