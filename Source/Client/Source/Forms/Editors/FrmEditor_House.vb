@@ -1,4 +1,6 @@
-﻿Friend Class frmEditor_House
+﻿Imports MirageBasic.Core
+
+Friend Class frmEditor_House
 
     Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
         HouseEditorInit()

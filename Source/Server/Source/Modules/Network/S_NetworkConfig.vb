@@ -1,5 +1,6 @@
 ﻿Imports System.Net
 Imports Asfw.Network
+Imports MirageBasic.Core
 
 Friend Module S_NetworkConfig
     Friend WithEvents Socket As Server
@@ -7,7 +8,7 @@ Friend Module S_NetworkConfig
     Friend Sub InitNetwork()
         If Not Socket Is Nothing Then Return
         ' Establish some Rulez
-        Socket = New Server(ClientPackets.Count, 4096, MAX_PLAYERS) With {
+        Socket = New Server(Packets.ClientPackets.Count, 4096, MAX_PLAYERS) With {
             .BufferLimit = 2048000, ' <- this is 2mb max data storage
             .MinimumIndex = 1, ' <- this prevents the network from giving us 0 as an index
             .PacketAcceptLimit = 100, ' Dunno what is a reasonable cap right now so why not? :P
@@ -42,10 +43,13 @@ Friend Module S_NetworkConfig
         Return TempPlayer(index).InGame
     End Function
 
-    Function IsMultiAccounts(Login As String) As Boolean
-        ' Lol this was broke before ~ SpiceyWolf
+    Function IsMultiAccounts(Index As Integer, Login As String) As Boolean
         For i As Integer = 1 To GetPlayersOnline()
-            If Player(i).Login.Trim.ToLower() = Login.Trim.ToLower() Then Return True
+            If i <> Index then
+                If Player(i).Login.Trim.ToLower() = Login.Trim.ToLower() Then
+                    Return True
+                End If
+            End If
         Next
         Return False
     End Function

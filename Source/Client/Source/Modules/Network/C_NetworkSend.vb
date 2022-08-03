@@ -1,12 +1,13 @@
 ﻿Imports System.Windows.Forms
 Imports Asfw
+Imports MirageBasic.Core
 
 Module C_NetworkSend
 
     Friend Sub SendNewAccount(name As String, password As String)
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CNewAccount)
+        buffer.WriteInt32(Packets.ClientPackets.CNewAccount)
         buffer.WriteString((EKeyPair.EncryptString(name)))
         buffer.WriteString((EKeyPair.EncryptString(password)))
         Socket.SendData(buffer.Data, buffer.Head)
@@ -614,60 +615,60 @@ Module C_NetworkSend
     Friend Sub SendRequestEditClass()
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CRequestEditClasses)
+        buffer.WriteInt32(ClientPackets.CRequestEditClass)
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
 
-    Friend Sub SendSaveClasses()
+    Friend Sub SendSaveJob()
         Dim i As Integer, n As Integer, q As Integer
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CSaveClasses)
+        buffer.WriteInt32(ClientPackets.CSaveClass)
 
-        For i = 1 To MAX_CLASSES
-            buffer.WriteString((Trim$(Classes(i).Name)))
-            buffer.WriteString((Trim$(Classes(i).Desc)))
+        For i = 1 To MAX_JOB
+            buffer.WriteString((Trim$(Job(i).Name)))
+            buffer.WriteString((Trim$(Job(i).Desc)))
 
             ' set sprite array size
-            n = UBound(Classes(i).MaleSprite)
+            n = UBound(Job(i).MaleSprite)
 
             ' send array size
             buffer.WriteInt32(n)
 
             ' loop around sending each sprite
             For q = 0 To n
-                buffer.WriteInt32(Classes(i).MaleSprite(q))
+                buffer.WriteInt32(Job(i).MaleSprite(q))
             Next
 
             ' set sprite array size
-            n = UBound(Classes(i).FemaleSprite)
+            n = UBound(Job(i).FemaleSprite)
 
             ' send array size
             buffer.WriteInt32(n)
 
             ' loop around sending each sprite
             For q = 0 To n
-                buffer.WriteInt32(Classes(i).FemaleSprite(q))
+                buffer.WriteInt32(Job(i).FemaleSprite(q))
             Next
 
-            buffer.WriteInt32(Classes(i).Stat(StatType.Strength))
-            buffer.WriteInt32(Classes(i).Stat(StatType.Endurance))
-            buffer.WriteInt32(Classes(i).Stat(StatType.Vitality))
-            buffer.WriteInt32(Classes(i).Stat(StatType.Intelligence))
-            buffer.WriteInt32(Classes(i).Stat(StatType.Luck))
-            buffer.WriteInt32(Classes(i).Stat(StatType.Spirit))
+            buffer.WriteInt32(Job(i).Stat(StatType.Strength))
+            buffer.WriteInt32(Job(i).Stat(StatType.Endurance))
+            buffer.WriteInt32(Job(i).Stat(StatType.Vitality))
+            buffer.WriteInt32(Job(i).Stat(StatType.Intelligence))
+            buffer.WriteInt32(Job(i).Stat(StatType.Luck))
+            buffer.WriteInt32(Job(i).Stat(StatType.Spirit))
 
             For q = 1 To 5
-                buffer.WriteInt32(Classes(i).StartItem(q))
-                buffer.WriteInt32(Classes(i).StartValue(q))
+                buffer.WriteInt32(Job(i).StartItem(q))
+                buffer.WriteInt32(Job(i).StartValue(q))
             Next
 
-            buffer.WriteInt32(Classes(i).StartMap)
-            buffer.WriteInt32(Classes(i).StartX)
-            buffer.WriteInt32(Classes(i).StartY)
+            buffer.WriteInt32(Job(i).StartMap)
+            buffer.WriteInt32(Job(i).StartX)
+            buffer.WriteInt32(Job(i).StartY)
 
-            buffer.WriteInt32(Classes(i).BaseExp)
+            buffer.WriteInt32(Job(i).BaseExp)
         Next
 
         Socket.SendData(buffer.Data, buffer.Head)

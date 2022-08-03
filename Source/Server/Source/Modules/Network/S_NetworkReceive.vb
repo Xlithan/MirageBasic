@@ -1,11 +1,12 @@
 ﻿Imports System.IO
 Imports Asfw
 Imports Asfw.IO
+Imports MirageBasic.Core
 
 Module S_NetworkReceive
 
     Friend Sub PacketRouter()
-        Socket.PacketId(ClientPackets.CCheckPing) = AddressOf Packet_Ping
+        Socket.PacketId(Packets.ClientPackets.CCheckPing) = AddressOf Packet_Ping
         Socket.PacketId(ClientPackets.CNewAccount) = AddressOf Packet_NewAccount
         Socket.PacketId(ClientPackets.CDelAccount) = AddressOf Packet_DeleteAccount
         Socket.PacketId(ClientPackets.CLogin) = AddressOf Packet_Login
@@ -116,7 +117,7 @@ Module S_NetworkReceive
         Socket.PacketId(ClientPackets.CCloseCraft) = AddressOf Packet_CloseCraft
         Socket.PacketId(ClientPackets.CStartCraft) = AddressOf Packet_StartCraft
 
-        Socket.PacketId(ClientPackets.CRequestClasses) = AddressOf Packet_RequestClasses
+        Socket.PacketId(ClientPackets.CRequestClass) = AddressOf Packet_RequestJob
 
         'emotes
         Socket.PacketId(ClientPackets.CEmote) = AddressOf Packet_Emote
@@ -158,8 +159,8 @@ Module S_NetworkReceive
         Socket.PacketId(ClientPackets.CSaveProjectile) = AddressOf HandleSaveProjectile
         Socket.PacketId(ClientPackets.CRequestEditRecipes) = AddressOf Packet_RequestEditRecipes
         Socket.PacketId(ClientPackets.CSaveRecipe) = AddressOf Packet_SaveRecipe
-        Socket.PacketId(ClientPackets.CRequestEditClasses) = AddressOf Packet_RequestEditClasses
-        Socket.PacketId(ClientPackets.CSaveClasses) = AddressOf Packet_SaveClasses
+        Socket.PacketId(ClientPackets.CRequestEditClass) = AddressOf Packet_RequestEditJob
+        Socket.PacketId(ClientPackets.CSaveClass) = AddressOf Packet_SaveJob
         Socket.PacketId(ClientPackets.CRequestAutoMap) = AddressOf Packet_RequestAutoMap
         Socket.PacketId(ClientPackets.CSaveAutoMap) = AddressOf Packet_SaveAutoMap
 
@@ -235,7 +236,7 @@ Module S_NetworkReceive
                 Else
                     ' send new char shit
                     If Not IsPlaying(index) Then
-                        SendNewCharClasses(index)
+                        SendNewCharJob(index)
                     End If
                 End If
 
@@ -326,9 +327,9 @@ Module S_NetworkReceive
                     Exit Sub
                 End If
 
-                If IsMultiAccounts(Name) Then
-                    'AlertMsg(index, "Multiple account logins is not authorized.")
-                    'Exit Sub
+                If IsMultiAccounts(index, Name) Then
+                    AlertMsg(index, "Multiple account logins is not authorized.")
+                    Exit Sub
                 End If
 
                 ' Load the player
@@ -336,48 +337,16 @@ Module S_NetworkReceive
                 ClearBank(index)
                 LoadBank(index, Name)
 
-                buffer.Dispose()
-                buffer = New ByteStream(4)
-                buffer.WriteInt32(ServerPackets.SLoginOk)
-                buffer.WriteInt32(MAX_CHARS)
-
-                AddDebug("Sent SMSG: SLoginOk")
-
-                For i = 1 To MAX_CHARS
-                    If Player(index).Character(i).Classes <= 0 Then
-                        buffer.WriteString("")
-                        buffer.WriteInt32(Player(index).Character(i).Sprite)
-                        buffer.WriteInt32(Player(index).Character(i).Level)
-                        buffer.WriteString("")
-                        buffer.WriteInt32(0)
-                    Else
-                        buffer.WriteString(Trim$(Player(index).Character(i).Name))
-                        buffer.WriteInt32(Player(index).Character(i).Sprite)
-                        buffer.WriteInt32(Player(index).Character(i).Level)
-                        buffer.WriteString(Trim$(Classes(Player(index).Character(i).Classes).Name))
-                        buffer.WriteInt32(Player(index).Character(i).Sex)
-                    End If
-
-                Next
-
-                Socket.SendDataTo(index, buffer.Data, buffer.Head)
-
                 ' Show the player up on the socket status
                 Addlog(GetPlayerLogin(index) & " has logged in from " & Socket.ClientIp(index) & ".", PLAYER_LOG)
                 Console.WriteLine(GetPlayerLogin(index) & " has logged in from " & Socket.ClientIp(index) & ".")
 
-                '' Check if character data has been created
-                'If Len(Trim$(Player(index).Character(TempPlayer(index).CurChar).Name)) > 0 Then
-                '    ' we have a char!
-                '    'HandleUseChar(index)
-                'Else
-                '    ' send new char shit
-                '    If Not IsPlaying(index) Then
-                '        SendNewCharClasses(index)
-                '    End If
-                'End If
-
-                buffer.Dispose()
+                ' Check if character data has been created
+                If Len(Trim$(Player(index).Character(TempPlayer(index).CurChar).Name)) > 0 Then
+                    HandleUseChar(index)
+                Else
+                    SendNewCharJob(index)
+                End If
             End If
         End If
     End Sub
@@ -401,11 +370,8 @@ Module S_NetworkReceive
                     ClearBank(index)
                     LoadBank(index, Trim$(Player(index).Login))
                 Else
-                    ' send new char shit
-                    If Not IsPlaying(index) Then
-                        SendNewCharClasses(index)
-                        TempPlayer(index).CurChar = slot
-                    End If
+                    SendNewCharJob(index)
+                    TempPlayer(index).CurChar = slot
                 End If
             End If
         End If
@@ -415,7 +381,7 @@ Module S_NetworkReceive
     Private Sub Packet_AddChar(index As Integer, ByRef data() As Byte)
         Dim Name As String, slot As Byte
         Dim Sex As Integer
-        Dim Classes As Integer
+        Dim Job As Integer
         Dim Sprite As Integer
         Dim i As Integer
         Dim n As Integer
@@ -428,7 +394,7 @@ Module S_NetworkReceive
             slot = buffer.ReadInt32
             Name = buffer.ReadString
             Sex = buffer.ReadInt32
-            Classes = buffer.ReadInt32
+            Job = buffer.ReadInt32
             Sprite = buffer.ReadInt32
 
             ' Prevent hacking
@@ -449,7 +415,7 @@ Module S_NetworkReceive
 
             If (Sex < modEnumerators.SexType.Male) OrElse (Sex > modEnumerators.SexType.Female) Then Exit Sub
 
-            If Classes < 1 OrElse Classes > Max_Classes Then Exit Sub
+            If Job < 1 OrElse Job > MAX_JOB Then Exit Sub
 
             ' Check if char already exists in slot
             If CharExist(index, slot) Then
@@ -465,7 +431,7 @@ Module S_NetworkReceive
 
             ' Everything went ok, add the character
             TempPlayer(index).CurChar = slot
-            AddChar(index, slot, Name, Sex, Classes, Sprite)
+            AddChar(index, slot, Name, Sex, Job, Sprite)
             Addlog("Character " & Name & " added to " & GetPlayerLogin(index) & "'s account.", PLAYER_LOG)
 
             ' log them in!!
@@ -502,7 +468,7 @@ Module S_NetworkReceive
                     AddDebug("Sent SMSG: SLoginOk")
 
                     For i = 1 To MAX_CHARS
-                        If Player(index).Character(i).Classes <= 0 Then
+                        If Player(index).Character(i).Job <= 0 Then
                             buffer.WriteString((Trim$(Player(index).Character(i).Name)))
                             buffer.WriteInt32(Player(index).Character(i).Sprite)
                             buffer.WriteInt32(Player(index).Character(i).Level)
@@ -512,7 +478,7 @@ Module S_NetworkReceive
                             buffer.WriteString((Trim$(Player(index).Character(i).Name)))
                             buffer.WriteInt32(Player(index).Character(i).Sprite)
                             buffer.WriteInt32(Player(index).Character(i).Level)
-                            buffer.WriteString((Trim$(Classes(Player(index).Character(i).Classes).Name)))
+                            buffer.WriteString((Trim$(Job(Player(index).Character(i).Job).Name)))
                             buffer.WriteInt32(Player(index).Character(i).Sex)
                         End If
 
@@ -2364,39 +2330,39 @@ Module S_NetworkReceive
 
     End Sub
 
-    Sub Packet_RequestClasses(index As Integer, ByRef data() As Byte)
-        AddDebug("Recieved CMSG: CRequestClasses")
+    Sub Packet_RequestJob(index As Integer, ByRef data() As Byte)
+        AddDebug("Recieved CMSG: CRequestJob")
 
-        SendClasses(index)
+        SendJob(index)
     End Sub
 
-    Sub Packet_RequestEditClasses(index As Integer, ByRef data() As Byte)
-        AddDebug("Recieved EMSG: RequestEditClasses")
+    Sub Packet_RequestEditJob(index As Integer, ByRef data() As Byte)
+        AddDebug("Recieved EMSG: RequestEditJob")
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
 
-        SendClasses(index)
+        SendJob(index)
 
         SendClassEditor(index)
     End Sub
 
-    Sub Packet_SaveClasses(index As Integer, ByRef data() As Byte)
+    Sub Packet_SaveJob(index As Integer, ByRef data() As Byte)
         Dim i As Integer, z As Integer, x As Integer
         Dim buffer As New ByteStream(data)
 
-        AddDebug("Recieved EMSG: SaveClasses")
+        AddDebug("Recieved EMSG: SaveJob")
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
 
-        For i = 0 To Max_Classes
-            ReDim Classes(i).Stat(StatType.Count - 1)
+        For i = 0 To MAX_JOB
+            ReDim Job(i).Stat(StatType.Count - 1)
         Next
 
-        For i = 1 To Max_Classes
+        For i = 1 To MAX_JOB
 
-            With Classes(i)
+            With Job(i)
                 .Name = buffer.ReadString
                 .Desc = buffer.ReadString
 
@@ -2444,11 +2410,11 @@ Module S_NetworkReceive
 
         buffer.Dispose()
 
-        SaveClasses()
+        SaveJobs()
 
-        LoadClasses()
+        LoadJobs()
 
-        SendClassesToAll()
+        SendJobToAll()
     End Sub
 
     Private Sub Packet_EditorLogin(index As Integer, ByRef data() As Byte)
@@ -2485,7 +2451,7 @@ Module S_NetworkReceive
                 Exit Sub
             End If
 
-            If IsMultiAccounts(Name) Then
+            If IsMultiAccounts(index, Name) Then
                 AlertMsg(index, "Multiple account logins is not authorized.")
                 Exit Sub
             End If
@@ -2495,7 +2461,6 @@ Module S_NetworkReceive
 
             If GetPlayerAccess(index) > AdminType.Player Then
                 SendEditorLoadOk(index)
-                'SendMapData(index, 1, True)
                 SendGameData(index)
                 SendMapNames(index)
                 SendProjectiles(index)

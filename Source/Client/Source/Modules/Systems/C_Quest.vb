@@ -1,4 +1,5 @@
 ﻿Imports Asfw
+Imports MirageBasic.Core
 
 Friend Module C_Quest
 
@@ -288,7 +289,7 @@ Friend Module C_Quest
         Dim buffer As ByteStream
 
         buffer = New ByteStream(4)
-        buffer.WriteInt32(ClientPackets.CRequestEditQuest)
+        buffer.WriteInt32(Packets.ClientPackets.CRequestEditQuest)
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
 
@@ -666,8 +667,8 @@ Friend Module C_Quest
             .cmbClassReq.Items.Clear()
             .cmbClassReq.Items.Add("None")
 
-            For i = 1 To MAX_CLASSES
-                .cmbClassReq.Items.Add(i & ": " & Classes(i).Name)
+            For i = 1 To MAX_JOB
+                .cmbClassReq.Items.Add(i & ": " & Job(i).Name)
             Next
 
             .cmbItemReq.Enabled = False
@@ -923,8 +924,8 @@ Friend Module C_Quest
 
             .cmbClassReq.Items.Clear()
             .cmbClassReq.Items.Add("None")
-            For i = 1 To MAX_CLASSES
-                .cmbClassReq.Items.Add(Trim(Classes(i).Name))
+            For i = 1 To MAX_JOB
+                .cmbClassReq.Items.Add(Trim(Job(i).Name))
             Next
 
             .cmbStartItem.SelectedIndex = Quest(Editorindex).QuestGiveItem
@@ -951,7 +952,7 @@ Friend Module C_Quest
                     Case 2
                         .lstRequirements.Items.Add(i & ":" & "Quest Requirement: " & Trim(Quest(Quest(Editorindex).RequirementIndex(i)).Name))
                     Case 3
-                        .lstRequirements.Items.Add(i & ":" & "Class Requirement: " & Trim(Classes(Quest(Editorindex).RequirementIndex(i)).Name))
+                        .lstRequirements.Items.Add(i & ":" & "Class Requirement: " & Trim(Job(Quest(Editorindex).RequirementIndex(i)).Name))
                     Case Else
                         .lstRequirements.Items.Add(i & ":")
                 End Select

@@ -1,4 +1,5 @@
 ﻿Imports Asfw
+Imports MirageBasic.Core
 
 Friend Module C_Time
 

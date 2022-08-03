@@ -1,6 +1,7 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
 Imports Asfw
+Imports MirageBasic.Core
 
 Friend Module C_GuiFunctions
 
@@ -192,7 +193,7 @@ Friend Module C_GuiFunctions
                     ElseIf x > ActionPanelX + SkillBtnX AndAlso x < ActionPanelX + SkillBtnX + 46 AndAlso y > ActionPanelY + SkillBtnY AndAlso y < ActionPanelY + SkillBtnY + 46 Then
                         PlaySound("Click.ogg")
                         buffer = New ByteStream(4)
-                        buffer.WriteInt32(ClientPackets.CSkills)
+                        buffer.WriteInt32(Packets.ClientPackets.CSkills)
                         Socket.SendData(buffer.Data, buffer.Head)
                         buffer.Dispose()
                         PnlSkillsVisible = Not PnlSkillsVisible

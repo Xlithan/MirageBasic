@@ -1,5 +1,5 @@
 Welcome to the MirageBasic Client. This is a free open source VB.Net game engine! 
 
-For help or support please visit our site at http://ms.draignet.uk 
+For help or support please visit our site at https://miragebasic.net/
 
 This project is based off of Orion+.

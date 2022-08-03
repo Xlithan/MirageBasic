@@ -1,7 +1,9 @@
 ﻿Imports System.IO
 Imports System.Windows.Forms
 Imports Asfw
+Imports MirageBasic.Core
 Imports SFML.Graphics
+Imports SFML.System
 Imports SFML.Window
 
 Friend Module C_Housing
@@ -82,7 +84,7 @@ Friend Module C_Housing
         Dim i As Integer, Buffer As ByteStream, count As Integer
         Buffer = New ByteStream(4)
 
-        Buffer.WriteInt32(ClientPackets.CSaveHouses)
+        Buffer.WriteInt32(Packets.ClientPackets.CSaveHouses)
 
         For i = 1 To MaxHouses
             If HouseChanged(i) Then count = count + 1
@@ -273,7 +275,7 @@ Friend Module C_Housing
         Dim i As Integer
         i = 1
 
-        While File.Exists(Path.Graphics & "Furniture\" & i & GfxExt)
+        While File.Exists(Paths.Graphics & "Furniture\" & i & GfxExt)
             NumFurniture = NumFurniture + 1
             i = i + 1
         End While

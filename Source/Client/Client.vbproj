@@ -1,22 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{531B337C-BC02-44ED-90C2-C448FE5190A2}</ProjectGuid>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
     <StartupObject>Engine.My.MyApplication</StartupObject>
     <RootNamespace>Engine</RootNamespace>
     <AssemblyName>MirageBasic Client</AssemblyName>
-    <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <OptionExplicit>On</OptionExplicit>
-    <OptionCompare>Binary</OptionCompare>
-    <OptionStrict>Off</OptionStrict>
-    <OptionInfer>On</OptionInfer>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <ManifestCertificateThumbprint>181BBD77C201FB969E61DF100063FD42A08B2BE6</ManifestCertificateThumbprint>
@@ -24,12 +13,6 @@
     <GenerateManifests>false</GenerateManifests>
     <TargetZone>LocalIntranet</TargetZone>
     <SignManifests>false</SignManifests>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkProfile />
     <PublishUrl>\Publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -45,337 +28,187 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>false</BootstrapperEnabled>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>My Project\Icon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DefineDebug>true</DefineDebug>
-    <DefineTrace>true</DefineTrace>
     <OutputPath>..\..\Build\Client\</OutputPath>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
     <DefineConstants>CLIENT</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <DefineTrace>true</DefineTrace>
     <OutputPath>..\..\Build\Client\</OutputPath>
-    <Optimize>true</Optimize>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
     <DebugType>None</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
     <DefineConstants>CLIENT</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Asfw.Net, Version=0.10.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Asfw.Net.0.10.6\lib\net45\Asfw.Net.dll</HintPath>
-    </Reference>
-    <Reference Include="DarkUI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DarkUI.1.0.0.1\lib\DarkUI.dll</HintPath>
-    </Reference>
-    <Reference Include="SFML.Portable, Version=2.0.6807.40114, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SFML-Portable-2.1.1.5.1\lib\SFML.Portable.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
+    <Compile Remove="Embedded\**" />
+    <EmbeddedResource Remove="Embedded\**" />
+    <None Remove="Embedded\**" />
   </ItemGroup>
   <ItemGroup>
-    <Import Include="Microsoft.VisualBasic" />
-    <Import Include="System" />
-    <Import Include="System.Collections" />
-    <Import Include="System.Collections.Generic" />
-    <Import Include="System.Diagnostics" />
+    <AdditionalFiles Remove="My Project\app.manifest" />
+  </ItemGroup>
+  <ItemGroup>
     <Import Include="System.Drawing" />
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="My Project\ApplicationEvents.vb" />
-    <Compile Include="My Project\Resources.Designer.vb">
-      <AutoGen>True</AutoGen>
+    <Compile Update="My Project\Resources.Designer.vb">
       <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Animation.Designer.vb">
+    <Compile Update="Source\Forms\Editors\FrmEditor_Animation.Designer.vb">
       <DependentUpon>FrmEditor_Animation.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Animation.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_AutoMapper.Designer.vb">
+    <Compile Update="Source\Forms\Editors\FrmEditor_AutoMapper.Designer.vb">
       <DependentUpon>FrmEditor_AutoMapper.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_AutoMapper.vb">
-      <SubType>Form</SubType>
+    <Compile Update="Source\Forms\Editors\FrmEditor_Job.Designer.vb">
+      <DependentUpon>FrmEditor_Job.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Classes.Designer.vb">
-      <DependentUpon>FrmEditor_Classes.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Classes.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Events.Designer.vb">
+    <Compile Update="Source\Forms\Editors\FrmEditor_Events.Designer.vb">
       <DependentUpon>FrmEditor_Events.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Events.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_House.Designer.vb">
+    <Compile Update="Source\Forms\Editors\FrmEditor_House.Designer.vb">
       <DependentUpon>FrmEditor_House.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_House.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Item.Designer.vb">
+    <Compile Update="Source\Forms\Editors\FrmEditor_Item.Designer.vb">
       <DependentUpon>FrmEditor_Item.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Item.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_MapEditor.designer.vb">
+    <Compile Update="Source\Forms\Editors\FrmEditor_MapEditor.designer.vb">
       <DependentUpon>FrmEditor_MapEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_MapEditor.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_NPC.Designer.vb">
+    <Compile Update="Source\Forms\Editors\FrmEditor_NPC.Designer.vb">
       <DependentUpon>FrmEditor_NPC.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_NPC.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Pet.Designer.vb">
+    <Compile Update="Source\Forms\Editors\FrmEditor_Pet.Designer.vb">
       <DependentUpon>FrmEditor_Pet.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Pet.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Projectile.Designer.vb">
+    <Compile Update="Source\Forms\Editors\FrmEditor_Projectile.Designer.vb">
       <DependentUpon>FrmEditor_Projectile.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Projectile.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Quest.Designer.vb">
+    <Compile Update="Source\Forms\Editors\FrmEditor_Quest.Designer.vb">
       <DependentUpon>FrmEditor_Quest.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Quest.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Recipe.Designer.vb">
+    <Compile Update="Source\Forms\Editors\FrmEditor_Recipe.Designer.vb">
       <DependentUpon>FrmEditor_Recipe.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Recipe.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Resource.Designer.vb">
+    <Compile Update="Source\Forms\Editors\FrmEditor_Resource.Designer.vb">
       <DependentUpon>FrmEditor_Resource.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Resource.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Shop.Designer.vb">
+    <Compile Update="Source\Forms\Editors\FrmEditor_Shop.Designer.vb">
       <DependentUpon>FrmEditor_Shop.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Shop.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Skill.Designer.vb">
+    <Compile Update="Source\Forms\Editors\FrmEditor_Skill.Designer.vb">
       <DependentUpon>FrmEditor_Skill.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_Skill.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_VisualWarp.Designer.vb">
+    <Compile Update="Source\Forms\Editors\FrmEditor_VisualWarp.Designer.vb">
       <DependentUpon>FrmEditor_VisualWarp.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\Editors\FrmEditor_VisualWarp.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Modules\C_AutoMap.vb" />
-    <Compile Include="Source\Modules\C_Editors.vb" />
-    <Compile Include="Source\Modules\Objects\C_Animations.vb" />
-    <Compile Include="Source\Modules\Objects\C_Classes.vb" />
-    <Compile Include="Source\Modules\Objects\C_Items.vb" />
-    <Compile Include="Source\Modules\Objects\C_Maps.vb" />
-    <Compile Include="Source\Modules\Objects\C_Resources.vb" />
-    <Compile Include="Source\Modules\Systems\C_Banks.vb" />
-    <Compile Include="Source\Modules\Systems\C_Shops.vb" />
-    <Compile Include="Source\Modules\Systems\C_Trade.vb" />
-    <Compile Include="Source\Modules\UI\C_Chat.vb" />
-    <Compile Include="Source\Forms\Game\FrmAdmin.Designer.vb">
+    <Compile Update="Source\Forms\Game\FrmAdmin.Designer.vb">
       <DependentUpon>FrmAdmin.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\Game\FrmAdmin.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Game\FrmGame.Designer.vb">
+    <Compile Update="Source\Forms\Game\FrmGame.Designer.vb">
       <DependentUpon>FrmGame.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\Game\FrmGame.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\FrmMenu.Designer.vb">
+    <Compile Update="Source\Forms\FrmMenu.Designer.vb">
       <DependentUpon>FrmMenu.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\FrmMenu.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Forms\Game\FrmOptions.Designer.vb">
+    <Compile Update="Source\Forms\Game\FrmOptions.Designer.vb">
       <DependentUpon>FrmOptions.vb</DependentUpon>
     </Compile>
-    <Compile Include="Source\Forms\Game\FrmOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Source\Modules\Objects\C_AutoTiles.vb" />
-    <Compile Include="Source\Modules\Systems\C_Crafting.vb" />
-    <Compile Include="Source\Modules\Systems\C_EventSystem.vb" />
-    <Compile Include="Source\Modules\UI\C_GuiFunctions.vb" />
-    <Compile Include="Source\Modules\Globals\C_Variables.vb" />
-    <Compile Include="Source\Modules\C_General.vb" />
-    <Compile Include="Source\Modules\C_GameLogic.vb" />
-    <Compile Include="Source\Modules\C_Graphics.vb" />
-    <Compile Include="Source\Modules\UI\C_HotBar.vb" />
-    <Compile Include="Source\Modules\Systems\C_Housing.vb" />
-    <Compile Include="Source\Modules\Systems\C_Parties.vb" />
-    <Compile Include="Source\Modules\Objects\C_Pets.vb" />
-    <Compile Include="Source\Modules\Objects\C_Player.vb" />
-    <Compile Include="Source\Modules\Objects\C_Projectiles.vb" />
-    <Compile Include="Source\Modules\Systems\C_Quest.vb" />
-    <Compile Include="Source\Modules\C_Sound.vb" />
-    <Compile Include="Source\Modules\Globals\C_Constants.vb" />
-    <Compile Include="Source\Modules\C_DataBase.vb" />
-    <Compile Include="Source\Modules\UI\C_Time.vb" />
-    <Compile Include="Source\Modules\UI\C_UpdateUI.vb" />
-    <Compile Include="Source\Modules\UI\C_Text.vb" />
-    <Compile Include="Source\Modules\C_Types.vb" />
-    <Compile Include="Source\Modules\Systems\C_Weather.vb" />
-    <Compile Include="My Project\AssemblyInfo.vb" />
-    <Compile Include="My Project\Application.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Application.myapp</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="My Project\Settings.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="Source\Modules\Network\C_NetworkConfig.vb" />
-    <Compile Include="Source\Modules\Network\C_NetworkReceive.vb" />
-    <Compile Include="Source\Modules\Network\C_NetworkSend.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Animation.resx">
-      <DependentUpon>FrmEditor_Animation.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_AutoMapper.resx">
-      <DependentUpon>FrmEditor_AutoMapper.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Classes.resx">
-      <DependentUpon>FrmEditor_Classes.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_House.resx">
-      <DependentUpon>FrmEditor_House.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Item.resx">
-      <DependentUpon>FrmEditor_Item.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_NPC.resx">
-      <DependentUpon>FrmEditor_NPC.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Pet.resx">
-      <DependentUpon>FrmEditor_Pet.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Projectile.resx">
-      <DependentUpon>FrmEditor_Projectile.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Quest.resx">
-      <DependentUpon>FrmEditor_Quest.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Recipe.resx">
-      <DependentUpon>FrmEditor_Recipe.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Resource.resx">
-      <DependentUpon>FrmEditor_Resource.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Shop.resx">
-      <DependentUpon>FrmEditor_Shop.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Skill.resx">
-      <DependentUpon>FrmEditor_Skill.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_VisualWarp.resx">
-      <DependentUpon>FrmEditor_VisualWarp.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Game\FrmAdmin.resx">
-      <DependentUpon>FrmAdmin.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_Events.resx">
-      <DependentUpon>FrmEditor_Events.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Editors\FrmEditor_MapEditor.resx">
-      <DependentUpon>FrmEditor_MapEditor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Game\FrmGame.resx">
-      <DependentUpon>FrmGame.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\FrmMenu.resx">
-      <DependentUpon>FrmMenu.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="My Project\Resources.resx">
-      <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>
-      <CustomToolNamespace>My.Resources</CustomToolNamespace>
-      <SubType>Designer</SubType>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Source\Forms\Game\FrmOptions.resx">
-      <DependentUpon>FrmOptions.vb</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Contents\AutoMapper.ini">
+    <None Update="Contents\AutoMapper.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="My Project\App.config" />
-    <None Include="Contents\Music\Forest.ogg">
+    <None Update="Contents\Gui\Menu\btn_createacc.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Music\Track1.ogg">
+    <None Update="Contents\Gui\Menu\btn_createacc_hover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Sounds\Click.ogg">
+    <None Update="Contents\Gui\Menu\btn_createchar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Sounds\Rain.ogg">
+    <None Update="Contents\Gui\Menu\btn_createchar_hover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Sounds\Thunder.ogg">
+    <None Update="Contents\Gui\Menu\btn_deletechar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="My Project\app.manifest" />
-    <None Include="My Project\Application.myapp">
-      <Generator>MyApplicationCodeGenerator</Generator>
-      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    <None Update="Contents\Gui\Menu\btn_deletechar_hover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="My Project\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <CustomToolNamespace>My</CustomToolNamespace>
-      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    <None Update="Contents\Gui\Menu\btn_login.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="My Project\packages.config" />
-    <None Include="My Project\SFML.Portable.dll.config" />
-    <None Include="packages.config" />
+    <None Update="Contents\Gui\Menu\btn_login_hover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Contents\Gui\Menu\btn_newchar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Contents\Gui\Menu\btn_newchar_hover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Contents\Gui\Menu\btn_usechar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Contents\Gui\Menu\btn_usechar_hover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Contents\Gui\Menu\Button_exit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Contents\Gui\Menu\button_hover_exit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Contents\Gui\Menu\button_hover_play.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Contents\Gui\Menu\button_hover_register.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Contents\Gui\Menu\Button_play.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Contents\Gui\Menu\Button_register.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Contents\Gui\Menu\icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Contents\Gui\Menu\LoadingBack.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Contents\Gui\Menu\menuPanel.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Contents\Music\Forest.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Contents\Music\Track1.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Contents\Sounds\Click.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Contents\Sounds\Rain.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Contents\Sounds\Thunder.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -415,655 +248,648 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Contents\Credits.txt">
+    <None Update="Contents\Credits.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Animations\1.png">
+    <None Update="Contents\Graphics\Animations\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Animations\2.png">
+    <None Update="Contents\Graphics\Animations\2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Characters\1.png">
+    <None Update="Contents\Graphics\Characters\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Characters\2.png">
+    <None Update="Contents\Graphics\Characters\2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Characters\3.png">
+    <None Update="Contents\Graphics\Characters\3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Emotes\1.png">
+    <None Update="Contents\Graphics\Emotes\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Emotes\10.png">
+    <None Update="Contents\Graphics\Emotes\10.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Emotes\11.png">
+    <None Update="Contents\Graphics\Emotes\11.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Emotes\2.png">
+    <None Update="Contents\Graphics\Emotes\2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Emotes\3.png">
+    <None Update="Contents\Graphics\Emotes\3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Emotes\4.png">
+    <None Update="Contents\Graphics\Emotes\4.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Emotes\5.png">
+    <None Update="Contents\Graphics\Emotes\5.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Emotes\6.png">
+    <None Update="Contents\Graphics\Emotes\6.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Emotes\7.png">
+    <None Update="Contents\Graphics\Emotes\7.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Emotes\8.png">
+    <None Update="Contents\Graphics\Emotes\8.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Emotes\9.png">
+    <None Update="Contents\Graphics\Emotes\9.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Faces\1.png">
+    <None Update="Contents\Graphics\Faces\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Faces\2.png">
+    <None Update="Contents\Graphics\Faces\2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Faces\3.png">
+    <None Update="Contents\Graphics\Faces\3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Fogs\1.png">
+    <None Update="Contents\Graphics\Fogs\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Furniture\1.png">
+    <None Update="Contents\Graphics\Furniture\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Furniture\2.png">
+    <None Update="Contents\Graphics\Furniture\2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Furniture\3.png">
+    <None Update="Contents\Graphics\Furniture\3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Furniture\4.png">
+    <None Update="Contents\Graphics\Furniture\4.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Furniture\5.png">
+    <None Update="Contents\Graphics\Furniture\5.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Actionbar\ActionBar.png">
+    <None Update="Contents\Gui\Actionbar\ActionBar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Button.png">
+    <None Update="Contents\Gui\Button.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Button_Hover.png">
+    <None Update="Contents\Gui\Button_Hover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\EXPBar.png">
+    <None Update="Contents\Gui\EXPBar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\HPBar.png">
+    <None Update="Contents\Gui\HPBar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Main\Bank.png">
+    <None Update="Contents\Gui\Main\Bank.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Main\Char.png">
+    <None Update="Contents\Gui\Main\Char.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Main\Chat.png">
+    <None Update="Contents\Gui\Main\Chat.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Main\Craft.png">
+    <None Update="Contents\Gui\Main\Craft.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Main\Description.png">
+    <None Update="Contents\Gui\Main\Description.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Main\EventChat.png">
+    <None Update="Contents\Gui\Main\EventChat.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Main\Hotbar.png">
+    <None Update="Contents\Gui\Main\Hotbar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Main\HUD.png">
+    <None Update="Contents\Gui\Main\HUD.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Main\Inventory.png">
+    <None Update="Contents\Gui\Main\Inventory.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Main\Min.png">
+    <None Update="Contents\Gui\Main\Min.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Main\MyChat.png">
+    <None Update="Contents\Gui\Main\MyChat.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Main\Pet.png">
+    <None Update="Contents\Gui\Main\Pet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Main\PetBar.png">
+    <None Update="Contents\Gui\Main\PetBar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Main\Plus.png">
+    <None Update="Contents\Gui\Main\Plus.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Main\ProgBar.png">
+    <None Update="Contents\Gui\Main\ProgBar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Main\QuestLog.png">
+    <None Update="Contents\Gui\Main\QuestLog.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Main\RightClick.png">
+    <None Update="Contents\Gui\Main\RightClick.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Main\Shop.png">
+    <None Update="Contents\Gui\Main\Shop.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Main\Skills.png">
+    <None Update="Contents\Gui\Main\Skills.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Main\Trade.png">
+    <None Update="Contents\Gui\Main\Trade.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Menu\Button.png">
+    <None Update="Contents\Gui\Menu\Button.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Menu\button_hover.png">
+    <None Update="Contents\Gui\Menu\button_hover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Menu\Logo.png">
+    <None Update="Contents\Gui\Menu\Logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Menu\Menu.png">
+    <None Update="Contents\Gui\Menu\Menu.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Menu\Panel.png">
+    <None Update="Contents\Gui\Menu\Panel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\Menu\Untitled.png">
+    <None Update="Contents\Gui\Menu\Untitled.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Gui\MPBar.png">
+    <None Update="Contents\Gui\MPBar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\1.png">
+    <None Update="Contents\Graphics\Items\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\10.png">
+    <None Update="Contents\Graphics\Items\10.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\100.png">
+    <None Update="Contents\Graphics\Items\100.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\101.png">
+    <None Update="Contents\Graphics\Items\101.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\102.png">
+    <None Update="Contents\Graphics\Items\102.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\103.png">
+    <None Update="Contents\Graphics\Items\103.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\104.png">
+    <None Update="Contents\Graphics\Items\104.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\105.png">
+    <None Update="Contents\Graphics\Items\105.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\106.png">
+    <None Update="Contents\Graphics\Items\106.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\107.png">
+    <None Update="Contents\Graphics\Items\107.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\108.png">
+    <None Update="Contents\Graphics\Items\108.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\109.png">
+    <None Update="Contents\Graphics\Items\109.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\11.png">
+    <None Update="Contents\Graphics\Items\11.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\110.png">
+    <None Update="Contents\Graphics\Items\110.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\111.png">
+    <None Update="Contents\Graphics\Items\111.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\112.png">
+    <None Update="Contents\Graphics\Items\112.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\113.png">
+    <None Update="Contents\Graphics\Items\113.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\114.png">
+    <None Update="Contents\Graphics\Items\114.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\115.png">
+    <None Update="Contents\Graphics\Items\115.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\116.png">
+    <None Update="Contents\Graphics\Items\116.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\117.png">
+    <None Update="Contents\Graphics\Items\117.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\118.png">
+    <None Update="Contents\Graphics\Items\118.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\119.png">
+    <None Update="Contents\Graphics\Items\119.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\12.png">
+    <None Update="Contents\Graphics\Items\12.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\120.png">
+    <None Update="Contents\Graphics\Items\120.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\121.png">
+    <None Update="Contents\Graphics\Items\121.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\122.png">
+    <None Update="Contents\Graphics\Items\122.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\123.png">
+    <None Update="Contents\Graphics\Items\123.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\124.png">
+    <None Update="Contents\Graphics\Items\124.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\125.png">
+    <None Update="Contents\Graphics\Items\125.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\126.png">
+    <None Update="Contents\Graphics\Items\126.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\127.png">
+    <None Update="Contents\Graphics\Items\127.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\128.png">
+    <None Update="Contents\Graphics\Items\128.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\129.png">
+    <None Update="Contents\Graphics\Items\129.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\13.png">
+    <None Update="Contents\Graphics\Items\13.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\130.png">
+    <None Update="Contents\Graphics\Items\130.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\131.png">
+    <None Update="Contents\Graphics\Items\131.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\14.png">
+    <None Update="Contents\Graphics\Items\14.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\15.png">
+    <None Update="Contents\Graphics\Items\15.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\16.png">
+    <None Update="Contents\Graphics\Items\16.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\17.png">
+    <None Update="Contents\Graphics\Items\17.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\18.png">
+    <None Update="Contents\Graphics\Items\18.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\19.png">
+    <None Update="Contents\Graphics\Items\19.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\2.png">
+    <None Update="Contents\Graphics\Items\2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\20.png">
+    <None Update="Contents\Graphics\Items\20.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\21.png">
+    <None Update="Contents\Graphics\Items\21.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\22.png">
+    <None Update="Contents\Graphics\Items\22.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\23.png">
+    <None Update="Contents\Graphics\Items\23.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\24.png">
+    <None Update="Contents\Graphics\Items\24.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\25.png">
+    <None Update="Contents\Graphics\Items\25.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\26.png">
+    <None Update="Contents\Graphics\Items\26.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\27.png">
+    <None Update="Contents\Graphics\Items\27.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\28.png">
+    <None Update="Contents\Graphics\Items\28.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\29.png">
+    <None Update="Contents\Graphics\Items\29.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\3.png">
+    <None Update="Contents\Graphics\Items\3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\30.png">
+    <None Update="Contents\Graphics\Items\30.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\31.png">
+    <None Update="Contents\Graphics\Items\31.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\32.png">
+    <None Update="Contents\Graphics\Items\32.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\33.png">
+    <None Update="Contents\Graphics\Items\33.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\34.png">
+    <None Update="Contents\Graphics\Items\34.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\35.png">
+    <None Update="Contents\Graphics\Items\35.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\36.png">
+    <None Update="Contents\Graphics\Items\36.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\37.png">
+    <None Update="Contents\Graphics\Items\37.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\38.png">
+    <None Update="Contents\Graphics\Items\38.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\39.png">
+    <None Update="Contents\Graphics\Items\39.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\4.png">
+    <None Update="Contents\Graphics\Items\4.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\40.png">
+    <None Update="Contents\Graphics\Items\40.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\41.png">
+    <None Update="Contents\Graphics\Items\41.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\42.png">
+    <None Update="Contents\Graphics\Items\42.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\43.png">
+    <None Update="Contents\Graphics\Items\43.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\44.png">
+    <None Update="Contents\Graphics\Items\44.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\45.png">
+    <None Update="Contents\Graphics\Items\45.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\46.png">
+    <None Update="Contents\Graphics\Items\46.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\47.png">
+    <None Update="Contents\Graphics\Items\47.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\48.png">
+    <None Update="Contents\Graphics\Items\48.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\49.png">
+    <None Update="Contents\Graphics\Items\49.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\5.png">
+    <None Update="Contents\Graphics\Items\5.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\50.png">
+    <None Update="Contents\Graphics\Items\50.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\51.png">
+    <None Update="Contents\Graphics\Items\51.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\52.png">
+    <None Update="Contents\Graphics\Items\52.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\53.png">
+    <None Update="Contents\Graphics\Items\53.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\54.png">
+    <None Update="Contents\Graphics\Items\54.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\55.png">
+    <None Update="Contents\Graphics\Items\55.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\56.png">
+    <None Update="Contents\Graphics\Items\56.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\57.png">
+    <None Update="Contents\Graphics\Items\57.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\58.png">
+    <None Update="Contents\Graphics\Items\58.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\59.png">
+    <None Update="Contents\Graphics\Items\59.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\6.png">
+    <None Update="Contents\Graphics\Items\6.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\60.png">
+    <None Update="Contents\Graphics\Items\60.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\61.png">
+    <None Update="Contents\Graphics\Items\61.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\62.png">
+    <None Update="Contents\Graphics\Items\62.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\63.png">
+    <None Update="Contents\Graphics\Items\63.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\64.png">
+    <None Update="Contents\Graphics\Items\64.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\65.png">
+    <None Update="Contents\Graphics\Items\65.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\66.png">
+    <None Update="Contents\Graphics\Items\66.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\67.png">
+    <None Update="Contents\Graphics\Items\67.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\68.png">
+    <None Update="Contents\Graphics\Items\68.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\69.png">
+    <None Update="Contents\Graphics\Items\69.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\7.png">
+    <None Update="Contents\Graphics\Items\7.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\70.png">
+    <None Update="Contents\Graphics\Items\70.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\71.png">
+    <None Update="Contents\Graphics\Items\71.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\72.png">
+    <None Update="Contents\Graphics\Items\72.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\73.png">
+    <None Update="Contents\Graphics\Items\73.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\74.png">
+    <None Update="Contents\Graphics\Items\74.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\75.png">
+    <None Update="Contents\Graphics\Items\75.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\76.png">
+    <None Update="Contents\Graphics\Items\76.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\77.png">
+    <None Update="Contents\Graphics\Items\77.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\78.png">
+    <None Update="Contents\Graphics\Items\78.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\79.png">
+    <None Update="Contents\Graphics\Items\79.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\8.png">
+    <None Update="Contents\Graphics\Items\8.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\80.png">
+    <None Update="Contents\Graphics\Items\80.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\81.png">
+    <None Update="Contents\Graphics\Items\81.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\82.png">
+    <None Update="Contents\Graphics\Items\82.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\83.png">
+    <None Update="Contents\Graphics\Items\83.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\84.png">
+    <None Update="Contents\Graphics\Items\84.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\85.png">
+    <None Update="Contents\Graphics\Items\85.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\86.png">
+    <None Update="Contents\Graphics\Items\86.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\87.png">
+    <None Update="Contents\Graphics\Items\87.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\88.png">
+    <None Update="Contents\Graphics\Items\88.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\89.png">
+    <None Update="Contents\Graphics\Items\89.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\9.png">
+    <None Update="Contents\Graphics\Items\9.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\90.png">
+    <None Update="Contents\Graphics\Items\90.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\91.png">
+    <None Update="Contents\Graphics\Items\91.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\92.png">
+    <None Update="Contents\Graphics\Items\92.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\93.png">
+    <None Update="Contents\Graphics\Items\93.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\94.png">
+    <None Update="Contents\Graphics\Items\94.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\95.png">
+    <None Update="Contents\Graphics\Items\95.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\96.png">
+    <None Update="Contents\Graphics\Items\96.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\97.png">
+    <None Update="Contents\Graphics\Items\97.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\98.png">
+    <None Update="Contents\Graphics\Items\98.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Items\99.png">
+    <None Update="Contents\Graphics\Items\99.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Misc\Blood.png">
+    <None Update="Contents\Graphics\Misc\Blood.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Misc\ChatBubble.png">
+    <None Update="Contents\Graphics\Misc\ChatBubble.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Misc\Cursor.png">
+    <None Update="Contents\Graphics\Misc\Cursor.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Misc\Direction.png">
+    <None Update="Contents\Graphics\Misc\Direction.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Misc\Door.png">
+    <None Update="Contents\Graphics\Misc\Door.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Misc\Light.png">
+    <None Update="Contents\Graphics\Misc\Light.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Misc\Shadow.png">
+    <None Update="Contents\Graphics\Misc\Shadow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Misc\Target.png">
+    <None Update="Contents\Graphics\Misc\Target.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Misc\Weather.png">
+    <None Update="Contents\Graphics\Misc\Weather.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Panoramas\1.png">
+    <None Update="Contents\Graphics\Panoramas\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Paperdolls\1.png">
+    <None Update="Contents\Graphics\Paperdolls\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Parallax\1.png">
+    <None Update="Contents\Graphics\Parallax\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Projectiles\1.png">
+    <None Update="Contents\Graphics\Projectiles\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Projectiles\2.png">
+    <None Update="Contents\Graphics\Projectiles\2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Projectiles\3.png">
+    <None Update="Contents\Graphics\Projectiles\3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Resources\1.png">
+    <None Update="Contents\Graphics\Resources\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Resources\2.png">
+    <None Update="Contents\Graphics\Resources\2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Resources\3.png">
+    <None Update="Contents\Graphics\Resources\3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Resources\4.png">
+    <None Update="Contents\Graphics\Resources\4.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Resources\5.png">
+    <None Update="Contents\Graphics\Resources\5.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Resources\6.png">
+    <None Update="Contents\Graphics\Resources\6.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Skillicons\1.png">
+    <None Update="Contents\Graphics\Skillicons\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Skillicons\2.png">
+    <None Update="Contents\Graphics\Skillicons\2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Skillicons\3.png">
+    <None Update="Contents\Graphics\Skillicons\3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Contents\Graphics\Tilesets\1.png">
+    <None Update="Contents\Graphics\Tilesets\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="My Project\Icon.ico" />
-    <Content Include="License\Item Credits.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="License\SFML License.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Clear.png" />
     <Content Include="Resources\Exit.png" />
     <Content Include="Resources\Fill.png" />
@@ -1073,19 +899,19 @@
     <Content Include="Resources\ScreenShot.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Embedded\" />
+    <ProjectReference Include="..\..\..\DarkUI\DarkUI\DarkUI.csproj" />
+    <ProjectReference Include="..\Core\Core.vbproj" />
   </ItemGroup>
-  <Import Project="..\Bindings\Bindings.projitems" Label="Shared" />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup>
+    <PackageReference Include="SFML.Audio" Version="2.5.0" />
+    <PackageReference Include="SFML.Graphics" Version="2.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="My Project\Resources.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup />
 </Project>

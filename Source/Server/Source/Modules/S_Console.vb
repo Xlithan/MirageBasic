@@ -1,4 +1,5 @@
 ﻿Imports System.Threading
+Imports MirageBasic.Core
 
 Module S_Console
     Private threadConsole As Thread

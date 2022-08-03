@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports Asfw
 Imports Asfw.IO
+Imports MirageBasic.Core
 
 Friend Module S_Animations
 
@@ -19,7 +20,7 @@ Friend Module S_Animations
         Dim filename As String
         Dim x As Integer
 
-        filename = Path.Animation(AnimationNum)
+        filename = Paths.Animation(AnimationNum)
 
         Dim writer As New ByteStream(100)
 
@@ -59,7 +60,7 @@ Friend Module S_Animations
     Sub LoadAnimation(AnimationNum As Integer)
         Dim filename As String
 
-        filename = Path.Animation(AnimationNum)
+        filename = Paths.Animation(AnimationNum)
         Dim reader As New ByteStream()
         ByteFile.Load(filename, reader)
 
@@ -90,7 +91,7 @@ Friend Module S_Animations
 
         For i = 1 To MAX_ANIMATIONS
 
-            If Not File.Exists(Path.Animation(i)) Then
+            If Not File.Exists(Paths.Animation(i)) Then
                 SaveAnimation(i)
                 Application.DoEvents()
             End If

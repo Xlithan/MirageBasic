@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports System.Linq
 Imports System.Windows.Forms
+Imports MirageBasic.Core
 
 Module C_DataBase
 
@@ -24,7 +25,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Path.Graphics & "characters\" & i & GfxExt)
+        While File.Exists(Paths.Graphics & "characters\" & i & GfxExt)
             NumCharacters = NumCharacters + 1
             i = i + 1
         End While
@@ -36,7 +37,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Path.Graphics & "paperdolls\" & i & GfxExt)
+        While File.Exists(Paths.Graphics & "paperdolls\" & i & GfxExt)
             NumPaperdolls = NumPaperdolls + 1
             i = i + 1
         End While
@@ -48,7 +49,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Path.Graphics & "animations\" & i & GfxExt)
+        While File.Exists(Paths.Graphics & "animations\" & i & GfxExt)
             NumAnimations = NumAnimations + 1
             i = i + 1
         End While
@@ -60,7 +61,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Path.Graphics & "SkillIcons\" & i & GfxExt)
+        While File.Exists(Paths.Graphics & "SkillIcons\" & i & GfxExt)
             NumSkillIcons = NumSkillIcons + 1
             i = i + 1
         End While
@@ -72,7 +73,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Path.Graphics & "Faces\" & i & GfxExt)
+        While File.Exists(Paths.Graphics & "Faces\" & i & GfxExt)
             NumFaces = NumFaces + 1
             i = i + 1
         End While
@@ -84,7 +85,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Path.Graphics & "Fogs\" & i & GfxExt)
+        While File.Exists(Paths.Graphics & "Fogs\" & i & GfxExt)
             NumFogs = NumFogs + 1
             i = i + 1
         End While
@@ -96,7 +97,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Path.Graphics & "Emotes\" & i & GfxExt)
+        While File.Exists(Paths.Graphics & "Emotes\" & i & GfxExt)
             NumEmotes = NumEmotes + 1
             i = i + 1
         End While
@@ -108,7 +109,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Path.Graphics & "Panoramas\" & i & GfxExt)
+        While File.Exists(Paths.Graphics & "Panoramas\" & i & GfxExt)
             NumPanorama = NumPanorama + 1
             i = i + 1
         End While
@@ -120,7 +121,7 @@ Module C_DataBase
         Dim i As Integer
         i = 1
 
-        While File.Exists(Path.Graphics & "Parallax\" & i & GfxExt)
+        While File.Exists(Paths.Graphics & "Parallax\" & i & GfxExt)
             NumParallax = NumParallax + 1
             i = i + 1
         End While
@@ -129,8 +130,8 @@ Module C_DataBase
     End Sub
 
     Friend Sub CacheMusic()
-        Dim files As String() = Directory.GetFiles(Path.Music, "*.ogg")
-        Dim maxNum As String = Directory.GetFiles(Path.Music, "*.ogg").Count
+        Dim files As String() = Directory.GetFiles(Paths.Music, "*.ogg")
+        Dim maxNum As String = Directory.GetFiles(Paths.Music, "*.ogg").Count
         Dim counter As Integer = 1
 
         For Each FileName In files
@@ -144,8 +145,8 @@ Module C_DataBase
     End Sub
 
     Friend Sub CacheSound()
-        Dim files As String() = Directory.GetFiles(Path.Sounds, "*.ogg")
-        Dim maxNum As String = Directory.GetFiles(Path.Sounds, "*.ogg").Count
+        Dim files As String() = Directory.GetFiles(Paths.Sounds, "*.ogg")
+        Dim maxNum As String = Directory.GetFiles(Paths.Sounds, "*.ogg").Count
         Dim counter As Integer = 1
 
         For Each FileName In files

@@ -1,5 +1,6 @@
 ﻿Imports System.Linq
 Imports Asfw
+Imports MirageBasic.Core
 
 Module S_Players
 
@@ -9,7 +10,7 @@ Module S_Players
 
         If Not IsSkill Then
             ' Check attack timer
-            If GetPlayerEquipment(Attacker, EquipmentType.Weapon) > 0 Then
+            If GetPlayerEquipment(Attacker, modEnumerators.EquipmentType.Weapon) > 0 Then
                 If GetTimeMs() < TempPlayer(Attacker).AttackTimer + Item(GetPlayerEquipment(Attacker, EquipmentType.Weapon)).Speed Then Exit Function
             Else
                 If GetTimeMs() < TempPlayer(Attacker).AttackTimer + 1000 Then Exit Function
@@ -876,11 +877,11 @@ Module S_Players
 
         Select Case Vital
             Case VitalType.HP
-                GetPlayerMaxVital = (Player(index).Character(TempPlayer(index).CurChar).Level + (GetPlayerStat(index, StatType.Vitality) \ 2) + Classes(Player(index).Character(TempPlayer(index).CurChar).Classes).Stat(StatType.Vitality)) * 2
+                GetPlayerMaxVital = (Player(index).Character(TempPlayer(index).CurChar).Level + (GetPlayerStat(index, StatType.Vitality) \ 2) + Job(Player(index).Character(TempPlayer(index).CurChar).Job).Stat(StatType.Vitality)) * 2
             Case VitalType.MP
-                GetPlayerMaxVital = (Player(index).Character(TempPlayer(index).CurChar).Level + (GetPlayerStat(index, StatType.Intelligence) \ 2) + Classes(Player(index).Character(TempPlayer(index).CurChar).Classes).Stat(StatType.Intelligence)) * 2
+                GetPlayerMaxVital = (Player(index).Character(TempPlayer(index).CurChar).Level + (GetPlayerStat(index, StatType.Intelligence) \ 2) + Job(Player(index).Character(TempPlayer(index).CurChar).Job).Stat(StatType.Intelligence)) * 2
             Case VitalType.SP
-                GetPlayerMaxVital = (Player(index).Character(TempPlayer(index).CurChar).Level + (GetPlayerStat(index, StatType.Spirit) \ 2) + Classes(Player(index).Character(TempPlayer(index).CurChar).Classes).Stat(StatType.Spirit)) * 2
+                GetPlayerMaxVital = (Player(index).Character(TempPlayer(index).CurChar).Level + (GetPlayerStat(index, StatType.Spirit) \ 2) + Job(Player(index).Character(TempPlayer(index).CurChar).Job).Stat(StatType.Spirit)) * 2
         End Select
 
     End Function
@@ -1076,7 +1077,7 @@ Module S_Players
     End Sub
 
     Function GetPlayerClass(index As Integer) As Integer
-        GetPlayerClass = Player(index).Character(TempPlayer(index).CurChar).Classes
+        GetPlayerClass = Player(index).Character(TempPlayer(index).CurChar).Job
     End Function
 
     Sub SetPlayerPK(index As Integer, PK As Integer)
@@ -2629,7 +2630,7 @@ Module S_Players
                                 PlayerMsg(index, "You must be level " & i & " to learn this skill.", ColorType.Yellow)
                             End If
                         Else
-                            PlayerMsg(index, "This skill can only be learned by " & CheckGrammar(GetClassName(Skill(n).ClassReq)) & ".", ColorType.Yellow)
+                            PlayerMsg(index, "This skill can only be learned by " & CheckGrammar(GetJobName(Skill(n).ClassReq)) & ".", ColorType.Yellow)
                         End If
                     Else
                         PlayerMsg(index, "This scroll is not connected to a skill, please inform an admin!", ColorType.BrightRed)
@@ -3181,7 +3182,7 @@ Module S_Players
         ' make sure the classreq > 0
         If ClassReq > 0 Then ' 0 = no req
             If ClassReq <> GetPlayerClass(index) Then
-                PlayerMsg(index, "Only " & CheckGrammar(Trim$(Classes(ClassReq).Name)) & " can use this skill.", ColorType.Yellow)
+                PlayerMsg(index, "Only " & CheckGrammar(Trim$(Job(ClassReq).Name)) & " can use this skill.", ColorType.Yellow)
                 Exit Sub
             End If
         End If

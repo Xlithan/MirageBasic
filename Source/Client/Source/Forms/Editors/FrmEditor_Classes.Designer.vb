@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class frmEditor_Classes
+Partial Class frmEditor_Job
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class frmEditor_Classes
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEditor_Classes))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEditor_Job))
         Me.DarkGroupBox1 = New DarkUI.Controls.DarkGroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
         Me.DarkGroupBox2 = New DarkUI.Controls.DarkGroupBox()
@@ -112,7 +112,7 @@ Partial Class frmEditor_Classes
         Me.DarkGroupBox1.Size = New System.Drawing.Size(173, 311)
         Me.DarkGroupBox1.TabIndex = 0
         Me.DarkGroupBox1.TabStop = False
-        Me.DarkGroupBox1.Text = "Classes List"
+        Me.DarkGroupBox1.Text = "Job List"
         '
         'lstIndex
         '
@@ -278,12 +278,6 @@ Partial Class frmEditor_Classes
         'cmbItems
         '
         Me.cmbItems.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbItems.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbItems.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbItems.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbItems.ButtonIcon = CType(resources.GetObject("cmbItems.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbItems.DrawDropdownHoverOutline = False
-        Me.cmbItems.DrawFocusRectangle = False
         Me.cmbItems.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbItems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -293,8 +287,6 @@ Partial Class frmEditor_Classes
         Me.cmbItems.Name = "cmbItems"
         Me.cmbItems.Size = New System.Drawing.Size(139, 21)
         Me.cmbItems.TabIndex = 3
-        Me.cmbItems.Text = Nothing
-        Me.cmbItems.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel11
         '
@@ -553,12 +545,6 @@ Partial Class frmEditor_Classes
         'cmbFemaleSprite
         '
         Me.cmbFemaleSprite.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbFemaleSprite.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbFemaleSprite.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbFemaleSprite.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbFemaleSprite.ButtonIcon = CType(resources.GetObject("cmbFemaleSprite.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbFemaleSprite.DrawDropdownHoverOutline = False
-        Me.cmbFemaleSprite.DrawFocusRectangle = False
         Me.cmbFemaleSprite.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbFemaleSprite.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbFemaleSprite.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -569,7 +555,6 @@ Partial Class frmEditor_Classes
         Me.cmbFemaleSprite.Size = New System.Drawing.Size(149, 21)
         Me.cmbFemaleSprite.TabIndex = 15
         Me.cmbFemaleSprite.Text = Nothing
-        Me.cmbFemaleSprite.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'picFemale
         '
@@ -640,12 +625,6 @@ Partial Class frmEditor_Classes
         'cmbMaleSprite
         '
         Me.cmbMaleSprite.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbMaleSprite.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbMaleSprite.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbMaleSprite.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbMaleSprite.ButtonIcon = CType(resources.GetObject("cmbMaleSprite.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbMaleSprite.DrawDropdownHoverOutline = False
-        Me.cmbMaleSprite.DrawFocusRectangle = False
         Me.cmbMaleSprite.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbMaleSprite.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMaleSprite.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -656,7 +635,6 @@ Partial Class frmEditor_Classes
         Me.cmbMaleSprite.Size = New System.Drawing.Size(149, 21)
         Me.cmbMaleSprite.TabIndex = 9
         Me.cmbMaleSprite.Text = Nothing
-        Me.cmbMaleSprite.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'picMale
         '
@@ -747,7 +725,7 @@ Partial Class frmEditor_Classes
         Me.btnSave.TabIndex = 5
         Me.btnSave.Text = "Save"
         '
-        'frmClasses
+        'frmJob
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -761,7 +739,7 @@ Partial Class frmEditor_Classes
         Me.Controls.Add(Me.DarkGroupBox2)
         Me.Controls.Add(Me.DarkGroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "frmClasses"
+        Me.Name = "frmJob"
         Me.Text = "Class Editor"
         Me.DarkGroupBox1.ResumeLayout(False)
         Me.DarkGroupBox2.ResumeLayout(False)

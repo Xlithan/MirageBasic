@@ -1,5 +1,6 @@
 ﻿Imports System.Linq
 Imports System.Threading
+Imports MirageBasic.Core
 
 Module modLoop
 
@@ -185,7 +186,7 @@ Module modLoop
         For i = 1 To GetPlayersOnline()
 
             If IsPlaying(i) Then
-                If GetPlayerVital(i, VitalType.HP) <> GetPlayerMaxVital(i, VitalType.HP) Then
+                If GetPlayerVital(i, modEnumerators.VitalType.HP) <> GetPlayerMaxVital(i, VitalType.HP) Then
                     SetPlayerVital(i, VitalType.HP, GetPlayerVital(i, VitalType.HP) + GetPlayerVitalRegen(i, VitalType.HP))
                     SendVital(i, VitalType.HP)
                 End If
@@ -695,7 +696,7 @@ Module modLoop
             PlayerMsg(index, "You must be an administrator to use this skill.", ColorType.BrightRed)
             Exit Sub
         ElseIf Not Skill(skillId).ClassReq = 0 AndAlso GetPlayerClass(index) <> Skill(skillId).ClassReq Then
-            PlayerMsg(index, String.Format("Only {0} can use this skill.", CheckGrammar((Classes(Skill(skillId).ClassReq).Name.Trim()))), ColorType.BrightRed)
+            PlayerMsg(index, String.Format("Only {0} can use this skill.", CheckGrammar((Job(Skill(skillId).ClassReq).Name.Trim()))), ColorType.BrightRed)
             Exit Sub
         ElseIf Skill(skillId).Range > 0 AndAlso Not IsTargetOnMap(index) Then
             Exit Sub

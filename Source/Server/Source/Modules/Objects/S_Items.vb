@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports Asfw
 Imports Asfw.IO
+Imports MirageBasic.Core
 
 Friend Module S_Items
 
@@ -17,7 +18,7 @@ Friend Module S_Items
 
     Sub SaveItem(itemNum As Integer)
         Dim filename As String
-        filename = Path.Item(itemNum)
+        filename = Paths.Item(itemNum)
 
         Dim writer As New ByteStream(100)
         writer.WriteString(Item(itemNum).Name)
@@ -94,7 +95,7 @@ Friend Module S_Items
         Dim filename As String
         Dim s As Integer
 
-        filename = Path.Item(ItemNum)
+        filename = Paths.Item(ItemNum)
 
         Dim reader As New ByteStream()
         ByteFile.Load(filename, reader)
@@ -162,7 +163,7 @@ Friend Module S_Items
 
         For i = 1 To MAX_ITEMS
 
-            If Not File.Exists(Path.Item(i)) Then
+            If Not File.Exists(Paths.Item(i)) Then
                 SaveItem(i)
             End If
 

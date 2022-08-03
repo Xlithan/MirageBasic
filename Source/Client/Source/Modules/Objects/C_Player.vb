@@ -1,13 +1,15 @@
 ﻿Imports System.Drawing
 Imports Asfw
+Imports MirageBasic.Core
 Imports SFML.Graphics
+Imports SFML.System
 Imports SFML.Window
 
 Module C_Player
 #Region "Globals"
     Friend CharSelection() As CharSelRec
     Friend Player(MAX_PLAYERS) As PlayerRec
-    Friend PlayerInv(MAX_INV) As PlayerInvStruct   ' Inventory
+    Friend PlayerInv(MAX_INV) As modTypes.PlayerInvStruct   ' Inventory
 #End Region
 
 #Region "Structs"
@@ -24,7 +26,7 @@ Module C_Player
         ' General
         Dim Name As String
 
-        Dim Classes As Byte
+        Dim Job As Byte
         Dim Sprite As Integer
         Dim Level As Byte
         Dim Exp As Integer
@@ -109,7 +111,7 @@ Module C_Player
         Player(index).Access = 0
         Player(index).Attacking = 0
         Player(index).AttackTimer = 0
-        Player(index).Classes = 0
+        Player(index).Job = 0
         Player(index).Dir = 0
 
         ReDim Player(index).Equipment(EquipmentType.Count - 1)
@@ -759,7 +761,7 @@ Module C_Player
 
     Sub SetPlayerClass(index As Integer, classnum As Integer)
         If index > MAX_PLAYERS Then Exit Sub
-        Player(index).Classes = classnum
+        Player(index).Job = classnum
     End Sub
 
     Sub SetPlayerPoints(index As Integer, points As Integer)
@@ -875,7 +877,7 @@ Module C_Player
     Function GetPlayerClass(index As Integer) As Integer
         GetPlayerClass = 0
         If index > MAX_PLAYERS Then Exit Function
-        GetPlayerClass = Player(index).Classes
+        GetPlayerClass = Player(index).Job
     End Function
 
     Function GetPlayerMap(index As Integer) As Integer
@@ -1198,7 +1200,7 @@ Module C_Player
         'name
         DrawText(CharWindowX + 10, CharWindowY + 14, Language.Character.name & GetPlayerName(Myindex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'class
-        DrawText(CharWindowX + 10, CharWindowY + 33, Language.Character.ClassType & Trim(Classes(GetPlayerClass(Myindex)).Name), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(CharWindowX + 10, CharWindowY + 33, Language.Character.ClassType & Trim(Job(GetPlayerClass(Myindex)).Name), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'level
         DrawText(CharWindowX + 150, CharWindowY + 14, Language.Character.Level & GetPlayerLevel(Myindex), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'points

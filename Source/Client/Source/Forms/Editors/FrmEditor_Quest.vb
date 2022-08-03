@@ -1,4 +1,6 @@
-﻿Friend Class frmEditor_Quest
+﻿Imports MirageBasic.Core
+
+Friend Class frmEditor_Quest
     Dim SelectedTask As Integer
 
     Private Sub FrmEditor_Quest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -419,7 +421,7 @@
                 Case 2
                     lstRequirements.Items.Add(i & ":" & "Quest Requirement: " & Trim(Quest(Quest(Editorindex).RequirementIndex(i)).Name))
                 Case 3
-                    lstRequirements.Items.Add(i & ":" & "Class Requirement: " & Trim(Classes(Quest(Editorindex).RequirementIndex(i)).Name))
+                    lstRequirements.Items.Add(i & ":" & "Class Requirement: " & Trim(Job(Quest(Editorindex).RequirementIndex(i)).Name))
                 Case Else
                     lstRequirements.Items.Add(i & ":")
             End Select
@@ -458,7 +460,7 @@
                 Case 2
                     lstRequirements.Items.Add(i & ":" & "Quest Requirement: " & Trim(Quest(Quest(Editorindex).RequirementIndex(i)).Name))
                 Case 3
-                    lstRequirements.Items.Add(i & ":" & "Class Requirement: " & Trim(Classes(Quest(Editorindex).RequirementIndex(i)).Name))
+                    lstRequirements.Items.Add(i & ":" & "Class Requirement: " & Trim(Job(Quest(Editorindex).RequirementIndex(i)).Name))
                 Case Else
                     lstRequirements.Items.Add(i & ":")
             End Select

@@ -3,6 +3,7 @@ Imports System.IO
 Imports System.Windows.Forms
 Imports Asfw
 Imports Asfw.IO
+Imports MirageBasic.Core
 
 Module C_Maps
 
@@ -37,7 +38,7 @@ Module C_Maps
         Dim MaxX As Byte
         Dim MaxY As Byte
 
-        Dim Tile(,) As TileStruct
+        Dim Tile(,) As modTypes.TileStruct
         Dim Npc() As Integer
         Dim EventCount As Integer
         Dim Events() As EventStruct
@@ -109,7 +110,7 @@ Module C_Maps
         Dim i As Integer
         i = 1
 
-        While File.Exists(Path.Graphics & "\tilesets\" & i & GfxExt)
+        While File.Exists(Paths.Graphics & "\tilesets\" & i & GfxExt)
             NumTileSets = NumTileSets + 1
             i = i + 1
         End While

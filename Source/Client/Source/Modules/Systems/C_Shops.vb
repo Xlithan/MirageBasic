@@ -1,5 +1,6 @@
 ﻿Imports System.Drawing
 Imports Asfw
+Imports MirageBasic.Core
 
 Module C_Shops
 

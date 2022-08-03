@@ -1,11 +1,12 @@
 ﻿Imports Asfw
 Imports Asfw.IO
+Imports MirageBasic.Core
 
 Module S_NetworkSend
 
     Sub AlertMsg(index As Integer, Msg As String)
         Dim buffer As New ByteStream(4)
-        buffer.WriteInt32(ServerPackets.SAlertMsg)
+        buffer.WriteInt32(Packets.ServerPackets.SAlertMsg)
         buffer.WriteString((Msg))
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
 
@@ -39,54 +40,54 @@ Module S_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Sub SendNewCharClasses(index As Integer)
+    Sub SendNewCharJob(index As Integer)
         Dim i As Integer, n As Integer, q As Integer
         Dim buffer As New ByteStream(4)
-        buffer.WriteInt32(ServerPackets.SNewCharClasses)
+        buffer.WriteInt32(ServerPackets.SNewCharJob)
 
-        For i = 1 To Max_Classes
-            buffer.WriteString((GetClassName(i)))
-            buffer.WriteString((Trim$(Classes(i).Desc)))
+        For i = 1 To MAX_JOB
+            buffer.WriteString((GetJobName(i)))
+            buffer.WriteString((Trim$(Job(i).Desc)))
 
-            buffer.WriteInt32(GetClassMaxVital(i, VitalType.HP))
-            buffer.WriteInt32(GetClassMaxVital(i, VitalType.MP))
-            buffer.WriteInt32(GetClassMaxVital(i, VitalType.SP))
+            buffer.WriteInt32(GetJobMaxVital(i, VitalType.HP))
+            buffer.WriteInt32(GetJobMaxVital(i, VitalType.MP))
+            buffer.WriteInt32(GetJobMaxVital(i, VitalType.SP))
 
             ' set sprite array size
-            n = UBound(Classes(i).MaleSprite)
+            n = UBound(Job(i).MaleSprite)
             ' send array size
             buffer.WriteInt32(n)
             ' loop around sending each sprite
             For q = 0 To n
-                buffer.WriteInt32(Classes(i).MaleSprite(q))
+                buffer.WriteInt32(Job(i).MaleSprite(q))
             Next
 
             ' set sprite array size
-            n = UBound(Classes(i).FemaleSprite)
+            n = UBound(Job(i).FemaleSprite)
             ' send array size
             buffer.WriteInt32(n)
             ' loop around sending each sprite
             For q = 0 To n
-                buffer.WriteInt32(Classes(i).FemaleSprite(q))
+                buffer.WriteInt32(Job(i).FemaleSprite(q))
             Next
 
-            buffer.WriteInt32(Classes(i).Stat(StatType.Strength))
-            buffer.WriteInt32(Classes(i).Stat(StatType.Endurance))
-            buffer.WriteInt32(Classes(i).Stat(StatType.Vitality))
-            buffer.WriteInt32(Classes(i).Stat(StatType.Luck))
-            buffer.WriteInt32(Classes(i).Stat(StatType.Intelligence))
-            buffer.WriteInt32(Classes(i).Stat(StatType.Spirit))
+            buffer.WriteInt32(Job(i).Stat(StatType.Strength))
+            buffer.WriteInt32(Job(i).Stat(StatType.Endurance))
+            buffer.WriteInt32(Job(i).Stat(StatType.Vitality))
+            buffer.WriteInt32(Job(i).Stat(StatType.Luck))
+            buffer.WriteInt32(Job(i).Stat(StatType.Intelligence))
+            buffer.WriteInt32(Job(i).Stat(StatType.Spirit))
 
             For q = 1 To 5
-                buffer.WriteInt32(Classes(i).StartItem(q))
-                buffer.WriteInt32(Classes(i).StartValue(q))
+                buffer.WriteInt32(Job(i).StartItem(q))
+                buffer.WriteInt32(Job(i).StartValue(q))
             Next
 
-            buffer.WriteInt32(Classes(i).StartMap)
-            buffer.WriteInt32(Classes(i).StartX)
-            buffer.WriteInt32(Classes(i).StartY)
+            buffer.WriteInt32(Job(i).StartMap)
+            buffer.WriteInt32(Job(i).StartX)
+            buffer.WriteInt32(Job(i).StartY)
 
-            buffer.WriteInt32(Classes(i).BaseExp)
+            buffer.WriteInt32(Job(i).BaseExp)
         Next
 
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
@@ -149,12 +150,12 @@ Module S_NetworkSend
         Buffer.Dispose()
     End Sub
 
-    Sub SendClasses(index As Integer)
+    Sub SendJob(index As Integer)
         'Dim i As Integer, n As Integer, q As Integer
         Dim buffer As New ByteStream(4)
-        buffer.WriteInt32(ServerPackets.SClassesData)
+        buffer.WriteInt32(ServerPackets.SClassData)
 
-        AddDebug("Sent SMSG: SClassesData")
+        AddDebug("Sent SMSG: SJobData")
 
         buffer.WriteBlock(ClassData)
 
@@ -162,12 +163,12 @@ Module S_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Sub SendClassesToAll()
+    Sub SendJobToAll()
         'Dim i As Integer, n As Integer, q As Integer
         Dim buffer As New ByteStream(4)
-        buffer.WriteInt32(ServerPackets.SClassesData)
+        buffer.WriteInt32(ServerPackets.SClassData)
 
-        AddDebug("Sent SMSG: SClassesData To All")
+        AddDebug("Sent SMSG: SJobData To All")
 
         buffer.WriteBlock(ClassData)
 
@@ -1395,7 +1396,7 @@ Module S_NetworkSend
         AddDebug("Sent SMSG: SNews")
 
         buffer.WriteString(Settings.GameName.Trim)
-        buffer.WriteString(GetFileContents(Path.Database & "news.txt").Trim)
+        buffer.WriteString(GetFileContents(Paths.Database & "news.txt").Trim)
 
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
 

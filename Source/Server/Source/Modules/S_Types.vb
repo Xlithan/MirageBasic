@@ -1,4 +1,6 @@
-﻿Module modTypes2
+﻿Imports MirageBasic.Core
+
+Module modTypes2
 
     ' Friend data structures
     Friend Map(MAX_CACHED_MAPS) As MapRec
@@ -30,7 +32,7 @@
         Dim Name As String
 
         Dim Sex As Byte
-        Dim Classes As Byte
+        Dim Job As Byte
         Dim Sprite As Integer
         Dim Level As Byte
         Dim Exp As Integer

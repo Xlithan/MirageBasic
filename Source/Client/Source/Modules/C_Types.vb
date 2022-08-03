@@ -1,4 +1,6 @@
-﻿Module C_Types2
+﻿Imports MirageBasic.Core
+
+Module C_Types2
 
     ' client-side stuff
     Friend ActionMsg(Byte.MaxValue) As ActionMsgRec

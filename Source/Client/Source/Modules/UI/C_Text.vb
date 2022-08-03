@@ -1,4 +1,6 @@
-﻿Imports SFML.Graphics
+﻿Imports MirageBasic.Core
+Imports SFML.Graphics
+Imports SFML.System
 Imports SFML.Window
 
 Module C_Text
@@ -147,7 +149,7 @@ Module C_Text
                             tX = ((ConvertMapX(X * PicX)) - 4) + (PicX * 0.5)
                             tY = ((ConvertMapY(y * PicY)) - 7) + (PicY * 0.5)
                             Select Case .Type
-                                Case TileType.Blocked
+                                Case modEnumerators.TileType.Blocked
                                     DrawText(tX, tY, "B", (Color.Red), (Color.Black), GameWindow)
                                 Case TileType.Warp
                                     DrawText(tX, tY, "W", (Color.Blue), (Color.Black), GameWindow)

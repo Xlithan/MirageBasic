@@ -245,12 +245,6 @@ Partial Class frmEditor_Item
         'cmbPet
         '
         Me.cmbPet.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbPet.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbPet.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbPet.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbPet.ButtonIcon = CType(resources.GetObject("cmbPet.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbPet.DrawDropdownHoverOutline = False
-        Me.cmbPet.DrawFocusRectangle = False
         Me.cmbPet.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbPet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPet.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -261,7 +255,6 @@ Partial Class frmEditor_Item
         Me.cmbPet.Size = New System.Drawing.Size(153, 21)
         Me.cmbPet.TabIndex = 1
         Me.cmbPet.Text = Nothing
-        Me.cmbPet.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel13
         '
@@ -297,12 +290,6 @@ Partial Class frmEditor_Item
         'cmbAnimation
         '
         Me.cmbAnimation.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbAnimation.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbAnimation.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbAnimation.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbAnimation.ButtonIcon = CType(resources.GetObject("cmbAnimation.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbAnimation.DrawDropdownHoverOutline = False
-        Me.cmbAnimation.DrawFocusRectangle = False
         Me.cmbAnimation.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbAnimation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbAnimation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -313,7 +300,6 @@ Partial Class frmEditor_Item
         Me.cmbAnimation.Size = New System.Drawing.Size(118, 21)
         Me.cmbAnimation.TabIndex = 20
         Me.cmbAnimation.Text = Nothing
-        Me.cmbAnimation.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel9
         '
@@ -370,12 +356,6 @@ Partial Class frmEditor_Item
         'cmbBind
         '
         Me.cmbBind.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbBind.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbBind.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbBind.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbBind.ButtonIcon = CType(resources.GetObject("cmbBind.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbBind.DrawDropdownHoverOutline = False
-        Me.cmbBind.DrawFocusRectangle = False
         Me.cmbBind.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbBind.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbBind.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -387,7 +367,6 @@ Partial Class frmEditor_Item
         Me.cmbBind.Size = New System.Drawing.Size(158, 21)
         Me.cmbBind.TabIndex = 14
         Me.cmbBind.Text = "None"
-        Me.cmbBind.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel6
         '
@@ -411,12 +390,6 @@ Partial Class frmEditor_Item
         'cmbSubType
         '
         Me.cmbSubType.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbSubType.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbSubType.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbSubType.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbSubType.ButtonIcon = CType(resources.GetObject("cmbSubType.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbSubType.DrawDropdownHoverOutline = False
-        Me.cmbSubType.DrawFocusRectangle = False
         Me.cmbSubType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbSubType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbSubType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -428,7 +401,6 @@ Partial Class frmEditor_Item
         Me.cmbSubType.Size = New System.Drawing.Size(121, 21)
         Me.cmbSubType.TabIndex = 11
         Me.cmbSubType.Text = "None"
-        Me.cmbSubType.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel5
         '
@@ -443,12 +415,6 @@ Partial Class frmEditor_Item
         'cmbType
         '
         Me.cmbType.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbType.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbType.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbType.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbType.ButtonIcon = CType(resources.GetObject("cmbType.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbType.DrawDropdownHoverOutline = False
-        Me.cmbType.DrawFocusRectangle = False
         Me.cmbType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -460,7 +426,6 @@ Partial Class frmEditor_Item
         Me.cmbType.Size = New System.Drawing.Size(121, 21)
         Me.cmbType.TabIndex = 9
         Me.cmbType.Text = "None"
-        Me.cmbType.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel4
         '
@@ -559,12 +524,6 @@ Partial Class frmEditor_Item
         'cmbSkills
         '
         Me.cmbSkills.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbSkills.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbSkills.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbSkills.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbSkills.ButtonIcon = CType(resources.GetObject("cmbSkills.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbSkills.DrawDropdownHoverOutline = False
-        Me.cmbSkills.DrawFocusRectangle = False
         Me.cmbSkills.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbSkills.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbSkills.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -575,7 +534,6 @@ Partial Class frmEditor_Item
         Me.cmbSkills.Size = New System.Drawing.Size(153, 21)
         Me.cmbSkills.TabIndex = 1
         Me.cmbSkills.Text = Nothing
-        Me.cmbSkills.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel12
         '
@@ -604,12 +562,6 @@ Partial Class frmEditor_Item
         'cmbRecipe
         '
         Me.cmbRecipe.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbRecipe.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbRecipe.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbRecipe.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbRecipe.ButtonIcon = CType(resources.GetObject("cmbRecipe.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbRecipe.DrawDropdownHoverOutline = False
-        Me.cmbRecipe.DrawFocusRectangle = False
         Me.cmbRecipe.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbRecipe.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbRecipe.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -620,7 +572,6 @@ Partial Class frmEditor_Item
         Me.cmbRecipe.Size = New System.Drawing.Size(138, 21)
         Me.cmbRecipe.TabIndex = 1
         Me.cmbRecipe.Text = Nothing
-        Me.cmbRecipe.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel35
         '
@@ -711,12 +662,6 @@ Partial Class frmEditor_Item
         'cmbAmmo
         '
         Me.cmbAmmo.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbAmmo.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbAmmo.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbAmmo.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbAmmo.ButtonIcon = CType(resources.GetObject("cmbAmmo.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbAmmo.DrawDropdownHoverOutline = False
-        Me.cmbAmmo.DrawFocusRectangle = False
         Me.cmbAmmo.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbAmmo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbAmmo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -727,7 +672,6 @@ Partial Class frmEditor_Item
         Me.cmbAmmo.Size = New System.Drawing.Size(254, 21)
         Me.cmbAmmo.TabIndex = 3
         Me.cmbAmmo.Text = Nothing
-        Me.cmbAmmo.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel25
         '
@@ -742,12 +686,6 @@ Partial Class frmEditor_Item
         'cmbProjectile
         '
         Me.cmbProjectile.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbProjectile.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbProjectile.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbProjectile.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbProjectile.ButtonIcon = CType(resources.GetObject("cmbProjectile.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbProjectile.DrawDropdownHoverOutline = False
-        Me.cmbProjectile.DrawFocusRectangle = False
         Me.cmbProjectile.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbProjectile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbProjectile.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -758,7 +696,6 @@ Partial Class frmEditor_Item
         Me.cmbProjectile.Size = New System.Drawing.Size(254, 21)
         Me.cmbProjectile.TabIndex = 1
         Me.cmbProjectile.Text = Nothing
-        Me.cmbProjectile.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel24
         '
@@ -962,12 +899,6 @@ Partial Class frmEditor_Item
         'cmbKnockBackTiles
         '
         Me.cmbKnockBackTiles.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbKnockBackTiles.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbKnockBackTiles.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbKnockBackTiles.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbKnockBackTiles.ButtonIcon = CType(resources.GetObject("cmbKnockBackTiles.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbKnockBackTiles.DrawDropdownHoverOutline = False
-        Me.cmbKnockBackTiles.DrawFocusRectangle = False
         Me.cmbKnockBackTiles.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbKnockBackTiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbKnockBackTiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -979,7 +910,6 @@ Partial Class frmEditor_Item
         Me.cmbKnockBackTiles.Size = New System.Drawing.Size(119, 21)
         Me.cmbKnockBackTiles.TabIndex = 8
         Me.cmbKnockBackTiles.Text = "No KnockBack"
-        Me.cmbKnockBackTiles.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel16
         '
@@ -1044,12 +974,6 @@ Partial Class frmEditor_Item
         'cmbTool
         '
         Me.cmbTool.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbTool.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbTool.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbTool.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbTool.ButtonIcon = CType(resources.GetObject("cmbTool.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbTool.DrawDropdownHoverOutline = False
-        Me.cmbTool.DrawFocusRectangle = False
         Me.cmbTool.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbTool.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbTool.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1061,7 +985,6 @@ Partial Class frmEditor_Item
         Me.cmbTool.Size = New System.Drawing.Size(121, 21)
         Me.cmbTool.TabIndex = 1
         Me.cmbTool.Text = "None"
-        Me.cmbTool.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel14
         '
@@ -1284,12 +1207,6 @@ Partial Class frmEditor_Item
         'cmbAccessReq
         '
         Me.cmbAccessReq.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbAccessReq.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbAccessReq.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbAccessReq.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbAccessReq.ButtonIcon = CType(resources.GetObject("cmbAccessReq.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbAccessReq.DrawDropdownHoverOutline = False
-        Me.cmbAccessReq.DrawFocusRectangle = False
         Me.cmbAccessReq.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbAccessReq.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbAccessReq.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1301,7 +1218,6 @@ Partial Class frmEditor_Item
         Me.cmbAccessReq.Size = New System.Drawing.Size(177, 21)
         Me.cmbAccessReq.TabIndex = 3
         Me.cmbAccessReq.Text = "Player"
-        Me.cmbAccessReq.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel27
         '
@@ -1316,12 +1232,6 @@ Partial Class frmEditor_Item
         'cmbClassReq
         '
         Me.cmbClassReq.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbClassReq.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbClassReq.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbClassReq.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbClassReq.ButtonIcon = CType(resources.GetObject("cmbClassReq.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbClassReq.DrawDropdownHoverOutline = False
-        Me.cmbClassReq.DrawFocusRectangle = False
         Me.cmbClassReq.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbClassReq.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbClassReq.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1332,7 +1242,6 @@ Partial Class frmEditor_Item
         Me.cmbClassReq.Size = New System.Drawing.Size(177, 21)
         Me.cmbClassReq.TabIndex = 1
         Me.cmbClassReq.Text = Nothing
-        Me.cmbClassReq.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel26
         '
@@ -1454,12 +1363,6 @@ Partial Class frmEditor_Item
         'cmbFurnitureType
         '
         Me.cmbFurnitureType.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbFurnitureType.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbFurnitureType.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbFurnitureType.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbFurnitureType.ButtonIcon = CType(resources.GetObject("cmbFurnitureType.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbFurnitureType.DrawDropdownHoverOutline = False
-        Me.cmbFurnitureType.DrawFocusRectangle = False
         Me.cmbFurnitureType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbFurnitureType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbFurnitureType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1469,9 +1372,7 @@ Partial Class frmEditor_Item
         Me.cmbFurnitureType.Location = New System.Drawing.Point(87, 24)
         Me.cmbFurnitureType.Name = "cmbFurnitureType"
         Me.cmbFurnitureType.Size = New System.Drawing.Size(202, 21)
-        Me.cmbFurnitureType.TabIndex = 9
         Me.cmbFurnitureType.Text = "Normal"
-        Me.cmbFurnitureType.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel36
         '

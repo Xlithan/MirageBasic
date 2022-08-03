@@ -1,4 +1,5 @@
-﻿Friend Class frmEditor_Resource
+﻿Imports MirageBasic.Core
+Friend Class frmEditor_Resource
 
     Private Sub ScrlNormalPic_Scroll(sender As Object, e As EventArgs) Handles nudNormalPic.ValueChanged
         EditorResource_DrawSprite()

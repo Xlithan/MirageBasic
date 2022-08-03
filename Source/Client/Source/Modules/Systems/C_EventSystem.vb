@@ -1,5 +1,7 @@
 ﻿Imports Asfw
+Imports MirageBasic.Core
 Imports SFML.Graphics
+Imports SFML.System
 Imports SFML.Window
 
 Friend Module C_EventSystem
@@ -646,7 +648,7 @@ newlist:
                                     Case 2
                                         FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player Has Item [" & Trim$(Item(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1).Name) & "] x" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data2)
                                     Case 3
-                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player's Class Is [" & Trim$(Classes(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1).Name) & "]")
+                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player's Class Is [" & Trim$(Job(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1).Name) & "]")
                                     Case 4
                                         FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player Knows Skill [" & Trim$(Skill(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1).Name) & "]")
                                     Case 5
@@ -707,20 +709,20 @@ newlist:
                                         End If
                                     Case 8
                                         Select Case TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1
-                                            Case SexType.Male
+                                            Case modEnumerators.SexType.Male
                                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player's Gender is Male")
                                             Case SexType.Female
                                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player's  Gender is Female")
                                         End Select
                                     Case 9
                                         Select Case TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1
-                                            Case Engine.TimeOfDay.Day
+                                            Case TimeOfDay.Day
                                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Time of Day is Day")
-                                            Case Engine.TimeOfDay.Night
+                                            Case TimeOfDay.Night
                                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Time of Day is Night")
-                                            Case Engine.TimeOfDay.Dawn
+                                            Case TimeOfDay.Dawn
                                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Time of Day is Dawn")
-                                            Case Engine.TimeOfDay.Dusk
+                                            Case TimeOfDay.Dusk
                                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Time of Day is Dusk")
                                         End Select
                                 End Select
@@ -930,7 +932,7 @@ newlist:
                                     FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Remove Player Skill [" & Trim$(Skill(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name) & "]")
                                 End If
                             Case EventType.EvChangeClass
-                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Player Class to " & Trim$(Classes(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name))
+                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Player Class to " & Trim$(Job(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name))
                             Case EventType.EvChangeSprite
                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Player Sprite to " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1)
                             Case EventType.EvChangeSex
@@ -2824,7 +2826,7 @@ newlist:
                     Case 1
                         If TmpEvent.Pages(CurPageNum).Graphic > 0 AndAlso TmpEvent.Pages(CurPageNum).Graphic <= NumCharacters Then
                             'Load character from Contents into our sourceBitmap
-                            sourceBitmap = New Bitmap(Path.Graphics & "\characters\" & TmpEvent.Pages(CurPageNum).Graphic & ".png")
+                            sourceBitmap = New Bitmap(Paths.Graphics & "\characters\" & TmpEvent.Pages(CurPageNum).Graphic & ".png")
                             targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
 
                             g = Graphics.FromImage(targetBitmap)
@@ -2846,7 +2848,7 @@ newlist:
                     Case 2
                         If TmpEvent.Pages(CurPageNum).Graphic > 0 AndAlso TmpEvent.Pages(CurPageNum).Graphic <= NumTileSets Then
                             'Load tilesheet from Contents into our sourceBitmap
-                            sourceBitmap = New Bitmap(Path.Graphics & "tilesets\" & TmpEvent.Pages(CurPageNum).Graphic & ".png")
+                            sourceBitmap = New Bitmap(Paths.Graphics & "tilesets\" & TmpEvent.Pages(CurPageNum).Graphic & ".png")
                             targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
 
                             If TmpEvent.Pages(CurPageNum).GraphicX2 = 0 AndAlso TmpEvent.Pages(CurPageNum).GraphicY2 = 0 Then

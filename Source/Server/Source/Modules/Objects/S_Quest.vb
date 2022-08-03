@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports Asfw
 Imports Asfw.IO
+Imports MirageBasic.Core
 
 Friend Module S_Quest
 
@@ -94,7 +95,7 @@ Friend Module S_Quest
     Sub SaveQuest(QuestNum As Integer)
         Dim filename As String
         Dim I As Integer
-        filename = Path.Quest(QuestNum)
+        filename = Paths.Quest(QuestNum)
 
         Dim writer As New ByteStream(100)
 
@@ -157,7 +158,7 @@ Friend Module S_Quest
         Dim FileName As String
         Dim I As Integer
 
-        FileName = Path.Quest(QuestNum)
+        FileName = Paths.Quest(QuestNum)
 
         Dim reader As New ByteStream()
         ByteFile.Load(FileName, reader)
@@ -212,7 +213,7 @@ Friend Module S_Quest
     Sub CheckQuests()
         Dim I As Integer
         For I = 1 To MAX_QUESTS
-            If Not File.Exists(Path.Quest(I)) Then
+            If Not File.Exists(Paths.Quest(I)) Then
                 SaveQuest(I)
                 Application.DoEvents()
             End If
@@ -286,7 +287,7 @@ Friend Module S_Quest
 
     Sub Packet_RequestEditQuest(index As Integer, ByRef data() As Byte)
         ' Prevent hacking
-        If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
+        If GetPlayerAccess(index) < modEnumerators.AdminType.Developer Then Exit Sub
 
         Dim Buffer = New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SQuestEditor)

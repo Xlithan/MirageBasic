@@ -1,4 +1,6 @@
-﻿Friend Class frmEditor_Skill
+﻿Imports MirageBasic.Core
+
+Friend Class frmEditor_Skill
 
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         Dim tmpindex As Integer

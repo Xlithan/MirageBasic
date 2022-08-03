@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports Asfw
 Imports Asfw.IO
+Imports MirageBasic.Core
 
 
 Module S_Pets
@@ -80,7 +81,7 @@ Module S_Pets
     Sub SavePet(petNum As Integer)
         Dim filename As String, i As Integer
 
-        filename = Path.Pet(petNum)
+        filename = Paths.Pet(petNum)
 
         Dim writer As New ByteStream(100)
 
@@ -96,7 +97,7 @@ Module S_Pets
         writer.WriteByte(Pet(petNum).StatType)
         writer.WriteByte(Pet(petNum).LevelingType)
 
-        For i = 0 To StatType.Count - 1
+        For i = 0 To modEnumerators.StatType.Count - 1
             writer.WriteByte(Pet(petNum).Stat(i))
         Next
 
@@ -128,7 +129,7 @@ Module S_Pets
         Dim reader As New ByteStream()
         Dim filename As String, i As Integer
 
-        filename = Path.Pet(petNum)
+        filename = Paths.Pet(petNum)
 
         ByteFile.Load(filename, reader)
 
@@ -1751,7 +1752,7 @@ Module S_Pets
             Application.DoEvents()
         Loop
 
-        'Ok we got a path. Now, lets look at the first step and see what direction we should take.
+        'Ok we got a Paths. Now, lets look at the first step and see what direction we should take.
         If path(1).X > lastX Then
             FindPetPath = DirectionType.Right
         ElseIf path(1).Y > lastY Then

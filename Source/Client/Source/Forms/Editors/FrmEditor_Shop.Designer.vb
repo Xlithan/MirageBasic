@@ -198,12 +198,6 @@ Partial Class frmEditor_Shop
         'cmbCostItem
         '
         Me.cmbCostItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbCostItem.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbCostItem.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbCostItem.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbCostItem.ButtonIcon = CType(resources.GetObject("cmbCostItem.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbCostItem.DrawDropdownHoverOutline = False
-        Me.cmbCostItem.DrawFocusRectangle = False
         Me.cmbCostItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbCostItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbCostItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -214,7 +208,6 @@ Partial Class frmEditor_Shop
         Me.cmbCostItem.Size = New System.Drawing.Size(165, 21)
         Me.cmbCostItem.TabIndex = 49
         Me.cmbCostItem.Text = Nothing
-        Me.cmbCostItem.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel7
         '
@@ -249,12 +242,6 @@ Partial Class frmEditor_Shop
         'cmbItem
         '
         Me.cmbItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbItem.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbItem.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbItem.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbItem.ButtonIcon = CType(resources.GetObject("cmbItem.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbItem.DrawDropdownHoverOutline = False
-        Me.cmbItem.DrawFocusRectangle = False
         Me.cmbItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -265,7 +252,7 @@ Partial Class frmEditor_Shop
         Me.cmbItem.Size = New System.Drawing.Size(165, 21)
         Me.cmbItem.TabIndex = 45
         Me.cmbItem.Text = Nothing
-        Me.cmbItem.TextPadding = New System.Windows.Forms.Padding(2)
+
         '
         'DarkLabel5
         '

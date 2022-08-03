@@ -220,8 +220,6 @@ Partial Class frmEditor_Skill
         'cmbAnim
         '
         Me.cmbAnim.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbAnim.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbAnim.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbAnim.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbAnim.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbAnim.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -245,8 +243,6 @@ Partial Class frmEditor_Skill
         'cmbAnimCast
         '
         Me.cmbAnimCast.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbAnimCast.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbAnimCast.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbAnimCast.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbAnimCast.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbAnimCast.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -489,8 +485,6 @@ Partial Class frmEditor_Skill
         'cmbDir
         '
         Me.cmbDir.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbDir.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbDir.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbDir.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbDir.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -573,8 +567,6 @@ Partial Class frmEditor_Skill
         'cmbKnockBackTiles
         '
         Me.cmbKnockBackTiles.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbKnockBackTiles.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbKnockBackTiles.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbKnockBackTiles.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbKnockBackTiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbKnockBackTiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -589,8 +581,6 @@ Partial Class frmEditor_Skill
         'cmbProjectile
         '
         Me.cmbProjectile.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbProjectile.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbProjectile.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbProjectile.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbProjectile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbProjectile.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -707,8 +697,6 @@ Partial Class frmEditor_Skill
         'cmbClass
         '
         Me.cmbClass.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbClass.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbClass.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbClass.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -722,8 +710,6 @@ Partial Class frmEditor_Skill
         'cmbAccessReq
         '
         Me.cmbAccessReq.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbAccessReq.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbAccessReq.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbAccessReq.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbAccessReq.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbAccessReq.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -786,8 +772,6 @@ Partial Class frmEditor_Skill
         'cmbType
         '
         Me.cmbType.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbType.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbType.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
         Me.cmbType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbType.FlatStyle = System.Windows.Forms.FlatStyle.Flat

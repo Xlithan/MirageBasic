@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports Asfw
 Imports Ini = Asfw.IO.TextFile
+Imports MirageBasic.Core
 
 Friend Module S_Events
 
@@ -410,7 +411,7 @@ Friend Module S_Events
     End Sub
 
     Sub SaveSwitches()
-        Dim cf = Path.Database & "Switches.ini"
+        Dim cf = Paths.Database & "Switches.ini"
         If Not File.Exists(cf) Then File.Create(cf).Dispose()
 
         For i = 1 To MAX_SWITCHES
@@ -419,7 +420,7 @@ Friend Module S_Events
     End Sub
 
     Sub SaveVariables()
-        Dim cf = Path.Database & "Variables.ini"
+        Dim cf = Paths.Database & "Variables.ini"
         If Not File.Exists(cf) Then File.Create(cf).Dispose()
 
         For i = 1 To MAX_VARIABLES
@@ -428,7 +429,7 @@ Friend Module S_Events
     End Sub
 
     Sub LoadSwitches()
-        Dim cf = Path.Database & "Switches.ini"
+        Dim cf = Paths.Database & "Switches.ini"
 
         If Not File.Exists(cf) Then
             CreateSwitches()
@@ -441,7 +442,7 @@ Friend Module S_Events
     End Sub
 
     Sub LoadVariables()
-        Dim cf = Path.Database & "Variables.ini"
+        Dim cf = Paths.Database & "Variables.ini"
 
         If Not File.Exists(cf) Then
             CreateVariables()
@@ -1469,7 +1470,7 @@ Friend Module S_Events
                 Application.DoEvents()
             Loop
 
-            'Ok we got a path. Now, lets look at the first step and see what direction we should take.
+            'Ok we got a Paths. Now, lets look at the first step and see what direction we should take.
             If path(1).X > lastX Then
                 CanEventMoveTowardsPlayer = DirectionType.Right
             ElseIf path(1).Y > lastY Then

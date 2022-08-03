@@ -2,6 +2,8 @@
 Imports Asfw
 Imports SFML.Graphics
 Imports SFML.Window
+Imports MirageBasic.Core
+Imports SFML.System
 
 Public Class FrmEditor_MapEditor
     Dim picbacktop As Integer, picbackleft As Integer
@@ -1250,8 +1252,8 @@ Public Class FrmEditor_MapEditor
             Exit Sub
         End If
 
-        If File.Exists(Path.Graphics & "items\" & itemnum & GfxExt) Then
-            Me.picMapItem.BackgroundImage = Drawing.Image.FromFile(Path.Graphics & "items\" & itemnum & GfxExt)
+        If File.Exists(Paths.Graphics & "items\" & itemnum & GfxExt) Then
+            Me.picMapItem.BackgroundImage = Drawing.Image.FromFile(Paths.Graphics & "items\" & itemnum & GfxExt)
         End If
 
     End Sub
@@ -1266,8 +1268,8 @@ Public Class FrmEditor_MapEditor
             Exit Sub
         End If
 
-        If File.Exists(Path.Graphics & "items\" & itemnum & GfxExt) Then
-            Me.picMapKey.BackgroundImage = Drawing.Image.FromFile(Path.Graphics & "items\" & itemnum & GfxExt)
+        If File.Exists(Paths.Graphics & "items\" & itemnum & GfxExt) Then
+            Me.picMapKey.BackgroundImage = Drawing.Image.FromFile(Paths.Graphics & "items\" & itemnum & GfxExt)
         End If
 
     End Sub

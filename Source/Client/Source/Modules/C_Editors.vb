@@ -1,4 +1,7 @@
 ﻿Imports System.IO
+Imports MirageBasic.Core
+Imports SFML.Audio
+Imports SFML.Graphics
 
 Module C_Editors
 
@@ -26,7 +29,7 @@ Module C_Editors
                 FrmEditor_Animation.cmbSound.SelectedIndex = 0
             Else
                 For i = 1 To FrmEditor_Animation.cmbSound.Items.Count
-                    If FrmEditor_Animation.cmbSound.Items(i - 1).ToString = Trim$(.Sound) Then
+                    If FrmEditor_Animation.cmbSound.Items(i - 1).ToString = FrmEditor_Animation.cmbSound.SelectedIndex Then
                         FrmEditor_Animation.cmbSound.SelectedIndex = i - 1
                         Exit For
                     End If
@@ -34,12 +37,12 @@ Module C_Editors
             End If
             FrmEditor_Animation.txtName.Text = Trim$(.Name)
 
-            FrmEditor_Animation.nudSprite0.Value = .Sprite(0)
+            FrmEditor_Animation.nudSprite0.Value = 0
             FrmEditor_Animation.nudFrameCount0.Value = .Frames(0)
             FrmEditor_Animation.nudLoopCount0.Value = .LoopCount(0)
             FrmEditor_Animation.nudLoopTime0.Value = .LoopTime(0)
 
-            FrmEditor_Animation.nudSprite1.Value = .Sprite(1)
+            FrmEditor_Animation.nudSprite1.Value = 0
             FrmEditor_Animation.nudFrameCount1.Value = .Frames(1)
             FrmEditor_Animation.nudLoopCount1.Value = .LoopCount(1)
             FrmEditor_Animation.nudLoopTime1.Value = .LoopTime(1)
@@ -134,7 +137,7 @@ Module C_Editors
             .cmbQuest.SelectedIndex = Npc(Editorindex).QuestNum
             .cmbSpawnPeriod.SelectedIndex = Npc(Editorindex).SpawnTime
 
-            .nudStrength.Value = Npc(Editorindex).Stat(StatType.Strength)
+            .nudStrength.Value = Npc(Editorindex).Stat(modEnumerators.StatType.Strength)
             .nudEndurance.Value = Npc(Editorindex).Stat(StatType.Endurance)
             .nudIntelligence.Value = Npc(Editorindex).Stat(StatType.Intelligence)
             .nudSpirit.Value = Npc(Editorindex).Stat(StatType.Spirit)
@@ -304,8 +307,8 @@ Module C_Editors
             ' build class combo
             .cmbClass.Items.Clear()
             .cmbClass.Items.Add("None")
-            For i = 1 To MAX_CLASSES
-                .cmbClass.Items.Add(Trim$(Classes(i).Name))
+            For i = 1 To MAX_JOB
+                .cmbClass.Items.Add(Trim$(Job(i).Name))
             Next
             .cmbClass.SelectedIndex = 0
 
@@ -419,8 +422,8 @@ Module C_Editors
         End If
 
         frmEditor_Shop.nudFace.Value = Shop(Editorindex).Face
-        If File.Exists(Path.Graphics & "Faces\" & Shop(Editorindex).Face & GfxExt) Then
-            frmEditor_Shop.picFace.BackgroundImage = Image.FromFile(Path.Graphics & "Faces\" & Shop(Editorindex).Face & GfxExt)
+        If File.Exists(Paths.Graphics & "Faces\" & Shop(Editorindex).Face & GfxExt) Then
+            frmEditor_Shop.picFace.BackgroundImage = Drawing.Image.FromFile(Paths.Graphics & "Faces\" & Shop(Editorindex).Face & GfxExt)
         End If
 
         frmEditor_Shop.cmbItem.Items.Clear()
@@ -491,103 +494,103 @@ Module C_Editors
 
 #Region "Class Editor"
 
-    Friend Sub ClassesEditorOk()
-        SendSaveClasses()
+    Friend Sub JobEditorOk()
+        SendSaveJob()
 
-        frmEditor_Classes.Visible = False
+        frmEditor_Job.Visible = False
         Editor = 0
     End Sub
 
-    Friend Sub ClassesEditorCancel()
-        SendRequestClasses()
-        frmEditor_Classes.Visible = False
+    Friend Sub JobEditorCancel()
+        SendRequestJob()
+        frmEditor_Job.Visible = False
         Editor = 0
     End Sub
 
     Friend Sub ClassEditorInit()
         Dim i As Integer
 
-        frmEditor_Classes.lstIndex.Items.Clear()
+        frmEditor_Job.lstIndex.Items.Clear()
 
-        For i = 1 To MAX_CLASSES
-            frmEditor_Classes.lstIndex.Items.Add(Trim(Classes(i).Name))
+        For i = 1 To MAX_JOB
+            frmEditor_Job.lstIndex.Items.Add(Trim(Job(i).Name))
         Next
 
-        Editor = EDITOR_CLASSES
+        Editor = EDITOR_Job
 
-        frmEditor_Classes.nudMaleSprite.Maximum = NumCharacters
-        frmEditor_Classes.nudFemaleSprite.Maximum = NumCharacters
+        frmEditor_Job.nudMaleSprite.Maximum = NumCharacters
+        frmEditor_Job.nudFemaleSprite.Maximum = NumCharacters
 
-        frmEditor_Classes.cmbItems.Items.Clear()
+        frmEditor_Job.cmbItems.Items.Clear()
 
-        frmEditor_Classes.cmbItems.Items.Add("None")
+        frmEditor_Job.cmbItems.Items.Add("None")
         For i = 1 To MAX_ITEMS
-            frmEditor_Classes.cmbItems.Items.Add(Trim(Item(i).Name))
+            frmEditor_Job.cmbItems.Items.Add(Trim(Item(i).Name))
         Next
 
-        frmEditor_Classes.lstIndex.SelectedIndex = 0
+        frmEditor_Job.lstIndex.SelectedIndex = 0
 
-        frmEditor_Classes.Visible = True
+        frmEditor_Job.Visible = True
     End Sub
 
     Friend Sub LoadClass()
         Dim i As Integer
 
-        If Editorindex <= 0 OrElse Editorindex > MAX_CLASSES Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_JOB Then Exit Sub
 
-        frmEditor_Classes.txtName.Text = Classes(Editorindex).Name
-        frmEditor_Classes.txtDescription.Text = Classes(Editorindex).Desc
+        frmEditor_Job.txtName.Text = Job(Editorindex).Name
+        frmEditor_Job.txtDescription.Text = Job(Editorindex).Desc
 
-        frmEditor_Classes.cmbMaleSprite.Items.Clear()
+        frmEditor_Job.cmbMaleSprite.Items.Clear()
 
-        For i = 0 To UBound(Classes(Editorindex).MaleSprite)
-            frmEditor_Classes.cmbMaleSprite.Items.Add("Sprite " & i + 1)
+        For i = 0 To UBound(Job(Editorindex).MaleSprite)
+            frmEditor_Job.cmbMaleSprite.Items.Add("Sprite " & i + 1)
         Next
 
-        frmEditor_Classes.cmbFemaleSprite.Items.Clear()
+        frmEditor_Job.cmbFemaleSprite.Items.Clear()
 
-        For i = 0 To UBound(Classes(Editorindex).FemaleSprite)
-            frmEditor_Classes.cmbFemaleSprite.Items.Add("Sprite " & i + 1)
+        For i = 0 To UBound(Job(Editorindex).FemaleSprite)
+            frmEditor_Job.cmbFemaleSprite.Items.Add("Sprite " & i + 1)
         Next
 
-        frmEditor_Classes.nudMaleSprite.Value = Classes(Editorindex).MaleSprite(0)
-        frmEditor_Classes.nudFemaleSprite.Value = Classes(Editorindex).FemaleSprite(0)
+        frmEditor_Job.nudMaleSprite.Value = Job(Editorindex).MaleSprite(0)
+        frmEditor_Job.nudFemaleSprite.Value = Job(Editorindex).FemaleSprite(0)
 
-        frmEditor_Classes.cmbMaleSprite.SelectedIndex = 0
-        frmEditor_Classes.cmbFemaleSprite.SelectedIndex = 0
+        frmEditor_Job.cmbMaleSprite.SelectedIndex = 0
+        frmEditor_Job.cmbFemaleSprite.SelectedIndex = 0
 
-        frmEditor_Classes.DrawPreview()
+        frmEditor_Job.DrawPreview()
 
         For i = 0 To StatType.Count - 1
-            If Classes(Editorindex).Stat(i) = 0 Then Classes(Editorindex).Stat(i) = 1
+            If Job(Editorindex).Stat(i) = 0 Then Job(Editorindex).Stat(i) = 1
         Next
 
-        frmEditor_Classes.nudStrength.Value = Classes(Editorindex).Stat(StatType.Strength)
-        frmEditor_Classes.nudLuck.Value = Classes(Editorindex).Stat(StatType.Luck)
-        frmEditor_Classes.nudEndurance.Value = Classes(Editorindex).Stat(StatType.Endurance)
-        frmEditor_Classes.nudIntelligence.Value = Classes(Editorindex).Stat(StatType.Intelligence)
-        frmEditor_Classes.nudVitality.Value = Classes(Editorindex).Stat(StatType.Vitality)
-        frmEditor_Classes.nudSpirit.Value = Classes(Editorindex).Stat(StatType.Spirit)
+        frmEditor_Job.nudStrength.Value = Job(Editorindex).Stat(StatType.Strength)
+        frmEditor_Job.nudLuck.Value = Job(Editorindex).Stat(StatType.Luck)
+        frmEditor_Job.nudEndurance.Value = Job(Editorindex).Stat(StatType.Endurance)
+        frmEditor_Job.nudIntelligence.Value = Job(Editorindex).Stat(StatType.Intelligence)
+        frmEditor_Job.nudVitality.Value = Job(Editorindex).Stat(StatType.Vitality)
+        frmEditor_Job.nudSpirit.Value = Job(Editorindex).Stat(StatType.Spirit)
 
-        If Classes(Editorindex).BaseExp < 10 Then
-            frmEditor_Classes.nudBaseExp.Value = 10
+        If Job(Editorindex).BaseExp < 10 Then
+            frmEditor_Job.nudBaseExp.Value = 10
         Else
-            frmEditor_Classes.nudBaseExp.Value = Classes(Editorindex).BaseExp
+            frmEditor_Job.nudBaseExp.Value = Job(Editorindex).BaseExp
         End If
 
-        frmEditor_Classes.lstStartItems.Items.Clear()
+        frmEditor_Job.lstStartItems.Items.Clear()
 
         For i = 1 To 5
-            If Classes(Editorindex).StartItem(i) > 0 Then
-                frmEditor_Classes.lstStartItems.Items.Add(Item(Classes(Editorindex).StartItem(i)).Name & " X " & Classes(Editorindex).StartValue(i))
+            If Job(Editorindex).StartItem(i) > 0 Then
+                frmEditor_Job.lstStartItems.Items.Add(Item(Job(Editorindex).StartItem(i)).Name & " X " & Job(Editorindex).StartValue(i))
             Else
-                frmEditor_Classes.lstStartItems.Items.Add("None")
+                frmEditor_Job.lstStartItems.Items.Add("None")
             End If
         Next
 
-        frmEditor_Classes.nudStartMap.Value = Classes(Editorindex).StartMap
-        frmEditor_Classes.nudStartX.Value = Classes(Editorindex).StartX
-        frmEditor_Classes.nudStartY.Value = Classes(Editorindex).StartY
+        frmEditor_Job.nudStartMap.Value = Job(Editorindex).StartMap
+        frmEditor_Job.nudStartX.Value = Job(Editorindex).StartX
+        frmEditor_Job.nudStartY.Value = Job(Editorindex).StartY
     End Sub
 
 #End Region
@@ -763,8 +766,8 @@ Module C_Editors
             frmEditor_Item.cmbClassReq.Items.Clear()
             frmEditor_Item.cmbClassReq.Items.Add("None")
 
-            For i = 1 To MAX_CLASSES
-                frmEditor_Item.cmbClassReq.Items.Add(Classes(i).Name)
+            For i = 1 To MAX_JOB
+                frmEditor_Item.cmbClassReq.Items.Add(Job(i).Name)
             Next
 
             frmEditor_Item.cmbClassReq.SelectedIndex = .ClassReq

@@ -228,12 +228,6 @@ Partial Class frmEditor_AutoMapper
         'cmbLayer
         '
         Me.cmbLayer.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.cmbLayer.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbLayer.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbLayer.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbLayer.ButtonIcon = CType(resources.GetObject("cmbLayer.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbLayer.DrawDropdownHoverOutline = False
-        Me.cmbLayer.DrawFocusRectangle = False
         Me.cmbLayer.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbLayer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbLayer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -245,17 +239,10 @@ Partial Class frmEditor_AutoMapper
         Me.cmbLayer.Size = New System.Drawing.Size(252, 21)
         Me.cmbLayer.TabIndex = 43
         Me.cmbLayer.Text = "Ground"
-        Me.cmbLayer.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'cmbPrefab
         '
         Me.cmbPrefab.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.cmbPrefab.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbPrefab.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbPrefab.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbPrefab.ButtonIcon = CType(resources.GetObject("cmbPrefab.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbPrefab.DrawDropdownHoverOutline = False
-        Me.cmbPrefab.DrawFocusRectangle = False
         Me.cmbPrefab.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbPrefab.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbPrefab.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -267,7 +254,6 @@ Partial Class frmEditor_AutoMapper
         Me.cmbPrefab.Size = New System.Drawing.Size(252, 21)
         Me.cmbPrefab.TabIndex = 43
         Me.cmbPrefab.Text = "Water"
-        Me.cmbPrefab.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'GroupBox1
         '
