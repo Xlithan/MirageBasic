@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports Asfw
+Imports MirageBasic.Core
 
 Friend Class FrmMenu
     Inherits Form
@@ -45,35 +46,35 @@ Friend Class FrmMenu
     Friend Sub LoadMenuGraphics()
 
         'main menu
-        If File.Exists(Path.Gui & "Menu\menu" & GfxExt) Then
-            BackgroundImage = Image.FromFile(Path.Gui & "Menu\menu" & GfxExt)
+        If File.Exists(Paths.Gui & "Menu/menu" & GfxExt) Then
+            BackgroundImage = Image.FromFile(Paths.Gui & "Menu/menu" & GfxExt)
         End If
 
         'main menu buttons
-        If File.Exists(Path.Gui & "Menu\button" & GfxExt) Then
-            btnExit.Image = Image.FromFile(Path.Gui & "Menu\button_exit" & GfxExt)
-            btnLogin.Image = Image.FromFile(Path.Gui & "Menu\btn_login" & GfxExt)
-            btnPlay.Image = Image.FromFile(Path.Gui & "Menu\button_play" & GfxExt)
-            btnRegister.Image = Image.FromFile(Path.Gui & "Menu\button_register" & GfxExt)
-            btnNewChar.Image = Image.FromFile(Path.Gui & "Menu\btn_newchar" & GfxExt)
-            btnUseChar.Image = Image.FromFile(Path.Gui & "Menu\btn_usechar" & GfxExt)
-            btnDelChar.Image = Image.FromFile(Path.Gui & "Menu\btn_deletechar" & GfxExt)
-            btnCreateAccount.Image = Image.FromFile(Path.Gui & "Menu\btn_createacc" & GfxExt)
+        If File.Exists(Paths.Gui & "Menu/button" & GfxExt) Then
+            btnExit.Image = Image.FromFile(Paths.Gui & "Menu/button_exit" & GfxExt)
+            btnLogin.Image = Image.FromFile(Paths.Gui & "Menu/btn_login" & GfxExt)
+            btnPlay.Image = Image.FromFile(Paths.Gui & "Menu/button_play" & GfxExt)
+            btnRegister.Image = Image.FromFile(Paths.Gui & "Menu/button_register" & GfxExt)
+            btnNewChar.Image = Image.FromFile(Paths.Gui & "Menu/btn_newchar" & GfxExt)
+            btnUseChar.Image = Image.FromFile(Paths.Gui & "Menu/btn_usechar" & GfxExt)
+            btnDelChar.Image = Image.FromFile(Paths.Gui & "Menu/btn_deletechar" & GfxExt)
+            btnCreateAccount.Image = Image.FromFile(Paths.Gui & "Menu/btn_createacc" & GfxExt)
         End If
 
         'main menu panels
-        If File.Exists(Path.Gui & "Menu\panel" & GfxExt) Then
-            pnlMainMenu.BackgroundImage = Image.FromFile(Path.Gui & "Menu\panel" & GfxExt)
-            pnlLogin.BackgroundImage = Image.FromFile(Path.Gui & "Menu\panel" & GfxExt)
-            pnlNewChar.BackgroundImage = Image.FromFile(Path.Gui & "Menu\panel" & GfxExt)
-            pnlCharSelect.BackgroundImage = Image.FromFile(Path.Gui & "Menu\panel" & GfxExt)
-            pnlRegister.BackgroundImage = Image.FromFile(Path.Gui & "Menu\panel" & GfxExt)
-            pnlCredits.BackgroundImage = Image.FromFile(Path.Gui & "Menu\panel" & GfxExt)
+        If File.Exists(Paths.Gui & "Menu\panel" & GfxExt) Then
+            pnlMainMenu.BackgroundImage = Image.FromFile(Paths.Gui & "Menu\panel" & GfxExt)
+            pnlLogin.BackgroundImage = Image.FromFile(Paths.Gui & "Menu\panel" & GfxExt)
+            pnlNewChar.BackgroundImage = Image.FromFile(Paths.Gui & "Menu\panel" & GfxExt)
+            pnlCharSelect.BackgroundImage = Image.FromFile(Paths.Gui & "Menu\panel" & GfxExt)
+            pnlRegister.BackgroundImage = Image.FromFile(Paths.Gui & "Menu\panel" & GfxExt)
+            pnlCredits.BackgroundImage = Image.FromFile(Paths.Gui & "Menu\panel" & GfxExt)
         End If
 
         'logo
-        If File.Exists(Path.Gui & "Menu\logo" & GfxExt) Then
-            picLogo.BackgroundImage = Image.FromFile(Path.Gui & "Menu\logo" & GfxExt)
+        If File.Exists(Paths.Gui & "Menu\logo" & GfxExt) Then
+            picLogo.BackgroundImage = Image.FromFile(Paths.Gui & "Menu\logo" & GfxExt)
         End If
 
         ' Main
@@ -90,7 +91,7 @@ Friend Class FrmMenu
         ' New Character
         lblNewChar.Text = Language.MainMenu.NewCharacter
         lblNewCharName.Text = Language.MainMenu.NewCharacterName
-        lblNewCharClass.Text = Language.MainMenu.NewCharacterClass
+        lblNewCharJob.Text = Language.MainMenu.NewCharacterClass
         lblNewCharGender.Text = Language.MainMenu.NewCharacterGender
         rdoMale.Text = Language.MainMenu.NewCharacterMale
         rdoFemale.Text = Language.MainMenu.NewCharacterFemale
@@ -122,13 +123,13 @@ Friend Class FrmMenu
             Dim charwidth As Integer
             Dim charheight As Integer
 
-            If NewCharClass = 0 Then NewCharClass = 1
+            If NewCharJob = 0 Then NewCharJob = 1
             If NewCharSprite = 0 Then NewCharSprite = 1
 
             If rdoMale.Checked = True Then
-                filename = Path.Graphics & "characters\" & Classes(NewCharClass).MaleSprite(NewCharSprite) & GfxExt
+                filename = Paths.Graphics & "characters\" & Job(NewCharJob).MaleSprite(NewCharSprite) & GfxExt
             Else
-                filename = Path.Graphics & "characters\" & Classes(NewCharClass).FemaleSprite(NewCharSprite) & GfxExt
+                filename = Paths.Graphics & "characters\" & Job(NewCharJob).FemaleSprite(NewCharSprite) & GfxExt
             End If
 
             Dim charsprite As Bitmap = New Bitmap(filename)
@@ -168,7 +169,7 @@ Friend Class FrmMenu
             If CharSelection(1).Sprite > 0 Then
                 g = picChar1.CreateGraphics
 
-                filename = Path.Graphics & "characters\" & CharSelection(1).Sprite & GfxExt
+                filename = Paths.Graphics & "characters\" & CharSelection(1).Sprite & GfxExt
 
                 Dim charsprite As Bitmap = New Bitmap(filename)
 
@@ -197,7 +198,7 @@ Friend Class FrmMenu
             If CharSelection(2).Sprite > 0 Then
                 g = picChar2.CreateGraphics
 
-                filename = Path.Graphics & "characters\" & CharSelection(2).Sprite & GfxExt
+                filename = Paths.Graphics & "characters\" & CharSelection(2).Sprite & GfxExt
 
                 Dim charsprite As Bitmap = New Bitmap(filename)
 
@@ -226,7 +227,7 @@ Friend Class FrmMenu
             If CharSelection(3).Sprite > 0 Then
                 g = picChar3.CreateGraphics
 
-                filename = Path.Graphics & "characters\" & CharSelection(3).Sprite & GfxExt
+                filename = Paths.Graphics & "characters\" & CharSelection(3).Sprite & GfxExt
 
                 Dim charsprite As Bitmap = New Bitmap(filename)
 
@@ -325,8 +326,8 @@ Friend Class FrmMenu
     ''' Changes selected class.
     ''' </summary>
     Private Sub CmbClass_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClass.SelectedIndexChanged
-        NewCharClass = cmbClass.SelectedIndex + 1
-        txtDescription.Text = Classes(NewCharClass).Desc
+        NewCharJob = cmbClass.SelectedIndex + 1
+        txtDescription.Text = Job(NewCharJob).Desc
         DrawCharacter()
     End Sub
 
@@ -350,9 +351,9 @@ Friend Class FrmMenu
     Private Sub LblNextChar_Click(sender As Object, e As EventArgs) Handles lblNextChar.Click
         NewCharSprite = NewCharSprite + 1
         If rdoMale.Checked = True Then
-            If NewCharSprite > Classes(NewCharClass).MaleSprite.Length - 1 Then NewCharSprite = 1
+            If NewCharSprite > Job(NewCharJob).MaleSprite.Length - 1 Then NewCharSprite = 1
         ElseIf rdoFemale.Checked = True Then
-            If NewCharSprite > Classes(NewCharClass).FemaleSprite.Length - 1 Then NewCharSprite = 1
+            If NewCharSprite > Job(NewCharJob).FemaleSprite.Length - 1 Then NewCharSprite = 1
         End If
         DrawCharacter()
     End Sub
@@ -363,9 +364,9 @@ Friend Class FrmMenu
     Private Sub LblPrevChar_Click(sender As Object, e As EventArgs) Handles lblPrevChar.Click
         NewCharSprite = NewCharSprite - 1
         If rdoMale.Checked = True Then
-            If NewCharSprite = 0 Then NewCharSprite = Classes(NewCharClass).MaleSprite.Length - 1
+            If NewCharSprite = 0 Then NewCharSprite = Job(NewCharJob).MaleSprite.Length - 1
         ElseIf rdoFemale.Checked = True Then
-            If NewCharSprite = 0 Then NewCharSprite = Classes(NewCharClass).FemaleSprite.Length - 1
+            If NewCharSprite = 0 Then NewCharSprite = Job(NewCharJob).FemaleSprite.Length - 1
         End If
         DrawCharacter()
     End Sub
@@ -404,14 +405,14 @@ Friend Class FrmMenu
     ''' Changes to hover state on button.
     ''' </summary>
     Private Sub BtnPlay_MouseEnter(sender As Object, e As EventArgs) Handles btnPlay.MouseEnter
-        btnPlay.Image = Image.FromFile(Path.Gui & "Menu\button_hover_play" & GfxExt)
+        btnPlay.Image = Image.FromFile(Paths.Gui & "Menu\button_hover_play" & GfxExt)
     End Sub
 
     ''' <summary>
     ''' Changes to normal state on button.
     ''' </summary>
     Private Sub BtnPlay_MouseLeave(sender As Object, e As EventArgs) Handles btnPlay.MouseLeave
-        btnPlay.Image = Image.FromFile(Path.Gui & "Menu\button_play" & GfxExt)
+        btnPlay.Image = Image.FromFile(Paths.Gui & "Menu\button_play" & GfxExt)
     End Sub
 
     ''' <summary>
@@ -431,14 +432,14 @@ Friend Class FrmMenu
     ''' Changes to hover state on button.
     ''' </summary>
     Private Sub btnRegister_MouseEnter(sender As Object, e As EventArgs) Handles btnRegister.MouseEnter
-        btnRegister.Image = Image.FromFile(Path.Gui & "Menu\button_hover_register" & GfxExt)
+        btnRegister.Image = Image.FromFile(Paths.Gui & "Menu\button_hover_register" & GfxExt)
     End Sub
 
     ''' <summary>
     ''' Changes to normal state on button.
     ''' </summary>
     Private Sub BtnRegister_MouseLeave(sender As Object, e As EventArgs) Handles btnRegister.MouseLeave
-        btnRegister.Image = Image.FromFile(Path.Gui & "Menu\button_register" & GfxExt)
+        btnRegister.Image = Image.FromFile(Paths.Gui & "Menu\button_register" & GfxExt)
     End Sub
 
     ''' <summary>
@@ -453,14 +454,14 @@ Friend Class FrmMenu
     ''' Changes to hover state on button.
     ''' </summary>
     Private Sub btnExit_MouseEnter(sender As Object, e As EventArgs) Handles btnExit.MouseEnter
-        btnExit.Image = Image.FromFile(Path.Gui & "Menu\button_hover_exit" & GfxExt)
+        btnExit.Image = Image.FromFile(Paths.Gui & "Menu\button_hover_exit" & GfxExt)
     End Sub
 
     ''' <summary>
     ''' Changes to normal state on button.
     ''' </summary>
     Private Sub BtnExit_MouseLeave(sender As Object, e As EventArgs) Handles btnExit.MouseLeave
-        btnExit.Image = Image.FromFile(Path.Gui & "Menu\button_exit" & GfxExt)
+        btnExit.Image = Image.FromFile(Paths.Gui & "Menu\button_exit" & GfxExt)
     End Sub
 
     ''' <summary>
@@ -476,14 +477,14 @@ Friend Class FrmMenu
     ''' Changes to hover state on button.
     ''' </summary>
     Private Sub BtnLogin_MouseEnter(sender As Object, e As EventArgs) Handles btnLogin.MouseEnter
-        btnLogin.Image = Image.FromFile(Path.Gui & "Menu\btn_login_hover" & GfxExt)
+        btnLogin.Image = Image.FromFile(Paths.Gui & "Menu\btn_login_hover" & GfxExt)
     End Sub
 
     ''' <summary>
     ''' Changes to normal state on button.
     ''' </summary>
     Private Sub BtnLogin_MouseLeave(sender As Object, e As EventArgs) Handles btnLogin.MouseLeave
-        btnLogin.Image = Image.FromFile(Path.Gui & "Menu\btn_login" & GfxExt)
+        btnLogin.Image = Image.FromFile(Paths.Gui & "Menu\btn_login" & GfxExt)
     End Sub
 
     ''' <summary>
@@ -513,14 +514,14 @@ Friend Class FrmMenu
     ''' Changes to hover state on button.
     ''' </summary>
     Private Sub BtnCreateAccount_MouseEnter(sender As Object, e As EventArgs) Handles btnCreateAccount.MouseEnter
-        btnCreateAccount.Image = Image.FromFile(Path.Gui & "Menu\btn_createacc_hover" & GfxExt)
+        btnCreateAccount.Image = Image.FromFile(Paths.Gui & "Menu\btn_createacc_hover" & GfxExt)
     End Sub
 
     ''' <summary>
     ''' Changes to normal state on button.
     ''' </summary>
     Private Sub BtnCreateAccount_MouseLeave(sender As Object, e As EventArgs) Handles btnCreateAccount.MouseLeave
-        btnCreateAccount.Image = Image.FromFile(Path.Gui & "Menu\btn_createacc" & GfxExt)
+        btnCreateAccount.Image = Image.FromFile(Paths.Gui & "Menu\btn_createacc" & GfxExt)
     End Sub
 
     ''' <summary>
@@ -534,14 +535,14 @@ Friend Class FrmMenu
     ''' Changes to hover state on button.
     ''' </summary>
     Private Sub BtnCreateCharacter_MouseEnter(sender As Object, e As EventArgs) Handles btnCreateCharacter.MouseEnter
-        btnCreateCharacter.Image = Image.FromFile(Path.Gui & "Menu\btn_createchar_hover" & GfxExt)
+        btnCreateCharacter.Image = Image.FromFile(Paths.Gui & "Menu\btn_createchar_hover" & GfxExt)
     End Sub
 
     ''' <summary>
     ''' Changes to normal state on button.
     ''' </summary>
     Private Sub BtnCreateCharacter_MouseLeave(sender As Object, e As EventArgs) Handles btnCreateCharacter.MouseLeave
-        btnCreateCharacter.Image = Image.FromFile(Path.Gui & "Menu\btn_createchar" & GfxExt)
+        btnCreateCharacter.Image = Image.FromFile(Paths.Gui & "Menu\btn_createchar" & GfxExt)
     End Sub
 
     ''' <summary>
@@ -596,14 +597,14 @@ Friend Class FrmMenu
     ''' Changes to hover state on button.
     ''' </summary>
     Private Sub BtnNewChar_MouseEnter(sender As Object, e As EventArgs) Handles btnNewChar.MouseEnter
-        btnNewChar.Image = Image.FromFile(Path.Gui & "Menu\btn_newchar_hover" & GfxExt)
+        btnNewChar.Image = Image.FromFile(Paths.Gui & "Menu\btn_newchar_hover" & GfxExt)
     End Sub
 
     ''' <summary>
     ''' Changes to normal state on button.
     ''' </summary>
     Private Sub BtnNewChar_MouseLeave(sender As Object, e As EventArgs) Handles btnNewChar.MouseLeave
-        btnNewChar.Image = Image.FromFile(Path.Gui & "Menu\btn_newchar" & GfxExt)
+        btnNewChar.Image = Image.FromFile(Paths.Gui & "Menu\btn_newchar" & GfxExt)
     End Sub
 
     ''' <summary>
@@ -626,14 +627,14 @@ Friend Class FrmMenu
     ''' Changes to hover state on button.
     ''' </summary>
     Private Sub BtnUseChar_MouseEnter(sender As Object, e As EventArgs) Handles btnUseChar.MouseEnter
-        btnUseChar.Image = Image.FromFile(Path.Gui & "Menu\btn_usechar_hover" & GfxExt)
+        btnUseChar.Image = Image.FromFile(Paths.Gui & "Menu\btn_usechar_hover" & GfxExt)
     End Sub
 
     ''' <summary>
     ''' Changes to normal state on button.
     ''' </summary>
     Private Sub BtnUseChar_MouseLeave(sender As Object, e As EventArgs) Handles btnUseChar.MouseLeave
-        btnUseChar.Image = Image.FromFile(Path.Gui & "Menu\btn_usechar" & GfxExt)
+        btnUseChar.Image = Image.FromFile(Paths.Gui & "Menu\btn_usechar" & GfxExt)
     End Sub
 
     ''' <summary>
@@ -654,14 +655,14 @@ Friend Class FrmMenu
     ''' Changes to hover state on button.
     ''' </summary>
     Private Sub BtnDelChar_MouseEnter(sender As Object, e As EventArgs) Handles btnDelChar.MouseEnter
-        btnDelChar.Image = Image.FromFile(Path.Gui & "Menu\btn_deletechar_hover" & GfxExt)
+        btnDelChar.Image = Image.FromFile(Paths.Gui & "Menu\btn_deletechar_hover" & GfxExt)
     End Sub
 
     ''' <summary>
     ''' Changes to normal state on button.
     ''' </summary>
     Private Sub BtnDelChar_MouseLeave(sender As Object, e As EventArgs) Handles btnDelChar.MouseLeave
-        btnDelChar.Image = Image.FromFile(Path.Gui & "Menu\btn_deletechar" & GfxExt)
+        btnDelChar.Image = Image.FromFile(Paths.Gui & "Menu\btn_deletechar" & GfxExt)
     End Sub
 
 #End Region

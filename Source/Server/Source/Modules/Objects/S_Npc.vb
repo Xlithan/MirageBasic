@@ -1,4 +1,5 @@
 ﻿Imports Asfw
+Imports MirageBasic.Core
 
 Module S_Npc
 
@@ -42,7 +43,7 @@ Module S_Npc
             MapNpc(mapNum).Npc(mapNpcNum).Target = 0
             MapNpc(mapNum).Npc(mapNpcNum).TargetType = 0 ' clear
 
-            MapNpc(mapNum).Npc(mapNpcNum).Vital(VitalType.HP) = GetNpcMaxVital(npcNum, VitalType.HP)
+            MapNpc(mapNum).Npc(mapNpcNum).Vital(modEnumerators.VitalType.HP) = GetNpcMaxVital(npcNum, VitalType.HP)
             MapNpc(mapNum).Npc(mapNpcNum).Vital(VitalType.MP) = GetNpcMaxVital(npcNum, VitalType.MP)
             MapNpc(mapNum).Npc(mapNpcNum).Vital(VitalType.SP) = GetNpcMaxVital(npcNum, VitalType.SP)
 

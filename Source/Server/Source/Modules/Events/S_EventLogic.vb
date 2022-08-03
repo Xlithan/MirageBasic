@@ -1,4 +1,5 @@
 ﻿Imports Asfw
+Imports MirageBasic.Core
 
 Friend Module S_EventLogic
 
@@ -93,7 +94,7 @@ Friend Module S_EventLogic
 
                             If TempPlayer(i).EventMap.EventPages(x).Visible = 0 Then
                                 Dim Buffer As New ByteStream(4)
-                                Buffer.WriteInt32(ServerPackets.SSpawnEvent)
+                                Buffer.WriteInt32(Packets.ServerPackets.SSpawnEvent)
                                 Buffer.WriteInt32(id)
                                 With TempPlayer(i).EventMap.EventPages(x)
                                     Buffer.WriteString((Trim(Map(GetPlayerMap(i)).Events(.EventId).Name)))
@@ -1458,7 +1459,7 @@ Friend Module S_EventLogic
                                                                         .CurSlot = 1
                                                                     End If
                                                                 Case 3
-                                                                    If Player(i).Character(TempPlayer(i).CurChar).Classes = Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1 Then
+                                                                    If Player(i).Character(TempPlayer(i).CurChar).Job = Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data1 Then
                                                                         .ListLeftOff(.CurList) = .CurSlot
                                                                         .CurList = Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.CommandList
                                                                         .CurSlot = 1
@@ -1740,7 +1741,7 @@ Friend Module S_EventLogic
                                                             End If
                                                             SendPlayerSkills(i)
                                                         Case EventType.EvChangeClass
-                                                            Player(i).Character(TempPlayer(i).CurChar).Classes = Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1
+                                                            Player(i).Character(TempPlayer(i).CurChar).Job = Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1
                                                             SendPlayerData(i)
                                                         Case EventType.EvChangeSprite
                                                             SetPlayerSprite(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1)
@@ -2019,7 +2020,7 @@ Friend Module S_EventLogic
         txt = Replace(txt, "/name", Trim$(Player(index).Character(TempPlayer(index).CurChar).Name))
         txt = Replace(txt, "/p", Trim$(Player(index).Character(TempPlayer(index).CurChar).Name))
         txt = Replace(txt, "$playername$", Trim$(Player(index).Character(TempPlayer(index).CurChar).Name))
-        txt = Replace(txt, "$playerclass$", Trim$(Classes(Player(index).Character(TempPlayer(index).CurChar).Classes).Name))
+        txt = Replace(txt, "$playerclass$", Trim$(Job(Player(index).Character(TempPlayer(index).CurChar).Job).Name))
         Do While InStr(1, txt, "/v") > 0
             x = InStr(1, txt, "/v")
             If x > 0 Then
@@ -2320,7 +2321,7 @@ Friend Module S_EventLogic
             Application.DoEvents()
         Loop
 
-        'Ok we got a path. Now, lets look at the first step and see what direction we should take.
+        'Ok we got a Paths. Now, lets look at the first step and see what direction we should take.
         If path(1).X > LastX Then
             FindNpcPath = DirectionType.Right
         ElseIf path(1).Y > LastY Then

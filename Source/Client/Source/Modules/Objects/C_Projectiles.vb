@@ -1,7 +1,9 @@
 ﻿Imports System.IO
 Imports System.Windows.Forms
 Imports Asfw
+Imports MirageBasic.Core
 Imports SFML.Graphics
+Imports SFML.System
 Imports SFML.Window
 
 Friend Module C_Projectiles
@@ -47,7 +49,7 @@ Friend Module C_Projectiles
         Dim buffer As ByteStream
 
         buffer = New ByteStream(4)
-        buffer.WriteInt32(ClientPackets.CRequestEditProjectiles)
+        buffer.WriteInt32(Packets.ClientPackets.CRequestEditProjectiles)
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
 
@@ -178,7 +180,7 @@ Friend Module C_Projectiles
 
         i = 1
 
-        While File.Exists(Path.Graphics & "projectiles\" & i & GfxExt)
+        While File.Exists(Paths.Graphics & "projectiles\" & i & GfxExt)
 
             NumProjectiles = NumProjectiles + 1
             i = i + 1
@@ -324,8 +326,8 @@ Friend Module C_Projectiles
             Exit Sub
         End If
 
-        If File.Exists(Path.Graphics & "Projectiles\" & iconnum & GfxExt) Then
-            frmEditor_Projectile.picProjectile.BackgroundImage = Drawing.Image.FromFile(Path.Graphics & "Projectiles\" & iconnum & GfxExt)
+        If File.Exists(Paths.Graphics & "Projectiles\" & iconnum & GfxExt) Then
+            frmEditor_Projectile.picProjectile.BackgroundImage = Drawing.Image.FromFile(Paths.Graphics & "Projectiles\" & iconnum & GfxExt)
         End If
 
     End Sub

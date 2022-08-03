@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports System.Threading
 Imports System.Windows.Forms
+Imports MirageBasic.Core
 
 Module C_General
 
@@ -11,10 +12,16 @@ Module C_General
     End Function
 
     Sub Startup()
-        SFML.Portable.Activate()
         LoadSettings()
         LoadLanguage()
         LoadInputs()
+
+        FrmOptions.optMOn.Checked = Settings.Music
+        FrmOptions.optSOn.Checked = Settings.Sound
+        FrmOptions.lblVolume.Text = "Volume: " & Settings.Volume
+        FrmOptions.scrlVolume.Value = Settings.Volume
+
+        FrmOptions.cmbScreenSize.SelectedIndex = Settings.ScreenSize
 
         SetStatus(Language.Load.Loading)
         FrmMenu.Text = FrmGame.Text = Settings.GameName
@@ -28,7 +35,7 @@ Module C_General
         End If
 
         ReDim CharSelection(3)
-        ReDim Classes(MAX_CLASSES)
+        ReDim Job(MAX_JOB)
         ReDim House(MaxHouses)
         ReDim HouseConfig(MaxHouses)
         ReDim Map.Npc(MAX_MAP_NPCS)

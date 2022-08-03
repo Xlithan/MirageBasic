@@ -56,7 +56,7 @@ Partial Class FrmMenu
         Me.rdoMale = New System.Windows.Forms.RadioButton()
         Me.cmbClass = New System.Windows.Forms.ComboBox()
         Me.lblNewCharGender = New System.Windows.Forms.Label()
-        Me.lblNewCharClass = New System.Windows.Forms.Label()
+        Me.lblNewCharJob = New System.Windows.Forms.Label()
         Me.txtCharName = New System.Windows.Forms.TextBox()
         Me.lblNewCharName = New System.Windows.Forms.Label()
         Me.lblNewChar = New System.Windows.Forms.Label()
@@ -342,7 +342,7 @@ Partial Class FrmMenu
         Me.pnlNewChar.Controls.Add(Me.rdoMale)
         Me.pnlNewChar.Controls.Add(Me.cmbClass)
         Me.pnlNewChar.Controls.Add(Me.lblNewCharGender)
-        Me.pnlNewChar.Controls.Add(Me.lblNewCharClass)
+        Me.pnlNewChar.Controls.Add(Me.lblNewCharJob)
         Me.pnlNewChar.Controls.Add(Me.txtCharName)
         Me.pnlNewChar.Controls.Add(Me.lblNewCharName)
         Me.pnlNewChar.Controls.Add(Me.lblNewChar)
@@ -452,15 +452,15 @@ Partial Class FrmMenu
         Me.lblNewCharGender.TabIndex = 34
         Me.lblNewCharGender.Text = "Gender:"
         '
-        'lblNewCharClass
+        'lblNewCharJob
         '
-        Me.lblNewCharClass.AutoSize = True
-        Me.lblNewCharClass.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNewCharClass.Location = New System.Drawing.Point(186, 45)
-        Me.lblNewCharClass.Name = "lblNewCharClass"
-        Me.lblNewCharClass.Size = New System.Drawing.Size(41, 17)
-        Me.lblNewCharClass.TabIndex = 33
-        Me.lblNewCharClass.Text = "Class:"
+        Me.lblNewCharJob.AutoSize = True
+        Me.lblNewCharJob.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNewCharJob.Location = New System.Drawing.Point(186, 45)
+        Me.lblNewCharJob.Name = "lblNewCharJob"
+        Me.lblNewCharJob.Size = New System.Drawing.Size(41, 17)
+        Me.lblNewCharJob.TabIndex = 33
+        Me.lblNewCharJob.Text = "Class:"
         '
         'txtCharName
         '
@@ -821,7 +821,7 @@ Partial Class FrmMenu
     Friend WithEvents rdoMale As System.Windows.Forms.RadioButton
     Friend WithEvents cmbClass As System.Windows.Forms.ComboBox
     Friend WithEvents lblNewCharGender As System.Windows.Forms.Label
-    Friend WithEvents lblNewCharClass As System.Windows.Forms.Label
+    Friend WithEvents lblNewCharJob As System.Windows.Forms.Label
     Friend WithEvents txtCharName As System.Windows.Forms.TextBox
     Friend WithEvents lblNewCharName As System.Windows.Forms.Label
     Friend WithEvents lblNewChar As System.Windows.Forms.Label

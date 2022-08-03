@@ -1,4 +1,5 @@
-﻿Module C_UpdateUI
+﻿Imports MirageBasic.Core
+Module C_UpdateUI
 
 #Region "Defines"
 

@@ -1,4 +1,6 @@
-﻿Friend Class FrmOptions
+﻿Imports MirageBasic.Core
+
+Friend Class FrmOptions
 
 #Region "Options"
 

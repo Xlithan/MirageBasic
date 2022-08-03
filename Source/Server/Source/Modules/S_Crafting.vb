@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports Asfw
 Imports Asfw.IO
+Imports MirageBasic.Core
 
 Friend Module modCrafting
 
@@ -34,7 +35,7 @@ Friend Module modCrafting
         Dim i As Integer
 
         For i = 1 To MAX_RECIPE
-            If Not File.Exists(Path.Recipe(i)) Then
+            If Not File.Exists(Paths.Recipe(i)) Then
                 SaveRecipe(i)
                 Application.DoEvents()
             End If
@@ -56,7 +57,7 @@ Friend Module modCrafting
         Dim filename As String
         Dim i As Integer
 
-        filename = Path.Recipe(RecipeNum)
+        filename = Paths.Recipe(RecipeNum)
 
         Dim writer As New ByteStream(100)
 
@@ -91,7 +92,7 @@ Friend Module modCrafting
 
         CheckRecipes()
 
-        filename = Path.Recipe(RecipeNum)
+        filename = Paths.Recipe(RecipeNum)
         Dim reader As New ByteStream()
         ByteFile.Load(filename, reader)
 
@@ -141,7 +142,7 @@ Friend Module modCrafting
 
     Sub Packet_RequestEditRecipes(index As Integer, ByRef data() As Byte)
         ' Prevent hacking
-        If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
+        If GetPlayerAccess(index) < modEnumerators.AdminType.Developer Then Exit Sub
 
         Dim Buffer = New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SRecipeEditor)

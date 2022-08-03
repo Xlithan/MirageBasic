@@ -1,6 +1,7 @@
 ﻿Imports System.Drawing
 Imports System.IO
 Imports System.Windows.Forms
+Imports MirageBasic.Core
 
 Public Class FrmEditor_Events
 
@@ -41,8 +42,8 @@ Public Class FrmEditor_Events
         cmbCondition_ClassIs.Enabled = False
         cmbCondition_ClassIs.Items.Clear()
 
-        For i = 1 To MAX_CLASSES
-            cmbCondition_ClassIs.Items.Add(i & ". " & CStr(Classes(i).Name))
+        For i = 1 To MAX_JOB
+            cmbCondition_ClassIs.Items.Add(i & ". " & CStr(Job(i).Name))
         Next
         cmbCondition_ClassIs.SelectedIndex = 0
         cmbCondition_LearntSkill.Enabled = False
@@ -117,9 +118,9 @@ Public Class FrmEditor_Events
         cmbChangeSkills.SelectedIndex = 0
         cmbChangeClass.Items.Clear()
 
-        If MAX_CLASSES > 0 Then
-            For i = 1 To MAX_CLASSES
-                cmbChangeClass.Items.Add(Trim$(Classes(i).Name))
+        If MAX_JOB > 0 Then
+            For i = 1 To MAX_JOB
+                cmbChangeClass.Items.Add(Trim$(Job(i).Name))
             Next
             cmbChangeClass.SelectedIndex = 0
         End If
@@ -371,12 +372,12 @@ Public Class FrmEditor_Events
                 fraCommands.Visible = False
             'Change Class
             Case "Change Class"
-                If MAX_CLASSES > 0 Then
+                If MAX_JOB > 0 Then
                     If cmbChangeClass.Items.Count = 0 Then
                         cmbChangeClass.Items.Clear()
 
-                        For i = 1 To MAX_CLASSES
-                            cmbChangeClass.Items.Add(Trim$(Classes(i).Name))
+                        For i = 1 To MAX_JOB
+                            cmbChangeClass.Items.Add(Trim$(Job(i).Name))
                         Next
                         cmbChangeClass.SelectedIndex = 0
                     End If
@@ -1571,8 +1572,8 @@ Public Class FrmEditor_Events
 
     Private Sub NudShowTextFace_ValueChanged(sender As Object, e As EventArgs) Handles nudShowTextFace.ValueChanged
         If nudShowTextFace.Value > 0 Then
-            If File.Exists(Path.Graphics & "Faces\" & nudShowTextFace.Value & GfxExt) Then
-                picShowTextFace.BackgroundImage = Image.FromFile(Path.Graphics & "Faces\" & nudShowTextFace.Value & GfxExt)
+            If File.Exists(Paths.Graphics & "Faces\" & nudShowTextFace.Value & GfxExt) Then
+                picShowTextFace.BackgroundImage = Image.FromFile(Paths.Graphics & "Faces\" & nudShowTextFace.Value & GfxExt)
             End If
         Else
             picShowTextFace.BackgroundImage = Nothing
@@ -1626,8 +1627,8 @@ Public Class FrmEditor_Events
 
     Private Sub NudShowChoicesFace_ValueChanged(sender As Object, e As EventArgs) Handles nudShowChoicesFace.ValueChanged
         If nudShowChoicesFace.Value > 0 Then
-            If File.Exists(Path.Graphics & "Faces\" & nudShowChoicesFace.Value & GfxExt) Then
-                picShowChoicesFace.BackgroundImage = Image.FromFile(Path.Graphics & "Faces\" & nudShowChoicesFace.Value & GfxExt)
+            If File.Exists(Paths.Graphics & "Faces\" & nudShowChoicesFace.Value & GfxExt) Then
+                picShowChoicesFace.BackgroundImage = Image.FromFile(Paths.Graphics & "Faces\" & nudShowChoicesFace.Value & GfxExt)
             End If
         Else
             picShowChoicesFace.Text = "Face: None"

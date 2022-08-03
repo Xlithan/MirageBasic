@@ -1,4 +1,6 @@
-﻿Friend Class frmEditor_Recipe
+﻿Imports MirageBasic.Core
+
+Friend Class frmEditor_Recipe
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         RecipeEditorOk()

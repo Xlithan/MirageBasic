@@ -1,4 +1,6 @@
-﻿Friend Class frmEditor_Item
+﻿Imports MirageBasic.Core
+
+Friend Class frmEditor_Item
 
 #Region "Form Code"
 
@@ -94,7 +96,7 @@
 
         cmbSubType.Enabled = False
 
-        If (cmbType.SelectedIndex = ItemType.Equipment) Then
+        If (cmbType.SelectedIndex = modEnumerators.ItemType.Equipment) Then
             fraEquipment.Visible = True
 
             ' Build subtype cmb

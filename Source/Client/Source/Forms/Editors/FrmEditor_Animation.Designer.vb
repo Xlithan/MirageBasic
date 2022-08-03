@@ -114,12 +114,6 @@ Partial Class FrmEditor_Animation
         'cmbSound
         '
         Me.cmbSound.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbSound.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbSound.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbSound.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbSound.ButtonIcon = CType(resources.GetObject("cmbSound.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbSound.DrawDropdownHoverOutline = False
-        Me.cmbSound.DrawFocusRectangle = False
         Me.cmbSound.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
         Me.cmbSound.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbSound.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -130,7 +124,6 @@ Partial Class FrmEditor_Animation
         Me.cmbSound.Size = New System.Drawing.Size(156, 21)
         Me.cmbSound.TabIndex = 25
         Me.cmbSound.Text = Nothing
-        Me.cmbSound.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel2
         '

@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports MirageBasic.Core
 
 Module S_General
     'Friend Declare Function GetQueueStatus Lib "user32" (fuFlags As Integer) As Integer
@@ -78,7 +79,7 @@ Module S_General
         Next
 
         ReDim Bank(MAX_PLAYERS)
-        ReDim Classes(MAX_CLASSES)
+        ReDim Job(MAX_JOB)
 
         For i = 1 To MAX_PLAYERS
             ReDim Bank(i).Item(MAX_BANK)
@@ -127,11 +128,11 @@ Module S_General
 
         LoadTilePrefab()
 
-        ReDim Classes(Max_Classes)
-        For i = 0 To Max_Classes
-            ReDim Classes(i).Stat(StatType.Count - 1)
-            ReDim Classes(i).StartItem(5)
-            ReDim Classes(i).StartValue(5)
+        ReDim Job(MAX_JOB)
+        For i = 0 To MAX_JOB
+            ReDim Job(i).Stat(StatType.Count - 1)
+            ReDim Job(i).StartItem(5)
+            ReDim Job(i).StartValue(5)
         Next
 
         For i = 0 To MAX_ITEMS
@@ -160,21 +161,21 @@ Module S_General
         ClearPets()
 
         ' Check if the directory is there, if its not make it
-        CheckDir(Path.Database)
-        CheckDir(Path.Items)
-        CheckDir(Path.Maps)
-        CheckDir(Path.Npcs)
-        CheckDir(Path.Shops)
-        CheckDir(Path.Skills)
-        CheckDir(Path.accounts)
-        CheckDir(Path.resources)
-        CheckDir(Path.Animations)
-        CheckDir(Path.logs)
-        CheckDir(Path.Quests)
-        CheckDir(Path.Recipes)
-        CheckDir(Path.Pets)
-        CheckDir(Path.Projectiles)
-        CheckDir(Path.Quests)
+        CheckDir(Paths.Database)
+        CheckDir(Paths.Items)
+        CheckDir(Paths.Maps)
+        CheckDir(Paths.Npcs)
+        CheckDir(Paths.Shops)
+        CheckDir(Paths.Skills)
+        CheckDir(Paths.accounts)
+        CheckDir(Paths.resources)
+        CheckDir(Paths.Animations)
+        CheckDir(Paths.logs)
+        CheckDir(Paths.Quests)
+        CheckDir(Paths.Recipes)
+        CheckDir(Paths.Pets)
+        CheckDir(Paths.Projectiles)
+        CheckDir(Paths.Quests)
 
         ' Get that network READY SUN! ~ SpiceyWOlf
         InitNetwork()
@@ -302,7 +303,7 @@ Module S_General
     End Sub
 
     Private Sub LoadGameData()
-        Console.WriteLine("Loading Classes...") : LoadClasses()
+        Console.WriteLine("Loading Classes...") : LoadJobs()
         Console.WriteLine("Loading Maps...") : LoadMaps()
         Console.WriteLine("Loading Items...") : LoadItems()
         Console.WriteLine("Loading Npc's...") : LoadNpcs()
@@ -337,7 +338,7 @@ Module S_General
 
     Sub ErrorHandler(sender As Object, args As UnhandledExceptionEventArgs)
         Dim e As Exception = DirectCast(args.ExceptionObject, Exception)
-        Dim myFilePath As String = Path.Logs & "ErrorLog.log"
+        Dim myFilePath As String = Paths.Logs & "ErrorLog.log"
 
         Using sw As New StreamWriter(File.Open(myFilePath, FileMode.Append))
             sw.WriteLine(DateTime.Now)

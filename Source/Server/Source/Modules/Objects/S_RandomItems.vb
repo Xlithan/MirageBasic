@@ -1,4 +1,6 @@
-﻿Module S_RandomItems
+﻿Imports MirageBasic.Core
+
+Module S_RandomItems
 
     Friend Sub ClearRandBank(index As Integer, BankNum As Integer)
         Dim i As Integer
@@ -9,7 +11,7 @@
         Bank(index).ItemRand(BankNum).Speed = 0
         Bank(index).ItemRand(BankNum).Rarity = 0
 
-        For i = 0 To StatType.Count - 1
+        For i = 0 To modEnumerators.StatType.Count - 1
             Bank(index).ItemRand(BankNum).Stat(i) = 0
         Next i
     End Sub

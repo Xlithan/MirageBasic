@@ -1,5 +1,6 @@
 ﻿Imports System.Drawing
 Imports Asfw
+Imports MirageBasic.Core
 
 Module C_Pets
 
@@ -90,7 +91,7 @@ Module C_Pets
 
         Pet(index).Name = ""
 
-        ReDim Pet(index).Stat(StatType.Count - 1)
+        ReDim Pet(index).Stat(modEnumerators.StatType.Count - 1)
         ReDim Pet(index).Skill(4)
     End Sub
 

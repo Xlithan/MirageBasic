@@ -1,22 +1,23 @@
 ﻿Imports Asfw
+Imports MirageBasic.Core
 
-Module C_Classes
+Module C_Job
 
 #Region "Incoming Traffic"
 
-    Sub Packet_NewCharClasses(ByRef data() As Byte)
+    Sub Packet_NewCharJob(ByRef data() As Byte)
         Dim i As Integer, z As Integer, x As Integer
         Dim buffer As New ByteStream(data)
 
         SelectedChar = 1
 
-        For i = 1 To MAX_CLASSES
+        For i = 1 To MAX_JOB
 
-            With Classes(i)
+            With Job(i)
                 .Name = Trim(buffer.ReadString)
                 .Desc = Trim(buffer.ReadString)
 
-                ReDim .Vital(VitalType.Count - 1)
+                ReDim .Vital(modEnumerators.VitalType.Count - 1)
 
                 .Vital(VitalType.HP) = buffer.ReadInt32
                 .Vital(VitalType.MP) = buffer.ReadInt32
@@ -75,10 +76,10 @@ Module C_Classes
         PnlCharCreateVisible = True
         PnlLoginVisible = False
 
-        ReDim Cmbclass(MAX_CLASSES)
+        ReDim Cmbclass(MAX_JOB)
 
-        For i = 1 To MAX_CLASSES
-            Cmbclass(i) = Classes(i).Name
+        For i = 1 To MAX_JOB
+            Cmbclass(i) = Job(i).Name
         Next
 
         FrmMenu.DrawCharacter()
@@ -86,15 +87,15 @@ Module C_Classes
         NewCharSprite = 1
     End Sub
 
-    Sub Packet_ClassesData(ByRef data() As Byte)
+    Sub Packet_JobData(ByRef data() As Byte)
         Dim i As Integer, z As Integer, x As Integer
         Dim buffer As New ByteStream(data)
 
         SelectedChar = 1
 
-        For i = 1 To MAX_CLASSES
+        For i = 1 To MAX_JOB
 
-            With Classes(i)
+            With Job(i)
                 .Name = Trim(buffer.ReadString)
                 .Desc = Trim(buffer.ReadString)
 
@@ -147,9 +148,9 @@ Module C_Classes
 
         Next
 
-        ReDim Cmbclass(MAX_CLASSES)
-        For i = 1 To MAX_CLASSES
-            Cmbclass(i) = Classes(i).Name
+        ReDim Cmbclass(MAX_JOB)
+        For i = 1 To MAX_JOB
+            Cmbclass(i) = Job(i).Name
         Next
         FrmMenu.DrawCharacter()
         NewCharSprite = 1
@@ -161,10 +162,10 @@ Module C_Classes
 
 #Region "Outgoing Traffic"
 
-    Friend Sub SendRequestClasses()
+    Friend Sub SendRequestJob()
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CRequestClasses)
+        buffer.WriteInt32(ClientPackets.CRequestClass)
 
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()

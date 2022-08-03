@@ -1,6 +1,8 @@
 ﻿Imports System.Drawing
 Imports Asfw
+Imports MirageBasic.Core
 Imports SFML.Graphics
+Imports SFML.System
 Imports SFML.Window
 
 Module C_Parties
@@ -87,7 +89,7 @@ Module C_Parties
 
         ' set vitals
         Player(playerNum).MaxHp = buffer.ReadInt32
-        Player(playerNum).Vital(VitalType.HP) = buffer.ReadInt32
+        Player(playerNum).Vital(modEnumerators.VitalType.HP) = buffer.ReadInt32
 
         Player(playerNum).MaxMp = buffer.ReadInt32
         Player(playerNum).Vital(VitalType.MP) = buffer.ReadInt32

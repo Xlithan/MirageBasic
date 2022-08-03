@@ -1,4 +1,6 @@
-﻿Friend Class FrmEditor_Animation
+﻿Imports MirageBasic.Core
+
+Friend Class FrmEditor_Animation
 
     Private Sub NudSprite0_ValueChanged(sender As Object, e As EventArgs) Handles nudSprite0.Click
         Animation(Editorindex).Sprite(0) = nudSprite0.Value

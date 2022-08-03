@@ -1,4 +1,4 @@
-﻿Imports System.Windows.Forms
+﻿Imports MirageBasic.Core
 
 Friend Class FrmGame
 

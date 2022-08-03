@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Windows.Forms
 Imports Asfw
+Imports MirageBasic.Core
 
 Module C_Resources
 
@@ -21,7 +22,7 @@ Module C_Resources
         Dim i As Integer
         i = 1
 
-        While File.Exists(Path.Graphics & "Resources\" & i & GfxExt)
+        While File.Exists(Paths.Graphics & "Resources\" & i & GfxExt)
             NumResources = NumResources + 1
             i = i + 1
         End While

@@ -1,4 +1,6 @@
-﻿Friend Class frmEditor_NPC
+﻿Imports MirageBasic.Core
+
+Friend Class frmEditor_NPC
 
 #Region "Form Code"
 

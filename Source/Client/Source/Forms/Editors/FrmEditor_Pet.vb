@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports MirageBasic.Core
 
 Friend Class frmEditor_Pet
 
@@ -49,8 +50,8 @@ Friend Class frmEditor_Pet
             Exit Sub
         End If
 
-        If File.Exists(Path.Graphics & "Characters\" & petnum & GfxExt) Then
-            picSprite.BackgroundImage = Image.FromFile(Path.Graphics & "Characters\" & petnum & GfxExt)
+        If File.Exists(Paths.Graphics & "Characters\" & petnum & GfxExt) Then
+            picSprite.BackgroundImage = Image.FromFile(Paths.Graphics & "Characters\" & petnum & GfxExt)
         End If
 
     End Sub

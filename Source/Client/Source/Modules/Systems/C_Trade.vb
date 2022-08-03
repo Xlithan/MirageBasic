@@ -1,5 +1,6 @@
 ﻿Imports System.Drawing
 Imports Asfw
+Imports MirageBasic.Core
 
 Module C_Trade
 
@@ -8,7 +9,7 @@ Module C_Trade
     Friend TradeTimer As Integer
     Friend TradeRequest As Boolean
     Friend InTrade As Boolean
-    Friend TradeYourOffer(MAX_INV) As PlayerInvStruct
+    Friend TradeYourOffer(MAX_INV) As modTypes.PlayerInvStruct
     Friend TradeTheirOffer(MAX_INV) As PlayerInvStruct
     Friend TradeX As Integer
     Friend TradeY As Integer

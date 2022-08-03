@@ -1,4 +1,5 @@
 ﻿Imports System.Drawing
+Imports MirageBasic.Core
 
 Module C_Variables
 
@@ -172,7 +173,7 @@ Module C_Variables
     ' New char
     Friend NewCharSprite As Integer
 
-    Friend NewCharClass As Integer
+    Friend NewCharJob As Integer
 
     Friend TempMapData() As Byte
 
@@ -237,5 +238,5 @@ Module C_Variables
     Friend Const EDITOR_QUEST As Byte = 7
     Friend Const EDITOR_HOUSE As Byte = 8
     Friend Const EDITOR_RECIPE As Byte = 9
-    Friend Const EDITOR_CLASSES As Byte = 10
+    Friend Const EDITOR_Job As Byte = 10
 End Module

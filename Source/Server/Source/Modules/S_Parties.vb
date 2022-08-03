@@ -1,4 +1,5 @@
 ﻿Imports Asfw
+Imports MirageBasic.Core
 
 Module S_Parties
 
@@ -28,7 +29,7 @@ Module S_Parties
 
     Sub SendPartyInvite(index As Integer, target As Integer)
         Dim buffer As New ByteStream(4)
-        buffer.WriteInt32(ServerPackets.SPartyInvite)
+        buffer.WriteInt32(Packets.ServerPackets.SPartyInvite)
 
         Addlog("Sent SMSG: SPartyInvite", PACKET_LOG)
         Console.WriteLine("Sent SMSG: SPartyInvite")

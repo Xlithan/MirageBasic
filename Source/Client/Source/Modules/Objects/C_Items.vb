@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports System.Windows.Forms
 Imports Asfw
+Imports MirageBasic.Core
 
 Module C_Items
 
@@ -23,7 +24,7 @@ Module C_Items
         Dim i As Integer
         i = 1
 
-        While File.Exists(Path.Graphics & "Items\" & i & GfxExt)
+        While File.Exists(Paths.Graphics & "Items\" & i & GfxExt)
             NumItems = NumItems + 1
             i = i + 1
         End While
@@ -33,7 +34,7 @@ Module C_Items
 
     Friend Sub ClearItem(index As Integer)
         Item(index) = Nothing
-        Item(index) = New ItemStruct
+        Item(index) = New modTypes.ItemStruct
         For x = 0 To StatType.Count - 1
             ReDim Item(index).Add_Stat(x)
         Next

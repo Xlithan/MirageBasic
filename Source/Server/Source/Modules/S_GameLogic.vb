@@ -1,4 +1,6 @@
-﻿Module S_GameLogic
+﻿Imports MirageBasic.Core
+
+Module S_GameLogic
 
     Function GetTotalMapPlayers(mapNum As Integer) As Integer
         Dim i As Integer, n As Integer

@@ -1,15 +1,16 @@
 ﻿Imports Asfw
 Imports Asfw.IO
+Imports MirageBasic.Core
 
 Module C_NetworkReceive
 
     Sub PacketRouter()
-        Socket.PacketId(ServerPackets.SAlertMsg) = AddressOf Packet_AlertMSG
+        Socket.PacketId(Packets.ServerPackets.SAlertMsg) = AddressOf Packet_AlertMSG
         Socket.PacketId(ServerPackets.SKeyPair) = AddressOf Packet_KeyPair
         Socket.PacketId(ServerPackets.SLoadCharOk) = AddressOf Packet_LoadCharOk
         Socket.PacketId(ServerPackets.SLoginOk) = AddressOf Packet_LoginOk
-        Socket.PacketId(ServerPackets.SNewCharClasses) = AddressOf Packet_NewCharClasses
-        Socket.PacketId(ServerPackets.SClassesData) = AddressOf Packet_ClassesData
+        Socket.PacketId(ServerPackets.SNewCharJob) = AddressOf Packet_NewCharJob
+        Socket.PacketId(ServerPackets.SClassData) = AddressOf Packet_JobData
         Socket.PacketId(ServerPackets.SInGame) = AddressOf Packet_InGame
         Socket.PacketId(ServerPackets.SPlayerInv) = AddressOf Packet_PlayerInv
         Socket.PacketId(ServerPackets.SPlayerInvUpdate) = AddressOf Packet_PlayerInvUpdate
@@ -221,8 +222,8 @@ Module C_NetworkReceive
 
         SaveSettings()
 
-        ' Request classes.
-        SendRequestClasses()
+        ' Request Job.
+        SendRequestJob()
 
         Dim buffer As New ByteStream(data)
         ' Now we can receive char data
@@ -760,19 +761,19 @@ Module C_NetworkReceive
 
         '\\\Read Class Data\\\
 
-        ' Max classes
+        ' Max Job
 
-        For i = 0 To MAX_CLASSES
-            ReDim Classes(i).Stat(StatType.Count - 1)
+        For i = 0 To MAX_JOB
+            ReDim Job(i).Stat(StatType.Count - 1)
         Next
 
-        For i = 0 To MAX_CLASSES
-            ReDim Classes(i).Vital(VitalType.Count - 1)
+        For i = 0 To MAX_JOB
+            ReDim Job(i).Vital(VitalType.Count - 1)
         Next
 
-        For i = 1 To MAX_CLASSES
+        For i = 1 To MAX_JOB
 
-            With Classes(i)
+            With Job(i)
                 .Name = Trim(buffer.ReadString)
                 .Desc = Trim$(buffer.ReadString)
 

@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports Asfw
 Imports Asfw.IO
+Imports MirageBasic.Core
 
 Friend Module S_Projectiles
 
@@ -48,7 +49,7 @@ Friend Module S_Projectiles
     Sub SaveProjectile(ProjectileNum As Integer)
         Dim filename As String
 
-        filename = Path.Projectile(ProjectileNum)
+        filename = Paths.Projectile(ProjectileNum)
 
         Dim writer As New ByteStream(100)
 
@@ -69,7 +70,7 @@ Friend Module S_Projectiles
         CheckProjectile()
 
         For i = 1 To MAX_PROJECTILES
-            filename = Path.Projectile(i)
+            filename = Paths.Projectile(i)
             Dim reader As New ByteStream()
             ByteFile.Load(filename, reader)
 
@@ -88,7 +89,7 @@ Friend Module S_Projectiles
         Dim i As Integer
 
         For i = 1 To MAX_PROJECTILES
-            If Not File.Exists(Path.Projectile(i)) Then
+            If Not File.Exists(Paths.Projectile(i)) Then
                 SaveProjectile(i)
             End If
         Next
@@ -149,7 +150,7 @@ Friend Module S_Projectiles
         Dim buffer As New ByteStream(4)
 
         ' Prevent hacking
-        If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
+        If GetPlayerAccess(index) < modEnumerators.AdminType.Developer Then Exit Sub
 
         buffer.WriteInt32(ServerPackets.SProjectileEditor)
 

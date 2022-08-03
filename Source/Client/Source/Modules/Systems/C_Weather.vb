@@ -1,7 +1,9 @@
 ﻿Imports System.IO
 Imports System.Windows.Forms
+Imports MirageBasic.Core
 Imports SFML.Audio
 Imports SFML.Graphics
+Imports SFML.System
 Imports SFML.Window
 
 Friend Module C_Weather
@@ -63,7 +65,7 @@ Friend Module C_Weather
 
         For i = 1 To MaxWeatherParticles
             If WeatherParticle(i).InUse Then
-                If WeatherParticle(i).Type = WeatherType.Storm Then
+                If WeatherParticle(i).Type = modEnumerators.WeatherType.Storm Then
                     spriteLeft = 0
                 Else
                     spriteLeft = WeatherParticle(i).Type - 1
@@ -164,7 +166,7 @@ Friend Module C_Weather
 #Region "Sound"
 
     Sub PlayWeatherSound(fileName As String, Optional looped As Boolean = False)
-        If Not Settings.Sound = 1 OrElse Not File.Exists(Path.Sounds & fileName) Then Exit Sub
+        If Not Settings.Sound = 1 OrElse Not File.Exists(Paths.Sounds & fileName) Then Exit Sub
         If CurWeatherMusic = fileName Then Exit Sub
 
         Dim buffer As SoundBuffer
@@ -174,7 +176,7 @@ Friend Module C_Weather
             WeatherSoundPlayer.Stop()
         End If
 
-        buffer = New SoundBuffer(Path.Sounds & fileName)
+        buffer = New SoundBuffer(Paths.Sounds & fileName)
         WeatherSoundPlayer.SoundBuffer = buffer
         If looped = True Then
             WeatherSoundPlayer.Loop() = True

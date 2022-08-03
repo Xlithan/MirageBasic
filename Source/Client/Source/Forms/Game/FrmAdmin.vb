@@ -1,4 +1,7 @@
-﻿Friend Class FrmAdmin
+﻿Imports System.Windows.Forms.VisualStyles
+Imports MirageBasic.Core
+
+Friend Class FrmAdmin
 
     Private Sub FrmAdmin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' set values for admin panel
@@ -14,7 +17,7 @@
 
     Private Sub BtnAdminWarpTo_Click(sender As Object, e As EventArgs) Handles btnAdminWarpTo.Click
 
-        If GetPlayerAccess(Myindex) < AdminType.Mapper Then
+        If GetPlayerAccess(Myindex) < modEnumerators.AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -127,7 +130,7 @@
             Exit Sub
         End If
 
-        SendRequestClasses()
+        SendRequestJob()
         SendRequestEditClass()
     End Sub
 

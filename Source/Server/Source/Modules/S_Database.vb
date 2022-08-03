@@ -1,129 +1,130 @@
 ﻿Imports System.IO
 Imports Asfw
 Imports Asfw.IO
+Imports MirageBasic.Core
 Imports Ini = Asfw.IO.TextFile
 
 Module modDatabase
 
-#Region "Classes"
+#Region "Job"
 
-    Sub ClearClasses()
+    Sub ClearJobs()
         Dim i As Integer
 
-        ReDim Classes(Max_Classes)
+        ReDim Job(MAX_JOB)
 
-        For i = 1 To Max_Classes
-            Classes(i) = Nothing
-            Classes(i).Name = ""
-            Classes(i).Desc = ""
+        For i = 1 To MAX_JOB
+            Job(i) = Nothing
+            Job(i).Name = ""
+            Job(i).Desc = ""
         Next
 
-        For i = 0 To Max_Classes
-            ReDim Classes(i).Stat(StatType.Count - 1)
-            ReDim Classes(i).StartItem(5)
-            ReDim Classes(i).StartValue(5)
+        For i = 0 To MAX_JOB
+            ReDim Job(i).Stat(modEnumerators.StatType.Count - 1)
+            ReDim Job(i).StartItem(5)
+            ReDim Job(i).StartValue(5)
         Next
 
     End Sub
 
-    Sub LoadClasses()
-        Dim cf = Path.Database & "Classes.ini"
+    Sub LoadJobs()
+        Dim cf = Paths.Database & "Job.ini"
         Dim i, n, x As Integer
 
-        ClearClasses()
+        ClearJobs()
 
-        For i = 1 To MAX_CLASSES
-            Classes(i).Name = Ini.Read(cf, "CLASS" & i, "Name")
-            Classes(i).Desc = Ini.Read(cf, "CLASS" & i, "Desc")
-            Classes(i).BaseExp = Val(Ini.Read(cf, "CLASS" & i, "BaseExp"))
+        For i = 1 To MAX_JOB
+            Job(i).Name = Ini.Read(cf, "CLASS" & i, "Name")
+            Job(i).Desc = Ini.Read(cf, "CLASS" & i, "Desc")
+            Job(i).BaseExp = Val(Ini.Read(cf, "CLASS" & i, "BaseExp"))
 
             n = Val(Ini.Read(cf, "CLASS" & i, "MaxMaleSprite"))
-            ReDim Classes(i).MaleSprite(n)
+            ReDim Job(i).MaleSprite(n)
             For x = 0 To n
-                Classes(i).MaleSprite(x) = Val(Ini.Read(cf, "CLASS" & i, "Sprite_Male" & x))
+                Job(i).MaleSprite(x) = Val(Ini.Read(cf, "CLASS" & i, "Sprite_Male" & x))
             Next
 
             n = Val(Ini.Read(cf, "CLASS" & i, "MaxFemaleSprite"))
-            ReDim Classes(i).FemaleSprite(n)
+            ReDim Job(i).FemaleSprite(n)
             For x = 0 To n
-                Classes(i).FemaleSprite(x) = Val(Ini.Read(cf, "CLASS" & i, "Sprite_Female" & x))
+                Job(i).FemaleSprite(x) = Val(Ini.Read(cf, "CLASS" & i, "Sprite_Female" & x))
             Next
 
-            Classes(i).Stat(StatType.Strength) = Val(Ini.Read(cf, "CLASS" & i, "Str"))
-            Classes(i).Stat(StatType.Endurance) = Val(Ini.Read(cf, "CLASS" & i, "End"))
-            Classes(i).Stat(StatType.Vitality) = Val(Ini.Read(cf, "CLASS" & i, "Vit"))
-            Classes(i).Stat(StatType.Luck) = Val(Ini.Read(cf, "CLASS" & i, "Luck"))
-            Classes(i).Stat(StatType.Intelligence) = Val(Ini.Read(cf, "CLASS" & i, "Int"))
-            Classes(i).Stat(StatType.Spirit) = Val(Ini.Read(cf, "CLASS" & i, "Speed"))
+            Job(i).Stat(StatType.Strength) = Val(Ini.Read(cf, "CLASS" & i, "Str"))
+            Job(i).Stat(StatType.Endurance) = Val(Ini.Read(cf, "CLASS" & i, "End"))
+            Job(i).Stat(StatType.Vitality) = Val(Ini.Read(cf, "CLASS" & i, "Vit"))
+            Job(i).Stat(StatType.Luck) = Val(Ini.Read(cf, "CLASS" & i, "Luck"))
+            Job(i).Stat(StatType.Intelligence) = Val(Ini.Read(cf, "CLASS" & i, "Int"))
+            Job(i).Stat(StatType.Spirit) = Val(Ini.Read(cf, "CLASS" & i, "Speed"))
 
-            Classes(i).StartMap = Val(Ini.Read(cf, "CLASS" & i, "StartMap"))
-            Classes(i).StartX = Val(Ini.Read(cf, "CLASS" & i, "StartX"))
-            Classes(i).StartY = Val(Ini.Read(cf, "CLASS" & i, "StartY"))
+            Job(i).StartMap = Val(Ini.Read(cf, "CLASS" & i, "StartMap"))
+            Job(i).StartX = Val(Ini.Read(cf, "CLASS" & i, "StartX"))
+            Job(i).StartY = Val(Ini.Read(cf, "CLASS" & i, "StartY"))
 
             ' loop for items & values
             For x = 1 To 5
-                Classes(i).StartItem(x) = Val(Ini.Read(cf, "CLASS" & i, "StartItem" & x))
-                Classes(i).StartValue(x) = Val(Ini.Read(cf, "CLASS" & i, "StartValue" & x))
+                Job(i).StartItem(x) = Val(Ini.Read(cf, "CLASS" & i, "StartItem" & x))
+                Job(i).StartValue(x) = Val(Ini.Read(cf, "CLASS" & i, "StartValue" & x))
             Next
         Next
     End Sub
 
-    Sub SaveClasses()
-        Dim cf = Path.Database & "Classes.ini"
+    Sub SaveJobs()
+        Dim cf = Paths.Database & "Job.ini"
         Dim i, n, x As Integer
 
-        For i = 1 To MAX_CLASSES
-            Ini.Write(cf, "CLASS" & i, "Name", Trim$(Classes(i).Name))
-            Ini.Write(cf, "CLASS" & i, "Desc", Trim$(Classes(i).Desc))
-            Ini.Write(cf, "CLASS" & i, "BaseExp", Classes(i).BaseExp)
+        For i = 1 To MAX_JOB
+            Ini.Write(cf, "CLASS" & i, "Name", Trim$(Job(i).Name))
+            Ini.Write(cf, "CLASS" & i, "Desc", Trim$(Job(i).Desc))
+            Ini.Write(cf, "CLASS" & i, "BaseExp", Job(i).BaseExp)
 
-            n = UBound(Classes(i).MaleSprite)
+            n = UBound(Job(i).MaleSprite)
             Ini.Write(cf, "CLASS" & i, "MaxMaleSprite", n)
             For x = 0 To n
-                Ini.Write(cf, "CLASS" & i, "Sprite_Male" & x, Classes(i).MaleSprite(x))
+                Ini.Write(cf, "CLASS" & i, "Sprite_Male" & x, Job(i).MaleSprite(x))
             Next
 
-            n = UBound(Classes(i).FemaleSprite)
+            n = UBound(Job(i).FemaleSprite)
             Ini.Write(cf, "CLASS" & i, "MaxFemaleSprite", n)
             For x = 0 To n
-                Ini.Write(cf, "CLASS" & i, "Sprite_Female" & x, Classes(i).FemaleSprite(x))
+                Ini.Write(cf, "CLASS" & i, "Sprite_Female" & x, Job(i).FemaleSprite(x))
             Next
 
-            Ini.Write(cf, "CLASS" & i, "Str", Classes(i).Stat(StatType.Strength))
-            Ini.Write(cf, "CLASS" & i, "End", Classes(i).Stat(StatType.Endurance))
-            Ini.Write(cf, "CLASS" & i, "Vit", Classes(i).Stat(StatType.Vitality))
-            Ini.Write(cf, "CLASS" & i, "Luck", Classes(i).Stat(StatType.Luck))
-            Ini.Write(cf, "CLASS" & i, "Int", Classes(i).Stat(StatType.Intelligence))
-            Ini.Write(cf, "CLASS" & i, "Speed", Classes(i).Stat(StatType.Spirit))
+            Ini.Write(cf, "CLASS" & i, "Str", Job(i).Stat(StatType.Strength))
+            Ini.Write(cf, "CLASS" & i, "End", Job(i).Stat(StatType.Endurance))
+            Ini.Write(cf, "CLASS" & i, "Vit", Job(i).Stat(StatType.Vitality))
+            Ini.Write(cf, "CLASS" & i, "Luck", Job(i).Stat(StatType.Luck))
+            Ini.Write(cf, "CLASS" & i, "Int", Job(i).Stat(StatType.Intelligence))
+            Ini.Write(cf, "CLASS" & i, "Speed", Job(i).Stat(StatType.Spirit))
 
-            Ini.Write(cf, "CLASS" & i, "StartMap", Classes(i).StartMap)
-            Ini.Write(cf, "CLASS" & i, "StartX", Classes(i).StartX)
-            Ini.Write(cf, "CLASS" & i, "StartY", Classes(i).StartY)
+            Ini.Write(cf, "CLASS" & i, "StartMap", Job(i).StartMap)
+            Ini.Write(cf, "CLASS" & i, "StartX", Job(i).StartX)
+            Ini.Write(cf, "CLASS" & i, "StartY", Job(i).StartY)
 
             ' loop for items & values
             For x = 1 To 5
-                Ini.Write(cf, "CLASS" & i, "StartItem" & x, Classes(i).StartItem(x))
-                Ini.Write(cf, "CLASS" & i, "StartValue" & x, Classes(i).StartValue(x))
+                Ini.Write(cf, "CLASS" & i, "StartItem" & x, Job(i).StartItem(x))
+                Ini.Write(cf, "CLASS" & i, "StartValue" & x, Job(i).StartValue(x))
             Next
         Next
     End Sub
 
-    Function GetClassMaxVital(ClassNum As Integer, Vital As VitalType) As Integer
-        GetClassMaxVital = 0
+    Function GetJobMaxVital(ClassNum As Integer, Vital As VitalType) As Integer
+        GetJobMaxVital = 0
 
         Select Case Vital
             Case VitalType.HP
-                GetClassMaxVital = (1 + (Classes(ClassNum).Stat(StatType.Vitality) \ 2) + Classes(ClassNum).Stat(StatType.Vitality)) * 2
+                GetJobMaxVital = (1 + (Job(ClassNum).Stat(StatType.Vitality) \ 2) + Job(ClassNum).Stat(StatType.Vitality)) * 2
             Case VitalType.MP
-                GetClassMaxVital = (1 + (Classes(ClassNum).Stat(StatType.Intelligence) \ 2) + Classes(ClassNum).Stat(StatType.Intelligence)) * 2
+                GetJobMaxVital = (1 + (Job(ClassNum).Stat(StatType.Intelligence) \ 2) + Job(ClassNum).Stat(StatType.Intelligence)) * 2
             Case VitalType.SP
-                GetClassMaxVital = (1 + (Classes(ClassNum).Stat(StatType.Spirit) \ 2) + Classes(ClassNum).Stat(StatType.Spirit)) * 2
+                GetJobMaxVital = (1 + (Job(ClassNum).Stat(StatType.Spirit) \ 2) + Job(ClassNum).Stat(StatType.Spirit)) * 2
         End Select
 
     End Function
 
-    Function GetClassName(ClassNum As Integer) As String
-        GetClassName = Trim$(Classes(ClassNum).Name)
+    Function GetJobName(ClassNum As Integer) As String
+        GetJobName = Trim$(Job(ClassNum).Name)
     End Function
 
 #End Region
@@ -132,7 +133,7 @@ Module modDatabase
 
     Sub CheckMaps()
         For i = 1 To MAX_MAPS
-            If Not File.Exists(Path.Map(i)) Then
+            If Not File.Exists(Paths.Map(i)) Then
                 SaveMap(i)
             End If
         Next
@@ -191,7 +192,7 @@ Module modDatabase
         Dim filename As String
         Dim x As Integer, y As Integer, l As Integer
 
-        filename = Path.Map(mapNum)
+        filename = Paths.Map(mapNum)
         Dim writer As New ByteStream(100)
         writer.WriteString(Map(mapNum).Name)
         writer.WriteString(Map(mapNum).Music)
@@ -247,7 +248,7 @@ Module modDatabase
     End Sub
 
     Sub SaveMapEvent(mapNum As Integer)
-        Dim cf = Path.Maps & mapNum & "_eventdata.ini"
+        Dim cf = Paths.Maps & mapNum & "_eventdata.ini"
 
         If Not File.Exists(cf) Then File.Create(cf).Dispose()
 
@@ -377,7 +378,7 @@ Module modDatabase
     End Sub
 
     Sub LoadMapEvent(mapNum As Integer)
-        Dim cf = Path.Maps & mapNum & "_eventdata.ini"
+        Dim cf = Paths.Maps & mapNum & "_eventdata.ini"
 
         Map(mapNum).EventCount = Val(Ini.Read(cf, "Events", "EventCount"))
         If Not Map(mapNum).EventCount > 0 Then Exit Sub
@@ -525,7 +526,7 @@ Module modDatabase
         Dim y As Integer
         Dim l As Integer
 
-        filename = Path.Map(mapNum)
+        filename = Paths.Map(mapNum)
         Dim reader As New ByteStream()
         ByteFile.Load(filename, reader)
 
@@ -588,7 +589,7 @@ Module modDatabase
         If Map(mapNum).Name Is Nothing Then Map(mapNum).Name = ""
         If Map(mapNum).Music Is Nothing Then Map(mapNum).Music = ""
 
-        If File.Exists(Path.Maps & mapNum & "_eventdata.ini") Then
+        If File.Exists(Paths.Maps & mapNum & "_eventdata.ini") Then
             LoadMapEvent(mapNum)
         End If
 
@@ -652,7 +653,7 @@ Module modDatabase
     Sub SaveNpc(NpcNum As Integer)
         Dim filename As String
         Dim i As Integer
-        filename = Path.Npc(NpcNum)
+        filename = Paths.Npc(NpcNum)
 
         Dim writer As New ByteStream(100)
         writer.WriteString(Npc(NpcNum).Name)
@@ -706,7 +707,7 @@ Module modDatabase
         Dim filename As String
         Dim n As Integer
 
-        filename = Path.Npc(NpcNum)
+        filename = Paths.Npc(NpcNum)
         Dim reader As New ByteStream()
         ByteFile.Load(filename, reader)
 
@@ -750,7 +751,7 @@ Module modDatabase
         Dim i As Integer
 
         For i = 1 To MAX_NPCS
-            If Not File.Exists(Path.Npc(i)) Then
+            If Not File.Exists(Paths.Npc(i)) Then
                 SaveNpc(i)
                 Application.DoEvents()
             End If
@@ -825,7 +826,7 @@ Module modDatabase
         Dim i As Integer
         Dim filename As String
 
-        filename = Path.Shop(shopNum)
+        filename = Paths.Shop(shopNum)
 
         Dim writer As New ByteStream(100)
 
@@ -860,7 +861,7 @@ Module modDatabase
         Dim filename As String
         Dim x As Integer
 
-        filename = Path.Shop(ShopNum)
+        filename = Paths.Shop(ShopNum)
         Dim reader As New ByteStream()
         ByteFile.Load(filename, reader)
 
@@ -882,7 +883,7 @@ Module modDatabase
 
         For i = 1 To MAX_SHOPS
 
-            If Not File.Exists(Path.Shop(i)) Then
+            If Not File.Exists(Paths.Shop(i)) Then
                 SaveShop(i)
             End If
 
@@ -926,7 +927,7 @@ Module modDatabase
 
     Sub SaveSkill(skillnum As Integer)
         Dim filename As String
-        filename = Path.Skill(skillnum)
+        filename = Paths.Skill(skillnum)
 
         Dim writer As New ByteStream(100)
 
@@ -977,7 +978,7 @@ Module modDatabase
     Sub LoadSkill(SkillNum As Integer)
         Dim filename As String
 
-        filename = Path.Skill(SkillNum)
+        filename = Paths.Skill(SkillNum)
         Dim reader As New ByteStream()
         ByteFile.Load(filename, reader)
 
@@ -1017,7 +1018,7 @@ Module modDatabase
 
         For i = 1 To MAX_SKILLS
 
-            If Not File.Exists(Path.Skill(i)) Then
+            If Not File.Exists(Paths.Skill(i)) Then
                 SaveSkill(i)
                 Application.DoEvents()
             End If
@@ -1108,6 +1109,7 @@ Module modDatabase
         Player(index).Login = reader.ReadString()
         Player(index).Password = reader.ReadString()
         Player(index).Access = reader.ReadByte()
+        TempPlayer(index).CurChar = 1
 
         For i As Integer = 1 To MAX_CHARS
             LoadCharacter(index, i)
@@ -1222,7 +1224,7 @@ Module modDatabase
 #Region "Characters"
 
     Sub ClearCharacter(index As Integer, CharNum As Integer)
-        Player(index).Character(CharNum).Classes = 0
+        Player(index).Character(CharNum).Job = 0
         Player(index).Character(CharNum).Dir = 0
 
         For i = 0 To EquipmentType.Count - 1
@@ -1373,7 +1375,7 @@ Module modDatabase
         Dim reader As New ByteStream()
         ByteFile.Load(filename, reader)
 
-        Player(index).Character(CharNum).Classes = reader.ReadByte()
+        Player(index).Character(CharNum).Job = reader.ReadByte()
         Player(index).Character(CharNum).Dir = reader.ReadByte()
 
         For i = 1 To EquipmentType.Count - 1
@@ -1520,7 +1522,7 @@ Module modDatabase
 
         Dim writer As New ByteStream(100)
 
-        writer.WriteByte(Player(index).Character(CharNum).Classes)
+        writer.WriteByte(Player(index).Character(CharNum).Job)
         writer.WriteByte(Player(index).Character(CharNum).Dir)
 
         For i = 1 To EquipmentType.Count - 1
@@ -1659,24 +1661,24 @@ Module modDatabase
         If Len(Trim$(Player(index).Character(CharNum).Name)) = 0 Then
             Player(index).Character(CharNum).Name = Name
             Player(index).Character(CharNum).Sex = Sex
-            Player(index).Character(CharNum).Classes = ClassNum
+            Player(index).Character(CharNum).Job = ClassNum
 
             If Player(index).Character(CharNum).Sex = SexType.Male Then
-                Player(index).Character(CharNum).Sprite = Classes(ClassNum).MaleSprite(Sprite - 1)
+                Player(index).Character(CharNum).Sprite = Job(ClassNum).MaleSprite(Sprite - 1)
             Else
-                Player(index).Character(CharNum).Sprite = Classes(ClassNum).FemaleSprite(Sprite - 1)
+                Player(index).Character(CharNum).Sprite = Job(ClassNum).FemaleSprite(Sprite - 1)
             End If
 
             Player(index).Character(CharNum).Level = 1
 
             For n = 0 To StatType.Count - 1
-                Player(index).Character(CharNum).Stat(n) = Classes(ClassNum).Stat(n)
+                Player(index).Character(CharNum).Stat(n) = Job(ClassNum).Stat(n)
             Next n
 
             Player(index).Character(CharNum).Dir = DirectionType.Down
-            Player(index).Character(CharNum).Map = Classes(ClassNum).StartMap
-            Player(index).Character(CharNum).X = Classes(ClassNum).StartX
-            Player(index).Character(CharNum).Y = Classes(ClassNum).StartY
+            Player(index).Character(CharNum).Map = Job(ClassNum).StartMap
+            Player(index).Character(CharNum).X = Job(ClassNum).StartX
+            Player(index).Character(CharNum).Y = Job(ClassNum).StartY
             Player(index).Character(CharNum).Dir = DirectionType.Down
             Player(index).Character(CharNum).Vital(VitalType.HP) = GetPlayerMaxVital(index, VitalType.HP)
             Player(index).Character(CharNum).Vital(VitalType.MP) = GetPlayerMaxVital(index, VitalType.MP)
@@ -1684,18 +1686,18 @@ Module modDatabase
 
             ' set starter equipment
             For n = 1 To 5
-                If Classes(ClassNum).StartItem(n) > 0 Then
-                    Player(index).Character(CharNum).Inv(n).Num = Classes(ClassNum).StartItem(n)
-                    Player(index).Character(CharNum).Inv(n).Value = Classes(ClassNum).StartValue(n)
+                If Job(ClassNum).StartItem(n) > 0 Then
+                    Player(index).Character(CharNum).Inv(n).Num = Job(ClassNum).StartItem(n)
+                    Player(index).Character(CharNum).Inv(n).Value = Job(ClassNum).StartValue(n)
 
-                    If Item(Classes(ClassNum).StartItem(n)).Randomize Then
+                    If Item(Job(ClassNum).StartItem(n)).Randomize Then
                         Player(index).Character(TempPlayer(index).CurChar).RandInv(n).Prefix = ""
                         Player(index).Character(TempPlayer(index).CurChar).RandInv(n).Suffix = ""
                         Player(index).Character(TempPlayer(index).CurChar).RandInv(n).Rarity = RarityType.RARITY_COMMON
-                        Player(index).Character(TempPlayer(index).CurChar).RandInv(n).Damage = Item(Classes(ClassNum).StartItem(n)).Data2
-                        Player(index).Character(TempPlayer(index).CurChar).RandInv(n).Speed = Item(Classes(ClassNum).StartItem(n)).Speed
+                        Player(index).Character(TempPlayer(index).CurChar).RandInv(n).Damage = Item(Job(ClassNum).StartItem(n)).Data2
+                        Player(index).Character(TempPlayer(index).CurChar).RandInv(n).Speed = Item(Job(ClassNum).StartItem(n)).Speed
                         For i = 0 To StatType.Count - 1
-                            Player(index).Character(TempPlayer(index).CurChar).RandInv(n).Stat(i) = Item(Classes(ClassNum).StartItem(n)).Add_Stat(i)
+                            Player(index).Character(TempPlayer(index).CurChar).RandInv(n).Stat(i) = Item(Job(ClassNum).StartItem(n)).Add_Stat(i)
                         Next
                     End If
                 End If
@@ -1724,7 +1726,7 @@ Module modDatabase
         Dim fullpath As String
         Dim Contents As String
 
-        fullpath = Path.Accounts & "charlist.txt"
+        fullpath = Paths.Accounts & "charlist.txt"
 
         Contents = GetFileContents(fullpath)
         characters = Split(Contents, vbNewLine)
@@ -1760,7 +1762,7 @@ Module modDatabase
         Dim contents As String
         Dim bAns = False
         Dim objReader As StreamWriter
-        fullpath = Path.Logs & FN
+        fullpath = Paths.Logs & FN
         contents = GetFileContents(fullpath)
         contents = contents & vbNewLine & strData
         Try
@@ -1778,7 +1780,7 @@ Module modDatabase
         Dim contents As String
         Dim bAns = False
         Dim objReader As StreamWriter
-        fullpath = Path.Database & fn
+        fullpath = Paths.Database & fn
         contents = GetFileContents(fullpath)
         contents = contents & vbNewLine & strData
         Try
@@ -1883,52 +1885,52 @@ Module modDatabase
         Dim i As Integer, n As Integer, q As Integer
         Dim buffer As New ByteStream(4)
 
-        For i = 1 To MAX_CLASSES
-            buffer.WriteString((GetClassName(i).Trim))
-            buffer.WriteString((Classes(i).Desc.Trim))
-            buffer.WriteInt32(GetClassMaxVital(i, VitalType.HP))
-            buffer.WriteInt32(GetClassMaxVital(i, VitalType.MP))
-            buffer.WriteInt32(GetClassMaxVital(i, VitalType.SP))
+        For i = 1 To MAX_JOB
+            buffer.WriteString((GetJobName(i).Trim))
+            buffer.WriteString((Job(i).Desc.Trim))
+            buffer.WriteInt32(GetJobMaxVital(i, VitalType.HP))
+            buffer.WriteInt32(GetJobMaxVital(i, VitalType.MP))
+            buffer.WriteInt32(GetJobMaxVital(i, VitalType.SP))
 
             ' set sprite array size
-            n = UBound(Classes(i).MaleSprite)
+            n = UBound(Job(i).MaleSprite)
 
             ' send array size
             buffer.WriteInt32(n)
 
             ' loop around sending each sprite
             For q = 0 To n
-                buffer.WriteInt32(Classes(i).MaleSprite(q))
+                buffer.WriteInt32(Job(i).MaleSprite(q))
             Next
 
             ' set sprite array size
-            n = UBound(Classes(i).FemaleSprite)
+            n = UBound(Job(i).FemaleSprite)
 
             ' send array size
             buffer.WriteInt32(n)
 
             ' loop around sending each sprite
             For q = 0 To n
-                buffer.WriteInt32(Classes(i).FemaleSprite(q))
+                buffer.WriteInt32(Job(i).FemaleSprite(q))
             Next
 
-            buffer.WriteInt32(Classes(i).Stat(StatType.Strength))
-            buffer.WriteInt32(Classes(i).Stat(StatType.Endurance))
-            buffer.WriteInt32(Classes(i).Stat(StatType.Vitality))
-            buffer.WriteInt32(Classes(i).Stat(StatType.Intelligence))
-            buffer.WriteInt32(Classes(i).Stat(StatType.Luck))
-            buffer.WriteInt32(Classes(i).Stat(StatType.Spirit))
+            buffer.WriteInt32(Job(i).Stat(StatType.Strength))
+            buffer.WriteInt32(Job(i).Stat(StatType.Endurance))
+            buffer.WriteInt32(Job(i).Stat(StatType.Vitality))
+            buffer.WriteInt32(Job(i).Stat(StatType.Intelligence))
+            buffer.WriteInt32(Job(i).Stat(StatType.Luck))
+            buffer.WriteInt32(Job(i).Stat(StatType.Spirit))
 
             For q = 1 To 5
-                buffer.WriteInt32(Classes(i).StartItem(q))
-                buffer.WriteInt32(Classes(i).StartValue(q))
+                buffer.WriteInt32(Job(i).StartItem(q))
+                buffer.WriteInt32(Job(i).StartValue(q))
             Next
 
-            buffer.WriteInt32(Classes(i).StartMap)
-            buffer.WriteInt32(Classes(i).StartX)
-            buffer.WriteInt32(Classes(i).StartY)
+            buffer.WriteInt32(Job(i).StartMap)
+            buffer.WriteInt32(Job(i).StartX)
+            buffer.WriteInt32(Job(i).StartY)
 
-            buffer.WriteInt32(Classes(i).BaseExp)
+            buffer.WriteInt32(Job(i).BaseExp)
         Next
 
         Return buffer.ToArray()

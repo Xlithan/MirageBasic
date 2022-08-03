@@ -201,12 +201,6 @@ Partial Class frmEditor_Recipe
         'cmbIngredient
         '
         Me.cmbIngredient.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbIngredient.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbIngredient.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbIngredient.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbIngredient.ButtonIcon = CType(resources.GetObject("cmbIngredient.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbIngredient.DrawDropdownHoverOutline = False
-        Me.cmbIngredient.DrawFocusRectangle = False
         Me.cmbIngredient.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbIngredient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbIngredient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -217,7 +211,6 @@ Partial Class frmEditor_Recipe
         Me.cmbIngredient.Size = New System.Drawing.Size(178, 21)
         Me.cmbIngredient.TabIndex = 3
         Me.cmbIngredient.Text = Nothing
-        Me.cmbIngredient.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel5
         '
@@ -263,12 +256,6 @@ Partial Class frmEditor_Recipe
         'cmbMakeItem
         '
         Me.cmbMakeItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbMakeItem.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbMakeItem.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbMakeItem.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbMakeItem.ButtonIcon = CType(resources.GetObject("cmbMakeItem.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbMakeItem.DrawDropdownHoverOutline = False
-        Me.cmbMakeItem.DrawFocusRectangle = False
         Me.cmbMakeItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbMakeItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMakeItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -279,7 +266,6 @@ Partial Class frmEditor_Recipe
         Me.cmbMakeItem.Size = New System.Drawing.Size(204, 21)
         Me.cmbMakeItem.TabIndex = 5
         Me.cmbMakeItem.Text = Nothing
-        Me.cmbMakeItem.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel3
         '
@@ -294,12 +280,6 @@ Partial Class frmEditor_Recipe
         'cmbType
         '
         Me.cmbType.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbType.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.cmbType.BorderStyle = System.Windows.Forms.ButtonBorderStyle.Solid
-        Me.cmbType.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(43, Byte), Integer))
-        Me.cmbType.ButtonIcon = CType(resources.GetObject("cmbType.ButtonIcon"), System.Drawing.Bitmap)
-        Me.cmbType.DrawDropdownHoverOutline = False
-        Me.cmbType.DrawFocusRectangle = False
         Me.cmbType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -311,7 +291,6 @@ Partial Class frmEditor_Recipe
         Me.cmbType.Size = New System.Drawing.Size(267, 21)
         Me.cmbType.TabIndex = 3
         Me.cmbType.Text = "Herbalist"
-        Me.cmbType.TextPadding = New System.Windows.Forms.Padding(2)
         '
         'DarkLabel2
         '

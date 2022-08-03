@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports Asfw
 Imports Asfw.IO
+Imports MirageBasic.Core
 Imports Ini = Asfw.IO.TextFile
 
 Friend Module S_Resources
@@ -39,7 +40,7 @@ Friend Module S_Resources
     Sub SaveResource(ResourceNum As Integer)
         Dim filename As String
 
-        filename = Path.Resource(ResourceNum)
+        filename = Paths.Resource(ResourceNum)
 
         Dim writer As New ByteStream(100)
 
@@ -76,7 +77,7 @@ Friend Module S_Resources
     Sub LoadResource(ResourceNum As Integer)
         Dim filename As String
 
-        filename = Path.Resource(ResourceNum)
+        filename = Paths.Resource(ResourceNum)
         Dim reader As New ByteStream()
         ByteFile.Load(filename, reader)
 
@@ -104,7 +105,7 @@ Friend Module S_Resources
     Sub CheckResources()
         For i = 1 To MAX_RESOURCES
 
-            If Not File.Exists(Path.Resource(i)) Then
+            If Not File.Exists(Paths.Resource(i)) Then
                 SaveResource(i)
             End If
 
@@ -176,7 +177,7 @@ Friend Module S_Resources
     End Function
 
     Sub LoadSkillExp()
-        Dim cf = Path.Database & "SkillExp.ini"
+        Dim cf = Paths.Database & "SkillExp.ini"
         For i = 1 To 100
             SkillExpTable(i) = Ini.Read(cf, "Level", i)
         Next

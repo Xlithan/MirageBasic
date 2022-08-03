@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports Asfw
+Imports MirageBasic.Core
 Imports Ini = Asfw.IO.TextFile
 
 Friend Module S_Housing
@@ -35,7 +36,7 @@ Friend Module S_Housing
 
 #Region "DataBase"
     Sub LoadHouses()
-        Dim cf = Path.Database & "houseconfig.ini"
+        Dim cf = Paths.Database & "houseconfig.ini"
         If Not File.Exists(cf) Then
             SaveHouses()
             Exit Sub
@@ -60,7 +61,7 @@ Friend Module S_Housing
     Sub SaveHouse(index As Integer)
         If Not (index > 0 AndAlso index <= MAX_HOUSES) Then Return
 
-        Dim cf = Path.Database & "houseconfig.ini"
+        Dim cf = Paths.Database & "houseconfig.ini"
         Ini.Write(cf, index, "BaseMap", HouseConfig(index).BaseMap)
         Ini.Write(cf, index, "Name", HouseConfig(index).ConfigName)
         Ini.Write(cf, index, "MaxFurniture", HouseConfig(index).MaxFurniture)
@@ -70,7 +71,7 @@ Friend Module S_Housing
     End Sub
 
     Sub SaveHouses()
-        Dim cf = Path.Database & "houseconfig.ini"
+        Dim cf = Paths.Database & "houseconfig.ini"
         If Not File.Exists(cf) Then File.Create(cf).Dispose()
 
         For i = 1 To MAX_HOUSES
@@ -94,7 +95,7 @@ Friend Module S_Housing
                 If HasItem(index, 1) >= price Then
                     TakeInvItem(index, 1, price)
                     Player(index).Character(TempPlayer(index).CurChar).House.Houseindex = TempPlayer(index).BuyHouseindex
-                    PlayerMsg(index, "You just bought the " & Trim$(HouseConfig(TempPlayer(index).BuyHouseindex).ConfigName) & " house!", ColorType.BrightGreen)
+                    PlayerMsg(index, "You just bought the " & Trim$(HouseConfig(TempPlayer(index).BuyHouseindex).ConfigName) & " house!", modEnumerators.ColorType.BrightGreen)
                     Player(index).Character(TempPlayer(index).CurChar).LastMap = GetPlayerMap(index)
                     Player(index).Character(TempPlayer(index).CurChar).LastX = GetPlayerX(index)
                     Player(index).Character(TempPlayer(index).CurChar).LastY = GetPlayerY(index)

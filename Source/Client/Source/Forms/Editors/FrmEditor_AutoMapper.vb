@@ -1,4 +1,5 @@
 ﻿Imports Ini = Asfw.IO.TextFile
+Imports MirageBasic.Core
 
 Friend Class frmEditor_AutoMapper
 
@@ -79,7 +80,7 @@ Friend Class frmEditor_AutoMapper
     Private Sub BtnSaveResource_Click(sender As Object, e As EventArgs) Handles btnSaveResource.Click
         Dim i As Integer
         Dim ResourceStr As String = ""
-        Dim cf = Path.Contents & "AutoMapper.ini"
+        Dim cf = Paths.Contents & "AutoMapper.ini"
 
         For i = 0 To lstResources.Items.Count - 1
             ResourceStr = CStr(ResourceStr & lstResources.Items(i))
@@ -131,7 +132,7 @@ Friend Class frmEditor_AutoMapper
 
     Private Sub BtnTileSetSave_Click(sender As Object, e As EventArgs) Handles btnTileSetSave.Click
         Dim Prefab As Integer, Layer As Integer
-        Dim cf = Path.Contents & "AutoMapper.ini"
+        Dim cf = Paths.Contents & "AutoMapper.ini"
 
         Prefab = cmbPrefab.SelectedIndex + 1
 

@@ -1,4 +1,5 @@
 ﻿Imports Asfw
+Imports MirageBasic.Core
 Imports Ini = Asfw.IO.TextFile
 
 Module S_AutoMap
@@ -100,7 +101,7 @@ Module S_AutoMap
     ''' </summary>
     Sub LoadTilePrefab()
         Dim prefab As Integer, layer As Integer
-        Dim cf = Path.Database & "AutoMapper.ini"
+        Dim cf = Paths.Database & "AutoMapper.ini"
 
         ReDim Tile(TilePrefab.Count - 1)
         For prefab = 1 To TilePrefab.Count - 1
@@ -204,7 +205,7 @@ Module S_AutoMap
     Sub Packet_SaveAutoMap(index As Integer, ByRef data() As Byte)
         Dim Layer As Integer
         Dim buffer As New ByteStream(data)
-        Dim cf = Path.Database & "AutoMapper.ini"
+        Dim cf = Paths.Database & "AutoMapper.ini"
 
         AddDebug("Recieved EMSG: SaveAutoMap")
 
@@ -244,7 +245,7 @@ Module S_AutoMap
 
     Sub SendAutoMapper(index As Integer)
         Dim buffer As ByteStream, Prefab As Integer
-        Dim cf = Path.Database & "AutoMapper.ini"
+        Dim cf = Paths.Database & "AutoMapper.ini"
         buffer = New ByteStream(4)
         buffer.WriteInt32(ServerPackets.SAutoMapper)
 

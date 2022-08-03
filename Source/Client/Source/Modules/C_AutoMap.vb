@@ -1,4 +1,5 @@
-﻿Imports Ini = Asfw.IO.TextFile
+﻿Imports MirageBasic.Core
+Imports Ini = Asfw.IO.TextFile
 
 Module C_AutoMap
     ' Automapper System
@@ -41,7 +42,7 @@ Module C_AutoMap
     Friend Tile(TilePrefab.Count - 1) As TileStruct
     Friend Detail() As DetailRec
     Friend ResourcesNum As String
-    Private Resources() As String
+    Public Resources() As String
     'Private ActualMap As Integer
 
     Enum MountainTile
@@ -100,7 +101,7 @@ Module C_AutoMap
 
     Sub LoadTilePrefab()
         Dim Prefab As Integer, Layer As Integer
-        Dim cf = Path.Contents & "AutoMapper.ini"
+        Dim cf = Paths.Contents & "AutoMapper.ini"
 
         ReDim Tile(TilePrefab.Count - 1)
         For Prefab = 1 To TilePrefab.Count - 1
@@ -173,7 +174,7 @@ Module C_AutoMap
         DetailFreq = buffer.ReadInt32
         ResourceFreq = buffer.ReadInt32
 
-        Dim cf = Path.Contents & "AutoMapper.ini"
+        Dim cf = Paths.Contents & "AutoMapper.ini"
         Ini.Write(cf, "Resources", "ResourcesNum", buffer.ReadString())
 
         For Prefab = 1 To TilePrefab.Count - 1
@@ -207,7 +208,7 @@ Module C_AutoMap
     End Sub
 
     Friend Sub SendSaveAutoMapper()
-        Dim cf = Path.Contents & "AutoMapper.ini"
+        Dim cf = Paths.Contents & "AutoMapper.ini"
         Dim buffer As New Asfw.ByteStream(4)
 
         buffer.WriteInt32(ClientPackets.CSaveAutoMap)

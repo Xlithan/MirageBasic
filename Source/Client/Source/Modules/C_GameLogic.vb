@@ -2,6 +2,7 @@
 Imports System.Threading
 Imports System.Windows.Forms
 Imports Asfw
+Imports MirageBasic.Core
 
 Module C_GameLogic
     Friend GameRand As New Random()
@@ -86,7 +87,7 @@ Module C_GameLogic
                     ShowAnimTimer = tick + 500
                 End If
 
-                For i = 1 To Byte.MaxValue
+                For i = 1 To MAX_ANIMATIONS
                     CheckAnimInstance(i)
                 Next
 
@@ -155,7 +156,7 @@ Module C_GameLogic
                 ' check if trade timed out
                 If TradeRequest = True Then
                     If TradeTimer < tick Then
-                        AddText(Language.Trade.Timeout, ColorType.Yellow)
+                        AddText(Language.Trade.Timeout, modEnumerators.ColorType.Yellow)
                         TradeRequest = False
                         TradeTimer = 0
                     End If
@@ -1159,7 +1160,7 @@ Continue1:
         SkillDescReqAccess = Skill(skillnum).AccessReq
 
         If Skill(skillnum).ClassReq > 0 Then
-            SkillDescReqClass = Trim$(Classes(Skill(skillnum).ClassReq).Name)
+            SkillDescReqClass = Trim$(Job(Skill(skillnum).ClassReq).Name)
         Else
             SkillDescReqClass = Language.SkillDescription.None
         End If

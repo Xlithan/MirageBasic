@@ -1,4 +1,6 @@
-﻿Module S_Instances
+﻿Imports MirageBasic.Core
+
+Module S_Instances
 
     Structure InstancedMap
         Dim OriginalMap As Integer

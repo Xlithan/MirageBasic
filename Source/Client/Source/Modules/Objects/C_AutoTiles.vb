@@ -1,4 +1,6 @@
-﻿Friend Module C_AutoTiles
+﻿Imports MirageBasic.Core
+
+Friend Module C_AutoTiles
 
 #Region "Globals and Types"
 
@@ -66,7 +68,7 @@
 
         For x = 0 To Map.MaxX
             For y = 0 To Map.MaxY
-                ReDim Autotile(x, y).Layer(LayerType.Count - 1)
+                ReDim Autotile(x, y).Layer(modEnumerators.LayerType.Count - 1)
                 For i = 0 To LayerType.Count - 1
                     ReDim Autotile(x, y).Layer(i).SrcX(4)
                     ReDim Autotile(x, y).Layer(i).SrcY(4)
