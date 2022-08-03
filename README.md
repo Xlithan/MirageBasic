@@ -4,7 +4,7 @@ MirageBasic Game Engine
 Simple 2D ORPG Game Engine written in VB.Net
 Based on the Orion+ conversion.
 
-Home: http://ms.draignet.uk
+Home: https://miragebasic.net
 
 ![Main Menu](https://i.imgur.com/lW5vSBs.png)
 
@@ -35,6 +35,6 @@ Log into the game with the client. On the server, open the player list, right cl
 
 Support & Updates:
 ==================
-The home for this engine is http://ms.draignet.uk if you need support or tips in game creation feel free to visit us. If you find any bugs feel free to report them on the official Mirage Source discord: https://discord.gg/49yhWHByFp
+The home for this engine is https://miragebasic.net if you need support or tips in game creation feel free to visit us. If you find any bugs feel free to report them on the official Mirage Source discord: https://discord.gg/49yhWHByFp
 
 Im working on updating it to a more useable base to use.
