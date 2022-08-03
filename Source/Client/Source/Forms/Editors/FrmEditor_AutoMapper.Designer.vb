@@ -384,7 +384,7 @@ Partial Class frmEditor_AutoMapper
         Me.DarkMenu.Location = New System.Drawing.Point(0, 0)
         Me.DarkMenu.Name = "DarkMenu"
         Me.DarkMenu.Padding = New System.Windows.Forms.Padding(4, 2, 0, 2)
-        Me.DarkMenu.Size = New System.Drawing.Size(441, 24)
+        Me.DarkMenu.Size = New System.Drawing.Size(1345, 24)
         Me.DarkMenu.TabIndex = 27
         '
         'ConfigurationsToolStripMenuItem2
@@ -400,14 +400,14 @@ Partial Class frmEditor_AutoMapper
         '
         Me.TilesetsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.TilesetsToolStripMenuItem.Name = "TilesetsToolStripMenuItem"
-        Me.TilesetsToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
+        Me.TilesetsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.TilesetsToolStripMenuItem.Text = "Tilesets"
         '
         'ResourcesToolStripMenuItem
         '
         Me.ResourcesToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.ResourcesToolStripMenuItem.Name = "ResourcesToolStripMenuItem"
-        Me.ResourcesToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
+        Me.ResourcesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ResourcesToolStripMenuItem.Text = "Resources"
         '
         'GenerateToolStripMenuItem1
@@ -654,8 +654,9 @@ Partial Class frmEditor_AutoMapper
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = true
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
-        Me.ClientSize = New System.Drawing.Size(441, 334)
+        Me.ClientSize = New System.Drawing.Size(1345, 334)
         Me.Controls.Add(Me.pnlResources)
         Me.Controls.Add(Me.btnStart)
         Me.Controls.Add(Me.txtResourceFreq)
