@@ -39,13 +39,13 @@ Public Class FrmEditor_Events
         cmbCondition_HasItem.SelectedIndex = 0
         nudCondition_HasItem.Enabled = False
         nudCondition_HasItem.Value = 1
-        cmbCondition_ClassIs.Enabled = False
-        cmbCondition_ClassIs.Items.Clear()
+        cmbCondition_JobIs.Enabled = False
+        cmbCondition_JobIs.Items.Clear()
 
         For i = 1 To MAX_JOB
-            cmbCondition_ClassIs.Items.Add(i & ". " & CStr(Job(i).Name))
+            cmbCondition_JobIs.Items.Add(i & ". " & CStr(Job(i).Name))
         Next
-        cmbCondition_ClassIs.SelectedIndex = 0
+        cmbCondition_JobIs.SelectedIndex = 0
         cmbCondition_LearntSkill.Enabled = False
         cmbCondition_LearntSkill.Items.Clear()
 
@@ -116,13 +116,13 @@ Public Class FrmEditor_Events
             cmbChangeSkills.Items.Add(Trim$(Skill(i).Name))
         Next
         cmbChangeSkills.SelectedIndex = 0
-        cmbChangeClass.Items.Clear()
+        cmbChangeJob.Items.Clear()
 
         If MAX_JOB > 0 Then
             For i = 1 To MAX_JOB
-                cmbChangeClass.Items.Add(Trim$(Job(i).Name))
+                cmbChangeJob.Items.Add(Trim$(Job(i).Name))
             Next
-            cmbChangeClass.SelectedIndex = 0
+            cmbChangeJob.SelectedIndex = 0
         End If
         nudChangeSprite.Maximum = NumCharacters
         cmbPlayAnim.Items.Clear()
@@ -205,7 +205,6 @@ Public Class FrmEditor_Events
     End Sub
 
     Private Sub FrmEditor_Events_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Width = 824
         fraDialogue.Width = Width
         fraDialogue.Height = Height
         fraDialogue.Top = 0
@@ -370,20 +369,20 @@ Public Class FrmEditor_Events
                 fraDialogue.Visible = True
                 fraChangeSkills.Visible = True
                 fraCommands.Visible = False
-            'Change Class
-            Case "Change Class"
+            'Change Job
+            Case "Change Job"
                 If MAX_JOB > 0 Then
-                    If cmbChangeClass.Items.Count = 0 Then
-                        cmbChangeClass.Items.Clear()
+                    If cmbChangeJob.Items.Count = 0 Then
+                        cmbChangeJob.Items.Clear()
 
                         For i = 1 To MAX_JOB
-                            cmbChangeClass.Items.Add(Trim$(Job(i).Name))
+                            cmbChangeJob.Items.Add(Trim$(Job(i).Name))
                         Next
-                        cmbChangeClass.SelectedIndex = 0
+                        cmbChangeJob.SelectedIndex = 0
                     End If
                 End If
                 fraDialogue.Visible = True
-                fraChangeClass.Visible = True
+                fraChangeJob.Visible = True
                 fraCommands.Visible = False
             'Change Sprite
             Case "Change Sprite"
@@ -1866,7 +1865,7 @@ Public Class FrmEditor_Events
 
         ClearConditionFrame()
 
-        cmbCondition_ClassIs.Enabled = True
+        cmbCondition_JobIs.Enabled = True
     End Sub
 
     Private Sub OptCondition4_CheckedChanged(sender As Object, e As EventArgs) Handles optCondition4.CheckedChanged
@@ -2052,24 +2051,24 @@ Public Class FrmEditor_Events
 
 #End Region
 
-#Region "Change Class"
+#Region "Change Job"
 
-    Private Sub BtnChangeClassOK_Click(sender As Object, e As EventArgs) Handles btnChangeClassOk.Click
+    Private Sub BtnChangeJobOK_Click(sender As Object, e As EventArgs) Handles btnChangeJobOk.Click
         If IsEdit = False Then
-            AddCommand(EventType.EvChangeClass)
+            AddCommand(EventType.EvChangeJob)
         Else
             EditCommand()
         End If
         ' hide
         fraDialogue.Visible = False
-        fraChangeClass.Visible = False
+        fraChangeJob.Visible = False
         fraCommands.Visible = False
     End Sub
 
-    Private Sub BtnChangeClassCancel_Click(sender As Object, e As EventArgs) Handles btnChangeClassCancel.Click
+    Private Sub BtnChangeJobCancel_Click(sender As Object, e As EventArgs) Handles btnChangeJobCancel.Click
         If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
-        fraChangeClass.Visible = False
+        fraChangeJob.Visible = False
     End Sub
 
 #End Region

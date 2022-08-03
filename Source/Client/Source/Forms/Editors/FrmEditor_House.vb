@@ -74,4 +74,21 @@ Friend Class frmEditor_House
         HouseEditorCancel()
     End Sub
 
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        Dim tmpindex As Integer
+
+        House(EditorIndex).ConfigName = ""
+        House(Editorindex).Price = 0
+        House(EditorIndex).BaseMap = 0
+        House(EditorIndex).MaxFurniture = 0
+        House(EditorIndex).X = 0
+        House(EditorIndex).Y = 0
+
+        tmpindex = lstIndex.SelectedIndex
+        lstIndex.Items.RemoveAt(Editorindex - 1)
+        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & House(Editorindex).ConfigName)
+        lstIndex.SelectedIndex = tmpindex
+        
+        HouseEditorInit
+    End Sub
 End Class

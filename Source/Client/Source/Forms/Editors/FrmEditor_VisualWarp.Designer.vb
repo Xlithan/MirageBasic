@@ -29,99 +29,108 @@ Partial Class frmEditor_VisualWarp
         Me.picPreview = New System.Windows.Forms.PictureBox()
         Me.lblSelX = New DarkUI.Controls.DarkLabel()
         Me.lblSelY = New DarkUI.Controls.DarkLabel()
-        Me.pnlPreview.SuspendLayout()
-        CType(Me.picPreview, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
+        Me.pnlPreview.SuspendLayout
+        CType(Me.picPreview,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.SuspendLayout
         '
         'btnWarpOK
         '
-        Me.btnWarpOK.Location = New System.Drawing.Point(12, 504)
+        Me.btnWarpOK.Location = New System.Drawing.Point(14, 582)
+        Me.btnWarpOK.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnWarpOK.Name = "btnWarpOK"
-        Me.btnWarpOK.Padding = New System.Windows.Forms.Padding(5)
-        Me.btnWarpOK.Size = New System.Drawing.Size(167, 23)
+        Me.btnWarpOK.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.btnWarpOK.Size = New System.Drawing.Size(195, 27)
         Me.btnWarpOK.TabIndex = 4
         Me.btnWarpOK.Text = "Ok"
         '
         'DarkLabel15
         '
-        Me.DarkLabel15.AutoSize = True
-        Me.DarkLabel15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel15.Location = New System.Drawing.Point(12, 9)
+        Me.DarkLabel15.AutoSize = true
+        Me.DarkLabel15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel15.Location = New System.Drawing.Point(14, 10)
+        Me.DarkLabel15.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel15.Name = "DarkLabel15"
-        Me.DarkLabel15.Size = New System.Drawing.Size(47, 13)
+        Me.DarkLabel15.Size = New System.Drawing.Size(52, 15)
         Me.DarkLabel15.TabIndex = 3
         Me.DarkLabel15.Text = "Map List"
         '
         'lstMaps
         '
-        Me.lstMaps.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
+        Me.lstMaps.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
         Me.lstMaps.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lstMaps.ForeColor = System.Drawing.Color.Gainsboro
-        Me.lstMaps.FormattingEnabled = True
-        Me.lstMaps.Location = New System.Drawing.Point(12, 25)
+        Me.lstMaps.FormattingEnabled = true
+        Me.lstMaps.ItemHeight = 15
+        Me.lstMaps.Location = New System.Drawing.Point(14, 29)
+        Me.lstMaps.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.lstMaps.Name = "lstMaps"
-        Me.lstMaps.Size = New System.Drawing.Size(173, 275)
+        Me.lstMaps.Size = New System.Drawing.Size(202, 317)
         Me.lstMaps.TabIndex = 2
         '
         'pnlPreview
         '
-        Me.pnlPreview.AutoScroll = True
+        Me.pnlPreview.AutoScroll = true
         Me.pnlPreview.Controls.Add(Me.picPreview)
-        Me.pnlPreview.Location = New System.Drawing.Point(191, 12)
+        Me.pnlPreview.Location = New System.Drawing.Point(223, 14)
+        Me.pnlPreview.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.pnlPreview.Name = "pnlPreview"
-        Me.pnlPreview.Size = New System.Drawing.Size(589, 515)
+        Me.pnlPreview.Size = New System.Drawing.Size(687, 594)
         Me.pnlPreview.TabIndex = 1
         '
         'picPreview
         '
-        Me.picPreview.Location = New System.Drawing.Point(3, 3)
+        Me.picPreview.Location = New System.Drawing.Point(4, 3)
+        Me.picPreview.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.picPreview.Name = "picPreview"
-        Me.picPreview.Size = New System.Drawing.Size(356, 376)
+        Me.picPreview.Size = New System.Drawing.Size(415, 434)
         Me.picPreview.TabIndex = 0
-        Me.picPreview.TabStop = False
+        Me.picPreview.TabStop = false
         '
         'lblSelX
         '
-        Me.lblSelX.AutoSize = True
-        Me.lblSelX.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.lblSelX.Location = New System.Drawing.Point(12, 313)
+        Me.lblSelX.AutoSize = true
+        Me.lblSelX.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.lblSelX.Location = New System.Drawing.Point(14, 361)
+        Me.lblSelX.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSelX.Name = "lblSelX"
-        Me.lblSelX.Size = New System.Drawing.Size(71, 13)
+        Me.lblSelX.Size = New System.Drawing.Size(73, 15)
         Me.lblSelX.TabIndex = 5
         Me.lblSelX.Text = "Selected X: 0"
         '
         'lblSelY
         '
-        Me.lblSelY.AutoSize = True
-        Me.lblSelY.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.lblSelY.Location = New System.Drawing.Point(12, 338)
+        Me.lblSelY.AutoSize = true
+        Me.lblSelY.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.lblSelY.Location = New System.Drawing.Point(14, 390)
+        Me.lblSelY.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSelY.Name = "lblSelY"
-        Me.lblSelY.Size = New System.Drawing.Size(71, 13)
+        Me.lblSelY.Size = New System.Drawing.Size(73, 15)
         Me.lblSelY.TabIndex = 6
         Me.lblSelY.Text = "Selected Y: 0"
         '
-        'FrmVisualWarp
+        'frmEditor_VisualWarp
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(63, Byte), Integer), CType(CType(65, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(788, 539)
-        Me.ControlBox = False
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
+        Me.ClientSize = New System.Drawing.Size(919, 622)
+        Me.ControlBox = false
         Me.Controls.Add(Me.lblSelY)
         Me.Controls.Add(Me.lblSelX)
         Me.Controls.Add(Me.pnlPreview)
         Me.Controls.Add(Me.btnWarpOK)
         Me.Controls.Add(Me.DarkLabel15)
         Me.Controls.Add(Me.lstMaps)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "FrmVisualWarp"
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.Name = "frmEditor_VisualWarp"
         Me.Text = "Visual Warp"
-        Me.pnlPreview.ResumeLayout(False)
-        CType(Me.picPreview, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        Me.pnlPreview.ResumeLayout(false)
+        CType(Me.picPreview,System.ComponentModel.ISupportInitialize).EndInit
+        Me.ResumeLayout(false)
+        Me.PerformLayout
 
-    End Sub
+End Sub
     Friend WithEvents btnWarpOK As DarkUI.Controls.DarkButton
     Friend WithEvents DarkLabel15 As DarkUI.Controls.DarkLabel
     Friend WithEvents lstMaps As Windows.Forms.ListBox

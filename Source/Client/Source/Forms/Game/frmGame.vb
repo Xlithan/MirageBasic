@@ -16,8 +16,6 @@ Friend Class FrmGame
 
     Private Sub FrmMainGame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         RePositionGui()
-
-        FrmAdmin.Visible = False
     End Sub
 
     Private Sub FrmMainGame_Closing(sender As Object, e As EventArgs) Handles MyBase.Closing
@@ -184,7 +182,7 @@ Friend Class FrmGame
 
                 ' right click
             ElseIf e.Button = MouseButtons.Right Then
-                If ShiftDown OrElse VbKeyShift = True Then
+                If VbKeyShift = True Then
                     ' admin warp if we're pressing shift and right clicking
                     If GetPlayerAccess(Myindex) >= 2 Then AdminWarp(CurX, CurY)
                 Else
@@ -199,16 +197,20 @@ Friend Class FrmGame
                 End If
                 FurnitureSelected = 0
             End If
+        Else
+            CheckGuiMouseDown(e.X, e.Y, e)
         End If
-
-        CheckGuiMouseDown(e.X, e.Y, e)
 
         If Not FrmAdmin.Visible OrElse Not FrmOptions.Visible Then Focus()
 
     End Sub
 
     Private Sub Picscreen_DoubleClick(sender As Object, e As MouseEventArgs) Handles picscreen.DoubleClick
-        CheckGuiDoubleClick(e.X, e.Y, e)
+        If Not CheckGuiClick(e.X, e.Y, e) Then
+            If GetPlayerAccess(Myindex) >= 2 Then AdminWarp(CurX, CurY)
+        Else
+            CheckGuiDoubleClick(e.X, e.Y, e)
+        End If
     End Sub
 
     Private Overloads Sub Picscreen_Paint(sender As Object, e As PaintEventArgs) Handles picscreen.Paint
@@ -259,6 +261,7 @@ Friend Class FrmGame
                 SendRequestAdmin()
             End If
         End If
+
         'hide gui
         If Inputs.HudToggle(e.KeyCode) Then
             HideGui = Not HideGui
@@ -280,11 +283,11 @@ Friend Class FrmGame
         If Inputs.Run(e.KeyCode) Then VbKeyShift = False
 
         Dim keyData As Keys = e.KeyData
+
         If IsAcceptable(keyData) Then
             e.Handled = True
             e.SuppressKeyPress = True
         End If
-
     End Sub
 
 #End Region

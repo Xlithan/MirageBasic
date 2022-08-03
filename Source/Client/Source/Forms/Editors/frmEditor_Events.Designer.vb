@@ -44,7 +44,7 @@ Partial Class FrmEditor_Events
         Dim TreeNode76 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Level Up")
         Dim TreeNode77 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change Level")
         Dim TreeNode78 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change Skills")
-        Dim TreeNode79 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change Class")
+        Dim TreeNode79 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change Job")
         Dim TreeNode80 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change Sprite")
         Dim TreeNode81 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change Gender")
         Dim TreeNode82 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Change PK")
@@ -396,10 +396,10 @@ Partial Class FrmEditor_Events
         Me.btnCreatelabelCancel = New DarkUI.Controls.DarkButton()
         Me.txtLabelName = New DarkUI.Controls.DarkTextBox()
         Me.lblLabelName = New DarkUI.Controls.DarkLabel()
-        Me.fraChangeClass = New DarkUI.Controls.DarkGroupBox()
-        Me.btnChangeClassOk = New DarkUI.Controls.DarkButton()
-        Me.btnChangeClassCancel = New DarkUI.Controls.DarkButton()
-        Me.cmbChangeClass = New DarkUI.Controls.DarkComboBox()
+        Me.fraChangeJob = New DarkUI.Controls.DarkGroupBox()
+        Me.btnChangeJobOk = New DarkUI.Controls.DarkButton()
+        Me.btnChangeJobCancel = New DarkUI.Controls.DarkButton()
+        Me.cmbChangeJob = New DarkUI.Controls.DarkComboBox()
         Me.DarkLabel38 = New DarkUI.Controls.DarkLabel()
         Me.fraChangeSkills = New DarkUI.Controls.DarkGroupBox()
         Me.btnChangeSkillsOk = New DarkUI.Controls.DarkButton()
@@ -492,7 +492,7 @@ Partial Class FrmEditor_Events
         Me.cmbCondition_LevelCompare = New DarkUI.Controls.DarkComboBox()
         Me.cmbCondition_LearntSkill = New DarkUI.Controls.DarkComboBox()
         Me.optCondition4 = New DarkUI.Controls.DarkRadioButton()
-        Me.cmbCondition_ClassIs = New DarkUI.Controls.DarkComboBox()
+        Me.cmbCondition_JobIs = New DarkUI.Controls.DarkComboBox()
         Me.optCondition3 = New DarkUI.Controls.DarkRadioButton()
         Me.nudCondition_HasItem = New DarkUI.Controls.DarkNumericUpDown()
         Me.DarkLabel16 = New DarkUI.Controls.DarkLabel()
@@ -600,7 +600,7 @@ Partial Class FrmEditor_Events
         Me.fraPlaySound.SuspendLayout()
         Me.fraChangePK.SuspendLayout()
         Me.fraCreateLabel.SuspendLayout()
-        Me.fraChangeClass.SuspendLayout()
+        Me.fraChangeJob.SuspendLayout()
         Me.fraChangeSkills.SuspendLayout()
         Me.fraCompleteTask.SuspendLayout()
         CType(Me.nudCompleteQuestTask, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -681,7 +681,7 @@ Partial Class FrmEditor_Events
         TreeNode78.Name = "Node6"
         TreeNode78.Text = "Change Skills"
         TreeNode79.Name = "Node7"
-        TreeNode79.Text = "Change Class"
+        TreeNode79.Text = "Change Job"
         TreeNode80.Name = "Node8"
         TreeNode80.Text = "Change Sprite"
         TreeNode81.Name = "Node9"
@@ -1823,7 +1823,7 @@ Partial Class FrmEditor_Events
         Me.fraDialogue.Controls.Add(Me.fraPlaySound)
         Me.fraDialogue.Controls.Add(Me.fraChangePK)
         Me.fraDialogue.Controls.Add(Me.fraCreateLabel)
-        Me.fraDialogue.Controls.Add(Me.fraChangeClass)
+        Me.fraDialogue.Controls.Add(Me.fraChangeJob)
         Me.fraDialogue.Controls.Add(Me.fraChangeSkills)
         Me.fraDialogue.Controls.Add(Me.fraCompleteTask)
         Me.fraDialogue.Controls.Add(Me.fraPlayerWarp)
@@ -3835,54 +3835,54 @@ Partial Class FrmEditor_Events
         Me.lblLabelName.TabIndex = 0
         Me.lblLabelName.Text = "Label Name:"
         '
-        'fraChangeClass
+        'fraChangeJob
         '
-        Me.fraChangeClass.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraChangeClass.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.fraChangeClass.Controls.Add(Me.btnChangeClassOk)
-        Me.fraChangeClass.Controls.Add(Me.btnChangeClassCancel)
-        Me.fraChangeClass.Controls.Add(Me.cmbChangeClass)
-        Me.fraChangeClass.Controls.Add(Me.DarkLabel38)
-        Me.fraChangeClass.ForeColor = System.Drawing.Color.Gainsboro
-        Me.fraChangeClass.Location = New System.Drawing.Point(401, 109)
-        Me.fraChangeClass.Name = "fraChangeClass"
-        Me.fraChangeClass.Size = New System.Drawing.Size(246, 76)
-        Me.fraChangeClass.TabIndex = 23
-        Me.fraChangeClass.TabStop = False
-        Me.fraChangeClass.Text = "Change Player Class"
-        Me.fraChangeClass.Visible = False
+        Me.fraChangeJob.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.fraChangeJob.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraChangeJob.Controls.Add(Me.btnChangeJobOk)
+        Me.fraChangeJob.Controls.Add(Me.btnChangeJobCancel)
+        Me.fraChangeJob.Controls.Add(Me.cmbChangeJob)
+        Me.fraChangeJob.Controls.Add(Me.DarkLabel38)
+        Me.fraChangeJob.ForeColor = System.Drawing.Color.Gainsboro
+        Me.fraChangeJob.Location = New System.Drawing.Point(401, 109)
+        Me.fraChangeJob.Name = "fraChangeJob"
+        Me.fraChangeJob.Size = New System.Drawing.Size(246, 76)
+        Me.fraChangeJob.TabIndex = 23
+        Me.fraChangeJob.TabStop = False
+        Me.fraChangeJob.Text = "Change Player Job"
+        Me.fraChangeJob.Visible = False
         '
-        'btnChangeClassOk
+        'btnChangeJobOk
         '
-        Me.btnChangeClassOk.Location = New System.Drawing.Point(84, 46)
-        Me.btnChangeClassOk.Name = "btnChangeClassOk"
-        Me.btnChangeClassOk.Padding = New System.Windows.Forms.Padding(5)
-        Me.btnChangeClassOk.Size = New System.Drawing.Size(75, 23)
-        Me.btnChangeClassOk.TabIndex = 27
-        Me.btnChangeClassOk.Text = "Ok"
+        Me.btnChangeJobOk.Location = New System.Drawing.Point(84, 46)
+        Me.btnChangeJobOk.Name = "btnChangeJobOk"
+        Me.btnChangeJobOk.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnChangeJobOk.Size = New System.Drawing.Size(75, 23)
+        Me.btnChangeJobOk.TabIndex = 27
+        Me.btnChangeJobOk.Text = "Ok"
         '
-        'btnChangeClassCancel
+        'btnChangeJobCancel
         '
-        Me.btnChangeClassCancel.Location = New System.Drawing.Point(165, 46)
-        Me.btnChangeClassCancel.Name = "btnChangeClassCancel"
-        Me.btnChangeClassCancel.Padding = New System.Windows.Forms.Padding(5)
-        Me.btnChangeClassCancel.Size = New System.Drawing.Size(75, 23)
-        Me.btnChangeClassCancel.TabIndex = 26
-        Me.btnChangeClassCancel.Text = "Cancel"
+        Me.btnChangeJobCancel.Location = New System.Drawing.Point(165, 46)
+        Me.btnChangeJobCancel.Name = "btnChangeJobCancel"
+        Me.btnChangeJobCancel.Padding = New System.Windows.Forms.Padding(5)
+        Me.btnChangeJobCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnChangeJobCancel.TabIndex = 26
+        Me.btnChangeJobCancel.Text = "Cancel"
         '
-        'cmbChangeClass
+        'cmbChangeJob
         '
-        Me.cmbChangeClass.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbChangeClass.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbChangeClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbChangeClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cmbChangeClass.ForeColor = System.Drawing.Color.Gainsboro
-        Me.cmbChangeClass.FormattingEnabled = True
-        Me.cmbChangeClass.Location = New System.Drawing.Point(49, 19)
-        Me.cmbChangeClass.Name = "cmbChangeClass"
-        Me.cmbChangeClass.Size = New System.Drawing.Size(191, 21)
-        Me.cmbChangeClass.TabIndex = 1
-        Me.cmbChangeClass.Text = Nothing
+        Me.cmbChangeJob.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.cmbChangeJob.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbChangeJob.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbChangeJob.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbChangeJob.ForeColor = System.Drawing.Color.Gainsboro
+        Me.cmbChangeJob.FormattingEnabled = True
+        Me.cmbChangeJob.Location = New System.Drawing.Point(49, 19)
+        Me.cmbChangeJob.Name = "cmbChangeJob"
+        Me.cmbChangeJob.Size = New System.Drawing.Size(191, 21)
+        Me.cmbChangeJob.TabIndex = 1
+        Me.cmbChangeJob.Text = Nothing
         '
         'DarkLabel38
         '
@@ -3892,7 +3892,7 @@ Partial Class FrmEditor_Events
         Me.DarkLabel38.Name = "DarkLabel38"
         Me.DarkLabel38.Size = New System.Drawing.Size(35, 13)
         Me.DarkLabel38.TabIndex = 0
-        Me.DarkLabel38.Text = "Class:"
+        Me.DarkLabel38.Text = "Job:"
         '
         'fraChangeSkills
         '
@@ -4675,7 +4675,7 @@ Partial Class FrmEditor_Events
         Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_LevelCompare)
         Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_LearntSkill)
         Me.fraConditionalBranch.Controls.Add(Me.optCondition4)
-        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_ClassIs)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_JobIs)
         Me.fraConditionalBranch.Controls.Add(Me.optCondition3)
         Me.fraConditionalBranch.Controls.Add(Me.nudCondition_HasItem)
         Me.fraConditionalBranch.Controls.Add(Me.DarkLabel16)
@@ -4961,19 +4961,19 @@ Partial Class FrmEditor_Events
         Me.optCondition4.TabStop = True
         Me.optCondition4.Text = "Knows Skill"
         '
-        'cmbCondition_ClassIs
+        'cmbCondition_JobIs
         '
-        Me.cmbCondition_ClassIs.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.cmbCondition_ClassIs.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbCondition_ClassIs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbCondition_ClassIs.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cmbCondition_ClassIs.ForeColor = System.Drawing.Color.Gainsboro
-        Me.cmbCondition_ClassIs.FormattingEnabled = True
-        Me.cmbCondition_ClassIs.Location = New System.Drawing.Point(107, 102)
-        Me.cmbCondition_ClassIs.Name = "cmbCondition_ClassIs"
-        Me.cmbCondition_ClassIs.Size = New System.Drawing.Size(276, 21)
-        Me.cmbCondition_ClassIs.TabIndex = 14
-        Me.cmbCondition_ClassIs.Text = Nothing
+        Me.cmbCondition_JobIs.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.cmbCondition_JobIs.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbCondition_JobIs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbCondition_JobIs.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cmbCondition_JobIs.ForeColor = System.Drawing.Color.Gainsboro
+        Me.cmbCondition_JobIs.FormattingEnabled = True
+        Me.cmbCondition_JobIs.Location = New System.Drawing.Point(107, 102)
+        Me.cmbCondition_JobIs.Name = "cmbCondition_JobIs"
+        Me.cmbCondition_JobIs.Size = New System.Drawing.Size(276, 21)
+        Me.cmbCondition_JobIs.TabIndex = 14
+        Me.cmbCondition_JobIs.Text = Nothing
         '
         'optCondition3
         '
@@ -4983,7 +4983,7 @@ Partial Class FrmEditor_Events
         Me.optCondition3.Size = New System.Drawing.Size(61, 17)
         Me.optCondition3.TabIndex = 13
         Me.optCondition3.TabStop = True
-        Me.optCondition3.Text = "Class Is"
+        Me.optCondition3.Text = "Job Is"
         '
         'nudCondition_HasItem
         '
@@ -5497,8 +5497,8 @@ Partial Class FrmEditor_Events
         Me.fraChangePK.ResumeLayout(False)
         Me.fraCreateLabel.ResumeLayout(False)
         Me.fraCreateLabel.PerformLayout()
-        Me.fraChangeClass.ResumeLayout(False)
-        Me.fraChangeClass.PerformLayout()
+        Me.fraChangeJob.ResumeLayout(False)
+        Me.fraChangeJob.PerformLayout()
         Me.fraChangeSkills.ResumeLayout(False)
         Me.fraChangeSkills.PerformLayout()
         Me.fraCompleteTask.ResumeLayout(False)
@@ -5645,7 +5645,7 @@ Partial Class FrmEditor_Events
     Friend WithEvents DarkLabel16 As DarkUI.Controls.DarkLabel
     Friend WithEvents cmbCondition_HasItem As DarkUI.Controls.DarkComboBox
     Friend WithEvents optCondition3 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents cmbCondition_ClassIs As DarkUI.Controls.DarkComboBox
+    Friend WithEvents cmbCondition_JobIs As DarkUI.Controls.DarkComboBox
     Friend WithEvents optCondition4 As DarkUI.Controls.DarkRadioButton
     Friend WithEvents cmbCondition_LearntSkill As DarkUI.Controls.DarkComboBox
     Friend WithEvents optCondition5 As DarkUI.Controls.DarkRadioButton
@@ -5740,11 +5740,11 @@ Partial Class FrmEditor_Events
     Friend WithEvents btnChangeSkillsOk As DarkUI.Controls.DarkButton
     Friend WithEvents btnChangeSkillsCancel As DarkUI.Controls.DarkButton
     Friend WithEvents optChangeSkillsRemove As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents fraChangeClass As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbChangeClass As DarkUI.Controls.DarkComboBox
+    Friend WithEvents fraChangeJob As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents cmbChangeJob As DarkUI.Controls.DarkComboBox
     Friend WithEvents DarkLabel38 As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnChangeClassOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnChangeClassCancel As DarkUI.Controls.DarkButton
+    Friend WithEvents btnChangeJobOk As DarkUI.Controls.DarkButton
+    Friend WithEvents btnChangeJobCancel As DarkUI.Controls.DarkButton
     Friend WithEvents fraCreateLabel As DarkUI.Controls.DarkGroupBox
     Friend WithEvents lblLabelName As DarkUI.Controls.DarkLabel
     Friend WithEvents txtLabelName As DarkUI.Controls.DarkTextBox

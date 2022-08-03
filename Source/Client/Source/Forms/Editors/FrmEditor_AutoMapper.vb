@@ -6,9 +6,9 @@ Friend Class frmEditor_AutoMapper
 #Region "Frm Code"
 
     Private Sub FrmAutoMapper_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        pnlResources.Top = 0
+        pnlResources.Top = 27
         pnlResources.Left = 0
-        pnlTileConfig.Top = 0
+        pnlTileConfig.Top = 27
         pnlTileConfig.Left = 0
         Width = 409
     End Sub

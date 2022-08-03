@@ -83,4 +83,7 @@ Friend Class frmEditor_Shop
         Shop(Editorindex).Face = nudFace.Value
     End Sub
 
+    Private Sub DarkGroupBox3_Enter(sender As Object, e As EventArgs) Handles DarkGroupBox3.Enter
+
+    End Sub
 End Class

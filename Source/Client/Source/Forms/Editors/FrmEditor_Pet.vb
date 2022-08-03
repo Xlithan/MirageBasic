@@ -235,6 +235,21 @@ Friend Class frmEditor_Pet
         Pet(Editorindex).EvolveNum = cmbEvolve.SelectedIndex
     End Sub
 
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        Dim tmpindex As Integer
+
+        If Editorindex = 0 OrElse Editorindex > MAX_PETS Then Exit Sub
+
+        ClearPet(Editorindex)
+
+        tmpindex = lstIndex.SelectedIndex
+        lstIndex.Items.RemoveAt(Editorindex - 1)
+        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Pet(Editorindex).Name)
+        lstIndex.SelectedIndex = tmpindex
+
+        PetEditorInit()
+    End Sub
+
 #End Region
 
 End Class

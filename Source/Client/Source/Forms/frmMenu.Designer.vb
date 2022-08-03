@@ -549,7 +549,7 @@ Partial Class FrmMenu
         Me.lblNews.Size = New System.Drawing.Size(366, 121)
         Me.lblNews.TabIndex = 37
         Me.lblNews.Text = "Welcome to the MirageBasic Client. This is a free open source VB.Net game engine!" &
-    " " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "For help or support please visit our site at http://forums.miragegaming.uk"
+    " " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "For help or support please visit our site at http://forums.miragegaming.net"
         Me.lblNews.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'picLogo

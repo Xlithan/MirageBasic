@@ -2784,7 +2784,7 @@ NextLoop:
             y += 15
         Next
 
-        If ShiftDown OrElse VbKeyShift = True Then
+        If VbKeyShift Then
             'info
             DrawText(xoffset - DescriptionGfxInfo.Width + 10, yoffset + 56, ItemDescInfo, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
