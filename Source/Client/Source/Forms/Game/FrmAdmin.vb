@@ -124,7 +124,7 @@ Friend Class FrmAdmin
         SendRequestEditAnimation()
     End Sub
 
-    Private Sub btnClassEditor_Click(sender As Object, e As EventArgs) Handles btnClassEditor.Click
+    Private Sub btnClassEditor_Click(sender As Object, e As EventArgs) Handles btnJobEditor.Click
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub

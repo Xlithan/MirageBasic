@@ -22,7 +22,6 @@ Partial Class frmEditor_Shop
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEditor_Shop))
         Me.DarkGroupBox1 = New DarkUI.Controls.DarkGroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
         Me.DarkGroupBox2 = New DarkUI.Controls.DarkGroupBox()
@@ -49,44 +48,48 @@ Partial Class frmEditor_Shop
         Me.txtName = New DarkUI.Controls.DarkTextBox()
         Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
         Me.picFace = New System.Windows.Forms.PictureBox()
-        Me.DarkGroupBox1.SuspendLayout()
-        Me.DarkGroupBox2.SuspendLayout()
-        Me.DarkGroupBox3.SuspendLayout()
-        CType(Me.nudCostValue, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudItemValue, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudBuy, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudFace, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picFace, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
+        Me.DarkGroupBox1.SuspendLayout
+        Me.DarkGroupBox2.SuspendLayout
+        Me.DarkGroupBox3.SuspendLayout
+        CType(Me.nudCostValue,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.nudItemValue,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.nudBuy,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.nudFace,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.picFace,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.SuspendLayout
         '
         'DarkGroupBox1
         '
-        Me.DarkGroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.DarkGroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.DarkGroupBox1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.DarkGroupBox1.Controls.Add(Me.lstIndex)
         Me.DarkGroupBox1.ForeColor = System.Drawing.Color.Gainsboro
-        Me.DarkGroupBox1.Location = New System.Drawing.Point(3, 3)
+        Me.DarkGroupBox1.Location = New System.Drawing.Point(4, 3)
+        Me.DarkGroupBox1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DarkGroupBox1.Name = "DarkGroupBox1"
-        Me.DarkGroupBox1.Size = New System.Drawing.Size(209, 398)
+        Me.DarkGroupBox1.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.DarkGroupBox1.Size = New System.Drawing.Size(244, 459)
         Me.DarkGroupBox1.TabIndex = 0
-        Me.DarkGroupBox1.TabStop = False
+        Me.DarkGroupBox1.TabStop = false
         Me.DarkGroupBox1.Text = "Shop List"
         '
         'lstIndex
         '
-        Me.lstIndex.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.lstIndex.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
         Me.lstIndex.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lstIndex.ForeColor = System.Drawing.Color.Gainsboro
-        Me.lstIndex.FormattingEnabled = True
-        Me.lstIndex.Location = New System.Drawing.Point(6, 19)
+        Me.lstIndex.FormattingEnabled = true
+        Me.lstIndex.ItemHeight = 15
+        Me.lstIndex.Location = New System.Drawing.Point(7, 22)
+        Me.lstIndex.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.lstIndex.Name = "lstIndex"
-        Me.lstIndex.Size = New System.Drawing.Size(196, 366)
+        Me.lstIndex.Size = New System.Drawing.Size(228, 422)
         Me.lstIndex.TabIndex = 1
         '
         'DarkGroupBox2
         '
-        Me.DarkGroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.DarkGroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.DarkGroupBox2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.DarkGroupBox2.Controls.Add(Me.btnCancel)
         Me.DarkGroupBox2.Controls.Add(Me.btnDelete)
         Me.DarkGroupBox2.Controls.Add(Me.btnSave)
@@ -100,44 +103,49 @@ Partial Class frmEditor_Shop
         Me.DarkGroupBox2.Controls.Add(Me.DarkLabel1)
         Me.DarkGroupBox2.Controls.Add(Me.picFace)
         Me.DarkGroupBox2.ForeColor = System.Drawing.Color.Gainsboro
-        Me.DarkGroupBox2.Location = New System.Drawing.Point(218, 3)
+        Me.DarkGroupBox2.Location = New System.Drawing.Point(254, 3)
+        Me.DarkGroupBox2.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DarkGroupBox2.Name = "DarkGroupBox2"
-        Me.DarkGroupBox2.Size = New System.Drawing.Size(414, 398)
+        Me.DarkGroupBox2.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.DarkGroupBox2.Size = New System.Drawing.Size(483, 459)
         Me.DarkGroupBox2.TabIndex = 1
-        Me.DarkGroupBox2.TabStop = False
+        Me.DarkGroupBox2.TabStop = false
         Me.DarkGroupBox2.Text = "Shop Properties"
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(333, 365)
+        Me.btnCancel.Location = New System.Drawing.Point(387, 421)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Padding = New System.Windows.Forms.Padding(5)
-        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancel.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnCancel.Size = New System.Drawing.Size(88, 27)
         Me.btnCancel.TabIndex = 55
         Me.btnCancel.Text = "Cancel"
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(170, 365)
+        Me.btnDelete.Location = New System.Drawing.Point(197, 422)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Padding = New System.Windows.Forms.Padding(5)
-        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnDelete.Size = New System.Drawing.Size(88, 27)
         Me.btnDelete.TabIndex = 54
         Me.btnDelete.Text = "Delete"
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(6, 365)
+        Me.btnSave.Location = New System.Drawing.Point(7, 422)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Padding = New System.Windows.Forms.Padding(5)
-        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnSave.Size = New System.Drawing.Size(88, 27)
         Me.btnSave.TabIndex = 53
         Me.btnSave.Text = "Save"
         '
         'DarkGroupBox3
         '
-        Me.DarkGroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox3.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.DarkGroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.DarkGroupBox3.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.DarkGroupBox3.Controls.Add(Me.btnDeleteTrade)
         Me.DarkGroupBox3.Controls.Add(Me.btnUpdate)
         Me.DarkGroupBox3.Controls.Add(Me.nudCostValue)
@@ -150,237 +158,237 @@ Partial Class frmEditor_Shop
         Me.DarkGroupBox3.Controls.Add(Me.DarkLabel5)
         Me.DarkGroupBox3.Controls.Add(Me.lstTradeItem)
         Me.DarkGroupBox3.ForeColor = System.Drawing.Color.Gainsboro
-        Me.DarkGroupBox3.Location = New System.Drawing.Point(6, 121)
+        Me.DarkGroupBox3.Location = New System.Drawing.Point(7, 140)
+        Me.DarkGroupBox3.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DarkGroupBox3.Name = "DarkGroupBox3"
-        Me.DarkGroupBox3.Size = New System.Drawing.Size(401, 238)
+        Me.DarkGroupBox3.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.DarkGroupBox3.Size = New System.Drawing.Size(468, 275)
         Me.DarkGroupBox3.TabIndex = 52
-        Me.DarkGroupBox3.TabStop = False
+        Me.DarkGroupBox3.TabStop = false
         Me.DarkGroupBox3.Text = "Items the Shop Sells"
         '
         'btnDeleteTrade
         '
-        Me.btnDeleteTrade.Location = New System.Drawing.Point(203, 211)
+        Me.btnDeleteTrade.Location = New System.Drawing.Point(237, 243)
+        Me.btnDeleteTrade.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnDeleteTrade.Name = "btnDeleteTrade"
-        Me.btnDeleteTrade.Padding = New System.Windows.Forms.Padding(5)
-        Me.btnDeleteTrade.Size = New System.Drawing.Size(75, 23)
+        Me.btnDeleteTrade.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnDeleteTrade.Size = New System.Drawing.Size(88, 27)
         Me.btnDeleteTrade.TabIndex = 53
         Me.btnDeleteTrade.Text = "Delete"
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(122, 211)
+        Me.btnUpdate.Location = New System.Drawing.Point(142, 243)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Padding = New System.Windows.Forms.Padding(5)
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdate.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnUpdate.Size = New System.Drawing.Size(88, 27)
         Me.btnUpdate.TabIndex = 52
         Me.btnUpdate.Text = "Update"
         '
         'nudCostValue
         '
-        Me.nudCostValue.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.nudCostValue.ForeColor = System.Drawing.Color.Gainsboro
-        Me.nudCostValue.Location = New System.Drawing.Point(297, 184)
+        Me.nudCostValue.Location = New System.Drawing.Point(346, 212)
+        Me.nudCostValue.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.nudCostValue.Name = "nudCostValue"
-        Me.nudCostValue.Size = New System.Drawing.Size(98, 20)
+        Me.nudCostValue.Size = New System.Drawing.Size(114, 23)
         Me.nudCostValue.TabIndex = 51
-        Me.nudCostValue.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel8
         '
-        Me.DarkLabel8.AutoSize = True
-        Me.DarkLabel8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel8.Location = New System.Drawing.Point(245, 186)
+        Me.DarkLabel8.AutoSize = true
+        Me.DarkLabel8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel8.Location = New System.Drawing.Point(286, 215)
+        Me.DarkLabel8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel8.Name = "DarkLabel8"
-        Me.DarkLabel8.Size = New System.Drawing.Size(46, 13)
+        Me.DarkLabel8.Size = New System.Drawing.Size(54, 15)
         Me.DarkLabel8.TabIndex = 50
         Me.DarkLabel8.Text = "Amount:"
         '
         'cmbCostItem
         '
-        Me.cmbCostItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.cmbCostItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbCostItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbCostItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cmbCostItem.ForeColor = System.Drawing.Color.Gainsboro
-        Me.cmbCostItem.FormattingEnabled = True
-        Me.cmbCostItem.Location = New System.Drawing.Point(74, 184)
+        Me.cmbCostItem.FormattingEnabled = true
+        Me.cmbCostItem.Location = New System.Drawing.Point(86, 212)
+        Me.cmbCostItem.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbCostItem.Name = "cmbCostItem"
-        Me.cmbCostItem.Size = New System.Drawing.Size(165, 21)
+        Me.cmbCostItem.Size = New System.Drawing.Size(192, 24)
         Me.cmbCostItem.TabIndex = 49
-        Me.cmbCostItem.Text = Nothing
         '
         'DarkLabel7
         '
-        Me.DarkLabel7.AutoSize = True
-        Me.DarkLabel7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel7.Location = New System.Drawing.Point(6, 187)
+        Me.DarkLabel7.AutoSize = true
+        Me.DarkLabel7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel7.Location = New System.Drawing.Point(7, 216)
+        Me.DarkLabel7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel7.Name = "DarkLabel7"
-        Me.DarkLabel7.Size = New System.Drawing.Size(54, 13)
+        Me.DarkLabel7.Size = New System.Drawing.Size(61, 15)
         Me.DarkLabel7.TabIndex = 48
         Me.DarkLabel7.Text = "Item Cost:"
         '
         'nudItemValue
         '
-        Me.nudItemValue.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.nudItemValue.ForeColor = System.Drawing.Color.Gainsboro
-        Me.nudItemValue.Location = New System.Drawing.Point(297, 158)
+        Me.nudItemValue.Location = New System.Drawing.Point(346, 182)
+        Me.nudItemValue.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.nudItemValue.Name = "nudItemValue"
-        Me.nudItemValue.Size = New System.Drawing.Size(98, 20)
+        Me.nudItemValue.Size = New System.Drawing.Size(114, 23)
         Me.nudItemValue.TabIndex = 47
-        Me.nudItemValue.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel6
         '
-        Me.DarkLabel6.AutoSize = True
-        Me.DarkLabel6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel6.Location = New System.Drawing.Point(245, 160)
+        Me.DarkLabel6.AutoSize = true
+        Me.DarkLabel6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel6.Location = New System.Drawing.Point(286, 185)
+        Me.DarkLabel6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel6.Name = "DarkLabel6"
-        Me.DarkLabel6.Size = New System.Drawing.Size(46, 13)
+        Me.DarkLabel6.Size = New System.Drawing.Size(54, 15)
         Me.DarkLabel6.TabIndex = 46
         Me.DarkLabel6.Text = "Amount:"
         '
         'cmbItem
         '
-        Me.cmbItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
         Me.cmbItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.cmbItem.ForeColor = System.Drawing.Color.Gainsboro
-        Me.cmbItem.FormattingEnabled = True
-        Me.cmbItem.Location = New System.Drawing.Point(74, 157)
+        Me.cmbItem.FormattingEnabled = true
+        Me.cmbItem.Location = New System.Drawing.Point(86, 181)
+        Me.cmbItem.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbItem.Name = "cmbItem"
-        Me.cmbItem.Size = New System.Drawing.Size(165, 21)
+        Me.cmbItem.Size = New System.Drawing.Size(192, 24)
         Me.cmbItem.TabIndex = 45
-        Me.cmbItem.Text = Nothing
-
         '
         'DarkLabel5
         '
-        Me.DarkLabel5.AutoSize = True
-        Me.DarkLabel5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel5.Location = New System.Drawing.Point(6, 160)
+        Me.DarkLabel5.AutoSize = true
+        Me.DarkLabel5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel5.Location = New System.Drawing.Point(7, 185)
+        Me.DarkLabel5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel5.Name = "DarkLabel5"
-        Me.DarkLabel5.Size = New System.Drawing.Size(62, 13)
+        Me.DarkLabel5.Size = New System.Drawing.Size(69, 15)
         Me.DarkLabel5.TabIndex = 44
         Me.DarkLabel5.Text = "Item to Sell:"
         '
         'lstTradeItem
         '
-        Me.lstTradeItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.lstTradeItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
         Me.lstTradeItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lstTradeItem.ForeColor = System.Drawing.Color.Gainsboro
-        Me.lstTradeItem.FormattingEnabled = True
+        Me.lstTradeItem.FormattingEnabled = true
+        Me.lstTradeItem.ItemHeight = 15
         Me.lstTradeItem.Items.AddRange(New Object() {"1.", "2.", "3.", "4.", "5.", "6.", "7.", "8."})
-        Me.lstTradeItem.Location = New System.Drawing.Point(6, 19)
+        Me.lstTradeItem.Location = New System.Drawing.Point(7, 22)
+        Me.lstTradeItem.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.lstTradeItem.Name = "lstTradeItem"
-        Me.lstTradeItem.Size = New System.Drawing.Size(389, 132)
+        Me.lstTradeItem.Size = New System.Drawing.Size(453, 152)
         Me.lstTradeItem.TabIndex = 43
         '
         'DarkLabel4
         '
-        Me.DarkLabel4.AutoSize = True
-        Me.DarkLabel4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel4.Location = New System.Drawing.Point(279, 87)
+        Me.DarkLabel4.AutoSize = true
+        Me.DarkLabel4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel4.Location = New System.Drawing.Point(326, 100)
+        Me.DarkLabel4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel4.Name = "DarkLabel4"
-        Me.DarkLabel4.Size = New System.Drawing.Size(98, 13)
+        Me.DarkLabel4.Size = New System.Drawing.Size(109, 15)
         Me.DarkLabel4.TabIndex = 51
         Me.DarkLabel4.Text = "% of the Item Value"
         '
         'nudBuy
         '
-        Me.nudBuy.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.nudBuy.ForeColor = System.Drawing.Color.Gainsboro
-        Me.nudBuy.Location = New System.Drawing.Point(193, 85)
+        Me.nudBuy.Location = New System.Drawing.Point(225, 98)
+        Me.nudBuy.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.nudBuy.Name = "nudBuy"
-        Me.nudBuy.Size = New System.Drawing.Size(80, 20)
+        Me.nudBuy.Size = New System.Drawing.Size(93, 23)
         Me.nudBuy.TabIndex = 50
-        Me.nudBuy.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel3
         '
-        Me.DarkLabel3.AutoSize = True
-        Me.DarkLabel3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel3.Location = New System.Drawing.Point(108, 87)
+        Me.DarkLabel3.AutoSize = true
+        Me.DarkLabel3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel3.Location = New System.Drawing.Point(126, 100)
+        Me.DarkLabel3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel3.Name = "DarkLabel3"
-        Me.DarkLabel3.Size = New System.Drawing.Size(79, 13)
+        Me.DarkLabel3.Size = New System.Drawing.Size(81, 15)
         Me.DarkLabel3.TabIndex = 49
-        Me.DarkLabel3.Text = "BuyBack Rate:"
+        Me.DarkLabel3.Text = "Buyback Rate:"
         '
         'nudFace
         '
-        Me.nudFace.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
-        Me.nudFace.ForeColor = System.Drawing.Color.Gainsboro
-        Me.nudFace.Location = New System.Drawing.Point(180, 51)
+        Me.nudFace.Location = New System.Drawing.Point(210, 59)
+        Me.nudFace.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.nudFace.Name = "nudFace"
-        Me.nudFace.Size = New System.Drawing.Size(93, 20)
+        Me.nudFace.Size = New System.Drawing.Size(108, 23)
         Me.nudFace.TabIndex = 48
-        Me.nudFace.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'DarkLabel2
         '
-        Me.DarkLabel2.AutoSize = True
-        Me.DarkLabel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel2.Location = New System.Drawing.Point(108, 53)
+        Me.DarkLabel2.AutoSize = true
+        Me.DarkLabel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel2.Location = New System.Drawing.Point(126, 61)
+        Me.DarkLabel2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel2.Name = "DarkLabel2"
-        Me.DarkLabel2.Size = New System.Drawing.Size(34, 13)
+        Me.DarkLabel2.Size = New System.Drawing.Size(34, 15)
         Me.DarkLabel2.TabIndex = 47
         Me.DarkLabel2.Text = "Face:"
         '
         'txtName
         '
-        Me.txtName.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtName.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
         Me.txtName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.txtName.Location = New System.Drawing.Point(180, 19)
+        Me.txtName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.txtName.Location = New System.Drawing.Point(210, 22)
+        Me.txtName.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(227, 20)
+        Me.txtName.Size = New System.Drawing.Size(264, 23)
         Me.txtName.TabIndex = 46
         '
         'DarkLabel1
         '
-        Me.DarkLabel1.AutoSize = True
-        Me.DarkLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel1.Location = New System.Drawing.Point(108, 21)
+        Me.DarkLabel1.AutoSize = true
+        Me.DarkLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel1.Location = New System.Drawing.Point(126, 24)
+        Me.DarkLabel1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel1.Name = "DarkLabel1"
-        Me.DarkLabel1.Size = New System.Drawing.Size(66, 13)
+        Me.DarkLabel1.Size = New System.Drawing.Size(42, 15)
         Me.DarkLabel1.TabIndex = 45
-        Me.DarkLabel1.Text = "Shop Name:"
+        Me.DarkLabel1.Text = "Name:"
         '
         'picFace
         '
         Me.picFace.BackColor = System.Drawing.Color.Black
         Me.picFace.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.picFace.Location = New System.Drawing.Point(6, 19)
+        Me.picFace.Location = New System.Drawing.Point(7, 22)
+        Me.picFace.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.picFace.Name = "picFace"
-        Me.picFace.Size = New System.Drawing.Size(96, 96)
+        Me.picFace.Size = New System.Drawing.Size(112, 111)
         Me.picFace.TabIndex = 44
-        Me.picFace.TabStop = False
+        Me.picFace.TabStop = false
         '
-        'frmShop
+        'frmEditor_Shop
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(638, 408)
-        Me.ControlBox = False
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.ClientSize = New System.Drawing.Size(740, 464)
+        Me.ControlBox = false
         Me.Controls.Add(Me.DarkGroupBox2)
         Me.Controls.Add(Me.DarkGroupBox1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "frmShop"
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.Name = "frmEditor_Shop"
         Me.Text = "Shop Editor"
-        Me.DarkGroupBox1.ResumeLayout(False)
-        Me.DarkGroupBox2.ResumeLayout(False)
-        Me.DarkGroupBox2.PerformLayout()
-        Me.DarkGroupBox3.ResumeLayout(False)
-        Me.DarkGroupBox3.PerformLayout()
-        CType(Me.nudCostValue, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudItemValue, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudBuy, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudFace, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picFace, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
+        Me.DarkGroupBox1.ResumeLayout(false)
+        Me.DarkGroupBox2.ResumeLayout(false)
+        Me.DarkGroupBox2.PerformLayout
+        Me.DarkGroupBox3.ResumeLayout(false)
+        Me.DarkGroupBox3.PerformLayout
+        CType(Me.nudCostValue,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.nudItemValue,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.nudBuy,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.nudFace,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.picFace,System.ComponentModel.ISupportInitialize).EndInit
+        Me.ResumeLayout(false)
 
-    End Sub
+End Sub
 
     Friend WithEvents DarkGroupBox1 As DarkUI.Controls.DarkGroupBox
     Friend WithEvents lstIndex As Windows.Forms.ListBox

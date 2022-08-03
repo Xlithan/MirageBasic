@@ -9,8 +9,8 @@ Public Class InputsDef
         Public MoveLeft As Keys = Keys.A
         Public MoveRight As Keys = Keys.D
 
-        Public Attack As Keys = Keys.Control
-        Public Run As Keys = Keys.Shift
+        Public Attack As Keys = Keys.ControlKey
+        Public Run As Keys = Keys.LShiftKey
         Public Loot As Keys = Keys.Space
 
         Public HotBar1 As Keys = Keys.NumPad0

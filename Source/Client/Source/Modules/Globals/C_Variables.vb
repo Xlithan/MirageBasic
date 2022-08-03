@@ -84,12 +84,9 @@ Module C_Variables
 
     ' Game direction vars
     Friend DirUp As Boolean
-
     Friend DirDown As Boolean
     Friend DirLeft As Boolean
     Friend DirRight As Boolean
-    Friend ShiftDown As Boolean
-    Friend ControlDown As Boolean
 
     ' Used for dragging Picture Boxes
     Friend SOffsetX As Integer

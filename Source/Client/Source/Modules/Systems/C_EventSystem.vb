@@ -293,7 +293,7 @@ Friend Module C_EventSystem
         EvLevelUp
         EvChangeLevel
         EvChangeSkills
-        EvChangeClass
+        EvChangeJob
         EvChangeSprite
         EvChangeSex
         EvChangePk
@@ -648,7 +648,7 @@ newlist:
                                     Case 2
                                         FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player Has Item [" & Trim$(Item(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1).Name) & "] x" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data2)
                                     Case 3
-                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player's Class Is [" & Trim$(Job(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1).Name) & "]")
+                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player's Job Is [" & Trim$(Job(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1).Name) & "]")
                                     Case 4
                                         FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Conditional Branch: Player Knows Skill [" & Trim$(Skill(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Data1).Name) & "]")
                                     Case 5
@@ -931,8 +931,8 @@ newlist:
                                 ElseIf TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2 = 1 Then
                                     FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Remove Player Skill [" & Trim$(Skill(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name) & "]")
                                 End If
-                            Case EventType.EvChangeClass
-                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Player Class to " & Trim$(Job(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name))
+                            Case EventType.EvChangeJob
+                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Player Job to " & Trim$(Job(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name))
                             Case EventType.EvChangeSprite
                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Set Player Sprite to " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1)
                             Case EventType.EvChangeSex
@@ -1194,9 +1194,9 @@ newlist:
                         TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 2
                         TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = FrmEditor_Events.cmbCondition_HasItem.SelectedIndex + 1
                         TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = FrmEditor_Events.nudCondition_HasItem.Value
-                    Case 3 'Class Is
+                    Case 3 'Job Is
                         TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 3
-                        TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = FrmEditor_Events.cmbCondition_ClassIs.SelectedIndex + 1
+                        TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = FrmEditor_Events.cmbCondition_JobIs.SelectedIndex + 1
                     Case 4 'Learnt Skill
                         TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 4
                         TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = FrmEditor_Events.cmbCondition_LearntSkill.SelectedIndex + 1
@@ -1322,9 +1322,9 @@ newlist:
                     TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data2 = 1
                 End If
 
-            Case EventType.EvChangeClass
+            Case EventType.EvChangeJob
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbChangeClass.SelectedIndex + 1
+                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbChangeJob.SelectedIndex + 1
 
             Case EventType.EvChangeSprite
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Index = Index
@@ -1588,8 +1588,8 @@ newlist:
                         FrmEditor_Events.cmbCondition_HasItem.SelectedIndex = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 - 1
                         FrmEditor_Events.nudCondition_HasItem.Value = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2
                     Case 3
-                        FrmEditor_Events.cmbCondition_ClassIs.Enabled = True
-                        FrmEditor_Events.cmbCondition_ClassIs.SelectedIndex = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 - 1
+                        FrmEditor_Events.cmbCondition_JobIs.Enabled = True
+                        FrmEditor_Events.cmbCondition_JobIs.SelectedIndex = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 - 1
                     Case 4
                         FrmEditor_Events.cmbCondition_LearntSkill.Enabled = True
                         FrmEditor_Events.cmbCondition_LearntSkill.SelectedIndex = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 - 1
@@ -1707,11 +1707,11 @@ newlist:
                 FrmEditor_Events.fraDialogue.Visible = True
                 FrmEditor_Events.fraChangeSkills.Visible = True
                 FrmEditor_Events.fraCommands.Visible = False
-            Case EventType.EvChangeClass
+            Case EventType.EvChangeJob
                 IsEdit = True
-                FrmEditor_Events.cmbChangeClass.SelectedIndex = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 - 1
+                FrmEditor_Events.cmbChangeJob.SelectedIndex = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 - 1
                 FrmEditor_Events.fraDialogue.Visible = True
-                FrmEditor_Events.fraChangeClass.Visible = True
+                FrmEditor_Events.fraChangeJob.Visible = True
                 FrmEditor_Events.fraCommands.Visible = False
             Case EventType.EvChangeSprite
                 IsEdit = True
@@ -2155,7 +2155,7 @@ newlist:
                     TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data2 = FrmEditor_Events.nudCondition_HasItem.Value
                 ElseIf FrmEditor_Events.optCondition3.Checked = True Then
                     TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 3
-                    TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = FrmEditor_Events.cmbCondition_ClassIs.SelectedIndex + 1
+                    TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = FrmEditor_Events.cmbCondition_JobIs.SelectedIndex + 1
                 ElseIf FrmEditor_Events.optCondition4.Checked = True Then
                     TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Condition = 4
                     TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.Data1 = FrmEditor_Events.cmbCondition_LearntSkill.SelectedIndex + 1
@@ -2236,8 +2236,8 @@ newlist:
                 ElseIf FrmEditor_Events.optChangeSkillsRemove.Checked = True Then
                     TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data2 = 1
                 End If
-            Case EventType.EvChangeClass
-                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbChangeClass.SelectedIndex + 1
+            Case EventType.EvChangeJob
+                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbChangeJob.SelectedIndex + 1
             Case EventType.EvChangeSprite
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.nudChangeSprite.Value
             Case EventType.EvChangeSex
@@ -2729,7 +2729,7 @@ newlist:
         Dim dRect As Rect
         Dim targetBitmap As Bitmap 'Bitmap we draw to
         Dim sourceBitmap As Bitmap 'This is our sprite or tileset that we are drawing from
-        Dim g As Graphics 'This is our graphics class that helps us draw to the targetBitmap
+        Dim g As Graphics 'This is our graphics Job that helps us draw to the targetBitmap
 
         If FrmEditor_Events.picGraphicSel.Visible Then
             Select Case FrmEditor_Events.cmbGraphic.SelectedIndex

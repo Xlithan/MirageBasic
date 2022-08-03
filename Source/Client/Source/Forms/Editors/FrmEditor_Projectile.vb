@@ -52,4 +52,18 @@
         Projectiles(Editorindex).Damage = nudDamage.Value
     End Sub
 
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        Dim tmpindex As Integer
+
+        If Editorindex < 1 OrElse Editorindex > MaxProjectiles Then Exit Sub
+
+        ClearProjectile(Editorindex)
+
+        tmpindex = lstIndex.SelectedIndex
+        lstIndex.Items.RemoveAt(Editorindex - 1)
+        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Projectiles(Editorindex).Name)
+        lstIndex.SelectedIndex = tmpindex
+
+        ProjectileEditorInit()
+    End Sub
 End Class
