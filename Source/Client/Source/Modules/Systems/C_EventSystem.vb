@@ -2739,7 +2739,7 @@ newlist:
                 Case 1
                     If FrmEditor_Events.nudGraphic.Value > 0 AndAlso FrmEditor_Events.nudGraphic.Value <= NumCharacters Then
                         'Load character from Contents into our sourceBitmap
-                        sourceBitmap = New Bitmap(Application.StartupPath & "/Data/graphics/characters/" & FrmEditor_Events.nudGraphic.Value & ".png")
+                        sourceBitmap = New Bitmap(Paths.Graphics & "\characters\" & FrmEditor_Events.nudGraphic.Value & ".png")
                         targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
 
                         g = Graphics.FromImage(targetBitmap)
@@ -2766,7 +2766,7 @@ newlist:
                 Case 2
                     If FrmEditor_Events.nudGraphic.Value > 0 AndAlso FrmEditor_Events.nudGraphic.Value <= NumTileSets Then
                         'Load tilesheet from Contents into our sourceBitmap
-                        sourceBitmap = New Bitmap(Application.StartupPath & "/Data/graphics/tilesets/" & FrmEditor_Events.nudGraphic.Value & ".png")
+                        sourceBitmap = New Bitmap(Paths.Graphics & "\tilesets\" & FrmEditor_Events.nudGraphic.Value & ".png")
                         targetBitmap = New Bitmap(sourceBitmap.Width, sourceBitmap.Height) 'Create our target Bitmap
 
                         If TmpEvent.Pages(CurPageNum).GraphicX2 = 0 AndAlso TmpEvent.Pages(CurPageNum).GraphicY2 = 0 Then

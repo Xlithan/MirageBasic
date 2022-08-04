@@ -287,9 +287,9 @@ Partial Class frmEditor_Resource
         Me.DarkLabel8.Location = New System.Drawing.Point(7, 143)
         Me.DarkLabel8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel8.Name = "DarkLabel8"
-        Me.DarkLabel8.Size = New System.Drawing.Size(113, 15)
+        Me.DarkLabel8.Size = New System.Drawing.Size(86, 15)
         Me.DarkLabel8.TabIndex = 11
-        Me.DarkLabel8.Text = "RespawnTime(secs):"
+        Me.DarkLabel8.Text = "Respawn Time:"
         '
         'DarkGroupBox3
         '
@@ -409,9 +409,9 @@ Partial Class frmEditor_Resource
         Me.DarkLabel4.Location = New System.Drawing.Point(7, 113)
         Me.DarkLabel4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel4.Name = "DarkLabel4"
-        Me.DarkLabel4.Size = New System.Drawing.Size(85, 15)
+        Me.DarkLabel4.Size = New System.Drawing.Size(34, 15)
         Me.DarkLabel4.TabIndex = 6
-        Me.DarkLabel4.Text = "Resource Type:"
+        Me.DarkLabel4.Text = "Type:"
         '
         'DarkLabel3
         '
@@ -475,16 +475,16 @@ Partial Class frmEditor_Resource
         Me.DarkLabel1.Location = New System.Drawing.Point(7, 22)
         Me.DarkLabel1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel1.Name = "DarkLabel1"
-        Me.DarkLabel1.Size = New System.Drawing.Size(93, 15)
+        Me.DarkLabel1.Size = New System.Drawing.Size(42, 15)
         Me.DarkLabel1.TabIndex = 0
-        Me.DarkLabel1.Text = "Resource Name:"
+        Me.DarkLabel1.Text = "Name:"
         '
         'btnSave
         '
         Me.btnSave.Location = New System.Drawing.Point(262, 493)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.btnSave.Padding = New System.Windows.Forms.Padding(6)
         Me.btnSave.Size = New System.Drawing.Size(88, 27)
         Me.btnSave.TabIndex = 2
         Me.btnSave.Text = "Save"
@@ -494,7 +494,7 @@ Partial Class frmEditor_Resource
         Me.btnDelete.Location = New System.Drawing.Point(428, 493)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.btnDelete.Padding = New System.Windows.Forms.Padding(6)
         Me.btnDelete.Size = New System.Drawing.Size(88, 27)
         Me.btnDelete.TabIndex = 3
         Me.btnDelete.Text = "Delete"
@@ -504,7 +504,7 @@ Partial Class frmEditor_Resource
         Me.btnCancel.Location = New System.Drawing.Point(601, 493)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.btnCancel.Padding = New System.Windows.Forms.Padding(6)
         Me.btnCancel.Size = New System.Drawing.Size(88, 27)
         Me.btnCancel.TabIndex = 4
         Me.btnCancel.Text = "Cancel"
@@ -515,13 +515,12 @@ Partial Class frmEditor_Resource
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
         Me.ClientSize = New System.Drawing.Size(695, 528)
-        Me.ControlBox = false
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.DarkGroupBox2)
         Me.Controls.Add(Me.DarkGroupBox1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.Name = "frmEditor_Resource"
         Me.Text = "Resource Editor"

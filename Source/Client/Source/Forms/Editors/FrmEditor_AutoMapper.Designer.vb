@@ -384,7 +384,7 @@ Partial Class frmEditor_AutoMapper
         Me.DarkMenu.Location = New System.Drawing.Point(0, 0)
         Me.DarkMenu.Name = "DarkMenu"
         Me.DarkMenu.Padding = New System.Windows.Forms.Padding(4, 2, 0, 2)
-        Me.DarkMenu.Size = New System.Drawing.Size(1345, 24)
+        Me.DarkMenu.Size = New System.Drawing.Size(440, 24)
         Me.DarkMenu.TabIndex = 27
         '
         'ConfigurationsToolStripMenuItem2
@@ -400,14 +400,14 @@ Partial Class frmEditor_AutoMapper
         '
         Me.TilesetsToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.TilesetsToolStripMenuItem.Name = "TilesetsToolStripMenuItem"
-        Me.TilesetsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.TilesetsToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
         Me.TilesetsToolStripMenuItem.Text = "Tilesets"
         '
         'ResourcesToolStripMenuItem
         '
         Me.ResourcesToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.ResourcesToolStripMenuItem.Name = "ResourcesToolStripMenuItem"
-        Me.ResourcesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ResourcesToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
         Me.ResourcesToolStripMenuItem.Text = "Resources"
         '
         'GenerateToolStripMenuItem1
@@ -564,7 +564,7 @@ Partial Class frmEditor_AutoMapper
         Me.txtMapStart.Location = New System.Drawing.Point(169, 32)
         Me.txtMapStart.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.txtMapStart.Name = "txtMapStart"
-        Me.txtMapStart.Size = New System.Drawing.Size(262, 23)
+        Me.txtMapStart.Size = New System.Drawing.Size(258, 23)
         Me.txtMapStart.TabIndex = 35
         Me.txtMapStart.Text = "1"
         '
@@ -576,7 +576,7 @@ Partial Class frmEditor_AutoMapper
         Me.txtMapSize.Location = New System.Drawing.Point(169, 62)
         Me.txtMapSize.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.txtMapSize.Name = "txtMapSize"
-        Me.txtMapSize.Size = New System.Drawing.Size(262, 23)
+        Me.txtMapSize.Size = New System.Drawing.Size(258, 23)
         Me.txtMapSize.TabIndex = 36
         Me.txtMapSize.Text = "4"
         '
@@ -588,7 +588,7 @@ Partial Class frmEditor_AutoMapper
         Me.txtMapX.Location = New System.Drawing.Point(169, 92)
         Me.txtMapX.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.txtMapX.Name = "txtMapX"
-        Me.txtMapX.Size = New System.Drawing.Size(262, 23)
+        Me.txtMapX.Size = New System.Drawing.Size(258, 23)
         Me.txtMapX.TabIndex = 37
         Me.txtMapX.Text = "50"
         '
@@ -600,7 +600,7 @@ Partial Class frmEditor_AutoMapper
         Me.txtMapY.Location = New System.Drawing.Point(169, 122)
         Me.txtMapY.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.txtMapY.Name = "txtMapY"
-        Me.txtMapY.Size = New System.Drawing.Size(262, 23)
+        Me.txtMapY.Size = New System.Drawing.Size(258, 23)
         Me.txtMapY.TabIndex = 38
         Me.txtMapY.Text = "50"
         '
@@ -612,7 +612,7 @@ Partial Class frmEditor_AutoMapper
         Me.txtSandBorder.Location = New System.Drawing.Point(169, 152)
         Me.txtSandBorder.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.txtSandBorder.Name = "txtSandBorder"
-        Me.txtSandBorder.Size = New System.Drawing.Size(262, 23)
+        Me.txtSandBorder.Size = New System.Drawing.Size(258, 23)
         Me.txtSandBorder.TabIndex = 39
         Me.txtSandBorder.Text = "4"
         '
@@ -624,7 +624,7 @@ Partial Class frmEditor_AutoMapper
         Me.txtDetail.Location = New System.Drawing.Point(169, 182)
         Me.txtDetail.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.txtDetail.Name = "txtDetail"
-        Me.txtDetail.Size = New System.Drawing.Size(262, 23)
+        Me.txtDetail.Size = New System.Drawing.Size(258, 23)
         Me.txtDetail.TabIndex = 40
         Me.txtDetail.Text = "10"
         '
@@ -636,7 +636,7 @@ Partial Class frmEditor_AutoMapper
         Me.txtResourceFreq.Location = New System.Drawing.Point(169, 212)
         Me.txtResourceFreq.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.txtResourceFreq.Name = "txtResourceFreq"
-        Me.txtResourceFreq.Size = New System.Drawing.Size(262, 23)
+        Me.txtResourceFreq.Size = New System.Drawing.Size(258, 23)
         Me.txtResourceFreq.TabIndex = 41
         Me.txtResourceFreq.Text = "20"
         '
@@ -646,7 +646,7 @@ Partial Class frmEditor_AutoMapper
         Me.btnStart.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnStart.Name = "btnStart"
         Me.btnStart.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnStart.Size = New System.Drawing.Size(413, 38)
+        Me.btnStart.Size = New System.Drawing.Size(412, 38)
         Me.btnStart.TabIndex = 42
         Me.btnStart.Text = "Create The World"
         '
@@ -656,7 +656,7 @@ Partial Class frmEditor_AutoMapper
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = true
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
-        Me.ClientSize = New System.Drawing.Size(1345, 334)
+        Me.ClientSize = New System.Drawing.Size(440, 334)
         Me.Controls.Add(Me.pnlResources)
         Me.Controls.Add(Me.btnStart)
         Me.Controls.Add(Me.txtResourceFreq)

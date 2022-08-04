@@ -752,19 +752,19 @@ Partial Class frmEditor_Job
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = true
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
         Me.ClientSize = New System.Drawing.Size(608, 549)
-        Me.ControlBox = false
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnRemoveClass)
         Me.Controls.Add(Me.btnAddClass)
         Me.Controls.Add(Me.DarkGroupBox2)
         Me.Controls.Add(Me.DarkGroupBox1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.Name = "frmEditor_Job"
-        Me.Text = "Class Editor"
+        Me.Text = "Job Editor"
         Me.DarkGroupBox1.ResumeLayout(false)
         Me.DarkGroupBox2.ResumeLayout(false)
         Me.DarkGroupBox2.PerformLayout

@@ -205,6 +205,7 @@ Public Class FrmEditor_Events
     End Sub
 
     Private Sub FrmEditor_Events_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Width = 946
         fraDialogue.Width = Width
         fraDialogue.Height = Height
         fraDialogue.Top = 0
