@@ -4,7 +4,7 @@ Friend Class frmEditor_Quest
     Dim SelectedTask As Integer
 
     Private Sub FrmEditor_Quest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Width = 740
+        Width = 857
 
         fraRequirements.Location = fraQuestList.Location
         fraRequirements.Visible = False

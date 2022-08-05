@@ -472,7 +472,7 @@ Partial Class frmEditor_Quest
         'chkQuestCancel
         '
         Me.chkQuestCancel.AutoSize = true
-        Me.chkQuestCancel.Location = New System.Drawing.Point(434, 23)
+        Me.chkQuestCancel.Location = New System.Drawing.Point(423, 25)
         Me.chkQuestCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.chkQuestCancel.Name = "chkQuestCancel"
         Me.chkQuestCancel.Size = New System.Drawing.Size(96, 19)
@@ -482,7 +482,7 @@ Partial Class frmEditor_Quest
         'chkRepeat
         '
         Me.chkRepeat.AutoSize = true
-        Me.chkRepeat.Location = New System.Drawing.Point(326, 23)
+        Me.chkRepeat.Location = New System.Drawing.Point(326, 25)
         Me.chkRepeat.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.chkRepeat.Name = "chkRepeat"
         Me.chkRepeat.Size = New System.Drawing.Size(89, 19)
@@ -507,15 +507,15 @@ Partial Class frmEditor_Quest
         Me.DarkLabel1.Location = New System.Drawing.Point(7, 24)
         Me.DarkLabel1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel1.Name = "DarkLabel1"
-        Me.DarkLabel1.Size = New System.Drawing.Size(76, 15)
+        Me.DarkLabel1.Size = New System.Drawing.Size(42, 15)
         Me.DarkLabel1.TabIndex = 0
-        Me.DarkLabel1.Text = "Quest Name:"
+        Me.DarkLabel1.Text = "Name:"
         '
         'DarkLabel8
         '
         Me.DarkLabel8.AutoSize = true
         Me.DarkLabel8.ForeColor = System.Drawing.Color.Red
-        Me.DarkLabel8.Location = New System.Drawing.Point(258, 535)
+        Me.DarkLabel8.Location = New System.Drawing.Point(258, 545)
         Me.DarkLabel8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel8.Name = "DarkLabel8"
         Me.DarkLabel8.Size = New System.Drawing.Size(238, 15)
@@ -550,6 +550,7 @@ Partial Class frmEditor_Quest
         Me.fraTasks.Controls.Add(Me.btnSaveTask)
         Me.fraTasks.Controls.Add(Me.Panel2)
         Me.fraTasks.Controls.Add(Me.Panel1)
+        Me.fraTasks.Controls.Add(Me.fraRequirements)
         Me.fraTasks.ForeColor = System.Drawing.Color.Gainsboro
         Me.fraTasks.Location = New System.Drawing.Point(845, 3)
         Me.fraTasks.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -917,11 +918,11 @@ Partial Class frmEditor_Quest
         Me.fraRequirements.Controls.Add(Me.rdbItemReq)
         Me.fraRequirements.Controls.Add(Me.rdbNoneReq)
         Me.fraRequirements.ForeColor = System.Drawing.Color.Gainsboro
-        Me.fraRequirements.Location = New System.Drawing.Point(845, 3)
+        Me.fraRequirements.Location = New System.Drawing.Point(1, 0)
         Me.fraRequirements.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraRequirements.Name = "fraRequirements"
         Me.fraRequirements.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraRequirements.Size = New System.Drawing.Size(611, 573)
+        Me.fraRequirements.Size = New System.Drawing.Size(480, 573)
         Me.fraRequirements.TabIndex = 6
         Me.fraRequirements.TabStop = false
         Me.fraRequirements.Text = "Requirements"
@@ -1163,17 +1164,15 @@ Partial Class frmEditor_Quest
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
-        Me.ClientSize = New System.Drawing.Size(1252, 570)
-        Me.ControlBox = false
+        Me.ClientSize = New System.Drawing.Size(841, 570)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.DarkLabel8)
         Me.Controls.Add(Me.DarkGroupBox2)
         Me.Controls.Add(Me.fraQuestList)
-        Me.Controls.Add(Me.fraRequirements)
         Me.Controls.Add(Me.fraTasks)
         Me.ForeColor = System.Drawing.Color.Gainsboro
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.Name = "frmEditor_Quest"
         Me.Text = "Quest Editor"

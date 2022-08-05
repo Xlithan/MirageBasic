@@ -205,6 +205,8 @@ Public Class FrmEditor_Events
     End Sub
 
     Private Sub FrmEditor_Events_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Width = 946
+
         fraDialogue.Width = Width
         fraDialogue.Height = Height
         fraDialogue.Top = 0
@@ -835,10 +837,6 @@ Public Class FrmEditor_Events
 #Region "Graphic"
 
     Private Sub PicGraphic_Click(sender As Object, e As EventArgs) Handles picGraphic.Click
-        fraGraphic.Top = 0
-        fraGraphic.Left = 0
-        fraGraphic.Width = Me.Width
-        fraGraphic.Height = Me.Height
         fraGraphic.BringToFront()
         fraGraphic.Visible = True
         GraphicSelType = 0

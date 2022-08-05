@@ -752,7 +752,7 @@ Module C_Graphics
     Friend Sub LoadTexture(index As Integer, texType As Byte)
 
         If texType = 1 Then 'tilesets
-            If index < 0 OrElse index > NumTileSets Then Exit Sub
+            If index <= 0 OrElse index > NumTileSets Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
             TileSetTexture(index) = New Texture(Paths.Graphics & "tilesets\" & index & GfxExt)
@@ -767,7 +767,7 @@ Module C_Graphics
             End With
 
         ElseIf texType = 2 Then 'characters
-            If index < 0 OrElse index > NumCharacters Then Exit Sub
+            If index <= 0 OrElse index > NumCharacters Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
             CharacterGfx(index) = New Texture(Paths.Graphics & "characters\" & index & GfxExt)
@@ -782,10 +782,10 @@ Module C_Graphics
             End With
 
         ElseIf texType = 3 Then 'paperdoll
-            If index < 0 OrElse index > NumPaperdolls Then Exit Sub
+            If index <= 0 OrElse index > NumPaperdolls Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            PaperDollGfx(index) = New Texture(Paths.Graphics & "Paperdolls\" & index & GfxExt)
+            PaperDollGfx(index) = New Texture(Paths.Graphics & "paperdolls\" & index & GfxExt)
             PaperDollSprite(index) = New Sprite(PaperDollGfx(index))
 
             'Cache the width and height
@@ -812,7 +812,7 @@ Module C_Graphics
             End With
 
         ElseIf texType = 5 Then 'resources
-            If index < 0 OrElse index > NumResources Then Exit Sub
+            If index <= 0 OrElse index > NumResources Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
             ResourcesGfx(index) = New Texture(Paths.Graphics & "resources\" & index & GfxExt)
@@ -830,7 +830,7 @@ Module C_Graphics
             If index <= 0 OrElse index > NumAnimations Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            AnimationsGfx(index) = New Texture(Paths.Graphics & "Animations\" & index & GfxExt)
+            AnimationsGfx(index) = New Texture(Paths.Graphics & "animations\" & index & GfxExt)
             AnimationsSprite(index) = New Sprite(AnimationsGfx(index))
 
             'Cache the width and height
@@ -842,10 +842,10 @@ Module C_Graphics
             End With
 
         ElseIf texType = 7 Then 'faces
-            If index < 0 OrElse index > NumFaces Then Exit Sub
+            If index <= 0 OrElse index > NumFaces Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            FacesGfx(index) = New Texture(Paths.Graphics & "Faces\" & index & GfxExt)
+            FacesGfx(index) = New Texture(Paths.Graphics & "faces\" & index & GfxExt)
             FacesSprite(index) = New Sprite(FacesGfx(index))
 
             'Cache the width and height
@@ -857,10 +857,10 @@ Module C_Graphics
             End With
 
         ElseIf texType = 8 Then 'fogs
-            If index < 0 OrElse index > NumFogs Then Exit Sub
+            If index <= 0 OrElse index > NumFogs Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            FogGfx(index) = New Texture(Paths.Graphics & "Fogs\" & index & GfxExt)
+            FogGfx(index) = New Texture(Paths.Graphics & "fogs\" & index & GfxExt)
             FogSprite(index) = New Sprite(FogGfx(index))
 
             'Cache the width and height
@@ -875,7 +875,7 @@ Module C_Graphics
             If index <= 0 OrElse index > NumSkillIcons Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            SkillIconsGfx(index) = New Texture(Paths.Graphics & "SkillIcons\" & index & GfxExt)
+            SkillIconsGfx(index) = New Texture(Paths.Graphics & "skillicons\" & index & GfxExt)
             SkillIconsSprite(index) = New Sprite(SkillIconsGfx(index))
 
             'Cache the width and height
@@ -890,7 +890,7 @@ Module C_Graphics
             If index < 0 OrElse index > NumFurniture Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            FurnitureGfx(index) = New Texture(Paths.Graphics & "Furniture\" & index & GfxExt)
+            FurnitureGfx(index) = New Texture(Paths.Graphics & "furniture\" & index & GfxExt)
             FurnitureSprite(index) = New Sprite(FurnitureGfx(index))
 
             'Cache the width and height
@@ -902,10 +902,10 @@ Module C_Graphics
             End With
 
         ElseIf texType = 11 Then 'projectiles
-            If index < 0 OrElse index > NumProjectiles Then Exit Sub
+            If index <= 0 OrElse index > NumProjectiles Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            ProjectileGfx(index) = New Texture(Paths.Graphics & "Projectiles\" & index & GfxExt)
+            ProjectileGfx(index) = New Texture(Paths.Graphics & "projectiles\" & index & GfxExt)
             ProjectileSprite(index) = New Sprite(ProjectileGfx(index))
 
             'Cache the width and height
@@ -917,10 +917,10 @@ Module C_Graphics
             End With
 
         ElseIf texType = 12 Then 'emotes
-            If index < 0 OrElse index > NumEmotes Then Exit Sub
+            If index <= 0 OrElse index > NumEmotes Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            EmotesGfx(index) = New Texture(Paths.Graphics & "Emotes\" & index & GfxExt)
+            EmotesGfx(index) = New Texture(Paths.Graphics & "emotes\" & index & GfxExt)
             EmotesSprite(index) = New Sprite(EmotesGfx(index))
 
             'Cache the width and height
@@ -932,10 +932,10 @@ Module C_Graphics
             End With
 
         ElseIf texType = 13 Then 'Panoramas
-            If index < 0 OrElse index > NumPanorama Then Exit Sub
+            If index <= 0 OrElse index > NumPanorama Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            PanoramasGfx(index) = New Texture(Paths.Graphics & "Panoramas\" & index & GfxExt)
+            PanoramasGfx(index) = New Texture(Paths.Graphics & "panoramas\" & index & GfxExt)
             PanoramasSprite(index) = New Sprite(PanoramasGfx(index))
 
             'Cache the width and height
@@ -946,10 +946,10 @@ Module C_Graphics
                 .TextureTimer = GetTickCount() + 100000
             End With
         ElseIf texType = 14 Then 'Parallax
-            If index < 0 OrElse index > NumParallax Then Exit Sub
+            If index <= 0 OrElse index > NumParallax Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            ParallaxGfx(index) = New Texture(Paths.Graphics & "Parallax\" & index & GfxExt)
+            ParallaxGfx(index) = New Texture(Paths.Graphics & "parallax\" & index & GfxExt)
             ParallaxSprite(index) = New Sprite(ParallaxGfx(index))
 
             'Cache the width and height

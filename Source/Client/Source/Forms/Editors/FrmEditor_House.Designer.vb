@@ -118,9 +118,9 @@ Partial Class frmEditor_House
         Me.DarkLabel6.Location = New System.Drawing.Point(7, 256)
         Me.DarkLabel6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel6.Name = "DarkLabel6"
-        Me.DarkLabel6.Size = New System.Drawing.Size(212, 15)
+        Me.DarkLabel6.Size = New System.Drawing.Size(134, 15)
         Me.DarkLabel6.TabIndex = 10
-        Me.DarkLabel6.Text = "Max Pieces of Furniture (0 for no max):"
+        Me.DarkLabel6.Text = "Max Pieces of Furniture:"
         '
         'nudPrice
         '
@@ -261,15 +261,15 @@ Partial Class frmEditor_House
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = true
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
         Me.ClientSize = New System.Drawing.Size(566, 428)
-        Me.ControlBox = false
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.DarkGroupBox2)
         Me.Controls.Add(Me.DarkGroupBox1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.Name = "frmEditor_House"
         Me.Text = "House Editor"

@@ -427,9 +427,9 @@ Partial Class frmEditor_Item
         Me.DarkLabel4.Location = New System.Drawing.Point(7, 50)
         Me.DarkLabel4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel4.Name = "DarkLabel4"
-        Me.DarkLabel4.Size = New System.Drawing.Size(61, 15)
+        Me.DarkLabel4.Size = New System.Drawing.Size(34, 15)
         Me.DarkLabel4.TabIndex = 8
-        Me.DarkLabel4.Text = "Item Type:"
+        Me.DarkLabel4.Text = "Type:"
         '
         'picItem
         '
@@ -498,9 +498,9 @@ Partial Class frmEditor_Item
         Me.DarkLabel1.Location = New System.Drawing.Point(7, 18)
         Me.DarkLabel1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel1.Name = "DarkLabel1"
-        Me.DarkLabel1.Size = New System.Drawing.Size(69, 15)
+        Me.DarkLabel1.Size = New System.Drawing.Size(42, 15)
         Me.DarkLabel1.TabIndex = 0
-        Me.DarkLabel1.Text = "Item Name:"
+        Me.DarkLabel1.Text = "Name:"
         '
         'fraSkill
         '
@@ -648,7 +648,7 @@ Partial Class frmEditor_Item
         Me.DarkGroupBox3.Controls.Add(Me.cmbProjectile)
         Me.DarkGroupBox3.Controls.Add(Me.DarkLabel24)
         Me.DarkGroupBox3.ForeColor = System.Drawing.Color.Gainsboro
-        Me.DarkGroupBox3.Location = New System.Drawing.Point(139, 193)
+        Me.DarkGroupBox3.Location = New System.Drawing.Point(137, 192)
         Me.DarkGroupBox3.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DarkGroupBox3.Name = "DarkGroupBox3"
         Me.DarkGroupBox3.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -721,7 +721,7 @@ Partial Class frmEditor_Item
         'picPaperdoll
         '
         Me.picPaperdoll.BackColor = System.Drawing.Color.Black
-        Me.picPaperdoll.Location = New System.Drawing.Point(7, 193)
+        Me.picPaperdoll.Location = New System.Drawing.Point(8, 192)
         Me.picPaperdoll.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.picPaperdoll.Name = "picPaperdoll"
         Me.picPaperdoll.Size = New System.Drawing.Size(125, 55)
@@ -983,7 +983,7 @@ Partial Class frmEditor_Item
         Me.btnBasics.Location = New System.Drawing.Point(253, 9)
         Me.btnBasics.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnBasics.Name = "btnBasics"
-        Me.btnBasics.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.btnBasics.Padding = New System.Windows.Forms.Padding(6)
         Me.btnBasics.Size = New System.Drawing.Size(88, 27)
         Me.btnBasics.TabIndex = 3
         Me.btnBasics.Text = "Basics"
@@ -993,7 +993,7 @@ Partial Class frmEditor_Item
         Me.btnRequirements.Location = New System.Drawing.Point(348, 9)
         Me.btnRequirements.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnRequirements.Name = "btnRequirements"
-        Me.btnRequirements.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.btnRequirements.Padding = New System.Windows.Forms.Padding(6)
         Me.btnRequirements.Size = New System.Drawing.Size(107, 27)
         Me.btnRequirements.TabIndex = 4
         Me.btnRequirements.Text = "Requirements"
@@ -1233,7 +1233,7 @@ Partial Class frmEditor_Item
         Me.btnSave.Location = New System.Drawing.Point(9, 472)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.btnSave.Padding = New System.Windows.Forms.Padding(6)
         Me.btnSave.Size = New System.Drawing.Size(229, 27)
         Me.btnSave.TabIndex = 6
         Me.btnSave.Text = "Save"
@@ -1243,7 +1243,7 @@ Partial Class frmEditor_Item
         Me.btnDelete.Location = New System.Drawing.Point(9, 505)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.btnDelete.Padding = New System.Windows.Forms.Padding(6)
         Me.btnDelete.Size = New System.Drawing.Size(229, 27)
         Me.btnDelete.TabIndex = 7
         Me.btnDelete.Text = "Delete"
@@ -1253,7 +1253,7 @@ Partial Class frmEditor_Item
         Me.btnCancel.Location = New System.Drawing.Point(9, 539)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.btnCancel.Padding = New System.Windows.Forms.Padding(6)
         Me.btnCancel.Size = New System.Drawing.Size(229, 27)
         Me.btnCancel.TabIndex = 8
         Me.btnCancel.Text = "Cancel"
@@ -1379,9 +1379,9 @@ Partial Class frmEditor_Item
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = true
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
         Me.ClientSize = New System.Drawing.Size(790, 575)
-        Me.ControlBox = false
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnSave)
@@ -1392,7 +1392,7 @@ Partial Class frmEditor_Item
         Me.Controls.Add(Me.fraEquipment)
         Me.Controls.Add(Me.fraFurniture)
         Me.Controls.Add(Me.fraRequirements)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.Name = "frmEditor_Item"
         Me.Text = "Item Editor"

@@ -133,9 +133,9 @@ Partial Class FrmEditor_Animation
         Me.DarkLabel2.Location = New System.Drawing.Point(19, 66)
         Me.DarkLabel2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel2.Name = "DarkLabel2"
-        Me.DarkLabel2.Size = New System.Drawing.Size(103, 15)
+        Me.DarkLabel2.Size = New System.Drawing.Size(44, 15)
         Me.DarkLabel2.TabIndex = 24
-        Me.DarkLabel2.Text = "Animation Sound:"
+        Me.DarkLabel2.Text = "Sound:"
         '
         'DarkGroupBox4
         '
@@ -239,7 +239,7 @@ Partial Class FrmEditor_Animation
         'picSprite1
         '
         Me.picSprite1.BackColor = System.Drawing.Color.Black
-        Me.picSprite1.Location = New System.Drawing.Point(248, 9)
+        Me.picSprite1.Location = New System.Drawing.Point(256, 12)
         Me.picSprite1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.picSprite1.Name = "picSprite1"
         Me.picSprite1.Size = New System.Drawing.Size(239, 190)
@@ -348,7 +348,7 @@ Partial Class FrmEditor_Animation
         'picSprite0
         '
         Me.picSprite0.BackColor = System.Drawing.Color.Black
-        Me.picSprite0.Location = New System.Drawing.Point(248, 10)
+        Me.picSprite0.Location = New System.Drawing.Point(256, 12)
         Me.picSprite0.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.picSprite0.Name = "picSprite0"
         Me.picSprite0.Size = New System.Drawing.Size(239, 190)
@@ -370,12 +370,12 @@ Partial Class FrmEditor_Animation
         '
         Me.DarkLabel1.AutoSize = true
         Me.DarkLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel1.Location = New System.Drawing.Point(19, 35)
+        Me.DarkLabel1.Location = New System.Drawing.Point(21, 32)
         Me.DarkLabel1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel1.Name = "DarkLabel1"
-        Me.DarkLabel1.Size = New System.Drawing.Size(101, 15)
+        Me.DarkLabel1.Size = New System.Drawing.Size(42, 15)
         Me.DarkLabel1.TabIndex = 0
-        Me.DarkLabel1.Text = "Animation Name:"
+        Me.DarkLabel1.Text = "Name:"
         '
         'btnSave
         '
@@ -411,15 +411,15 @@ Partial Class FrmEditor_Animation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = true
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
         Me.ClientSize = New System.Drawing.Size(758, 586)
-        Me.ControlBox = false
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.DarkGroupBox2)
         Me.Controls.Add(Me.DarkGroupBox1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.Name = "FrmEditor_Animation"
         Me.Text = "Animation Editor"

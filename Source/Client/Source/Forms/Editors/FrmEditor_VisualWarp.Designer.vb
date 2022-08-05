@@ -38,7 +38,7 @@ Partial Class frmEditor_VisualWarp
         Me.btnWarpOK.Location = New System.Drawing.Point(14, 582)
         Me.btnWarpOK.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnWarpOK.Name = "btnWarpOK"
-        Me.btnWarpOK.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.btnWarpOK.Padding = New System.Windows.Forms.Padding(6)
         Me.btnWarpOK.Size = New System.Drawing.Size(195, 27)
         Me.btnWarpOK.TabIndex = 4
         Me.btnWarpOK.Text = "Ok"
@@ -114,14 +114,13 @@ Partial Class frmEditor_VisualWarp
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(60,Byte),Integer), CType(CType(63,Byte),Integer), CType(CType(65,Byte),Integer))
         Me.ClientSize = New System.Drawing.Size(919, 622)
-        Me.ControlBox = false
         Me.Controls.Add(Me.lblSelY)
         Me.Controls.Add(Me.lblSelX)
         Me.Controls.Add(Me.pnlPreview)
         Me.Controls.Add(Me.btnWarpOK)
         Me.Controls.Add(Me.DarkLabel15)
         Me.Controls.Add(Me.lstMaps)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.Name = "frmEditor_VisualWarp"
         Me.Text = "Visual Warp"

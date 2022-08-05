@@ -2019,7 +2019,6 @@ Partial Class FrmEditor_MapEditor
         Me.AutoSize = true
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(585, 600)
-        Me.ControlBox = false
         Me.Controls.Add(Me.tabpages)
         Me.Controls.Add(Me.ToolStrip)
         Me.Controls.Add(Me.pnlAttributes)

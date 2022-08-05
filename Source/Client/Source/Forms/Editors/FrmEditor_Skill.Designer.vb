@@ -798,9 +798,9 @@ Partial Class frmEditor_Skill
         Me.DarkLabel2.Location = New System.Drawing.Point(7, 50)
         Me.DarkLabel2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel2.Name = "DarkLabel2"
-        Me.DarkLabel2.Size = New System.Drawing.Size(58, 15)
+        Me.DarkLabel2.Size = New System.Drawing.Size(34, 15)
         Me.DarkLabel2.TabIndex = 2
-        Me.DarkLabel2.Text = "Skill Type:"
+        Me.DarkLabel2.Text = "Type:"
         '
         'txtName
         '
@@ -820,20 +820,20 @@ Partial Class frmEditor_Skill
         Me.DarkLabel1.Location = New System.Drawing.Point(7, 18)
         Me.DarkLabel1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel1.Name = "DarkLabel1"
-        Me.DarkLabel1.Size = New System.Drawing.Size(66, 15)
+        Me.DarkLabel1.Size = New System.Drawing.Size(42, 15)
         Me.DarkLabel1.TabIndex = 0
-        Me.DarkLabel1.Text = "Skill Name:"
+        Me.DarkLabel1.Text = "Name:"
         '
         'frmEditor_Skill
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = true
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
         Me.ClientSize = New System.Drawing.Size(952, 463)
-        Me.ControlBox = false
         Me.Controls.Add(Me.DarkGroupBox2)
         Me.Controls.Add(Me.DarkGroupBox1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.Name = "frmEditor_Skill"
         Me.Text = "Skill Editor"

@@ -36,174 +36,174 @@
         ''' <summary> Returns graphics directory </summary>
         Public ReadOnly Property Graphics As String
             Get
-                Return Contents & "/Graphics/"
+                Return Contents & "\Graphics\"
             End Get
         End Property
 
         ''' <summary> Returns gui directory </summary>
         Public ReadOnly Property Gui As String
             Get
-                Return Contents & "/Gui/"
+                Return Contents & "\Gui\"
             End Get
         End Property
 
         ''' <summary> Returns music directory </summary>
         Public ReadOnly Property Music As String
             Get
-                Return Contents & "/Music/"
+                Return Contents & "\Music\"
             End Get
         End Property
 
         ''' <summary> Returns sounds directory </summary>
         Public ReadOnly Property Sounds As String
             Get
-                Return Contents & "/Sounds/"
+                Return Contents & "\Sounds\"
             End Get
         End Property
 
-        ''' <summary> Returns accounts directory </summary>
+        ''' <summary> Returns accounts directory <\summary>
         Public ReadOnly Property Accounts As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "/Database/Accounts/"
+                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Accounts\"
             End Get
         End Property
 
-        ''' <summary> Returns account file </summary>
+        ''' <summary> Returns account file <\summary>
         Public Function Account(index As Integer) As String
             Return Accounts & index & ".dat"
         End Function
 
-        ''' <summary> Returns animations directory </summary>
+        ''' <summary> Returns animations directory <\summary>
         Public ReadOnly Property Animations As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "/Database/Animations/"
+                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Animations\"
             End Get
         End Property
 
-        ''' <summary> Returns animation file </summary>
+        ''' <summary> Returns animation file <\summary>
         Public Function Animation(index As Integer) As String
             Return Animations & index & ".dat"
         End Function
 
-        ''' <summary> Returns items directory </summary>
+        ''' <summary> Returns items directory <\summary>
         Public ReadOnly Property Items As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "/Database/Items/"
+                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Items\"
             End Get
         End Property
 
-        ''' <summary> Returns item file </summary>
+        ''' <summary> Returns item file <\summary>
         Public Function Item(index As Integer) As String
             Return Items & index & ".dat"
         End Function
 
-        ''' <summary> Returns logs directory </summary>
+        ''' <summary> Returns logs directory <\summary>
         Public ReadOnly Property Logs As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "/Logs/"
+                Return AppDomain.CurrentDomain.BaseDirectory & "\Logs\"
             End Get
         End Property
 
-        ''' <summary> Returns maps directory </summary>
+        ''' <summary> Returns maps directory <\summary>
         Public ReadOnly Property Maps As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "/Database/Maps/"
+                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Maps\"
             End Get
         End Property
 
-        ''' <summary> Returns map file </summary>
+        ''' <summary> Returns map file <\summary>
         Public Function Map(index As Integer) As String
             Return Maps & index & ".dat"
         End Function
 
-        ''' <summary> Returns npcs directory </summary>
+        ''' <summary> Returns npcs directory <\summary>
         Public ReadOnly Property Npcs As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "/Database/Npcs/"
+                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Npcs\"
             End Get
         End Property
 
-        ''' <summary> Returns npc file </summary>
+        ''' <summary> Returns npc file <\summary>
         Public Function Npc(index As Integer) As String
             Return Npcs() & index & ".dat"
         End Function
 
-        ''' <summary> Returns pets directory </summary>
+        ''' <summary> Returns pets directory <\summary>
         Public ReadOnly Property Pets As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "/Database/Pets/"
+                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Pets\"
             End Get
         End Property
 
-        ''' <summary> Returns pet file </summary>
+        ''' <summary> Returns pet file <\summary>
         Public Function Pet(index As Integer) As String
             Return Pets() & index & ".dat"
         End Function
 
-        ''' <summary> Returns projectiles directory </summary>
+        ''' <summary> Returns projectiles directory <\summary>
         Public ReadOnly Property Projectiles As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "/Database/Projectiles/"
+                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Projectiles\"
             End Get
         End Property
 
-        ''' <summary> Returns projectile file </summary>
+        ''' <summary> Returns projectile file <\summary>
         Public Function Projectile(index As Integer) As String
             Return Projectiles() & index & ".dat"
         End Function
 
-        ''' <summary> Returns quests directory </summary>
+        ''' <summary> Returns quests directory <\summary>
         Public ReadOnly Property Quests As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "/Database/Quests/"
+                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Quests\"
             End Get
         End Property
 
-        ''' <summary> Returns quest file </summary>
+        ''' <summary> Returns quest file <\summary>
         Public Function Quest(index As Integer) As String
             Return Quests() & index & ".dat"
         End Function
 
-        ''' <summary> Returns recipes directory </summary>
+        ''' <summary> Returns recipes directory <\summary>
         Public ReadOnly Property Recipes As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "/Database/Recipes/"
+                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Recipes\"
             End Get
         End Property
 
-        ''' <summary> Returns recipe file </summary>
+        ''' <summary> Returns recipe file <\summary>
         Public Function Recipe(index As Integer) As String
             Return Recipes() & index & ".dat"
         End Function
 
-        ''' <summary> Returns resources directory </summary>
+        ''' <summary> Returns resources directory <\summary>
         Public ReadOnly Property Resources As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "/Database/Resources/"
+                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Resources\"
             End Get
         End Property
 
-        ''' <summary> Returns resource file </summary>
+        ''' <summary> Returns resource file <\summary>
         Public Function Resource(index As Integer) As String
             Return Resources() & index & ".dat"
         End Function
 
-        ''' <summary> Returns shops directory </summary>
+        ''' <summary> Returns shops directory <\summary>
         Public ReadOnly Property Shops As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "/Database/Shops/"
+                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Shops\"
             End Get
         End Property
 
-        ''' <summary> Returns shop file </summary>
+        ''' <summary> Returns shop file <\summary>
         Public Function Shop(index As Integer) As String
             Return Shops() & index & ".dat"
         End Function
 
-        ''' <summary> Returns skills directory </summary>
+        ''' <summary> Returns skills directory <\summary>
         Public ReadOnly Property Skills As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "/Database/Skills/"
+                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Skills\"
             End Get
         End Property
 
