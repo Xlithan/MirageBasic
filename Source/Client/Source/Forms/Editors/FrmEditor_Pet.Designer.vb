@@ -702,13 +702,13 @@ Partial Class frmEditor_Pet
         Me.DarkLabel1.Location = New System.Drawing.Point(7, 29)
         Me.DarkLabel1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel1.Name = "DarkLabel1"
-        Me.DarkLabel1.Size = New System.Drawing.Size(62, 15)
+        Me.DarkLabel1.Size = New System.Drawing.Size(42, 15)
         Me.DarkLabel1.TabIndex = 0
-        Me.DarkLabel1.Text = "Pet Name:"
+        Me.DarkLabel1.Text = "Name:"
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(259, 554)
+        Me.btnSave.Location = New System.Drawing.Point(252, 554)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Padding = New System.Windows.Forms.Padding(6)
