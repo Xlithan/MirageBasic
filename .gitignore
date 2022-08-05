@@ -40,3 +40,6 @@ Source/Server/My Project/app.manifest
 *.v2
 *.v1
 *.lock
+*.opendb
+*.db-shm
+*.db-wal
