@@ -1002,6 +1002,8 @@ Public Class FrmEditor_MapEditor
         InMapEditor = False
         Visible = False
         GettingMap = True
+        ' unload the form
+        FrmEditor_Events.Dispose()
     End Sub
 
     Public Sub MapEditorSend()
@@ -1272,6 +1274,10 @@ Public Class FrmEditor_MapEditor
             Me.picMapKey.BackgroundImage = Drawing.Image.FromFile(Paths.Graphics & "items\" & itemnum & GfxExt)
         End If
 
+    End Sub
+
+    Private Sub FrmEditor_MapEditor_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        MapEditorCancel()
     End Sub
 
     Friend Sub DrawTileOutline()
