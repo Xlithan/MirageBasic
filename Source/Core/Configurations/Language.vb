@@ -29,7 +29,7 @@ Public Class LanguageDef
         Public News As String = "Welcome To the MirageBasic Client.
                                  This Is a free open source VB.Net game engine!
                                  For help Or support please visit our site at
-                                 http://ascensionforums.com."
+                                 http://miragebasic.net."
 
         ' Login Panel
         Public Login As String = "Login"
@@ -268,7 +268,7 @@ Public Module modLanguage
 
         If Not File.Exists(cf) Then
             File.Create(cf).Dispose()
-            SaveXml(Of LanguageDef)(cf, New LanguageDef)
-        End If : Language = LoadXml(Of LanguageDef)(cf)
+            'SaveXml(Of LanguageDef)(cf, New LanguageDef)
+        End If ': Language = LoadXml(Of LanguageDef)(cf)
     End Sub
 End Module
