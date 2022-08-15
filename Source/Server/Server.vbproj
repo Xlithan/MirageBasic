@@ -95,10 +95,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Asfw-Networking" Version="1.0.0" />
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Asfw-Networking\Asfw.csproj" />
     <ProjectReference Include="..\Core\Core.vbproj" />
   </ItemGroup>
 </Project>

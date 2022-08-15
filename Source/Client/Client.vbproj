@@ -899,10 +899,11 @@
     <Content Include="Resources\ScreenShot.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\DarkUI\DarkUI\DarkUI.csproj" />
     <ProjectReference Include="..\Core\Core.vbproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Asfw-Networking" Version="1.0.0" />
+    <PackageReference Include="DarkUI-NET6" Version="1.0.0" />
     <PackageReference Include="SFML.Audio" Version="2.5.0" />
     <PackageReference Include="SFML.Graphics" Version="2.5.0" />
   </ItemGroup>

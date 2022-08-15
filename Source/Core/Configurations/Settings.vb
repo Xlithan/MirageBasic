@@ -44,7 +44,7 @@ Public Module modSettings
 
         If Not File.Exists(cf) Then
             File.Create(cf).Dispose()
-            SaveXml(Of SettingsDef)(cf, New SettingsDef)
+            'SaveXml(Of SettingsDef)(cf, New SettingsDef)
         End If
     End Sub
 
@@ -54,7 +54,7 @@ Public Module modSettings
             Directory.CreateDirectory(cf)
         End If : cf = cf & "\Settings.xml"
 
-        SaveXml(Of SettingsDef)(cf, Settings)
+        'SaveXml(Of SettingsDef)(cf, Settings)
     End Sub
 
 End Module
