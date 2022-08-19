@@ -2752,9 +2752,6 @@ newlist:
 
                         g.DrawRectangle(Pens.Red, New Rectangle(GraphicSelX * PicX, GraphicSelY * PicY, GraphicSelX2 * PicX, GraphicSelY2 * PicY))
 
-                        FrmEditor_Events.picGraphicSel.Width = targetBitmap.Width
-                        FrmEditor_Events.picGraphicSel.Height = targetBitmap.Height
-                        FrmEditor_Events.picGraphicSel.Visible = True
                         FrmEditor_Events.picGraphicSel.BackgroundImage = targetBitmap
                         FrmEditor_Events.picGraphic.BackgroundImage = targetBitmap
 
@@ -2802,17 +2799,10 @@ newlist:
                         Dim destRect As New Rectangle(0, 0, targetBitmap.Width, targetBitmap.Height)     'This is the rectangle in the target graphic we want to render to
 
                         g.DrawImage(sourceBitmap, destRect, sourceRect, GraphicsUnit.Pixel)
-
                         g.DrawRectangle(Pens.Red, New Rectangle(GraphicSelX * PicX, GraphicSelY * PicY, (GraphicSelX2) * PicX, (GraphicSelY2) * PicY))
-
                         g.Dispose()
 
-                        FrmEditor_Events.picGraphicSel.Width = targetBitmap.Width
-                        FrmEditor_Events.picGraphicSel.Height = targetBitmap.Height
-                        FrmEditor_Events.picGraphicSel.Visible = True
                         FrmEditor_Events.picGraphicSel.BackgroundImage = targetBitmap
-                        ' frmEditor_Events.pnlGraphicSelect.Width = targetBitmap.Width
-                        'frmEditor_Events.pnlGraphicSelect.Height = targetBitmap.Height
                     Else
                         FrmEditor_Events.picGraphicSel.BackgroundImage = Nothing
                         Exit Sub
@@ -2835,11 +2825,8 @@ newlist:
                             Dim destRect As New Rectangle(0, 0, targetBitmap.Width / 4, targetBitmap.Height / 4)     'This is the rectangle in the target graphic we want to render to
 
                             g.DrawImage(sourceBitmap, destRect, sourceRect, GraphicsUnit.Pixel)
-
                             g.Dispose()
 
-                            FrmEditor_Events.picGraphic.Width = targetBitmap.Width
-                            FrmEditor_Events.picGraphic.Height = targetBitmap.Height
                             FrmEditor_Events.picGraphic.BackgroundImage = targetBitmap
                         Else
                             FrmEditor_Events.picGraphic.BackgroundImage = Nothing
@@ -2884,11 +2871,8 @@ newlist:
                             Dim destRect As New Rectangle(dRect.Left, dRect.Top, dRect.Right, dRect.Bottom)     'This is the rectangle in the target graphic we want to render to
 
                             g.DrawImage(sourceBitmap, destRect, sourceRect, GraphicsUnit.Pixel)
-
                             g.Dispose()
 
-                            FrmEditor_Events.picGraphic.Width = targetBitmap.Width
-                            FrmEditor_Events.picGraphic.Height = targetBitmap.Height
                             FrmEditor_Events.picGraphic.BackgroundImage = targetBitmap
                         End If
                 End Select
