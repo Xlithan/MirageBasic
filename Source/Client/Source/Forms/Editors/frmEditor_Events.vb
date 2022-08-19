@@ -2577,10 +2577,6 @@ Public Class FrmEditor_Events
         fraOpenShop.Visible = False
     End Sub
 
-    Private Sub PicGraphicSel_Click(sender As Object, e As EventArgs) Handles picGraphicSel.Click
-
-    End Sub
-
 #End Region
 
 #End Region
