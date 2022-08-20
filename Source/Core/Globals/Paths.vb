@@ -25,7 +25,7 @@
         ''' <summary> Returns configuration directory </summary>
         Public ReadOnly Property Config As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory + "Configuration\"
+                Return AppDomain.CurrentDomain.BaseDirectory & "Configuration\"
             End Get
         End Property
 
