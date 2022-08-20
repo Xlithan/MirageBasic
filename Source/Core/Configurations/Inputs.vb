@@ -1,6 +1,9 @@
-﻿Imports System.IO
+﻿Imports System.Data
+Imports System.Diagnostics.Metrics
+Imports System.IO
+Imports System.Runtime.ConstrainedExecution
 Imports System.Windows.Forms
-Imports Asfw.IO.Serialization
+Imports System.Xml.Serialization
 
 Public Class InputsDef
     Public Class Input
@@ -129,23 +132,32 @@ Public Module modInputs
 
     Public Sub LoadInputs()
         Dim cf As String = Paths.Config()
-        If Not Directory.Exists(cf) Then
-            Directory.CreateDirectory(cf)
-        End If : cf = cf & "\Inputs.xml"
+        Dim x As New XmlSerializer(GetType(InputsDef), New XmlRootAttribute("Inputs"))
+
+        Directory.CreateDirectory(cf)
+        cf += "Inputs.xml"
 
         If Not File.Exists(cf) Then
             File.Create(cf).Dispose()
-            'SaveXml(Of InputsDef)(cf, New InputsDef)
-        End If ': Inputs = LoadXml(Of InputsDef)(cf)
+            Dim writer = New StreamWriter(cf)
+            x.Serialize(writer, Inputs)
+            writer.Close
+        End If
+
+        Dim reader = New StreamReader(cf)
+        Inputs = x.Deserialize(reader)
+        reader.Close
     End Sub
 
     Public Sub SaveInputs()
         Dim cf As String = Paths.Config()
-        If Not Directory.Exists(cf) Then
-            Directory.CreateDirectory(cf)
-        End If : cf = cf & "\Inputs.xml"
 
-        'SaveXml(Of InputsDef)(cf, Inputs)
+        Directory.CreateDirectory(cf)
+        cf += "Inputs.xml"
+
+        Dim x As New XmlSerializer(GetType(InputsDef), New XmlRootAttribute("Inputs"))
+        Dim writer = New StreamWriter(cf)
+        
+        x.Serialize(writer, Inputs)
     End Sub
-
 End Module

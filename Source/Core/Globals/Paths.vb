@@ -4,28 +4,28 @@
         ''' <summary> Returns app directory </summary>
         Public ReadOnly Property Local As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "/"
+                Return AppDomain.CurrentDomain.BaseDirectory
             End Get
         End Property
 
         ''' <summary> Returns contents directory </summary>
         Public ReadOnly Property Contents As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "/Contents/"
+                Return AppDomain.CurrentDomain.BaseDirectory & "Contents\"
             End Get
         End Property
 
         ''' <summary> Returns database directory </summary>
         Public ReadOnly Property Database As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "/Database/"
+                Return AppDomain.CurrentDomain.BaseDirectory & "Database\"
             End Get
         End Property
 
         ''' <summary> Returns configuration directory </summary>
         Public ReadOnly Property Config As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "/Configuration/"
+                Return AppDomain.CurrentDomain.BaseDirectory & "Configuration\"
             End Get
         End Property
 

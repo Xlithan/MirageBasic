@@ -1,9 +1,11 @@
 ﻿Imports System.IO
-Imports Asfw.IO.Serialization
+Imports System.Xml.Serialization
+Imports MirageBasic.Core
 
 Public Class LanguageDef
 
     Public Load As New LoadDef
+
     Public Class LoadDef
 
         Public Loading As String = "Loading..."
@@ -140,6 +142,7 @@ Public Class LanguageDef
     End Class
 
     Public ItemDescription As New ItemDescriptionDef
+
     Public Class ItemDescriptionDef
 
         Public NotAvailable As String = "Not Available"
@@ -234,7 +237,7 @@ Public Class LanguageDef
     Public Character As New CharacterDef
     Public Class CharacterDef
 
-        Public Name As String = "Name : "
+        Public PName As String = "Name : "
         Public ClassType As String = "Class : "
         Public Level As String = "Lv : "
         Public Exp As String = "Exp : "
@@ -261,14 +264,21 @@ Public Module modLanguage
     Public Language As New LanguageDef
 
     Public Sub LoadLanguage()
-        Dim cf As String = Paths.Config() & "\Languages\"
-        If Not Directory.Exists(cf) Then
-            Directory.CreateDirectory(cf)
-        End If : cf = cf & Settings.Language & ".xml"
+        Dim cf As String = Paths.Config()
+        Dim x As New XmlSerializer(GetType(LanguageDef), New XmlRootAttribute("Language"))
+
+        Directory.CreateDirectory(cf)
+        cf += "language.xml"
 
         If Not File.Exists(cf) Then
             File.Create(cf).Dispose()
-            'SaveXml(Of LanguageDef)(cf, New LanguageDef)
-        End If ': Language = LoadXml(Of LanguageDef)(cf)
+            Dim writer = New StreamWriter(cf)
+            x.Serialize(writer, Language)
+            writer.Close
+        End If
+
+        Dim reader = New StreamReader(cf)
+        Language = x.Deserialize(reader)
+        reader.Close
     End Sub
 End Module
