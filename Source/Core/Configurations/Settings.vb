@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 Imports System.Xml.Serialization
-Imports Asfw.IO.Serialization
+Imports MirageBasic.Core
 
 Public Class SettingsDef
 
@@ -38,23 +38,33 @@ Public Module modSettings
 
     Public Sub LoadSettings()
         Dim cf As String = Paths.Config()
-        If Not Directory.Exists(cf) Then
-            Directory.CreateDirectory(cf)
-        End If : cf = cf & "/Settings.xml"
+        Dim x As New XmlSerializer(GetType(SettingsDef), New XmlRootAttribute("Settings"))
+
+        Directory.CreateDirectory(cf)
+        cf += "Settings.xml"
 
         If Not File.Exists(cf) Then
             File.Create(cf).Dispose()
-            'SaveXml(Of SettingsDef)(cf, New SettingsDef)
+            Dim writer = New StreamWriter(cf)
+            x.Serialize(writer, Settings)
+            writer.Close
         End If
+
+        Dim reader = New StreamReader(cf)
+        Settings = x.Deserialize(reader)
+        reader.Close
     End Sub
 
     Public Sub SaveSettings()
         Dim cf As String = Paths.Config()
-        If Not Directory.Exists(cf) Then
-            Directory.CreateDirectory(cf)
-        End If : cf = cf & "\Settings.xml"
 
-        'SaveXml(Of SettingsDef)(cf, Settings)
+        Directory.CreateDirectory(cf)
+        cf += "Settings.xml"
+
+        Dim x As New XmlSerializer(GetType(SettingsDef), New XmlRootAttribute("Settings"))
+        Dim writer = New StreamWriter(cf)
+        
+        x.Serialize(writer, Settings)
     End Sub
 
 End Module
