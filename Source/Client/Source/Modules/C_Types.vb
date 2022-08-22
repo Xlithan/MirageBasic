@@ -12,19 +12,19 @@ Module C_Types2
     'Mapreport
     Friend MapNames(MAX_MAPS) As String
 
-    Friend Structure ChatRec
+    Public Structure ChatRec
         Dim Text As String
         Dim Color As Integer
         Dim Y As Byte
     End Structure
 
-    Friend Structure SkillAnim
+    Public Structure SkillAnim
         Dim Skillnum As Integer
         Dim Timer As Integer
         Dim FramePointer As Integer
     End Structure
 
-    Friend Structure ChatBubbleRec
+    Public Structure ChatBubbleRec
         Dim Msg As String
         Dim Colour As Integer
         Dim Target As Integer
@@ -33,13 +33,13 @@ Module C_Types2
         Dim Active As Boolean
     End Structure
 
-    Friend Structure MapResourceRec
+    Public Structure MapResourceRec
         Dim X As Integer
         Dim Y As Integer
         Dim ResourceState As Byte
     End Structure
 
-    Friend Structure ActionMsgRec
+    Public Structure ActionMsgRec
         Dim Message As String
         Dim Created As Integer
         Dim Type As Integer
@@ -50,7 +50,7 @@ Module C_Types2
         Dim Timer As Integer
     End Structure
 
-    Friend Structure BloodRec
+    Public Structure BloodRec
         Dim Sprite As Integer
         Dim Timer As Integer
         Dim X As Integer

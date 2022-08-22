@@ -8,7 +8,7 @@ Module S_Npc
     Sub SpawnAllMapNpcs()
         Dim i As Integer
 
-        For i = 1 To MAX_CACHED_MAPS
+        For i = 0 To MAX_CACHED_MAPS
             SpawnMapNpcs(i)
         Next
 
@@ -17,7 +17,7 @@ Module S_Npc
     Sub SpawnMapNpcs(mapNum As Integer)
         Dim i As Integer
 
-        For i = 1 To MAX_MAP_NPCS
+        For i = 0 To MAX_MAP_NPCS
             SpawnNpc(i, mapNum)
         Next
 
@@ -50,8 +50,8 @@ Module S_Npc
             MapNpc(mapNum).Npc(mapNpcNum).Dir = Int(Rnd() * 4)
 
             'Check if theres a spawn tile for the specific npc
-            For x = 0 To Map(mapNum).MaxX
-                For y = 0 To Map(mapNum).MaxY
+            For X = 0 To Map(mapNum).MaxX
+                For Y = 0 To Map(mapNum).MaxY
                     If Map(mapNum).Tile(x, y).Type = TileType.NpcSpawn Then
                         If Map(mapNum).Tile(x, y).Data1 = mapNpcNum Then
                             MapNpc(mapNum).Npc(mapNpcNum).X = x
@@ -86,8 +86,8 @@ Module S_Npc
 
             ' Didn't spawn, so now we'll just try to find a free tile
             If Not spawned Then
-                For x = 0 To Map(mapNum).MaxX
-                    For y = 0 To Map(mapNum).MaxY
+                For X = 0 To Map(mapNum).MaxX
+                    For Y = 0 To Map(mapNum).MaxY
                         If NpcTileIsOpen(mapNum, x, y) Then
                             MapNpc(mapNum).Npc(mapNpcNum).X = x
                             MapNpc(mapNum).Npc(mapNpcNum).Y = y
@@ -108,7 +108,7 @@ Module S_Npc
 
                 AddDebug("Recieved SMSG: SSpawnNpc")
 
-                For i = 1 To VitalType.Count - 1
+                For i = 0 To VitalType.Count - 1
                     buffer.WriteInt32(MapNpc(mapNum).Npc(mapNpcNum).Vital(i))
                 Next
 
@@ -130,7 +130,7 @@ Module S_Npc
         NpcTileIsOpen = True
 
         If PlayersOnMap(mapNum) Then
-            For LoopI = 1 To Socket.HighIndex
+            For LoopI = 0 To Socket.HighIndex
                 If GetPlayerMap(LoopI) = mapNum AndAlso GetPlayerX(LoopI) = x AndAlso GetPlayerY(LoopI) = y Then
                     NpcTileIsOpen = False
                     Exit Function
@@ -138,7 +138,7 @@ Module S_Npc
             Next
         End If
 
-        For LoopI = 1 To MAX_MAP_NPCS
+        For LoopI = 0 To MAX_MAP_NPCS
             If MapNpc(mapNum).Npc(LoopI).Num > 0 AndAlso MapNpc(mapNum).Npc(LoopI).X = x AndAlso MapNpc(mapNum).Npc(LoopI).Y = y Then
                 NpcTileIsOpen = False
                 Exit Function
@@ -180,7 +180,7 @@ Module S_Npc
                     End If
 
                     ' Check to make sure that there is not a player in the way
-                    For i = 1 To GetPlayersOnline()
+                    For i = 0 To GetPlayersOnline()
                         If IsPlaying(i) Then
                             If (GetPlayerMap(i) = mapNum) AndAlso (GetPlayerX(i) = MapNpc(mapNum).Npc(MapNpcNum).X) AndAlso (GetPlayerY(i) = MapNpc(mapNum).Npc(MapNpcNum).Y - 1) Then
                                 CanNpcMove = False
@@ -190,7 +190,7 @@ Module S_Npc
                     Next
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 1 To MAX_MAP_NPCS
+                    For i = 0 To MAX_MAP_NPCS
                         If (i <> MapNpcNum) AndAlso (MapNpc(mapNum).Npc(i).Num > 0) AndAlso (MapNpc(mapNum).Npc(i).X = MapNpc(mapNum).Npc(MapNpcNum).X) AndAlso (MapNpc(mapNum).Npc(i).Y = MapNpc(mapNum).Npc(MapNpcNum).Y - 1) Then
                             CanNpcMove = False
                             Exit Function
@@ -213,7 +213,7 @@ Module S_Npc
                     End If
 
                     ' Check to make sure that there is not a player in the way
-                    For i = 1 To GetPlayersOnline()
+                    For i = 0 To GetPlayersOnline()
                         If IsPlaying(i) Then
                             If (GetPlayerMap(i) = mapNum) AndAlso (GetPlayerX(i) = MapNpc(mapNum).Npc(MapNpcNum).X) AndAlso (GetPlayerY(i) = MapNpc(mapNum).Npc(MapNpcNum).Y + 1) Then
                                 CanNpcMove = False
@@ -223,7 +223,7 @@ Module S_Npc
                     Next
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 1 To MAX_MAP_NPCS
+                    For i = 0 To MAX_MAP_NPCS
                         If (i <> MapNpcNum) AndAlso (MapNpc(mapNum).Npc(i).Num > 0) AndAlso (MapNpc(mapNum).Npc(i).X = MapNpc(mapNum).Npc(MapNpcNum).X) AndAlso (MapNpc(mapNum).Npc(i).Y = MapNpc(mapNum).Npc(MapNpcNum).Y + 1) Then
                             CanNpcMove = False
                             Exit Function
@@ -246,7 +246,7 @@ Module S_Npc
                     End If
 
                     ' Check to make sure that there is not a player in the way
-                    For i = 1 To GetPlayersOnline()
+                    For i = 0 To GetPlayersOnline()
                         If IsPlaying(i) Then
                             If (GetPlayerMap(i) = mapNum) AndAlso (GetPlayerX(i) = MapNpc(mapNum).Npc(MapNpcNum).X - 1) AndAlso (GetPlayerY(i) = MapNpc(mapNum).Npc(MapNpcNum).Y) Then
                                 CanNpcMove = False
@@ -256,7 +256,7 @@ Module S_Npc
                     Next
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 1 To MAX_MAP_NPCS
+                    For i = 0 To MAX_MAP_NPCS
                         If (i <> MapNpcNum) AndAlso (MapNpc(mapNum).Npc(i).Num > 0) AndAlso (MapNpc(mapNum).Npc(i).X = MapNpc(mapNum).Npc(MapNpcNum).X - 1) AndAlso (MapNpc(mapNum).Npc(i).Y = MapNpc(mapNum).Npc(MapNpcNum).Y) Then
                             CanNpcMove = False
                             Exit Function
@@ -279,7 +279,7 @@ Module S_Npc
                     End If
 
                     ' Check to make sure that there is not a player in the way
-                    For i = 1 To GetPlayersOnline()
+                    For i = 0 To GetPlayersOnline()
                         If IsPlaying(i) Then
                             If (GetPlayerMap(i) = mapNum) AndAlso (GetPlayerX(i) = MapNpc(mapNum).Npc(MapNpcNum).X + 1) AndAlso (GetPlayerY(i) = MapNpc(mapNum).Npc(MapNpcNum).Y) Then
                                 CanNpcMove = False
@@ -289,7 +289,7 @@ Module S_Npc
                     Next
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 1 To MAX_MAP_NPCS
+                    For i = 0 To MAX_MAP_NPCS
                         If (i <> MapNpcNum) AndAlso (MapNpc(mapNum).Npc(i).Num > 0) AndAlso (MapNpc(mapNum).Npc(i).X = MapNpc(mapNum).Npc(MapNpcNum).X + 1) AndAlso (MapNpc(mapNum).Npc(i).Y = MapNpc(mapNum).Npc(MapNpcNum).Y) Then
                             CanNpcMove = False
                             Exit Function
@@ -415,12 +415,12 @@ Module S_Npc
 
             ' check if PLAYER can avoid the attack
             If CanPlayerDodge(index) Then
-                SendActionMsg(mapNum, "Dodge!", ColorType.Pink, 1, (Player(index).Character(TempPlayer(index).CurChar).X * 32), (Player(index).Character(TempPlayer(index).CurChar).Y * 32))
+                SendActionMsg(mapNum, "Dodge!", ColorType.Pink, 1, (Player(index).X * 32), (Player(index).Y * 32))
                 Exit Sub
             End If
 
             If CanPlayerParry(index) Then
-                SendActionMsg(mapNum, "Parry!", ColorType.Pink, 1, (Player(index).Character(TempPlayer(index).CurChar).X * 32), (Player(index).Character(TempPlayer(index).CurChar).Y * 32))
+                SendActionMsg(mapNum, "Parry!", ColorType.Pink, 1, (Player(index).X * 32), (Player(index).Y * 32))
                 Exit Sub
             End If
 
@@ -428,7 +428,7 @@ Module S_Npc
             Damage = GetNpcDamage(npcnum)
 
             If CanPlayerBlockHit(index) Then
-                SendActionMsg(mapNum, "Block!", ColorType.Pink, 1, (Player(index).Character(TempPlayer(index).CurChar).X * 32), (Player(index).Character(TempPlayer(index).CurChar).Y * 32))
+                SendActionMsg(mapNum, "Block!", ColorType.Pink, 1, (Player(index).X * 32), (Player(index).Y * 32))
                 Exit Sub
             Else
 
@@ -630,13 +630,13 @@ Module S_Npc
 
             If GetPlayerLevel(Victim) >= 10 Then
 
-                For z = 1 To MAX_INV
+                For z = 0 To MAX_INV
                     If GetPlayerInvItemNum(Victim, z) > 0 Then
                         InvCount = InvCount + 1
                     End If
                 Next
 
-                For z = 1 To EquipmentType.Count - 1
+                For z = 0 To EquipmentType.Count - 1
                     If GetPlayerEquipment(Victim, z) > 0 Then
                         EqCount = EqCount + 1
                     End If
@@ -648,7 +648,7 @@ Module S_Npc
                 If z > InvCount Then
                     z = z - InvCount
 
-                    For x = 1 To EquipmentType.Count - 1
+                    For x = 0 To EquipmentType.Count - 1
 
                         If GetPlayerEquipment(Victim, x) > 0 Then
                             j = j + 1
@@ -664,7 +664,7 @@ Module S_Npc
                         End If
                     Next
                 Else
-                    For x = 1 To MAX_INV
+                    For x = 0 To MAX_INV
                         If GetPlayerInvItemNum(Victim, x) > 0 Then
                             j = j + 1
 
@@ -773,7 +773,7 @@ Module S_Npc
 
     Friend Sub KnockBackNpc(index As Integer, NpcNum As Integer, Optional IsSkill As Integer = 0)
         If IsSkill > 0 Then
-            For i = 1 To Skill(IsSkill).KnockBackTiles
+            For i = 0 To Skill(IsSkill).KnockBackTiles
                 If CanNpcMove(GetPlayerMap(index), NpcNum, GetPlayerDir(index)) Then
                     NpcMove(GetPlayerMap(index), NpcNum, GetPlayerDir(index), MovementType.Walking)
                 End If
@@ -782,7 +782,7 @@ Module S_Npc
             MapNpc(GetPlayerMap(index)).Npc(NpcNum).StunTimer = GetTimeMs()
         Else
             If Item(GetPlayerEquipment(index, EquipmentType.Weapon)).KnockBack = 1 Then
-                For i = 1 To Item(GetPlayerEquipment(index, EquipmentType.Weapon)).KnockBackTiles
+                For i = 0 To Item(GetPlayerEquipment(index, EquipmentType.Weapon)).KnockBackTiles
                     If CanNpcMove(GetPlayerMap(index), NpcNum, GetPlayerDir(index)) Then
                         NpcMove(GetPlayerMap(index), NpcNum, GetPlayerDir(index), MovementType.Walking)
                     End If
@@ -800,7 +800,7 @@ Module S_Npc
 
         If MapNpc(mapNum).Npc(MapNpcNum).SkillBuffer > 0 Then Exit Function
 
-        For i = 1 To MAX_NPC_SKILLS
+        For i = 0 To MAX_NPC_SKILLS
             If Npc(MapNpc(mapNum).Npc(MapNpcNum).Num).Skill(i) > 0 Then
                 SkillList.Add(Npc(MapNpc(mapNum).Npc(MapNpcNum).Num).Skill(i))
             End If
@@ -1031,7 +1031,7 @@ Module S_Npc
 
         AddDebug("Sent SMSG: SMapNpcData")
 
-        For i = 1 To MAX_MAP_NPCS
+        For i = 0 To MAX_MAP_NPCS
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).Num)
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).X)
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).Y)
@@ -1079,7 +1079,7 @@ Module S_Npc
         Npc(NpcNum).Animation = buffer.ReadInt32()
         Npc(NpcNum).AttackSay = buffer.ReadString()
         Npc(NpcNum).Behaviour = buffer.ReadInt32()
-        For i = 1 To 5
+        For i = 0 To 5
             Npc(NpcNum).DropChance(i) = buffer.ReadInt32()
             Npc(NpcNum).DropItem(i) = buffer.ReadInt32()
             Npc(NpcNum).DropItemValue(i) = buffer.ReadInt32()
@@ -1100,7 +1100,7 @@ Module S_Npc
 
         Npc(NpcNum).QuestNum = buffer.ReadInt32()
 
-        For i = 1 To MAX_NPC_SKILLS
+        For i = 0 To MAX_NPC_SKILLS
             Npc(NpcNum).Skill(i) = buffer.ReadInt32()
         Next
 
@@ -1118,7 +1118,7 @@ Module S_Npc
     Sub SendNpcs(index As Integer)
         Dim i As Integer
 
-        For i = 1 To MAX_NPCS
+        For i = 0 To MAX_NPCS
             If Len(Trim$(Npc(i).Name)) > 0 Then
                 SendUpdateNpcTo(index, i)
             End If
@@ -1138,7 +1138,7 @@ Module S_Npc
         buffer.WriteString((Npc(NpcNum).AttackSay))
         buffer.WriteInt32(Npc(NpcNum).Behaviour)
 
-        For i = 1 To 5
+        For i = 0 To 5
             buffer.WriteInt32(Npc(NpcNum).DropChance(i))
             buffer.WriteInt32(Npc(NpcNum).DropItem(i))
             buffer.WriteInt32(Npc(NpcNum).DropItemValue(i))
@@ -1159,7 +1159,7 @@ Module S_Npc
 
         buffer.WriteInt32(Npc(NpcNum).QuestNum)
 
-        For i = 1 To MAX_NPC_SKILLS
+        For i = 0 To MAX_NPC_SKILLS
             buffer.WriteInt32(Npc(NpcNum).Skill(i))
         Next
 
@@ -1182,7 +1182,7 @@ Module S_Npc
         buffer.WriteString((Npc(NpcNum).AttackSay))
         buffer.WriteInt32(Npc(NpcNum).Behaviour)
 
-        For i = 1 To 5
+        For i = 0 To 5
             buffer.WriteInt32(Npc(NpcNum).DropChance(i))
             buffer.WriteInt32(Npc(NpcNum).DropItem(i))
             buffer.WriteInt32(Npc(NpcNum).DropItemValue(i))
@@ -1203,7 +1203,7 @@ Module S_Npc
 
         buffer.WriteInt32(Npc(NpcNum).QuestNum)
 
-        For i = 1 To MAX_NPC_SKILLS
+        For i = 0 To MAX_NPC_SKILLS
             buffer.WriteInt32(Npc(NpcNum).Skill(i))
         Next
 
@@ -1223,7 +1223,7 @@ Module S_Npc
 
         AddDebug("Sent SMSG: SMapNpcData")
 
-        For i = 1 To MAX_MAP_NPCS
+        For i = 0 To MAX_MAP_NPCS
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).Num)
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).X)
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).Y)
@@ -1271,7 +1271,7 @@ Module S_Npc
 
         AddDebug("Sent SMSG: SMapNpcVitals")
 
-        For i = 1 To VitalType.Count - 1
+        For i = 0 To VitalType.Count - 1
             buffer.WriteInt32(MapNpc(mapNum).Npc(MapNpcNum).Vital(i))
         Next
 

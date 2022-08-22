@@ -13,7 +13,7 @@ Friend Module modCrafting
     Friend Const RecipeType_Wood As Byte = 1
     Friend Const RecipeType_Metal As Byte = 2
 
-    Friend Structure RecipeRec
+    Public Structure RecipeRec
         Dim Name As String
         Dim RecipeType As Byte
         Dim MakeItemNum As Integer
@@ -22,7 +22,7 @@ Friend Module modCrafting
         Dim CreateTime As Byte
     End Structure
 
-    Friend Structure IngredientsRec
+    Public Structure IngredientsRec
         Dim ItemNum As Integer
         Dim Value As Integer
     End Structure
@@ -34,7 +34,7 @@ Friend Module modCrafting
     Sub CheckRecipes()
         Dim i As Integer
 
-        For i = 1 To MAX_RECIPE
+        For i = 0 To MAX_RECIPE
             If Not File.Exists(Paths.Recipe(i)) Then
                 SaveRecipe(i)
                 Application.DoEvents()
@@ -46,7 +46,7 @@ Friend Module modCrafting
     Sub SaveRecipes()
         Dim i As Integer
 
-        For i = 1 To MAX_RECIPE
+        For i = 0 To MAX_RECIPE
             SaveRecipe(i)
             Application.DoEvents()
         Next
@@ -66,7 +66,7 @@ Friend Module modCrafting
         writer.WriteInt32(Recipe(RecipeNum).MakeItemNum)
         writer.WriteInt32(Recipe(RecipeNum).MakeItemAmount)
 
-        For i = 1 To MAX_INGREDIENT
+        For i = 0 To MAX_INGREDIENT
             writer.WriteInt32(Recipe(RecipeNum).Ingredients(i).ItemNum)
             writer.WriteInt32(Recipe(RecipeNum).Ingredients(i).Value)
         Next
@@ -79,7 +79,7 @@ Friend Module modCrafting
     Sub LoadRecipes()
         Dim i As Integer
 
-        For i = 1 To MAX_RECIPE
+        For i = 0 To MAX_RECIPE
             LoadRecipe(i)
             Application.DoEvents()
         Next
@@ -102,7 +102,7 @@ Friend Module modCrafting
         Recipe(RecipeNum).MakeItemAmount = reader.ReadInt32()
 
         ReDim Recipe(RecipeNum).Ingredients(MAX_INGREDIENT)
-        For i = 1 To MAX_INGREDIENT
+        For i = 0 To MAX_INGREDIENT
             Recipe(RecipeNum).Ingredients(i).ItemNum = reader.ReadInt32()
             Recipe(RecipeNum).Ingredients(i).Value = reader.ReadInt32()
         Next
@@ -114,7 +114,7 @@ Friend Module modCrafting
     Sub ClearRecipes()
         Dim i As Integer
 
-        For i = 1 To MAX_RECIPE
+        For i = 0 To MAX_RECIPE
             ClearRecipe(i)
             Application.DoEvents()
         Next
@@ -171,7 +171,7 @@ Friend Module modCrafting
         Recipe(n).MakeItemNum = buffer.ReadInt32
         Recipe(n).MakeItemAmount = buffer.ReadInt32
 
-        For i = 1 To MAX_INGREDIENT
+        For i = 0 To MAX_INGREDIENT
             Recipe(n).Ingredients(i).ItemNum = buffer.ReadInt32()
             Recipe(n).Ingredients(i).Value = buffer.ReadInt32()
         Next
@@ -222,7 +222,7 @@ Friend Module modCrafting
     Sub SendRecipes(index As Integer)
         Dim i As Integer
 
-        For i = 1 To MAX_RECIPE
+        For i = 0 To MAX_RECIPE
 
             If Len(Trim$(Recipe(i).Name)) > 0 Then
                 SendUpdateRecipeTo(index, i)
@@ -245,7 +245,7 @@ Friend Module modCrafting
         buffer.WriteInt32(Recipe(RecipeNum).MakeItemNum)
         buffer.WriteInt32(Recipe(RecipeNum).MakeItemAmount)
 
-        For i = 1 To MAX_INGREDIENT
+        For i = 0 To MAX_INGREDIENT
             buffer.WriteInt32(Recipe(RecipeNum).Ingredients(i).ItemNum)
             buffer.WriteInt32(Recipe(RecipeNum).Ingredients(i).Value)
         Next
@@ -270,7 +270,7 @@ Friend Module modCrafting
         buffer.WriteInt32(Recipe(RecipeNum).MakeItemNum)
         buffer.WriteInt32(Recipe(RecipeNum).MakeItemAmount)
 
-        For i = 1 To MAX_INGREDIENT
+        For i = 0 To MAX_INGREDIENT
             buffer.WriteInt32(Recipe(RecipeNum).Ingredients(i).ItemNum)
             buffer.WriteInt32(Recipe(RecipeNum).Ingredients(i).Value)
         Next
@@ -290,8 +290,8 @@ Friend Module modCrafting
 
         AddDebug("Sent SMSG: SSendPlayerRecipe")
 
-        For i = 1 To MAX_RECIPE
-            buffer.WriteInt32(Player(index).Character(TempPlayer(index).CurChar).RecipeLearned(i))
+        For i = 0 To MAX_RECIPE
+            buffer.WriteInt32(Player(index).RecipeLearned(i))
         Next
 
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
@@ -332,7 +332,7 @@ Friend Module modCrafting
     Friend Function CheckLearnedRecipe(index As Integer, RecipeNum As Integer) As Boolean
         CheckLearnedRecipe = False
 
-        If Player(index).Character(TempPlayer(index).CurChar).RecipeLearned(RecipeNum) = 1 Then
+        If Player(index).RecipeLearned(RecipeNum) = 1 Then
             CheckLearnedRecipe = True
         End If
     End Function
@@ -341,7 +341,7 @@ Friend Module modCrafting
         If CheckLearnedRecipe(index, RecipeNum) Then ' we know this one allready
             PlayerMsg(index, "You allready know this recipe!", ColorType.BrightRed)
         Else ' lets learn it
-            Player(index).Character(TempPlayer(index).CurChar).RecipeLearned(RecipeNum) = 1
+            Player(index).RecipeLearned(RecipeNum) = 1
 
             PlayerMsg(index, "You learned the " & Recipe(RecipeNum).Name & " recipe!", ColorType.BrightGreen)
 
@@ -371,7 +371,7 @@ Friend Module modCrafting
 
         'ok, we made the item, give and take the shit
         If GiveInvItem(index, Recipe(TempPlayer(index).CraftRecipe).MakeItemNum, Recipe(TempPlayer(index).CraftRecipe).MakeItemAmount, True) Then
-            For i = 1 To MAX_INGREDIENT
+            For i = 0 To MAX_INGREDIENT
                 TakeInvItem(index, Recipe(TempPlayer(index).CraftRecipe).Ingredients(i).ItemNum, Recipe(TempPlayer(index).CraftRecipe).Ingredients(i).Value)
             Next
             PlayerMsg(index, "You created " & Trim(Item(Recipe(TempPlayer(index).CraftRecipe).MakeItemNum).Name) & " X " & Recipe(TempPlayer(index).CraftRecipe).MakeItemAmount, ColorType.BrightGreen)

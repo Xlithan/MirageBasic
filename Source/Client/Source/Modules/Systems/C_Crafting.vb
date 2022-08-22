@@ -41,7 +41,7 @@ Friend Module C_Crafting
     Friend CraftTimerEnabled As Boolean
     Friend CraftTimer As Integer
 
-    Friend Structure RecipeStruct
+    Public Structure RecipeStruct
         Dim Name As String
         Dim RecipeType As Byte
         Dim MakeItemNum As Integer
@@ -50,7 +50,7 @@ Friend Module C_Crafting
         Dim CreateTime As Byte
     End Structure
 
-    Friend Structure IngredientsStruct
+    Public Structure IngredientsStruct
         Dim ItemNum As Integer
         Dim Value As Integer
     End Structure
@@ -64,7 +64,7 @@ Friend Module C_Crafting
 
         ReDim Recipe(MAX_RECIPE)
 
-        For i = 1 To MAX_RECIPE
+       For i = 0 To MAX_RECIPE
             ClearRecipe(i)
         Next
 
@@ -80,7 +80,7 @@ Friend Module C_Crafting
     Friend Sub ClearChanged_Recipe()
         Dim i As Integer
 
-        For i = 1 To MAX_RECIPE
+       For i = 0 To MAX_RECIPE
             RecipeChanged(i) = Nothing
         Next
 
@@ -103,7 +103,7 @@ Friend Module C_Crafting
         Recipe(n).MakeItemNum = buffer.ReadInt32
         Recipe(n).MakeItemAmount = buffer.ReadInt32
 
-        For i = 1 To MAX_INGREDIENT
+       For i = 0 To MAX_INGREDIENT
             Recipe(n).Ingredients(i).ItemNum = buffer.ReadInt32()
             Recipe(n).Ingredients(i).Value = buffer.ReadInt32()
         Next
@@ -121,7 +121,7 @@ Friend Module C_Crafting
     Sub Packet_SendPlayerRecipe(ByRef data() As Byte)
         Dim i As Integer
         Dim buffer As New ByteStream(data)
-        For i = 1 To MAX_RECIPE
+       For i = 0 To MAX_RECIPE
             Player(Myindex).RecipeLearned(i) = buffer.ReadInt32
         Next
 
@@ -181,7 +181,7 @@ Friend Module C_Crafting
         buffer.WriteInt32(Recipe(recipeNum).MakeItemNum)
         buffer.WriteInt32(Recipe(recipeNum).MakeItemAmount)
 
-        For i = 1 To MAX_INGREDIENT
+       For i = 0 To MAX_INGREDIENT
             buffer.WriteInt32(Recipe(recipeNum).Ingredients(i).ItemNum)
             buffer.WriteInt32(Recipe(recipeNum).Ingredients(i).Value)
         Next
@@ -206,7 +206,7 @@ Friend Module C_Crafting
         If Player(Myindex).RecipeLearned(recipeindex) = 0 Then Exit Sub
 
         'enough ingredients?
-        For i = 1 To MAX_INGREDIENT
+       For i = 0 To MAX_INGREDIENT
             If Recipe(recipeindex).Ingredients(i).ItemNum > 0 AndAlso HasItem(Myindex, Recipe(recipeindex).Ingredients(i).ItemNum) < (amount * Recipe(recipeindex).Ingredients(i).Value) Then
                 AddText(Language.Crafting.NotEnough, ColorType.Red)
                 Exit Sub
@@ -257,7 +257,7 @@ Friend Module C_Crafting
             .lstIndex.Items.Clear()
 
             ' Add the names
-            For i = 1 To MAX_RECIPE
+           For i = 0 To MAX_RECIPE
                 .lstIndex.Items.Add(i & ": " & Trim$(Recipe(i).Name))
             Next
 
@@ -267,7 +267,7 @@ Friend Module C_Crafting
 
             .cmbMakeItem.Items.Add("None")
             .cmbIngredient.Items.Add("None")
-            For i = 1 To MAX_ITEMS
+           For i = 0 To MAX_ITEMS
                 .cmbMakeItem.Items.Add(Trim$(Item(i).Name))
                 .cmbIngredient.Items.Add(Trim$(Item(i).Name))
             Next
@@ -315,7 +315,7 @@ Friend Module C_Crafting
     Friend Sub RecipeEditorOk()
         Dim i As Integer
 
-        For i = 1 To MAX_RECIPE
+       For i = 0 To MAX_RECIPE
             If RecipeChanged(i) Then
                 SendSaveRecipe(i)
             End If
@@ -330,7 +330,7 @@ Friend Module C_Crafting
         Dim i As Integer
         frmEditor_Recipe.lstIngredients.Items.Clear()
 
-        For i = 1 To MAX_INGREDIENT
+       For i = 0 To MAX_INGREDIENT
             With Recipe(Editorindex).Ingredients(i)
                 ' if none, show as none
                 If .ItemNum <= 0 AndAlso .Value = 0 Then
@@ -354,7 +354,7 @@ Friend Module C_Crafting
 
         x = 1
 
-        For i = 1 To MAX_RECIPE
+       For i = 0 To MAX_RECIPE
             If ChkKnownOnlyChecked = True Then
                 If Player(Myindex).RecipeLearned(i) = 1 Then
                     RecipeNames(x) = Trim$(Recipe(i).Name)
@@ -388,7 +388,7 @@ Friend Module C_Crafting
         LblProductNameText = Item(Recipe(recipeindex).MakeItemNum).Name
         LblProductAmountText = "X 1"
 
-        For i = 1 To MAX_INGREDIENT
+       For i = 0 To MAX_INGREDIENT
             If Recipe(recipeindex).Ingredients(i).ItemNum > 0 Then
                 PicMaterialIndex(i) = Item(Recipe(recipeindex).Ingredients(i).ItemNum).Pic
                 LblMaterialName(i) = Item(Recipe(recipeindex).Ingredients(i).ItemNum).Name
@@ -407,7 +407,7 @@ Friend Module C_Crafting
 
         GetRecipeIndex = 0
 
-        For i = 1 To MAX_RECIPE
+       For i = 0 To MAX_RECIPE
             If Trim$(Recipe(i).Name) = Trim$(recipeName) Then
                 GetRecipeIndex = i
                 Exit For
@@ -426,7 +426,7 @@ Friend Module C_Crafting
         y = 10
 
         'draw recipe names
-        For i = 1 To MAX_RECIPE
+       For i = 0 To MAX_RECIPE
             If Len(Trim$(RecipeNames(i))) > 0 Then
                 DrawText(CraftPanelX + 12, CraftPanelY + y, Trim$(RecipeNames(i)), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
                 y = y + 20
@@ -473,7 +473,7 @@ Friend Module C_Crafting
 
         y = 107
 
-        For i = 1 To MAX_INGREDIENT
+       For i = 0 To MAX_INGREDIENT
             If PicMaterialIndex(i) > 0 Then
                 If ItemsGfxInfo(PicMaterialIndex(i)).IsLoaded = False Then
                     LoadTexture(PicMaterialIndex(i), 4)
@@ -500,7 +500,7 @@ Friend Module C_Crafting
         'reset the panel's info
         ReDim RecipeNames(MAX_RECIPE)
 
-        For i = 1 To MAX_RECIPE
+       For i = 0 To MAX_RECIPE
             RecipeNames(i) = ""
         Next
 
@@ -512,7 +512,7 @@ Friend Module C_Crafting
         LblProductNameText = Language.Crafting.NotSelected
         LblProductAmountText = "0"
 
-        For i = 1 To MAX_INGREDIENT
+       For i = 0 To MAX_INGREDIENT
             PicMaterialIndex(i) = 0
             LblMaterialName(i) = ""
             LblMaterialAmount(i) = ""

@@ -39,8 +39,8 @@ Module C_AutoMap
     'Distance between mountains and the map limit, so the player can walk freely when teleport between maps
     Private Const MountainBorder As Byte = 5
 
-    Friend Tile(TilePrefab.Count - 1) As TileStruct
-    Friend Detail() As DetailRec
+    Public Tile(TilePrefab.Count - 1) As TileStruct
+    Public Detail() As DetailStruct
     Friend ResourcesNum As String
     Public Resources() As String
     'Private ActualMap As Integer
@@ -76,12 +76,12 @@ Module C_AutoMap
         Common
     End Enum
 
-    Structure DetailRec
+   Public Structure DetailStruct
         Dim DetailBase As Byte
         Dim Tile As TileStruct
     End Structure
 
-    Structure MapOrientationRec
+   Public Structure MapOrientationStruct
         Dim Prefab As Integer
         Dim TileStartX As Integer
         Dim TileStartY As Integer
@@ -104,10 +104,10 @@ Module C_AutoMap
         Dim cf = Paths.Contents & "AutoMapper.ini"
 
         ReDim Tile(TilePrefab.Count - 1)
-        For Prefab = 1 To TilePrefab.Count - 1
+        For Prefab = 0 To TilePrefab.Count - 1
 
             ReDim Tile(Prefab).Layer(LayerType.Count - 1)
-            For Layer = 1 To LayerType.Count - 1
+            For Layer = 0 To LayerType.Count - 1
                 Tile(Prefab).Layer(Layer).Tileset = Val(Ini.Read(cf, "Prefab" & Prefab, "Layer" & Layer & "Tileset"))
                 Tile(Prefab).Layer(Layer).X = Val(Ini.Read(cf, "Prefab" & Prefab, "Layer" & Layer & "X"))
                 Tile(Prefab).Layer(Layer).Y = Val(Ini.Read(cf, "Prefab" & Prefab, "Layer" & Layer & "Y"))
@@ -177,7 +177,7 @@ Module C_AutoMap
         Dim cf = Paths.Contents & "AutoMapper.ini"
         Ini.Write(cf, "Resources", "ResourcesNum", buffer.ReadString())
 
-        For Prefab = 1 To TilePrefab.Count - 1
+        For Prefab = 0 To TilePrefab.Count - 1
             ReDim Tile(Prefab).Layer(LayerType.Count - 1)
 
             Layer = buffer.ReadInt32()
@@ -224,8 +224,8 @@ Module C_AutoMap
         'send xml info
         buffer.WriteString((Ini.Read(cf, "Resources", "ResourcesNum")))
 
-        For Prefab = 1 To TilePrefab.Count - 1
-            For Layer = 1 To LayerType.Count - 1
+        For Prefab = 0 To TilePrefab.Count - 1
+            For Layer = 0 To LayerType.Count - 1
                 If Val(Ini.Read(cf, "Prefab" & Prefab, "Layer" & Layer & "Tileset")) > 0 Then
                     buffer.WriteInt32(Layer)
                     buffer.WriteInt32(Val(Ini.Read(cf, "Prefab" & Prefab, "Layer" & Layer & "Tileset")))

@@ -1,26 +1,15 @@
 ﻿Imports MirageBasic.Core
 
 Module S_Instances
-
-    Structure InstancedMap
-        Dim OriginalMap As Integer
-    End Structure
-
     'Consts
     Friend Const INSTANCED_MAP_MASK As Integer = 16777216 '1 << 24
-
     Friend Const MAP_NUMBER_MASK As Integer = INSTANCED_MAP_MASK - 1
-
-    Friend Const MAX_INSTANCED_MAPS As Integer = 100
-    Friend Const MAX_CACHED_MAPS As Integer = MAX_MAPS + MAX_INSTANCED_MAPS
     Friend Const INSTANCED_MAP_SUFFIX As String = " (Instanced)"
-
-    Friend InstancedMaps(MAX_INSTANCED_MAPS) As InstancedMap
 
     Friend Sub ClearInstancedMaps()
         Dim i As Integer
 
-        For i = 1 To MAX_INSTANCED_MAPS
+        For i = 0 To MAX_INSTANCED_MAPS
             CacheResources(i + MAX_MAPS)
             InstancedMaps(i).OriginalMap = 0
         Next
@@ -29,7 +18,7 @@ Module S_Instances
     Friend Function FindFreeInstanceMapSlot() As Integer
         Dim i As Integer
 
-        For i = 1 To MAX_INSTANCED_MAPS
+        For i = 0 To MAX_INSTANCED_MAPS
             If InstancedMaps(i).OriginalMap = 0 Then
                 FindFreeInstanceMapSlot = i
                 Exit Function
@@ -61,7 +50,7 @@ Module S_Instances
 
         'Copy Map Item Data
 
-        For i = 1 To MAX_MAP_ITEMS
+        For i = 0 To MAX_MAP_ITEMS
             MapItem(slot + MAX_MAPS, i) = MapItem(mapNum, i)
         Next
 
@@ -81,11 +70,11 @@ Module S_Instances
 
         ClearMap(Slot + MAX_MAPS)
 
-        For x = 1 To MAX_MAP_NPCS
+        For x = 0 To MAX_MAP_NPCS
             ClearMapNpc(x, Slot + MAX_MAPS)
         Next
 
-        For x = 1 To MAX_MAP_ITEMS
+        For x = 0 To MAX_MAP_ITEMS
             ClearMapItem(x, Slot + MAX_MAPS)
         Next
         InstancedMaps(Slot).OriginalMap = 0

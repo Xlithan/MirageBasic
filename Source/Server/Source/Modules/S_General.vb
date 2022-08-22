@@ -73,63 +73,58 @@ Module S_General
         ReDim HouseConfig(MAX_HOUSES)
 
         For i = 0 To MAX_CACHED_MAPS
-            For x = 0 To MAX_MAP_NPCS
+            For X = 0 To MAX_MAP_NPCS
                 ReDim MapNpc(i).Npc(x).Vital(VitalType.Count)
             Next
         Next
 
         ReDim Bank(MAX_PLAYERS)
-        ReDim Job(MAX_JOB)
+        ReDim Job(MAX_JOBS)
 
-        For i = 1 To MAX_PLAYERS
+        For i = 0 To MAX_PLAYERS
             ReDim Bank(i).Item(MAX_BANK)
             ReDim Bank(i).ItemRand(MAX_BANK)
-            For x = 1 To MAX_BANK
+            For x = 0 To MAX_BANK
                 ReDim Bank(i).ItemRand(x).Stat(StatType.Count - 1)
             Next
         Next
 
         ReDim Player(MAX_PLAYERS)
+        ReDim TempPlayer(MAX_PLAYERS)
 
-        For i = 1 To MAX_PLAYERS
-            'multi char
-            ReDim Player(i).Character(MAX_CHARS)
-            For x = 1 To MAX_CHARS
-                ReDim Player(i).Character(x).Switches(MAX_SWITCHES)
-                ReDim Player(i).Character(x).Variables(MAX_VARIABLES)
-                ReDim Player(i).Character(x).Vital(VitalType.Count - 1)
-                ReDim Player(i).Character(x).Stat(StatType.Count - 1)
-                ReDim Player(i).Character(x).Equipment(EquipmentType.Count - 1)
-                ReDim Player(i).Character(x).Inv(MAX_INV)
-                ReDim Player(i).Character(x).Skill(MAX_PLAYER_SKILLS)
-                ReDim Player(i).Character(x).PlayerQuest(MAX_QUESTS)
+        For i = 0 To MAX_PLAYERS
+            ReDim Player(i).Switches(MAX_SWITCHES)
+            ReDim Player(i).Variables(MAX_VARIABLES)
+            ReDim Player(i).Vital(VitalType.Count - 1)
+            ReDim Player(i).Stat(StatType.Count - 1)
+            ReDim Player(i).Equipment(EquipmentType.Count - 1)
+            ReDim Player(i).Inv(MAX_INV)
+            ReDim Player(i).Skill(MAX_PLAYER_SKILLS)
+            ReDim Player(i).PlayerQuest(MAX_QUESTS)
 
-                ReDim Player(i).Character(x).RandEquip(EquipmentType.Count - 1)
-                ReDim Player(i).Character(x).RandInv(MAX_INV)
-                For y = 1 To EquipmentType.Count - 1
-                    ReDim Player(i).Character(x).RandEquip(y).Stat(StatType.Count - 1)
-                Next
-                For y = 1 To MAX_INV
-                    ReDim Player(i).Character(x).RandInv(y).Stat(StatType.Count - 1)
-                Next
+            ReDim Player(i).RandEquip(EquipmentType.Count - 1)
+            ReDim Player(i).RandInv(MAX_INV)
+            For y = 0 To EquipmentType.Count - 1
+                ReDim Player(i).RandEquip(y).Stat(StatType.Count - 1)
+            Next
+            For y = 0 To MAX_INV
+                ReDim Player(i).RandInv(y).Stat(StatType.Count - 1)
             Next
         Next
 
-        ReDim TempPlayer(MAX_PLAYERS)
-
-        For i = 1 To MAX_PLAYERS
+        For i = 0 To MAX_PLAYERS
             ReDim TempPlayer(i).SkillCd(MAX_PLAYER_SKILLS)
             ReDim TempPlayer(i).PetSkillCd(4)
         Next
 
-        For i = 1 To MAX_PLAYERS
+        For i = 0 To MAX_PLAYERS
             ReDim TempPlayer(i).TradeOffer(MAX_INV)
         Next
 
         LoadTilePrefab()
 
-        ReDim Job(MAX_JOB)
-        For i = 0 To MAX_JOB
+        ReDim Job(MAX_JOBS)
+        For i = 0 To MAX_JOBS
             ReDim Job(i).Stat(StatType.Count - 1)
             ReDim Job(i).StartItem(5)
             ReDim Job(i).StartValue(5)
@@ -183,7 +178,7 @@ Module S_General
         ' Init all the player sockets
         Console.WriteLine("Initializing player array...")
 
-        For x = 1 To MAX_PLAYERS
+        For x = 0 To MAX_PLAYERS
             ClearPlayer(x)
         Next
 
@@ -267,7 +262,7 @@ Module S_General
         SaveAllPlayersOnline()
 
         Console.WriteLine("Unloading players...")
-        For i As Integer = 1 To MAX_PLAYERS
+        For i As Integer = 0 To MAX_PLAYERS
             SendLeftGame(i)
             LeftGame(i)
         Next

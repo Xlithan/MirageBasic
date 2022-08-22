@@ -71,12 +71,10 @@ Public Class LanguageDef
         Public SendNewCharacter As String = "Connected, sending character data..."
         Public SendRegister As String = "Connected, sending registration information..."
         Public ConnectToServer As String = "Connecting To server...( {0} )"
-
     End Class
 
     Public Game As New GameDef
     Public Class GameDef
-
         Public MapName As String = "Map : "
         Public Time As String = "Time : "
         Public Fps As String = "Fps : "

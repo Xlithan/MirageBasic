@@ -11,7 +11,7 @@ Module C_Parties
 
     Friend Party As PartyRec
 
-    Friend Structure PartyRec
+    Public Structure PartyRec
         Dim Leader As Integer
         Dim Member() As Integer
         Dim MemberCount As Integer
@@ -63,7 +63,7 @@ Module C_Parties
 
         ' carry on otherwise
         Party.Leader = buffer.ReadInt32
-        For I = 1 To MAX_PARTY_MEMBERS
+        For I = 0 To MAX_PARTY_MEMBERS
             Party.Member(I) = buffer.ReadInt32
         Next
         Party.MemberCount = buffer.ReadInt32
@@ -78,7 +78,7 @@ Module C_Parties
         playerNum = buffer.ReadInt32
 
         ' find the party number
-        For I = 1 To MAX_PARTY_MEMBERS
+        For I = 0 To MAX_PARTY_MEMBERS
             If Party.Member(I) = playerNum Then
                 partyindex = I
             End If
@@ -197,7 +197,7 @@ Module C_Parties
             End If
 
             ' draw members
-            For I = 1 To MAX_PARTY_MEMBERS
+            For I = 0 To MAX_PARTY_MEMBERS
                 If Party.Member(I) > 0 Then
                     If Party.Member(I) <> Party.Leader Then
                         ' cache the index

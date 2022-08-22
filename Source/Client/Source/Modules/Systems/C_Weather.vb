@@ -16,7 +16,7 @@ Friend Module C_Weather
     Friend WeatherSoundPlayer As Sound
     Friend CurWeatherMusic As String
 
-    Friend Structure WeatherParticleRec
+    Public Structure WeatherParticleRec
         Dim Type As Integer
         Dim X As Integer
         Dim Y As Integer
@@ -63,7 +63,7 @@ Friend Module C_Weather
     Friend Sub DrawWeather()
         Dim i As Integer, spriteLeft As Integer
 
-        For i = 1 To MaxWeatherParticles
+        For i = 0 To MaxWeatherParticles
             If WeatherParticle(i).InUse Then
                 If WeatherParticle(i).Type = modEnumerators.WeatherType.Storm Then
                     spriteLeft = 0
@@ -118,7 +118,7 @@ Friend Module C_Weather
             x = Rand(1, 101 - CurrentWeatherIntensity)
             If x = 1 Then
                 'Add a new particle
-                For i = 1 To MaxWeatherParticles
+                For i = 0 To MaxWeatherParticles
                     If WeatherParticle(i).InUse = 0 Then
                         If Rand(1, 3) = 1 Then
                             WeatherParticle(i).InUse = 1
@@ -148,7 +148,7 @@ Friend Module C_Weather
                 PlayExtraSound("Thunder.ogg")
             End If
         End If
-        For i = 1 To MaxWeatherParticles
+        For i = 0 To MaxWeatherParticles
             If WeatherParticle(i).InUse = 1 Then
                 If WeatherParticle(i).X > TileView.Right * 32 OrElse WeatherParticle(i).Y > TileView.Bottom * 32 Then
                     WeatherParticle(i).InUse = 0

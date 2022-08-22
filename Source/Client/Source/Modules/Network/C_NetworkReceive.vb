@@ -10,7 +10,7 @@ Module C_NetworkReceive
         Socket.PacketId(ServerPackets.SLoadCharOk) = AddressOf Packet_LoadCharOk
         Socket.PacketId(ServerPackets.SLoginOk) = AddressOf Packet_LoginOk
         Socket.PacketId(ServerPackets.SNewCharJob) = AddressOf Packet_NewCharJob
-        Socket.PacketId(ServerPackets.SClassData) = AddressOf Packet_JobData
+        Socket.PacketId(ServerPackets.SJobData) = AddressOf Packet_JobData
         Socket.PacketId(ServerPackets.SInGame) = AddressOf Packet_InGame
         Socket.PacketId(ServerPackets.SPlayerInv) = AddressOf Packet_PlayerInv
         Socket.PacketId(ServerPackets.SPlayerInvUpdate) = AddressOf Packet_PlayerInvUpdate
@@ -169,6 +169,7 @@ Module C_NetworkReceive
     Private Sub Packet_AlertMSG(ByRef data() As Byte)
         Dim msg As String
         Dim buffer As New ByteStream(data)
+
         Pnlloadvisible = False
 
         If FrmMenu.Visible = False Then
@@ -188,15 +189,16 @@ Module C_NetworkReceive
         MsgBox(msg, vbOKOnly, Settings.GameName)
         DestroyGame()
     End Sub
-
     Private Sub Packet_KeyPair(ByRef data() As Byte)
         Dim buffer As New ByteStream(data)
+
         EKeyPair.ImportKeyString(buffer.ReadString())
         buffer.Dispose()
     End Sub
 
     Private Sub Packet_LoadCharOk(ByRef data() As Byte)
         Dim buffer As New ByteStream(data)
+
         ' Now we can receive game data
         Myindex = buffer.ReadInt32
 
@@ -233,7 +235,7 @@ Module C_NetworkReceive
         SelectedChar = 1
 
         'reset for deleting chars
-        For i = 1 To MaxChars
+       For i = 0 To MaxChars
             CharSelection(i).Name = ""
             CharSelection(i).Sprite = 0
             CharSelection(i).Level = 0
@@ -241,7 +243,7 @@ Module C_NetworkReceive
             CharSelection(i).Gender = 0
         Next
 
-        For i = 1 To MaxChars
+       For i = 0 To MaxChars
             charName = buffer.ReadString
             sprite = buffer.ReadInt32
             level = buffer.ReadInt32
@@ -273,8 +275,6 @@ Module C_NetworkReceive
 
     End Sub
 
-
-
     Private Sub Packet_InGame(ByRef data() As Byte)
         InGame = True
         CanMoveNow = True
@@ -284,7 +284,8 @@ Module C_NetworkReceive
     Private Sub Packet_PlayerInv(ByRef data() As Byte)
         Dim i As Integer, invNum As Integer, amount As Integer
         Dim buffer As New ByteStream(data)
-        For i = 1 To MAX_INV
+
+       For i = 0 To MAX_INV
             invNum = buffer.ReadInt32
             amount = buffer.ReadInt32
             SetPlayerInvItemNum(Myindex, i, invNum)
@@ -312,6 +313,7 @@ Module C_NetworkReceive
     Private Sub Packet_PlayerInvUpdate(ByRef data() As Byte)
         Dim n As Integer, i As Integer
         Dim buffer As New ByteStream(data)
+
         n = buffer.ReadInt32
         SetPlayerInvItemNum(Myindex, n, buffer.ReadInt32)
         SetPlayerInvItemValue(Myindex, n, buffer.ReadInt32)
@@ -337,11 +339,12 @@ Module C_NetworkReceive
     Private Sub Packet_PlayerWornEquipment(ByRef data() As Byte)
         Dim i As Integer, n As Integer
         Dim buffer As New ByteStream(data)
-        For i = 1 To EquipmentType.Count - 1
+
+        For i = 0 To EquipmentType.Count - 1
             SetPlayerEquipment(Myindex, buffer.ReadInt32, i)
         Next
 
-        For i = 1 To EquipmentType.Count - 1
+       For i = 0 To EquipmentType.Count - 1
             Player(Myindex).RandEquip(i).Prefix = buffer.ReadString
             Player(Myindex).RandEquip(i).Suffix = buffer.ReadString
             Player(Myindex).RandEquip(i).Damage = buffer.ReadInt32
@@ -354,7 +357,6 @@ Module C_NetworkReceive
         Next
 
         ' changes to inventory, need to clear any drop menu
-
         FrmGame.pnlCurrency.Visible = False
         FrmGame.txtCurrency.Text = ""
         TmpCurrencyItem = 0
@@ -367,6 +369,7 @@ Module C_NetworkReceive
         Dim mapNpcNum As Integer, movement As Integer
         Dim x As Integer, y As Integer, dir As Integer
         Dim buffer As New ByteStream(data)
+
         mapNpcNum = buffer.ReadInt32
         x = buffer.ReadInt32
         y = buffer.ReadInt32
@@ -399,6 +402,7 @@ Module C_NetworkReceive
     Private Sub Packet_NpcDir(ByRef data() As Byte)
         Dim dir As Integer, i As Integer
         Dim buffer As New ByteStream(data)
+
         i = buffer.ReadInt32
         dir = buffer.ReadInt32
 
@@ -415,6 +419,7 @@ Module C_NetworkReceive
     Private Sub Packet_Attack(ByRef data() As Byte)
         Dim i As Integer
         Dim buffer As New ByteStream(data)
+
         i = buffer.ReadInt32
 
         ' Set player to attacking
@@ -427,6 +432,7 @@ Module C_NetworkReceive
     Private Sub Packet_NpcAttack(ByRef data() As Byte)
         Dim i As Integer
         Dim buffer As New ByteStream(data)
+
         i = buffer.ReadInt32
 
         ' Set npc to attacking
@@ -499,7 +505,7 @@ Module C_NetworkReceive
             .Y = buffer.ReadInt32
             .Dir = buffer.ReadInt32
 
-            For i = 1 To VitalType.Count - 1
+           For i = 0 To VitalType.Count - 1
                 .Vital(i) = buffer.ReadInt32
             Next
             ' Client use only
@@ -532,7 +538,7 @@ Module C_NetworkReceive
         ReDim Npc(i).DropChance(5)
         ReDim Npc(i).DropItem(5)
         ReDim Npc(i).DropItemValue(5)
-        For x = 1 To 5
+        For x = 0 To 5
             Npc(i).DropChance(x) = buffer.ReadInt32()
             Npc(i).DropItem(x) = buffer.ReadInt32()
             Npc(i).DropItemValue(x) = buffer.ReadInt32()
@@ -547,13 +553,13 @@ Module C_NetworkReceive
         Npc(i).SpawnSecs = buffer.ReadInt32()
         Npc(i).Sprite = buffer.ReadInt32()
 
-        For x = 0 To StatType.Count - 1
+        For X = 0 To StatType.Count - 1
             Npc(i).Stat(x) = buffer.ReadInt32()
         Next
 
         Npc(i).QuestNum = buffer.ReadInt32()
 
-        For x = 1 To MAX_NPC_SKILLS
+        For x = 0 To MAX_NPC_SKILLS
             Npc(i).Skill(x) = buffer.ReadInt32()
         Next
 
@@ -620,7 +626,8 @@ Module C_NetworkReceive
     Private Sub Packet_Skills(ByRef data() As Byte)
         Dim i As Integer
         Dim buffer As New ByteStream(data)
-        For i = 1 To MAX_PLAYER_SKILLS
+
+        For i = 0 To MAX_PLAYER_SKILLS
             PlayerSkills(i) = buffer.ReadInt32
         Next
 
@@ -629,6 +636,7 @@ Module C_NetworkReceive
 
     Private Sub Packet_LeftMap(ByRef data() As Byte)
         Dim buffer As New ByteStream(data)
+
         ClearPlayer(buffer.ReadInt32)
 
         buffer.Dispose()
@@ -642,8 +650,10 @@ Module C_NetworkReceive
     Private Sub Packet_DoorAnimation(ByRef data() As Byte)
         Dim x As Integer, y As Integer
         Dim buffer As New ByteStream(data)
+
         x = buffer.ReadInt32
         y = buffer.ReadInt32
+
         With TempTile(x, y)
             .DoorFrame = 1
             .DoorAnimate = 1 ' 0 = nothing| 1 = opening | 2 = closing
@@ -656,6 +666,7 @@ Module C_NetworkReceive
     Private Sub Packet_ActionMessage(ByRef data() As Byte)
         Dim x As Integer, y As Integer, message As String, color As Integer, tmpType As Integer
         Dim buffer As New ByteStream(data)
+
         message = Trim(buffer.ReadString)
         color = buffer.ReadInt32
         tmpType = buffer.ReadInt32
@@ -670,6 +681,7 @@ Module C_NetworkReceive
     Private Sub Packet_Blood(ByRef data() As Byte)
         Dim x As Integer, y As Integer, sprite As Integer
         Dim buffer As New ByteStream(data)
+
         x = buffer.ReadInt32
         y = buffer.ReadInt32
 
@@ -688,14 +700,12 @@ Module C_NetworkReceive
 
         buffer.Dispose()
     End Sub
-
-
-
     Private Sub Packet_NPCVitals(ByRef data() As Byte)
         Dim mapNpcNum As Integer
         Dim buffer As New ByteStream(data)
+
         mapNpcNum = buffer.ReadInt32
-        For i = 1 To VitalType.Count - 1
+        For i = 0 To VitalType.Count - 1
             MapNpc(mapNpcNum).Vital(i) = buffer.ReadInt32
         Next
 
@@ -705,6 +715,7 @@ Module C_NetworkReceive
     Private Sub Packet_Cooldown(ByRef data() As Byte)
         Dim slot As Integer
         Dim buffer As New ByteStream(data)
+
         slot = buffer.ReadInt32
         SkillCd(slot) = GetTickCount()
 
@@ -713,6 +724,7 @@ Module C_NetworkReceive
 
     Private Sub Packet_ClearSkillBuffer(ByRef data() As Byte)
         Dim buffer As New ByteStream(data)
+
         SkillBuffer = 0
         SkillBufferTimer = 0
 
@@ -723,6 +735,7 @@ Module C_NetworkReceive
         Dim access As Integer, name As String, message As String
         Dim header As String, pk As Integer
         Dim buffer As New ByteStream(data)
+
         name = Trim(buffer.ReadString)
         access = buffer.ReadInt32
         pk = buffer.ReadInt32
@@ -736,6 +749,7 @@ Module C_NetworkReceive
 
     Private Sub Packet_Stunned(ByRef data() As Byte)
         Dim buffer As New ByteStream(data)
+
         StunDuration = buffer.ReadInt32
 
         buffer.Dispose()
@@ -744,6 +758,7 @@ Module C_NetworkReceive
     Private Sub Packet_MapWornEquipment(ByRef data() As Byte)
         Dim playernum As Integer
         Dim buffer As New ByteStream(data)
+
         playernum = buffer.ReadInt32
         SetPlayerEquipment(playernum, buffer.ReadInt32, EquipmentType.Armor)
         SetPlayerEquipment(playernum, buffer.ReadInt32, EquipmentType.Weapon)
@@ -759,21 +774,11 @@ Module C_NetworkReceive
         Dim n As Integer, i As Integer, z As Integer, x As Integer, a As Integer, b As Integer
         Dim buffer As New ByteStream(Compression.DecompressBytes(data))
 
-        '\\\Read Class Data\\\
-
-        ' Max Job
-
-        For i = 0 To MAX_JOB
-            ReDim Job(i).Stat(StatType.Count - 1)
-        Next
-
-        For i = 0 To MAX_JOB
-            ReDim Job(i).Vital(VitalType.Count - 1)
-        Next
-
-        For i = 1 To MAX_JOB
-
+       For i = 0 To MAX_JOBS
             With Job(i)
+                ReDim .Stat(StatType.Count - 1)
+                ReDim .Vital(VitalType.Count - 1)
+
                 .Name = Trim(buffer.ReadString)
                 .Desc = Trim$(buffer.ReadString)
 
@@ -783,19 +788,23 @@ Module C_NetworkReceive
 
                 ' get array size
                 z = buffer.ReadInt32
+
                 ' redim array
                 ReDim .MaleSprite(z)
+
                 ' loop-receive data
-                For x = 0 To z
+                For X = 0 To z
                     .MaleSprite(x) = buffer.ReadInt32
                 Next
 
                 ' get array size
                 z = buffer.ReadInt32
+
                 ' redim array
                 ReDim .FemaleSprite(z)
+
                 ' loop-receive data
-                For x = 0 To z
+                For X = 0 To z
                     .FemaleSprite(x) = buffer.ReadInt32
                 Next
 
@@ -808,7 +817,7 @@ Module C_NetworkReceive
 
                 ReDim .StartItem(5)
                 ReDim .StartValue(5)
-                For q = 1 To 5
+                For q = 0 To 5
                     .StartItem(q) = buffer.ReadInt32
                     .StartValue(q) = buffer.ReadInt32
                 Next
@@ -827,12 +836,9 @@ Module C_NetworkReceive
         n = 0
         z = 0
 
-        '\\\End Read Class Data\\\
-
-        '\\\Read Item Data\\\\\\\
         x = buffer.ReadInt32
 
-        For i = 1 To x
+       For i = 0 To x
             n = buffer.ReadInt32
 
             ' Update the item
@@ -893,7 +899,6 @@ Module C_NetworkReceive
         Next
 
         ' changes to inventory, need to clear any drop menu
-
         FrmGame.pnlCurrency.Visible = False
         FrmGame.txtCurrency.Text = ""
         TmpCurrencyItem = 0
@@ -903,24 +908,20 @@ Module C_NetworkReceive
         n = 0
         x = 0
         z = 0
-
-        '\\\End Read Item Data\\\\\\\
-
-        '\\\Read Animation Data\\\\\\\
         x = buffer.ReadInt32
 
-        For i = 1 To x
+       For i = 0 To x
             n = buffer.ReadInt32
             ' Update the Animation
-            For z = 0 To UBound(Animation(n).Frames)
+            For z = 0 To UBound(Animation(n).Frames) - 1
                 Animation(n).Frames(z) = buffer.ReadInt32()
             Next
 
-            For z = 0 To UBound(Animation(n).LoopCount)
+            For z = 0 To UBound(Animation(n).LoopCount) - 1
                 Animation(n).LoopCount(z) = buffer.ReadInt32()
             Next
 
-            For z = 0 To UBound(Animation(n).LoopTime)
+            For z = 0 To UBound(Animation(n).LoopTime) - 1
                 Animation(n).LoopTime(z) = buffer.ReadInt32()
             Next
 
@@ -930,7 +931,7 @@ Module C_NetworkReceive
             If Animation(n).Name Is Nothing Then Animation(n).Name = ""
             If Animation(n).Sound Is Nothing Then Animation(n).Sound = ""
 
-            For z = 0 To UBound(Animation(n).Sprite)
+            For z = 0 To UBound(Animation(n).Sprite) - 1
                 Animation(n).Sprite(z) = buffer.ReadInt32()
             Next
         Next
@@ -940,17 +941,14 @@ Module C_NetworkReceive
         x = 0
         z = 0
 
-        '\\\End Read Animation Data\\\\\\\
-
-        '\\\Read NPC Data\\\\\\\
         x = buffer.ReadInt32
-        For i = 1 To x
+        For i = 0 To x
             n = buffer.ReadInt32
             ' Update the Npc
             Npc(n).Animation = buffer.ReadInt32()
             Npc(n).AttackSay = Trim(buffer.ReadString())
             Npc(n).Behaviour = buffer.ReadInt32()
-            For z = 1 To 5
+            For z = 0 To 5
                 Npc(n).DropChance(z) = buffer.ReadInt32()
                 Npc(n).DropItem(z) = buffer.ReadInt32()
                 Npc(n).DropItemValue(z) = buffer.ReadInt32()
@@ -972,7 +970,7 @@ Module C_NetworkReceive
             Npc(n).QuestNum = buffer.ReadInt32()
 
             ReDim Npc(n).Skill(MAX_NPC_SKILLS)
-            For z = 1 To MAX_NPC_SKILLS
+            For z = 0 To MAX_NPC_SKILLS
                 Npc(n).Skill(z) = buffer.ReadInt32()
             Next
 
@@ -988,12 +986,9 @@ Module C_NetworkReceive
         x = 0
         z = 0
 
-        '\\\End Read NPC Data\\\\\\\
-
-        '\\\Read Shop Data\\\\\\\
         x = buffer.ReadInt32
 
-        For i = 1 To x
+       For i = 0 To x
             n = buffer.ReadInt32
 
             Shop(n).BuyRate = buffer.ReadInt32()
@@ -1015,12 +1010,9 @@ Module C_NetworkReceive
         x = 0
         z = 0
 
-        '\\\End Read Shop Data\\\\\\\
-
-        '\\\Read Skills Data\\\\\\\\\\
         x = buffer.ReadInt32
 
-        For i = 1 To x
+       For i = 0 To x
             n = buffer.ReadInt32
 
             Skill(n).AccessReq = buffer.ReadInt32()
@@ -1060,12 +1052,9 @@ Module C_NetworkReceive
         n = 0
         z = 0
 
-        '\\\End Read Skills Data\\\\\\\\\\
-
-        '\\\Read Resource Data\\\\\\\\\\\\
         x = buffer.ReadInt32
 
-        For i = 1 To x
+       For i = 0 To x
             n = buffer.ReadInt32
 
             Resource(n).Animation = buffer.ReadInt32()
@@ -1093,8 +1082,6 @@ Module C_NetworkReceive
         x = 0
         z = 0
 
-        '\\\End Read Resource Data\\\\\\\\\\\\
-
         buffer.Dispose()
     End Sub
 
@@ -1109,7 +1096,7 @@ Module C_NetworkReceive
     Private Sub Packet_Mapreport(ByRef data() As Byte)
         Dim I As Integer
         Dim buffer As New ByteStream(data)
-        For I = 1 To MAX_MAPS
+       For i = 0 To MAX_MAPS
             MapNames(I) = Trim(buffer.ReadString())
         Next
 
@@ -1125,15 +1112,12 @@ Module C_NetworkReceive
     Private Sub Packet_MapNames(ByRef data() As Byte)
         Dim I As Integer
         Dim buffer As New ByteStream(data)
-        For I = 1 To MAX_MAPS
+       For i = 0 To MAX_MAPS
             MapNames(I) = Trim(buffer.ReadString())
         Next
 
         buffer.Dispose()
     End Sub
-
-
-
     Private Sub Packet_Critical(ByRef data() As Byte)
         ShakeTimerEnabled = True
         ShakeTimer = GetTickCount()
@@ -1193,10 +1177,9 @@ Module C_NetworkReceive
         DestroyGame()
     End Sub
 
-    '**********************
-    '***  EDITOR STUFF  ***
-    '**********************
-
+    '*****************
+    '***  EDITORS  ***
+    '*****************
     Private Sub Packet_EditAnimation(ByRef data() As Byte)
         InitAnimationEditor = True
     End Sub

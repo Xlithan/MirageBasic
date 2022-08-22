@@ -11,8 +11,8 @@ Module C_Sound
     Friend ExtraSoundPlayer As Sound
     Friend MusicPlayer As Music
     Friend PreviewPlayer As Music
-    Friend MusicCache(100) As String
-    Friend SoundCache(100) As String
+    Friend MusicCache() As String
+    Friend SoundCache() As String
 
     Friend FadeInSwitch As Boolean
     Friend FadeOutSwitch As Boolean

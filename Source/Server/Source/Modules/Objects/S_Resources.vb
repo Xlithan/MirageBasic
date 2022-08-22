@@ -11,7 +11,7 @@ Friend Module S_Resources
     Friend SkillExpTable(100) As Integer
     Friend ResourceCache(MAX_CACHED_MAPS) As ResourceCacheRec
 
-    Friend Structure MapResourceRec
+    Public Structure MapResourceRec
         Dim ResourceState As Byte
         Dim ResourceTimer As Integer
         Dim X As Integer
@@ -19,7 +19,7 @@ Friend Module S_Resources
         Dim CurHealth As Byte
     End Structure
 
-    Friend Structure ResourceCacheRec
+    Public Structure ResourceCacheRec
         Dim ResourceCount As Integer
         Dim ResourceData() As MapResourceRec
     End Structure
@@ -31,7 +31,7 @@ Friend Module S_Resources
     Sub SaveResources()
         Dim i As Integer
 
-        For i = 1 To MAX_RESOURCES
+        For i = 0 To MAX_RESOURCES
             SaveResource(i)
         Next
 
@@ -67,7 +67,7 @@ Friend Module S_Resources
 
         Call CheckResources()
 
-        For i = 1 To MAX_RESOURCES
+        For i = 0 To MAX_RESOURCES
             LoadResource(i)
             Application.DoEvents()
         Next
@@ -103,7 +103,7 @@ Friend Module S_Resources
     End Sub
 
     Sub CheckResources()
-        For i = 1 To MAX_RESOURCES
+        For i = 0 To MAX_RESOURCES
 
             If Not File.Exists(Paths.Resource(i)) Then
                 SaveResource(i)
@@ -121,7 +121,7 @@ Friend Module S_Resources
     End Sub
 
     Sub ClearResources()
-        For i = 1 To MAX_RESOURCES
+        For i = 0 To MAX_RESOURCES
             ClearResource(i)
         Next
     End Sub
@@ -130,8 +130,8 @@ Friend Module S_Resources
         Dim x As Integer, y As Integer, Resource_Count As Integer
         Resource_Count = 0
 
-        For x = 0 To Map(mapNum).MaxX
-            For y = 0 To Map(mapNum).MaxY
+        For X = 0 To Map(mapNum).MaxX
+            For Y = 0 To Map(mapNum).MaxY
 
                 If Map(mapNum).Tile(x, y).Type = TileType.Resource Then
                     Resource_Count += 1
@@ -149,7 +149,7 @@ Friend Module S_Resources
 
     Function ResourcesData() As Byte()
         Dim buffer As New ByteStream(4)
-        For i = 1 To MAX_RESOURCES
+        For i = 0 To MAX_RESOURCES
             If Not Len(Trim$(Resource(i).Name)) > 0 Then Continue For
             buffer.WriteBlock(ResourceData(i))
         Next
@@ -177,9 +177,11 @@ Friend Module S_Resources
     End Function
 
     Sub LoadSkillExp()
-        Dim cf = Paths.Database & "SkillExp.ini"
+        Dim i As Integer
+        Dim cf As String = Paths.Database & "SkillExp.ini"
+
         For i = 1 To 100
-            SkillExpTable(i) = Ini.Read(cf, "Level", i)
+            SkillExpTable(i) = Ini.Read(cf, "Level", i.ToString())
         Next
     End Sub
 
@@ -193,7 +195,7 @@ Friend Module S_Resources
 
         If index > MAX_PLAYERS Then Exit Function
 
-        GetPlayerGatherSkillLvl = Player(index).Character(TempPlayer(index).CurChar).GatherSkills(SkillSlot).SkillLevel
+        GetPlayerGatherSkillLvl = Player(index).GatherSkills(SkillSlot).SkillLevel
     End Function
 
     Function GetPlayerGatherSkillExp(index As Integer, SkillSlot As Integer) As Integer
@@ -202,7 +204,7 @@ Friend Module S_Resources
 
         If index > MAX_PLAYERS Then Exit Function
 
-        GetPlayerGatherSkillExp = Player(index).Character(TempPlayer(index).CurChar).GatherSkills(SkillSlot).SkillCurExp
+        GetPlayerGatherSkillExp = Player(index).GatherSkills(SkillSlot).SkillCurExp
     End Function
 
     Function GetPlayerGatherSkillMaxExp(index As Integer, SkillSlot As Integer) As Integer
@@ -211,25 +213,25 @@ Friend Module S_Resources
 
         If index > MAX_PLAYERS Then Exit Function
 
-        GetPlayerGatherSkillMaxExp = Player(index).Character(TempPlayer(index).CurChar).GatherSkills(SkillSlot).SkillNextLvlExp
+        GetPlayerGatherSkillMaxExp = Player(index).GatherSkills(SkillSlot).SkillNextLvlExp
     End Function
 
     Sub SetPlayerGatherSkillLvl(index As Integer, SkillSlot As Integer, lvl As Integer)
         If index > MAX_PLAYERS Then Exit Sub
 
-        Player(index).Character(TempPlayer(index).CurChar).GatherSkills(SkillSlot).SkillLevel = lvl
+        Player(index).GatherSkills(SkillSlot).SkillLevel = lvl
     End Sub
 
     Sub SetPlayerGatherSkillExp(index As Integer, SkillSlot As Integer, Exp As Integer)
         If index > MAX_PLAYERS Then Exit Sub
 
-        Player(index).Character(TempPlayer(index).CurChar).GatherSkills(SkillSlot).SkillCurExp = Exp
+        Player(index).GatherSkills(SkillSlot).SkillCurExp = Exp
     End Sub
 
     Sub SetPlayerGatherSkillMaxExp(index As Integer, SkillSlot As Integer, MaxExp As Integer)
         If index > MAX_PLAYERS Then Exit Sub
 
-        Player(index).Character(TempPlayer(index).CurChar).GatherSkills(SkillSlot).SkillNextLvlExp = MaxExp
+        Player(index).GatherSkills(SkillSlot).SkillNextLvlExp = MaxExp
     End Sub
 
     Sub CheckResourceLevelUp(index As Integer, SkillSlot As Integer)
@@ -402,7 +404,7 @@ Friend Module S_Resources
     Sub SendResources(index As Integer)
         Dim i As Integer
 
-        For i = 1 To MAX_RESOURCES
+        For i = 0 To MAX_RESOURCES
 
             If Len(Trim$(Resource(i).Name)) > 0 Then
                 SendUpdateResourceTo(index, i)

@@ -87,7 +87,7 @@ Module C_GameLogic
                     ShowAnimTimer = tick + 500
                 End If
 
-                For i = 1 To MAX_ANIMATIONS
+               For i = 0 To MAX_ANIMATIONS
                     CheckAnimInstance(i)
                 Next
 
@@ -164,7 +164,7 @@ Module C_GameLogic
 
                 ' check if we need to end the CD icon
                 If NumSkillIcons > 0 Then
-                    For i = 1 To MAX_PLAYER_SKILLS
+                   For i = 0 To MAX_PLAYER_SKILLS
                         If PlayerSkills(i) > 0 Then
                             If SkillCd(i) > 0 Then
                                 If SkillCd(i) + (Skill(PlayerSkills(i)).CdTime * 1000) < tick Then
@@ -200,7 +200,7 @@ Module C_GameLogic
                     ' Process input before rendering, otherwise input will be behind by 1 frame
                     If walkTimer < tick Then
 
-                        For i = 1 To TotalOnline 'MAX_PLAYERS
+                       For i = 0 To TotalOnline 'MAX_PLAYERS
                             If IsPlaying(i) Then
                                 ProcessMovement(i)
                                 If PetAlive(i) Then
@@ -210,14 +210,14 @@ Module C_GameLogic
                         Next
 
                         ' Process npc movements (actually move them)
-                        For i = 1 To MAX_MAP_NPCS
+                       For i = 0 To MAX_MAP_NPCS
                             If Map.Npc(i) > 0 Then
                                 ProcessNpcMovement(i)
                             End If
                         Next i
 
                         If Map.CurrentEvents > 0 Then
-                            For i = 1 To Map.CurrentEvents
+                           For i = 0 To Map.CurrentEvents
                                 ProcessEventMovement(i)
                             Next i
                         End If
@@ -327,8 +327,8 @@ Module C_GameLogic
         Dim y As Integer
         ReDim TempTile(Map.MaxX, Map.MaxY)
 
-        For x = 0 To Map.MaxX
-            For y = 0 To Map.MaxY
+        For X = 0 To Map.MaxX
+            For Y = 0 To Map.MaxY
                 TempTile(x, y).DoorOpen = 0
             Next
         Next
@@ -534,7 +534,7 @@ Module C_GameLogic
             name = ""
 
             ' Get the desired player from the user text
-            For i = 1 To Len(chatText)
+           For i = 0 To Len(chatText)
 
                 If Mid$(chatText, i, 1) <> Space(1) Then
                     name = name & Mid$(chatText, i, 1)
@@ -660,7 +660,7 @@ Module C_GameLogic
                     n = command(1)
 
                     ' Check to make sure its a valid map #
-                    If n > 0 AndAlso n <= MaxQuests Then
+                    If n > 0 AndAlso n <= MAX_QUESTS Then
                         QuestReset(n)
                     Else
                         AddText(Language.Chat.InvalidQuest, QColorType.AlertColor)
@@ -1213,7 +1213,7 @@ Continue1:
         ' default to new bubble
         index = ChatBubbleindex
         ' loop through and see if that player/npc already has a chat bubble
-        For i = 1 To Byte.MaxValue
+       For i = 0 To Byte.MaxValue
             If ChatBubble(i).TargetType = targetType Then
                 If ChatBubble(i).Target = target Then
                     ' reset master index

@@ -99,7 +99,7 @@ Friend Class frmEditor_AutoMapper
     Private Sub CmbPrefab_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPrefab.SelectedIndexChanged
         Dim Layer As Integer
 
-        For Layer = 1 To LayerType.Count - 1
+        For Layer = 0 To LayerType.Count - 1
             If Tile(cmbPrefab.SelectedIndex + 1).Layer(Layer).Tileset > 0 Then
                 Exit For
             End If
@@ -136,7 +136,7 @@ Friend Class frmEditor_AutoMapper
 
         Prefab = cmbPrefab.SelectedIndex + 1
 
-        For Layer = 1 To 5
+        For Layer = 0 To 5
             If Tile(Prefab).Layer(Layer).Tileset > 0 Then
                 Ini.Write(cf, "Prefab" & Prefab, "Layer" & Layer & "Tileset", Val(Tile(Prefab).Layer(Layer).Tileset))
                 Ini.Write(cf, "Prefab" & Prefab, "Layer" & Layer & "X", Val(Tile(Prefab).Layer(Layer).X))

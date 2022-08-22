@@ -17,7 +17,7 @@ Friend Class frmEditor_Job
 
         Editorindex = lstIndex.SelectedIndex + 1
 
-        LoadClassInfo = True
+        LoadJobInfo = True
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -34,7 +34,7 @@ Friend Class frmEditor_Job
 
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         Dim tmpindex As Integer
-        If Editorindex = 0 OrElse Editorindex > MAX_JOB Then Exit Sub
+        If Editorindex = 0 OrElse Editorindex > MAX_JOBS Then Exit Sub
 
         tmpindex = lstIndex.SelectedIndex
         Job(Editorindex).Name = Trim$(txtName.Text)
@@ -49,7 +49,7 @@ Friend Class frmEditor_Job
 
     Private Sub BtnAddMaleSprite_Click(sender As Object, e As EventArgs) Handles btnAddMaleSprite.Click
         Dim tmpamount As Byte
-        If Editorindex = 0 OrElse Editorindex > MAX_JOB then Exit Sub
+        If Editorindex = 0 OrElse Editorindex > MAX_JOBS then Exit Sub
 
         tmpamount = UBound(Job(Editorindex).MaleSprite)
 
@@ -57,23 +57,23 @@ Friend Class frmEditor_Job
 
         Job(Editorindex).MaleSprite(tmpamount + 1) = 1
 
-        LoadClassInfo = True
+        LoadJobInfo = True
     End Sub
 
     Private Sub BtnDeleteMaleSprite_Click(sender As Object, e As EventArgs) Handles btnDeleteMaleSprite.Click
         Dim tmpamount As Byte
-        If Editorindex = 0 OrElse Editorindex > MAX_JOB Then Exit Sub
+        If Editorindex = 0 OrElse Editorindex > MAX_JOBS Then Exit Sub
 
         tmpamount = UBound(Job(Editorindex).MaleSprite)
 
         ReDim Preserve Job(Editorindex).MaleSprite(tmpamount - 1)
 
-        LoadClassInfo = True
+        LoadJobInfo = True
     End Sub
 
     Private Sub BtnAddFemaleSprite_Click(sender As Object, e As EventArgs) Handles btnAddFemaleSprite.Click
         Dim tmpamount As Byte
-        If Editorindex = 0 OrElse Editorindex > MAX_JOB Then Exit Sub
+        If Editorindex = 0 OrElse Editorindex > MAX_JOBS Then Exit Sub
 
         tmpamount = UBound(Job(Editorindex).FemaleSprite)
 
@@ -81,18 +81,18 @@ Friend Class frmEditor_Job
 
         Job(Editorindex).FemaleSprite(tmpamount + 1) = 1
 
-        LoadClassInfo = True
+        LoadJobInfo = True
     End Sub
 
     Private Sub BtnDeleteFemaleSprite_Click(sender As Object, e As EventArgs) Handles btnDeleteFemaleSprite.Click
         Dim tmpamount As Byte
-        If Editorindex = 0 OrElse Editorindex > MAX_JOB Then Exit Sub
+        If Editorindex = 0 OrElse Editorindex > MAX_JOBS Then Exit Sub
 
         tmpamount = UBound(Job(Editorindex).FemaleSprite)
 
         ReDim Preserve Job(Editorindex).FemaleSprite(tmpamount - 1)
 
-        LoadClassInfo = True
+        LoadJobInfo = True
     End Sub
 
     Private Sub NudMaleSprite_ValueChanged(sender As Object, e As EventArgs) Handles nudMaleSprite.Click
@@ -150,43 +150,43 @@ Friend Class frmEditor_Job
 #Region "Stats"
 
     Private Sub NumStrength_ValueChanged(sender As Object, e As EventArgs) Handles nudStrength.Click
-        If Editorindex <= 0 OrElse Editorindex > MAX_JOB Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_JOBS Then Exit Sub
 
         Job(Editorindex).Stat(StatType.Strength) = nudStrength.Value
     End Sub
 
     Private Sub NumLuck_ValueChanged(sender As Object, e As EventArgs) Handles nudLuck.Click
-        If Editorindex <= 0 OrElse Editorindex > MAX_JOB Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_JOBS Then Exit Sub
 
         Job(Editorindex).Stat(StatType.Luck) = nudLuck.Value
     End Sub
 
     Private Sub NumEndurance_ValueChanged(sender As Object, e As EventArgs) Handles nudEndurance.Click
-        If Editorindex <= 0 OrElse Editorindex > MAX_JOB Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_JOBS Then Exit Sub
 
         Job(Editorindex).Stat(StatType.Endurance) = nudEndurance.Value
     End Sub
 
     Private Sub NumIntelligence_ValueChanged(sender As Object, e As EventArgs) Handles nudIntelligence.Click
-        If Editorindex <= 0 OrElse Editorindex > MAX_JOB Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_JOBS Then Exit Sub
 
         Job(Editorindex).Stat(StatType.Intelligence) = nudIntelligence.Value
     End Sub
 
     Private Sub NumVitality_ValueChanged(sender As Object, e As EventArgs) Handles nudVitality.Click
-        If Editorindex <= 0 OrElse Editorindex > MAX_JOB Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_JOBS Then Exit Sub
 
         Job(Editorindex).Stat(StatType.Vitality) = nudVitality.Value
     End Sub
 
     Private Sub NumSpirit_ValueChanged(sender As Object, e As EventArgs) Handles nudSpirit.Click
-        If Editorindex <= 0 OrElse Editorindex > MAX_JOB Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_JOBS Then Exit Sub
 
         Job(Editorindex).Stat(StatType.Spirit) = nudSpirit.Value
     End Sub
 
     Private Sub NumBaseExp_ValueChanged(sender As Object, e As EventArgs) Handles nudBaseExp.Click
-        If Editorindex <= 0 OrElse Editorindex > MAX_JOB Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_JOBS Then Exit Sub
 
         Job(Editorindex).BaseExp = nudBaseExp.Value
     End Sub
@@ -201,7 +201,7 @@ Friend Class frmEditor_Job
         Job(Editorindex).StartItem(lstStartItems.SelectedIndex + 1) = cmbItems.SelectedIndex
         Job(Editorindex).StartValue(lstStartItems.SelectedIndex + 1) = nudItemAmount.Value
 
-        LoadClassInfo = True
+        LoadJobInfo = True
     End Sub
 
 #End Region
@@ -209,19 +209,19 @@ Friend Class frmEditor_Job
 #Region "Starting Point"
 
     Private Sub NumStartMap_ValueChanged(sender As Object, e As EventArgs) Handles nudStartMap.Click
-        If Editorindex <= 0 OrElse Editorindex > MAX_JOB Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_JOBS Then Exit Sub
 
         Job(Editorindex).StartMap = nudStartMap.Value
     End Sub
 
     Private Sub NumStartX_ValueChanged(sender As Object, e As EventArgs) Handles nudStartX.Click
-        If Editorindex <= 0 OrElse Editorindex > MAX_JOB Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_JOBS Then Exit Sub
 
         Job(Editorindex).StartX = nudStartX.Value
     End Sub
 
     Private Sub NumStartY_ValueChanged(sender As Object, e As EventArgs) Handles nudStartY.Click
-        If Editorindex <= 0 OrElse Editorindex > MAX_JOB Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_JOBS Then Exit Sub
 
         Job(Editorindex).StartY = nudStartY.Value
     End Sub

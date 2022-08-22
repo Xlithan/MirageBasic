@@ -1,7 +1,7 @@
 ﻿Public Module modConstants
     Public Const MAX_ANIMATIONS As Integer = 100
     Public Const MAX_BANK As Byte = 90
-    Public Const MAX_JOB As Byte = 3
+    Public Const MAX_JOBS As Byte = 3
     Public Const MAX_COTS As Integer = 30
     Public Const MAX_INGREDIENT As Byte = 5
     Public Const MAX_INV As Byte = 35
@@ -25,6 +25,13 @@
     Public Const MAX_SWITCHES As Integer = 500
     Public Const MAX_TRADES As Byte = 20
     Public Const MAX_VARIABLES As Integer = 500
-
     Public Const NAME_LENGTH As Byte = 20
+    Public Const MAX_INSTANCED_MAPS As Integer = 100
+    Public Const MAX_CACHED_MAPS As Integer = MAX_MAPS + MAX_INSTANCED_MAPS
+    Public const MAX_HOUSES As Integer = 100
+    Public Const MAX_QUESTS As Integer = 250
+    Public Const MAX_HOTBAR As Byte = 7
+    Public Const MAX_MAPX As Byte = 50
+    Public Const MAX_MAPY As Byte = 50
+    Public Const MAX_PROJECTILES As Integer = 255
 End Module

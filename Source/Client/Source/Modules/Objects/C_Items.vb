@@ -35,10 +35,10 @@ Module C_Items
     Friend Sub ClearItem(index As Integer)
         Item(index) = Nothing
         Item(index) = New modTypes.ItemStruct
-        For x = 0 To StatType.Count - 1
+        For X = 0 To StatType.Count - 1
             ReDim Item(index).Add_Stat(x)
         Next
-        For x = 0 To StatType.Count - 1
+        For X = 0 To StatType.Count - 1
             ReDim Item(index).Stat_Req(x)
         Next
 
@@ -53,7 +53,7 @@ Module C_Items
 
         ReDim Item(MAX_ITEMS)
 
-        For i = 1 To MAX_ITEMS
+       For i = 0 To MAX_ITEMS
             ClearItem(i)
         Next
 

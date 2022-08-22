@@ -15,7 +15,7 @@ Friend Module S_Projectiles
 
 #Region "Types"
 
-    Friend Structure ProjectileRec
+    Public Structure ProjectileRec
         Dim Name As String
         Dim Sprite As Integer
         Dim Range As Byte
@@ -23,7 +23,7 @@ Friend Module S_Projectiles
         Dim Damage As Integer
     End Structure
 
-    Friend Structure MapProjectileRec
+    Public Structure MapProjectileRec
         Dim ProjectileNum As Integer
         Dim Owner As Integer
         Dim OwnerType As Byte
@@ -40,7 +40,7 @@ Friend Module S_Projectiles
     Sub SaveProjectiles()
         Dim i As Integer
 
-        For i = 1 To MAX_PROJECTILES
+        For i = 0 To MAX_PROJECTILES
             SaveProjectile(i)
         Next
 
@@ -69,7 +69,7 @@ Friend Module S_Projectiles
 
         CheckProjectile()
 
-        For i = 1 To MAX_PROJECTILES
+        For i = 0 To MAX_PROJECTILES
             filename = Paths.Projectile(i)
             Dim reader As New ByteStream()
             ByteFile.Load(filename, reader)
@@ -88,7 +88,7 @@ Friend Module S_Projectiles
     Sub CheckProjectile()
         Dim i As Integer
 
-        For i = 1 To MAX_PROJECTILES
+        For i = 0 To MAX_PROJECTILES
             If Not File.Exists(Paths.Projectile(i)) Then
                 SaveProjectile(i)
             End If
@@ -101,8 +101,8 @@ Friend Module S_Projectiles
         Dim y As Integer
 
         ReDim MapProjectiles(MAX_MAPS, MAX_PROJECTILES)
-        For x = 1 To MAX_MAPS
-            For y = 1 To MAX_PROJECTILES
+        For x = 0 To MAX_MAPS
+            For y = 0 To MAX_PROJECTILES
                 ClearMapProjectile(x, y)
             Next
         Next
@@ -136,7 +136,7 @@ Friend Module S_Projectiles
 
         ReDim Projectiles(MAX_PROJECTILES)
 
-        For i = 1 To MAX_PROJECTILES
+        For i = 0 To MAX_PROJECTILES
             ClearProjectile(i)
         Next
 
@@ -305,7 +305,7 @@ Friend Module S_Projectiles
     Sub SendProjectiles(index As Integer)
         Dim i As Integer
 
-        For i = 1 To MAX_PROJECTILES
+        For i = 0 To MAX_PROJECTILES
             If Len(Trim$(Projectiles(i).Name)) > 0 Then
                 Call SendUpdateProjectileTo(index, i)
             End If
@@ -347,7 +347,7 @@ Friend Module S_Projectiles
         mapNum = GetPlayerMap(index)
 
         'Find a free projectile
-        For i = 1 To MAX_PROJECTILES
+        For i = 0 To MAX_PROJECTILES
             If MapProjectiles(mapNum, i).ProjectileNum = 0 Then ' Free Projectile
                 ProjectileSlot = i
                 Exit For

@@ -40,7 +40,7 @@ Module modLoop
                 ' Check if any of our pets has completed casting and get their skill going if they have.
                 Dim petskills = (
                 From p In onlinePlayers
-                Where Player(p.Index).Character(p.player.CurChar).Pet.Alive = 1 AndAlso TempPlayer(p.Index).PetskillBuffer.Skill > 0 AndAlso GetTimeMs() > p.player.PetskillBuffer.Timer + (Skill(Player(p.Index).Character(p.player.CurChar).Pet.Skill(p.player.PetskillBuffer.Skill)).CastTime * 1000)
+                Where Player(p.Index).Pet.Alive = 1 AndAlso TempPlayer(p.Index).PetskillBuffer.Skill > 0 AndAlso GetTimeMs() > p.player.PetskillBuffer.Timer + (Skill(Player(p.Index).Pet.Skill(p.player.PetskillBuffer.Skill)).CastTime * 1000)
                 Select New With {p.Index, Key .Success = HandlePetSkill(p.Index)}
                 ).ToArray()
 
@@ -59,7 +59,7 @@ Module modLoop
                 ).ToArray()
 
                 ' HoT and DoT logic
-                'For x = 1 To MAX_COTS
+                'For x = 0 To MAX_COTS
                 '    HandleDoT_Pet i, x
                 '        HandleHoT_Pet i, x
                 '    Next
@@ -90,9 +90,9 @@ Module modLoop
                 ' Handle player housing timers.
                 Dim playerhousing = (
                     From p In onlinePlayers
-                    Where Player(p.Index).Character(p.player.CurChar).InHouse > 0 AndAlso
-                          IsPlaying(Player(p.Index).Character(p.player.CurChar).InHouse) AndAlso
-                          Player(Player(p.Index).Character(p.player.CurChar).InHouse).Character(p.player.CurChar).InHouse <> Player(p.Index).Character(p.player.CurChar).InHouse
+                    Where Player(p.Index).InHouse > 0 AndAlso
+                          IsPlaying(Player(p.Index).InHouse) AndAlso
+                          Player(Player(p.Index).InHouse).InHouse <> Player(p.Index).InHouse
                     Select New With {p.Index, Key .Success = HandlePlayerHouse(p.Index)}
                 ).ToArray()
 
@@ -142,7 +142,7 @@ Module modLoop
             Console.WriteLine("Saving all online players...")
             GlobalMsg("Saving all online players...")
 
-            For i = 1 To GetPlayersOnline()
+            For i = 0 To GetPlayersOnline()
                 If IsPlaying(i) Then
                     SavePlayer(i)
                     SaveBank(i)
@@ -161,13 +161,13 @@ Module modLoop
         ' ///////////////////////////////////////////
         ' // This is used for respawning map items //
         ' ///////////////////////////////////////////
-        For y = 1 To MAX_CACHED_MAPS
+        For y = 0 To MAX_CACHED_MAPS
 
             ' Make sure no one is on the map when it respawns
             If Not PlayersOnMap(y) Then
 
                 ' Clear out unnecessary junk
-                For x = 1 To MAX_MAP_ITEMS
+                For x = 0 To MAX_MAP_ITEMS
                     ClearMapItem(x, y)
                 Next
 
@@ -183,7 +183,7 @@ Module modLoop
     Private Sub UpdatePlayerVitals()
         Dim i As Integer
 
-        For i = 1 To GetPlayersOnline()
+        For i = 0 To GetPlayersOnline()
 
             If IsPlaying(i) Then
                 If GetPlayerVital(i, modEnumerators.VitalType.HP) <> GetPlayerMaxVital(i, VitalType.HP) Then
@@ -216,12 +216,12 @@ Module modLoop
         Dim target As Integer, targetTypes As Byte, targetX As Integer, targetY As Integer, targetVerify As Boolean
         Dim resourceIndex As Integer
 
-        For mapNum = 1 To MAX_CACHED_MAPS
+        For mapNum = 0 To MAX_CACHED_MAPS
 
             If ServerDestroyed Then Exit Sub
 
             ' items appearing to everyone
-            For i = 1 To MAX_MAP_ITEMS
+            For i = 0 To MAX_MAP_ITEMS
                 If MapItem(mapNum, i).Num > 0 Then
                     If MapItem(mapNum, i).PlayerName <> vbNullString Then
                         ' make item public?
@@ -262,7 +262,7 @@ Module modLoop
             ' Respawning Resources
             If ResourceCache Is Nothing Then Exit Sub
             If ResourceCache(mapNum).ResourceCount > 0 Then
-                For i = 1 To ResourceCache(mapNum).ResourceCount
+                For i = 0 To ResourceCache(mapNum).ResourceCount
 
                     resourceIndex = Map(mapNum).Tile(ResourceCache(mapNum).ResourceData(i).X, ResourceCache(mapNum).ResourceData(i).Y).Data1
 
@@ -285,7 +285,7 @@ Module modLoop
             If PlayersOnMap(mapNum) = True Then
                 tickCount = GetTimeMs()
 
-                For x = 1 To MAX_MAP_NPCS
+                For x = 0 To MAX_MAP_NPCS
                     npcNum = MapNpc(mapNum).Npc(x).Num
 
                     ' check if they've completed casting, and if so set the actual skill going
@@ -308,13 +308,13 @@ Module modLoop
                                 ' make sure it's not stunned
                                 If Not MapNpc(mapNum).Npc(x).StunDuration > 0 Then
 
-                                    For i = 1 To GetPlayersOnline()
+                                    For i = 0 To GetPlayersOnline()
                                         If IsPlaying(i) Then
                                             If GetPlayerMap(i) = mapNum AndAlso MapNpc(mapNum).Npc(x).Target = 0 AndAlso GetPlayerAccess(i) <= AdminType.Monitor Then
                                                 If PetAlive(i) Then
                                                     n = Npc(npcNum).Range
-                                                    distanceX = MapNpc(mapNum).Npc(x).X - Player(i).Character(TempPlayer(i).CurChar).Pet.X
-                                                    distanceY = MapNpc(mapNum).Npc(x).Y - Player(i).Character(TempPlayer(i).CurChar).Pet.Y
+                                                    distanceX = MapNpc(mapNum).Npc(x).X - Player(i).Pet.X
+                                                    distanceY = MapNpc(mapNum).Npc(x).Y - Player(i).Pet.Y
 
                                                     ' Make sure we get a positive value
                                                     If distanceX < 0 Then distanceX *= -1
@@ -357,7 +357,7 @@ Module modLoop
                                     ' Check if target was found for NPC targetting
                                     If MapNpc(mapNum).Npc(x).Target = 0 AndAlso Npc(npcNum).Faction > 0 Then
                                         ' search for npc of another faction to target
-                                        For i = 1 To MAX_MAP_NPCS
+                                        For i = 0 To MAX_MAP_NPCS
                                             ' exist?
                                             If MapNpc(mapNum).Npc(i).Num > 0 Then
                                                 ' different faction?
@@ -431,8 +431,8 @@ Module modLoop
                                         If target > 0 Then
                                             If IsPlaying(target) = True AndAlso GetPlayerMap(target) = mapNum AndAlso PetAlive(target) Then
                                                 targetVerify = True
-                                                targetY = Player(target).Character(TempPlayer(target).CurChar).Pet.Y
-                                                targetX = Player(target).Character(TempPlayer(target).CurChar).Pet.X
+                                                targetY = Player(target).Pet.Y
+                                                targetX = Player(target).Pet.X
                                             Else
                                                 MapNpc(mapNum).Npc(x).TargetType = 0 ' clear
                                                 MapNpc(mapNum).Npc(x).Target = 0
@@ -629,8 +629,8 @@ Module modLoop
     End Function
 
     Friend Function HandlePlayerHouse(index As Integer) As Boolean
-        Player(index).Character(TempPlayer(index).CurChar).InHouse = 0
-        PlayerWarp(index, Player(index).Character(TempPlayer(index).CurChar).LastMap, Player(index).Character(TempPlayer(index).CurChar).LastX, Player(index).Character(TempPlayer(index).CurChar).LastY)
+        Player(index).InHouse = 0
+        PlayerWarp(index, Player(index).LastMap, Player(index).LastX, Player(index).LastY)
         PlayerMsg(index, "Your visitation has ended. Possibly due to a disconnection. You are being warped back to your previous location.", ColorType.Yellow)
         HandlePlayerHouse = True
     End Function
@@ -1047,7 +1047,7 @@ Module modLoop
                 Select Case Skill(skillnum).Type
                     Case SkillType.DamageHp
                         didCast = True
-                        For i = 1 To GetPlayersOnline()
+                        For i = 0 To GetPlayersOnline()
                             If IsPlaying(i) Then
                                 If GetPlayerMap(i) = mapNum Then
                                     If IsInRange(aoe, x, y, GetPlayerX(i), GetPlayerY(i)) Then
@@ -1060,7 +1060,7 @@ Module modLoop
                                 End If
                             End If
                         Next
-                        For i = 1 To MAX_MAP_NPCS
+                        For i = 0 To MAX_MAP_NPCS
                             If MapNpc(mapNum).Npc(i).Num > 0 Then
                                 If MapNpc(mapNum).Npc(i).Vital(modEnumerators.VitalType.HP) > 0 Then
                                     If IsInRange(aoe, x, y, MapNpc(mapNum).Npc(i).X, MapNpc(mapNum).Npc(i).Y) Then
@@ -1088,14 +1088,14 @@ Module modLoop
                         End If
 
                         didCast = True
-                        For i = 1 To GetPlayersOnline()
+                        For i = 0 To GetPlayersOnline()
                             If IsPlaying(i) AndAlso GetPlayerMap(i) = GetPlayerMap(npcNum) Then
                                 If IsInRange(aoe, x, y, GetPlayerX(i), GetPlayerY(i)) Then
                                     SkillPlayer_Effect(vitalType, increment, i, vital, skillnum)
                                 End If
                             End If
                         Next
-                        For i = 1 To MAX_MAP_NPCS
+                        For i = 0 To MAX_MAP_NPCS
                             If MapNpc(mapNum).Npc(i).Num > 0 AndAlso MapNpc(mapNum).Npc(i).Vital(modEnumerators.VitalType.HP) > 0 Then
                                 If IsInRange(aoe, x, y, MapNpc(mapNum).Npc(i).X, MapNpc(mapNum).Npc(i).Y) Then
                                     SkillNpc_Effect(vitalType, increment, i, vital, skillnum, mapNum)

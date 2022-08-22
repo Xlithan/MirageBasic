@@ -19,7 +19,7 @@ Module C_Shops
             .Name = ""
         }
         ReDim Shop(index).TradeItem(MAX_TRADES)
-        For x = 0 To MAX_TRADES
+        For X = 0 To MAX_TRADES
             ReDim Shop(index).TradeItem(x)
         Next
     End Sub
@@ -29,7 +29,7 @@ Module C_Shops
 
         ReDim Shop(MAX_SHOPS)
 
-        For i = 1 To MAX_SHOPS
+       For i = 0 To MAX_SHOPS
             ClearShop(i)
         Next
 
@@ -166,7 +166,7 @@ Module C_Shops
             DrawButton("Close Shop", ShopWindowX + ShopButtonCloseX, ShopWindowY + ShopButtonCloseY, 0)
         End If
 
-        For i = 1 To MAX_TRADES
+       For i = 0 To MAX_TRADES
             itemnum = Shop(InShop).TradeItem(i).Item
             If itemnum > 0 AndAlso itemnum <= MAX_ITEMS Then
                 itempic = Item(itemnum).Pic

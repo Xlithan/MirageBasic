@@ -9,8 +9,6 @@ Module C_Trade
     Friend TradeTimer As Integer
     Friend TradeRequest As Boolean
     Friend InTrade As Boolean
-    Friend TradeYourOffer(MAX_INV) As modTypes.PlayerInvStruct
-    Friend TradeTheirOffer(MAX_INV) As PlayerInvStruct
     Friend TradeX As Integer
     Friend TradeY As Integer
     Friend TheirWorth As String
@@ -62,13 +60,13 @@ Module C_Trade
         datatype = buffer.ReadInt32
 
         If datatype = 0 Then ' ours!
-            For i = 1 To MAX_INV
+           For i = 0 To MAX_INV
                 TradeYourOffer(i).Num = buffer.ReadInt32
                 TradeYourOffer(i).Value = buffer.ReadInt32
             Next
             YourWorth = String.Format(Language.Trade.Value, buffer.ReadInt32) & "g"
         ElseIf datatype = 1 Then 'theirs
-            For i = 1 To MAX_INV
+           For i = 0 To MAX_INV
                 TradeTheirOffer(i).Num = buffer.ReadInt32
                 TradeTheirOffer(i).Value = buffer.ReadInt32
             Next
@@ -186,7 +184,7 @@ Module C_Trade
 
         DrawText(TradeWindowX + 260, TradeWindowY + 6, Tradername & "'s Offer.", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 15)
 
-        For i = 1 To MAX_INV
+       For i = 0 To MAX_INV
             ' blt your own offer
             itemnum = GetPlayerInvItemNum(Myindex, TradeYourOffer(i).Num)
 
@@ -243,7 +241,7 @@ Module C_Trade
 
         DrawText(TradeWindowX + 8, TradeWindowY + 288, YourWorth, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
 
-        For i = 1 To MAX_INV
+       For i = 0 To MAX_INV
             ' blt their offer
             itemnum = TradeTheirOffer(i).Num
             'itemnum = GetPlayerInvItemNum(MyIndex, TradeYourOffer(i).Num)

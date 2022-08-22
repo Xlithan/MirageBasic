@@ -9,42 +9,13 @@ Imports SFML.Window
 Friend Module C_Housing
 
 #Region "Globals & Types"
-
-    Friend MaxHouses As Integer = 100
-
     Friend FurnitureCount As Integer
     Friend FurnitureHouse As Integer
     Friend FurnitureSelected As Integer
     Friend HouseTileindex As Integer
-
-    Friend House() As HouseRec
-    Friend HouseConfig() As HouseRec
-    Friend Furniture() As FurnitureRec
     Friend NumFurniture As Integer
-    Friend HouseChanged(MaxHouses) As Boolean
+    Friend HouseChanged(MAX_HOUSES) As Boolean
     Friend HouseEdit As Boolean
-
-    Structure HouseRec
-        Dim ConfigName As String
-        Dim BaseMap As Integer
-        Dim Price As Integer
-        Dim MaxFurniture As Integer
-        Dim X As Integer
-        Dim Y As Integer
-    End Structure
-
-    Structure FurnitureRec
-        Dim ItemNum As Integer
-        Dim X As Integer
-        Dim Y As Integer
-    End Structure
-
-    Structure PlayerHouseRec
-        Dim Houseindex As Integer
-        Dim FurnitureCount As Integer
-        Dim Furniture() As FurnitureRec
-    End Structure
-
 #End Region
 
 #Region "Editor"
@@ -86,14 +57,14 @@ Friend Module C_Housing
 
         Buffer.WriteInt32(Packets.ClientPackets.CSaveHouses)
 
-        For i = 1 To MaxHouses
+        For i = 0 To MAX_HOUSES
             If HouseChanged(i) Then count = count + 1
         Next
 
         Buffer.WriteInt32(count)
 
         If count > 0 Then
-            For i = 1 To MaxHouses
+            For i = 0 To MAX_HOUSES
                 If HouseChanged(i) Then
                     Buffer.WriteInt32(i)
                     Buffer.WriteString((Trim$(House(i).ConfigName)))
@@ -117,11 +88,11 @@ Friend Module C_Housing
 
     Friend Sub ClearChanged_House()
 
-        For i = 1 To MaxHouses
+        For i = 0 To MAX_HOUSES
             HouseChanged(i) = Nothing
         Next i
 
-        ReDim HouseChanged(MaxHouses)
+        ReDim HouseChanged(MAX_HOUSES)
     End Sub
 
 #End Region
@@ -131,7 +102,7 @@ Friend Module C_Housing
     Sub Packet_HouseConfigurations(ByRef data() As Byte)
         Dim i As Integer
         Dim buffer As New ByteStream(data)
-        For i = 1 To MaxHouses
+        For i = 0 To MAX_HOUSES
             HouseConfig(i).ConfigName = buffer.ReadString
             HouseConfig(i).BaseMap = buffer.ReadInt32
             HouseConfig(i).MaxFurniture = buffer.ReadInt32
@@ -192,7 +163,7 @@ Friend Module C_Housing
 
         ReDim Furniture(FurnitureCount)
         If FurnitureCount > 0 Then
-            For i = 1 To FurnitureCount
+            For i = 0 To FurnitureCount
                 Furniture(i).ItemNum = buffer.ReadInt32
                 Furniture(i).X = buffer.ReadInt32
                 Furniture(i).Y = buffer.ReadInt32
@@ -206,7 +177,7 @@ Friend Module C_Housing
     Sub Packet_EditHouses(ByRef data() As Byte)
         Dim buffer As New ByteStream(data)
         Dim i As Integer
-        For i = 1 To MaxHouses
+        For i = 0 To MAX_HOUSES
             With House(i)
                 .ConfigName = Trim$(buffer.ReadString)
                 .BaseMap = buffer.ReadInt32

@@ -26,7 +26,7 @@ Friend Class frmEditor_Quest
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         Dim tmpindex As Integer
 
-        If Editorindex <= 0 OrElse Editorindex > MaxQuests Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_QUESTS Then Exit Sub
 
         tmpindex = lstIndex.SelectedIndex
         Quest(Editorindex).Name = Trim$(txtName.Text)
@@ -36,7 +36,7 @@ Friend Class frmEditor_Quest
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        If Editorindex <= 0 OrElse Editorindex > MaxQuests Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_QUESTS Then Exit Sub
 
         If Len(Trim$(txtName.Text)) = 0 Then
             MsgBox("Name required.")
@@ -50,49 +50,49 @@ Friend Class frmEditor_Quest
     End Sub
 
     Private Sub TxtStartText_TextChanged(sender As Object, e As EventArgs) Handles txtStartText.TextChanged
-        If Editorindex <= 0 OrElse Editorindex > MaxQuests Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_QUESTS Then Exit Sub
 
         Quest(Editorindex).Chat(1) = Trim$(txtStartText.Text)
     End Sub
 
     Private Sub TxtProgressText_TextChanged(sender As Object, e As EventArgs) Handles txtProgressText.TextChanged
-        If Editorindex <= 0 OrElse Editorindex > MaxQuests Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_QUESTS Then Exit Sub
 
         Quest(Editorindex).Chat(2) = Trim$(txtProgressText.Text)
     End Sub
 
     Private Sub TxtEndText_TextChanged(sender As Object, e As EventArgs) Handles txtEndText.TextChanged
-        If Editorindex <= 0 OrElse Editorindex > MaxQuests Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_QUESTS Then Exit Sub
 
         Quest(Editorindex).Chat(3) = Trim$(txtEndText.Text)
     End Sub
 
     Private Sub CmbStartItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbStartItem.SelectedIndexChanged
-        If Editorindex <= 0 OrElse Editorindex > MaxQuests Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_QUESTS Then Exit Sub
 
         Quest(Editorindex).QuestGiveItem = cmbStartItem.SelectedIndex
     End Sub
 
     Private Sub CmbEndItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbEndItem.SelectedIndexChanged
-        If Editorindex <= 0 OrElse Editorindex > MaxQuests Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_QUESTS Then Exit Sub
 
         Quest(Editorindex).QuestRemoveItem = cmbEndItem.SelectedIndex
     End Sub
 
     Private Sub NudGiveAmount_ValueChanged(sender As Object, e As EventArgs) Handles nudGiveAmount.ValueChanged
-        If Editorindex <= 0 OrElse Editorindex > MaxQuests Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_QUESTS Then Exit Sub
 
         Quest(Editorindex).QuestGiveItemValue = cmbEndItem.SelectedIndex
     End Sub
 
     Private Sub NudTakeAmount_ValueChanged(sender As Object, e As EventArgs) Handles nudTakeAmount.ValueChanged
-        If Editorindex <= 0 OrElse Editorindex > MaxQuests Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_QUESTS Then Exit Sub
 
         Quest(Editorindex).QuestRemoveItemValue = nudTakeAmount.Value
     End Sub
 
     Private Sub ChkRepeat_CheckedChanged(sender As Object, e As EventArgs) Handles chkRepeat.CheckedChanged
-        If Editorindex <= 0 OrElse Editorindex > MaxQuests Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_QUESTS Then Exit Sub
 
         If chkRepeat.Checked = True Then
             Quest(Editorindex).Repeat = 1
@@ -102,7 +102,7 @@ Friend Class frmEditor_Quest
     End Sub
 
     Private Sub ChkQuestCancel_CheckedChanged(sender As Object, e As EventArgs) Handles chkQuestCancel.CheckedChanged
-        If Editorindex <= 0 OrElse Editorindex > MaxQuests Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_QUESTS Then Exit Sub
 
         If chkQuestCancel.Checked = True Then
             Quest(Editorindex).Cancelable = 1
@@ -114,13 +114,13 @@ Friend Class frmEditor_Quest
 #Region "Rewards"
 
     Private Sub NudExpReward_ValueChanged(sender As Object, e As EventArgs) Handles nudExpReward.ValueChanged
-        If Editorindex <= 0 OrElse Editorindex > MaxQuests Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_QUESTS Then Exit Sub
 
         Quest(Editorindex).RewardExp = nudExpReward.Value
     End Sub
 
     Private Sub BtnAddReward_Click(sender As Object, e As EventArgs) Handles btnAddReward.Click
-        If Editorindex <= 0 OrElse Editorindex > MaxQuests Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_QUESTS Then Exit Sub
 
         If cmbItemReward.SelectedIndex < 0 Then Exit Sub
 
@@ -133,7 +133,7 @@ Friend Class frmEditor_Quest
         Quest(Editorindex).RewardItemAmount(Quest(Editorindex).RewardCount) = nudItemRewValue.Value
 
         lstRewards.Items.Clear()
-        For i = 1 To Quest(Editorindex).RewardCount
+       For i = 0 To Quest(Editorindex).RewardCount
             lstRewards.Items.Add(i & ":" & Quest(Editorindex).RewardItemAmount(i) & " X " & Trim(Item(Quest(Editorindex).RewardItem(i)).Name))
         Next
     End Sub
@@ -147,7 +147,7 @@ Friend Class frmEditor_Quest
         ReDim tmpRewardItem(Quest(Editorindex).RewardCount - 1)
         ReDim tmpRewardItemIndex(Quest(Editorindex).RewardCount - 1)
 
-        For i = 1 To Quest(Editorindex).RewardCount
+       For i = 0 To Quest(Editorindex).RewardCount
             If Not i = lstRewards.SelectedIndex + 1 Then
                 tmpRewardItem(i) = Quest(Editorindex).RewardItem(i)
                 tmpRewardItemIndex(i) = Quest(Editorindex).RewardItemAmount(i)
@@ -159,13 +159,13 @@ Friend Class frmEditor_Quest
         ReDim Quest(Editorindex).RewardItem(Quest(Editorindex).RewardCount)
         ReDim Quest(Editorindex).RewardItemAmount(Quest(Editorindex).RewardCount)
 
-        For i = 1 To Quest(Editorindex).RewardCount
+       For i = 0 To Quest(Editorindex).RewardCount
             Quest(Editorindex).RewardItem(i) = tmpRewardItem(i)
             Quest(Editorindex).RewardItemAmount(i) = tmpRewardItemIndex(i)
         Next
 
         lstRewards.Items.Clear()
-        For i = 1 To Quest(Editorindex).RewardCount
+       For i = 0 To Quest(Editorindex).RewardCount
             lstRewards.Items.Add(i & ":" & Quest(Editorindex).RewardItemAmount(i) & " X " & Trim(Item(Quest(Editorindex).RewardItem(i)).Name))
         Next
 
@@ -198,14 +198,14 @@ Friend Class frmEditor_Quest
     End Sub
 
     Private Sub BtnRemoveTask_Click(sender As Object, e As EventArgs) Handles btnRemoveTask.Click
-        Dim i As Integer, tmptask() As TaskRec
+        Dim i As Integer, tmptask() As TaskStruct
 
         If lstTasks.SelectedIndex < 0 Then Exit Sub
         If Quest(Editorindex).TaskCount <= 0 Then Exit Sub
 
         ReDim tmptask(Quest(Editorindex).TaskCount - 1)
 
-        For i = 1 To Quest(Editorindex).TaskCount
+       For i = 0 To Quest(Editorindex).TaskCount
             If Not i = lstTasks.SelectedIndex + 1 Then
                 tmptask(i) = Quest(Editorindex).Task(i)
             End If
@@ -215,14 +215,14 @@ Friend Class frmEditor_Quest
 
         ReDim Quest(Editorindex).Task(Quest(Editorindex).TaskCount)
 
-        For i = 1 To Quest(Editorindex).TaskCount
+       For i = 0 To Quest(Editorindex).TaskCount
             If Not i = lstTasks.SelectedIndex + 1 Then
                 Quest(Editorindex).Task(i) = tmptask(i)
             End If
         Next
 
         lstTasks.Items.Clear()
-        For i = 1 To Quest(Editorindex).TaskCount
+       For i = 0 To Quest(Editorindex).TaskCount
             lstTasks.Items.Add(i & ":" & Quest(Editorindex).Task(i).TaskLog)
         Next
 
@@ -270,7 +270,7 @@ Friend Class frmEditor_Quest
         End If
 
         lstTasks.Items.Clear()
-        For i = 1 To Quest(Editorindex).TaskCount
+       For i = 0 To Quest(Editorindex).TaskCount
             lstTasks.Items.Add(i & ":" & Quest(Editorindex).Task(i).TaskLog)
         Next
 
@@ -394,7 +394,7 @@ Friend Class frmEditor_Quest
         ReDim tmpRequirement(Quest(Editorindex).ReqCount - 1)
         ReDim tmpRequirementIndex(Quest(Editorindex).ReqCount - 1)
 
-        For i = 1 To Quest(Editorindex).ReqCount
+       For i = 0 To Quest(Editorindex).ReqCount
             If Not i = lstRequirements.SelectedIndex + 1 Then
                 tmpRequirement(i) = Quest(Editorindex).Requirement(i)
                 tmpRequirementIndex(i) = Quest(Editorindex).RequirementIndex(i)
@@ -406,7 +406,7 @@ Friend Class frmEditor_Quest
         ReDim Quest(Editorindex).Requirement(Quest(Editorindex).ReqCount)
         ReDim Quest(Editorindex).RequirementIndex(Quest(Editorindex).ReqCount)
 
-        For i = 1 To Quest(Editorindex).ReqCount
+       For i = 0 To Quest(Editorindex).ReqCount
             If Not i = lstRequirements.SelectedIndex + 1 Then
                 Quest(Editorindex).Requirement(i) = tmpRequirement(i)
                 Quest(Editorindex).RequirementIndex(i) = tmpRequirementIndex(i)
@@ -414,7 +414,7 @@ Friend Class frmEditor_Quest
         Next
 
         lstRequirements.Items.Clear()
-        For i = 1 To Quest(Editorindex).ReqCount
+       For i = 0 To Quest(Editorindex).ReqCount
             Select Case Quest(Editorindex).Requirement(i)
                 Case 1
                     lstRequirements.Items.Add(i & ":" & "Item Requirement: " & Trim(Item(Quest(Editorindex).RequirementIndex(i)).Name))
@@ -453,7 +453,7 @@ Friend Class frmEditor_Quest
         End If
 
         lstRequirements.Items.Clear()
-        For i = 1 To Quest(Editorindex).ReqCount
+       For i = 0 To Quest(Editorindex).ReqCount
             Select Case Quest(Editorindex).Requirement(i)
                 Case 1
                     lstRequirements.Items.Add(i & ":" & "Item Requirement: " & Trim(Item(Quest(Editorindex).RequirementIndex(i)).Name))

@@ -2,7 +2,7 @@
 
     ''' <Summary> Text Color Contstant </Summary>
     Enum ColorType As Byte
-        Black
+        Black 
         Blue
         Green
         Cyan
@@ -157,7 +157,7 @@
 
     ''' <Summary> Stats used by Players, Npcs and Class </Summary>
     Public Enum StatType As Byte
-        Strength = 1
+        Strength
         Endurance
         Vitality
         Luck
@@ -169,7 +169,7 @@
 
     ''' <Summary> Vitals used by Players, Npcs, and Class </Summary>
     Public Enum VitalType As Byte
-        HP = 1
+        HP
         MP
         SP
 
@@ -178,7 +178,7 @@
 
     ''' <Summary> Equipment used by Players </Summary>
     Public Enum EquipmentType As Byte
-        Weapon = 1
+        Weapon
         Armor
         Helmet
         Shield
@@ -190,7 +190,7 @@
 
     ''' <Summary> Layers in a map </Summary>
     Public Enum LayerType As Byte
-        Ground = 1
+        Ground
         Mask
         Mask2
         Fringe
@@ -201,7 +201,7 @@
 
     ''' <Summary> Resource Skills </Summary>
     Public Enum ResourceSkills As Byte
-        Herbalist = 1
+        Herbalist
         WoodCutter
         Miner
         Fisherman
@@ -210,14 +210,14 @@
     End Enum
 
     Public Enum RandomBonusType
-        RANDOM_SPEED = 1            ' Reduces time between attacks by 20%
-        RANDOM_DAMAGE        ' Increases base damage by 25%
+        RANDOM_SPEED           ' Reduces time between attacks by 20%
+        RANDOM_DAMAGE          ' Increases base damage by 25%
         RANDOM_WARRIOR         ' Adds Strength and Endurance
-        RANDOM_ARCHER        ' Adds Achery and Endurance
-        RANDOM_MAGE          ' Adds Magic and Endurance
-        RANDOM_JESTER         ' Adds Magic and Archery
-        RANDOM_BATTLEMAGE     ' Adds Attack and Magic
-        RANDOM_ROGUE         ' Adds Attack and Archery
+        RANDOM_ARCHER          ' Adds Achery and Endurance
+        RANDOM_MAGE            ' Adds Magic and Endurance
+        RANDOM_JESTER          ' Adds Magic and Archery
+        RANDOM_BATTLEMAGE      ' Adds Attack and Magic
+        RANDOM_ROGUE           ' Adds Attack and Archery
         RANDOM_TOWER           ' Adds Endurance and Defense
         RANDOM_SURVIVALIST     ' Adds Cooking and Fishing
         RANDOM_PERFECTIONIST   ' Adds Mining and Jeweler
@@ -229,7 +229,7 @@
     End Enum
 
     Public Enum RarityType
-        RARITY_BROKEN = 1
+        RARITY_BROKEN
         RARITY_COMMON
         RARITY_UNCOMMON
         RARITY_RARE
@@ -247,7 +247,7 @@
     End Enum
 
     Public Enum QuestType
-        Slay = 1
+        Slay
         Collect
         Talk
         Reach

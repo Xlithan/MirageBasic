@@ -19,18 +19,17 @@ Module C_Editors
             FrmEditor_Animation.cmbSound.Items.Clear()
             FrmEditor_Animation.cmbSound.Items.Add("None")
 
-            If UBound(SoundCache) > 0 Then
-                For i = 1 To UBound(SoundCache)
-                    FrmEditor_Animation.cmbSound.Items.Add(SoundCache(i))
-                Next
-            End If
+            For i = 0 To UBound(SoundCache)
+                FrmEditor_Animation.cmbSound.Items.Add(SoundCache(i))
+            Next
 
+            CacheSound
             If Trim$(Animation(Editorindex).Sound) = "None" OrElse Trim$(Animation(Editorindex).Sound) = "" Then
                 FrmEditor_Animation.cmbSound.SelectedIndex = 0
             Else
-                For i = 1 To FrmEditor_Animation.cmbSound.Items.Count
-                    If FrmEditor_Animation.cmbSound.Items(i - 1).ToString = FrmEditor_Animation.cmbSound.SelectedIndex Then
-                        FrmEditor_Animation.cmbSound.SelectedIndex = i - 1
+               For i = 0 To FrmEditor_Animation.cmbSound.Items.Count
+                    If FrmEditor_Animation.cmbSound.GetItemText(i) = FrmEditor_Animation.cmbSound.SelectedIndex Then
+                        FrmEditor_Animation.cmbSound.SelectedIndex = i
                         Exit For
                     End If
                 Next
@@ -57,7 +56,7 @@ Module C_Editors
     Friend Sub AnimationEditorOk()
         Dim i As Integer
 
-        For i = 1 To MAX_ANIMATIONS
+       For i = 0 To MAX_ANIMATIONS
             If Animation_Changed(i) Then
                 SendSaveAnimation(i)
             End If
@@ -99,19 +98,19 @@ Module C_Editors
             'populate combo boxes
             .cmbAnimation.Items.Clear()
             .cmbAnimation.Items.Add("None")
-            For i = 1 To MAX_ANIMATIONS
+           For i = 0 To MAX_ANIMATIONS
                 .cmbAnimation.Items.Add(i & ": " & Animation(i).Name)
             Next
 
             .cmbQuest.Items.Clear()
             .cmbQuest.Items.Add("None")
-            For i = 1 To MaxQuests
+           For i = 0 To MAX_QUESTS
                 .cmbQuest.Items.Add(i & ": " & Quest(i).Name)
             Next
 
             .cmbItem.Items.Clear()
             .cmbItem.Items.Add("None")
-            For i = 1 To MAX_ITEMS
+           For i = 0 To MAX_ITEMS
                 .cmbItem.Items.Add(i & ": " & Item(i).Name)
             Next
 
@@ -158,7 +157,7 @@ Module C_Editors
             .cmbSkill5.Items.Add("None")
             .cmbSkill6.Items.Add("None")
 
-            For i = 1 To MAX_SKILLS
+           For i = 0 To MAX_SKILLS
                 If Len(Skill(i).Name) > 0 Then
                     .cmbSkill1.Items.Add(Skill(i).Name)
                     .cmbSkill2.Items.Add(Skill(i).Name)
@@ -184,7 +183,7 @@ Module C_Editors
     Friend Sub NpcEditorOk()
         Dim i As Integer
 
-        For i = 1 To MAX_NPCS
+       For i = 0 To MAX_NPCS
             If NPC_Changed(i) Then
                 SendSaveNpc(i)
             End If
@@ -204,7 +203,7 @@ Module C_Editors
     End Sub
 
     Friend Sub ClearChanged_NPC()
-        For i = 1 To MAX_NPCS
+       For i = 0 To MAX_NPCS
             NPC_Changed(i) = False
         Next
     End Sub
@@ -213,7 +212,7 @@ Module C_Editors
 
 #Region "Resource Editor"
     Friend Sub ClearChanged_Resource()
-        For i = 1 To MAX_RESOURCES
+       For i = 0 To MAX_RESOURCES
             Resource_Changed(i) = Nothing
         Next i
         ReDim Resource_Changed(MAX_RESOURCES)
@@ -229,13 +228,13 @@ Module C_Editors
             'populate combo boxes
             .cmbRewardItem.Items.Clear()
             .cmbRewardItem.Items.Add("None")
-            For i = 1 To MAX_ITEMS
+           For i = 0 To MAX_ITEMS
                 .cmbRewardItem.Items.Add(i & ": " & Item(i).Name)
             Next
 
             .cmbAnimation.Items.Clear()
             .cmbAnimation.Items.Add("None")
-            For i = 1 To MAX_ANIMATIONS
+           For i = 0 To MAX_ANIMATIONS
                 .cmbAnimation.Items.Add(i & ": " & Animation(i).Name)
             Next
 
@@ -267,7 +266,7 @@ Module C_Editors
     Friend Sub ResourceEditorOk()
         Dim i As Integer
 
-        For i = 1 To MAX_RESOURCES
+       For i = 0 To MAX_RESOURCES
             If Resource_Changed(i) Then
                 SendSaveResource(i)
             End If
@@ -307,14 +306,14 @@ Module C_Editors
             ' build class combo
             .cmbClass.Items.Clear()
             .cmbClass.Items.Add("None")
-            For i = 1 To MAX_JOB
+           For i = 0 To MAX_JOBS
                 .cmbClass.Items.Add(Trim$(Job(i).Name))
             Next
             .cmbClass.SelectedIndex = 0
 
             .cmbProjectile.Items.Clear()
             .cmbProjectile.Items.Add("None")
-            For i = 1 To MaxProjectiles
+           For i = 0 To MAX_PROJECTILES
                 .cmbProjectile.Items.Add(Trim$(Projectiles(i).Name))
             Next
             .cmbProjectile.SelectedIndex = 0
@@ -323,7 +322,7 @@ Module C_Editors
             .cmbAnimCast.Items.Add("None")
             .cmbAnim.Items.Clear()
             .cmbAnim.Items.Add("None")
-            For i = 1 To MAX_ANIMATIONS
+           For i = 0 To MAX_ANIMATIONS
                 .cmbAnimCast.Items.Add(Trim$(Animation(i).Name))
                 .cmbAnim.Items.Add(Trim$(Animation(i).Name))
             Next
@@ -379,7 +378,7 @@ Module C_Editors
     Friend Sub SkillEditorOk()
         Dim i As Integer
 
-        For i = 1 To MAX_SKILLS
+       For i = 0 To MAX_SKILLS
             If Skill_Changed(i) Then
                 SendSaveSkill(i)
             End If
@@ -399,7 +398,7 @@ Module C_Editors
     End Sub
 
     Friend Sub ClearChanged_Skill()
-        For i = 1 To MAX_SKILLS
+       For i = 0 To MAX_SKILLS
             Skill_Changed(i) = False
         Next
     End Sub
@@ -431,7 +430,7 @@ Module C_Editors
         frmEditor_Shop.cmbCostItem.Items.Clear()
         frmEditor_Shop.cmbCostItem.Items.Add("None")
 
-        For i = 1 To MAX_ITEMS
+       For i = 0 To MAX_ITEMS
             frmEditor_Shop.cmbItem.Items.Add(i & ": " & Trim$(Item(i).Name))
             frmEditor_Shop.cmbCostItem.Items.Add(i & ": " & Trim$(Item(i).Name))
         Next
@@ -448,7 +447,7 @@ Module C_Editors
         Dim i As Integer
         frmEditor_Shop.lstTradeItem.Items.Clear()
 
-        For i = 1 To MAX_TRADES
+       For i = 0 To MAX_TRADES
             With Shop(Editorindex).TradeItem(i)
                 ' if none, show as none
                 If .Item = 0 AndAlso .CostItem = 0 Then
@@ -465,7 +464,7 @@ Module C_Editors
     Friend Sub ShopEditorOk()
         Dim i As Integer
 
-        For i = 1 To MAX_SHOPS
+       For i = 0 To MAX_SHOPS
             If Shop_Changed(i) Then
                 SendSaveShop(i)
             End If
@@ -485,7 +484,7 @@ Module C_Editors
     End Sub
 
     Friend Sub ClearChanged_Shop()
-        For i = 1 To MAX_SHOPS
+       For i = 0 To MAX_SHOPS
             Shop_Changed(i) = False
         Next
     End Sub
@@ -507,12 +506,12 @@ Module C_Editors
         Editor = 0
     End Sub
 
-    Friend Sub ClassEditorInit()
+    Friend Sub JobEditorInit()
         Dim i As Integer
 
         frmEditor_Job.lstIndex.Items.Clear()
 
-        For i = 1 To MAX_JOB
+       For i = 0 To MAX_JOBS
             frmEditor_Job.lstIndex.Items.Add(Trim(Job(i).Name))
         Next
 
@@ -524,7 +523,7 @@ Module C_Editors
         frmEditor_Job.cmbItems.Items.Clear()
 
         frmEditor_Job.cmbItems.Items.Add("None")
-        For i = 1 To MAX_ITEMS
+       For i = 0 To MAX_ITEMS
             frmEditor_Job.cmbItems.Items.Add(Trim(Item(i).Name))
         Next
 
@@ -533,10 +532,10 @@ Module C_Editors
         frmEditor_Job.Visible = True
     End Sub
 
-    Friend Sub LoadClass()
+    Friend Sub LoadJob()
         Dim i As Integer
 
-        If Editorindex <= 0 OrElse Editorindex > MAX_JOB Then Exit Sub
+        If Editorindex <= 0 OrElse Editorindex > MAX_JOBS Then Exit Sub
 
         frmEditor_Job.txtName.Text = Job(Editorindex).Name
         frmEditor_Job.txtDescription.Text = Job(Editorindex).Desc
@@ -580,7 +579,7 @@ Module C_Editors
 
         frmEditor_Job.lstStartItems.Items.Clear()
 
-        For i = 1 To 5
+       For i = 0 To 5
             If Job(Editorindex).StartItem(i) > 0 Then
                 frmEditor_Job.lstStartItems.Items.Add(Item(Job(Editorindex).StartItem(i)).Name & " X " & Job(Editorindex).StartValue(i))
             Else
@@ -605,7 +604,7 @@ Module C_Editors
             .lstIndex.Items.Clear()
 
             ' Add the names
-            For i = 1 To MAX_ITEMS
+           For i = 0 To MAX_ITEMS
                 .lstIndex.Items.Add(i & ": " & Trim$(Item(i).Name))
             Next
 
@@ -625,37 +624,37 @@ Module C_Editors
             'populate combo boxes
             frmEditor_Item.cmbAnimation.Items.Clear()
             frmEditor_Item.cmbAnimation.Items.Add("None")
-            For i = 1 To MAX_ANIMATIONS
+           For i = 0 To MAX_ANIMATIONS
                 frmEditor_Item.cmbAnimation.Items.Add(i & ": " & Animation(i).Name)
             Next
 
             frmEditor_Item.cmbAmmo.Items.Clear()
             frmEditor_Item.cmbAmmo.Items.Add("None")
-            For i = 1 To MAX_ITEMS
+           For i = 0 To MAX_ITEMS
                 frmEditor_Item.cmbAmmo.Items.Add(i & ": " & Item(i).Name)
             Next
 
             frmEditor_Item.cmbProjectile.Items.Clear()
             frmEditor_Item.cmbProjectile.Items.Add("None")
-            For i = 1 To MaxProjectiles
+           For i = 0 To MAX_PROJECTILES
                 frmEditor_Item.cmbProjectile.Items.Add(i & ": " & Projectiles(i).Name)
             Next
 
             frmEditor_Item.cmbSkills.Items.Clear()
             frmEditor_Item.cmbSkills.Items.Add("None")
-            For i = 1 To MAX_SKILLS
+           For i = 0 To MAX_SKILLS
                 frmEditor_Item.cmbSkills.Items.Add(i & ": " & Skill(i).Name)
             Next
 
             frmEditor_Item.cmbPet.Items.Clear()
             frmEditor_Item.cmbPet.Items.Add("None")
-            For i = 1 To MAX_PETS
+           For i = 0 To MAX_PETS
                 frmEditor_Item.cmbPet.Items.Add(i & ": " & Pet(i).Name)
             Next
 
             frmEditor_Item.cmbRecipe.Items.Clear()
             frmEditor_Item.cmbRecipe.Items.Add("None")
-            For i = 1 To MAX_RECIPE
+           For i = 0 To MAX_RECIPE
                 frmEditor_Item.cmbRecipe.Items.Add(i & ": " & Recipe(i).Name)
             Next
 
@@ -766,7 +765,7 @@ Module C_Editors
             frmEditor_Item.cmbClassReq.Items.Clear()
             frmEditor_Item.cmbClassReq.Items.Add("None")
 
-            For i = 1 To MAX_JOB
+           For i = 0 To MAX_JOBS
                 frmEditor_Item.cmbClassReq.Items.Add(Job(i).Name)
             Next
 
@@ -809,7 +808,7 @@ Module C_Editors
     Friend Sub ItemEditorOk()
         Dim i As Integer
 
-        For i = 1 To MAX_ITEMS
+       For i = 0 To MAX_ITEMS
             If Item_Changed(i) Then
                 SendSaveItem(i)
             End If

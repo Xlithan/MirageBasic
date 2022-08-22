@@ -13,7 +13,7 @@ Module C_UpdateUI
     Friend Frmmaingamevisible As Boolean
     Friend Pnlloadvisible As Boolean
     Friend Lblnextcharleft As Integer
-    Friend Cmbclass() As String
+    Friend CmbJob() As String
     Friend TxtChatAdd As String
     Friend ChkSavePassChecked As Boolean
     Friend TempUserName As String
@@ -283,12 +283,11 @@ Module C_UpdateUI
 
     Friend CraftPanelX As Integer = 25
     Friend CraftPanelY As Integer = 25
-    Friend LoadClassInfo As Boolean
+    Friend LoadJobInfo As Boolean
 
 #End Region
 
     Sub UpdateUi()
-
         If ReloadFrmMain = True Then
             ReloadFrmMain = False
         End If
@@ -320,20 +319,20 @@ Module C_UpdateUI
             FrmMenu.lblNextChar.Left = Lblnextcharleft
         End If
 
-        If Not Cmbclass Is Nothing Then
-            FrmMenu.cmbClass.Items.Clear()
+        If Not cmbJob Is Nothing Then
+            FrmMenu.cmbJob.Items.Clear()
 
-            For i = 1 To UBound(Cmbclass)
-                FrmMenu.cmbClass.Items.Add(Cmbclass(i))
+            For i = 1 To UBound(CmbJob)
+                FrmMenu.cmbJob.Items.Add(CmbJob(i))
             Next
 
-            FrmMenu.cmbClass.SelectedIndex = 0
+            FrmMenu.cmbJob.SelectedIndex = 0
 
             FrmMenu.rdoMale.Checked = True
 
             FrmMenu.txtCharName.Focus()
 
-            Cmbclass = Nothing
+            CmbJob = Nothing
         End If
 
         If PnlLoginVisible <> FrmMenu.pnlLogin.Visible Then
@@ -374,7 +373,7 @@ Module C_UpdateUI
                 .lstIndex.Items.Clear()
 
                 ' Add the names
-                For i = 1 To MAX_PETS
+                For i = 0 To MAX_PETS
                     .lstIndex.Items.Add(i & ": " & Trim$(Pet(i).Name))
                 Next
 
@@ -383,7 +382,7 @@ Module C_UpdateUI
                 .cmbEvolve.Items.Add("None")
 
                 ' Add the names
-                For i = 1 To MAX_PETS
+                For i = 0 To MAX_PETS
                     .cmbEvolve.Items.Add(i & ": " & Trim$(Pet(i).Name))
                 Next
 
@@ -402,7 +401,7 @@ Module C_UpdateUI
                 .cmbQuestReq.Items.Clear()
                 .cmbQuestReq.Items.Add("None")
                 ' Add the names
-                For I = 1 To MaxQuests
+                For I = 0 To MAX_QUESTS
                     .lstIndex.Items.Add(I & ": " & Trim$(Quest(I).Name))
                     .cmbQuestReq.Items.Add(I & ": " & Trim$(Quest(I).Name))
                 Next
@@ -420,7 +419,7 @@ Module C_UpdateUI
                 .lstIndex.Items.Clear()
 
                 ' Add the names
-                For i = 1 To MAX_ANIMATIONS
+                For i = 0 To MAX_ANIMATIONS
                     .lstIndex.Items.Add(i & ": " & Trim$(Animation(i).Name))
                 Next
 
@@ -442,13 +441,13 @@ Module C_UpdateUI
         End If
 
         If InitClassEditor = True Then
-            ClassEditorInit()
+            JobEditorInit()
             InitClassEditor = False
         End If
 
-        If LoadClassInfo = True Then
-            LoadClass()
-            LoadClassInfo = False
+        If LoadJobInfo = True Then
+            LoadJob()
+            LoadJobInfo = False
         End If
 
         If InitResourceEditor = True Then
@@ -459,7 +458,7 @@ Module C_UpdateUI
                 .lstIndex.Items.Clear()
 
                 ' Add the names
-                For i = 1 To MAX_RESOURCES
+                For i = 0 To MAX_RESOURCES
                     If Resource(i).Name Is Nothing Then Resource(i).Name = ""
                     If Resource(i).SuccessMessage Is Nothing Then Resource(i).SuccessMessage = ""
                     If Resource(i).EmptyMessage Is Nothing Then Resource(i).EmptyMessage = ""
@@ -479,7 +478,7 @@ Module C_UpdateUI
                 .lstIndex.Items.Clear()
 
                 ' Add the names
-                For i = 1 To MAX_NPCS
+                For i = 0 To MAX_NPCS
                     .lstIndex.Items.Add(i & ": " & Trim$(Npc(i).Name))
                 Next
 
@@ -496,7 +495,7 @@ Module C_UpdateUI
                 .lstIndex.Items.Clear()
 
                 ' Add the names
-                For i = 1 To MAX_SKILLS
+                For i = 0 To MAX_SKILLS
                     .lstIndex.Items.Add(i & ": " & Trim$(Skill(i).Name))
                 Next
 
@@ -513,7 +512,7 @@ Module C_UpdateUI
                 .lstIndex.Items.Clear()
 
                 ' Add the names
-                For i = 1 To MAX_SHOPS
+                For i = 0 To MAX_SHOPS
                     .lstIndex.Items.Add(i & ": " & Trim$(Shop(i).Name))
                 Next
 
@@ -530,7 +529,7 @@ Module C_UpdateUI
                 .lstIndex.Items.Clear()
 
                 ' Add the names
-                For i = 1 To MAX_ANIMATIONS
+                For i = 0 To MAX_ANIMATIONS
                     .lstIndex.Items.Add(i & ": " & Trim$(Animation(i).Name))
                 Next
 
@@ -547,7 +546,7 @@ Module C_UpdateUI
                 .lstIndex.Items.Clear()
 
                 ' Add the names
-                For i = 1 To MaxHouses
+                For i = 0 To MAX_HOUSES
                     .lstIndex.Items.Add(i & ": " & Trim$(House(i).ConfigName))
                 Next
 
@@ -566,7 +565,7 @@ Module C_UpdateUI
                 .lstIndex.Items.Clear()
 
                 ' Add the names
-                For i = 1 To MaxProjectiles
+                For i = 0 To MAX_PROJECTILES
                     .lstIndex.Items.Add(i & ": " & Trim$(Projectiles(i).Name))
                 Next
 
@@ -638,7 +637,7 @@ Module C_UpdateUI
 
             FrmAdmin.lstMaps.Items.Clear()
 
-            For x = 1 To MAX_MAPS
+            For x = 0 To MAX_MAPS
                 FrmAdmin.lstMaps.Items.Add(x)
                 FrmAdmin.lstMaps.Items(x - 1).SubItems.Add(MapNames(x))
             Next
@@ -657,7 +656,7 @@ Module C_UpdateUI
 
             DialogType = DialogueTypeQuest
 
-            If QuestNumForStart > 0 AndAlso QuestNumForStart <= MaxQuests Then
+            If QuestNumForStart > 0 AndAlso QuestNumForStart <= MAX_QUESTS Then
                 QuestAcceptTag = QuestNumForStart
             End If
 
@@ -724,25 +723,25 @@ Module C_UpdateUI
                 ' set the tabs
                 .tabPages.TabPages.Clear()
 
-                For i = 1 To TmpEvent.PageCount
+                For i = 0 To TmpEvent.PageCount
                     .tabPages.TabPages.Add(Str(i))
                 Next
                 ' items
                 .cmbHasItem.Items.Clear()
                 .cmbHasItem.Items.Add("None")
-                For i = 1 To MAX_ITEMS
+                For i = 0 To MAX_ITEMS
                     .cmbHasItem.Items.Add(i & ": " & Trim$(Item(i).Name))
                 Next
                 ' variables
                 .cmbPlayerVar.Items.Clear()
                 .cmbPlayerVar.Items.Add("None")
-                For i = 1 To MaxVariables
+                For i = 0 To MaxVariables
                     .cmbPlayerVar.Items.Add(i & ". " & Variables(i))
                 Next
                 ' variables
                 .cmbPlayerSwitch.Items.Clear()
                 .cmbPlayerSwitch.Items.Add("None")
-                For i = 1 To MaxSwitches
+                For i = 0 To MaxSwitches
                     .cmbPlayerSwitch.Items.Add(i & ". " & Switches(i))
                 Next
                 ' name

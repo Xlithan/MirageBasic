@@ -67,7 +67,7 @@ Friend Module C_EventSystem
 
 #Region "Types"
 
-    Friend Structure EventCommandRec
+    Public Structure EventCommandRec
         Dim Index As Integer
         Dim Text1 As String
         Dim Text2 As String
@@ -85,7 +85,7 @@ Friend Module C_EventSystem
         Dim MoveRoute() As MoveRouteRec
     End Structure
 
-    Friend Structure MoveRouteRec
+    Public Structure MoveRouteRec
         Dim Index As Integer
         Dim Data1 As Integer
         Dim Data2 As Integer
@@ -95,13 +95,13 @@ Friend Module C_EventSystem
         Dim Data6 As Integer
     End Structure
 
-    Friend Structure CommandListRec
+    Public Structure CommandListRec
         Dim CommandCount As Integer
         Dim ParentList As Integer
         Dim Commands() As EventCommandRec
     End Structure
 
-    Friend Structure ConditionalBranchRec
+    Public Structure ConditionalBranchRec
         Dim Condition As Integer
         Dim Data1 As Integer
         Dim Data2 As Integer
@@ -110,7 +110,7 @@ Friend Module C_EventSystem
         Dim ElseCommandList As Integer
     End Structure
 
-    Friend Structure EventPageRec
+    Public Structure EventPageRec
 
         'These are condition variables that decide if the event even appears to the player.
         Dim ChkVariable As Integer
@@ -172,7 +172,7 @@ Friend Module C_EventSystem
         Dim Y As Integer
     End Structure
 
-    Friend Structure EventStruct
+    Public Structure EventStruct
         Dim Name As String
         Dim Globals As Integer
         Dim PageCount As Integer
@@ -181,7 +181,7 @@ Friend Module C_EventSystem
         Dim Y As Integer
     End Structure
 
-    Friend Structure MapEventStruct
+    Public Structure MapEventStruct
         Dim Name As String
         Dim Dir As Integer
         Dim X As Integer
@@ -210,7 +210,7 @@ Friend Module C_EventSystem
     Friend CopyEvent As EventStruct
     Friend CopyEventPage As EventPageRec
 
-    Friend Structure EventListRec
+    Public Structure EventListRec
         Dim CommandList As Integer
         Dim CommandNum As Integer
     End Structure
@@ -359,7 +359,7 @@ Friend Module C_EventSystem
 
         count = Map.EventCount
         If count = 0 Then Exit Sub
-        For i = 1 To count
+        For i = 0 To count
             If Map.Events(i).X = X AndAlso Map.Events(i).Y = Y Then
                 ' copy it
                 CopyEvent = Map.Events(i)
@@ -376,7 +376,7 @@ Friend Module C_EventSystem
 
         count = Map.EventCount
         If count > 0 Then
-            For i = 1 To count
+            For i = 0 To count
                 If Map.Events(i).X = X AndAlso Map.Events(i).Y = Y Then
                     ' already an event - paste over it
                     EventNum = i
@@ -406,7 +406,7 @@ Friend Module C_EventSystem
         If FrmEditor_Events.Visible = True Then Exit Sub
 
         count = Map.EventCount
-        For i = 1 To count
+        For i = 0 To count
             If Map.Events(i).X = X AndAlso Map.Events(i).Y = Y Then
                 ' delete it
                 ClearEvent(i)
@@ -434,7 +434,7 @@ Friend Module C_EventSystem
         count = Map.EventCount + 1
         ' make sure there's not already an event
         If count - 1 > 0 Then
-            For i = 1 To count - 1
+            For i = 0 To count - 1
                 If Map.Events(i).X = X AndAlso Map.Events(i).Y = Y Then
                     ' already an event - edit it
                     If Not cancelLoad Then EventEditorInit(i)
@@ -607,7 +607,7 @@ Friend Module C_EventSystem
             curlist = 1
             X = -1
 newlist:
-            For i = 1 To TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
+            For i = 0 To TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
                 If listleftoff(curlist) > 0 Then
                     If (TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(listleftoff(curlist)).Index = EventType.EvCondition OrElse TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(listleftoff(curlist)).Index = EventType.EvShowChoices) AndAlso conditionalstage(curlist) <> 0 Then
                         i = listleftoff(curlist)
@@ -1129,7 +1129,7 @@ newlist:
             ReDim TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(0 To p)
             TmpEvent.Pages(CurPageNum).CommandList(curlist).ParentList = oldCommandList.ParentList
             TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = p
-            For i = 1 To p - 1
+            For i = 0 To p - 1
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i) = oldCommandList.Commands(i)
             Next
         End If
@@ -1757,7 +1757,7 @@ newlist:
                 FrmEditor_Events.cmbEvent.Items.Add("This Event")
                 FrmEditor_Events.cmbEvent.SelectedIndex = 0
                 FrmEditor_Events.cmbEvent.Enabled = True
-                For i = 1 To Map.EventCount
+                For i = 0 To Map.EventCount
                     If i <> EditorEvent Then
                         FrmEditor_Events.cmbEvent.Items.Add(Trim$(Map.Events(i).Name))
                         X = X + 1
@@ -1771,7 +1771,7 @@ newlist:
                 FrmEditor_Events.chkRepeatRoute.Checked = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data3
                 TempMoveRouteCount = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).MoveRouteCount
                 TempMoveRoute = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).MoveRoute
-                For i = 1 To TempMoveRouteCount
+                For i = 0 To TempMoveRouteCount
                     Select Case TempMoveRoute(i).Index
                         Case 1
                             FrmEditor_Events.lstMoveRoute.Items.Add("Move Up")
@@ -1875,7 +1875,7 @@ newlist:
                 FrmEditor_Events.cmbPlayAnimEvent.Visible = False
                 FrmEditor_Events.cmbPlayAnim.SelectedIndex = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 - 1
                 FrmEditor_Events.cmbPlayAnimEvent.Items.Clear()
-                For i = 1 To Map.EventCount
+                For i = 0 To Map.EventCount
                     FrmEditor_Events.cmbPlayAnimEvent.Items.Add(i & ". " & Trim$(Map.Events(i).Name))
                 Next
                 FrmEditor_Events.cmbPlayAnimEvent.SelectedIndex = 0
@@ -1902,9 +1902,9 @@ newlist:
                 FrmEditor_Events.fraCommands.Visible = False
             Case EventType.EvPlayBgm
                 IsEdit = True
-                For i = 1 To UBound(MusicCache)
+                For i = 0 To UBound(MusicCache)
                     If MusicCache(i) = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Text1 Then
-                        FrmEditor_Events.cmbPlayBGM.SelectedIndex = i - 1
+                        FrmEditor_Events.cmbPlayBGM.SelectedIndex = i
                     End If
                 Next
                 FrmEditor_Events.fraDialogue.Visible = True
@@ -1912,9 +1912,9 @@ newlist:
                 FrmEditor_Events.fraCommands.Visible = False
             Case EventType.EvPlaySound
                 IsEdit = True
-                For i = 1 To UBound(SoundCache)
+                For i = 0 To UBound(SoundCache)
                     If SoundCache(i) = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Text1 Then
-                        FrmEditor_Events.cmbPlaySound.SelectedIndex = i - 1
+                        FrmEditor_Events.cmbPlaySound.SelectedIndex = i
                     End If
                 Next
                 FrmEditor_Events.fraDialogue.Visible = True
@@ -2042,7 +2042,7 @@ newlist:
                 ListOfEvents(0) = EditorEvent
                 FrmEditor_Events.cmbMoveWait.Items.Add("This Event")
                 FrmEditor_Events.cmbMoveWait.SelectedIndex = 0
-                For i = 1 To Map.EventCount
+                For i = 0 To Map.EventCount
                     If i <> EditorEvent Then
                         FrmEditor_Events.cmbMoveWait.Items.Add(Trim$(Map.Events(i).Name))
                         X = X + 1
@@ -2077,7 +2077,7 @@ newlist:
                 X = 1
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).ParentList = oldCommandList.ParentList
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = p
-                For i = 1 To p + 1
+                For i = 0 To p + 1
                     If i <> curslot Then
                         TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(X) = oldCommandList.Commands(i)
                         X = X + 1
@@ -2095,7 +2095,7 @@ newlist:
                 ReDim TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(p)
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).ParentList = oldCommandList.ParentList
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = p
-                For i = 1 To p + 1
+                For i = 0 To p + 1
                     If i <> curslot Then
                         TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(X) = oldCommandList.Commands(i)
                         X = X + 1
@@ -2444,10 +2444,10 @@ newlist:
     Sub Packet_SwitchesAndVariables(ByRef data() As Byte)
         Dim i As Integer
         Dim buffer As New ByteStream(data)
-        For i = 1 To MaxSwitches
+        For i = 0 To MaxSwitches
             Switches(i) = buffer.ReadString
         Next
-        For i = 1 To MaxVariables
+        For i = 0 To MaxVariables
             Variables(i) = buffer.ReadString
         Next
 
@@ -2462,7 +2462,7 @@ newlist:
         Map.EventCount = buffer.ReadInt32
         If Map.EventCount > 0 Then
             ReDim Map.Events(Map.EventCount)
-            For i = 1 To Map.EventCount
+            For i = 0 To Map.EventCount
                 With Map.Events(i)
                     .Name = buffer.ReadString
                     .Globals = buffer.ReadInt32
@@ -2472,7 +2472,7 @@ newlist:
                 End With
                 If Map.Events(i).PageCount > 0 Then
                     ReDim Map.Events(i).Pages(Map.Events(i).PageCount)
-                    For x = 1 To Map.Events(i).PageCount
+                    For x = 0 To Map.Events(i).PageCount
                         With Map.Events(i).Pages(x)
                             .ChkVariable = buffer.ReadInt32
                             .Variableindex = buffer.ReadInt32
@@ -2501,7 +2501,7 @@ newlist:
                             .RepeatMoveRoute = buffer.ReadInt32
                             If .MoveRouteCount > 0 Then
                                 ReDim Map.Events(i).Pages(x).MoveRoute(.MoveRouteCount)
-                                For y = 1 To .MoveRouteCount
+                                For y = 0 To .MoveRouteCount
                                     .MoveRoute(y).Index = buffer.ReadInt32
                                     .MoveRoute(y).Data1 = buffer.ReadInt32
                                     .MoveRoute(y).Data2 = buffer.ReadInt32
@@ -2522,12 +2522,12 @@ newlist:
                         End With
                         If Map.Events(i).Pages(x).CommandListCount > 0 Then
                             ReDim Map.Events(i).Pages(x).CommandList(Map.Events(i).Pages(x).CommandListCount)
-                            For y = 1 To Map.Events(i).Pages(x).CommandListCount
+                            For y = 0 To Map.Events(i).Pages(x).CommandListCount
                                 Map.Events(i).Pages(x).CommandList(y).CommandCount = buffer.ReadInt32
                                 Map.Events(i).Pages(x).CommandList(y).ParentList = buffer.ReadInt32
                                 If Map.Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
                                     ReDim Map.Events(i).Pages(x).CommandList(y).Commands(Map.Events(i).Pages(x).CommandList(y).CommandCount)
-                                    For z = 1 To Map.Events(i).Pages(x).CommandList(y).CommandCount
+                                    For z = 0 To Map.Events(i).Pages(x).CommandList(y).CommandCount
                                         With Map.Events(i).Pages(x).CommandList(y).Commands(z)
                                             .Index = buffer.ReadInt32
                                             .Text1 = buffer.ReadString
@@ -2550,7 +2550,7 @@ newlist:
                                             .MoveRouteCount = buffer.ReadInt32
                                             If .MoveRouteCount > 0 Then
                                                 ReDim Preserve .MoveRoute(.MoveRouteCount)
-                                                For w = 1 To .MoveRouteCount
+                                                For w = 0 To .MoveRouteCount
                                                     .MoveRoute(w).Index = buffer.ReadInt32
                                                     .MoveRoute(w).Data1 = buffer.ReadInt32
                                                     .MoveRoute(w).Data2 = buffer.ReadInt32
@@ -2587,7 +2587,7 @@ newlist:
         ShowEventLbl = True
         choices = buffer.ReadInt32
         InEvent = True
-        For i = 1 To 4
+        For i = 0 To 4
             EventChoices(i) = ""
             EventChoiceVisible(i) = False
         Next
@@ -2595,7 +2595,7 @@ newlist:
         If choices = 0 Then
         Else
             EventChatType = 1
-            For i = 1 To choices
+            For i = 0 To choices
                 EventChoices(i) = buffer.ReadString
                 EventChoiceVisible(i) = True
             Next
@@ -2708,10 +2708,10 @@ newlist:
 
         buffer.WriteInt32(ClientPackets.CSwitchesAndVariables)
 
-        For i = 1 To MaxSwitches
+        For i = 0 To MaxSwitches
             buffer.WriteString((Trim$(Switches(i))))
         Next
-        For i = 1 To MaxVariables
+        For i = 0 To MaxVariables
             buffer.WriteString((Trim$(Variables(i))))
         Next
 
@@ -2888,7 +2888,7 @@ newlist:
         Dim tY As Integer
 
         If Map.EventCount <= 0 Then Exit Sub
-        For i = 1 To Map.EventCount
+        For i = 0 To Map.EventCount
             width = 32
             height = 32
             x = Map.Events(i).X * 32
@@ -3288,14 +3288,14 @@ nextevent:
         Dim i As Integer
 
         If AnotherChat = 1 Then
-            For i = 1 To 4
+            For i = 0 To 4
                 EventChoiceVisible(i) = False
             Next
             EventText = ""
             EventChatType = 1
             EventChatTimer = GetTickCount() + 100
         ElseIf AnotherChat = 2 Then
-            For i = 1 To 4
+            For i = 0 To 4
                 EventChoiceVisible(i) = False
             Next
             EventText = ""

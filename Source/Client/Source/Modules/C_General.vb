@@ -35,14 +35,14 @@ Module C_General
         End If
 
         ReDim CharSelection(3)
-        ReDim Job(MAX_JOB)
-        ReDim House(MaxHouses)
-        ReDim HouseConfig(MaxHouses)
+        ReDim Job(MAX_JOBS)
+        ReDim House(MAX_HOUSES)
+        ReDim HouseConfig(MAX_HOUSES)
         ReDim Map.Npc(MAX_MAP_NPCS)
         ReDim MapNpc(MAX_MAP_NPCS)
-        ReDim MapProjectiles(MaxProjectiles)
+        ReDim MapProjectiles(MAX_PROJECTILES)
         ReDim Player(MAX_PLAYERS)
-        ReDim Projectiles(MaxProjectiles)
+        ReDim Projectiles(MAX_PROJECTILES)
 
         ClearAnimations()
         ClearAnimInstances()
@@ -56,9 +56,10 @@ Module C_General
         ClearRecipes()
         ClearShops()
 
-        For i = 1 To MAX_PLAYERS
+        For i = 0 To MAX_PLAYERS
             ClearPlayer(i)
         Next
+
         For i = 0 To MAX_MAP_NPCS
             For x = 0 To VitalType.Count - 1
                 ReDim MapNpc(i).Vital(x)
@@ -66,14 +67,14 @@ Module C_General
         Next
 
         SetStatus(Language.Load.Graphics)
-        DirArrowX(DirectionType.Up + 1) = 12
-        DirArrowY(DirectionType.Up + 1) = 0
-        DirArrowX(DirectionType.Down + 1) = 12
-        DirArrowY(DirectionType.Down + 1) = 23
-        DirArrowX(DirectionType.Left + 1) = 0
-        DirArrowY(DirectionType.Left + 1) = 12
-        DirArrowX(DirectionType.Right + 1) = 23
-        DirArrowY(DirectionType.Right + 1) = 12
+        DirArrowX(DirectionType.Up) = 12
+        DirArrowY(DirectionType.Up) = 0
+        DirArrowX(DirectionType.Down) = 12
+        DirArrowY(DirectionType.Down) = 23
+        DirArrowX(DirectionType.Left) = 0
+        DirArrowY(DirectionType.Left) = 12
+        DirArrowX(DirectionType.Right) = 23
+        DirArrowY(DirectionType.Right) = 12
 
         CheckAnimations()
         CheckCharacters()
@@ -111,7 +112,7 @@ Module C_General
         Dim i As Integer
 
         ' Prevent high ascii chars
-        For i = 1 To Len(sInput)
+       For i = 1 To Len(sInput)
 
             If (Asc(Mid$(sInput, i, 1))) < 32 OrElse Asc(Mid$(sInput, i, 1)) > 126 Then
                 MsgBox(Language.MainMenu.StringLegal, vbOKOnly, Settings.GameName)
@@ -152,9 +153,9 @@ Module C_General
                     SetStatus(Language.MainMenu.SendNewCharacter)
 
                     If FrmMenu.rdoMale.Checked = True Then
-                        SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Male, FrmMenu.cmbClass.SelectedIndex + 1, NewCharSprite)
+                        SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Male, FrmMenu.cmbJob.SelectedIndex + 1, NewCharSprite)
                     Else
-                        SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Female, FrmMenu.cmbClass.SelectedIndex + 1, NewCharSprite)
+                        SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Female, FrmMenu.cmbJob.SelectedIndex + 1, NewCharSprite)
                     End If
                 End If
 

@@ -6,7 +6,7 @@ Module C_Pets
 
 #Region "Globals etc"
 
-    Friend Pet() As PetRec
+    Friend Pet() As PetStruct
 
     Friend Const PetbarTop As Byte = 2
     Friend Const PetbarLeft As Byte = 2
@@ -29,60 +29,6 @@ Module C_Pets
     Friend Const PetAttackBehaviourGuard As Byte = 3 'If attacked, the pet will fight back
     Friend Const PetAttackBehaviourDonothing As Byte = 4 'The pet will not attack even if attacked
 
-    Friend Structure PetRec
-        Dim Num As Integer
-        Dim Name As String
-        Dim Sprite As Integer
-
-        Dim Range As Integer
-
-        Dim Level As Integer
-
-        Dim MaxLevel As Integer
-        Dim ExpGain As Integer
-        Dim LevelPnts As Integer
-
-        Dim StatType As Byte '1 for set stats, 2 for relation to owner's stats
-        Dim LevelingType As Byte '0 for leveling on own, 1 for not leveling
-
-        Dim Stat() As Byte
-
-        Dim Skill() As Integer
-
-        Dim Evolvable As Byte
-        Dim EvolveLevel As Integer
-        Dim EvolveNum As Integer
-    End Structure
-
-    Friend Structure PlayerPetRec
-        Dim Num As Integer
-        Dim Health As Integer
-        Dim Mana As Integer
-        Dim Level As Integer
-        Dim Stat() As Byte
-        Dim Skill() As Integer
-        Dim Points As Integer
-        Dim X As Integer
-        Dim Y As Integer
-        Dim Dir As Integer
-        Dim MaxHp As Integer
-        Dim MaxMp As Integer
-        Dim Alive As Byte
-        Dim AttackBehaviour As Integer
-        Dim Exp As Integer
-        Dim Tnl As Integer
-
-        'Client Use Only
-        Dim XOffset As Integer
-
-        Dim YOffset As Integer
-        Dim Moving As Byte
-        Dim Attacking As Byte
-        Dim AttackTimer As Integer
-        Dim Steps As Byte
-        Dim Damage As Integer
-    End Structure
-
 #End Region
 
 #Region "Database"
@@ -101,7 +47,7 @@ Module C_Pets
         ReDim Pet(MAX_PETS)
         ReDim PetSkillCd(4)
 
-        For i = 1 To MAX_PETS
+       For i = 0 To MAX_PETS
             ClearPet(i)
         Next
 
@@ -214,7 +160,7 @@ Module C_Pets
                 buffer.WriteInt32(.Stat(i))
             Next
 
-            For i = 1 To 4
+           For i = 0 To 4
                 buffer.WriteInt32(.Skill(i))
             Next
 
@@ -247,7 +193,7 @@ Module C_Pets
             Player(n).Pet.Stat(i) = buffer.ReadInt32
         Next
 
-        For i = 1 To 4
+       For i = 0 To 4
             Player(n).Pet.Skill(i) = buffer.ReadInt32
         Next
 
@@ -289,7 +235,7 @@ Module C_Pets
                 .Stat(i) = buffer.ReadInt32
             Next
 
-            For i = 1 To 4
+           For i = 0 To 4
                 .Skill(i) = buffer.ReadInt32
             Next
 
@@ -384,6 +330,7 @@ Module C_Pets
     Friend Sub Packet_PetXY(ByRef data() As Byte)
         Dim i As Integer
         Dim buffer As New ByteStream(data)
+
         Player(i).Pet.X = buffer.ReadInt32
         Player(i).Pet.Y = buffer.ReadInt32
 
@@ -392,6 +339,7 @@ Module C_Pets
 
     Friend Sub Packet_PetExperience(ByRef data() As Byte)
         Dim buffer As New ByteStream(data)
+
         Player(Myindex).Pet.Exp = buffer.ReadInt32
         Player(Myindex).Pet.Tnl = buffer.ReadInt32
 
@@ -605,7 +553,7 @@ Module C_Pets
         Else
             RenderSprite(PetBarSprite, GameWindow, PetbarX, PetbarY, 0, 0, PetbarGfxInfo.Width, PetbarGfxInfo.Height)
 
-            For i = 1 To 4
+           For i = 0 To 4
                 skillnum = Player(Myindex).Pet.Skill(i)
 
                 If skillnum > 0 Then
@@ -711,7 +659,7 @@ Module C_Pets
 
         IsPetBarSlot = 0
 
-        For i = 1 To MaxPetbar
+       For i = 0 To MaxPetbar
 
             With tempRec
                 .Top = PetbarY + PetbarTop
@@ -752,7 +700,7 @@ Module C_Pets
             .cmbSkill3.Items.Add("None")
             .cmbSkill4.Items.Add("None")
 
-            For i = 1 To MAX_SKILLS
+           For i = 0 To MAX_SKILLS
                 .cmbSkill1.Items.Add(i & ": " & Skill(i).Name)
                 .cmbSkill2.Items.Add(i & ": " & Skill(i).Name)
                 .cmbSkill3.Items.Add(i & ": " & Skill(i).Name)
@@ -833,7 +781,7 @@ Module C_Pets
     Friend Sub PetEditorOk()
         Dim i As Integer
 
-        For i = 1 To MAX_PETS
+       For i = 0 To MAX_PETS
             If Pet_Changed(i) Then
                 SendSavePet(i)
             End If
