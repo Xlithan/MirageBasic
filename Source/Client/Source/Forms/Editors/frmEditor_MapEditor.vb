@@ -263,7 +263,7 @@ Public Class FrmEditor_MapEditor
 
         lstNpc.Items.Clear()
 
-        For n = 1 To MAX_MAP_NPCS
+        For n = 0 To MAX_MAP_NPCS
             If Map.Npc(n) > 0 Then
                 lstNpc.Items.Add(n & ": " & Npc(Map.Npc(n)).Name)
             Else
@@ -357,7 +357,7 @@ Public Class FrmEditor_MapEditor
         ClearAttributeDialogue()
         pnlAttributes.Visible = True
         fraBuyHouse.Visible = True
-        scrlBuyHouse.Maximum = MaxHouses
+        scrlBuyHouse.Maximum = MAX_HOUSES
         scrlBuyHouse.Value = 1
     End Sub
 
@@ -452,21 +452,21 @@ Public Class FrmEditor_MapEditor
 
             x2 = Map.MaxX
             y2 = Map.MaxY
+
             ' change the data
             .MaxX = Val(txtMaxX.Text)
             .MaxY = Val(txtMaxY.Text)
-            ReDim Map.Tile(0 To .MaxX, 0 To .MaxY)
 
-            ReDim Autotile(0 To .MaxX, 0 To .MaxY)
+            ReDim Map.Tile(.MaxX, .MaxY)
+            ReDim Autotile(.MaxX, .MaxY)
 
             If x2 > .MaxX Then x2 = .MaxX
             If y2 > .MaxY Then y2 = .MaxY
 
             For X = 0 To .MaxX
                 For Y = 0 To .MaxY
-                    ReDim .Tile(X, Y).Layer(0 To LayerType.Count - 1)
-
-                    ReDim Autotile(X, Y).Layer(0 To LayerType.Count - 1)
+                    ReDim .Tile(X, Y).Layer(LayerType.Count - 1)
+                    ReDim Autotile(X, Y).Layer(LayerType.Count - 1)
 
                     If X <= x2 Then
                         If Y <= y2 Then
@@ -599,18 +599,17 @@ Public Class FrmEditor_MapEditor
         lstMusic.Items.Clear()
         lstMusic.Items.Add("None")
 
-        If UBound(MusicCache) > 0 Then
-            For i = 1 To UBound(MusicCache)
-                lstMusic.Items.Add(MusicCache(i))
-            Next
-        End If
+        CacheMusic
+        For i = 0 To UBound(MusicCache)
+            lstMusic.Items.Add(MusicCache(i))
+        Next
 
         If Trim$(Map.Music) = "None" Then
             lstMusic.SelectedIndex = 0
         Else
-            For i = 1 To lstMusic.Items.Count
-                If lstMusic.Items(i - 1).ToString = Trim$(Map.Music) Then
-                    lstMusic.SelectedIndex = i - 1
+           For i = 0 To lstMusic.Items.Count 
+                If lstMusic.Items(i).ToString = Trim$(Map.Music) Then
+                    lstMusic.SelectedIndex = i
                     Exit For
                 End If
             Next
@@ -628,7 +627,7 @@ Public Class FrmEditor_MapEditor
 
         lstMapNpc.Items.Clear()
 
-        For X = 1 To MAX_MAP_NPCS
+        For X = 0 To MAX_MAP_NPCS
             If Map.Npc(X) = 0 Then
                 lstMapNpc.Items.Add("No NPC")
             Else
@@ -640,7 +639,7 @@ Public Class FrmEditor_MapEditor
         cmbNpcList.Items.Clear()
         cmbNpcList.Items.Add("No NPC")
 
-        For Y = 1 To MAX_NPCS
+        For Y = 0 To MAX_NPCS
             cmbNpcList.Items.Add(Y & ": " & Trim$(Npc(Y).Name))
         Next
 
@@ -660,13 +659,13 @@ Public Class FrmEditor_MapEditor
 
         cmbPanorama.Items.Clear()
         cmbPanorama.Items.Add("None")
-        For i = 1 To NumPanorama
+       For i = 0 To NumPanorama
             cmbPanorama.Items.Add("Panorama" & i)
         Next
 
         cmbParallax.Items.Clear()
         cmbParallax.Items.Add("None")
-        For i = 1 To NumParallax
+       For i = 0 To NumParallax
             cmbParallax.Items.Add("Parallax" & i)
         Next
 
@@ -710,7 +709,7 @@ Public Class FrmEditor_MapEditor
 
         ' set shops for the shop attribute
         cmbShop.Items.Add("None")
-        For i = 1 To MAX_SHOPS
+       For i = 0 To MAX_SHOPS
             cmbShop.Items.Add(i & ": " & Shop(i).Name)
         Next
         ' we're not in a shop
@@ -719,7 +718,7 @@ Public Class FrmEditor_MapEditor
         optBlocked.Checked = True
 
         cmbTileSets.Items.Clear()
-        For i = 1 To NumTileSets
+       For i = 0 To NumTileSets
             cmbTileSets.Items.Add("Tileset " & i)
         Next
 
@@ -940,7 +939,7 @@ Public Class FrmEditor_MapEditor
                 X -= ((X \ PicX) * PicX)
                 Y -= ((Y \ PicY) * PicY)
                 ' see if it hits an arrow
-                For i = 1 To 4
+               For i = 0 To 4
                     If X >= DirArrowX(i) AndAlso X <= DirArrowX(i) + 8 Then
                         If Y >= DirArrowY(i) AndAlso Y <= DirArrowY(i) + 8 Then
                             ' flip the value.
@@ -994,6 +993,7 @@ Public Class FrmEditor_MapEditor
     End Sub
 
     Public Sub MapEditorCancel()
+        If InMapEditor = false Then Exit sub
         Dim Buffer As ByteStream
         Buffer = New ByteStream(4)
         Buffer.WriteInt32(ClientPackets.CNeedMap)

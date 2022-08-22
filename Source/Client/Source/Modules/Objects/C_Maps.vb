@@ -18,7 +18,7 @@ Module C_Maps
 #End Region
 
 #Region "Structs"
-    Friend Structure MapStruct
+    Public Structure MapStruct
         Dim Name As String
         Dim Music As String
 
@@ -66,7 +66,7 @@ Module C_Maps
         Dim MapEvents() As MapEventStruct
     End Structure
 
-    Friend Structure MapItemStruct
+    Public Structure MapItemStruct
         Dim Num As Integer
         Dim Value As Integer
         Dim Frame As Byte
@@ -76,7 +76,7 @@ Module C_Maps
         Dim RandData As RandInvStruct
     End Structure
 
-    Friend Structure MapNpcStruct
+    Public Structure MapNpcStruct
         Dim Num As Integer
         Dim Target As Integer
         Dim TargetType As Byte
@@ -96,7 +96,7 @@ Module C_Maps
         Dim Steps As Integer
     End Structure
 
-    Friend Structure TempTileStruct
+    Public Structure TempTileStruct
         Dim DoorOpen As Byte
         Dim DoorFrame As Byte
         Dim DoorTimer As Integer
@@ -139,8 +139,8 @@ Module C_Maps
             ReDim Map.Npc(MAX_MAP_NPCS)
             ReDim Map.Tile(Map.MaxX, Map.MaxY)
 
-            For x = 0 To ScreenMapx
-                For y = 0 To ScreenMapy
+            For X = 0 To ScreenMapx
+                For Y = 0 To ScreenMapy
                     ReDim Map.Tile(x, y).Layer(LayerType.Count - 1)
                     For l = 0 To LayerType.Count - 1
                         Map.Tile(x, y).Layer(l).Tileset = 0
@@ -159,7 +159,7 @@ Module C_Maps
     Sub ClearMapItems()
         Dim i As Integer
 
-        For i = 1 To MAX_MAP_ITEMS
+       For i = 0 To MAX_MAP_ITEMS
             ClearMapItem(i)
         Next
 
@@ -193,9 +193,9 @@ Module C_Maps
     End Sub
 
     Sub ClearMapNpcs()
-        Dim i As Integer
+       Dim i As Integer
 
-        For i = 1 To MAX_MAP_NPCS
+       For i = 0 To MAX_MAP_NPCS
             ClearMapNpc(i)
         Next
 
@@ -219,7 +219,7 @@ Module C_Maps
         GettingMap = True
 
         ' Erase all players except self
-        For i = 1 To TotalOnline 'MAX_PLAYERS
+       For i = 0 To TotalOnline 'MAX_PLAYERS
             If i <> Myindex Then
                 SetPlayerMap(i, 0)
             End If
@@ -290,12 +290,12 @@ Module C_Maps
 
                 ReDim Map.Tile(Map.MaxX, Map.MaxY)
 
-                For x = 1 To MAX_MAP_NPCS
+                For x = 0 To MAX_MAP_NPCS
                     Map.Npc(x) = buffer.ReadInt32
                 Next
 
-                For x = 0 To Map.MaxX
-                    For y = 0 To Map.MaxY
+                For X = 0 To Map.MaxX
+                    For Y = 0 To Map.MaxY
                         Map.Tile(x, y).Data1 = buffer.ReadInt32
                         Map.Tile(x, y).Data2 = buffer.ReadInt32
                         Map.Tile(x, y).Data3 = buffer.ReadInt32
@@ -320,7 +320,7 @@ Module C_Maps
 
                 If Map.EventCount > 0 Then
                     ReDim Map.Events(Map.EventCount)
-                    For i = 1 To Map.EventCount
+                   For i = 0 To Map.EventCount
                         With Map.Events(i)
                             .Name = Trim(buffer.ReadString)
                             .Globals = buffer.ReadInt32
@@ -330,7 +330,7 @@ Module C_Maps
                         End With
                         If Map.Events(i).PageCount > 0 Then
                             ReDim Map.Events(i).Pages(Map.Events(i).PageCount)
-                            For x = 1 To Map.Events(i).PageCount
+                            For x = 0 To Map.Events(i).PageCount
                                 With Map.Events(i).Pages(x)
                                     .ChkVariable = buffer.ReadInt32
                                     .Variableindex = buffer.ReadInt32
@@ -367,7 +367,7 @@ Module C_Maps
 
                                     If .MoveRouteCount > 0 Then
                                         ReDim Map.Events(i).Pages(x).MoveRoute(.MoveRouteCount)
-                                        For y = 1 To .MoveRouteCount
+                                        For y = 0 To .MoveRouteCount
                                             .MoveRoute(y).Index = buffer.ReadInt32
                                             .MoveRoute(y).Data1 = buffer.ReadInt32
                                             .MoveRoute(y).Data2 = buffer.ReadInt32
@@ -393,12 +393,12 @@ Module C_Maps
 
                                 If Map.Events(i).Pages(x).CommandListCount > 0 Then
                                     ReDim Map.Events(i).Pages(x).CommandList(Map.Events(i).Pages(x).CommandListCount)
-                                    For y = 1 To Map.Events(i).Pages(x).CommandListCount
+                                    For y = 0 To Map.Events(i).Pages(x).CommandListCount
                                         Map.Events(i).Pages(x).CommandList(y).CommandCount = buffer.ReadInt32
                                         Map.Events(i).Pages(x).CommandList(y).ParentList = buffer.ReadInt32
                                         If Map.Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
                                             ReDim Map.Events(i).Pages(x).CommandList(y).Commands(Map.Events(i).Pages(x).CommandList(y).CommandCount)
-                                            For z = 1 To Map.Events(i).Pages(x).CommandList(y).CommandCount
+                                            For z = 0 To Map.Events(i).Pages(x).CommandList(y).CommandCount
                                                 With Map.Events(i).Pages(x).CommandList(y).Commands(z)
                                                     .Index = buffer.ReadInt32
                                                     .Text1 = Trim(buffer.ReadString)
@@ -421,7 +421,7 @@ Module C_Maps
                                                     .MoveRouteCount = buffer.ReadInt32
                                                     If .MoveRouteCount > 0 Then
                                                         ReDim Preserve .MoveRoute(.MoveRouteCount)
-                                                        For w = 1 To .MoveRouteCount
+                                                        For w = 0 To .MoveRouteCount
                                                             .MoveRoute(w).Index = buffer.ReadInt32
                                                             .MoveRoute(w).Data1 = buffer.ReadInt32
                                                             .MoveRoute(w).Data2 = buffer.ReadInt32
@@ -443,14 +443,14 @@ Module C_Maps
                 'End Event Data
             End If
 
-            For i = 1 To MAX_MAP_ITEMS
+           For i = 0 To MAX_MAP_ITEMS
                 MapItem(i).Num = buffer.ReadInt32
                 MapItem(i).Value = buffer.ReadInt32()
                 MapItem(i).X = buffer.ReadInt32()
                 MapItem(i).Y = buffer.ReadInt32()
             Next
 
-            For i = 1 To MAX_MAP_NPCS
+           For i = 0 To MAX_MAP_NPCS
                 MapNpc(i).Num = buffer.ReadInt32()
                 MapNpc(i).X = buffer.ReadInt32()
                 MapNpc(i).Y = buffer.ReadInt32()
@@ -488,7 +488,7 @@ Module C_Maps
 
         MapData = True
 
-        For i = 1 To Byte.MaxValue
+       For i = 0 To Byte.MaxValue
             ClearActionMsg(i)
         Next
 
@@ -514,7 +514,7 @@ Module C_Maps
     Sub Packet_MapNPCData(ByRef data() As Byte)
         Dim i As Integer
         Dim buffer As New ByteStream(data)
-        For i = 1 To MAX_MAP_NPCS
+       For i = 0 To MAX_MAP_NPCS
 
             With MapNpc(i)
                 .Num = buffer.ReadInt32
@@ -551,7 +551,7 @@ Module C_Maps
         Dim i As Integer
         Dim musicFile As String
 
-        For i = 1 To Byte.MaxValue
+       For i = 0 To Byte.MaxValue
             ClearActionMsg(i)
         Next
 
@@ -634,12 +634,12 @@ Module C_Maps
         buffer.WriteInt32(Map.Panorama)
         buffer.WriteInt32(Map.Parallax)
 
-        For i = 1 To MAX_MAP_NPCS
+       For i = 0 To MAX_MAP_NPCS
             buffer.WriteInt32(Map.Npc(i))
         Next
 
-        For x = 0 To Map.MaxX
-            For y = 0 To Map.MaxY
+        For X = 0 To Map.MaxX
+            For Y = 0 To Map.MaxY
                 buffer.WriteInt32(Map.Tile(x, y).Data1)
                 buffer.WriteInt32(Map.Tile(x, y).Data2)
                 buffer.WriteInt32(Map.Tile(x, y).Data3)
@@ -657,7 +657,7 @@ Module C_Maps
         'Event Data
         buffer.WriteInt32(Map.EventCount)
         If Map.EventCount > 0 Then
-            For i = 1 To Map.EventCount
+           For i = 0 To Map.EventCount
                 With Map.Events(i)
                     buffer.WriteString((.Name.Trim))
                     buffer.WriteInt32(.Globals)
@@ -666,7 +666,7 @@ Module C_Maps
                     buffer.WriteInt32(.PageCount)
                 End With
                 If Map.Events(i).PageCount > 0 Then
-                    For x = 1 To Map.Events(i).PageCount
+                    For x = 0 To Map.Events(i).PageCount
                         With Map.Events(i).Pages(x)
                             buffer.WriteInt32(.ChkVariable)
                             buffer.WriteInt32(.Variableindex)
@@ -694,7 +694,7 @@ Module C_Maps
                             buffer.WriteInt32(.IgnoreMoveRoute)
                             buffer.WriteInt32(.RepeatMoveRoute)
                             If .MoveRouteCount > 0 Then
-                                For y = 1 To .MoveRouteCount
+                                For y = 0 To .MoveRouteCount
                                     buffer.WriteInt32(.MoveRoute(y).Index)
                                     buffer.WriteInt32(.MoveRoute(y).Data1)
                                     buffer.WriteInt32(.MoveRoute(y).Data2)
@@ -716,11 +716,11 @@ Module C_Maps
                             buffer.WriteInt32(.ChkPlayerGender)
                         End With
                         If Map.Events(i).Pages(x).CommandListCount > 0 Then
-                            For y = 1 To Map.Events(i).Pages(x).CommandListCount
+                            For y = 0 To Map.Events(i).Pages(x).CommandListCount
                                 buffer.WriteInt32(Map.Events(i).Pages(x).CommandList(y).CommandCount)
                                 buffer.WriteInt32(Map.Events(i).Pages(x).CommandList(y).ParentList)
                                 If Map.Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
-                                    For z = 1 To Map.Events(i).Pages(x).CommandList(y).CommandCount
+                                    For z = 0 To Map.Events(i).Pages(x).CommandList(y).CommandCount
                                         With Map.Events(i).Pages(x).CommandList(y).Commands(z)
                                             buffer.WriteInt32(.Index)
                                             buffer.WriteString((.Text1))
@@ -742,7 +742,7 @@ Module C_Maps
                                             buffer.WriteInt32(.ConditionalBranch.ElseCommandList)
                                             buffer.WriteInt32(.MoveRouteCount)
                                             If .MoveRouteCount > 0 Then
-                                                For w = 1 To .MoveRouteCount
+                                                For w = 0 To .MoveRouteCount
                                                     buffer.WriteInt32(.MoveRoute(w).Index)
                                                     buffer.WriteInt32(.MoveRoute(w).Data1)
                                                     buffer.WriteInt32(.MoveRoute(w).Data2)

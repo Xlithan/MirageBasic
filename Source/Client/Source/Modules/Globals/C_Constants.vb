@@ -97,5 +97,4 @@ Module C_Constants
     Friend Const DialogueTypeParty As Byte = 3
     Friend Const DialogueTypeQuest As Byte = 4
     Friend Const DialogueTypeTrade As Byte = 5
-
 End Module

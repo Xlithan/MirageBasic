@@ -7,7 +7,6 @@
         CLogin
         CAddChar
         CUseChar
-        CDelChar
         CSayMsg
         CBroadcastMsg
         CPlayerMsg
@@ -202,7 +201,7 @@
         SLoadCharOk
         SLoginOk
         SNewCharJob
-        SClassData
+        SJobData
         SInGame
         SPlayerInv
         SPlayerInvUpdate

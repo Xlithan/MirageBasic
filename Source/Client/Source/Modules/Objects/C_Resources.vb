@@ -40,7 +40,7 @@ Module C_Resources
     Sub ClearResources()
         Dim i As Integer
 
-        For i = 1 To MAX_RESOURCES
+       For i = 0 To MAX_RESOURCES
             ClearResource(i)
         Next
 

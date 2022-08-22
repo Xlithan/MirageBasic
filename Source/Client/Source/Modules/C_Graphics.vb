@@ -293,14 +293,14 @@ Module C_Graphics
 
 #Region "Types"
 
-    Friend Structure GraphicInfo
+    Public Structure GraphicInfo
         Dim Width As Integer
         Dim Height As Integer
         Dim IsLoaded As Boolean
         Dim TextureTimer As Integer
     End Structure
 
-    Friend Structure GraphicsTiles
+    Public Structure GraphicsTiles
         Dim Tile(,) As Texture
     End Structure
 
@@ -1085,7 +1085,7 @@ Module C_Graphics
         RenderSprite(DirectionsSprite, GameWindow, ConvertMapX(x * PicX), ConvertMapY(y * PicY), rec.X, rec.Y, rec.Width, rec.Height)
 
         ' render dir blobs
-        For i = 1 To 4
+       For i = 0 To 4
             rec.X = (i - 1) * 8
             rec.Width = 8
             ' find out whether render blocked or not
@@ -1423,7 +1423,7 @@ Module C_Graphics
     Sub ClearGfx()
 
         'clear tilesets
-        For I = 1 To NumTileSets
+       For i = 0 To NumTileSets
             If TileSetTextureInfo(I).IsLoaded Then
                 If TileSetTextureInfo(I).TextureTimer < GetTickCount() Then
                     TileSetTexture(I).Dispose()
@@ -1435,7 +1435,7 @@ Module C_Graphics
         Next
 
         'clear characters
-        For I = 1 To NumCharacters
+       For i = 0 To NumCharacters
             If CharacterGfxInfo(I).IsLoaded Then
                 If CharacterGfxInfo(I).TextureTimer < GetTickCount() Then
                     CharacterGfx(I).Dispose()
@@ -1447,7 +1447,7 @@ Module C_Graphics
         Next
 
         'clear paperdoll
-        For I = 1 To NumPaperdolls
+       For i = 0 To NumPaperdolls
             If PaperDollGfxInfo(I).IsLoaded Then
                 If PaperDollGfxInfo(I).TextureTimer < GetTickCount() Then
                     PaperDollGfx(I).Dispose()
@@ -1459,7 +1459,7 @@ Module C_Graphics
         Next
 
         'clear items
-        For I = 1 To NumItems
+       For i = 0 To NumItems
             If ItemsGfxInfo(I).IsLoaded Then
                 If ItemsGfxInfo(I).TextureTimer < GetTickCount() Then
                     ItemsGfx(I).Dispose()
@@ -1471,7 +1471,7 @@ Module C_Graphics
         Next
 
         'clear resources
-        For I = 1 To NumResources
+       For i = 0 To NumResources
             If ResourcesGfxInfo(I).IsLoaded Then
                 If ResourcesGfxInfo(I).TextureTimer < GetTickCount() Then
                     ResourcesGfx(I).Dispose()
@@ -1483,7 +1483,7 @@ Module C_Graphics
         Next
 
         'animations
-        For I = 1 To NumAnimations
+       For i = 0 To NumAnimations
             If AnimationsGfxInfo(I).IsLoaded Then
                 If AnimationsGfxInfo(I).TextureTimer < GetTickCount() Then
                     AnimationsGfx(I).Dispose()
@@ -1494,7 +1494,7 @@ Module C_Graphics
         Next
 
         'clear faces
-        For I = 1 To NumFaces
+       For i = 0 To NumFaces
             If FacesGfxInfo(I).IsLoaded Then
                 If FacesGfxInfo(I).TextureTimer < GetTickCount() Then
                     FacesGfx(I).Dispose()
@@ -1506,7 +1506,7 @@ Module C_Graphics
         Next
 
         'clear fogs
-        For I = 1 To NumFogs
+       For i = 0 To NumFogs
             If FogGfxInfo(I).IsLoaded Then
                 If FogGfxInfo(I).TextureTimer < GetTickCount() Then
                     FogGfx(I).Dispose()
@@ -1517,7 +1517,7 @@ Module C_Graphics
         Next
 
         'clear SkillIcons
-        For I = 1 To NumSkillIcons
+       For i = 0 To NumSkillIcons
             If SkillIconsGfxInfo(I).IsLoaded Then
                 If SkillIconsGfxInfo(I).TextureTimer < GetTickCount() Then
                     SkillIconsGfx(I).Dispose()
@@ -1529,7 +1529,7 @@ Module C_Graphics
         Next
 
         'clear Furniture
-        For I = 1 To NumFurniture
+       For i = 0 To NumFurniture
             If FurnitureGfxInfo(I).IsLoaded Then
                 If FurnitureGfxInfo(I).TextureTimer < GetTickCount() Then
                     FurnitureGfx(I).Dispose()
@@ -1541,7 +1541,7 @@ Module C_Graphics
         Next
 
         'clear Projectiles
-        For I = 1 To NumProjectiles
+       For i = 0 To NumProjectiles
             If ProjectileGfxInfo(I).IsLoaded Then
                 If ProjectileGfxInfo(I).TextureTimer < GetTickCount() Then
                     ProjectileGfx(I).Dispose()
@@ -1553,7 +1553,7 @@ Module C_Graphics
         Next
 
         'clear Emotes
-        For I = 1 To NumEmotes
+       For i = 0 To NumEmotes
             If EmotesGfxInfo(I).IsLoaded Then
                 If EmotesGfxInfo(I).TextureTimer < GetTickCount() Then
                     EmotesGfx(I).Dispose()
@@ -1565,7 +1565,7 @@ Module C_Graphics
         Next
 
         'clear Panoramas
-        For I = 1 To NumPanorama
+       For i = 0 To NumPanorama
             If PanoramasGfxInfo(I).IsLoaded Then
                 If PanoramasGfxInfo(I).TextureTimer < GetTickCount() Then
                     PanoramasGfx(I).Dispose()
@@ -1577,7 +1577,7 @@ Module C_Graphics
         Next
 
         'clear Parallax
-        For I = 1 To NumParallax
+       For i = 0 To NumParallax
             If ParallaxGfxInfo(I).IsLoaded Then
                 If ParallaxGfxInfo(I).TextureTimer < GetTickCount() Then
                     ParallaxGfx(I).Dispose()
@@ -1638,7 +1638,7 @@ Module C_Graphics
         If FurnitureHouse > 0 Then
             If FurnitureHouse = Player(Myindex).InHouse Then
                 If FurnitureCount > 0 Then
-                    For I = 1 To FurnitureCount
+                   For i = 0 To FurnitureCount
                         If Furniture(I).ItemNum > 0 Then
                             DrawFurniture(I, 0)
                         End If
@@ -1650,7 +1650,7 @@ Module C_Graphics
         ' events
         If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
 
-            For I = 1 To Map.CurrentEvents
+           For i = 0 To Map.CurrentEvents
                 If Map.MapEvents(I).Position = 0 Then
                     DrawEvent(I)
                 End If
@@ -1658,13 +1658,13 @@ Module C_Graphics
         End If
 
         'blood
-        For I = 1 To Byte.MaxValue
+       For i = 0 To Byte.MaxValue
             DrawBlood(I)
         Next
 
         ' Draw out the items
         If NumItems > 0 Then
-            For I = 1 To MAX_MAP_ITEMS
+           For i = 0 To MAX_MAP_ITEMS
                 If MapItem(I).Num > 0 Then
                     DrawItem(I)
                 End If
@@ -1687,7 +1687,7 @@ Module C_Graphics
 
         ' draw animations
         If NumAnimations > 0 Then
-            For I = 1 To MAX_ANIMATIONS
+           For i = 0 To MAX_ANIMATIONS
                 If AnimInstance(I).Used(0) Then
                     DrawAnimation(I, 0)
                 End If
@@ -1695,11 +1695,11 @@ Module C_Graphics
         End If
 
         ' Y-based render. Renders Players, Npcs and Resources based on Y-axis.
-        For y = 0 To Map.MaxY
+        For Y = 0 To Map.MaxY
 
             If NumCharacters > 0 Then
                 ' Players
-                For I = 1 To TotalOnline 'MAX_PLAYERS
+               For i = 0 To TotalOnline 'MAX_PLAYERS
                     If IsPlaying(I) AndAlso GetPlayerMap(I) = GetPlayerMap(Myindex) Then
                         If Player(I).Y = y Then
                             DrawPlayer(I)
@@ -1713,7 +1713,7 @@ Module C_Graphics
                 Next
 
                 ' Npcs
-                For I = 1 To MAX_MAP_NPCS
+               For i = 0 To MAX_MAP_NPCS
                     If MapNpc(I).Y = y Then
                         DrawNpc(I)
                     End If
@@ -1721,7 +1721,7 @@ Module C_Graphics
 
                 ' events
                 If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
-                    For I = 1 To Map.CurrentEvents
+                   For i = 0 To Map.CurrentEvents
                         If Map.MapEvents(I).Position = 1 Then
                             If y = Map.MapEvents(I).Y Then
                                 DrawEvent(I)
@@ -1741,7 +1741,7 @@ Module C_Graphics
                     End If
                 End If
 
-                For I = 1 To TotalOnline 'MAX_PLAYERS
+               For i = 0 To TotalOnline 'MAX_PLAYERS
                     If IsPlaying(I) Then
                         If Player(I).Map = Player(Myindex).Map Then
                             If CurX = Player(I).X AndAlso CurY = Player(I).Y Then
@@ -1761,7 +1761,7 @@ Module C_Graphics
             If NumResources > 0 Then
                 If ResourcesInit Then
                     If ResourceIndex > 0 Then
-                        For I = 1 To ResourceIndex
+                       For i = 0 To ResourceIndex
                             If MapResource(I).Y = y Then
                                 DrawMapResource(I)
                             End If
@@ -1773,8 +1773,8 @@ Module C_Graphics
 
         ' animations
         If NumAnimations > 0 Then
-            For I = 1 To MAX_ANIMATIONS
-                If AnimInstance(I - 1).Used(1) Then
+           For i = 0 To MAX_ANIMATIONS
+                If AnimInstance(I).Used(1) Then
                     DrawAnimation(I - 1, 1)
                 End If
             Next
@@ -1782,7 +1782,7 @@ Module C_Graphics
 
         'projectiles
         If NumProjectiles > 0 Then
-            For I = 1 To MaxProjectiles
+           For i = 0 To MAX_PROJECTILES
                 If MapProjectiles(I).ProjectileNum > 0 Then
                     DrawProjectile(I)
                 End If
@@ -1791,7 +1791,7 @@ Module C_Graphics
 
         'events
         If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
-            For I = 1 To Map.CurrentEvents
+           For i = 0 To Map.CurrentEvents
                 If Map.MapEvents(I).Position = 2 Then
                     DrawEvent(I)
                 End If
@@ -1813,7 +1813,7 @@ Module C_Graphics
         If FurnitureHouse > 0 Then
             If FurnitureHouse = Player(Myindex).InHouse Then
                 If FurnitureCount > 0 Then
-                    For I = 1 To FurnitureCount
+                   For i = 0 To FurnitureCount
                         If Furniture(I).ItemNum > 0 Then
                             DrawFurniture(I, 1)
                         End If
@@ -1860,7 +1860,7 @@ Module C_Graphics
         End If
 
         ' draw player names
-        For I = 1 To TotalOnline 'MAX_PLAYERS
+       For i = 0 To TotalOnline 'MAX_PLAYERS
             If IsPlaying(I) AndAlso GetPlayerMap(I) = GetPlayerMap(Myindex) Then
                 DrawPlayerName(I)
                 If PetAlive(I) Then
@@ -1870,7 +1870,7 @@ Module C_Graphics
         Next
 
         'draw event names
-        For I = 1 To Map.CurrentEvents
+       For i = 0 To Map.CurrentEvents
             If Map.MapEvents(I).Visible = 1 Then
                 If Map.MapEvents(I).ShowName = 1 Then
                     DrawEventName(I)
@@ -1879,7 +1879,7 @@ Module C_Graphics
         Next
 
         ' draw npc names
-        For I = 1 To MAX_MAP_NPCS
+       For i = 0 To MAX_MAP_NPCS
             If MapNpc(I).Num > 0 Then
                 DrawNpcName(I)
             End If
@@ -1890,14 +1890,14 @@ Module C_Graphics
         End If
 
         ' draw the messages
-        For I = 1 To Byte.MaxValue
+       For i = 0 To Byte.MaxValue
             If ChatBubble(I).Active Then
                 DrawChatBubble(I)
             End If
         Next
 
         'action msg
-        For I = 1 To Byte.MaxValue
+       For i = 0 To Byte.MaxValue
             DrawActionMsg(I)
         Next
 
@@ -2002,7 +2002,7 @@ Module C_Graphics
 
         If Settings.ShowNpcBar = 1 Then
             ' check for hp bar
-            For i = 1 To MAX_MAP_NPCS
+           For i = 0 To MAX_MAP_NPCS
                 If Map.Npc Is Nothing Then Exit Sub
                 If Map.Npc(i) > 0 Then
                     If Npc(MapNpc(i).Num).Behaviour = NpcBehavior.AttackOnSight OrElse Npc(MapNpc(i).Num).Behaviour = NpcBehavior.AttackWhenAttacked OrElse Npc(MapNpc(i).Num).Behaviour = NpcBehavior.Guard Then
@@ -2456,7 +2456,7 @@ Module C_Graphics
         'first render panel
         RenderSprite(InvPanelSprite, GameWindow, InvWindowX, InvWindowY, 0, 0, InvPanelGfxInfo.Width, InvPanelGfxInfo.Height)
 
-        For i = 1 To MAX_INV
+       For i = 0 To MAX_INV
             itemnum = GetPlayerInvItemNum(Myindex, i)
 
             If itemnum > 0 AndAlso itemnum <= MAX_ITEMS Then
@@ -2474,7 +2474,7 @@ Module C_Graphics
 
                 ' exit out if we're offering item in a trade.
                 If InTrade > 0 Then
-                    For x = 1 To MAX_INV
+                    For x = 0 To MAX_INV
                         If TradeYourOffer(x).Num = i Then
                             GoTo NextLoop
                         End If
@@ -2545,7 +2545,7 @@ NextLoop:
 
         If GetTickCount() > tmr100 Then
             ' check for map animation changes#
-            For i = 1 To MAX_MAP_ITEMS
+           For i = 0 To MAX_MAP_ITEMS
 
                 If MapItem(i).Num > 0 Then
                     itempic = Item(MapItem(i).Num).Pic
@@ -2562,7 +2562,7 @@ NextLoop:
             Next
         End If
 
-        For i = 1 To MAX_INV
+       For i = 0 To MAX_INV
             itemnum = GetPlayerInvItemNum(Myindex, i)
 
             If itemnum > 0 AndAlso itemnum <= MAX_ITEMS Then
@@ -2661,7 +2661,7 @@ NextLoop:
         'first render panel
         RenderSprite(SkillPanelSprite, GameWindow, SkillWindowX, SkillWindowY, 0, 0, SkillPanelGfxInfo.Width, SkillPanelGfxInfo.Height)
 
-        For i = 1 To MAX_PLAYER_SKILLS
+       For i = 0 To MAX_PLAYER_SKILLS
             skillnum = PlayerSkills(i)
 
             If skillnum > 0 AndAlso skillnum <= MAX_SKILLS Then

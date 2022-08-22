@@ -20,8 +20,6 @@ Friend Module modTime
 
     Sub HandleTimeOfDayChanged(ByRef source As Time)
         SendTimeToAll()
-        ClearAllMapNpcs()
-        SpawnAllMapNpcs()
     End Sub
 
     Sub HandleTimeSync(ByRef source As Time)
@@ -46,7 +44,7 @@ Friend Module modTime
     Sub SendGameClockToAll()
         Dim I As Integer
 
-        For I = 1 To GetPlayersOnline()
+       For i = 0 To GetPlayersOnline()
             If IsPlaying(I) Then
                 SendGameClockTo(I)
             End If
@@ -70,7 +68,7 @@ Friend Module modTime
     Sub SendTimeToAll()
         Dim I As Integer
 
-        For I = 1 To GetPlayersOnline()
+       For i = 0 To GetPlayersOnline()
             If IsPlaying(I) Then
                 SendTimeTo(I)
             End If

@@ -9,38 +9,10 @@ Imports SFML.Window
 Friend Module C_Projectiles
 
 #Region "Defines"
-
-    Friend Const MaxProjectiles As Integer = 255
-    Friend Projectiles(MaxProjectiles) As ProjectileRec
-    Friend MapProjectiles(MaxProjectiles) As MapProjectileRec
     Friend NumProjectiles As Integer
     Friend InitProjectileEditor As Boolean
     Friend Const EditorProjectile As Byte = 10
-    Friend ProjectileChanged(MaxProjectiles) As Boolean
-
-#End Region
-
-#Region "Types"
-
-    Friend Structure ProjectileRec
-        Dim Name As String
-        Dim Sprite As Integer
-        Dim Range As Byte
-        Dim Speed As Integer
-        Dim Damage As Integer
-    End Structure
-
-    Friend Structure MapProjectileRec
-        Dim ProjectileNum As Integer
-        Dim Owner As Integer
-        Dim OwnerType As Byte
-        Dim X As Integer
-        Dim Y As Integer
-        Dim Dir As Byte
-        Dim Range As Integer
-        Dim TravelTime As Integer
-        Dim Timer As Integer
-    End Structure
+    Friend ProjectileChanged(MAX_PROJECTILES) As Boolean
 
 #End Region
 
@@ -143,7 +115,7 @@ Friend Module C_Projectiles
     Sub ClearProjectiles()
         Dim i As Integer
 
-        For i = 1 To MaxProjectiles
+       For i = 0 To MAX_PROJECTILES
             ClearProjectile(i)
         Next
 
@@ -232,7 +204,7 @@ Friend Module C_Projectiles
         End If
 
         'Check for npc collision
-        For i = 1 To MAX_MAP_NPCS
+       For i = 0 To MAX_MAP_NPCS
             If MapNpc(i).X = x AndAlso MapNpc(i).Y = y Then
                 canClearProjectile = True
                 collisionindex = i
@@ -243,7 +215,7 @@ Friend Module C_Projectiles
         Next
 
         'Check for player collision
-        For i = 1 To MAX_PLAYERS
+       For i = 0 To MAX_PLAYERS
             If IsPlaying(i) AndAlso GetPlayerMap(i) = GetPlayerMap(Myindex) Then
                 If GetPlayerX(i) = x AndAlso GetPlayerY(i) = y Then
                     canClearProjectile = True
@@ -355,7 +327,7 @@ Friend Module C_Projectiles
     Friend Sub ProjectileEditorOk()
         Dim i As Integer
 
-        For i = 1 To MaxProjectiles
+       For i = 0 To MAX_PROJECTILES
             If ProjectileChanged(i) Then
                 Call SendSaveProjectile(i)
             End If
@@ -380,7 +352,7 @@ Friend Module C_Projectiles
     Friend Sub ClearChanged_Projectile()
         Dim i As Integer
 
-        For i = 0 To MaxProjectiles
+        For i = 0 To MAX_PROJECTILES
             ProjectileChanged(i) = False
         Next
 

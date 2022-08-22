@@ -78,12 +78,12 @@ Module S_AutoMap
         Common
     End Enum
 
-    Structure DetailRec
+   Public Structure DetailRec
         Dim DetailBase As Byte
         Dim Tile As TileStruct
     End Structure
 
-    Structure MapOrientationRec
+   Public Structure MapOrientationRec
         Dim Prefab As Integer
         Dim TileStartX As Integer
         Dim TileStartY As Integer
@@ -104,10 +104,10 @@ Module S_AutoMap
         Dim cf = Paths.Database & "AutoMapper.ini"
 
         ReDim Tile(TilePrefab.Count - 1)
-        For prefab = 1 To TilePrefab.Count - 1
+        For prefab = 0 To TilePrefab.Count - 1
 
             ReDim Tile(prefab).Layer(LayerType.Count - 1)
-            For layer = 1 To LayerType.Count - 1
+            For layer = 0 To LayerType.Count - 1
                 Tile(prefab).Layer(layer).Tileset = Val(Ini.Read(cf, "Prefab" & prefab, "Layer" & layer & "Tileset"))
                 Tile(prefab).Layer(layer).X = Val(Ini.Read(cf, "Prefab" & prefab, "Layer" & layer & "X"))
                 Tile(prefab).Layer(layer).Y = Val(Ini.Read(cf, "Prefab" & prefab, "Layer" & layer & "Y"))
@@ -221,7 +221,7 @@ Module S_AutoMap
 
         Ini.Write(cf, "Resources", "ResourcesNum", buffer.ReadString())
 
-        For Prefab = 1 To TilePrefab.Count - 1
+        For Prefab = 0 To TilePrefab.Count - 1
             ReDim Tile(Prefab).Layer(LayerType.Count - 1)
 
             Layer = buffer.ReadInt32()
@@ -263,8 +263,8 @@ Module S_AutoMap
         'send xml info
         buffer.WriteString((Ini.Read(cf, "Resources", "ResourcesNum")))
 
-        For Prefab = 1 To TilePrefab.Count - 1
-            For Layer = 1 To LayerType.Count - 1
+        For Prefab = 0 To TilePrefab.Count - 1
+            For Layer = 0 To LayerType.Count - 1
                 If Val(Ini.Read(cf, "Prefab" & Prefab, "Layer" & Layer & "Tileset")) > 0 Then
                     buffer.WriteInt32(Layer)
                     buffer.WriteInt32(Val(Ini.Read(cf, "Prefab" & Prefab, "Layer" & Layer & "Tileset")))
@@ -297,7 +297,7 @@ Module S_AutoMap
 
         ReDim Preserve tileDest.Layer(LayerType.Count - 1)
 
-        For i = 1 To LayerType.Count - 1
+        For i = 0 To LayerType.Count - 1
             If Tile(prefab).Layer(i).Tileset <> 0 OrElse cleanNextTiles Then
                 tileDest.Layer(i) = Tile(prefab).Layer(i)
                 If Not HaveDetails(prefab) Then cleanNextTiles = True
@@ -310,7 +310,7 @@ Module S_AutoMap
                     Dim detailNum As Integer
                     Dim details() As Integer
                     ReDim details(1)
-                    For i = 1 To UBound(Detail)
+                    For i = 0 To UBound(Detail)
                         If Detail(i).DetailBase = prefab Then
                             ReDim Preserve details(UBound(details) + 1)
                             details(UBound(details)) = i
@@ -346,8 +346,8 @@ Module S_AutoMap
     Sub MakeResource(mapNum As Integer)
         Dim x As Integer, y As Integer
 
-        For x = 1 To Map(mapNum).MaxX - 1
-            For y = 1 To Map(mapNum).MaxY - 1
+        For x = 0 To Map(mapNum).MaxX - 1
+            For y = 0 To Map(mapNum).MaxY - 1
                 If CanPlaceResource(mapNum, x, y) AndAlso CanPlaceResource(mapNum, x - 1, y) AndAlso CanPlaceResource(mapNum, x + 1, y) AndAlso CanPlaceResource(mapNum, x, y - 1) AndAlso CanPlaceResource(mapNum, x, y + 1) Then
                     Dim resourceNum As Integer
 
@@ -414,8 +414,8 @@ Module S_AutoMap
         Dim foundBorder As Boolean
 
         With Map(mapNum)
-            For x = 0 To .MaxX
-                For y = 0 To .MaxY
+            For X = 0 To .MaxX
+                For Y = 0 To .MaxY
                     If CanPlaceOvergrass(mapNum, x, y) Then
                         grassCount = grassCount + 1
                     End If
@@ -730,7 +730,7 @@ SelectMap:
         totalMountains = Random(0, (totalGrass / (mountainMinAreaWidth * MountainMinAreaHeight)))
 
         If totalMountains > 0 Then
-            For i = 1 To totalMountains
+            For i = 0 To totalMountains
                 positionTries = 0
 Retry:
                 If positionTries < 5 Then
@@ -913,14 +913,14 @@ Important:
 
         With Map(mapNum)
             If prefab <> MapPrefab.Common Then
-                For x = 0 To .MaxX
-                    For y = 0 To .MaxY
+                For X = 0 To .MaxX
+                    For Y = 0 To .MaxY
                         AddTile(TilePrefab.Water, mapNum, x, y)
                     Next y
                 Next x
             Else
-                For x = 0 To .MaxX
-                    For y = 0 To .MaxY
+                For X = 0 To .MaxX
+                    For Y = 0 To .MaxY
                         AddTile(TilePrefab.Grass, mapNum, x, y)
                     Next y
                 Next x
@@ -1323,7 +1323,7 @@ ChangeDir:
         If locationCount > 0 Then
             Dim i As Integer
             Dim dir As Integer
-            For i = 1 To locationCount
+            For i = 0 To locationCount
                 If startX(i) < Map(mapNum).MaxX / 2 Then
                     If startY(i) < Map(mapNum).MaxY / 2 Then
                         If Random(1, 2) = 1 Then

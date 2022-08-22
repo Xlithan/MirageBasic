@@ -44,7 +44,6 @@ Friend Class FrmMenu
     ''' Preload the images in the menu.
     ''' </summary>
     Friend Sub LoadMenuGraphics()
-
         'main menu
         If File.Exists(Paths.Gui & "Menu/menu" & GfxExt) Then
             BackgroundImage = Image.FromFile(Paths.Gui & "Menu/menu" & GfxExt)
@@ -123,15 +122,15 @@ Friend Class FrmMenu
             Dim charwidth As Integer
             Dim charheight As Integer
 
-            If NewCharJob = 0 Then NewCharJob = 1
-            If NewCharSprite = 0 Then NewCharSprite = 1
-
             If rdoMale.Checked = True Then
+                If NewCharSprite > UBound(Job(NewCharJob).MaleSprite) Then Exit sub
                 filename = Paths.Graphics & "characters\" & Job(NewCharJob).MaleSprite(NewCharSprite) & GfxExt
             Else
+                If NewCharSprite > Ubound(Job(NewCharJob).FemaleSprite) Then Exit Sub
                 filename = Paths.Graphics & "characters\" & Job(NewCharJob).FemaleSprite(NewCharSprite) & GfxExt
             End If
 
+            If File.Exists(filename) = False Then Exit sub
             Dim charsprite As Bitmap = New Bitmap(filename)
 
             charwidth = charsprite.Width / 4
@@ -272,7 +271,7 @@ Friend Class FrmMenu
     Private Sub TmrCredits_Tick(sender As Object, e As EventArgs) Handles tmrCredits.Tick
         Dim credits As String
         Dim filepath As String
-        filepath = Application.StartupPath & "\Data\credits.txt"
+        filepath = Paths.Database & "credits.txt"
         lblScrollingCredits.Top = 177
         If PnlCreditsVisible = True Then
             tmrCredits.Enabled = False
@@ -316,6 +315,7 @@ Friend Class FrmMenu
     ''' </summary>
     Private Sub ChkSavePass_CheckedChanged(sender As Object, e As EventArgs) Handles chkSavePass.CheckedChanged
         ChkSavePassChecked = chkSavePass.Checked
+        SaveSettings
     End Sub
 
 #End Region
@@ -325,8 +325,8 @@ Friend Class FrmMenu
     ''' <summary>
     ''' Changes selected class.
     ''' </summary>
-    Private Sub CmbClass_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClass.SelectedIndexChanged
-        NewCharJob = cmbClass.SelectedIndex + 1
+    Private Sub CmbClass_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJob.SelectedIndexChanged
+        NewCharJob = cmbJob.SelectedIndex + 1
         txtDescription.Text = Job(NewCharJob).Desc
         DrawCharacter()
     End Sub
@@ -351,9 +351,9 @@ Friend Class FrmMenu
     Private Sub LblNextChar_Click(sender As Object, e As EventArgs) Handles lblNextChar.Click
         NewCharSprite = NewCharSprite + 1
         If rdoMale.Checked = True Then
-            If NewCharSprite > Job(NewCharJob).MaleSprite.Length - 1 Then NewCharSprite = 1
+            If NewCharSprite > Job(NewCharJob).MaleSprite.Length Then NewCharSprite = 0
         ElseIf rdoFemale.Checked = True Then
-            If NewCharSprite > Job(NewCharJob).FemaleSprite.Length - 1 Then NewCharSprite = 1
+            If NewCharSprite > Job(NewCharJob).FemaleSprite.Length Then NewCharSprite = 0
         End If
         DrawCharacter()
     End Sub
@@ -364,9 +364,9 @@ Friend Class FrmMenu
     Private Sub LblPrevChar_Click(sender As Object, e As EventArgs) Handles lblPrevChar.Click
         NewCharSprite = NewCharSprite - 1
         If rdoMale.Checked = True Then
-            If NewCharSprite = 0 Then NewCharSprite = Job(NewCharJob).MaleSprite.Length - 1
+            If NewCharSprite = 0 Then NewCharSprite = Job(NewCharJob).MaleSprite.Length
         ElseIf rdoFemale.Checked = True Then
-            If NewCharSprite = 0 Then NewCharSprite = Job(NewCharJob).FemaleSprite.Length - 1
+            If NewCharSprite = 0 Then NewCharSprite = Job(NewCharJob).FemaleSprite.Length
         End If
         DrawCharacter()
     End Sub
@@ -577,7 +577,7 @@ Friend Class FrmMenu
 
         newSelectedChar = 0
 
-        For i = 1 To MaxChars
+       For i = 0 To MaxChars
             If CharSelection(i).Name = "" Then
                 newSelectedChar = i
                 Exit For
@@ -635,20 +635,6 @@ Friend Class FrmMenu
     ''' </summary>
     Private Sub BtnUseChar_MouseLeave(sender As Object, e As EventArgs) Handles btnUseChar.MouseLeave
         btnUseChar.Image = Image.FromFile(Paths.Gui & "Menu\btn_usechar" & GfxExt)
-    End Sub
-
-    ''' <summary>
-    ''' Handles DelChar button press.
-    ''' </summary>
-    Private Sub BtnDelChar_Click(sender As Object, e As EventArgs) Handles btnDelChar.Click
-        Dim result1 As DialogResult = MessageBox.Show("Sure you want to delete character " & SelectedChar & "?", "You sure?", MessageBoxButtons.YesNo)
-        If result1 = DialogResult.Yes Then
-            Dim buffer As New ByteStream(4)
-            buffer.WriteInt32(ClientPackets.CDelChar)
-            buffer.WriteInt32(SelectedChar)
-            Socket.SendData(buffer.Data, buffer.Head)
-            buffer.Dispose()
-        End If
     End Sub
 
     ''' <summary>

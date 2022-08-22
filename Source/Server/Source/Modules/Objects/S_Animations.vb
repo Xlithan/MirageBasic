@@ -10,7 +10,7 @@ Friend Module S_Animations
     Sub SaveAnimations()
         Dim i As Integer
 
-        For i = 1 To MAX_ANIMATIONS
+       For i = 0 To MAX_ANIMATIONS
             SaveAnimation(i)
         Next
 
@@ -27,19 +27,19 @@ Friend Module S_Animations
         writer.WriteString(Animation(AnimationNum).Name)
         writer.WriteString(Animation(AnimationNum).Sound)
 
-        For x = 0 To UBound(Animation(AnimationNum).Sprite)
+        For X = 0 To UBound(Animation(AnimationNum).Sprite)
             writer.WriteInt32(Animation(AnimationNum).Sprite(x))
         Next
 
-        For x = 0 To UBound(Animation(AnimationNum).Frames)
+        For X = 0 To UBound(Animation(AnimationNum).Frames)
             writer.WriteInt32(Animation(AnimationNum).Frames(x))
         Next
 
-        For x = 0 To UBound(Animation(AnimationNum).LoopCount)
+        For X = 0 To UBound(Animation(AnimationNum).LoopCount)
             writer.WriteInt32(Animation(AnimationNum).LoopCount(x))
         Next
 
-        For x = 0 To UBound(Animation(AnimationNum).LoopTime)
+        For X = 0 To UBound(Animation(AnimationNum).LoopTime)
             writer.WriteInt32(Animation(AnimationNum).LoopTime(x))
         Next
 
@@ -51,7 +51,7 @@ Friend Module S_Animations
 
         CheckAnimations()
 
-        For i = 1 To MAX_ANIMATIONS
+       For i = 0 To MAX_ANIMATIONS
             LoadAnimation(i)
         Next
 
@@ -67,19 +67,19 @@ Friend Module S_Animations
         Animation(AnimationNum).Name = reader.ReadString()
         Animation(AnimationNum).Sound = reader.ReadString()
 
-        For x = 0 To UBound(Animation(AnimationNum).Sprite)
+        For X = 0 To UBound(Animation(AnimationNum).Sprite)
             Animation(AnimationNum).Sprite(x) = reader.ReadInt32()
         Next
 
-        For x = 0 To UBound(Animation(AnimationNum).Frames)
+        For X = 0 To UBound(Animation(AnimationNum).Frames)
             Animation(AnimationNum).Frames(x) = reader.ReadInt32()
         Next
 
-        For x = 0 To UBound(Animation(AnimationNum).LoopCount)
+        For X = 0 To UBound(Animation(AnimationNum).LoopCount)
             Animation(AnimationNum).LoopCount(x) = reader.ReadInt32()
         Next
 
-        For x = 0 To UBound(Animation(AnimationNum).LoopTime)
+        For X = 0 To UBound(Animation(AnimationNum).LoopTime)
             Animation(AnimationNum).LoopTime(x) = reader.ReadInt32()
         Next
 
@@ -89,7 +89,7 @@ Friend Module S_Animations
     Sub CheckAnimations()
         Dim i As Integer
 
-        For i = 1 To MAX_ANIMATIONS
+       For i = 0 To MAX_ANIMATIONS
 
             If Not File.Exists(Paths.Animation(i)) Then
                 SaveAnimation(i)
@@ -110,7 +110,7 @@ Friend Module S_Animations
     End Sub
 
     Sub ClearAnimations()
-        For i = 1 To MAX_ANIMATIONS
+       For i = 0 To MAX_ANIMATIONS
             ClearAnimation(i)
         Next
     End Sub
@@ -118,7 +118,7 @@ Friend Module S_Animations
     Function AnimationsData() As Byte()
         Dim buffer As New ByteStream(4)
 
-        For i = 1 To MAX_ANIMATIONS
+       For i = 0 To MAX_ANIMATIONS
             If Not Len(Trim$(Animation(i).Name)) > 0 Then Continue For
             buffer.WriteBlock(AnimationData(i))
         Next
@@ -237,7 +237,7 @@ Friend Module S_Animations
     Sub SendAnimations(index As Integer)
         Dim i As Integer
 
-        For i = 1 To MAX_ANIMATIONS
+       For i = 0 To MAX_ANIMATIONS
 
             If Len(Trim$(Animation(i).Name)) > 0 Then
                 SendUpdateAnimationTo(index, i)

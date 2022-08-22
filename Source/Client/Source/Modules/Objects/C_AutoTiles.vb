@@ -42,19 +42,19 @@ Friend Module C_AutoTiles
 
     Friend Autotile(,) As AutotileRec
 
-    Friend Structure PointRec
+    Public Structure PointRec
         Dim X As Integer
         Dim Y As Integer
     End Structure
 
-    Friend Structure QuarterTileRec
+    Public Structure QuarterTileRec
         Dim QuarterTile() As PointRec '1 To 4
         Dim RenderState As Byte
         Dim SrcX() As Integer '1 To 4
         Dim SrcY() As Integer '1 To 4
     End Structure
 
-    Friend Structure AutotileRec
+    Public Structure AutotileRec
         Dim Layer() As QuarterTileRec '1 To MapLayer.Count - 1
         Dim ExLayer() As QuarterTileRec '1 To ExMapLayer.Count - 1
     End Structure
@@ -66,8 +66,8 @@ Friend Module C_AutoTiles
 
         ReDim Autotile(Map.MaxX, Map.MaxY)
 
-        For x = 0 To Map.MaxX
-            For y = 0 To Map.MaxY
+        For X = 0 To Map.MaxX
+            For Y = 0 To Map.MaxY
                 ReDim Autotile(x, y).Layer(modEnumerators.LayerType.Count - 1)
                 For i = 0 To LayerType.Count - 1
                     ReDim Autotile(x, y).Layer(i).SrcX(4)
@@ -229,8 +229,8 @@ Friend Module C_AutoTiles
         ' First, we need to re-size the array
 
         ReDim Autotile(Map.MaxX, Map.MaxY)
-        For x = 0 To Map.MaxX
-            For y = 0 To Map.MaxY
+        For X = 0 To Map.MaxX
+            For Y = 0 To Map.MaxY
                 ReDim Autotile(x, y).Layer(LayerType.Count - 1)
                 For i = 0 To LayerType.Count - 1
                     ReDim Autotile(x, y).Layer(i).SrcX(4)
@@ -306,9 +306,9 @@ Friend Module C_AutoTiles
         AutoSe(4).X = 48
         AutoSe(4).Y = 80
 
-        For x = 0 To Map.MaxX
-            For y = 0 To Map.MaxY
-                For layerNum = 1 To LayerType.Count - 1
+        For X = 0 To Map.MaxX
+            For Y = 0 To Map.MaxY
+                For layerNum = 0 To LayerType.Count - 1
                     ' calculate the subtile positions and place them
                     CalculateAutotile(x, y, layerNum)
                     ' cache the rendering state of the tiles and set them
@@ -352,7 +352,7 @@ Friend Module C_AutoTiles
             Else
                 Autotile(x, y).Layer(layerNum).RenderState = RenderStateAutotile
                 ' cache tileset positioning
-                For quarterNum = 1 To 4
+                For quarterNum = 0 To 4
                     Autotile(x, y).Layer(layerNum).SrcX(quarterNum) = (Map.Tile(x, y).Layer(layerNum).X * 32) + Autotile(x, y).Layer(layerNum).QuarterTile(quarterNum).X
                     Autotile(x, y).Layer(layerNum).SrcY(quarterNum) = (Map.Tile(x, y).Layer(layerNum).Y * 32) + Autotile(x, y).Layer(layerNum).QuarterTile(quarterNum).Y
                 Next

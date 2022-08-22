@@ -16,16 +16,16 @@ Module C_Animations
     Sub ClearAnimation(index As Integer)
         Animation(index) = Nothing
         Animation(index) = New AnimationStruct
-        For x = 0 To 1
+        For X = 0 To 1
             ReDim Animation(index).Sprite(x)
         Next
-        For x = 0 To 1
+        For X = 0 To 1
             ReDim Animation(index).Frames(x)
         Next
-        For x = 0 To 1
+        For X = 0 To 1
             ReDim Animation(index).LoopCount(x)
         Next
-        For x = 0 To 1
+        For X = 0 To 1
             ReDim Animation(index).LoopTime(x)
         Next
         Animation(index).Name = ""
@@ -36,7 +36,7 @@ Module C_Animations
 
         ReDim Animation(MAX_ANIMATIONS)
 
-        For i = 1 To MAX_ANIMATIONS
+       For i = 0 To MAX_ANIMATIONS
             ClearAnimation(i)
         Next
 
@@ -48,16 +48,16 @@ Module C_Animations
         ReDim AnimInstance(MAX_ANIMATIONS)
 
         For i = 0 To MAX_ANIMATIONS
-            For x = 0 To 1
+            For X = 0 To 1
                 ReDim AnimInstance(i).Timer(x)
             Next
-            For x = 0 To 1
+            For X = 0 To 1
                 ReDim AnimInstance(i).Used(x)
             Next
-            For x = 0 To 1
+            For X = 0 To 1
                 ReDim AnimInstance(i).LoopIndex(x)
             Next
-            For x = 0 To 1
+            For X = 0 To 1
                 ReDim AnimInstance(i).FrameIndex(x)
             Next
 

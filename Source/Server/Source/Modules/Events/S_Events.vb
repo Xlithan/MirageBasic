@@ -24,241 +24,6 @@ Friend Module S_Events
 
 #End Region
 
-#Region "Structures"
-
-    Structure MoveRouteStruct
-        Dim Index As Integer
-        Dim Data1 As Integer
-        Dim Data2 As Integer
-        Dim Data3 As Integer
-        Dim Data4 As Integer
-        Dim Data5 As Integer
-        Dim Data6 As Integer
-    End Structure
-
-    Structure GlobalEventStruct
-        Dim X As Integer
-        Dim Y As Integer
-        Dim Dir As Integer
-        Dim Active As Integer
-
-        Dim WalkingAnim As Integer
-        Dim FixedDir As Integer
-        Dim WalkThrough As Integer
-        Dim ShowName As Integer
-
-        Dim Position As Integer
-
-        Dim GraphicType As Integer
-        Dim GraphicNum As Integer
-        Dim GraphicX As Integer
-        Dim GraphicX2 As Integer
-        Dim GraphicY As Integer
-        Dim GraphicY2 As Integer
-
-        'Server Only Options
-        Dim MoveType As Integer
-
-        Dim MoveSpeed As Integer
-        Dim MoveFreq As Integer
-        Dim MoveRouteCount As Integer
-        Dim MoveRoute() As MoveRouteStruct
-        Dim MoveRouteStep As Integer
-
-        Dim RepeatMoveRoute As Integer
-        Dim IgnoreIfCannotMove As Integer
-
-        Dim MoveTimer As Integer
-        Dim QuestNum As Integer
-        Dim MoveRouteComplete As Integer
-    End Structure
-
-    Structure GlobalEventsStruct
-        Dim EventCount As Integer
-        Dim Events() As GlobalEventStruct
-    End Structure
-
-    Friend Structure ConditionalBranchStruct
-        Dim Condition As Integer
-        Dim Data1 As Integer
-        Dim Data2 As Integer
-        Dim Data3 As Integer
-        Dim CommandList As Integer
-        Dim ElseCommandList As Integer
-    End Structure
-
-    Structure EventCommandStruct
-        Dim Index As Byte
-        Dim Text1 As String
-        Dim Text2 As String
-        Dim Text3 As String
-        Dim Text4 As String
-        Dim Text5 As String
-        Dim Data1 As Integer
-        Dim Data2 As Integer
-        Dim Data3 As Integer
-        Dim Data4 As Integer
-        Dim Data5 As Integer
-        Dim Data6 As Integer
-        Dim ConditionalBranch As ConditionalBranchStruct
-        Dim MoveRouteCount As Integer
-        Dim MoveRoute() As MoveRouteStruct
-    End Structure
-
-    Structure CommandListStruct
-        Dim CommandCount As Integer
-        Dim ParentList As Integer
-        Dim Commands() As EventCommandStruct
-    End Structure
-
-    Structure EventPageStruct
-
-        'These are condition variables that decide if the event even appears to the player.
-        Dim ChkVariable As Integer
-
-        Dim Variableindex As Integer
-        Dim VariableCondition As Integer
-        Dim VariableCompare As Integer
-
-        Dim ChkSwitch As Integer
-        Dim Switchindex As Integer
-        Dim SwitchCompare As Integer
-
-        Dim ChkHasItem As Integer
-        Dim HasItemindex As Integer
-        Dim HasItemAmount As Integer
-
-        Dim ChkSelfSwitch As Integer
-        Dim SelfSwitchindex As Integer
-        Dim SelfSwitchCompare As Integer
-        Dim ChkPlayerGender As Integer
-        'End Conditions
-
-        'Handles the Event Sprite
-        Dim GraphicType As Byte
-
-        Dim Graphic As Integer
-        Dim GraphicX As Integer
-        Dim GraphicY As Integer
-        Dim GraphicX2 As Integer
-        Dim GraphicY2 As Integer
-
-        'Handles Movement - Move Routes to come soon.
-        Dim MoveType As Byte
-
-        Dim MoveSpeed As Byte
-        Dim MoveFreq As Byte
-        Dim MoveRouteCount As Integer
-        Dim MoveRoute() As MoveRouteStruct
-        Dim IgnoreMoveRoute As Integer
-        Dim RepeatMoveRoute As Integer
-
-        'Guidelines for the event
-        Dim WalkAnim As Integer
-
-        Dim DirFix As Integer
-        Dim WalkThrough As Integer
-        Dim ShowName As Integer
-
-        'Trigger for the event
-        Dim Trigger As Byte
-
-        'Commands for the event
-        Dim CommandListCount As Integer
-
-        Dim CommandList() As CommandListStruct
-
-        Dim Position As Byte
-
-        Dim QuestNum As Integer
-
-        'For EventMap
-        Dim X As Integer
-
-        Dim Y As Integer
-    End Structure
-
-    Structure EventStruct
-        Dim Name As String
-        Dim Globals As Byte
-        Dim PageCount As Integer
-        Dim Pages() As EventPageStruct
-        Dim X As Integer
-        Dim Y As Integer
-
-        'Self Switches re-set on restart.
-        Dim SelfSwitches() As Integer '0 to 4
-
-    End Structure
-
-    Friend Structure GlobalMapEventsStruct
-        Dim EventId As Integer
-        Dim PageId As Integer
-        Dim X As Integer
-        Dim Y As Integer
-    End Structure
-
-    Structure MapEventStruct
-        Dim Dir As Integer
-        Dim X As Integer
-        Dim Y As Integer
-
-        Dim WalkingAnim As Integer
-        Dim FixedDir As Integer
-        Dim WalkThrough As Integer
-        Dim ShowName As Integer
-
-        Dim GraphicType As Integer
-        Dim GraphicX As Integer
-        Dim GraphicY As Integer
-        Dim GraphicX2 As Integer
-        Dim GraphicY2 As Integer
-        Dim GraphicNum As Integer
-
-        Dim MovementSpeed As Integer
-        Dim Position As Integer
-        Dim Visible As Integer
-        Dim EventId As Integer
-        Dim PageId As Integer
-
-        'Server Only Options
-        Dim MoveType As Integer
-
-        Dim MoveSpeed As Integer
-        Dim MoveFreq As Integer
-        Dim MoveRouteCount As Integer
-        Dim MoveRoute() As MoveRouteStruct
-        Dim MoveRouteStep As Integer
-
-        Dim RepeatMoveRoute As Integer
-        Dim IgnoreIfCannotMove As Integer
-        Dim QuestNum As Integer
-
-        Dim MoveTimer As Integer
-        Dim SelfSwitches() As Integer '0 to 4
-        Dim MoveRouteComplete As Integer
-    End Structure
-
-    Structure EventMapStruct
-        Dim CurrentEvents As Integer
-        Dim EventPages() As MapEventStruct
-    End Structure
-
-    Structure EventProcessingStruct
-        Dim Active As Integer
-        Dim CurList As Integer
-        Dim CurSlot As Integer
-        Dim EventId As Integer
-        Dim PageId As Integer
-        Dim WaitingForResponse As Integer
-        Dim EventMovingId As Integer
-        Dim EventMovingType As Integer
-        Dim ActionTimer As Integer
-        Dim ListLeftOff() As Integer
-    End Structure
-
-#End Region
-
 #Region "Enums"
 
     Friend Enum MoveRouteOpts
@@ -395,7 +160,7 @@ Friend Module S_Events
 #Region "Database"
 
     Sub CreateSwitches()
-        For i = 1 To MAX_SWITCHES
+        For i = 0 To MAX_SWITCHES
             Switches(i) = ""
         Next
 
@@ -403,7 +168,7 @@ Friend Module S_Events
     End Sub
 
     Sub CreateVariables()
-        For i = 1 To MAX_VARIABLES
+        For i = 0 To MAX_VARIABLES
             Variables(i) = ""
         Next
 
@@ -414,7 +179,7 @@ Friend Module S_Events
         Dim cf = Paths.Database & "Switches.ini"
         If Not File.Exists(cf) Then File.Create(cf).Dispose()
 
-        For i = 1 To MAX_SWITCHES
+        For i = 0 To MAX_SWITCHES
             Ini.PutVar(cf, "Switches", i, Switches(i))
         Next
     End Sub
@@ -423,7 +188,7 @@ Friend Module S_Events
         Dim cf = Paths.Database & "Variables.ini"
         If Not File.Exists(cf) Then File.Create(cf).Dispose()
 
-        For i = 1 To MAX_VARIABLES
+        For i = 0 To MAX_VARIABLES
             Ini.PutVar(cf, "Variables", i, Variables(i))
         Next
     End Sub
@@ -436,7 +201,7 @@ Friend Module S_Events
             Exit Sub
         End If
 
-        For i = 1 To MAX_SWITCHES
+        For i = 0 To MAX_SWITCHES
             Switches(i) = Ini.GetVar(cf, "Switches", i)
         Next
     End Sub
@@ -449,7 +214,7 @@ Friend Module S_Events
             Exit Sub
         End If
 
-        For i = 1 To MAX_VARIABLES
+        For i = 0 To MAX_VARIABLES
             Variables(i) = Ini.GetVar(cf, "Variables", i)
         Next
     End Sub
@@ -496,7 +261,7 @@ Friend Module S_Events
                     End If
 
                     ' Check to make sure that there is not a player in the way
-                    For i = 1 To Socket.HighIndex
+                    For i = 0 To Socket.HighIndex
                         If IsPlaying(i) Then
                             If (GetPlayerMap(i) = mapNum) AndAlso (GetPlayerX(i) = x) AndAlso (GetPlayerY(i) = y - 1) Then
                                 CanEventMove = False
@@ -524,7 +289,7 @@ Friend Module S_Events
 
                     If CanEventMove = False Then Exit Function
                     ' Check to make sure that there is not another npc in the way
-                    For i = 1 To MAX_MAP_NPCS
+                    For i = 0 To MAX_MAP_NPCS
                         If (MapNpc(mapNum).Npc(i).X = x) AndAlso (MapNpc(mapNum).Npc(i).Y = y - 1) Then
                             CanEventMove = False
                             Exit Function
@@ -532,7 +297,7 @@ Friend Module S_Events
                     Next
 
                     If globalevent = True AndAlso TempEventMap(mapNum).EventCount > 0 Then
-                        For z = 1 To TempEventMap(mapNum).EventCount
+                        For z = 0 To TempEventMap(mapNum).EventCount
                             If (z <> eventId) AndAlso (z > 0) AndAlso (TempEventMap(mapNum).Events(z).X = x) AndAlso (TempEventMap(mapNum).Events(z).Y = y - 1) AndAlso (TempEventMap(mapNum).Events(z).WalkThrough = 0) Then
                                 CanEventMove = False
                                 Exit Function
@@ -540,7 +305,7 @@ Friend Module S_Events
                         Next
                     Else
                         If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-                            For z = 1 To TempPlayer(index).EventMap.CurrentEvents
+                            For z = 0 To TempPlayer(index).EventMap.CurrentEvents
                                 If (TempPlayer(index).EventMap.EventPages(z).EventId <> eventId) AndAlso (eventId > 0) AndAlso (TempPlayer(index).EventMap.EventPages(z).X = TempPlayer(index).EventMap.EventPages(eventId).X) AndAlso (TempPlayer(index).EventMap.EventPages(z).Y = TempPlayer(index).EventMap.EventPages(eventId).Y - 1) AndAlso (TempPlayer(index).EventMap.EventPages(z).WalkThrough = 0) Then
                                     CanEventMove = False
                                     Exit Function
@@ -581,7 +346,7 @@ Friend Module S_Events
                     End If
 
                     ' Check to make sure that there is not a player in the way
-                    For i = 1 To Socket.HighIndex
+                    For i = 0 To Socket.HighIndex
                         If IsPlaying(i) Then
                             If (GetPlayerMap(i) = mapNum) AndAlso (GetPlayerX(i) = x) AndAlso (GetPlayerY(i) = y + 1) Then
                                 CanEventMove = False
@@ -610,7 +375,7 @@ Friend Module S_Events
                     If CanEventMove = False Then Exit Function
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 1 To MAX_MAP_NPCS
+                    For i = 0 To MAX_MAP_NPCS
                         If (MapNpc(mapNum).Npc(i).X = x) AndAlso (MapNpc(mapNum).Npc(i).Y = y + 1) Then
                             CanEventMove = False
                             Exit Function
@@ -618,7 +383,7 @@ Friend Module S_Events
                     Next
 
                     If globalevent = True AndAlso TempEventMap(mapNum).EventCount > 0 Then
-                        For z = 1 To TempEventMap(mapNum).EventCount
+                        For z = 0 To TempEventMap(mapNum).EventCount
                             If (z <> eventId) AndAlso (z > 0) AndAlso (TempEventMap(mapNum).Events(z).X = x) AndAlso (TempEventMap(mapNum).Events(z).Y = y + 1) AndAlso (TempEventMap(mapNum).Events(z).WalkThrough = 0) Then
                                 CanEventMove = False
                                 Exit Function
@@ -626,7 +391,7 @@ Friend Module S_Events
                         Next
                     Else
                         If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-                            For z = 1 To TempPlayer(index).EventMap.CurrentEvents
+                            For z = 0 To TempPlayer(index).EventMap.CurrentEvents
                                 If (TempPlayer(index).EventMap.EventPages(z).EventId <> eventId) AndAlso (eventId > 0) AndAlso (TempPlayer(index).EventMap.EventPages(z).X = TempPlayer(index).EventMap.EventPages(eventId).X) AndAlso (TempPlayer(index).EventMap.EventPages(z).Y = TempPlayer(index).EventMap.EventPages(eventId).Y + 1) AndAlso (TempPlayer(index).EventMap.EventPages(z).WalkThrough = 0) Then
                                     CanEventMove = False
                                     Exit Function
@@ -667,7 +432,7 @@ Friend Module S_Events
                     End If
 
                     ' Check to make sure that there is not a player in the way
-                    For i = 1 To Socket.HighIndex
+                    For i = 0 To Socket.HighIndex
                         If IsPlaying(i) Then
                             If (GetPlayerMap(i) = mapNum) AndAlso (GetPlayerX(i) = x - 1) AndAlso (GetPlayerY(i) = y) Then
                                 CanEventMove = False
@@ -696,7 +461,7 @@ Friend Module S_Events
                     If CanEventMove = False Then Exit Function
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 1 To MAX_MAP_NPCS
+                    For i = 0 To MAX_MAP_NPCS
                         If (MapNpc(mapNum).Npc(i).X = x - 1) AndAlso (MapNpc(mapNum).Npc(i).Y = y) Then
                             CanEventMove = False
                             Exit Function
@@ -704,7 +469,7 @@ Friend Module S_Events
                     Next
 
                     If globalevent = True AndAlso TempEventMap(mapNum).EventCount > 0 Then
-                        For z = 1 To TempEventMap(mapNum).EventCount
+                        For z = 0 To TempEventMap(mapNum).EventCount
                             If (z <> eventId) AndAlso (z > 0) AndAlso (TempEventMap(mapNum).Events(z).X = x - 1) AndAlso (TempEventMap(mapNum).Events(z).Y = y) AndAlso (TempEventMap(mapNum).Events(z).WalkThrough = 0) Then
                                 CanEventMove = False
                                 Exit Function
@@ -712,7 +477,7 @@ Friend Module S_Events
                         Next
                     Else
                         If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-                            For z = 1 To TempPlayer(index).EventMap.CurrentEvents
+                            For z = 0 To TempPlayer(index).EventMap.CurrentEvents
                                 If (TempPlayer(index).EventMap.EventPages(z).EventId <> eventId) AndAlso (eventId > 0) AndAlso (TempPlayer(index).EventMap.EventPages(z).X = TempPlayer(index).EventMap.EventPages(eventId).X - 1) AndAlso (TempPlayer(index).EventMap.EventPages(z).Y = TempPlayer(index).EventMap.EventPages(eventId).Y) AndAlso (TempPlayer(index).EventMap.EventPages(z).WalkThrough = 0) Then
                                     CanEventMove = False
                                     Exit Function
@@ -753,7 +518,7 @@ Friend Module S_Events
                     End If
 
                     ' Check to make sure that there is not a player in the way
-                    For i = 1 To Socket.HighIndex
+                    For i = 0 To Socket.HighIndex
                         If IsPlaying(i) Then
                             If (GetPlayerMap(i) = mapNum) AndAlso (GetPlayerX(i) = x + 1) AndAlso (GetPlayerY(i) = y) Then
                                 CanEventMove = False
@@ -782,7 +547,7 @@ Friend Module S_Events
                     If CanEventMove = False Then Exit Function
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 1 To MAX_MAP_NPCS
+                    For i = 0 To MAX_MAP_NPCS
                         If (MapNpc(mapNum).Npc(i).X = x + 1) AndAlso (MapNpc(mapNum).Npc(i).Y = y) Then
                             CanEventMove = False
                             Exit Function
@@ -790,7 +555,7 @@ Friend Module S_Events
                     Next
 
                     If globalevent = True AndAlso TempEventMap(mapNum).EventCount > 0 Then
-                        For z = 1 To TempEventMap(mapNum).EventCount
+                        For z = 0 To TempEventMap(mapNum).EventCount
                             If (z <> eventId) AndAlso (z > 0) AndAlso (TempEventMap(mapNum).Events(z).X = x + 1) AndAlso (TempEventMap(mapNum).Events(z).Y = y) AndAlso (TempEventMap(mapNum).Events(z).WalkThrough = 0) Then
                                 CanEventMove = False
                                 Exit Function
@@ -798,7 +563,7 @@ Friend Module S_Events
                         Next
                     Else
                         If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-                            For z = 1 To TempPlayer(index).EventMap.CurrentEvents
+                            For z = 0 To TempPlayer(index).EventMap.CurrentEvents
                                 If (TempPlayer(index).EventMap.EventPages(z).EventId <> eventId) AndAlso (eventId > 0) AndAlso (TempPlayer(index).EventMap.EventPages(z).X = TempPlayer(index).EventMap.EventPages(eventId).X + 1) AndAlso (TempPlayer(index).EventMap.EventPages(z).Y = TempPlayer(index).EventMap.EventPages(eventId).Y) AndAlso (TempPlayer(index).EventMap.EventPages(z).WalkThrough = 0) Then
                                     CanEventMove = False
                                     Exit Function
@@ -834,7 +599,7 @@ Friend Module S_Events
 
         If globalevent = False Then
             If TempPlayer(playerindex).EventMap.CurrentEvents > 0 Then
-                For i = 1 To TempPlayer(playerindex).EventMap.CurrentEvents
+                For i = 0 To TempPlayer(playerindex).EventMap.CurrentEvents
                     If eventId = i Then
                         eventindex = eventId
                         eventId = TempPlayer(playerindex).EventMap.EventPages(i).EventId
@@ -881,7 +646,7 @@ Friend Module S_Events
 
         If globalevent = False Then
             If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-                For i = 1 To TempPlayer(index).EventMap.CurrentEvents
+                For i = 0 To TempPlayer(index).EventMap.CurrentEvents
                     If eventId = i Then
                         eventindex = eventId
                         eventId = TempPlayer(index).EventMap.EventPages(i).EventId
@@ -1307,7 +1072,7 @@ Friend Module S_Events
 
             ReDim pos(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
-            For i = 1 To TempPlayer(playerId).EventMap.CurrentEvents
+            For i = 0 To TempPlayer(playerId).EventMap.CurrentEvents
                 If TempPlayer(playerId).EventMap.EventPages(i).Visible Then
                     If TempPlayer(playerId).EventMap.EventPages(i).WalkThrough = 1 Then
                         pos(TempPlayer(playerId).EventMap.EventPages(i).X, TempPlayer(playerId).EventMap.EventPages(i).Y) = 9
@@ -1763,7 +1528,7 @@ Friend Module S_Events
         reply = buffer.ReadInt32
 
         If TempPlayer(index).EventProcessingCount > 0 Then
-            For i = 1 To TempPlayer(index).EventProcessingCount
+            For i = 0 To TempPlayer(index).EventProcessingCount
                 If TempPlayer(index).EventProcessing(i).EventId = eventId AndAlso TempPlayer(index).EventProcessing(i).PageId = pageId Then
                     If TempPlayer(index).EventProcessing(i).WaitingForResponse = 1 Then
                         If reply = 0 Then
@@ -1836,7 +1601,7 @@ Friend Module S_Events
         End Select
 
         If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-            For z = 1 To TempPlayer(index).EventMap.CurrentEvents
+            For z = 0 To TempPlayer(index).EventMap.CurrentEvents
                 If TempPlayer(index).EventMap.EventPages(z).EventId = i Then
                     i = z
                     begineventprocessing = True
@@ -1878,11 +1643,11 @@ Friend Module S_Events
 
         AddDebug("Recieved CMSG: CSwitchesAndVariables")
 
-        For i = 1 To MAX_SWITCHES
+        For i = 0 To MAX_SWITCHES
             Switches(i) = buffer.ReadString
         Next
 
-        For i = 1 To MAX_VARIABLES
+        For i = 0 To MAX_VARIABLES
             Variables(i) = buffer.ReadString
         Next
 
@@ -1942,11 +1707,11 @@ Friend Module S_Events
 
         AddDebug("Sent SMSG: SSwitchesAndVariables")
 
-        For i = 1 To MAX_SWITCHES
+        For i = 0 To MAX_SWITCHES
             buffer.WriteString((Trim(Switches(i))))
         Next
 
-        For i = 1 To MAX_VARIABLES
+        For i = 0 To MAX_VARIABLES
             buffer.WriteString((Trim(Variables(i))))
         Next
 
@@ -1973,7 +1738,7 @@ Friend Module S_Events
         buffer.WriteInt32(Map(mapNum).EventCount)
 
         If Map(mapNum).EventCount > 0 Then
-            For i = 1 To Map(mapNum).EventCount
+            For i = 0 To Map(mapNum).EventCount
                 With Map(mapNum).Events(i)
                     buffer.WriteString((Trim(.Name)))
                     buffer.WriteInt32(.Globals)
@@ -1982,7 +1747,7 @@ Friend Module S_Events
                     buffer.WriteInt32(.PageCount)
                 End With
                 If Map(mapNum).Events(i).PageCount > 0 Then
-                    For x = 1 To Map(mapNum).Events(i).PageCount
+                    For x = 0 To Map(mapNum).Events(i).PageCount
                         With Map(mapNum).Events(i).Pages(x)
                             buffer.WriteInt32(.ChkVariable)
                             buffer.WriteInt32(.Variableindex)
@@ -2017,7 +1782,7 @@ Friend Module S_Events
                             buffer.WriteInt32(.RepeatMoveRoute)
 
                             If .MoveRouteCount > 0 Then
-                                For y = 1 To .MoveRouteCount
+                                For y = 0 To .MoveRouteCount
                                     buffer.WriteInt32(.MoveRoute(y).Index)
                                     buffer.WriteInt32(.MoveRoute(y).Data1)
                                     buffer.WriteInt32(.MoveRoute(y).Data2)
@@ -2040,11 +1805,11 @@ Friend Module S_Events
                         End With
 
                         If Map(mapNum).Events(i).Pages(x).CommandListCount > 0 Then
-                            For y = 1 To Map(mapNum).Events(i).Pages(x).CommandListCount
+                            For y = 0 To Map(mapNum).Events(i).Pages(x).CommandListCount
                                 buffer.WriteInt32(Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount)
                                 buffer.WriteInt32(Map(mapNum).Events(i).Pages(x).CommandList(y).ParentList)
                                 If Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
-                                    For z = 1 To Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount
+                                    For z = 0 To Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount
                                         With Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(z)
                                             buffer.WriteInt32(.Index)
                                             buffer.WriteString((.Text1))
@@ -2066,7 +1831,7 @@ Friend Module S_Events
                                             buffer.WriteInt32(.ConditionalBranch.ElseCommandList)
                                             buffer.WriteInt32(.MoveRouteCount)
                                             If .MoveRouteCount > 0 Then
-                                                For w = 1 To .MoveRouteCount
+                                                For w = 0 To .MoveRouteCount
                                                     buffer.WriteInt32(.MoveRoute(w).Index)
                                                     buffer.WriteInt32(.MoveRoute(w).Data1)
                                                     buffer.WriteInt32(.MoveRoute(w).Data2)

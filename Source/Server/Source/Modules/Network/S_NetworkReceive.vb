@@ -12,7 +12,6 @@ Module S_NetworkReceive
         Socket.PacketId(ClientPackets.CLogin) = AddressOf Packet_Login
         Socket.PacketId(ClientPackets.CAddChar) = AddressOf Packet_AddChar
         Socket.PacketId(ClientPackets.CUseChar) = AddressOf Packet_UseChar
-        Socket.PacketId(ClientPackets.CDelChar) = AddressOf Packet_DeleteChar
         Socket.PacketId(ClientPackets.CSayMsg) = AddressOf Packet_SayMessage
         Socket.PacketId(ClientPackets.CBroadcastMsg) = AddressOf Packet_BroadCastMsg
         Socket.PacketId(ClientPackets.CPlayerMsg) = AddressOf Packet_PlayerMsg
@@ -230,7 +229,7 @@ Module S_NetworkReceive
                 LoadPlayer(index, username)
 
                 ' Check if character data has been created
-                If Len(Trim$(Player(index).Character(TempPlayer(index).CurChar).Name)) > 0 Then
+                If Len(Trim$(Player(index).Name)) > 0 Then
                     ' we have a char!
                     HandleUseChar(index)
                 Else
@@ -265,7 +264,7 @@ Module S_NetworkReceive
             Exit Sub
         End If
 
-        For i = 1 To GetPlayersOnline()
+        For i = 0 To GetPlayersOnline()
             If IsPlaying(i) Then
                 If Trim$(Player(i).Login) = Trim$(Name) Then
                     AlertMsg(i, "Your account has been removed by an admin!")
@@ -342,7 +341,7 @@ Module S_NetworkReceive
                 Console.WriteLine(GetPlayerLogin(index) & " has logged in from " & Socket.ClientIp(index) & ".")
 
                 ' Check if character data has been created
-                If Len(Trim$(Player(index).Character(TempPlayer(index).CurChar).Name)) > 0 Then
+                If Len(Trim$(Player(index).Name)) > 0 Then
                     HandleUseChar(index)
                 Else
                     SendNewCharJob(index)
@@ -363,15 +362,13 @@ Module S_NetworkReceive
                 slot = buffer.ReadInt32
 
                 ' Check if character data has been created
-                If Len(Trim$(Player(index).Character(slot).Name)) > 0 Then
+                If Len(Trim$(Player(index).Name)) > 0 Then
                     ' we have a char!
-                    TempPlayer(index).CurChar = slot
                     HandleUseChar(index)
                     ClearBank(index)
                     LoadBank(index, Trim$(Player(index).Login))
                 Else
                     SendNewCharJob(index)
-                    TempPlayer(index).CurChar = slot
                 End If
             End If
         End If
@@ -415,7 +412,7 @@ Module S_NetworkReceive
 
             If (Sex < modEnumerators.SexType.Male) OrElse (Sex > modEnumerators.SexType.Female) Then Exit Sub
 
-            If Job < 1 OrElse Job > MAX_JOB Then Exit Sub
+            If Job < 1 OrElse Job > MAX_JOBS Then Exit Sub
 
             ' Check if char already exists in slot
             If CharExist(index, slot) Then
@@ -430,7 +427,6 @@ Module S_NetworkReceive
             End If
 
             ' Everything went ok, add the character
-            TempPlayer(index).CurChar = slot
             AddChar(index, slot, Name, Sex, Job, Sprite)
             Addlog("Character " & Name & " added to " & GetPlayerLogin(index) & "'s account.", PLAYER_LOG)
 
@@ -438,55 +434,6 @@ Module S_NetworkReceive
             HandleUseChar(index)
 
             buffer.Dispose()
-        End If
-
-    End Sub
-
-    Private Sub Packet_DeleteChar(index As Integer, ByRef data() As Byte)
-        Dim slot As Byte
-        Dim buffer As New ByteStream(data)
-
-        AddDebug("Recieved CMSG: CDelChar")
-
-        If Not IsPlaying(index) Then
-            If IsLoggedIn(index) Then
-
-                slot = buffer.ReadInt32
-
-                ' Check if character data has been created
-                If Len(Trim$(Player(index).Character(slot).Name)) > 0 Then
-                    ' we have a char!
-                    DeleteName(Trim$(Player(index).Character(slot).Name))
-                    ClearCharacter(index, slot)
-                    SaveCharacter(index, slot)
-
-                    buffer.Dispose()
-                    buffer = New ByteStream(4)
-                    buffer.WriteInt32(ServerPackets.SLoginOk)
-                    buffer.WriteInt32(MAX_CHARS)
-
-                    AddDebug("Sent SMSG: SLoginOk")
-
-                    For i = 1 To MAX_CHARS
-                        If Player(index).Character(i).Job <= 0 Then
-                            buffer.WriteString((Trim$(Player(index).Character(i).Name)))
-                            buffer.WriteInt32(Player(index).Character(i).Sprite)
-                            buffer.WriteInt32(Player(index).Character(i).Level)
-                            buffer.WriteString((""))
-                            buffer.WriteInt32(0)
-                        Else
-                            buffer.WriteString((Trim$(Player(index).Character(i).Name)))
-                            buffer.WriteInt32(Player(index).Character(i).Sprite)
-                            buffer.WriteInt32(Player(index).Character(i).Level)
-                            buffer.WriteString((Trim$(Job(Player(index).Character(i).Job).Name)))
-                            buffer.WriteInt32(Player(index).Character(i).Sex)
-                        End If
-
-                    Next
-
-                    Socket.SendDataTo(index, buffer.Data, buffer.Head)
-                End If
-            End If
         End If
 
     End Sub
@@ -695,7 +642,7 @@ Module S_NetworkReceive
         End If
 
         ' Try to attack a player
-        For i = 1 To GetPlayersOnline()
+        For i = 0 To GetPlayersOnline()
             Tempindex = i
 
             ' Make sure we dont try to attack ourselves
@@ -707,7 +654,7 @@ Module S_NetworkReceive
         Next
 
         ' Try to attack a npc
-        For i = 1 To MAX_MAP_NPCS
+        For i = 0 To MAX_MAP_NPCS
             TryPlayerAttackNpc(index, i)
         Next
 
@@ -954,14 +901,14 @@ Module S_NetworkReceive
 
         ReDim Map(mapNum).Tile(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
-        For x = 1 To MAX_MAP_NPCS
+        For x = 0 To MAX_MAP_NPCS
             ClearMapNpc(x, mapNum)
             Map(mapNum).Npc(x) = buffer.ReadInt32
         Next
 
         With Map(mapNum)
-            For x = 0 To .MaxX
-                For y = 0 To .MaxY
+            For X = 0 To .MaxX
+                For Y = 0 To .MaxY
                     .Tile(x, y).Data1 = buffer.ReadInt32
                     .Tile(x, y).Data2 = buffer.ReadInt32
                     .Tile(x, y).Data3 = buffer.ReadInt32
@@ -984,7 +931,7 @@ Module S_NetworkReceive
 
         If Map(mapNum).EventCount > 0 Then
             ReDim Map(mapNum).Events(Map(mapNum).EventCount)
-            For i = 1 To Map(mapNum).EventCount
+            For i = 0 To Map(mapNum).EventCount
                 With Map(mapNum).Events(i)
                     .Name = buffer.ReadString
                     .Globals = buffer.ReadInt32
@@ -995,7 +942,7 @@ Module S_NetworkReceive
                 If Map(mapNum).Events(i).PageCount > 0 Then
                     ReDim Map(mapNum).Events(i).Pages(Map(mapNum).Events(i).PageCount)
                     ReDim TempPlayer(i).EventMap.EventPages(Map(mapNum).Events(i).PageCount)
-                    For x = 1 To Map(mapNum).Events(i).PageCount
+                    For x = 0 To Map(mapNum).Events(i).PageCount
                         With Map(mapNum).Events(i).Pages(x)
                             .ChkVariable = buffer.ReadInt32
                             .Variableindex = buffer.ReadInt32
@@ -1032,7 +979,7 @@ Module S_NetworkReceive
 
                             If .MoveRouteCount > 0 Then
                                 ReDim Map(mapNum).Events(i).Pages(x).MoveRoute(.MoveRouteCount)
-                                For y = 1 To .MoveRouteCount
+                                For y = 0 To .MoveRouteCount
                                     .MoveRoute(y).Index = buffer.ReadInt32
                                     .MoveRoute(y).Data1 = buffer.ReadInt32
                                     .MoveRoute(y).Data2 = buffer.ReadInt32
@@ -1058,12 +1005,12 @@ Module S_NetworkReceive
 
                         If Map(mapNum).Events(i).Pages(x).CommandListCount > 0 Then
                             ReDim Map(mapNum).Events(i).Pages(x).CommandList(Map(mapNum).Events(i).Pages(x).CommandListCount)
-                            For y = 1 To Map(mapNum).Events(i).Pages(x).CommandListCount
+                            For y = 0 To Map(mapNum).Events(i).Pages(x).CommandListCount
                                 Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount = buffer.ReadInt32
                                 Map(mapNum).Events(i).Pages(x).CommandList(y).ParentList = buffer.ReadInt32
                                 If Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
                                     ReDim Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount)
-                                    For z = 1 To Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount
+                                    For z = 0 To Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount
                                         With Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(z)
                                             .Index = buffer.ReadInt32
                                             .Text1 = buffer.ReadString
@@ -1087,7 +1034,7 @@ Module S_NetworkReceive
                                             Dim tmpcount As Integer = .MoveRouteCount
                                             If tmpcount > 0 Then
                                                 ReDim Preserve .MoveRoute(tmpcount)
-                                                For w = 1 To tmpcount
+                                                For w = 0 To tmpcount
                                                     .MoveRoute(w).Index = buffer.ReadInt32
                                                     .MoveRoute(w).Data1 = buffer.ReadInt32
                                                     .MoveRoute(w).Data2 = buffer.ReadInt32
@@ -1118,16 +1065,16 @@ Module S_NetworkReceive
         SpawnMapNpcs(mapNum)
         SpawnGlobalEvents(mapNum)
 
-        For i = 1 To GetPlayersOnline()
+        For i = 0 To GetPlayersOnline()
             If IsPlaying(i) Then
-                If Player(i).Character(TempPlayer(i).CurChar).Map = mapNum Then
+                If Player(i).Map = mapNum Then
                     SpawnMapEventsFor(i, mapNum)
                 End If
             End If
         Next
 
         ' Clear it all out
-        For i = 1 To MAX_MAP_ITEMS
+        For i = 0 To MAX_MAP_ITEMS
             SpawnItemSlot(i, 0, 0, GetPlayerMap(index), MapItem(GetPlayerMap(index), i).X, MapItem(GetPlayerMap(index), i).Y)
             ClearMapItem(i, GetPlayerMap(index))
         Next
@@ -1139,7 +1086,7 @@ Module S_NetworkReceive
         CacheResources(mapNum)
 
         ' Refresh map for everyone online
-        For i = 1 To GetPlayersOnline()
+        For i = 0 To GetPlayersOnline()
             If IsPlaying(i) AndAlso GetPlayerMap(i) = mapNum Then
                 PlayerWarp(i, mapNum, GetPlayerX(i), GetPlayerY(i))
                 ' Send map
@@ -1182,7 +1129,7 @@ Module S_NetworkReceive
         If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
 
         ' Clear out it all
-        For i = 1 To MAX_MAP_ITEMS
+        For i = 0 To MAX_MAP_ITEMS
             SpawnItemSlot(i, 0, 0, GetPlayerMap(index), MapItem(GetPlayerMap(index), i).X, MapItem(GetPlayerMap(index), i).Y)
             ClearMapItem(i, GetPlayerMap(index))
         Next
@@ -1191,7 +1138,7 @@ Module S_NetworkReceive
         SpawnMapItems(GetPlayerMap(index))
 
         ' Respawn NPCS
-        For i = 1 To MAX_MAP_NPCS
+        For i = 0 To MAX_MAP_NPCS
             SpawnNpc(i, GetPlayerMap(index))
         Next
 
@@ -1253,7 +1200,7 @@ Module S_NetworkReceive
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Creator Then Exit Sub
 
-        filename = Application.StartupPath & "\data\banlist.txt"
+        filename = Paths.Database & "banlist.txt"
 
         If File.Exists(filename) Then Kill(filename)
 
@@ -1504,7 +1451,7 @@ Module S_NetworkReceive
         If x < 0 OrElse x > Map(GetPlayerMap(index)).MaxX OrElse y < 0 OrElse y > Map(GetPlayerMap(index)).MaxY Then Exit Sub
 
         ' Check for a player
-        For i = 1 To GetPlayersOnline()
+        For i = 0 To GetPlayersOnline()
 
             If IsPlaying(i) Then
                 If GetPlayerMap(index) = GetPlayerMap(i) Then
@@ -1554,7 +1501,7 @@ Module S_NetworkReceive
         Next
 
         ' Check for an item
-        For i = 1 To MAX_MAP_ITEMS
+        For i = 0 To MAX_MAP_ITEMS
 
             If MapItem(GetPlayerMap(index), i).Num > 0 Then
                 If MapItem(GetPlayerMap(index), i).X = x Then
@@ -1568,7 +1515,7 @@ Module S_NetworkReceive
         Next
 
         ' Check for an npc
-        For i = 1 To MAX_MAP_NPCS
+        For i = 0 To MAX_MAP_NPCS
 
             If MapNpc(GetPlayerMap(index)).Npc(i).Num > 0 Then
                 If MapNpc(GetPlayerMap(index)).Npc(i).X = x Then
@@ -1587,22 +1534,22 @@ Module S_NetworkReceive
         Next
 
         'Housing
-        If Player(index).Character(TempPlayer(index).CurChar).InHouse > 0 Then
-            If Player(index).Character(TempPlayer(index).CurChar).InHouse = index Then
-                If Player(index).Character(TempPlayer(index).CurChar).House.Houseindex > 0 Then
-                    If Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount > 0 Then
-                        For i = 1 To Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount
-                            If x >= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).X AndAlso x <= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).X + Item(Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).ItemNum).FurnitureWidth - 1 Then
-                                If y <= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).Y AndAlso y >= Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).Y - Item(Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).ItemNum).FurnitureHeight + 1 Then
+        If Player(index).InHouse > 0 Then
+            If Player(index).InHouse = index Then
+                If Player(index).House.Houseindex > 0 Then
+                    If Player(index).House.FurnitureCount > 0 Then
+                        For i = 0 To Player(index).House.FurnitureCount
+                            If x >= Player(index).House.Furniture(i).X AndAlso x <= Player(index).House.Furniture(i).X + Item(Player(index).House.Furniture(i).ItemNum).FurnitureWidth - 1 Then
+                                If y <= Player(index).House.Furniture(i).Y AndAlso y >= Player(index).House.Furniture(i).Y - Item(Player(index).House.Furniture(i).ItemNum).FurnitureHeight + 1 Then
                                     'Found an Item, get the index and lets pick it up!
-                                    x = FindOpenInvSlot(index, Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).ItemNum)
+                                    x = FindOpenInvSlot(index, Player(index).House.Furniture(i).ItemNum)
                                     If x > 0 Then
-                                        GiveInvItem(index, Player(index).Character(TempPlayer(index).CurChar).House.Furniture(i).ItemNum, 0, True)
-                                        Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount = Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount - 1
-                                        For x = i + 1 To Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount + 1
-                                            Player(index).Character(TempPlayer(index).CurChar).House.Furniture(x - 1) = Player(index).Character(TempPlayer(index).CurChar).House.Furniture(x)
+                                        GiveInvItem(index, Player(index).House.Furniture(i).ItemNum, 0, True)
+                                        Player(index).House.FurnitureCount = Player(index).House.FurnitureCount - 1
+                                        For x = i + 1 To Player(index).House.FurnitureCount + 1
+                                            Player(index).House.Furniture(x - 1) = Player(index).House.Furniture(x)
                                         Next
-                                        ReDim Preserve Player(index).Character(TempPlayer(index).CurChar).House.Furniture(Player(index).Character(TempPlayer(index).CurChar).House.FurnitureCount)
+                                        ReDim Preserve Player(index).House.Furniture(Player(index).House.FurnitureCount)
                                         SendFurnitureToHouse(index)
                                         Exit Sub
                                     Else
@@ -1789,7 +1736,7 @@ Module S_NetworkReceive
             Exit Sub
         End If
 
-        Player(index).Character(TempPlayer(index).CurChar).Skill(skillslot) = 0
+        Player(index).Skill(skillslot) = 0
         SendPlayerSkills(index)
 
         buffer.Dispose()
@@ -2018,7 +1965,7 @@ Module S_NetworkReceive
             ' clear out their trade offers
             ReDim TempPlayer(index).TradeOffer(MAX_INV)
             ReDim TempPlayer(tradetarget).TradeOffer(MAX_INV)
-            For i = 1 To MAX_INV
+            For i = 0 To MAX_INV
                 TempPlayer(index).TradeOffer(i).Num = 0
                 TempPlayer(index).TradeOffer(i).Value = 0
                 TempPlayer(tradetarget).TradeOffer(i).Num = 0
@@ -2057,10 +2004,10 @@ Module S_NetworkReceive
         End If
 
         ' take their items
-        For i = 1 To MAX_INV
+        For i = 0 To MAX_INV
             ' player
             If TempPlayer(index).TradeOffer(i).Num > 0 Then
-                itemNum = Player(index).Character(TempPlayer(index).CurChar).Inv(TempPlayer(index).TradeOffer(i).Num).Num
+                itemNum = Player(index).Inv(TempPlayer(index).TradeOffer(i).Num).Num
                 If itemNum > 0 Then
                     ' store temp
                     tmpTradeItem(i).Num = itemNum
@@ -2083,7 +2030,7 @@ Module S_NetworkReceive
         Next
 
         ' taken all items. now they can't not get items because of no inventory space.
-        For i = 1 To MAX_INV
+        For i = 0 To MAX_INV
             ' player
             If tmpTradeItem2(i).Num > 0 Then
                 ' give away!
@@ -2100,7 +2047,7 @@ Module S_NetworkReceive
         SendInventory(tradeTarget)
 
         ' they now have all the items. Clear out values + let them out of the trade.
-        For i = 1 To MAX_INV
+        For i = 0 To MAX_INV
             TempPlayer(index).TradeOffer(i).Num = 0
             TempPlayer(index).TradeOffer(i).Value = 0
             TempPlayer(tradeTarget).TradeOffer(i).Num = 0
@@ -2124,7 +2071,7 @@ Module S_NetworkReceive
 
         tradeTarget = TempPlayer(index).InTrade
 
-        For i = 1 To MAX_INV
+        For i = 0 To MAX_INV
             TempPlayer(index).TradeOffer(i).Num = 0
             TempPlayer(index).TradeOffer(i).Value = 0
             TempPlayer(tradeTarget).TradeOffer(i).Num = 0
@@ -2165,7 +2112,7 @@ Module S_NetworkReceive
         If Item(itemnum).Type = ItemType.Currency OrElse Item(itemnum).Stackable = 1 Then
 
             ' check if already offering same currency item
-            For i = 1 To MAX_INV
+            For i = 0 To MAX_INV
 
                 If TempPlayer(index).TradeOffer(i).Num = invslot Then
                     ' add amount
@@ -2191,7 +2138,7 @@ Module S_NetworkReceive
             Next
         Else
             ' make sure they're not already offering it
-            For i = 1 To MAX_INV
+            For i = 0 To MAX_INV
                 If TempPlayer(index).TradeOffer(i).Num = invslot Then
                     PlayerMsg(index, "You've already offered this item.", ColorType.BrightRed)
                     Exit Sub
@@ -2200,7 +2147,7 @@ Module S_NetworkReceive
         End If
 
         ' not already offering - find earliest empty slot
-        For i = 1 To MAX_INV
+        For i = 0 To MAX_INV
             If TempPlayer(index).TradeOffer(i).Num = 0 Then
                 emptyslot = i
                 Exit For
@@ -2285,8 +2232,8 @@ Module S_NetworkReceive
         skill = buffer.ReadInt32
         type = buffer.ReadInt32
 
-        Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).Slot = skill
-        Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).SlotType = type
+        Player(index).Hotbar(slot).Slot = skill
+        Player(index).Hotbar(slot).SlotType = type
 
         SendHotbar(index)
 
@@ -2301,8 +2248,8 @@ Module S_NetworkReceive
 
         slot = buffer.ReadInt32
 
-        Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).Slot = 0
-        Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).SlotType = 0
+        Player(index).Hotbar(slot).Slot = 0
+        Player(index).Hotbar(slot).SlotType = 0
 
         SendHotbar(index)
 
@@ -2318,11 +2265,11 @@ Module S_NetworkReceive
         slot = buffer.ReadInt32
         buffer.Dispose()
 
-        If Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).Slot > 0 Then
-            If Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).SlotType = 1 Then 'skill
-                BufferSkill(index, Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).Slot)
-            ElseIf Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).SlotType = 2 Then 'item
-                UseItem(index, Player(index).Character(TempPlayer(index).CurChar).Hotbar(slot).Slot)
+        If Player(index).Hotbar(slot).Slot > 0 Then
+            If Player(index).Hotbar(slot).SlotType = 1 Then 'skill
+                BufferSkill(index, Player(index).Hotbar(slot).Slot)
+            ElseIf Player(index).Hotbar(slot).SlotType = 2 Then 'item
+                UseItem(index, Player(index).Hotbar(slot).Slot)
             End If
         End If
 
@@ -2356,11 +2303,11 @@ Module S_NetworkReceive
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
 
-        For i = 0 To MAX_JOB
+        For i = 0 To MAX_JOBS
             ReDim Job(i).Stat(StatType.Count - 1)
         Next
 
-        For i = 1 To MAX_JOB
+        For i = 0 To MAX_JOBS
 
             With Job(i)
                 .Name = buffer.ReadString
@@ -2371,17 +2318,20 @@ Module S_NetworkReceive
 
                 ' redim array
                 ReDim .MaleSprite(z)
+
                 ' loop-receive data
-                For x = 0 To z
+                For X = 0 To z
                     .MaleSprite(x) = buffer.ReadInt32
                 Next
 
                 ' get array size
                 z = buffer.ReadInt32
+
                 ' redim array
                 ReDim .FemaleSprite(z)
+
                 ' loop-receive data
-                For x = 0 To z
+                For X = 0 To z
                     .FemaleSprite(x) = buffer.ReadInt32
                 Next
 
@@ -2392,9 +2342,7 @@ Module S_NetworkReceive
                 .Stat(StatType.Luck) = buffer.ReadInt32
                 .Stat(StatType.Spirit) = buffer.ReadInt32
 
-                ReDim .StartItem(5)
-                ReDim .StartValue(5)
-                For q = 1 To 5
+                For q = 0 To 5
                     .StartItem(q) = buffer.ReadInt32
                     .StartValue(q) = buffer.ReadInt32
                 Next
@@ -2561,14 +2509,14 @@ Module S_NetworkReceive
 
         ReDim Map(mapNum).Tile(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
-        For x = 1 To MAX_MAP_NPCS
+        For x = 0 To MAX_MAP_NPCS
             ClearMapNpc(x, mapNum)
             Map(mapNum).Npc(x) = buffer.ReadInt32
         Next
 
         With Map(mapNum)
-            For x = 0 To .MaxX
-                For y = 0 To .MaxY
+            For X = 0 To .MaxX
+                For Y = 0 To .MaxY
                     .Tile(x, y).Data1 = buffer.ReadInt32
                     .Tile(x, y).Data2 = buffer.ReadInt32
                     .Tile(x, y).Data3 = buffer.ReadInt32
@@ -2591,7 +2539,7 @@ Module S_NetworkReceive
 
         If Map(mapNum).EventCount > 0 Then
             ReDim Map(mapNum).Events(Map(mapNum).EventCount)
-            For i = 1 To Map(mapNum).EventCount
+            For i = 0 To Map(mapNum).EventCount
                 With Map(mapNum).Events(i)
                     .Name = buffer.ReadString
                     .Globals = buffer.ReadInt32
@@ -2602,7 +2550,7 @@ Module S_NetworkReceive
                 If Map(mapNum).Events(i).PageCount > 0 Then
                     ReDim Map(mapNum).Events(i).Pages(Map(mapNum).Events(i).PageCount)
                     ReDim TempPlayer(i).EventMap.EventPages(Map(mapNum).Events(i).PageCount)
-                    For x = 1 To Map(mapNum).Events(i).PageCount
+                    For x = 0 To Map(mapNum).Events(i).PageCount
                         With Map(mapNum).Events(i).Pages(x)
                             .ChkVariable = buffer.ReadInt32
                             .Variableindex = buffer.ReadInt32
@@ -2639,7 +2587,7 @@ Module S_NetworkReceive
 
                             If .MoveRouteCount > 0 Then
                                 ReDim Map(mapNum).Events(i).Pages(x).MoveRoute(.MoveRouteCount)
-                                For y = 1 To .MoveRouteCount
+                                For y = 0 To .MoveRouteCount
                                     .MoveRoute(y).Index = buffer.ReadInt32
                                     .MoveRoute(y).Data1 = buffer.ReadInt32
                                     .MoveRoute(y).Data2 = buffer.ReadInt32
@@ -2665,12 +2613,12 @@ Module S_NetworkReceive
 
                         If Map(mapNum).Events(i).Pages(x).CommandListCount > 0 Then
                             ReDim Map(mapNum).Events(i).Pages(x).CommandList(Map(mapNum).Events(i).Pages(x).CommandListCount)
-                            For y = 1 To Map(mapNum).Events(i).Pages(x).CommandListCount
+                            For y = 0 To Map(mapNum).Events(i).Pages(x).CommandListCount
                                 Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount = buffer.ReadInt32
                                 Map(mapNum).Events(i).Pages(x).CommandList(y).ParentList = buffer.ReadInt32
                                 If Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
                                     ReDim Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount)
-                                    For z = 1 To Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount
+                                    For z = 0 To Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount
                                         With Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(z)
                                             .Index = buffer.ReadInt32
                                             .Text1 = buffer.ReadString
@@ -2694,7 +2642,7 @@ Module S_NetworkReceive
                                             Dim tmpcount As Integer = .MoveRouteCount
                                             If tmpcount > 0 Then
                                                 ReDim Preserve .MoveRoute(tmpcount)
-                                                For w = 1 To tmpcount
+                                                For w = 0 To tmpcount
                                                     .MoveRoute(w).Index = buffer.ReadInt32
                                                     .MoveRoute(w).Data1 = buffer.ReadInt32
                                                     .MoveRoute(w).Data2 = buffer.ReadInt32
@@ -2726,16 +2674,16 @@ Module S_NetworkReceive
         SpawnMapNpcs(mapNum)
         SpawnGlobalEvents(mapNum)
 
-        For i = 1 To GetPlayersOnline()
+        For i = 0 To GetPlayersOnline()
             If IsPlaying(i) Then
-                If Player(i).Character(TempPlayer(i).CurChar).Map = mapNum Then
+                If Player(i).Map = mapNum Then
                     SpawnMapEventsFor(i, mapNum)
                 End If
             End If
         Next
 
         ' Clear out it all
-        For i = 1 To MAX_MAP_ITEMS
+        For i = 0 To MAX_MAP_ITEMS
             SpawnItemSlot(i, 0, 0, GetPlayerMap(index), MapItem(GetPlayerMap(index), i).X, MapItem(GetPlayerMap(index), i).Y)
             ClearMapItem(i, GetPlayerMap(index))
         Next
@@ -2747,7 +2695,7 @@ Module S_NetworkReceive
         CacheResources(mapNum)
 
         ' Refresh map for everyone online
-        For i = 1 To GetPlayersOnline()
+        For i = 0 To GetPlayersOnline()
             If IsPlaying(i) AndAlso GetPlayerMap(i) = mapNum Then
                 PlayerWarp(i, mapNum, GetPlayerX(i), GetPlayerY(i))
                 ' Send map

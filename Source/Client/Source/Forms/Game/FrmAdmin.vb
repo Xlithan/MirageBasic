@@ -8,7 +8,7 @@ Friend Class FrmAdmin
         cmbSpawnItem.Items.Clear()
 
         ' Add the names
-        For i = 1 To MAX_ITEMS
+       For i = 0 To MAX_ITEMS
             cmbSpawnItem.Items.Add(i & ": " & Trim$(Item(i).Name))
         Next
     End Sub

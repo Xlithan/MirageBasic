@@ -130,9 +130,10 @@ Module C_DataBase
     End Sub
 
     Friend Sub CacheMusic()
+        ReDim MusicCache(Directory.GetFiles(Paths.Music, "*.ogg").Count)
         Dim files As String() = Directory.GetFiles(Paths.Music, "*.ogg")
         Dim maxNum As String = Directory.GetFiles(Paths.Music, "*.ogg").Count
-        Dim counter As Integer = 1
+        Dim counter As Integer = 0
 
         For Each FileName In files
             ReDim Preserve MusicCache(counter)
@@ -145,9 +146,10 @@ Module C_DataBase
     End Sub
 
     Friend Sub CacheSound()
+        ReDim SoundCache(Directory.GetFiles(Paths.Sounds, "*.ogg").Count)
         Dim files As String() = Directory.GetFiles(Paths.Sounds, "*.ogg")
         Dim maxNum As String = Directory.GetFiles(Paths.Sounds, "*.ogg").Count
-        Dim counter As Integer = 1
+        Dim counter As Integer = 0
 
         For Each FileName In files
             ReDim Preserve SoundCache(counter)
@@ -165,7 +167,7 @@ Module C_DataBase
 #Region "Blood"
 
     Sub ClearBlood()
-        For I = 1 To Byte.MaxValue
+       For i = 0 To Byte.MaxValue
             Blood(I).Timer = 0
         Next
     End Sub
@@ -179,7 +181,7 @@ Module C_DataBase
 
         ReDim Npc(MAX_NPCS)
 
-        For i = 1 To MAX_NPCS
+       For i = 0 To MAX_NPCS
             ClearNpc(i)
         Next
 
@@ -191,7 +193,7 @@ Module C_DataBase
             .Name = "",
             .AttackSay = ""
         }
-        For x = 0 To StatType.Count - 1
+        For X = 0 To StatType.Count - 1
             ReDim Npc(index).Stat(x)
         Next
 
@@ -205,7 +207,7 @@ Module C_DataBase
 #End Region
 
     Friend Sub ClearChangedItem()
-        For i = 1 To MAX_ITEMS
+       For i = 0 To MAX_ITEMS
             Item_Changed(i) = Nothing
         Next i
         ReDim Item_Changed(MAX_ITEMS)
@@ -216,7 +218,7 @@ Module C_DataBase
     Sub ClearSkills()
         Dim i As Integer
 
-        For i = 1 To MAX_SKILLS
+       For i = 0 To MAX_SKILLS
             ClearSkill(i)
         Next
 

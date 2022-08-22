@@ -9,15 +9,12 @@ Module C_Job
         Dim i As Integer, z As Integer, x As Integer
         Dim buffer As New ByteStream(data)
 
-        SelectedChar = 1
-
-        For i = 1 To MAX_JOB
-
+       For i = 1 To MAX_JOBS
             With Job(i)
                 .Name = Trim(buffer.ReadString)
                 .Desc = Trim(buffer.ReadString)
 
-                ReDim .Vital(modEnumerators.VitalType.Count - 1)
+                ReDim .Vital(VitalType.Count - 1)
 
                 .Vital(VitalType.HP) = buffer.ReadInt32
                 .Vital(VitalType.MP) = buffer.ReadInt32
@@ -26,18 +23,18 @@ Module C_Job
                 ' get array size
                 z = buffer.ReadInt32
                 ' redim array
-                ReDim .MaleSprite(z + 1)
+                ReDim .MaleSprite(z)
                 ' loop-receive data
-                For x = 1 To z + 1
+                For x = 0 To z
                     .MaleSprite(x) = buffer.ReadInt32
                 Next
 
                 ' get array size
                 z = buffer.ReadInt32
                 ' redim array
-                ReDim .FemaleSprite(z + 1)
+                ReDim .FemaleSprite(z)
                 ' loop-receive data
-                For x = 1 To z + 1
+                For x = 0 To z
                     .FemaleSprite(x) = buffer.ReadInt32
                 Next
 
@@ -52,7 +49,7 @@ Module C_Job
 
                 ReDim .StartItem(5)
                 ReDim .StartValue(5)
-                For q = 1 To 5
+                For q = 0 To 5
                     .StartItem(q) = buffer.ReadInt32
                     .StartValue(q) = buffer.ReadInt32
                 Next
@@ -76,25 +73,24 @@ Module C_Job
         PnlCharCreateVisible = True
         PnlLoginVisible = False
 
-        ReDim Cmbclass(MAX_JOB)
+        ReDim CmbJob(MAX_JOBS)
 
-        For i = 1 To MAX_JOB
-            Cmbclass(i) = Job(i).Name
+       For i = 1 To MAX_JOBS
+            CmbJob(i) = Job(i).Name
         Next
 
         FrmMenu.DrawCharacter()
 
-        NewCharSprite = 1
+        NewCharSprite = 0
     End Sub
 
     Sub Packet_JobData(ByRef data() As Byte)
         Dim i As Integer, z As Integer, x As Integer
         Dim buffer As New ByteStream(data)
 
-        SelectedChar = 1
+        NewCharSprite = 0
 
-        For i = 1 To MAX_JOB
-
+        For i = 1 To MAX_JOBS
             With Job(i)
                 .Name = Trim(buffer.ReadString)
                 .Desc = Trim(buffer.ReadString)
@@ -108,18 +104,18 @@ Module C_Job
                 ' get array size
                 z = buffer.ReadInt32
                 ' redim array
-                ReDim .MaleSprite(z + 1)
+                ReDim .MaleSprite(z)
                 ' loop-receive data
-                For x = 1 To z + 1
+                For x = 0 To z
                     .MaleSprite(x) = buffer.ReadInt32
                 Next
 
                 ' get array size
                 z = buffer.ReadInt32
                 ' redim array
-                ReDim .FemaleSprite(z + 1)
+                ReDim .FemaleSprite(z)
                 ' loop-receive data
-                For x = 1 To z + 1
+                For x = 0 To z
                     .FemaleSprite(x) = buffer.ReadInt32
                 Next
 
@@ -134,7 +130,7 @@ Module C_Job
 
                 ReDim .StartItem(5)
                 ReDim .StartValue(5)
-                For q = 1 To 5
+                For q = 0 To 5
                     .StartItem(q) = buffer.ReadInt32
                     .StartValue(q) = buffer.ReadInt32
                 Next
@@ -148,12 +144,11 @@ Module C_Job
 
         Next
 
-        ReDim Cmbclass(MAX_JOB)
-        For i = 1 To MAX_JOB
-            Cmbclass(i) = Job(i).Name
+       ReDim CmbJob(MAX_JOBS)
+       For i = 1 To MAX_JOBS
+            CmbJob(i) = Job(i).Name
         Next
         FrmMenu.DrawCharacter()
-        NewCharSprite = 1
 
         buffer.Dispose()
     End Sub

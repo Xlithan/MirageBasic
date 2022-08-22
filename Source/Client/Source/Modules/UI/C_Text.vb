@@ -106,7 +106,7 @@ Module C_Text
         ' Draw name
         DrawText(textX, textY, Trim$(name), color, backcolor, GameWindow)
 
-        'For i = 1 To MaxQuests
+        'For i = 0 To MAX_QUESTS
         '    'check if the npc is the starter to any quest: [!] symbol
         '    'can accept the quest as a new one?
         '    If Player(MyIndex).PlayerQuest(i).Status = QuestStatusType.NotStarted OrElse Player(MyIndex).PlayerQuest(i).Status = QuestStatusType.Repeatable OrElse (Player(MyIndex).PlayerQuest(i).Status = QuestStatusType.Completed AndAlso Quest(i).Repeat = 1) Then

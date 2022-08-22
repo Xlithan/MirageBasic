@@ -10,7 +10,7 @@ Friend Module S_Items
     Sub SaveItems()
         Dim i As Integer
 
-        For i = 1 To MAX_ITEMS
+       For i = 0 To MAX_ITEMS
             SaveItem(i)
         Next
 
@@ -85,7 +85,7 @@ Friend Module S_Items
 
         CheckItems()
 
-        For i = 1 To MAX_ITEMS
+       For i = 0 To MAX_ITEMS
             LoadItem(i)
         Next
 
@@ -161,7 +161,7 @@ Friend Module S_Items
     Sub CheckItems()
         Dim i As Integer
 
-        For i = 1 To MAX_ITEMS
+       For i = 0 To MAX_ITEMS
 
             If Not File.Exists(Paths.Item(i)) Then
                 SaveItem(i)
@@ -186,14 +186,14 @@ Friend Module S_Items
     End Sub
 
     Sub ClearItems()
-        For i = 1 To MAX_ITEMS
+       For i = 0 To MAX_ITEMS
             ClearItem(i)
         Next
     End Sub
 
     Function ItemsData() As Byte()
         Dim buffer As New ByteStream(4)
-        For i = 1 To MAX_ITEMS
+       For i = 0 To MAX_ITEMS
             If Not Len(Trim$(Item(i).Name)) > 0 Then Continue For
             buffer.WriteBlock(ItemData(i))
         Next
@@ -245,7 +245,7 @@ Friend Module S_Items
         buffer.WriteInt32(Item(itemNum).FurnitureHeight)
 
         For i = 0 To 3
-            For x = 0 To 3
+            For X = 0 To 3
                 buffer.WriteInt32(Item(itemNum).FurnitureBlocks(i, x))
                 buffer.WriteInt32(Item(itemNum).FurnitureFringe(i, x))
             Next
@@ -271,7 +271,7 @@ Friend Module S_Items
 
         AddDebug("Sent SMSG: SMapItemData")
 
-        For i = 1 To MAX_MAP_ITEMS
+       For i = 0 To MAX_MAP_ITEMS
             buffer.WriteInt32(MapItem(mapNum, i).Num)
             buffer.WriteInt32(MapItem(mapNum, i).Value)
             buffer.WriteInt32(MapItem(mapNum, i).X)
@@ -292,7 +292,7 @@ Friend Module S_Items
 
         AddDebug("Sent SMSG: SMapItemData To All")
 
-        For i = 1 To MAX_MAP_ITEMS
+       For i = 0 To MAX_MAP_ITEMS
             buffer.WriteInt32(MapItem(mapNum, i).Num)
             buffer.WriteInt32(MapItem(mapNum, i).Value)
             buffer.WriteInt32(MapItem(mapNum, i).X)
@@ -358,7 +358,7 @@ Friend Module S_Items
         ' Check for subscript out of range
         If mapNum <= 0 OrElse mapNum > MAX_CACHED_MAPS Then Exit Function
 
-        For i = 1 To MAX_MAP_ITEMS
+       For i = 0 To MAX_MAP_ITEMS
             If MapItem(mapNum, i).Num = 0 Then
                 FindOpenMapItemSlot = i
                 Exit Function
@@ -370,7 +370,7 @@ Friend Module S_Items
     Sub SpawnAllMapsItems()
         Dim i As Integer
 
-        For i = 1 To MAX_CACHED_MAPS
+       For i = 0 To MAX_CACHED_MAPS
             SpawnMapItems(i)
         Next
 
@@ -384,8 +384,8 @@ Friend Module S_Items
         If mapNum <= 0 OrElse mapNum > MAX_CACHED_MAPS Then Exit Sub
 
         ' Spawn what we have
-        For x = 0 To Map(mapNum).MaxX
-            For y = 0 To Map(mapNum).MaxY
+        For X = 0 To Map(mapNum).MaxX
+            For Y = 0 To Map(mapNum).MaxY
                 ' Check if the tile type is an item or a saved tile incase someone drops something
                 If (Map(mapNum).Tile(x, y).Type = TileType.Item) Then
 
@@ -543,7 +543,7 @@ Friend Module S_Items
     Sub SendItems(index As Integer)
         Dim i As Integer
 
-        For i = 1 To MAX_ITEMS
+       For i = 0 To MAX_ITEMS
             If Len(Trim$(Item(i).Name)) > 0 Then
                 SendUpdateItemTo(index, i)
             End If

@@ -9,7 +9,7 @@ Friend Class frmEditor_NPC
 
         cmbItem.Items.Clear()
         cmbItem.Items.Add("None")
-        For i = 1 To MAX_ITEMS
+       For i = 0 To MAX_ITEMS
             cmbItem.Items.Add(i & ": " & Item(i).Name)
         Next
     End Sub

@@ -42,3 +42,5 @@ Source/Editors/Source/Forms/Forms.rar
 *.db-wal
 Source/.DS_Store
 *.v5
+Source/Client/.DS_Store
+*.1

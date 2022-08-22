@@ -2,12 +2,12 @@
 
 Namespace Global.Engine
 
-    Friend Structure ChatCursor
+    Public Structure ChatCursor
         Friend X As Integer
         Friend Y As Integer
     End Structure
 
-    Friend Structure ChatData
+    Public Structure ChatData
         Friend Active As Boolean
         Friend HistoryLimit As Integer
         Friend MessageLimit As Integer

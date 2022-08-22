@@ -7,7 +7,7 @@ Module S_Parties
 
     Friend Party(MAX_PARTIES) As PartyRec
 
-    Friend Structure PartyRec
+    Public Structure PartyRec
         Dim Leader As Integer
         Dim Member() As Integer
         Dim MemberCount As Integer
@@ -20,7 +20,7 @@ Module S_Parties
     Sub SendDataToParty(partyNum As Integer, ByRef data() As Byte)
         Dim i As Integer
 
-        For i = 1 To Party(partyNum).MemberCount
+        For i = 0 To Party(partyNum).MemberCount
             If Party(partyNum).Member(i) > 0 Then
                 Socket.SendDataTo(Party(partyNum).Member(i), data, data.Length)
             End If
@@ -34,7 +34,7 @@ Module S_Parties
         Addlog("Sent SMSG: SPartyInvite", PACKET_LOG)
         Console.WriteLine("Sent SMSG: SPartyInvite")
 
-        buffer.WriteString((Trim$(Player(target).Character(TempPlayer(target).CurChar).Name)))
+        buffer.WriteString((Trim$(Player(target).Name)))
 
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
         buffer.Dispose()
@@ -49,7 +49,7 @@ Module S_Parties
 
         buffer.WriteInt32(1)
         buffer.WriteInt32(Party(partyNum).Leader)
-        For i = 1 To MAX_PARTY_MEMBERS
+        For i = 0 To MAX_PARTY_MEMBERS
             buffer.WriteInt32(Party(partyNum).Member(i))
         Next
         buffer.WriteInt32(Party(partyNum).MemberCount)
@@ -72,7 +72,7 @@ Module S_Parties
             ' send party data
             buffer.WriteInt32(1)
             buffer.WriteInt32(Party(partyNum).Leader)
-            For i = 1 To MAX_PARTY_MEMBERS
+            For i = 0 To MAX_PARTY_MEMBERS
                 buffer.WriteInt32(Party(partyNum).Member(i))
             Next
             buffer.WriteInt32(Party(partyNum).MemberCount)
@@ -95,9 +95,9 @@ Module S_Parties
         Addlog("Sent SMSG: SPartyVitals", PACKET_LOG)
         Console.WriteLine("Sent SMSG: SPartyVitals")
 
-        For i = 1 To VitalType.Count - 1
+        For i = 0 To VitalType.Count - 1
             buffer.WriteInt32(GetPlayerMaxVital(index, i))
-            buffer.WriteInt32(Player(index).Character(TempPlayer(index).CurChar).Vital(i))
+            buffer.WriteInt32(Player(index).Vital(i))
         Next
 
         SendDataToParty(partyNum, buffer.ToArray)
@@ -161,7 +161,7 @@ Module S_Parties
     Sub ClearParties()
         Dim i As Integer
 
-        For i = 1 To MAX_PARTIES
+        For i = 0 To MAX_PARTIES
             ClearParty(i)
         Next
 
@@ -178,7 +178,7 @@ Module S_Parties
         Dim i As Integer
 
         ' send message to all people
-        For i = 1 To MAX_PARTY_MEMBERS
+        For i = 0 To MAX_PARTY_MEMBERS
             ' exist?
             If Party(partyNum).Member(i) > 0 Then
                 ' make sure they're logged on
@@ -190,7 +190,7 @@ Module S_Parties
     End Sub
 
     Private Sub Party_RemoveFromParty(index As Integer, partyNum As Integer)
-        For i = 1 To MAX_PARTY_MEMBERS
+        For i = 0 To MAX_PARTY_MEMBERS
             If Party(partyNum).Member(i) = index Then
                 Party(partyNum).Member(i) = 0
                 TempPlayer(index).InParty = 0
@@ -217,7 +217,7 @@ Module S_Parties
                 ' check if leader
                 If Party(partyNum).Leader = index Then
                     ' set next person down as leader
-                    For i = 1 To MAX_PARTY_MEMBERS
+                    For i = 0 To MAX_PARTY_MEMBERS
                         If Party(partyNum).Member(i) > 0 AndAlso Party(partyNum).Member(i) <> index Then
                             Party(partyNum).Leader = Party(partyNum).Member(i)
                             PartyMsg(partyNum, String.Format("{0} is now the party leader.", GetPlayerName(i)))
@@ -239,7 +239,7 @@ Module S_Parties
                 PartyMsg(partyNum, "The party has been disbanded.")
 
                 ' clear out everyone's party
-                For i = 1 To MAX_PARTY_MEMBERS
+                For i = 0 To MAX_PARTY_MEMBERS
                     index = Party(partyNum).Member(i)
                     ' player exist?
                     If index > 0 Then
@@ -279,7 +279,7 @@ Module S_Parties
             ' make sure we're the leader
             If Party(partyNum).Leader = index Then
                 ' got a blank slot?
-                For i = 1 To MAX_PARTY_MEMBERS
+                For i = 0 To MAX_PARTY_MEMBERS
                     If Party(partyNum).Member(i) = 0 Then
                         ' send the invitation
                         SendPartyInvite(target, index)
@@ -317,7 +317,7 @@ Module S_Parties
             ' get the partynumber
             partyNum = TempPlayer(index).InParty
             ' got a blank slot?
-            For i = 1 To MAX_PARTY_MEMBERS
+            For i = 0 To MAX_PARTY_MEMBERS
                 If Party(partyNum).Member(i) = 0 Then
                     'add to the party
                     Party(partyNum).Member(i) = target
@@ -339,7 +339,7 @@ Module S_Parties
             Exit Sub
         Else
             ' not in a party. Create one with the new person.
-            For i = 1 To MAX_PARTIES
+            For i = 0 To MAX_PARTIES
                 ' find blank party
                 If Not Party(i).Leader > 0 Then
                     partyNum = i
@@ -387,7 +387,7 @@ Module S_Parties
             End If
         Next
         ' count the members
-        For i = 1 To MAX_PARTY_MEMBERS
+        For i = 0 To MAX_PARTY_MEMBERS
             ' we've got a blank member
             If Party(partyNum).Member(i) = 0 Then
                 ' is it lower than the high index?
@@ -426,7 +426,7 @@ Module S_Parties
         End If
 
         ' check members in others maps
-        For i = 1 To MAX_PARTY_MEMBERS
+        For i = 0 To MAX_PARTY_MEMBERS
             tmpindex = Party(partyNum).Member(i)
             If tmpindex > 0 Then
                 If Socket.IsConnected(tmpindex) AndAlso IsPlaying(tmpindex) Then
@@ -442,7 +442,7 @@ Module S_Parties
         leftOver = exp Mod (Party(partyNum).MemberCount - loseMemberCount)
 
         ' loop through and give everyone exp
-        For i = 1 To MAX_PARTY_MEMBERS
+        For i = 0 To MAX_PARTY_MEMBERS
             tmpindex = Party(partyNum).Member(i)
             ' existing member?
             If tmpindex > 0 Then
@@ -470,7 +470,7 @@ Module S_Parties
 
         If TempPlayer(index).InParty Then
             If Party(TempPlayer(index).InParty).Leader Then
-                For i = 1 To Party(TempPlayer(index).InParty).MemberCount
+                For i = 0 To Party(TempPlayer(index).InParty).MemberCount
                     PlayerWarp(Party(TempPlayer(index).InParty).Member(i), mapNum, x, y)
                 Next
             End If

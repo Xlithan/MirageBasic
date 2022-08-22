@@ -465,7 +465,7 @@ Module C_NetworkSend
         buffer.WriteInt32(Npc(NpcNum).Animation)
         buffer.WriteString((Npc(NpcNum).AttackSay))
         buffer.WriteInt32(Npc(NpcNum).Behaviour)
-        For i = 1 To 5
+       For i = 0 To 5
             buffer.WriteInt32(Npc(NpcNum).DropChance(i))
             buffer.WriteInt32(Npc(NpcNum).DropItem(i))
             buffer.WriteInt32(Npc(NpcNum).DropItemValue(i))
@@ -486,7 +486,7 @@ Module C_NetworkSend
 
         buffer.WriteInt32(Npc(NpcNum).QuestNum)
 
-        For i = 1 To MAX_NPC_SKILLS
+       For i = 0 To MAX_NPC_SKILLS
             buffer.WriteInt32(Npc(NpcNum).Skill(i))
         Next
 
@@ -626,7 +626,7 @@ Module C_NetworkSend
 
         buffer.WriteInt32(ClientPackets.CSaveClass)
 
-        For i = 1 To MAX_JOB
+       For i = 0 To MAX_JOBS
             buffer.WriteString((Trim$(Job(i).Name)))
             buffer.WriteString((Trim$(Job(i).Desc)))
 
@@ -659,7 +659,7 @@ Module C_NetworkSend
             buffer.WriteInt32(Job(i).Stat(StatType.Luck))
             buffer.WriteInt32(Job(i).Stat(StatType.Spirit))
 
-            For q = 1 To 5
+            For q = 0 To 5
                 buffer.WriteInt32(Job(i).StartItem(q))
                 buffer.WriteInt32(Job(i).StartValue(q))
             Next
@@ -724,7 +724,7 @@ Module C_NetworkSend
         buffer.WriteInt32(Item(itemNum).FurnitureHeight)
 
         For i = 0 To 3
-            For x = 0 To 3
+            For X = 0 To 3
                 buffer.WriteInt32(Item(itemNum).FurnitureBlocks(i, x))
                 buffer.WriteInt32(Item(itemNum).FurnitureFringe(i, x))
             Next
