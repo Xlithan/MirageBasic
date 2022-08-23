@@ -24,7 +24,7 @@ Module C_General
         FrmOptions.cmbScreenSize.SelectedIndex = Settings.ScreenSize
 
         SetStatus(Language.Load.Loading)
-        FrmMenu.Text = FrmGame.Text = Settings.GameName
+        FrmMenu.Text = Settings.GameName
         FrmMenu.Visible = True
 
         CacheMusic()
