@@ -168,6 +168,7 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
+        SendRequestNpcs()
         SendRequestEditMap()
     End Sub
 
