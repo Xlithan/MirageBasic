@@ -619,11 +619,7 @@ Public Class FrmEditor_MapEditor
         lstMapNpc.Items.Add("None")
         
         For x = 0 To MAX_MAP_NPCS
-            If Map.Npc(x) > 0 Then
-                lstMapNpc.Items.Add(X & ": " & Trim$(Npc(Map.Npc(X)).Name))
-            Else
-                lstMapNpc.Items.Add("None")
-            End If
+             lstMapNpc.Items.Add(X & ": " & Trim$(Npc(Map.Npc(X)).Name))
         Next
 
         cmbNpcList.Items.Clear()
