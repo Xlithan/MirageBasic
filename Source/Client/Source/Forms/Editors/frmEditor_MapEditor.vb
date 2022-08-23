@@ -616,14 +616,12 @@ Public Class FrmEditor_MapEditor
         txtBootY.Text = Map.BootY
 
         lstMapNpc.Items.Clear()
-        lstMapNpc.Items.Add("None")
         
         For x = 0 To MAX_MAP_NPCS
              lstMapNpc.Items.Add(X & ": " & Trim$(Npc(Map.Npc(X)).Name))
         Next
 
         cmbNpcList.Items.Clear()
-        cmbNpcList.Items.Add("None")
 
         For y = 0 To MAX_NPCS
             cmbNpcList.Items.Add(Y & ": " & Trim$(Npc(Y).Name))
