@@ -65,6 +65,7 @@ Public Module modSettings
         Dim writer = New StreamWriter(cf)
         
         x.Serialize(writer, Settings)
+        writer.Close
     End Sub
 
 End Module
