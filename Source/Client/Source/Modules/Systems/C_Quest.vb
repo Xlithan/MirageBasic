@@ -61,7 +61,7 @@ Friend Module C_Quest
 #Region "DataBase"
 
     Sub ClearQuest(questNum As Integer)
-        Dim I As Integer
+        Dim i As Integer
 
         ' clear the Quest
         Quest(questNum).Name = ""
@@ -72,7 +72,7 @@ Friend Module C_Quest
         Quest(questNum).ReqCount = 0
         ReDim Quest(questNum).Requirement(Quest(questNum).ReqCount)
         ReDim Quest(questNum).RequirementIndex(Quest(questNum).ReqCount)
-        For I = 0 To Quest(questNum).ReqCount
+        For i = 0 To Quest(questNum).ReqCount
             Quest(questNum).Requirement(I) = 0
             Quest(questNum).RequirementIndex(I) = 0
         Next
@@ -83,14 +83,14 @@ Friend Module C_Quest
         Quest(questNum).QuestRemoveItemValue = 0
 
         ReDim Quest(questNum).Chat(3)
-        For I = 0 To 3
+        For i = 0 To 3
             Quest(questNum).Chat(I) = ""
         Next
 
         Quest(questNum).RewardCount = 0
         ReDim Quest(questNum).RewardItem(Quest(questNum).RewardCount)
         ReDim Quest(questNum).RewardItemAmount(Quest(questNum).RewardCount)
-        For I = 0 To Quest(questNum).RewardCount
+        For i = 0 To Quest(questNum).RewardCount
             Quest(questNum).RewardItem(I) = 0
             Quest(questNum).RewardItemAmount(I) = 0
         Next
@@ -98,7 +98,7 @@ Friend Module C_Quest
 
         Quest(questNum).TaskCount = 0
         ReDim Quest(questNum).Task(Quest(questNum).TaskCount)
-        For I = 0 To Quest(questNum).TaskCount
+        For i = 0 To Quest(questNum).TaskCount
             Quest(questNum).Task(I).Order = 0
             Quest(questNum).Task(I).Npc = 0
             Quest(questNum).Task(I).Item = 0
@@ -114,11 +114,11 @@ Friend Module C_Quest
     End Sub
 
     Sub ClearQuests()
-        Dim I As Integer
+        Dim i As Integer
 
         ReDim Quest(MAX_QUESTS)
 
-        For I = 0 To MAX_QUESTS
+        For i = 0 To MAX_QUESTS
             ClearQuest(I)
         Next
     End Sub
@@ -145,7 +145,7 @@ Friend Module C_Quest
         Quest(questNum).ReqCount = buffer.ReadInt32
         ReDim Quest(questNum).Requirement(Quest(questNum).ReqCount)
         ReDim Quest(questNum).RequirementIndex(Quest(questNum).ReqCount)
-        For I = 0 To Quest(questNum).ReqCount
+        For i = 0 To Quest(questNum).ReqCount
             Quest(questNum).Requirement(I) = buffer.ReadInt32
             Quest(questNum).RequirementIndex(I) = buffer.ReadInt32
         Next
@@ -155,7 +155,7 @@ Friend Module C_Quest
         Quest(questNum).QuestRemoveItem = buffer.ReadInt32
         Quest(questNum).QuestRemoveItemValue = buffer.ReadInt32
 
-        For I = 0 To 3
+        For i = 0 To 3
             Quest(questNum).Chat(I) = buffer.ReadString
         Next
 
@@ -171,7 +171,7 @@ Friend Module C_Quest
 
         Quest(questNum).TaskCount = buffer.ReadInt32
         ReDim Quest(questNum).Task(Quest(questNum).TaskCount)
-        For I = 0 To Quest(questNum).TaskCount
+        For i = 0 To Quest(questNum).TaskCount
             Quest(questNum).Task(I).Order = buffer.ReadInt32
             Quest(questNum).Task(I).Npc = buffer.ReadInt32
             Quest(questNum).Task(I).Item = buffer.ReadInt32
@@ -202,9 +202,9 @@ Friend Module C_Quest
     End Sub
 
     Friend Sub Packet_PlayerQuests(ByRef data() As Byte)
-        Dim I As Integer
+        Dim i As Integer
         Dim buffer As New ByteStream(data)
-        For I = 0 To MAX_QUESTS
+        For i = 0 To MAX_QUESTS
             Player(Myindex).PlayerQuest(I).Status = buffer.ReadInt32
             Player(Myindex).PlayerQuest(I).ActualTask = buffer.ReadInt32
             Player(Myindex).PlayerQuest(I).CurrentCount = buffer.ReadInt32
@@ -307,10 +307,10 @@ Friend Module C_Quest
     End Function
 
     Friend Function GetQuestNum(questName As String) As Integer
-        Dim I As Integer
+        Dim i As Integer
         GetQuestNum = 0
 
-        For I = 0 To MAX_QUESTS
+        For i = 0 To MAX_QUESTS
             If Trim$(Quest(I).Name) = Trim$(questName) Then
                 GetQuestNum = I
                 Exit For
@@ -398,15 +398,15 @@ Friend Module C_Quest
     End Function
 
     Friend Sub RefreshQuestLog()
-        Dim I As Integer, x As Integer
+        Dim i As Integer, x As Integer
 
-        For I = 0 To MaxActivequests
+        For i = 0 To MaxActivequests
             QuestNames(I) = ""
         Next
 
         x = 1
 
-        For I = 0 To MAX_QUESTS
+        For i = 0 To MAX_QUESTS
             If QuestInProgress(I) AndAlso x < MaxActivequests Then
                 QuestNames(x) = Trim$(Quest(I).Name)
                 x = x + 1
@@ -424,7 +424,7 @@ Friend Module C_Quest
 
         If SelectedQuest = 0 Then Exit Sub
 
-        For I = 0 To MAX_QUESTS
+        For i = 0 To MAX_QUESTS
             If Trim$(QuestNames(SelectedQuest)) = Trim$(Quest(I).Name) Then
                 questNum = I
             End If
@@ -518,7 +518,7 @@ Friend Module C_Quest
 
         'Rewards
         ReDim QuestRewardsText(Quest(questNum).RewardCount + 1)
-        For I = 0 To Quest(questNum).RewardCount
+        For i = 0 To Quest(questNum).RewardCount
             QuestRewardsText(I) = Item(Quest(questNum).RewardItem(I)).Name & " X" & Str(Quest(questNum).RewardItemAmount(I))
         Next
         QuestRewardsText(I) = Str(Quest(questNum).RewardExp) & " EXP"
@@ -789,7 +789,7 @@ Friend Module C_Quest
         buffer.WriteInt32(Quest(QuestNum).Cancelable)
 
         buffer.WriteInt32(Quest(QuestNum).ReqCount)
-        For I = 0 To Quest(QuestNum).ReqCount
+        For i = 0 To Quest(QuestNum).ReqCount
             buffer.WriteInt32(Quest(QuestNum).Requirement(I))
             buffer.WriteInt32(Quest(QuestNum).RequirementIndex(I))
         Next
@@ -799,7 +799,7 @@ Friend Module C_Quest
         buffer.WriteInt32(Quest(QuestNum).QuestRemoveItem)
         buffer.WriteInt32(Quest(QuestNum).QuestRemoveItemValue)
 
-        For I = 0 To 3
+        For i = 0 To 3
             buffer.WriteString((Trim(Quest(QuestNum).Chat(I))))
         Next
 
@@ -812,7 +812,7 @@ Friend Module C_Quest
         buffer.WriteInt32(Quest(QuestNum).RewardExp)
 
         buffer.WriteInt32(Quest(QuestNum).TaskCount)
-        For I = 0 To Quest(QuestNum).TaskCount
+        For i = 0 To Quest(QuestNum).TaskCount
             buffer.WriteInt32(Quest(QuestNum).Task(I).Order)
             buffer.WriteInt32(Quest(QuestNum).Task(I).Npc)
             buffer.WriteInt32(Quest(QuestNum).Task(I).Item)
@@ -832,7 +832,7 @@ Friend Module C_Quest
     Friend Sub QuestEditorInit()
 
         If frmEditor_Quest.Visible = False Then Exit Sub
-        Editorindex = frmEditor_Quest.lstIndex.SelectedIndex + 1
+        Editorindex = frmEditor_Quest.lstIndex.SelectedIndex
 
         With frmEditor_Quest
             .txtName.Text = Trim$(Quest(Editorindex).Name)
@@ -917,9 +917,9 @@ Friend Module C_Quest
     End Sub
 
     Friend Sub QuestEditorOk()
-        Dim I As Integer
+        Dim i As Integer
 
-        For I = 0 To MAX_QUESTS
+        For i = 0 To MAX_QUESTS
             If QuestChanged(I) Then
                 SendSaveQuest(I)
             End If
@@ -940,7 +940,7 @@ Friend Module C_Quest
     End Sub
 
     Friend Sub ClearChanged_Quest()
-        Dim I As Integer
+        Dim i As Integer
 
         For i = 0 To MAX_QUESTS
             QuestChanged(I) = False

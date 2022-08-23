@@ -401,7 +401,7 @@ Module C_UpdateUI
                 .cmbQuestReq.Items.Clear()
                 .cmbQuestReq.Items.Add("None")
                 ' Add the names
-                For I = 0 To MAX_QUESTS
+                For i = 0 To MAX_QUESTS
                     .lstIndex.Items.Add(I & ": " & Trim$(Quest(I).Name))
                     .cmbQuestReq.Items.Add(I & ": " & Trim$(Quest(I).Name))
                 Next

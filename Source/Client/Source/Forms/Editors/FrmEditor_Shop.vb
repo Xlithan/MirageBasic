@@ -10,8 +10,8 @@ Friend Class frmEditor_Shop
         If Editorindex = 0 Then Exit Sub
         tmpindex = lstIndex.SelectedIndex
         Shop(Editorindex).Name = Trim$(txtName.Text)
-        lstIndex.Items.RemoveAt(Editorindex - 1)
-        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Shop(Editorindex).Name)
+        lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & Shop(Editorindex).Name)
         lstIndex.SelectedIndex = tmpindex
     End Sub
 
@@ -21,7 +21,7 @@ Friend Class frmEditor_Shop
 
     Private Sub BtnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         Dim index As Integer
-        index = lstTradeItem.SelectedIndex + 1
+        index = lstTradeItem.SelectedIndex
         If index = 0 Then Exit Sub
         With Shop(Editorindex).TradeItem(index)
             .Item = cmbItem.SelectedIndex
@@ -34,7 +34,7 @@ Friend Class frmEditor_Shop
 
     Private Sub BtnDeleteTrade_Click(sender As Object, e As EventArgs) Handles btnDeleteTrade.Click
         Dim index As Integer
-        index = lstTradeItem.SelectedIndex + 1
+        index = lstTradeItem.SelectedIndex
         If index = 0 Then Exit Sub
         With Shop(Editorindex).TradeItem(index)
             .Item = 0
@@ -67,8 +67,8 @@ Friend Class frmEditor_Shop
         ClearShop(Editorindex)
 
         tmpindex = lstIndex.SelectedIndex
-        lstIndex.Items.RemoveAt(Editorindex - 1)
-        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Shop(Editorindex).Name)
+        lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & Shop(Editorindex).Name)
         lstIndex.SelectedIndex = tmpindex
 
         ShopEditorInit()

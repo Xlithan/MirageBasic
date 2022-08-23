@@ -281,7 +281,7 @@ Friend Module C_Crafting
     Friend Sub RecipeEditorInit()
 
         If frmEditor_Recipe.Visible = False Then Exit Sub
-        Editorindex = frmEditor_Recipe.lstIndex.SelectedIndex + 1
+        Editorindex = frmEditor_Recipe.lstIndex.SelectedIndex
 
         With Recipe(Editorindex)
             frmEditor_Recipe.txtName.Text = Trim$(.Name)

@@ -73,7 +73,7 @@ Module S_General
         ReDim HouseConfig(MAX_HOUSES)
 
         For i = 0 To MAX_CACHED_MAPS
-            For X = 0 To MAX_MAP_NPCS
+            For x = 0 To MAX_MAP_NPCS
                 ReDim MapNpc(i).Npc(x).Vital(VitalType.Count)
             Next
         Next

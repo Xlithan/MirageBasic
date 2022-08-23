@@ -25,8 +25,8 @@ Friend Class frmEditor_Projectile
 
         tmpindex = lstIndex.SelectedIndex
         Projectiles(Editorindex).Name = Trim$(txtName.Text)
-        lstIndex.Items.RemoveAt(Editorindex - 1)
-        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Projectiles(Editorindex).Name)
+        lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & Projectiles(Editorindex).Name)
         lstIndex.SelectedIndex = tmpindex
     End Sub
 
@@ -62,8 +62,8 @@ Friend Class frmEditor_Projectile
         ClearProjectile(Editorindex)
 
         tmpindex = lstIndex.SelectedIndex
-        lstIndex.Items.RemoveAt(Editorindex - 1)
-        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Projectiles(Editorindex).Name)
+        lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & Projectiles(Editorindex).Name)
         lstIndex.SelectedIndex = tmpindex
 
         ProjectileEditorInit()

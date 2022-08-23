@@ -686,7 +686,7 @@ Module C_Pets
         Dim i As Integer
 
         If frmEditor_Pet.Visible = False Then Exit Sub
-        Editorindex = frmEditor_Pet.lstIndex.SelectedIndex + 1
+        Editorindex = frmEditor_Pet.lstIndex.SelectedIndex
 
         With frmEditor_Pet
             'populate skill combo's

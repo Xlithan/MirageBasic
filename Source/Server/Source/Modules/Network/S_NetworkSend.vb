@@ -45,7 +45,7 @@ Module S_NetworkSend
         Dim buffer As New ByteStream(4)
         buffer.WriteInt32(ServerPackets.SNewCharJob)
 
-        For i = 1 To MAX_JOBS
+        For i = 0 To MAX_JOBS
             buffer.WriteString((GetJobName(i)))
             buffer.WriteString((Trim$(Job(i).Desc)))
 
@@ -1312,7 +1312,7 @@ Module S_NetworkSend
 
         AddDebug("Sent SMSG: SMapReport")
 
-        For I = 0 To MAX_MAPS
+        For i = 0 To MAX_MAPS
             buffer.WriteString(Map(I).Name.Trim)
         Next
 
@@ -1340,7 +1340,7 @@ Module S_NetworkSend
 
         AddDebug("Sent SMSG: SMapNames")
 
-        For I = 0 To MAX_MAPS
+        For i = 0 To MAX_MAPS
             buffer.WriteString(Map(I).Name.Trim)
         Next
 

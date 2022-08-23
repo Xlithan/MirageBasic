@@ -8,8 +8,8 @@ Friend Class frmEditor_Skill
         If Editorindex = 0 Then Exit Sub
         tmpindex = lstIndex.SelectedIndex
         Skill(Editorindex).Name = Trim$(txtName.Text)
-        lstIndex.Items.RemoveAt(Editorindex - 1)
-        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Skill(Editorindex).Name)
+        lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & Skill(Editorindex).Name)
         lstIndex.SelectedIndex = tmpindex
     End Sub
 
@@ -117,8 +117,8 @@ Friend Class frmEditor_Skill
         ClearSkill(Editorindex)
 
         tmpindex = lstIndex.SelectedIndex
-        lstIndex.Items.RemoveAt(Editorindex - 1)
-        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Skill(Editorindex).Name)
+        lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & Skill(Editorindex).Name)
         lstIndex.SelectedIndex = tmpindex
 
         SkillEditorInit()

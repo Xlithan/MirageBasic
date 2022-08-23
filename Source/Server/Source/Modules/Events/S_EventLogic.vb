@@ -1139,10 +1139,11 @@ Friend Module S_EventLogic
             If Gettingmap = True Then Exit Sub
 
             If IsPlaying(i) Then
-                For x = 1 To TempPlayer(i).EventMap.CurrentEvents
-                    If TempPlayer(i).EventMap.EventPages(x).Visible Then
-                        If Map(Player(i).Map).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Pages(TempPlayer(i).EventMap.EventPages(x).PageId).Trigger = 2 Then 'Parallel Process baby!
-                            If TempPlayer(i).EventProcessingCount > 0 Then
+                For x = 0 To TempPlayer(i).EventMap.CurrentEvents
+                    If TempPlayer(i).EventProcessingCount > 0 Then
+                        If TempPlayer(i).EventMap.EventPages(x).Visible Then
+                            If Map(Player(i).Map).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Pages(TempPlayer(i).EventMap.EventPages(x).PageId).Trigger = 2 Then 'Parallel Process baby!
+                            
                                 If TempPlayer(i).EventProcessing(x).Active = 0 Then
                                     If Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Pages(TempPlayer(i).EventMap.EventPages(x).PageId).CommandListCount > 0 Then
                                         'start new event processing

@@ -11,7 +11,7 @@ Module C_Editors
 
         If FrmEditor_Animation.Visible = False Then Exit Sub
 
-        Editorindex = FrmEditor_Animation.lstIndex.SelectedIndex + 1
+        Editorindex = FrmEditor_Animation.lstIndex.SelectedIndex
 
         With Animation(Editorindex)
 
@@ -46,7 +46,7 @@ Module C_Editors
             FrmEditor_Animation.nudLoopCount1.Value = .LoopCount(1)
             FrmEditor_Animation.nudLoopTime1.Value = .LoopTime(1)
 
-            Editorindex = FrmEditor_Animation.lstIndex.SelectedIndex + 1
+            Editorindex = FrmEditor_Animation.lstIndex.SelectedIndex
         End With
 
         EditorAnim_DrawAnim()
@@ -89,7 +89,7 @@ Module C_Editors
         Dim i As Integer
 
         If frmEditor_NPC.Visible = False Then Exit Sub
-        Editorindex = frmEditor_NPC.lstIndex.SelectedIndex + 1
+        Editorindex = frmEditor_NPC.lstIndex.SelectedIndex
         frmEditor_NPC.cmbDropSlot.SelectedIndex = 0
         If Npc(Editorindex).AttackSay Is Nothing Then Npc(Editorindex).AttackSay = ""
         If Npc(Editorindex).Name Is Nothing Then Npc(Editorindex).Name = ""
@@ -214,7 +214,7 @@ Module C_Editors
     Friend Sub ClearChanged_Resource()
        For i = 0 To MAX_RESOURCES
             Resource_Changed(i) = Nothing
-        Next i
+        Next 
         ReDim Resource_Changed(MAX_RESOURCES)
     End Sub
 
@@ -222,7 +222,7 @@ Module C_Editors
         Dim i As Integer
 
         If frmEditor_Resource.Visible = False Then Exit Sub
-        Editorindex = frmEditor_Resource.lstIndex.SelectedIndex + 1
+        Editorindex = frmEditor_Resource.lstIndex.SelectedIndex
 
         With frmEditor_Resource
             'populate combo boxes
@@ -293,7 +293,7 @@ Module C_Editors
         Dim i As Integer
 
         If frmEditor_Skill.Visible = False Then Exit Sub
-        Editorindex = frmEditor_Skill.lstIndex.SelectedIndex + 1
+        Editorindex = frmEditor_Skill.lstIndex.SelectedIndex
 
         If Skill(Editorindex).Name Is Nothing Then Skill(Editorindex).Name = ""
 
@@ -411,7 +411,7 @@ Module C_Editors
         Dim i As Integer
 
         If frmEditor_Shop.Visible = False Then Exit Sub
-        Editorindex = frmEditor_Shop.lstIndex.SelectedIndex + 1
+        Editorindex = frmEditor_Shop.lstIndex.SelectedIndex
 
         frmEditor_Shop.txtName.Text = Trim$(Shop(Editorindex).Name)
         If Shop(Editorindex).BuyRate > 0 Then
@@ -579,7 +579,7 @@ Module C_Editors
 
         frmEditor_Job.lstStartItems.Items.Clear()
 
-       For i = 0 To 5
+       For i = 0 To MAX_DROP_ITEMS
             If Job(Editorindex).StartItem(i) > 0 Then
                 frmEditor_Job.lstStartItems.Items.Add(Item(Job(Editorindex).StartItem(i)).Name & " X " & Job(Editorindex).StartValue(i))
             Else
@@ -618,7 +618,7 @@ Module C_Editors
         Dim i As Integer
 
         If frmEditor_Item.Visible = False Then Exit Sub
-        Editorindex = frmEditor_Item.lstIndex.SelectedIndex + 1
+        Editorindex = frmEditor_Item.lstIndex.SelectedIndex
 
         With Item(Editorindex)
             'populate combo boxes
@@ -781,7 +781,7 @@ Module C_Editors
                 frmEditor_Item.chkStackable.Checked = False
             End If
 
-            Editorindex = frmEditor_Item.lstIndex.SelectedIndex + 1
+            Editorindex = frmEditor_Item.lstIndex.SelectedIndex
         End With
 
         frmEditor_Item.nudPic.Maximum = NumItems

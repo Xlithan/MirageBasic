@@ -9,7 +9,7 @@ Module C_Job
         Dim i As Integer, z As Integer, x As Integer
         Dim buffer As New ByteStream(data)
 
-       For i = 1 To MAX_JOBS
+       For i = 0 To MAX_JOBS
             With Job(i)
                 .Name = Trim(buffer.ReadString)
                 .Desc = Trim(buffer.ReadString)
@@ -75,7 +75,7 @@ Module C_Job
 
         ReDim CmbJob(MAX_JOBS)
 
-       For i = 1 To MAX_JOBS
+       For i = 0 To MAX_JOBS
             CmbJob(i) = Job(i).Name
         Next
 
@@ -90,7 +90,7 @@ Module C_Job
 
         NewCharSprite = 0
 
-        For i = 1 To MAX_JOBS
+        For i = 0 To MAX_JOBS
             With Job(i)
                 .Name = Trim(buffer.ReadString)
                 .Desc = Trim(buffer.ReadString)
@@ -145,7 +145,7 @@ Module C_Job
         Next
 
        ReDim CmbJob(MAX_JOBS)
-       For i = 1 To MAX_JOBS
+       For i = 0 To MAX_JOBS
             CmbJob(i) = Job(i).Name
         Next
         FrmMenu.DrawCharacter()

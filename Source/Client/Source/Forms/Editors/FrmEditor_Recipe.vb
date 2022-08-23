@@ -18,8 +18,8 @@ Friend Class frmEditor_Recipe
         ClearRecipe(Editorindex)
 
         tmpindex = lstIndex.SelectedIndex
-        lstIndex.Items.RemoveAt(Editorindex - 1)
-        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Recipe(Editorindex).Name)
+        lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & Recipe(Editorindex).Name)
         lstIndex.SelectedIndex = tmpindex
 
         lstIngredients.Items.Clear()
@@ -32,8 +32,8 @@ Friend Class frmEditor_Recipe
         If Editorindex = 0 OrElse Editorindex > MAX_RECIPE Then Exit Sub
         tmpindex = lstIndex.SelectedIndex
         Recipe(Editorindex).Name = Trim$(txtName.Text)
-        lstIndex.Items.RemoveAt(Editorindex - 1)
-        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Recipe(Editorindex).Name)
+        lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & Recipe(Editorindex).Name)
         lstIndex.SelectedIndex = tmpindex
     End Sub
 
@@ -45,8 +45,8 @@ Friend Class frmEditor_Recipe
     Private Sub BtnIngredientAdd_Click(sender As Object, e As EventArgs) Handles btnIngredientAdd.Click
         If lstIngredients.SelectedIndex < 0 OrElse cmbIngredient.SelectedIndex = 0 Then Exit Sub
 
-        Recipe(Editorindex).Ingredients(lstIngredients.SelectedIndex + 1).ItemNum = cmbIngredient.SelectedIndex
-        Recipe(Editorindex).Ingredients(lstIngredients.SelectedIndex + 1).Value = numItemAmount.Value
+        Recipe(Editorindex).Ingredients(lstIngredients.SelectedIndex).ItemNum = cmbIngredient.SelectedIndex
+        Recipe(Editorindex).Ingredients(lstIngredients.SelectedIndex).Value = numItemAmount.Value
 
         UpdateIngredient()
 

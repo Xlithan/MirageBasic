@@ -38,8 +38,8 @@ Friend Class frmEditor_Job
 
         tmpindex = lstIndex.SelectedIndex
         Job(Editorindex).Name = Trim$(txtName.Text)
-        lstIndex.Items.RemoveAt(Editorindex - 1)
-        lstIndex.Items.Insert(Editorindex - 1, Trim(Job(Editorindex).Name))
+        lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.Insert(EditorIndex, Trim(Job(Editorindex).Name))
         lstIndex.SelectedIndex = tmpindex
     End Sub
 

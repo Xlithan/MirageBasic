@@ -43,8 +43,8 @@ Friend Class FrmEditor_Animation
         If Editorindex = 0 OrElse Editorindex > MAX_ANIMATIONS Then Exit Sub
         tmpindex = lstIndex.SelectedIndex
         Animation(Editorindex).Name = Trim$(txtName.Text)
-        lstIndex.Items.RemoveAt(Editorindex - 1)
-        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Animation(Editorindex).Name)
+        lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & Animation(Editorindex).Name)
         lstIndex.SelectedIndex = tmpindex
     End Sub
 
@@ -60,8 +60,8 @@ Friend Class FrmEditor_Animation
         ClearAnimation(Editorindex)
 
         tmpindex = lstIndex.SelectedIndex
-        lstIndex.Items.RemoveAt(Editorindex - 1)
-        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Animation(Editorindex).Name)
+        lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & Animation(Editorindex).Name)
         lstIndex.SelectedIndex = tmpindex
 
         AnimationEditorInit()

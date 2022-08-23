@@ -42,7 +42,7 @@ Friend Module modTime
     End Sub
 
     Sub SendGameClockToAll()
-        Dim I As Integer
+        Dim i As Integer
 
        For i = 0 To GetPlayersOnline()
             If IsPlaying(I) Then
@@ -66,7 +66,7 @@ Friend Module modTime
     End Sub
 
     Sub SendTimeToAll()
-        Dim I As Integer
+        Dim i As Integer
 
        For i = 0 To GetPlayersOnline()
             If IsPlaying(I) Then

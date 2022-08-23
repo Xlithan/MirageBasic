@@ -30,8 +30,8 @@ Friend Class frmEditor_NPC
         ClearNpc(Editorindex)
 
         tmpindex = lstIndex.SelectedIndex
-        lstIndex.Items.RemoveAt(Editorindex - 1)
-        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Npc(Editorindex).Name)
+        lstIndex.Items.RemoveAt(Editorindex)
+        lstIndex.Items.Insert(Editorindex, Editorindex & ": " & Npc(Editorindex).Name)
         lstIndex.SelectedIndex = tmpindex
 
         NpcEditorInit()
@@ -52,8 +52,8 @@ Friend Class frmEditor_NPC
 
         tmpindex = lstIndex.SelectedIndex
         Npc(Editorindex).Name = Trim$(txtName.Text)
-        lstIndex.Items.RemoveAt(Editorindex - 1)
-        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Npc(Editorindex).Name)
+        lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & Npc(Editorindex).Name)
         lstIndex.SelectedIndex = tmpindex
     End Sub
 
