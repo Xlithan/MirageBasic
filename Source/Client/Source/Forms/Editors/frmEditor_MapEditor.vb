@@ -398,20 +398,10 @@ Public Class FrmEditor_MapEditor
 
 #Region "Npc's"
 
-    Private Sub LstMapNpc_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstMapNpc.SelectedIndexChanged
-        cmbNpcList.SelectedItem = lstMapNpc.SelectedItem
-    End Sub
-
     Private Sub CmbNpcList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNpcList.SelectedIndexChanged
-        If lstMapNpc.SelectedIndex > -1 Then
-            If cmbNpcList.SelectedIndex > 0 Then
-                lstMapNpc.Items.Item(lstMapNpc.SelectedIndex) = cmbNpcList.SelectedIndex & ": " & Npc(cmbNpcList.SelectedIndex).Name
-                Map.Npc(lstMapNpc.SelectedIndex + 1) = cmbNpcList.SelectedIndex
-            Else
-                lstMapNpc.Items.Item(lstMapNpc.SelectedIndex) = "No NPC"
-                Map.Npc(lstMapNpc.SelectedIndex + 1) = 0
-            End If
-
+        If cmbNpcList.SelectedIndex > 0 Then
+            lstMapNpc.Items.Item(lstMapNpc.SelectedIndex) = cmbNpcList.SelectedIndex & ": " & Npc(cmbNpcList.SelectedIndex).Name
+            Map.Npc(lstMapNpc.SelectedIndex) = cmbNpcList.SelectedIndex
         End If
     End Sub
 
@@ -626,24 +616,24 @@ Public Class FrmEditor_MapEditor
         txtBootY.Text = Map.BootY
 
         lstMapNpc.Items.Clear()
-
-        For X = 0 To MAX_MAP_NPCS
-            If Map.Npc(X) = 0 Then
-                lstMapNpc.Items.Add("No NPC")
-            Else
+        lstMapNpc.Items.Add("None")
+        
+        For x = 0 To MAX_MAP_NPCS
+            If Map.Npc(x) > 0 Then
                 lstMapNpc.Items.Add(X & ": " & Trim$(Npc(Map.Npc(X)).Name))
+            Else
+                lstMapNpc.Items.Add("None")
             End If
-
         Next
 
         cmbNpcList.Items.Clear()
-        cmbNpcList.Items.Add("No NPC")
+        cmbNpcList.Items.Add("None")
 
-        For Y = 0 To MAX_NPCS
+        For y = 0 To MAX_NPCS
             cmbNpcList.Items.Add(Y & ": " & Trim$(Npc(Y).Name))
         Next
 
-        lblMap.Text = "Current map: " & "?"
+        lblMap.Text = "Current Map: " & "?"
         txtMaxX.Text = Map.MaxX
         txtMaxY.Text = Map.MaxY
 
@@ -709,7 +699,7 @@ Public Class FrmEditor_MapEditor
 
         ' set shops for the shop attribute
         cmbShop.Items.Add("None")
-       For i = 0 To MAX_SHOPS
+        For i = 0 To MAX_SHOPS
             cmbShop.Items.Add(i & ": " & Shop(i).Name)
         Next
         ' we're not in a shop
