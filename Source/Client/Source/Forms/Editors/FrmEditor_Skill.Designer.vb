@@ -708,7 +708,7 @@ Partial Class frmEditor_Skill
         Me.DarkLabel6.Name = "DarkLabel6"
         Me.DarkLabel6.Size = New System.Drawing.Size(87, 15)
         Me.DarkLabel6.TabIndex = 11
-        Me.DarkLabel6.Text = "Class Required:"
+        Me.DarkLabel6.Text = "Job Required:"
         '
         'cmbClass
         '

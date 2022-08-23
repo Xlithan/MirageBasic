@@ -231,10 +231,10 @@ Friend Class frmEditor_Item
 
 #Region "Requirements"
 
-    Private Sub CmbClassReq_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClassReq.SelectedIndexChanged
+    Private Sub CmbClassReq_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJobReq.SelectedIndexChanged
         If Editorindex = 0 OrElse Editorindex > MAX_ITEMS Then Exit Sub
 
-        Item(Editorindex).ClassReq = cmbClassReq.SelectedIndex
+        Item(Editorindex).ClassReq = cmbJobReq.SelectedIndex
     End Sub
 
     Private Sub CmbAccessReq_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAccessReq.SelectedIndexChanged

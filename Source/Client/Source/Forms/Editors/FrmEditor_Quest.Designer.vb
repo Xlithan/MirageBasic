@@ -1071,7 +1071,7 @@ Partial Class frmEditor_Quest
         Me.DarkLabel20.Name = "DarkLabel20"
         Me.DarkLabel20.Size = New System.Drawing.Size(108, 15)
         Me.DarkLabel20.TabIndex = 8
-        Me.DarkLabel20.Text = "Class Requirement:"
+        Me.DarkLabel20.Text = "Job Requirement:"
         '
         'rdbClassReq
         '
@@ -1082,7 +1082,7 @@ Partial Class frmEditor_Quest
         Me.rdbClassReq.Size = New System.Drawing.Size(52, 19)
         Me.rdbClassReq.TabIndex = 7
         Me.rdbClassReq.TabStop = true
-        Me.rdbClassReq.Text = "Class"
+        Me.rdbClassReq.Text = "Job"
         '
         'cmbQuestReq
         '

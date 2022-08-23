@@ -2848,7 +2848,7 @@ NextLoop:
         'Access
         DrawText(SkillWindowX - DescriptionGfxInfo.Width + 10, SkillWindowY + 176, "Access: " & SkillDescReqAccess, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'Class
-        DrawText(SkillWindowX - DescriptionGfxInfo.Width + 10, SkillWindowY + 192, "Class: " & SkillDescReqClass, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(SkillWindowX - DescriptionGfxInfo.Width + 10, SkillWindowY + 192, "Job: " & SkillDescReqClass, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
     End Sub
 

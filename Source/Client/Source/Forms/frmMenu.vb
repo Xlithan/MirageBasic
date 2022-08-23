@@ -315,6 +315,7 @@ Friend Class FrmMenu
     ''' </summary>
     Private Sub ChkSavePass_CheckedChanged(sender As Object, e As EventArgs) Handles chkSavePass.CheckedChanged
         ChkSavePassChecked = chkSavePass.Checked
+        Settings.SavePass = ChkSavePassChecked
         SaveSettings
     End Sub
 

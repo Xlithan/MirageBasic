@@ -491,8 +491,7 @@ Module C_Editors
 
 #End Region
 
-#Region "Class Editor"
-
+#Region "Job Editor"
     Friend Sub JobEditorOk()
         SendSaveJob()
 
@@ -762,14 +761,14 @@ Module C_Editors
             frmEditor_Item.nudSprReq.Value = .Stat_Req(StatType.Spirit)
 
             ' Build cmbClassReq
-            frmEditor_Item.cmbClassReq.Items.Clear()
-            frmEditor_Item.cmbClassReq.Items.Add("None")
+            frmEditor_Item.cmbJobReq.Items.Clear()
+            frmEditor_Item.cmbJobReq.Items.Add("None")
 
            For i = 0 To MAX_JOBS
-                frmEditor_Item.cmbClassReq.Items.Add(Job(i).Name)
+                frmEditor_Item.cmbJobReq.Items.Add(Job(i).Name)
             Next
 
-            frmEditor_Item.cmbClassReq.SelectedIndex = .ClassReq
+            frmEditor_Item.cmbJobReq.SelectedIndex = .ClassReq
             ' Info
             frmEditor_Item.nudPrice.Value = .Price
             frmEditor_Item.cmbBind.SelectedIndex = .BindType

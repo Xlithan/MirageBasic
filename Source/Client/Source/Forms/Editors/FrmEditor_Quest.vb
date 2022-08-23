@@ -421,7 +421,7 @@ Friend Class frmEditor_Quest
                 Case 2
                     lstRequirements.Items.Add(i & ":" & "Quest Requirement: " & Trim(Quest(Quest(Editorindex).RequirementIndex(i)).Name))
                 Case 3
-                    lstRequirements.Items.Add(i & ":" & "Class Requirement: " & Trim(Job(Quest(Editorindex).RequirementIndex(i)).Name))
+                    lstRequirements.Items.Add(i & ":" & "Job Requirement: " & Trim(Job(Quest(Editorindex).RequirementIndex(i)).Name))
                 Case Else
                     lstRequirements.Items.Add(i & ":")
             End Select
@@ -460,7 +460,7 @@ Friend Class frmEditor_Quest
                 Case 2
                     lstRequirements.Items.Add(i & ":" & "Quest Requirement: " & Trim(Quest(Quest(Editorindex).RequirementIndex(i)).Name))
                 Case 3
-                    lstRequirements.Items.Add(i & ":" & "Class Requirement: " & Trim(Job(Quest(Editorindex).RequirementIndex(i)).Name))
+                    lstRequirements.Items.Add(i & ":" & "Job Requirement: " & Trim(Job(Quest(Editorindex).RequirementIndex(i)).Name))
                 Case Else
                     lstRequirements.Items.Add(i & ":")
             End Select
