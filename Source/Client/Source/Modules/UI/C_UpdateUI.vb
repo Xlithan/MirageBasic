@@ -769,13 +769,13 @@ Module C_UpdateUI
         If OptionsVisible = True Then
 
             ' show in GUI
-            If Settings.Music = 1 Then
+            If Settings.Music = true Then
                 FrmOptions.optMOn.Checked = True
             Else
                 FrmOptions.optMOff.Checked = True
             End If
 
-            If Settings.Music = 1 Then
+            If Settings.Sound = true Then
                 FrmOptions.optSOn.Checked = True
             Else
                 FrmOptions.optSOff.Checked = True
@@ -797,6 +797,7 @@ Module C_UpdateUI
             Else
                 FrmOptions.chkNpcBars.Checked = False
             End If
+
 
             FrmOptions.Visible = True
             OptionsVisible = False
