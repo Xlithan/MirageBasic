@@ -13,8 +13,8 @@ Friend Class frmEditor_House
 
         tmpindex = lstIndex.SelectedIndex
         House(Editorindex).ConfigName = Trim$(txtName.Text)
-        lstIndex.Items.RemoveAt(Editorindex - 1)
-        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & House(Editorindex).ConfigName)
+        lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & House(Editorindex).ConfigName)
         lstIndex.SelectedIndex = tmpindex
 
     End Sub
@@ -85,8 +85,8 @@ Friend Class frmEditor_House
         House(EditorIndex).Y = 0
 
         tmpindex = lstIndex.SelectedIndex
-        lstIndex.Items.RemoveAt(Editorindex - 1)
-        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & House(Editorindex).ConfigName)
+        lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & House(Editorindex).ConfigName)
         lstIndex.SelectedIndex = tmpindex
         
         HouseEditorInit

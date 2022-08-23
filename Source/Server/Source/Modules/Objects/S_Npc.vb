@@ -1079,7 +1079,7 @@ Module S_Npc
         Npc(NpcNum).Animation = buffer.ReadInt32()
         Npc(NpcNum).AttackSay = buffer.ReadString()
         Npc(NpcNum).Behaviour = buffer.ReadInt32()
-        For i = 0 To 5
+        For i = 0 To MAX_DROP_ITEMS
             Npc(NpcNum).DropChance(i) = buffer.ReadInt32()
             Npc(NpcNum).DropItem(i) = buffer.ReadInt32()
             Npc(NpcNum).DropItemValue(i) = buffer.ReadInt32()
@@ -1138,7 +1138,7 @@ Module S_Npc
         buffer.WriteString((Npc(NpcNum).AttackSay))
         buffer.WriteInt32(Npc(NpcNum).Behaviour)
 
-        For i = 0 To 5
+        For i = 0 To MAX_DROP_ITEMS
             buffer.WriteInt32(Npc(NpcNum).DropChance(i))
             buffer.WriteInt32(Npc(NpcNum).DropItem(i))
             buffer.WriteInt32(Npc(NpcNum).DropItemValue(i))
@@ -1182,7 +1182,7 @@ Module S_Npc
         buffer.WriteString((Npc(NpcNum).AttackSay))
         buffer.WriteInt32(Npc(NpcNum).Behaviour)
 
-        For i = 0 To 5
+        For i = 0 To MAX_DROP_ITEMS
             buffer.WriteInt32(Npc(NpcNum).DropChance(i))
             buffer.WriteInt32(Npc(NpcNum).DropItem(i))
             buffer.WriteInt32(Npc(NpcNum).DropItemValue(i))

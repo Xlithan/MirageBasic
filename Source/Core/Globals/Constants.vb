@@ -34,4 +34,5 @@
     Public Const MAX_MAPX As Byte = 50
     Public Const MAX_MAPY As Byte = 50
     Public Const MAX_PROJECTILES As Integer = 255
+    Public const MAX_DROP_ITEMS As Byte = 5
 End Module

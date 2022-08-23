@@ -24,7 +24,7 @@ Friend Module C_Housing
 
         If frmEditor_House.Visible = False Then Exit Sub
 
-        Editorindex = frmEditor_House.lstIndex.SelectedIndex + 1
+        Editorindex = frmEditor_House.lstIndex.SelectedIndex
 
         With House(Editorindex)
             frmEditor_House.txtName.Text = Trim$(.ConfigName)

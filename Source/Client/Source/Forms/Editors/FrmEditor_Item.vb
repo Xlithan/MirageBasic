@@ -20,8 +20,8 @@ Friend Class frmEditor_Item
         ClearItem(Editorindex + 1)
 
         tmpindex = lstIndex.SelectedIndex
-        lstIndex.Items.RemoveAt(Editorindex - 1)
-        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Item(Editorindex).Name)
+        lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & Item(Editorindex).Name)
         lstIndex.SelectedIndex = tmpindex
 
         ItemEditorInit()
@@ -178,8 +178,8 @@ Friend Class frmEditor_Item
         If Editorindex = 0 OrElse Editorindex > MAX_ITEMS Then Exit Sub
         tmpindex = lstIndex.SelectedIndex
         Item(Editorindex).Name = Trim$(txtName.Text)
-        lstIndex.Items.RemoveAt(Editorindex - 1)
-        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Item(Editorindex).Name)
+        lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & Item(Editorindex).Name)
         lstIndex.SelectedIndex = tmpindex
     End Sub
 

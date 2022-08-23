@@ -25,8 +25,8 @@ Friend Class frmEditor_Pet
         If Editorindex <= 0 OrElse Editorindex > MAX_PETS Then Exit Sub
         tmpindex = lstIndex.SelectedIndex
         Pet(Editorindex).Name = Trim$(txtName.Text)
-        lstIndex.Items.RemoveAt(Editorindex - 1)
-        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Pet(Editorindex).Name)
+        lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & Pet(Editorindex).Name)
         lstIndex.SelectedIndex = tmpindex
     End Sub
 
@@ -243,8 +243,8 @@ Friend Class frmEditor_Pet
         ClearPet(Editorindex)
 
         tmpindex = lstIndex.SelectedIndex
-        lstIndex.Items.RemoveAt(Editorindex - 1)
-        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Pet(Editorindex).Name)
+        lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & Pet(Editorindex).Name)
         lstIndex.SelectedIndex = tmpindex
 
         PetEditorInit()

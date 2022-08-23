@@ -30,8 +30,8 @@ Friend Class frmEditor_Quest
 
         tmpindex = lstIndex.SelectedIndex
         Quest(Editorindex).Name = Trim$(txtName.Text)
-        lstIndex.Items.RemoveAt(Editorindex - 1)
-        lstIndex.Items.Insert(Editorindex - 1, Editorindex & ": " & Quest(Editorindex).Name)
+        lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & Quest(Editorindex).Name)
         lstIndex.SelectedIndex = tmpindex
     End Sub
 

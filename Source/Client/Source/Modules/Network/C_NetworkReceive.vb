@@ -1094,7 +1094,7 @@ Module C_NetworkReceive
     End Sub
 
     Private Sub Packet_Mapreport(ByRef data() As Byte)
-        Dim I As Integer
+        Dim i As Integer
         Dim buffer As New ByteStream(data)
        For i = 0 To MAX_MAPS
             MapNames(I) = Trim(buffer.ReadString())
@@ -1110,7 +1110,7 @@ Module C_NetworkReceive
     End Sub
 
     Private Sub Packet_MapNames(ByRef data() As Byte)
-        Dim I As Integer
+        Dim i As Integer
         Dim buffer As New ByteStream(data)
        For i = 0 To MAX_MAPS
             MapNames(I) = Trim(buffer.ReadString())

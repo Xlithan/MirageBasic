@@ -465,7 +465,7 @@ Module C_NetworkSend
         buffer.WriteInt32(Npc(NpcNum).Animation)
         buffer.WriteString((Npc(NpcNum).AttackSay))
         buffer.WriteInt32(Npc(NpcNum).Behaviour)
-       For i = 0 To 5
+       For i = 0 To MAX_DROP_ITEMS
             buffer.WriteInt32(Npc(NpcNum).DropChance(i))
             buffer.WriteInt32(Npc(NpcNum).DropItem(i))
             buffer.WriteInt32(Npc(NpcNum).DropItemValue(i))

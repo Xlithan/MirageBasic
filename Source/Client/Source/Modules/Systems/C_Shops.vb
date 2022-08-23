@@ -19,7 +19,7 @@ Module C_Shops
             .Name = ""
         }
         ReDim Shop(index).TradeItem(MAX_TRADES)
-        For X = 0 To MAX_TRADES
+        For x = 0 To MAX_TRADES
             ReDim Shop(index).TradeItem(x)
         Next
     End Sub

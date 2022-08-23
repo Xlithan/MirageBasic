@@ -156,8 +156,8 @@ Module modDatabase
         ReDim Map(mapNum).Npc(MAX_MAP_NPCS)
         ReDim Map(mapNum).Tile(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
-        For X = 0 To MAX_MAPX
-            For Y = 0 To MAX_MAPY
+        For x = 0 To MAX_MAPX
+            For y = 0 To MAX_MAPY
                 ReDim Map(mapNum).Tile(x, y).Layer(LayerType.Count - 1)
             Next
         Next
@@ -663,7 +663,7 @@ Module modDatabase
         writer.WriteByte(Npc(NpcNum).Behaviour)
         writer.WriteByte(Npc(NpcNum).Range)
 
-        For i = 0 To 5
+        For i = 0 To MAX_DROP_ITEMS
             writer.WriteInt32(Npc(NpcNum).DropChance(i))
             writer.WriteInt32(Npc(NpcNum).DropItem(i))
             writer.WriteInt32(Npc(NpcNum).DropItemValue(i))
@@ -718,7 +718,7 @@ Module modDatabase
         Npc(NpcNum).Behaviour = reader.ReadByte()
         Npc(NpcNum).Range = reader.ReadByte()
 
-        For i = 0 To 5
+        For i = 0 To MAX_DROP_ITEMS
             Npc(NpcNum).DropChance(i) = reader.ReadInt32()
             Npc(NpcNum).DropItem(i) = reader.ReadInt32()
             Npc(NpcNum).DropItemValue(i) = reader.ReadInt32()
@@ -760,7 +760,7 @@ Module modDatabase
     End Sub
 
     Sub ClearMapNpc(index As Integer, mapNum As Integer)
-        ReDim MapNpc(mapNum).Npc(index).Vital(VitalType.Count)
+        ReDim MapNpc(mapNum).Npc(index).Vital(VitalType.Count - 1)
         ReDim MapNpc(mapNum).Npc(index).SkillCd(MAX_NPC_SKILLS)
     End Sub
 
@@ -791,7 +791,7 @@ Module modDatabase
         Npc(index).Name = ""
         Npc(index).AttackSay = ""
         ReDim Npc(index).Stat(StatType.Count - 1)
-        For i = 0 To 5
+        For i = 0 To MAX_DROP_ITEMS
             ReDim Npc(index).DropChance(5)
             ReDim Npc(index).DropItem(5)
             ReDim Npc(index).DropItemValue(5)
@@ -1875,7 +1875,7 @@ Module modDatabase
         Dim i As Integer, n As Integer, q As Integer
         Dim buffer As New ByteStream(4)
 
-        For i = 1 To MAX_JOBS
+        For i = 0 To MAX_JOBS
             buffer.WriteString((GetJobName(i).Trim))
             buffer.WriteString((Job(i).Desc.Trim))
 
@@ -1942,7 +1942,7 @@ Module modDatabase
         buffer.WriteInt32(Npc(NpcNum).Animation)
         buffer.WriteString((Npc(NpcNum).AttackSay))
         buffer.WriteInt32(Npc(NpcNum).Behaviour)
-        For i = 0 To 5
+        For i = 0 To MAX_DROP_ITEMS
             buffer.WriteInt32(Npc(NpcNum).DropChance(i))
             buffer.WriteInt32(Npc(NpcNum).DropItem(i))
             buffer.WriteInt32(Npc(NpcNum).DropItemValue(i))

@@ -310,7 +310,7 @@ Friend Module C_Projectiles
     Friend Sub ProjectileEditorInit()
 
         If frmEditor_Projectile.Visible = False Then Exit Sub
-        Editorindex = frmEditor_Projectile.lstIndex.SelectedIndex + 1
+        Editorindex = frmEditor_Projectile.lstIndex.SelectedIndex
 
         With Projectiles(Editorindex)
             frmEditor_Projectile.txtName.Text = Trim$(.Name)
