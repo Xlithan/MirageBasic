@@ -822,7 +822,7 @@ Module S_NetworkReceive
 
         AddDebug("Recieved CMSG: CGetStats")
 
-        PlayerMsg(index, "-=- Stats for " & GetPlayerName(index) & " -=-", ColorType.Yellow)
+        PlayerMsg(index, "Stats: " & GetPlayerName(index), ColorType.Yellow)
         PlayerMsg(index, "Level: " & GetPlayerLevel(index) & "  Exp: " & GetPlayerExp(index) & "/" & GetPlayerNextLevel(index), ColorType.Yellow)
         PlayerMsg(index, "HP: " & GetPlayerVital(index, VitalType.HP) & "/" & GetPlayerMaxVital(index, VitalType.HP) & "  MP: " & GetPlayerVital(index, VitalType.MP) & "/" & GetPlayerMaxVital(index, VitalType.MP) & "  SP: " & GetPlayerVital(index, VitalType.SP) & "/" & GetPlayerMaxVital(index, VitalType.SP), ColorType.Yellow)
         PlayerMsg(index, "STR: " & GetPlayerStat(index, StatType.Strength) & "  DEF: " & GetPlayerStat(index, StatType.Endurance) & "  MAGI: " & GetPlayerStat(index, StatType.Intelligence) & "  Speed: " & GetPlayerStat(index, StatType.Spirit), ColorType.Yellow)

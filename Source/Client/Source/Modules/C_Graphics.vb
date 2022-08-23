@@ -2394,7 +2394,7 @@ Module C_Graphics
         RenderSprite(ExpBarSprite, GameWindow, HudWindowX + HudexpBarX, HudWindowY + HudexpBarY + 4, rec.X, rec.Y, rec.Width, rec.Height)
 
         'draw text onto that
-        DrawText(HudWindowX + HudexpBarX + 65, HudWindowY + HudexpBarY + 4, GetPlayerExp(Myindex) & "/" & NextlevelExp, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(HudWindowX + 85, HudWindowY + 2, "Exp: " & GetPlayerExp(Myindex) & "/" & NextlevelExp, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
     End Sub
 
     Sub DrawActionPanel()
