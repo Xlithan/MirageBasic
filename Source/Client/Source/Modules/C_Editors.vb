@@ -89,6 +89,7 @@ Module C_Editors
         Dim i As Integer
 
         If frmEditor_NPC.Visible = False Then Exit Sub
+        frmEditor_NPC.lstIndex.SelectedIndex = 1
         Editorindex = frmEditor_NPC.lstIndex.SelectedIndex
         frmEditor_NPC.cmbDropSlot.SelectedIndex = 0
         If Npc(Editorindex).AttackSay Is Nothing Then Npc(Editorindex).AttackSay = ""
@@ -222,6 +223,7 @@ Module C_Editors
         Dim i As Integer
 
         If frmEditor_Resource.Visible = False Then Exit Sub
+        frmEditor_Resource.lstIndex.SelectedIndex = 1
         Editorindex = frmEditor_Resource.lstIndex.SelectedIndex
 
         With frmEditor_Resource
@@ -293,6 +295,7 @@ Module C_Editors
         Dim i As Integer
 
         If frmEditor_Skill.Visible = False Then Exit Sub
+        frmEditor_Skill.lstIndex.SelectedIndex = 1
         Editorindex = frmEditor_Skill.lstIndex.SelectedIndex
 
         If Skill(Editorindex).Name Is Nothing Then Skill(Editorindex).Name = ""
@@ -411,6 +414,7 @@ Module C_Editors
         Dim i As Integer
 
         If frmEditor_Shop.Visible = False Then Exit Sub
+        frmEditor_Shop.lstIndex.SelectedIndex = 1
         Editorindex = frmEditor_Shop.lstIndex.SelectedIndex
 
         frmEditor_Shop.txtName.Text = Trim$(Shop(Editorindex).Name)
@@ -509,6 +513,7 @@ Module C_Editors
         Dim i As Integer
 
         frmEditor_Job.lstIndex.Items.Clear()
+        frmEditor_Job.lstIndex.SelectedIndex = 1
 
        For i = 0 To MAX_JOBS
             frmEditor_Job.lstIndex.Items.Add(Trim(Job(i).Name))
@@ -526,7 +531,7 @@ Module C_Editors
             frmEditor_Job.cmbItems.Items.Add(Trim(Item(i).Name))
         Next
 
-        frmEditor_Job.lstIndex.SelectedIndex = 0
+        frmEditor_Job.lstIndex.SelectedIndex = 1
 
         frmEditor_Job.Visible = True
     End Sub
@@ -608,7 +613,7 @@ Module C_Editors
             Next
 
             .Show()
-            .lstIndex.SelectedIndex = 0
+            .lstIndex.SelectedIndex = 1
             ItemEditorInit()
         End With
     End Sub
@@ -617,6 +622,7 @@ Module C_Editors
         Dim i As Integer
 
         If frmEditor_Item.Visible = False Then Exit Sub
+        frmEditor_Item.lstIndex.SelectedIndex = 1
         Editorindex = frmEditor_Item.lstIndex.SelectedIndex
 
         With Item(Editorindex)

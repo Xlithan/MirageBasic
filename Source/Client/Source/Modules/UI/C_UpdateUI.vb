@@ -387,7 +387,7 @@ Module C_UpdateUI
                 Next
 
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 .cmbEvolve.SelectedIndex = 0
                 PetEditorInit()
             End With
@@ -407,7 +407,7 @@ Module C_UpdateUI
                 Next
 
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 QuestEditorInit()
             End With
             QuestEditorShow = False
@@ -424,7 +424,7 @@ Module C_UpdateUI
                 Next
 
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 AnimationEditorInit()
             End With
             InitAnimationEditor = False
@@ -466,7 +466,7 @@ Module C_UpdateUI
                 Next
 
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 ResourceEditorInit()
             End With
             InitResourceEditor = False
@@ -483,7 +483,7 @@ Module C_UpdateUI
                 Next
 
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 NpcEditorInit()
             End With
             InitNPCEditor = False
@@ -500,7 +500,7 @@ Module C_UpdateUI
                 Next
 
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 SkillEditorInit()
             End With
             InitSkillEditor = False
@@ -517,7 +517,7 @@ Module C_UpdateUI
                 Next
 
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 ShopEditorInit()
             End With
             InitShopEditor = False
@@ -534,7 +534,7 @@ Module C_UpdateUI
                 Next
 
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 AnimationEditorInit()
             End With
             InitAnimationEditor = False
@@ -551,7 +551,7 @@ Module C_UpdateUI
                 Next
 
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
             End With
 
             HouseEditorInit()
@@ -570,7 +570,7 @@ Module C_UpdateUI
                 Next
 
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 ProjectileEditorInit()
             End With
 
