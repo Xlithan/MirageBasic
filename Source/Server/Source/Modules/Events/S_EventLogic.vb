@@ -7,14 +7,12 @@ Friend Module S_EventLogic
         Dim i As Integer, mapNum As Integer, x As Integer, id As Integer, page As Integer, compare As Integer
 
         For i = 0 To GetPlayersOnline()
-            If Gettingmap = True Then Exit Sub
-
             If IsPlaying(i) = False Then
                 TempPlayer(i).EventMap.CurrentEvents = 0
                 Exit Sub
             End If
 
-            If TempPlayer(i).EventMap.CurrentEvents > 0 Then 'And Map(MapNum).Events IsNot Nothing Then
+            If TempPlayer(i).EventMap.CurrentEvents > 0 Then
                 mapNum = GetPlayerMap(i)
 
                 For x = 0 To TempPlayer(i).EventMap.CurrentEvents
@@ -138,12 +136,8 @@ Friend Module S_EventLogic
         'That was only removing events... now we gotta worry about spawning them again, luckily, it is almost the same exact thing, but backwards!
 
         For i = 0 To GetPlayersOnline()
-            If Gettingmap = True Then Exit Sub
-
             If TempPlayer(i).EventMap.CurrentEvents > 0 Then
                 mapNum = GetPlayerMap(i)
-                If mapNum = 0 Then Exit Sub
-
                 For x = 0 To TempPlayer(i).EventMap.CurrentEvents
                     id = TempPlayer(i).EventMap.EventPages(x).EventId
                     pageID = TempPlayer(i).EventMap.EventPages(x).PageId
@@ -357,8 +351,6 @@ Friend Module S_EventLogic
         'Process Movement if needed for each player/each map/each event....
 
         For i = 0 To MAX_MAPS
-            If Gettingmap = True Then Exit Sub
-
             If PlayersOnMap(i) Then
                 'Manage Global Events First, then all the others.....
                 If TempEventMap(i).EventCount > 0 Then
@@ -738,16 +730,10 @@ Friend Module S_EventLogic
         Dim donotprocessmoveroute As Boolean
 
         For i = 0 To GetPlayersOnline()
-
-            If Gettingmap = True Then Exit Sub
-
             If IsPlaying(i) Then
                 playerID = i
                 If TempPlayer(i).EventMap.CurrentEvents > 0 Then
                     For x = 0 To TempPlayer(i).EventMap.CurrentEvents
-
-                        If Gettingmap = True Then Exit Sub
-
                         If Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Globals = 0 Then
                             If TempPlayer(i).EventMap.EventPages(x).Visible = 1 Then
                                 If TempPlayer(i).EventMap.EventPages(x).MoveTimer <= GetTimeMs() Then
@@ -1136,8 +1122,6 @@ Friend Module S_EventLogic
         'Now, we process the damn things for commands :P
 
         For i = 0 To GetPlayersOnline()
-            If Gettingmap = True Then Exit Sub
-
             If IsPlaying(i) Then
                 For x = 0 To TempPlayer(i).EventMap.CurrentEvents
                     If TempPlayer(i).EventProcessingCount > 0 Then
@@ -1182,8 +1166,6 @@ Friend Module S_EventLogic
 
         'That is it for starting parallel processes :D now we just have to make the code that actually processes the events to their fullest
         For i = 0 To GetPlayersOnline()
-            If Gettingmap = True Then Exit Sub
-
             If IsPlaying(i) AndAlso TempPlayer(i).GettingMap = 0 Then
                 If TempPlayer(i).EventProcessingCount > 0 Then
                     restartloop = True
@@ -1992,27 +1974,12 @@ Friend Module S_EventLogic
 
     Friend Sub UpdateEventLogic()
         'Check Removing and Adding of Events (Did switches change or something?)
-
-        If Gettingmap = True Then Exit Sub
-
+        If GettingMap Then Exit Sub
         RemoveDeadEvents()
-
-        If Gettingmap = True Then Exit Sub
-
         SpawnNewEvents()
-
-        If Gettingmap = True Then Exit Sub
-
         ProcessEventMovement()
-
-        If Gettingmap = True Then Exit Sub
-
         ProcessLocalEventMovement()
-
-        If Gettingmap = True Then Exit Sub
-
         ProcessEventCommands()
-
     End Sub
 
     Function ParseEventText(index As Integer, txt As String) As String

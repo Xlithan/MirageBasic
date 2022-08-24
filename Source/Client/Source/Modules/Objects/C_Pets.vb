@@ -694,11 +694,6 @@ Module C_Pets
             .cmbSkill3.Items.Clear()
             .cmbSkill4.Items.Clear()
 
-            .cmbSkill1.Items.Add("None")
-            .cmbSkill2.Items.Add("None")
-            .cmbSkill3.Items.Add("None")
-            .cmbSkill4.Items.Add("None")
-
            For i = 0 To MAX_SKILLS
                 .cmbSkill1.Items.Add(i & ": " & Skill(i).Name)
                 .cmbSkill2.Items.Add(i & ": " & Skill(i).Name)
@@ -772,9 +767,7 @@ Module C_Pets
         End With
 
         ClearChanged_Pet()
-
         Pet_Changed(Editorindex) = True
-
     End Sub
 
     Friend Sub PetEditorOk()
@@ -790,11 +783,9 @@ Module C_Pets
 
         Editor = 0
         ClearChanged_Pet()
-
     End Sub
 
     Friend Sub PetEditorCancel()
-
         Editor = 0
 
         frmEditor_Pet.Dispose()
@@ -806,9 +797,7 @@ Module C_Pets
     End Sub
 
     Friend Sub ClearChanged_Pet()
-
         ReDim Pet_Changed(MAX_PETS)
-
     End Sub
 
 #End Region

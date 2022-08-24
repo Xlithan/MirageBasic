@@ -319,7 +319,7 @@ Module C_Maps
                 Map.EventCount = buffer.ReadInt32
 
                 If Map.EventCount > 0 Then
-                    ReDim Map.Events(Map.EventCount)
+                   ReDim Map.Events(Map.EventCount)
                    For i = 0 To Map.EventCount
                         With Map.Events(i)
                             .Name = Trim(buffer.ReadString)

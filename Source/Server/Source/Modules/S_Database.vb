@@ -16,9 +16,6 @@ Module modDatabase
         For i = 0 To MAX_JOBS
             Job(i).Name = ""
             Job(i).Desc = ""
-        Next
-
-        For i = 0 To MAX_JOBS
             ReDim Job(i).Stat(StatType.Count - 1)
             ReDim Job(i).StartItem(5)
             ReDim Job(i).StartValue(5)
@@ -61,7 +58,7 @@ Module modDatabase
             Job(i).StartY = Val(Ini.Read(cf, "CLASS" & i, "StartY"))
 
             ' loop for items & values
-            For x = 0 To 5
+            For x = 0 To MAX_DROP_ITEMS
                 Job(i).StartItem(x) = Val(Ini.Read(cf, "CLASS" & i, "StartItem" & x))
                 Job(i).StartValue(x) = Val(Ini.Read(cf, "CLASS" & i, "StartValue" & x))
             Next
@@ -101,7 +98,7 @@ Module modDatabase
             Ini.Write(cf, "CLASS" & i, "StartY", Job(i).StartY)
 
             ' loop for items & values
-            For x = 0 To 5
+            For x = 0 To MAX_DROP_ITEMS
                 Ini.Write(cf, "CLASS" & i, "StartItem" & x, Job(i).StartItem(x))
                 Ini.Write(cf, "CLASS" & i, "StartValue" & x, Job(i).StartValue(x))
             Next
@@ -109,8 +106,6 @@ Module modDatabase
     End Sub
 
     Function GetJobMaxVital(ClassNum As Integer, Vital As VitalType) As Integer
-        GetJobMaxVital = 0
-
         Select Case Vital
             Case VitalType.HP
                 GetJobMaxVital = (1 + (Job(ClassNum).Stat(StatType.Vitality) \ 2) + Job(ClassNum).Stat(StatType.Vitality)) * 2
@@ -119,7 +114,6 @@ Module modDatabase
             Case VitalType.SP
                 GetJobMaxVital = (1 + (Job(ClassNum).Stat(StatType.Spirit) \ 2) + Job(ClassNum).Stat(StatType.Spirit)) * 2
         End Select
-
     End Function
 
     Function GetJobName(ClassNum As Integer) As String
@@ -148,6 +142,7 @@ Module modDatabase
     Sub ClearMap(mapNum As Integer)
         Dim x As Integer
         Dim y As Integer
+
         Map(mapNum) = Nothing
         Map(mapNum).Tileset = 1
         Map(mapNum).Name = ""
@@ -190,9 +185,10 @@ Module modDatabase
     Sub SaveMap(mapNum As Integer)
         Dim filename As String
         Dim x As Integer, y As Integer, l As Integer
+        Dim writer As New ByteStream(100)
 
         filename = Paths.Map(mapNum)
-        Dim writer As New ByteStream(100)
+
         writer.WriteString(Map(mapNum).Name)
         writer.WriteString(Map(mapNum).Music)
         writer.WriteInt32(Map(mapNum).Revision)
@@ -228,11 +224,11 @@ Module modDatabase
                 writer.WriteInt32(Map(mapNum).Tile(x, y).Data2)
                 writer.WriteInt32(Map(mapNum).Tile(x, y).Data3)
                 writer.WriteByte(Map(mapNum).Tile(x, y).DirBlock)
-                For l = 0 To LayerType.Count - 1
-                    writer.WriteByte(Map(mapNum).Tile(x, y).Layer(l).Tileset)
-                    writer.WriteByte(Map(mapNum).Tile(x, y).Layer(l).X)
-                    writer.WriteByte(Map(mapNum).Tile(x, y).Layer(l).Y)
-                    writer.WriteByte(Map(mapNum).Tile(x, y).Layer(l).AutoTile)
+                For i = 0 To LayerType.Count - 1
+                    writer.WriteByte(Map(mapNum).Tile(x, y).Layer(i).Tileset)
+                    writer.WriteByte(Map(mapNum).Tile(x, y).Layer(i).X)
+                    writer.WriteByte(Map(mapNum).Tile(x, y).Layer(i).Y)
+                    writer.WriteByte(Map(mapNum).Tile(x, y).Layer(i).AutoTile)
                 Next
                 writer.WriteByte(Map(mapNum).Tile(x, y).Type)
             Next
@@ -247,122 +243,119 @@ Module modDatabase
     End Sub
 
     Sub SaveMapEvent(mapNum As Integer)
-        Dim cf = Paths.Maps & mapNum & "_eventdata.ini"
-
-        If Not File.Exists(cf) Then File.Create(cf).Dispose()
-
-        'This is for event saving, it is in .ini files because there are non-limited values (strings) that cannot easily be loaded/saved in the normal manner.
-        Ini.Write(cf, "Events", "EventCount", Val(Map(mapNum).EventCount))
+        Dim filename = Paths.EventMap(mapNum)
+        Dim writer As New ByteStream(100)
+ 
+        writer.WriteInt32(Map(mapNum).EventCount)
 
         If Map(mapNum).EventCount > 0 Then
             For i = 0 To Map(mapNum).EventCount
                 With Map(mapNum).Events(i)
-                    Ini.Write(cf, "Event" & i, "Name", .Name)
-                    Ini.Write(cf, "Event" & i, "Global", Val(.Globals))
-                    Ini.Write(cf, "Event" & i, "x", Val(.X))
-                    Ini.Write(cf, "Event" & i, "y", Val(.Y))
-                    Ini.Write(cf, "Event" & i, "PageCount", Val(.PageCount))
-
+                    writer.WriteString(.Name)
+                    writer.WriteByte(.Globals)
+                    writer.WriteInt32(.X)
+                    writer.WriteInt32(.Y)
+                    writer.WriteInt32(.PageCount)
                 End With
+
                 If Map(mapNum).Events(i).PageCount > 0 Then
                     For x = 0 To Map(mapNum).Events(i).PageCount
                         With Map(mapNum).Events(i).Pages(x)
-                            Ini.Write(cf, "Event" & i & "Page" & x, "chkVariable", Val(.ChkVariable))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "VariableIndex", Val(.Variableindex))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "VariableCondition", Val(.VariableCondition))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "VariableCompare", Val(.VariableCompare))
+                            writer.WriteInt32(.ChkVariable)
+                            writer.WriteInt32(.Variableindex)
+                            writer.WriteInt32(.VariableCondition)
+                            writer.WriteInt32(.VariableCompare)
 
-                            Ini.Write(cf, "Event" & i & "Page" & x, "chkSwitch", Val(.ChkSwitch))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "SwitchIndex", Val(.Switchindex))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "SwitchCompare", Val(.SwitchCompare))
+                            writer.WriteInt32(.ChkSwitch)
+                            writer.WriteInt32(.Switchindex)
+                            writer.WriteInt32(.SwitchCompare)
 
-                            Ini.Write(cf, "Event" & i & "Page" & x, "chkHasItem", Val(.ChkHasItem))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "HasItemIndex", Val(.HasItemindex))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "HasItemAmount", Val(.HasItemAmount))
+                            writer.WriteInt32(.ChkHasItem)
+                            writer.WriteInt32(.HasItemindex)
+                            writer.WriteInt32(.HasItemAmount)
 
-                            Ini.Write(cf, "Event" & i & "Page" & x, "chkSelfSwitch", Val(.ChkSelfSwitch))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "SelfSwitchIndex", Val(.SelfSwitchindex))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "SelfSwitchCompare", Val(.SelfSwitchCompare))
+                            writer.WriteInt32(.ChkSelfSwitch)
+                            writer.WriteInt32(.SelfSwitchindex)
+                            writer.WriteInt32(.SelfSwitchCompare)
 
-                            Ini.Write(cf, "Event" & i & "Page" & x, "GraphicType", Val(.GraphicType))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "Graphic", Val(.Graphic))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "GraphicX", Val(.GraphicX))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "GraphicY", Val(.GraphicY))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "GraphicX2", Val(.GraphicX2))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "GraphicY2", Val(.GraphicY2))
+                            writer.WriteByte(.GraphicType)
+                            writer.WriteInt32(.Graphic)
+                            writer.WriteInt32(.GraphicX)
+                            writer.WriteInt32(.GraphicY)
+                            writer.WriteInt32(.GraphicX2)
+                            writer.WriteInt32(.GraphicY2)
 
-                            Ini.Write(cf, "Event" & i & "Page" & x, "MoveType", Val(.MoveType))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "MoveSpeed", Val(.MoveSpeed))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "MoveFreq", Val(.MoveFreq))
+                            writer.WriteByte(.MoveType)
+                            writer.WriteByte(.MoveSpeed)
+                            writer.WriteByte(.MoveFreq)
 
-                            Ini.Write(cf, "Event" & i & "Page" & x, "IgnoreMoveRoute", Val(.IgnoreMoveRoute))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "RepeatMoveRoute", Val(.RepeatMoveRoute))
+                            writer.WriteInt32(.IgnoreMoveRoute)
+                            writer.WriteInt32(.RepeatMoveRoute)
 
-                            Ini.Write(cf, "Event" & i & "Page" & x, "MoveRouteCount", Val(.MoveRouteCount))
+                            writer.WriteInt32(.MoveRouteCount)
 
                             If .MoveRouteCount > 0 Then
                                 For y = 0 To .MoveRouteCount
-                                    Ini.Write(cf, "Event" & i & "Page" & x, "MoveRoute" & y & "Index", Val(.MoveRoute(y).Index))
-                                    Ini.Write(cf, "Event" & i & "Page" & x, "MoveRoute" & y & "Data1", Val(.MoveRoute(y).Data1))
-                                    Ini.Write(cf, "Event" & i & "Page" & x, "MoveRoute" & y & "Data2", Val(.MoveRoute(y).Data2))
-                                    Ini.Write(cf, "Event" & i & "Page" & x, "MoveRoute" & y & "Data3", Val(.MoveRoute(y).Data3))
-                                    Ini.Write(cf, "Event" & i & "Page" & x, "MoveRoute" & y & "Data4", Val(.MoveRoute(y).Data4))
-                                    Ini.Write(cf, "Event" & i & "Page" & x, "MoveRoute" & y & "Data5", Val(.MoveRoute(y).Data5))
-                                    Ini.Write(cf, "Event" & i & "Page" & x, "MoveRoute" & y & "Data6", Val(.MoveRoute(y).Data6))
+                                    writer.WriteInt32(.MoveRoute(y).Index)
+                                    writer.WriteInt32(.MoveRoute(y).Data1)
+                                    writer.WriteInt32(.MoveRoute(y).Data2)
+                                    writer.WriteInt32(.MoveRoute(y).Data3)
+                                    writer.WriteInt32(.MoveRoute(y).Data4)
+                                    writer.WriteInt32(.MoveRoute(y).Data5)
+                                    writer.WriteInt32(.MoveRoute(y).Data6)
                                 Next
                             End If
 
-                            Ini.Write(cf, "Event" & i & "Page" & x, "WalkAnim", Val(.WalkAnim))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "DirFix", Val(.DirFix))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "WalkThrough", Val(.WalkThrough))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "ShowName", Val(.ShowName))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "Trigger", Val(.Trigger))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "CommandListCount", Val(.CommandListCount))
+                            writer.WriteInt32(.WalkAnim)
+                            writer.WriteInt32(.DirFix)
+                            writer.WriteInt32(.WalkThrough)
+                            writer.WriteInt32(.ShowName)
+                            writer.WriteByte(.Trigger)
+                            writer.WriteInt32(.CommandListCount)
 
-                            Ini.Write(cf, "Event" & i & "Page" & x, "Position", Val(.Position))
-                            Ini.Write(cf, "Event" & i & "Page" & x, "QuestNum", Val(.QuestNum))
+                            writer.WriteByte(.Position)
+                            writer.WriteInt32(.QuestNum)
 
-                            Ini.Write(cf, "Event" & i & "Page" & x, "PlayerGender", Val(.ChkPlayerGender))
-
+                            writer.WriteInt32(.ChkPlayerGender)
                         End With
 
                         If Map(mapNum).Events(i).Pages(x).CommandListCount > 0 Then
                             For y = 0 To Map(mapNum).Events(i).Pages(x).CommandListCount
-                                Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "CommandCount", Val(Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount))
-                                Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "ParentList", Val(Map(mapNum).Events(i).Pages(x).CommandList(y).ParentList))
+                                writer.WriteInt32(Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount)
+                                writer.WriteInt32(Map(mapNum).Events(i).Pages(x).CommandList(y).ParentList)
 
                                 If Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
                                     For z = 0 To Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount
                                         With Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(z)
-                                            Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "Index", Val(.Index))
-                                            Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "Text1", .Text1)
-                                            Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "Text2", .Text2)
-                                            Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "Text3", .Text3)
-                                            Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "Text4", .Text4)
-                                            Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "Text5", .Text5)
-                                            Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "Data1", Val(.Data1))
-                                            Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "Data2", Val(.Data2))
-                                            Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "Data3", Val(.Data3))
-                                            Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "Data4", Val(.Data4))
-                                            Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "Data5", Val(.Data5))
-                                            Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "Data6", Val(.Data6))
-                                            Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "ConditionalBranchCommandList", Val(.ConditionalBranch.CommandList))
-                                            Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "ConditionalBranchCondition", Val(.ConditionalBranch.Condition))
-                                            Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "ConditionalBranchData1", Val(.ConditionalBranch.Data1))
-                                            Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "ConditionalBranchData2", Val(.ConditionalBranch.Data2))
-                                            Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "ConditionalBranchData3", Val(.ConditionalBranch.Data3))
-                                            Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "ConditionalBranchElseCommandList", Val(.ConditionalBranch.ElseCommandList))
-                                            Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "MoveRouteCount", Val(.MoveRouteCount))
+                                            writer.WriteByte(.Index)
+                                            writer.WriteString(.Text1)
+                                            writer.WriteString(.Text2)
+                                            writer.WriteString(.Text3)
+                                            writer.WriteString(.Text4)
+                                            writer.WriteString(.Text5)
+                                            writer.WriteInt32(.Data1)
+                                            writer.WriteInt32(.Data2)
+                                            writer.WriteInt32(.Data3)
+                                            writer.WriteInt32(.Data4)
+                                            writer.WriteInt32(.Data5)
+                                            writer.WriteInt32(.Data6)
+                                            writer.WriteInt32(.ConditionalBranch.CommandList)
+                                            writer.WriteInt32(.ConditionalBranch.Condition)
+                                            writer.WriteInt32(.ConditionalBranch.Data1)
+                                            writer.WriteInt32(.ConditionalBranch.Data2)
+                                            writer.WriteInt32(.ConditionalBranch.Data3)
+                                            writer.WriteInt32(.ConditionalBranch.ElseCommandList)
+                                            writer.WriteInt32(.MoveRouteCount)
 
                                             If .MoveRouteCount > 0 Then
                                                 For w = 0 To .MoveRouteCount
-                                                    Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "MoveRoute" & w & "Index", Val(.MoveRoute(w).Index))
-                                                    Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "MoveRoute" & w & "Data1", Val(.MoveRoute(w).Data1))
-                                                    Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "MoveRoute" & w & "Data2", Val(.MoveRoute(w).Data2))
-                                                    Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "MoveRoute" & w & "Data3", Val(.MoveRoute(w).Data3))
-                                                    Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "MoveRoute" & w & "Data4", Val(.MoveRoute(w).Data4))
-                                                    Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "MoveRoute" & w & "Data5", Val(.MoveRoute(w).Data5))
-                                                    Ini.Write(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & z & "MoveRoute" & w & "Data6", Val(.MoveRoute(w).Data6))
+                                                    writer.WriteInt32(.MoveRoute(w).Index)
+                                                    writer.WriteInt32(.MoveRoute(w).Data1)
+                                                    writer.WriteInt32(.MoveRoute(w).Data2)
+                                                    writer.WriteInt32(.MoveRoute(w).Data3)
+                                                    writer.WriteInt32(.MoveRoute(w).Data4)
+                                                    writer.WriteInt32(.MoveRoute(w).Data5)
+                                                    writer.WriteInt32(.MoveRoute(w).Data6)
                                                 Next
                                             End If
                                         End With
@@ -374,137 +367,141 @@ Module modDatabase
                 End If
             Next
         End If
+
+        ByteFile.Save(filename, writer)
     End Sub
 
     Sub LoadMapEvent(mapNum As Integer)
-        Dim cf = Paths.Maps & mapNum & "_eventdata.ini"
+        Dim filename = Paths.EventMap(mapNum)
 
-        Map(mapNum).EventCount = Val(Ini.Read(cf, "Events", "EventCount"))
-        If Not Map(mapNum).EventCount > 0 Then Exit Sub
+        If File.Exists(filename) = False Then Exit Sub
 
         Dim i As Integer, x As Integer, y As Integer, p As Integer
+        Dim reader As New ByteStream()
+        ByteFile.Load(filename, reader)
 
+        Map(mapNum).EventCount = reader.ReadInt32()
         ReDim Map(mapNum).Events(Map(mapNum).EventCount)
+
         For i = 0 To Map(mapNum).EventCount
-            If Val(Ini.Read(cf, "Event" & i, "PageCount")) > 0 Then
+            With Map(mapNum).Events(i)
+                .Name = reader.ReadString()
+                .Globals = reader.ReadByte()
+                .X = reader.ReadInt32()
+                .Y = reader.ReadInt32()
+                .PageCount = reader.ReadInt32()
+            End With
 
-                With Map(mapNum).Events(i)
-                    .Name = Ini.Read(cf, "Event" & i, "Name")
-                    .Globals = Val(Ini.Read(cf, "Event" & i, "Global"))
-                    .X = Val(Ini.Read(cf, "Event" & i, "x"))
-                    .Y = Val(Ini.Read(cf, "Event" & i, "y"))
-                    .PageCount = Val(Ini.Read(cf, "Event" & i, "PageCount"))
-                End With
-                If Map(mapNum).Events(i).PageCount > 0 Then
-                    ReDim Map(mapNum).Events(i).Pages(Map(mapNum).Events(i).PageCount)
-                    For x = 0 To Map(mapNum).Events(i).PageCount
-                        With Map(mapNum).Events(i).Pages(x)
-                            .ChkVariable = Val(Ini.Read(cf, "Event" & i & "Page" & x, "chkVariable"))
-                            .Variableindex = Val(Ini.Read(cf, "Event" & i & "Page" & x, "VariableIndex"))
-                            .VariableCondition = Val(Ini.Read(cf, "Event" & i & "Page" & x, "VariableCondition"))
-                            .VariableCompare = Val(Ini.Read(cf, "Event" & i & "Page" & x, "VariableCompare"))
+            If Map(mapNum).Events(i).PageCount > 0 Then
+                ReDim Map(mapNum).Events(i).Pages(Map(mapNum).Events(i).PageCount)
+                For x = 1 To Map(mapNum).Events(i).PageCount
+                    With Map(mapNum).Events(i).Pages(x)
+                        .ChkVariable = reader.ReadInt32()
+                        .Variableindex = reader.ReadInt32()
+                        .VariableCondition = reader.ReadInt32()
+                        .VariableCompare = reader.ReadInt32()
 
-                            .ChkSwitch = Val(Ini.Read(cf, "Event" & i & "Page" & x, "chkSwitch"))
-                            .Switchindex = Val(Ini.Read(cf, "Event" & i & "Page" & x, "SwitchIndex"))
-                            .SwitchCompare = Val(Ini.Read(cf, "Event" & i & "Page" & x, "SwitchCompare"))
+                        .ChkSwitch = reader.ReadInt32()
+                        .Switchindex = reader.ReadInt32()
+                        .SwitchCompare = reader.ReadInt32()
 
-                            .ChkHasItem = Val(Ini.Read(cf, "Event" & i & "Page" & x, "chkHasItem"))
-                            .HasItemindex = Val(Ini.Read(cf, "Event" & i & "Page" & x, "HasItemIndex"))
-                            .HasItemAmount = Val(Ini.Read(cf, "Event" & i & "Page" & x, "HasItemAmount"))
+                        .ChkHasItem = reader.ReadInt32()
+                        .HasItemindex = reader.ReadInt32()
+                        .HasItemAmount = reader.ReadInt32()
 
-                            .ChkSelfSwitch = Val(Ini.Read(cf, "Event" & i & "Page" & x, "chkSelfSwitch"))
-                            .SelfSwitchindex = Val(Ini.Read(cf, "Event" & i & "Page" & x, "SelfSwitchIndex"))
-                            .SelfSwitchCompare = Val(Ini.Read(cf, "Event" & i & "Page" & x, "SelfSwitchCompare"))
+                        .ChkSelfSwitch = reader.ReadInt32()
+                        .SelfSwitchindex = reader.ReadInt32()
+                        .SelfSwitchCompare = reader.ReadInt32()
 
-                            .GraphicType = Val(Ini.Read(cf, "Event" & i & "Page" & x, "GraphicType"))
-                            .Graphic = Val(Ini.Read(cf, "Event" & i & "Page" & x, "Graphic"))
-                            .GraphicX = Val(Ini.Read(cf, "Event" & i & "Page" & x, "GraphicX"))
-                            .GraphicY = Val(Ini.Read(cf, "Event" & i & "Page" & x, "GraphicY"))
-                            .GraphicX2 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "GraphicX2"))
-                            .GraphicY2 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "GraphicY2"))
+                        .GraphicType = reader.ReadByte()
+                        .GraphicX = reader.ReadInt32()
+                        .GraphicY = reader.ReadInt32()
+                        .GraphicX2 = reader.ReadInt32()
+                        .GraphicY2 = reader.ReadInt32()
 
-                            .MoveType = Val(Ini.Read(cf, "Event" & i & "Page" & x, "MoveType"))
-                            .MoveSpeed = Val(Ini.Read(cf, "Event" & i & "Page" & x, "MoveSpeed"))
-                            .MoveFreq = Val(Ini.Read(cf, "Event" & i & "Page" & x, "MoveFreq"))
+                        .MoveType = reader.ReadByte()
+                        .MoveSpeed = reader.ReadByte()
+                        .MoveFreq = reader.ReadByte()
 
-                            .IgnoreMoveRoute = Val(Ini.Read(cf, "Event" & i & "Page" & x, "IgnoreMoveRoute"))
-                            .RepeatMoveRoute = Val(Ini.Read(cf, "Event" & i & "Page" & x, "RepeatMoveRoute"))
+                        .IgnoreMoveRoute = reader.ReadInt32()
+                        .RepeatMoveRoute = reader.ReadInt32()
 
-                            .MoveRouteCount = Val(Ini.Read(cf, "Event" & i & "Page" & x, "MoveRouteCount"))
+                        .MoveRouteCount = reader.ReadInt32()
 
-                            If .MoveRouteCount > 0 Then
-                                ReDim Map(mapNum).Events(i).Pages(x).MoveRoute(.MoveRouteCount)
-                                For y = 0 To .MoveRouteCount
-                                    .MoveRoute(y).Index = Val(Ini.Read(cf, "Event" & i & "Page" & x, "MoveRoute" & y & "Index"))
-                                    .MoveRoute(y).Data1 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "MoveRoute" & y & "Data1"))
-                                    .MoveRoute(y).Data2 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "MoveRoute" & y & "Data2"))
-                                    .MoveRoute(y).Data3 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "MoveRoute" & y & "Data3"))
-                                    .MoveRoute(y).Data4 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "MoveRoute" & y & "Data4"))
-                                    .MoveRoute(y).Data5 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "MoveRoute" & y & "Data5"))
-                                    .MoveRoute(y).Data6 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "MoveRoute" & y & "Data6"))
-                                Next
-                            End If
-
-                            .WalkAnim = Val(Ini.Read(cf, "Event" & i & "Page" & x, "WalkAnim"))
-                            .DirFix = Val(Ini.Read(cf, "Event" & i & "Page" & x, "DirFix"))
-                            .WalkThrough = Val(Ini.Read(cf, "Event" & i & "Page" & x, "WalkThrough"))
-                            .ShowName = Val(Ini.Read(cf, "Event" & i & "Page" & x, "ShowName"))
-                            .Trigger = Val(Ini.Read(cf, "Event" & i & "Page" & x, "Trigger"))
-                            .CommandListCount = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandListCount"))
-
-                            .Position = Val(Ini.Read(cf, "Event" & i & "Page" & x, "Position"))
-                            .QuestNum = Val(Ini.Read(cf, "Event" & i & "Page" & x, "QuestNum"))
-
-                            .ChkPlayerGender = Val(Ini.Read(cf, "Event" & i & "Page" & x, "PlayerGender"))
-                        End With
-
-                        If Map(mapNum).Events(i).Pages(x).CommandListCount > 0 Then
-                            ReDim Map(mapNum).Events(i).Pages(x).CommandList(Map(mapNum).Events(i).Pages(x).CommandListCount)
-                            For y = 0 To Map(mapNum).Events(i).Pages(x).CommandListCount
-                                Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "CommandCount"))
-                                Map(mapNum).Events(i).Pages(x).CommandList(y).ParentList = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "ParentList"))
-                                If Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
-                                    ReDim Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount)
-                                    For p = 0 To Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount
-                                        With Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(p)
-                                            .Index = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "Index"))
-                                            .Text1 = Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "Text1")
-                                            .Text2 = Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "Text2")
-                                            .Text3 = Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "Text3")
-                                            .Text4 = Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "Text4")
-                                            .Text5 = Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "Text5")
-                                            .Data1 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "Data1"))
-                                            .Data2 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "Data2"))
-                                            .Data3 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "Data3"))
-                                            .Data4 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "Data4"))
-                                            .Data5 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "Data5"))
-                                            .Data6 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "Data6"))
-                                            .ConditionalBranch.CommandList = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "ConditionalBranchCommandList"))
-                                            .ConditionalBranch.Condition = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "ConditionalBranchCondition"))
-                                            .ConditionalBranch.Data1 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "ConditionalBranchData1"))
-                                            .ConditionalBranch.Data2 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "ConditionalBranchData2"))
-                                            .ConditionalBranch.Data3 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "ConditionalBranchData3"))
-                                            .ConditionalBranch.ElseCommandList = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "ConditionalBranchElseCommandList"))
-                                            .MoveRouteCount = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "MoveRouteCount"))
-                                            If .MoveRouteCount > 0 Then
-                                                ReDim .MoveRoute(.MoveRouteCount)
-                                                For w = 0 To .MoveRouteCount
-                                                    .MoveRoute(w).Index = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "MoveRoute" & w & "Index"))
-                                                    .MoveRoute(w).Data1 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "MoveRoute" & w & "Data1"))
-                                                    .MoveRoute(w).Data2 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "MoveRoute" & w & "Data2"))
-                                                    .MoveRoute(w).Data3 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "MoveRoute" & w & "Data3"))
-                                                    .MoveRoute(w).Data4 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "MoveRoute" & w & "Data4"))
-                                                    .MoveRoute(w).Data5 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "MoveRoute" & w & "Data5"))
-                                                    .MoveRoute(w).Data6 = Val(Ini.Read(cf, "Event" & i & "Page" & x, "CommandList" & y & "Command" & p & "MoveRoute" & w & "Data6"))
-                                                Next
-                                            End If
-                                        End With
-                                    Next
-                                End If
+                        If .MoveRouteCount > 0 Then
+                            ReDim Map(mapNum).Events(i).Pages(x).MoveRoute(.MoveRouteCount)
+                            For y = 0 To .MoveRouteCount
+                                .MoveRoute(y).Index = reader.ReadInt32()
+                                .MoveRoute(y).Data1 = reader.ReadInt32()
+                                .MoveRoute(y).Data2 = reader.ReadInt32()
+                                .MoveRoute(y).Data3 = reader.ReadInt32()
+                                .MoveRoute(y).Data4 = reader.ReadInt32()
+                                .MoveRoute(y).Data5 = reader.ReadInt32()
+                                .MoveRoute(y).Data6 = reader.ReadInt32()
                             Next
                         End If
-                    Next
-                End If
+
+                        .WalkAnim = reader.ReadInt32()
+                        .DirFix = reader.ReadInt32()
+                        .WalkThrough = reader.ReadInt32()
+                        .DirFix = reader.ReadInt32()
+                        .WalkThrough = reader.ReadInt32()
+                        .ShowName = reader.ReadInt32()
+                        .Trigger = reader.ReadByte()
+                        .CommandListCount = reader.ReadInt32()
+
+                        .Position = reader.ReadByte()
+                        .QuestNum = reader.ReadInt32()
+
+                        .ChkPlayerGender = reader.ReadInt32()
+                    End With
+
+                    If Map(mapNum).Events(i).Pages(x).CommandListCount > 0 Then
+                        ReDim Map(mapNum).Events(i).Pages(x).CommandList(Map(mapNum).Events(i).Pages(x).CommandListCount)
+                        For y = 0 To Map(mapNum).Events(i).Pages(x).CommandListCount
+                            Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount = reader.ReadInt32()
+                            Map(mapNum).Events(i).Pages(x).CommandList(y).ParentList = reader.ReadInt32()
+                            If Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
+                                ReDim Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount)
+                                For p = 0 To Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount
+                                    With Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(p)
+                                        .Index = reader.ReadByte()
+                                        .Text1 = reader.ReadString()
+                                        .Text2 = reader.ReadString()
+                                        .Text3 = reader.ReadString()
+                                        .Text4 = reader.ReadString()
+                                        .Text5 = reader.ReadString()
+                                        .Data1 = reader.ReadInt32()
+                                        .Data2 = reader.ReadInt32()
+                                        .Data3 = reader.ReadInt32()
+                                        .Data4 = reader.ReadInt32()
+                                        .Data5 = reader.ReadInt32()
+                                        .Data6 = reader.ReadInt32()
+                                        .ConditionalBranch.CommandList = reader.ReadInt32()
+                                        .ConditionalBranch.Condition = reader.ReadInt32()
+                                        .ConditionalBranch.Data1 = reader.ReadInt32()
+                                        .ConditionalBranch.Data2 = reader.ReadInt32()
+                                        .ConditionalBranch.Data3 = reader.ReadInt32()
+                                        .ConditionalBranch.ElseCommandList = reader.ReadInt32()
+                                        .MoveRouteCount = reader.ReadInt32()
+                                        If .MoveRouteCount > 0 Then
+                                            ReDim .MoveRoute(.MoveRouteCount)
+                                            For w = 0 To .MoveRouteCount
+                                                .MoveRoute(w).Index = reader.ReadInt32()
+                                                .MoveRoute(w).Data1 = reader.ReadInt32()
+                                                .MoveRoute(w).Data2 = reader.ReadInt32()
+                                                .MoveRoute(w).Data3 = reader.ReadInt32()
+                                                .MoveRoute(w).Data4 = reader.ReadInt32()
+                                                .MoveRoute(w).Data5 = reader.ReadInt32()
+                                                .MoveRoute(w).Data6 = reader.ReadInt32()
+                                            Next
+                                        End If
+                                    End With
+                                Next
+                            End If
+                        Next
+                    End If
+                Next
             End If
         Next
     End Sub
@@ -588,10 +585,7 @@ Module modDatabase
         If Map(mapNum).Name Is Nothing Then Map(mapNum).Name = ""
         If Map(mapNum).Music Is Nothing Then Map(mapNum).Music = ""
 
-        If File.Exists(Paths.Maps & mapNum & "_eventdata.ini") Then
-            LoadMapEvent(mapNum)
-        End If
-
+        LoadMapEvent(mapNum)
     End Sub
 
     Sub ClearTempTiles()
@@ -699,7 +693,6 @@ Module modDatabase
             LoadNpc(i)
             Application.DoEvents()
         Next
-        'SaveNpcs()
     End Sub
 
     Sub LoadNpc(NpcNum As Integer)
@@ -1929,6 +1922,7 @@ Module modDatabase
 
     Function NpcsData() As Byte()
         Dim buffer As New ByteStream(4)
+
         For i = 0 To MAX_NPCS
             If Not Len(Trim$(Npc(i).Name)) > 0 Then Continue For
             buffer.WriteBlock(NpcData(i))
@@ -1938,6 +1932,7 @@ Module modDatabase
 
     Function NpcData(NpcNum As Integer) As Byte()
         Dim buffer As New ByteStream(4)
+
         buffer.WriteInt32(NpcNum)
         buffer.WriteInt32(Npc(NpcNum).Animation)
         buffer.WriteString((Npc(NpcNum).AttackSay))
@@ -1978,6 +1973,7 @@ Module modDatabase
 
     Function ShopData(shopNum As Integer) As Byte()
         Dim buffer As New ByteStream(4)
+
         buffer.WriteInt32(shopNum)
         buffer.WriteInt32(Shop(shopNum).BuyRate)
         buffer.WriteString((Shop(shopNum).Name))
@@ -1993,6 +1989,7 @@ Module modDatabase
 
     Function SkillsData() As Byte()
         Dim buffer As New ByteStream(4)
+
         For i = 0 To MAX_SKILLS
             If Not Len(Trim$(Skill(i).Name)) > 0 Then Continue For
             buffer.WriteBlock(SkillData(i))
@@ -2002,6 +1999,7 @@ Module modDatabase
 
     Function SkillData(skillnum As Integer) As Byte()
         Dim buffer As New ByteStream(4)
+
         buffer.WriteInt32(skillnum)
         buffer.WriteInt32(Skill(skillnum).AccessReq)
         buffer.WriteInt32(Skill(skillnum).AoE)

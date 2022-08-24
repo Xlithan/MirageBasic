@@ -8,19 +8,18 @@ Module C_Editors
 #Region "Animation Editor"
 
     Friend Sub AnimationEditorInit()
-        Editorindex = FrmEditor_Animation.lstIndex.SelectedIndex
-
         With Animation(Editorindex)
+            Editorindex = FrmEditor_Animation.lstIndex.SelectedIndex
+
             ' find the music we have set
             FrmEditor_Animation.cmbSound.Items.Clear()
-            FrmEditor_Animation.cmbSound.Items.Add("None")
 
             CacheSound
             For i = 0 To UBound(SoundCache)
                 FrmEditor_Animation.cmbSound.Items.Add(SoundCache(i))
             Next
 
-            If Trim$(Animation(Editorindex).Sound) = "None" OrElse Trim$(Animation(Editorindex).Sound) = "" Then
+            If Trim$(Animation(Editorindex).Sound) = "" Then
                 FrmEditor_Animation.cmbSound.SelectedIndex = 0
             Else
                For i = 0 To FrmEditor_Animation.cmbSound.Items.Count
@@ -82,42 +81,21 @@ Module C_Editors
     Friend Sub NpcEditorInit()
         Dim i As Integer
 
-        Editorindex = frmEditor_NPC.lstIndex.SelectedIndex
-        frmEditor_NPC.cmbDropSlot.SelectedIndex = 0
-
         With frmEditor_NPC
-            'populate combo boxes
-            .cmbAnimation.Items.Clear()
-            .cmbAnimation.Items.Add("None")
-           For i = 0 To MAX_ANIMATIONS
-                .cmbAnimation.Items.Add(i & ": " & Animation(i).Name)
-            Next
-
-            .cmbQuest.Items.Clear()
-            .cmbQuest.Items.Add("None")
-           For i = 0 To MAX_QUESTS
-                .cmbQuest.Items.Add(i & ": " & Quest(i).Name)
-            Next
-
-            .cmbItem.Items.Clear()
-            .cmbItem.Items.Add("None")
-           For i = 0 To MAX_ITEMS
-                .cmbItem.Items.Add(i & ": " & Item(i).Name)
-            Next
+            Editorindex = .lstIndex.SelectedIndex
+            .cmbDropSlot.SelectedIndex = 0
 
             .txtName.Text = Trim$(Npc(Editorindex).Name)
             .txtAttackSay.Text = Trim$(Npc(Editorindex).AttackSay)
-
-            If Npc(Editorindex).Sprite < 0 OrElse Npc(Editorindex).Sprite > .nudSprite.Maximum Then Npc(Editorindex).Sprite = 0
             .nudSprite.Value = Npc(Editorindex).Sprite
             .nudSpawnSecs.Value = Npc(Editorindex).SpawnSecs
             .cmbBehaviour.SelectedIndex = Npc(Editorindex).Behaviour
             .cmbFaction.SelectedIndex = Npc(Editorindex).Faction
             .nudRange.Value = Npc(Editorindex).Range
-            .nudChance.Value = Npc(Editorindex).DropChance(frmEditor_NPC.cmbDropSlot.SelectedIndex + 1)
-            .cmbItem.SelectedIndex = Npc(Editorindex).DropItem(frmEditor_NPC.cmbDropSlot.SelectedIndex + 1)
+            .nudChance.Value = Npc(Editorindex).DropChance(frmEditor_NPC.cmbDropSlot.SelectedIndex)
+            .cmbItem.SelectedIndex = Npc(Editorindex).DropItem(frmEditor_NPC.cmbDropSlot.SelectedIndex)
 
-            .nudAmount.Value = Npc(Editorindex).DropItemValue(frmEditor_NPC.cmbDropSlot.SelectedIndex + 1)
+            .nudAmount.Value = Npc(Editorindex).DropItemValue(frmEditor_NPC.cmbDropSlot.SelectedIndex)
 
             .nudHp.Value = Npc(Editorindex).Hp
             .nudExp.Value = Npc(Editorindex).Exp
@@ -133,31 +111,6 @@ Module C_Editors
             .nudSpirit.Value = Npc(Editorindex).Stat(StatType.Spirit)
             .nudLuck.Value = Npc(Editorindex).Stat(StatType.Luck)
             .nudVitality.Value = Npc(Editorindex).Stat(StatType.Vitality)
-
-            .cmbSkill1.Items.Clear()
-            .cmbSkill2.Items.Clear()
-            .cmbSkill3.Items.Clear()
-            .cmbSkill4.Items.Clear()
-            .cmbSkill5.Items.Clear()
-            .cmbSkill6.Items.Clear()
-
-            .cmbSkill1.Items.Add("None")
-            .cmbSkill2.Items.Add("None")
-            .cmbSkill3.Items.Add("None")
-            .cmbSkill4.Items.Add("None")
-            .cmbSkill5.Items.Add("None")
-            .cmbSkill6.Items.Add("None")
-
-           For i = 0 To MAX_SKILLS
-                If Len(Skill(i).Name) > 0 Then
-                    .cmbSkill1.Items.Add(Skill(i).Name)
-                    .cmbSkill2.Items.Add(Skill(i).Name)
-                    .cmbSkill3.Items.Add(Skill(i).Name)
-                    .cmbSkill4.Items.Add(Skill(i).Name)
-                    .cmbSkill5.Items.Add(Skill(i).Name)
-                    .cmbSkill6.Items.Add(Skill(i).Name)
-                End If
-            Next
 
             .cmbSkill1.SelectedIndex = Npc(Editorindex).Skill(1)
             .cmbSkill2.SelectedIndex = Npc(Editorindex).Skill(2)
@@ -217,13 +170,11 @@ Module C_Editors
         With frmEditor_Resource
             'populate combo boxes
             .cmbRewardItem.Items.Clear()
-            .cmbRewardItem.Items.Add("None")
            For i = 0 To MAX_ITEMS
                 .cmbRewardItem.Items.Add(i & ": " & Item(i).Name)
             Next
 
             .cmbAnimation.Items.Clear()
-            .cmbAnimation.Items.Add("None")
            For i = 0 To MAX_ANIMATIONS
                 .cmbAnimation.Items.Add(i & ": " & Animation(i).Name)
             Next
@@ -282,28 +233,26 @@ Module C_Editors
     Friend Sub SkillEditorInit()
         Dim i As Integer
 
-        Editorindex = frmEditor_Skill.lstIndex.SelectedIndex
-
         With frmEditor_Skill
+            Editorindex = .lstIndex.SelectedIndex
+
             ' build class combo
             .cmbClass.Items.Clear()
-            .cmbClass.Items.Add("None")
+
            For i = 0 To MAX_JOBS
                 .cmbClass.Items.Add(Trim$(Job(i).Name))
             Next
             .cmbClass.SelectedIndex = 0
-
             .cmbProjectile.Items.Clear()
-            .cmbProjectile.Items.Add("None")
+
            For i = 0 To MAX_PROJECTILES
                 .cmbProjectile.Items.Add(Trim$(Projectiles(i).Name))
             Next
             .cmbProjectile.SelectedIndex = 0
 
             .cmbAnimCast.Items.Clear()
-            .cmbAnimCast.Items.Add("None")
             .cmbAnim.Items.Clear()
-            .cmbAnim.Items.Add("None")
+
            For i = 0 To MAX_ANIMATIONS
                 .cmbAnimCast.Items.Add(Trim$(Animation(i).Name))
                 .cmbAnim.Items.Add(Trim$(Animation(i).Name))
@@ -353,7 +302,6 @@ Module C_Editors
         End With
 
         EditorSkill_DrawIcon()
-
         Skill_Changed(Editorindex) = True
     End Sub
 
@@ -404,16 +352,6 @@ Module C_Editors
         If File.Exists(Paths.Graphics & "Faces\" & Shop(Editorindex).Face & GfxExt) Then
             frmEditor_Shop.picFace.BackgroundImage = Drawing.Image.FromFile(Paths.Graphics & "Faces\" & Shop(Editorindex).Face & GfxExt)
         End If
-
-        frmEditor_Shop.cmbItem.Items.Clear()
-        frmEditor_Shop.cmbItem.Items.Add("None")
-        frmEditor_Shop.cmbCostItem.Items.Clear()
-        frmEditor_Shop.cmbCostItem.Items.Add("None")
-
-       For i = 0 To MAX_ITEMS
-            frmEditor_Shop.cmbItem.Items.Add(i & ": " & Trim$(Item(i).Name))
-            frmEditor_Shop.cmbCostItem.Items.Add(i & ": " & Trim$(Item(i).Name))
-        Next
 
         frmEditor_Shop.cmbItem.SelectedIndex = 0
         frmEditor_Shop.cmbCostItem.SelectedIndex = 0
@@ -480,9 +418,9 @@ Module C_Editors
     End Sub
 
     Friend Sub JobEditorCancel()
-        SendRequestEditJob()
-        frmEditor_Job.Visible = False
         Editor = 0
+        frmEditor_Job.Visible = False
+        SendRequestJobs()
     End Sub
 
     Friend Sub JobEditorInit()
@@ -535,8 +473,6 @@ Module C_Editors
        For i = 0 To MAX_DROP_ITEMS
             If Job(Editorindex).StartItem(i) > 0 Then
                 frmEditor_Job.lstStartItems.Items.Add(Item(Job(Editorindex).StartItem(i)).Name & " X " & Job(Editorindex).StartValue(i))
-            Else
-                frmEditor_Job.lstStartItems.Items.Add("None")
             End If
         Next
 
@@ -557,37 +493,31 @@ Module C_Editors
         With Item(Editorindex)
             'populate combo boxes
             frmEditor_Item.cmbAnimation.Items.Clear()
-            frmEditor_Item.cmbAnimation.Items.Add("None")
            For i = 0 To MAX_ANIMATIONS
                 frmEditor_Item.cmbAnimation.Items.Add(i & ": " & Animation(i).Name)
             Next
 
             frmEditor_Item.cmbAmmo.Items.Clear()
-            frmEditor_Item.cmbAmmo.Items.Add("None")
            For i = 0 To MAX_ITEMS
                 frmEditor_Item.cmbAmmo.Items.Add(i & ": " & Item(i).Name)
             Next
 
             frmEditor_Item.cmbProjectile.Items.Clear()
-            frmEditor_Item.cmbProjectile.Items.Add("None")
            For i = 0 To MAX_PROJECTILES
                 frmEditor_Item.cmbProjectile.Items.Add(i & ": " & Projectiles(i).Name)
             Next
 
             frmEditor_Item.cmbSkills.Items.Clear()
-            frmEditor_Item.cmbSkills.Items.Add("None")
            For i = 0 To MAX_SKILLS
                 frmEditor_Item.cmbSkills.Items.Add(i & ": " & Skill(i).Name)
             Next
 
             frmEditor_Item.cmbPet.Items.Clear()
-            frmEditor_Item.cmbPet.Items.Add("None")
            For i = 0 To MAX_PETS
                 frmEditor_Item.cmbPet.Items.Add(i & ": " & Pet(i).Name)
             Next
 
             frmEditor_Item.cmbRecipe.Items.Clear()
-            frmEditor_Item.cmbRecipe.Items.Add("None")
            For i = 0 To MAX_RECIPE
                 frmEditor_Item.cmbRecipe.Items.Add(i & ": " & Recipe(i).Name)
             Next
@@ -697,8 +627,6 @@ Module C_Editors
 
             ' Build cmbClassReq
             frmEditor_Item.cmbJobReq.Items.Clear()
-            frmEditor_Item.cmbJobReq.Items.Add("None")
-
            For i = 0 To MAX_JOBS
                 frmEditor_Item.cmbJobReq.Items.Add(Job(i).Name)
             Next

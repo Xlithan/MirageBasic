@@ -1639,8 +1639,8 @@ Module C_Graphics
             If FurnitureHouse = Player(Myindex).InHouse Then
                 If FurnitureCount > 0 Then
                    For i = 0 To FurnitureCount
-                        If Furniture(I).ItemNum > 0 Then
-                            DrawFurniture(I, 0)
+                        If Furniture(i).ItemNum > 0 Then
+                            DrawFurniture(i, 0)
                         End If
                     Next
                 End If
@@ -1651,8 +1651,8 @@ Module C_Graphics
         If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
 
            For i = 0 To Map.CurrentEvents
-                If Map.MapEvents(I).Position = 0 Then
-                    DrawEvent(I)
+                If Map.MapEvents(i).Position = 0 Then
+                    DrawEvent(i)
                 End If
             Next
         End If
@@ -1665,8 +1665,8 @@ Module C_Graphics
         ' Draw out the items
         If NumItems > 0 Then
            For i = 0 To MAX_MAP_ITEMS
-                If MapItem(I).Num > 0 Then
-                    DrawItem(I)
+                If MapItem(i).Num > 0 Then
+                    DrawItem(i)
                 End If
             Next
         End If
@@ -1775,7 +1775,7 @@ Module C_Graphics
         If NumAnimations > 0 Then
            For i = 0 To MAX_ANIMATIONS
                 If AnimInstance(I).Used(1) Then
-                    DrawAnimation(I - 1, 1)
+                    DrawAnimation(i, 1)
                 End If
             Next
         End If

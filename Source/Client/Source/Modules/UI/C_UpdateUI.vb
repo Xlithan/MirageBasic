@@ -378,8 +378,6 @@ Module C_UpdateUI
 
                 .cmbEvolve.Items.Clear()
 
-                .cmbEvolve.Items.Add("None")
-
                 ' Add the names
                 For i = 0 To MAX_PETS
                     .cmbEvolve.Items.Add(i & ": " & Trim$(Pet(i).Name))
@@ -393,12 +391,11 @@ Module C_UpdateUI
             InitPetEditor = False
         End If
 
-        If QuestEditorShow = True Then
+        If InitQuestEditor = True Then
             With frmEditor_Quest
-                Editor = EditorTasks
+                Editor = EDITOR_QUEST
                 .lstIndex.Items.Clear()
                 .cmbQuestReq.Items.Clear()
-                .cmbQuestReq.Items.Add("None")
 
                 ' Add the names
                 For i = 0 To MAX_QUESTS
@@ -410,7 +407,7 @@ Module C_UpdateUI
                 .lstIndex.SelectedIndex = 1
                 QuestEditorInit()
             End With
-            QuestEditorShow = False
+            InitQuestEditor = False
         End If
 
         If InitAnimationEditor = True Then
@@ -461,9 +458,6 @@ Module C_UpdateUI
                 .cmbMakeItem.Items.Clear()
                 .cmbIngredient.Items.Clear()
 
-                .cmbMakeItem.Items.Add("None")
-                .cmbIngredient.Items.Add("None")
-
                 For i = 0 To MAX_ITEMS
                     .cmbMakeItem.Items.Add(Trim$(Item(i).Name))
                     .cmbIngredient.Items.Add(Trim$(Item(i).Name))
@@ -491,7 +485,6 @@ Module C_UpdateUI
 
                 .cmbItems.Items.Clear()
 
-                .cmbItems.Items.Add("None")
                 For i = 0 To MAX_ITEMS
                     .cmbItems.Items.Add(Trim(Item(i).Name))
                 Next
@@ -536,6 +529,38 @@ Module C_UpdateUI
                     .lstIndex.Items.Add(i & ": " & Trim$(Npc(i).Name))
                 Next
 
+                'populate combo boxes
+                .cmbAnimation.Items.Clear()
+                For i = 0 To MAX_ANIMATIONS
+                    .cmbAnimation.Items.Add(i & ": " & Animation(i).Name)
+                Next
+
+                .cmbQuest.Items.Clear()
+                For i = 0 To MAX_QUESTS
+                    .cmbQuest.Items.Add(i & ": " & Quest(i).Name)
+                Next
+
+                .cmbItem.Items.Clear()
+                For i = 0 To MAX_ITEMS
+                    .cmbItem.Items.Add(i & ": " & Item(i).Name)
+                Next
+
+                .cmbSkill1.Items.Clear()
+                .cmbSkill2.Items.Clear()
+                .cmbSkill3.Items.Clear()
+                .cmbSkill4.Items.Clear()
+                .cmbSkill5.Items.Clear()
+                .cmbSkill6.Items.Clear()
+
+               For i = 0 To MAX_SKILLS
+                    .cmbSkill1.Items.Add(Skill(i).Name)
+                    .cmbSkill2.Items.Add(Skill(i).Name)
+                    .cmbSkill3.Items.Add(Skill(i).Name)
+                    .cmbSkill4.Items.Add(Skill(i).Name)
+                    .cmbSkill5.Items.Add(Skill(i).Name)
+                    .cmbSkill6.Items.Add(Skill(i).Name)
+                Next
+
                 .Show()
                 .lstIndex.SelectedIndex = 1
                 NpcEditorInit()
@@ -568,6 +593,14 @@ Module C_UpdateUI
                 ' Add the names
                 For i = 0 To MAX_SHOPS
                     .lstIndex.Items.Add(i & ": " & Trim$(Shop(i).Name))
+                Next
+
+                .cmbItem.Items.Clear()
+                .cmbCostItem.Items.Clear()
+
+                For i = 0 To MAX_ITEMS
+                    .cmbItem.Items.Add(i & ": " & Trim$(Item(i).Name))
+                    .cmbCostItem.Items.Add(i & ": " & Trim$(Item(i).Name))
                 Next
 
                 .Show()
@@ -676,7 +709,7 @@ Module C_UpdateUI
 
             For x = 0 To MAX_MAPS
                 FrmAdmin.lstMaps.Items.Add(x)
-                FrmAdmin.lstMaps.Items(x - 1).SubItems.Add(MapNames(x))
+                FrmAdmin.lstMaps.Items(x).SubItems.Add(MapNames(x))
             Next
 
             UpdateMapnames = False
@@ -765,19 +798,16 @@ Module C_UpdateUI
                 Next
                 ' items
                 .cmbHasItem.Items.Clear()
-                .cmbHasItem.Items.Add("None")
                 For i = 0 To MAX_ITEMS
                     .cmbHasItem.Items.Add(i & ": " & Trim$(Item(i).Name))
                 Next
                 ' variables
                 .cmbPlayerVar.Items.Clear()
-                .cmbPlayerVar.Items.Add("None")
                 For i = 0 To MaxVariables
                     .cmbPlayerVar.Items.Add(i & ". " & Variables(i))
                 Next
                 ' variables
                 .cmbPlayerSwitch.Items.Clear()
-                .cmbPlayerSwitch.Items.Add("None")
                 For i = 0 To MaxSwitches
                     .cmbPlayerSwitch.Items.Add(i & ". " & Switches(i))
                 Next

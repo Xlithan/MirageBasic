@@ -39,16 +39,13 @@ Friend Module C_Housing
         End With
 
         HouseChanged(Editorindex) = True
-
     End Sub
 
     Friend Sub HouseEditorCancel()
-
         Editor = 0
         frmEditor_House.Dispose()
 
         ClearChanged_House()
-
     End Sub
 
     Friend Sub HouseEditorOk()
@@ -87,7 +84,6 @@ Friend Module C_Housing
     End Sub
 
     Friend Sub ClearChanged_House()
-
         For i = 0 To MAX_HOUSES
             HouseChanged(i) = Nothing
         Next i

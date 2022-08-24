@@ -3,6 +3,7 @@
 Friend Class frmEditor_House
 
     Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
+        If lstIndex.SelectedIndex = 0 Then lstIndex.SelectedIndex = 1
         HouseEditorInit()
     End Sub
 

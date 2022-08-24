@@ -4,6 +4,8 @@ Imports System.Windows.Forms
 Imports MirageBasic.Core
 
 Public Class FrmEditor_Events
+    Dim tmpGraphicIndex As Integer
+    Dim tmpGraphicType As Byte
 
 #Region "Frm Code"
 
@@ -167,10 +169,6 @@ Public Class FrmEditor_Events
         cmbCompleteQuest.Items.Clear()
         cmbEndQuest.Items.Clear()
 
-        cmbBeginQuest.Items.Add("None")
-        cmbCompleteQuest.Items.Add("None")
-        cmbEndQuest.Items.Add("None")
-
        For i = 0 To MAX_QUESTS
             cmbBeginQuest.Items.Add(i & ". " & Trim$(Quest(i).Name))
             cmbCompleteQuest.Items.Add(i & ". " & Trim$(Quest(i).Name))
@@ -180,7 +178,6 @@ Public Class FrmEditor_Events
         cmbSpawnNpc.SelectedIndex = 0
         nudFogData0.Maximum = NumFogs
         cmbEventQuest.Items.Clear()
-        cmbEventQuest.Items.Add("None")
        For i = 0 To MAX_QUESTS
             cmbEventQuest.Items.Add(i & ". " & Trim$(Quest(i).Name))
         Next
@@ -194,6 +191,8 @@ Public Class FrmEditor_Events
         'End If
 
         fraDialogue.Visible = False
+
+        If tabPages.SelectedIndex = 0 Then tabPages.Selectedindex = 1
 
         EditorEvent_DrawGraphic()
     End Sub
@@ -210,19 +209,32 @@ Public Class FrmEditor_Events
         fraMoveRoute.Height = Height
         fraMoveRoute.Top = 0
         fraMoveRoute.Left = 0
-
-        fraGraphic.Width = Width
-        fraGraphic.Height = Height
-        fraGraphic.Top = 0
-        fraGraphic.Left = 0
     End Sub
 
     Private Sub BtnOK_Click(sender As Object, e As EventArgs) Handles btnOk.Click
-        EventEditorOK()
+        if fraGraphic.Visible = false Then
+            EventEditorOK()
+        Else
+            If GraphicSelType = 0 Then
+                TmpEvent.Pages(CurPageNum).GraphicType = cmbGraphic.SelectedIndex
+                TmpEvent.Pages(CurPageNum).Graphic = nudGraphic.Value
+            Else
+                AddMoveRouteCommand(42)
+                GraphicSelType = 0
+            End If
+            fraGraphic.Visible = false
+        End If
     End Sub
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Dispose()
+        If fraGraphic.Visible = False then
+            Dispose()
+        Else
+            TmpEvent.Pages(CurPageNum).GraphicType = tmpGraphicType
+            TmpEvent.Pages(CurPageNum).Graphic = tmpGraphicIndex
+            fraGraphic.Visible = False
+            EditorEvent_DrawGraphic
+        End If
     End Sub
 
     Private Sub TvCommands_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles tvCommands.AfterSelect
@@ -659,7 +671,8 @@ Public Class FrmEditor_Events
 #Region "Page Buttons"
 
     Private Sub TabPages_Click(sender As Object, e As EventArgs) Handles tabPages.Click
-        CurPageNum = tabPages.SelectedIndex + 1
+        If tabPages.SelectedIndex = 0 Then tabPages.Selectedindex = 1
+        CurPageNum = tabPages.SelectedIndex
         EventEditorLoadPage(CurPageNum)
     End Sub
 
@@ -701,15 +714,15 @@ Public Class FrmEditor_Events
         TmpEvent.Pages(CurPageNum) = Nothing
         ' move everything else down a notch
         If CurPageNum < TmpEvent.PageCount Then
-            For i = CurPageNum To TmpEvent.PageCount - 1
-                TmpEvent.Pages(i + 1) = TmpEvent.Pages(i)
+            For i = CurPageNum To TmpEvent.PageCount
+                TmpEvent.Pages(i) = TmpEvent.Pages(i)
             Next
         End If
-        TmpEvent.PageCount = TmpEvent.PageCount - 1
+        TmpEvent.PageCount = TmpEvent.PageCount
         ' set the tabs
         tabPages.TabPages.Clear()
 
-       For i = 0 To TmpEvent.PageCount
+       For i = 1 To TmpEvent.PageCount
             tabPages.TabPages.Add("0", Str(i), "")
         Next
         ' set the tab back
@@ -832,17 +845,18 @@ Public Class FrmEditor_Events
 
     Private Sub PicGraphic_Click(sender As Object, e As EventArgs) Handles picGraphic.Click
         fraGraphic.BringToFront()
+        tmpGraphicIndex = TmpEvent.Pages(CurPageNum).Graphic
+        tmpGraphicType = TmpEvent.Pages(CurPageNum).GraphicType
         fraGraphic.Visible = True
         GraphicSelType = 0
     End Sub
 
-    Private Sub CmbGraphic_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbGraphic.SelectedIndexChanged
+    Private Sub CmbGraphic_SelectedIndexChanged(sender As Object, e As EventArgs) 
         If cmbGraphic.SelectedIndex = -1 Then Exit Sub
         TmpEvent.Pages(CurPageNum).GraphicType = cmbGraphic.SelectedIndex
         ' set the max on the scrollbar
         Select Case cmbGraphic.SelectedIndex
             Case 0 ' None
-                nudGraphic.Value = 1
                 nudGraphic.Enabled = False
             Case 1 ' character
                 nudGraphic.Maximum = NumCharacters
@@ -862,7 +876,7 @@ Public Class FrmEditor_Events
         EditorEvent_DrawGraphic()
     End Sub
 
-    Private Sub NudGraphic_ValueChanged(sender As Object, e As EventArgs) Handles nudGraphic.ValueChanged
+    Private Sub NudGraphic_ValueChanged(sender As Object, e As EventArgs) 
         EditorEvent_DrawGraphic()
     End Sub
 
@@ -909,25 +923,6 @@ Public Class FrmEditor_Events
             Next
         End If
         EditorEvent_DrawGraphic()
-    End Sub
-
-    Private Sub BtnGraphicOk_Click(sender As Object, e As EventArgs) Handles btnGraphicOk.Click
-        If GraphicSelType = 0 Then
-            TmpEvent.Pages(CurPageNum).GraphicType = cmbGraphic.SelectedIndex
-            TmpEvent.Pages(CurPageNum).Graphic = nudGraphic.Value
-            TmpEvent.Pages(CurPageNum).GraphicX = GraphicSelX
-            TmpEvent.Pages(CurPageNum).GraphicY = GraphicSelY
-            TmpEvent.Pages(CurPageNum).GraphicX2 = GraphicSelX2
-            TmpEvent.Pages(CurPageNum).GraphicY2 = GraphicSelY2
-        Else
-            AddMoveRouteCommand(42)
-            GraphicSelType = 0
-        End If
-        fraGraphic.Visible = False
-    End Sub
-
-    Private Sub BtnGraphicCancel_Click(sender As Object, e As EventArgs) Handles btnGraphicCancel.Click
-        fraGraphic.Visible = False
     End Sub
 
 #End Region
@@ -1338,9 +1333,6 @@ Public Class FrmEditor_Events
         Select Case lstvwMoveRoute.SelectedItems(0).Index + 1
             'Set Graphic
             Case 43
-                fraGraphic.Width = 841
-                fraGraphic.Height = 585
-                fraGraphic.Visible = True
                 fraGraphic.BringToFront()
                 GraphicSelType = 1
             Case Else

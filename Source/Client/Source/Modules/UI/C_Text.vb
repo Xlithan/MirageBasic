@@ -81,7 +81,7 @@ Module C_Text
         color = Color.Yellow
         backcolor = Color.Black
 
-        name = Trim$(Map.MapEvents(index).Name)
+        Name = Trim$(Map.MapEvents(index).Name)
 
         ' calc pos
         textX = ConvertMapX(Map.MapEvents(index).X * PicX) + Map.MapEvents(index).XOffset + (PicX \ 2) - GetTextWidth(Trim$(name)) \ 2

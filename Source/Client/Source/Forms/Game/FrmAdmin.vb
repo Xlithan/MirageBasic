@@ -24,12 +24,7 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        ' Check to make sure its a valid map #
-        If nudAdminMap.Value > 0 AndAlso nudAdminMap.Value <= MAX_MAPS Then
-            WarpTo(nudAdminMap.Value)
-        Else
-            AddText("Invalid map number.", ColorType.BrightRed)
-        End If
+        WarpTo(nudAdminMap.Value)
     End Sub
 
     Private Sub BtnAdminBan_Click(sender As Object, e As EventArgs) Handles btnAdminBan.Click
@@ -37,8 +32,6 @@ Friend Class FrmAdmin
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
-
-        If Len(Trim$(txtAdminName.Text)) < 1 Then Exit Sub
 
         SendBan(Trim$(txtAdminName.Text))
     End Sub
@@ -49,8 +42,6 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        If Len(Trim$(txtAdminName.Text)) < 1 Then Exit Sub
-
         SendKick(Trim$(txtAdminName.Text))
     End Sub
 
@@ -60,8 +51,6 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        If Len(Trim$(txtAdminName.Text)) < 1 Then Exit Sub
-
         If IsNumeric(Trim$(txtAdminName.Text)) Then Exit Sub
 
         WarpToMe(Trim$(txtAdminName.Text))
@@ -70,10 +59,6 @@ Friend Class FrmAdmin
     Private Sub BtnAdminWarpMe2_Click(sender As Object, e As EventArgs) Handles btnAdminWarpMe2.Click
         If GetPlayerAccess(Myindex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-            Exit Sub
-        End If
-
-        If Len(Trim$(txtAdminName.Text)) < 1 Then
             Exit Sub
         End If
 
@@ -90,10 +75,6 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        If Len(Trim$(txtAdminName.Text)) < 2 Then
-            Exit Sub
-        End If
-
         If IsNumeric(Trim$(txtAdminName.Text)) OrElse cmbAccess.SelectedIndex < 0 Then
             Exit Sub
         End If
@@ -106,8 +87,6 @@ Friend Class FrmAdmin
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
-
-        If nudAdminSprite.Value < 1 Then Exit Sub
 
         SendSetSprite(nudAdminSprite.Value)
     End Sub
@@ -180,6 +159,8 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
+        ClearSkills()
+        SendRequestSkills() 
         SendRequestNpcs()
         SendRequestEditNpc()
     End Sub
@@ -272,12 +253,8 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        ' Check to make sure its a valid map #
-        If lstMaps.FocusedItem.Index> 0 AndAlso lstMaps.FocusedItem.Index<= MAX_MAPS Then
-            WarpTo(lstMaps.FocusedItem.Index)
-        Else
-            AddText("Invalid map number: " & lstMaps.FocusedItem.Index, QColorType.AlertColor)
-        End If
+        If lstMaps.FocusedItem.Index = 0 Then Exit sub
+        WarpTo(lstMaps.FocusedItem.Index)
     End Sub
 
 #End Region

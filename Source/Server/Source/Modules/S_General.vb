@@ -176,7 +176,7 @@ Module S_General
         InitNetwork()
 
         ' Init all the player sockets
-        Console.WriteLine("Initializing player array...")
+        Console.WriteLine("Initializing Players...")
 
         For x = 0 To MAX_PLAYERS
             ClearPlayer(x)
@@ -185,9 +185,9 @@ Module S_General
         ' Serves as a constructor
         ClearGameData()
         LoadGameData()
-        Console.WriteLine("Spawning map items...")
+        Console.WriteLine("Spawning Map Items...")
         SpawnAllMapsItems()
-        Console.WriteLine("Spawning map npcs...")
+        Console.WriteLine("Spawning Map Npcs...")
         SpawnAllMapNpcs()
 
         ' Check if the master charlist file exists for checking duplicate names, and if it doesnt make it

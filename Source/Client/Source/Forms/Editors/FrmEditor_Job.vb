@@ -159,8 +159,8 @@ Friend Class frmEditor_Job
 #Region "Start Items"
 
     Private Sub BtnItemAdd_Click(sender As Object, e As EventArgs) Handles btnItemAdd.Click
-        Job(Editorindex).StartItem(lstStartItems.SelectedIndex + 1) = cmbItems.SelectedIndex
-        Job(Editorindex).StartValue(lstStartItems.SelectedIndex + 1) = nudItemAmount.Value
+        Job(Editorindex).StartItem(lstStartItems.SelectedIndex ) = cmbItems.SelectedIndex
+        Job(Editorindex).StartValue(lstStartItems.SelectedIndex ) = nudItemAmount.Value
     End Sub
 
 #End Region
@@ -181,7 +181,7 @@ Friend Class frmEditor_Job
 
     Private Sub lstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
         If lstIndex.SelectedIndex = 0 Then lstIndex.SelectedIndex = 1
-         JobEditorInit
+        JobEditorInit
     End Sub
 
 #End Region

@@ -25,7 +25,8 @@ Friend Class frmEditor_Item
         ItemEditorInit()
     End Sub
 
-    Private Sub LstIndex_MouseClick(sender As Object, e As EventArgs) Handles lstIndex.MouseClick
+    Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
+        If lstIndex.SelectedIndex = 0 Then lstIndex.SelectedIndex = 1
         ItemEditorInit()
         PicFurniture_MouseDown(sender, e)
     End Sub
@@ -94,7 +95,6 @@ Friend Class frmEditor_Item
 
             ' Build subtype cmb
             cmbSubType.Items.Clear()
-            cmbSubType.Items.Add("None")
 
             cmbSubType.Items.Add("Weapon")
             cmbSubType.Items.Add("Armor")
@@ -114,7 +114,6 @@ Friend Class frmEditor_Item
 
             ' Build subtype cmb
             cmbSubType.Items.Clear()
-            cmbSubType.Items.Add("None")
 
             cmbSubType.Items.Add("Hp")
             cmbSubType.Items.Add("Mp")

@@ -1390,8 +1390,8 @@ Partial Class frmEditor_Item
         Me.Controls.Add(Me.DarkGroupBox1)
         Me.Controls.Add(Me.fraEquipment)
         Me.Controls.Add(Me.fraFurniture)
-        Me.Controls.Add(Me.fraRequirements)
         Me.Controls.Add(Me.fraBasics)
+        Me.Controls.Add(Me.fraRequirements)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.Name = "frmEditor_Item"

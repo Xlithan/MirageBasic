@@ -111,9 +111,14 @@
             End Get
         End Property
 
-        ''' <summary> Returns map file <\summary>
+         ''' <summary> Returns map file <\summary>
         Public Function Map(index As Integer) As String
             Return Maps & index & ".dat"
+        End Function
+
+         ''' <summary> Returns map file <\summary>
+        Public Function EventMap(index As Integer) As String
+            Return Maps & index & "_event.dat"
         End Function
 
         ''' <summary> Returns npcs directory <\summary>

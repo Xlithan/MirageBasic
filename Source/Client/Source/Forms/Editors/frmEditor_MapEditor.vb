@@ -587,23 +587,18 @@ Public Class FrmEditor_MapEditor
         ' find the music we have set
 
         lstMusic.Items.Clear()
-        lstMusic.Items.Add("None")
 
         CacheMusic
         For i = 0 To UBound(MusicCache)
             lstMusic.Items.Add(MusicCache(i))
         Next
 
-        If Trim$(Map.Music) = "None" Then
-            lstMusic.SelectedIndex = 0
-        Else
-           For i = 0 To lstMusic.Items.Count 
-                If lstMusic.Items(i).ToString = Trim$(Map.Music) Then
-                    lstMusic.SelectedIndex = i
-                    Exit For
-                End If
-            Next
-        End If
+        For i = 0 To lstMusic.Items.Count - 1
+            If lstMusic.Items(i).ToString = Trim$(Map.Music) Then
+                lstMusic.SelectedIndex = i
+                Exit For
+            End If
+        Next
 
         ' rest of it
         txtUp.Text = Map.Up
@@ -642,13 +637,11 @@ Public Class FrmEditor_MapEditor
         lblIntensity.Text = "Intensity: " & scrlIntensity.Value
 
         cmbPanorama.Items.Clear()
-        cmbPanorama.Items.Add("None")
        For i = 0 To NumPanorama
             cmbPanorama.Items.Add("Panorama" & i)
         Next
 
         cmbParallax.Items.Clear()
-        cmbParallax.Items.Add("None")
        For i = 0 To NumParallax
             cmbParallax.Items.Add("Parallax" & i)
         Next
@@ -692,7 +685,6 @@ Public Class FrmEditor_MapEditor
         'width = TileSetTextureInfo(tileset).Width
 
         ' set shops for the shop attribute
-        cmbShop.Items.Add("None")
         For i = 0 To MAX_SHOPS
             cmbShop.Items.Add(i & ": " & Shop(i).Name)
         Next

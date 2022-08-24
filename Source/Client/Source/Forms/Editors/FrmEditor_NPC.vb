@@ -8,13 +8,13 @@ Friend Class frmEditor_NPC
         nudSprite.Maximum = NumCharacters
 
         cmbItem.Items.Clear()
-        cmbItem.Items.Add("None")
        For i = 0 To MAX_ITEMS
             cmbItem.Items.Add(i & ": " & Item(i).Name)
         Next
     End Sub
 
     Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
+        If lstIndex.SelectedIndex = 0 Then lstIndex.SelectedIndex = 1
         NpcEditorInit()
     End Sub
 

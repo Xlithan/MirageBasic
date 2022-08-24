@@ -47,6 +47,7 @@ Friend Class FrmEditor_Animation
     End Sub
 
     Private Sub LstIndex_Click(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles lstIndex.Click
+        If lstIndex.SelectedIndex = 0 Then lstIndex.SelectedIndex = 1
         AnimationEditorInit()
     End Sub
 
