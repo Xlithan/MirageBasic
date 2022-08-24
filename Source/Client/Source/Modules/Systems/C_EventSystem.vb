@@ -2652,10 +2652,10 @@ newlist:
                         g.Dispose()
 
                         FrmEditor_Events.picGraphicSel.BackgroundImage = targetBitmap
-                        FrmEditor_Events.picGraphic.BackgroundImage = nothing
+                        FrmEditor_Events.picGraphic.BackgroundImage = Nothing
                     Else
                         FrmEditor_Events.picGraphicSel.BackgroundImage = Nothing
-                        FrmEditor_Events.picGraphic.BackgroundImage = nothing
+                        FrmEditor_Events.picGraphic.BackgroundImage = Nothing
                         Exit Sub
                     End If
             End Select
