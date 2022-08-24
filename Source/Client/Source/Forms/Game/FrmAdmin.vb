@@ -11,6 +11,8 @@ Friend Class FrmAdmin
        For i = 0 To MAX_ITEMS
             cmbSpawnItem.Items.Add(i & ": " & Trim$(Item(i).Name))
         Next
+
+        SendRequestMapreport()
     End Sub
 
 #Region "Moderation"
@@ -271,7 +273,7 @@ Friend Class FrmAdmin
         End If
 
         ' Check to make sure its a valid map #
-        If lstMaps.FocusedItem.Index + 1 > 0 AndAlso lstMaps.FocusedItem.Index + 1 <= MAX_MAPS Then
+        If lstMaps.FocusedItem.Index> 0 AndAlso lstMaps.FocusedItem.Index<= MAX_MAPS Then
             WarpTo(lstMaps.FocusedItem.Index + 1)
         Else
             AddText("Invalid map number: " & lstMaps.FocusedItem.Index + 1, QColorType.AlertColor)
@@ -296,7 +298,7 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        SendSpawnItem(cmbSpawnItem.SelectedIndex + 1, nudSpawnItemAmount.Value)
+        SendSpawnItem(cmbSpawnItem.SelectedIndex, nudSpawnItemAmount.Value)
     End Sub
 
     Private Sub BtnLevelUp_Click(sender As Object, e As EventArgs) Handles btnLevelUp.Click
