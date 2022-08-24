@@ -225,7 +225,7 @@ Module C_NetworkReceive
         SaveSettings()
 
         ' Request Job.
-        SendRequestJob()
+        SendRequestEditJob()
 
         Dim buffer As New ByteStream(data)
         ' Now we can receive char data
@@ -538,7 +538,7 @@ Module C_NetworkReceive
         ReDim Npc(i).DropChance(5)
         ReDim Npc(i).DropItem(5)
         ReDim Npc(i).DropItemValue(5)
-        For x = 0 To 5
+        For x = 0 To MAX_DROP_ITEMS
             Npc(i).DropChance(x) = buffer.ReadInt32()
             Npc(i).DropItem(x) = buffer.ReadInt32()
             Npc(i).DropItemValue(x) = buffer.ReadInt32()
@@ -1185,7 +1185,7 @@ Module C_NetworkReceive
     End Sub
 
     Private Sub Packet_ClassEditor(ByRef data() As Byte)
-        InitClassEditor = True
+        InitJobEditor = True
     End Sub
 
     Sub Packet_EditItem(ByRef data() As Byte)
@@ -1215,6 +1215,4 @@ Module C_NetworkReceive
     Private Sub Packet_EditSkill(ByRef data() As Byte)
         InitSkillEditor = True
     End Sub
-
-
 End Module

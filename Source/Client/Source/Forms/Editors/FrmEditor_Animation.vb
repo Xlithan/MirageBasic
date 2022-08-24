@@ -1,7 +1,6 @@
 ﻿Imports MirageBasic.Core
 
 Friend Class FrmEditor_Animation
-
     Private Sub NudSprite0_ValueChanged(sender As Object, e As EventArgs) Handles nudSprite0.Click
         Animation(Editorindex).Sprite(0) = nudSprite0.Value
     End Sub
@@ -40,7 +39,6 @@ Friend Class FrmEditor_Animation
 
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         Dim tmpindex As Integer
-        If Editorindex = 0 OrElse Editorindex > MAX_ANIMATIONS Then Exit Sub
         tmpindex = lstIndex.SelectedIndex
         Animation(Editorindex).Name = Trim$(txtName.Text)
         lstIndex.Items.RemoveAt(EditorIndex)
@@ -48,14 +46,13 @@ Friend Class FrmEditor_Animation
         lstIndex.SelectedIndex = tmpindex
     End Sub
 
-    Private Sub LstIndex_MouseClick(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles lstIndex.MouseClick
+    Private Sub LstIndex_Click(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles lstIndex.Click
+        If lstIndex.SelectedIndex = 0 Then lstIndex.SelectedIndex = 1
         AnimationEditorInit()
     End Sub
 
     Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Dim tmpindex As Integer
-
-        If Editorindex = 0 OrElse Editorindex > MAX_ANIMATIONS Then Exit Sub
 
         ClearAnimation(Editorindex)
 
@@ -77,8 +74,6 @@ Friend Class FrmEditor_Animation
     End Sub
 
     Private Sub CmbSound_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSound.SelectedIndexChanged
-        If Editorindex = 0 OrElse Editorindex > MAX_ANIMATIONS Then Exit Sub
-
         Animation(Editorindex).Sound = cmbSound.SelectedItem.ToString
     End Sub
 

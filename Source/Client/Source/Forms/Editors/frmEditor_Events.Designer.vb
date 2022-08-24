@@ -156,6 +156,14 @@ Partial Class FrmEditor_Events
         Me.chkWalkAnim = New DarkUI.Controls.DarkCheckBox()
         Me.fraCommands = New System.Windows.Forms.Panel()
         Me.btnCancelCommand = New DarkUI.Controls.DarkButton()
+        Me.fraGraphic = New DarkUI.Controls.DarkGroupBox()
+        Me.btnGraphicOk = New DarkUI.Controls.DarkButton()
+        Me.btnGraphicCancel = New DarkUI.Controls.DarkButton()
+        Me.DarkLabel13 = New DarkUI.Controls.DarkLabel()
+        Me.nudGraphic = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel12 = New DarkUI.Controls.DarkLabel()
+        Me.cmbGraphic = New DarkUI.Controls.DarkComboBox()
+        Me.DarkLabel11 = New DarkUI.Controls.DarkLabel()
         Me.DarkGroupBox8 = New DarkUI.Controls.DarkGroupBox()
         Me.btnClearCommand = New DarkUI.Controls.DarkButton()
         Me.btnDeleteCommand = New DarkUI.Controls.DarkButton()
@@ -210,14 +218,6 @@ Partial Class FrmEditor_Events
         Me.ColumnHeader4 = New System.Windows.Forms.ColumnHeader()
         Me.lstMoveRoute = New System.Windows.Forms.ListBox()
         Me.cmbEvent = New DarkUI.Controls.DarkComboBox()
-        Me.fraGraphic = New DarkUI.Controls.DarkGroupBox()
-        Me.btnGraphicOk = New DarkUI.Controls.DarkButton()
-        Me.btnGraphicCancel = New DarkUI.Controls.DarkButton()
-        Me.DarkLabel13 = New DarkUI.Controls.DarkLabel()
-        Me.nudGraphic = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel12 = New DarkUI.Controls.DarkLabel()
-        Me.cmbGraphic = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel11 = New DarkUI.Controls.DarkLabel()
         Me.pnlGraphicSel = New System.Windows.Forms.Panel()
         Me.fraDialogue = New DarkUI.Controls.DarkGroupBox()
         Me.fraConditionalBranch = New DarkUI.Controls.DarkGroupBox()
@@ -535,6 +535,8 @@ Partial Class FrmEditor_Events
         CType(Me.picGraphic,System.ComponentModel.ISupportInitialize).BeginInit
         Me.DarkGroupBox6.SuspendLayout
         Me.fraCommands.SuspendLayout
+        Me.fraGraphic.SuspendLayout
+        CType(Me.nudGraphic,System.ComponentModel.ISupportInitialize).BeginInit
         Me.DarkGroupBox8.SuspendLayout
         Me.DarkGroupBox7.SuspendLayout
         Me.DarkGroupBox5.SuspendLayout
@@ -545,8 +547,6 @@ Partial Class FrmEditor_Events
         CType(Me.nudPlayerVariable,System.ComponentModel.ISupportInitialize).BeginInit
         Me.fraMoveRoute.SuspendLayout
         Me.DarkGroupBox10.SuspendLayout
-        Me.fraGraphic.SuspendLayout
-        CType(Me.nudGraphic,System.ComponentModel.ISupportInitialize).BeginInit
         Me.fraDialogue.SuspendLayout
         Me.fraConditionalBranch.SuspendLayout
         Me.fraConditions_Quest.SuspendLayout
@@ -887,6 +887,7 @@ Partial Class FrmEditor_Events
         '
         'pnlTabPage
         '
+        Me.pnlTabPage.Controls.Add(Me.fraGraphic)
         Me.pnlTabPage.Controls.Add(Me.fraGraphicPic)
         Me.pnlTabPage.Controls.Add(Me.DarkGroupBox6)
         Me.pnlTabPage.Controls.Add(Me.fraCommands)
@@ -1008,6 +1009,100 @@ Partial Class FrmEditor_Events
         Me.btnCancelCommand.Size = New System.Drawing.Size(88, 27)
         Me.btnCancelCommand.TabIndex = 2
         Me.btnCancelCommand.Text = "Cancel"
+        '
+        'fraGraphic
+        '
+        Me.fraGraphic.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraGraphic.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.fraGraphic.Controls.Add(Me.btnGraphicOk)
+        Me.fraGraphic.Controls.Add(Me.btnGraphicCancel)
+        Me.fraGraphic.Controls.Add(Me.DarkLabel13)
+        Me.fraGraphic.Controls.Add(Me.nudGraphic)
+        Me.fraGraphic.Controls.Add(Me.DarkLabel12)
+        Me.fraGraphic.Controls.Add(Me.cmbGraphic)
+        Me.fraGraphic.Controls.Add(Me.DarkLabel11)
+        Me.fraGraphic.ForeColor = System.Drawing.Color.Gainsboro
+        Me.fraGraphic.Location = New System.Drawing.Point(454, 6)
+        Me.fraGraphic.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraGraphic.Name = "fraGraphic"
+        Me.fraGraphic.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraGraphic.Size = New System.Drawing.Size(459, 557)
+        Me.fraGraphic.TabIndex = 14
+        Me.fraGraphic.TabStop = false
+        Me.fraGraphic.Text = "Graphic Selection"
+        Me.fraGraphic.Visible = false
+        '
+        'btnGraphicOk
+        '
+        Me.btnGraphicOk.Location = New System.Drawing.Point(761, 658)
+        Me.btnGraphicOk.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.btnGraphicOk.Name = "btnGraphicOk"
+        Me.btnGraphicOk.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnGraphicOk.Size = New System.Drawing.Size(88, 27)
+        Me.btnGraphicOk.TabIndex = 8
+        Me.btnGraphicOk.Text = "Ok"
+        '
+        'btnGraphicCancel
+        '
+        Me.btnGraphicCancel.Location = New System.Drawing.Point(855, 658)
+        Me.btnGraphicCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.btnGraphicCancel.Name = "btnGraphicCancel"
+        Me.btnGraphicCancel.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnGraphicCancel.Size = New System.Drawing.Size(88, 27)
+        Me.btnGraphicCancel.TabIndex = 7
+        Me.btnGraphicCancel.Text = "Cancel"
+        '
+        'DarkLabel13
+        '
+        Me.DarkLabel13.AutoSize = true
+        Me.DarkLabel13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel13.Location = New System.Drawing.Point(12, 659)
+        Me.DarkLabel13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel13.Name = "DarkLabel13"
+        Me.DarkLabel13.Size = New System.Drawing.Size(181, 15)
+        Me.DarkLabel13.TabIndex = 6
+        Me.DarkLabel13.Text = "Hold Shift to select multiple tiles."
+        '
+        'nudGraphic
+        '
+        Me.nudGraphic.Location = New System.Drawing.Point(121, 57)
+        Me.nudGraphic.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudGraphic.Name = "nudGraphic"
+        Me.nudGraphic.Size = New System.Drawing.Size(252, 23)
+        Me.nudGraphic.TabIndex = 3
+        '
+        'DarkLabel12
+        '
+        Me.DarkLabel12.AutoSize = true
+        Me.DarkLabel12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel12.Location = New System.Drawing.Point(24, 59)
+        Me.DarkLabel12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel12.Name = "DarkLabel12"
+        Me.DarkLabel12.Size = New System.Drawing.Size(54, 15)
+        Me.DarkLabel12.TabIndex = 2
+        Me.DarkLabel12.Text = "Number:"
+        '
+        'cmbGraphic
+        '
+        Me.cmbGraphic.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbGraphic.FormattingEnabled = true
+        Me.cmbGraphic.Items.AddRange(New Object() {"None", "Character", "Tileset"})
+        Me.cmbGraphic.Location = New System.Drawing.Point(121, 21)
+        Me.cmbGraphic.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbGraphic.Name = "cmbGraphic"
+        Me.cmbGraphic.Size = New System.Drawing.Size(252, 24)
+        Me.cmbGraphic.TabIndex = 1
+        '
+        'DarkLabel11
+        '
+        Me.DarkLabel11.AutoSize = true
+        Me.DarkLabel11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel11.Location = New System.Drawing.Point(24, 24)
+        Me.DarkLabel11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel11.Name = "DarkLabel11"
+        Me.DarkLabel11.Size = New System.Drawing.Size(83, 15)
+        Me.DarkLabel11.TabIndex = 0
+        Me.DarkLabel11.Text = "Graphics Type:"
         '
         'DarkGroupBox8
         '
@@ -1705,100 +1800,6 @@ Partial Class FrmEditor_Events
         Me.cmbEvent.Name = "cmbEvent"
         Me.cmbEvent.Size = New System.Drawing.Size(222, 24)
         Me.cmbEvent.TabIndex = 0
-        '
-        'fraGraphic
-        '
-        Me.fraGraphic.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
-        Me.fraGraphic.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
-        Me.fraGraphic.Controls.Add(Me.btnGraphicOk)
-        Me.fraGraphic.Controls.Add(Me.btnGraphicCancel)
-        Me.fraGraphic.Controls.Add(Me.DarkLabel13)
-        Me.fraGraphic.Controls.Add(Me.nudGraphic)
-        Me.fraGraphic.Controls.Add(Me.DarkLabel12)
-        Me.fraGraphic.Controls.Add(Me.cmbGraphic)
-        Me.fraGraphic.Controls.Add(Me.DarkLabel11)
-        Me.fraGraphic.ForeColor = System.Drawing.Color.Gainsboro
-        Me.fraGraphic.Location = New System.Drawing.Point(940, 130)
-        Me.fraGraphic.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraGraphic.Name = "fraGraphic"
-        Me.fraGraphic.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraGraphic.Size = New System.Drawing.Size(91, 83)
-        Me.fraGraphic.TabIndex = 9
-        Me.fraGraphic.TabStop = false
-        Me.fraGraphic.Text = "Graphic Selection"
-        Me.fraGraphic.Visible = false
-        '
-        'btnGraphicOk
-        '
-        Me.btnGraphicOk.Location = New System.Drawing.Point(761, 658)
-        Me.btnGraphicOk.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnGraphicOk.Name = "btnGraphicOk"
-        Me.btnGraphicOk.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnGraphicOk.Size = New System.Drawing.Size(88, 27)
-        Me.btnGraphicOk.TabIndex = 8
-        Me.btnGraphicOk.Text = "Ok"
-        '
-        'btnGraphicCancel
-        '
-        Me.btnGraphicCancel.Location = New System.Drawing.Point(855, 658)
-        Me.btnGraphicCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnGraphicCancel.Name = "btnGraphicCancel"
-        Me.btnGraphicCancel.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnGraphicCancel.Size = New System.Drawing.Size(88, 27)
-        Me.btnGraphicCancel.TabIndex = 7
-        Me.btnGraphicCancel.Text = "Cancel"
-        '
-        'DarkLabel13
-        '
-        Me.DarkLabel13.AutoSize = true
-        Me.DarkLabel13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel13.Location = New System.Drawing.Point(10, 659)
-        Me.DarkLabel13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel13.Name = "DarkLabel13"
-        Me.DarkLabel13.Size = New System.Drawing.Size(181, 15)
-        Me.DarkLabel13.TabIndex = 6
-        Me.DarkLabel13.Text = "Hold Shift to select multiple tiles."
-        '
-        'nudGraphic
-        '
-        Me.nudGraphic.Location = New System.Drawing.Point(443, 22)
-        Me.nudGraphic.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudGraphic.Name = "nudGraphic"
-        Me.nudGraphic.Size = New System.Drawing.Size(140, 23)
-        Me.nudGraphic.TabIndex = 3
-        '
-        'DarkLabel12
-        '
-        Me.DarkLabel12.AutoSize = true
-        Me.DarkLabel12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel12.Location = New System.Drawing.Point(382, 24)
-        Me.DarkLabel12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel12.Name = "DarkLabel12"
-        Me.DarkLabel12.Size = New System.Drawing.Size(54, 15)
-        Me.DarkLabel12.TabIndex = 2
-        Me.DarkLabel12.Text = "Number:"
-        '
-        'cmbGraphic
-        '
-        Me.cmbGraphic.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbGraphic.FormattingEnabled = true
-        Me.cmbGraphic.Items.AddRange(New Object() {"None", "Character", "Tileset"})
-        Me.cmbGraphic.Location = New System.Drawing.Point(121, 21)
-        Me.cmbGraphic.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbGraphic.Name = "cmbGraphic"
-        Me.cmbGraphic.Size = New System.Drawing.Size(252, 24)
-        Me.cmbGraphic.TabIndex = 1
-        '
-        'DarkLabel11
-        '
-        Me.DarkLabel11.AutoSize = true
-        Me.DarkLabel11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel11.Location = New System.Drawing.Point(22, 24)
-        Me.DarkLabel11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel11.Name = "DarkLabel11"
-        Me.DarkLabel11.Size = New System.Drawing.Size(83, 15)
-        Me.DarkLabel11.TabIndex = 0
-        Me.DarkLabel11.Text = "Graphics Type:"
         '
         'pnlGraphicSel
         '
@@ -5479,8 +5480,7 @@ Partial Class FrmEditor_Events
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
-        Me.ClientSize = New System.Drawing.Size(930, 708)
-        Me.Controls.Add(Me.fraGraphic)
+        Me.ClientSize = New System.Drawing.Size(1612, 708)
         Me.Controls.Add(Me.pnlVariableSwitches)
         Me.Controls.Add(Me.fraDialogue)
         Me.Controls.Add(Me.fraMoveRoute)
@@ -5505,6 +5505,9 @@ Partial Class FrmEditor_Events
         Me.DarkGroupBox6.ResumeLayout(false)
         Me.DarkGroupBox6.PerformLayout
         Me.fraCommands.ResumeLayout(false)
+        Me.fraGraphic.ResumeLayout(false)
+        Me.fraGraphic.PerformLayout
+        CType(Me.nudGraphic,System.ComponentModel.ISupportInitialize).EndInit
         Me.DarkGroupBox8.ResumeLayout(false)
         Me.DarkGroupBox7.ResumeLayout(false)
         Me.DarkGroupBox7.PerformLayout
@@ -5519,9 +5522,6 @@ Partial Class FrmEditor_Events
         Me.fraMoveRoute.ResumeLayout(false)
         Me.fraMoveRoute.PerformLayout
         Me.DarkGroupBox10.ResumeLayout(false)
-        Me.fraGraphic.ResumeLayout(false)
-        Me.fraGraphic.PerformLayout
-        CType(Me.nudGraphic,System.ComponentModel.ISupportInitialize).EndInit
         Me.fraDialogue.ResumeLayout(false)
         Me.fraConditionalBranch.ResumeLayout(false)
         Me.fraConditionalBranch.PerformLayout
@@ -5708,15 +5708,7 @@ End Sub
     Friend WithEvents chkIgnoreMove As DarkUI.Controls.DarkCheckBox
     Friend WithEvents btnMoveRouteOk As DarkUI.Controls.DarkButton
     Friend WithEvents btnMoveRouteCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents fraGraphic As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents DarkLabel11 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbGraphic As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel12 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudGraphic As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel13 As DarkUI.Controls.DarkLabel
     Friend WithEvents picGraphicSel As PictureBox
-    Friend WithEvents btnGraphicOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnGraphicCancel As DarkUI.Controls.DarkButton
     Friend WithEvents fraDialogue As DarkUI.Controls.DarkGroupBox
     Friend WithEvents fraConditionalBranch As DarkUI.Controls.DarkGroupBox
     Friend WithEvents optCondition0 As DarkUI.Controls.DarkRadioButton
@@ -6034,4 +6026,12 @@ End Sub
     Friend WithEvents chkWalkAnim As DarkUI.Controls.DarkCheckBox
     Friend WithEvents fraGraphicPic As DarkUI.Controls.DarkGroupBox
     Friend WithEvents picGraphic As PictureBox
+    Friend WithEvents fraGraphic As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents btnGraphicOk As DarkUI.Controls.DarkButton
+    Friend WithEvents btnGraphicCancel As DarkUI.Controls.DarkButton
+    Friend WithEvents DarkLabel13 As DarkUI.Controls.DarkLabel
+    Friend WithEvents nudGraphic As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel12 As DarkUI.Controls.DarkLabel
+    Friend WithEvents cmbGraphic As DarkUI.Controls.DarkComboBox
+    Friend WithEvents DarkLabel11 As DarkUI.Controls.DarkLabel
 End Class

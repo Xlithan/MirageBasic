@@ -4,8 +4,6 @@ Friend Class frmEditor_Skill
 
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         Dim tmpindex As Integer
-
-        If Editorindex = 0 Then Exit Sub
         tmpindex = lstIndex.SelectedIndex
         Skill(Editorindex).Name = Trim$(txtName.Text)
         lstIndex.Items.RemoveAt(EditorIndex)
@@ -44,7 +42,7 @@ Friend Class frmEditor_Skill
     Private Sub NudIcon_Scroll(sender As Object, e As EventArgs) Handles nudIcon.ValueChanged
 
         Skill(Editorindex).Icon = nudIcon.Value
-        EditorSkill_BltIcon()
+        EditorSkill_DrawIcon()
     End Sub
 
     Private Sub NudMap_Scroll(sender As Object, e As EventArgs) Handles nudMap.ValueChanged
@@ -104,6 +102,7 @@ Friend Class frmEditor_Skill
     End Sub
 
     Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
+        If lstIndex.SelectedIndex = 0 Then lstIndex.SelectedIndex = 1
         SkillEditorInit()
     End Sub
 
@@ -131,6 +130,9 @@ Friend Class frmEditor_Skill
     Private Sub FrmEditor_Skill_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         nudIcon.Maximum = NumSkillIcons
         nudCast.Value = 1
+        nudAoE.Maximum = Byte.MaxValue
+        nudRange.Maximum = Byte.MaxValue
+        nudMap.Maximum = MAX_MAPS
     End Sub
 
     Private Sub ChkProjectile_CheckedChanged(sender As Object, e As EventArgs) Handles chkProjectile.CheckedChanged
@@ -146,8 +148,6 @@ Friend Class frmEditor_Skill
     End Sub
 
     Private Sub ChkKnockBack_CheckedChanged(sender As Object, e As EventArgs) Handles chkKnockBack.CheckedChanged
-        If Editorindex = 0 OrElse Editorindex > MAX_SKILLS Then Exit Sub
-
         If chkKnockBack.Checked = True Then
             Skill(Editorindex).KnockBack = 1
         Else
@@ -156,8 +156,6 @@ Friend Class frmEditor_Skill
     End Sub
 
     Private Sub CmbKnockBackTiles_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbKnockBackTiles.SelectedIndexChanged
-        If Editorindex = 0 OrElse Editorindex > MAX_SKILLS Then Exit Sub
-
         Skill(Editorindex).KnockBackTiles = cmbKnockBackTiles.SelectedIndex
     End Sub
 

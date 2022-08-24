@@ -111,7 +111,7 @@ Partial Class frmEditor_Item
         Me.nudLevelReq = New DarkUI.Controls.DarkNumericUpDown()
         Me.cmbAccessReq = New DarkUI.Controls.DarkComboBox()
         Me.DarkLabel27 = New DarkUI.Controls.DarkLabel()
-        Me.cmbClassReq = New DarkUI.Controls.DarkComboBox()
+        Me.cmbJobReq = New DarkUI.Controls.DarkComboBox()
         Me.DarkLabel26 = New DarkUI.Controls.DarkLabel()
         Me.btnSave = New DarkUI.Controls.DarkButton()
         Me.btnDelete = New DarkUI.Controls.DarkButton()
@@ -1007,7 +1007,7 @@ Partial Class frmEditor_Item
         Me.fraRequirements.Controls.Add(Me.nudLevelReq)
         Me.fraRequirements.Controls.Add(Me.cmbAccessReq)
         Me.fraRequirements.Controls.Add(Me.DarkLabel27)
-        Me.fraRequirements.Controls.Add(Me.cmbClassReq)
+        Me.fraRequirements.Controls.Add(Me.cmbJobReq)
         Me.fraRequirements.Controls.Add(Me.DarkLabel26)
         Me.fraRequirements.ForeColor = System.Drawing.Color.Gainsboro
         Me.fraRequirements.Location = New System.Drawing.Point(253, 43)
@@ -1207,15 +1207,15 @@ Partial Class frmEditor_Item
         Me.DarkLabel27.TabIndex = 2
         Me.DarkLabel27.Text = "Access Requirement:"
         '
-        'cmbClassReq
+        'cmbJobReq
         '
-        Me.cmbClassReq.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbClassReq.FormattingEnabled = true
-        Me.cmbClassReq.Location = New System.Drawing.Point(140, 15)
-        Me.cmbClassReq.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbClassReq.Name = "cmbClassReq"
-        Me.cmbClassReq.Size = New System.Drawing.Size(206, 24)
-        Me.cmbClassReq.TabIndex = 1
+        Me.cmbJobReq.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbJobReq.FormattingEnabled = true
+        Me.cmbJobReq.Location = New System.Drawing.Point(140, 15)
+        Me.cmbJobReq.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbJobReq.Name = "cmbJobReq"
+        Me.cmbJobReq.Size = New System.Drawing.Size(206, 24)
+        Me.cmbJobReq.TabIndex = 1
         '
         'DarkLabel26
         '
@@ -1224,9 +1224,9 @@ Partial Class frmEditor_Item
         Me.DarkLabel26.Location = New System.Drawing.Point(7, 18)
         Me.DarkLabel26.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel26.Name = "DarkLabel26"
-        Me.DarkLabel26.Size = New System.Drawing.Size(108, 15)
+        Me.DarkLabel26.Size = New System.Drawing.Size(99, 15)
         Me.DarkLabel26.TabIndex = 0
-        Me.DarkLabel26.Text = "Class Requirement:"
+        Me.DarkLabel26.Text = "Job Requirement:"
         '
         'btnSave
         '
@@ -1388,9 +1388,9 @@ Partial Class frmEditor_Item
         Me.Controls.Add(Me.btnRequirements)
         Me.Controls.Add(Me.btnBasics)
         Me.Controls.Add(Me.DarkGroupBox1)
-        Me.Controls.Add(Me.fraBasics)
         Me.Controls.Add(Me.fraEquipment)
         Me.Controls.Add(Me.fraFurniture)
+        Me.Controls.Add(Me.fraBasics)
         Me.Controls.Add(Me.fraRequirements)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -1517,7 +1517,7 @@ End Sub
     Friend WithEvents btnBasics As DarkUI.Controls.DarkButton
     Friend WithEvents btnRequirements As DarkUI.Controls.DarkButton
     Friend WithEvents fraRequirements As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbClassReq As DarkUI.Controls.DarkComboBox
+    Friend WithEvents cmbJobReq As DarkUI.Controls.DarkComboBox
     Friend WithEvents DarkLabel26 As DarkUI.Controls.DarkLabel
     Friend WithEvents cmbAccessReq As DarkUI.Controls.DarkComboBox
     Friend WithEvents DarkLabel27 As DarkUI.Controls.DarkLabel

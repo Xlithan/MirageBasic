@@ -28,8 +28,6 @@ Friend Module C_Quest
 
     Friend QuestChanged(MAX_QUESTS) As Boolean
 
-    Friend QuestEditorShow As Boolean
-
     'questlog variables
 
     Friend Const MaxActivequests = 10
@@ -128,7 +126,7 @@ Friend Module C_Quest
 #Region "Incoming Packets"
 
     Friend Sub Packet_QuestEditor(ByRef data() As Byte)
-        QuestEditorShow = True
+        InitQuestEditor = True
     End Sub
 
     Friend Sub Packet_UpdateQuest(ByRef data() As Byte)
@@ -597,21 +595,18 @@ Friend Module C_Quest
         With frmEditor_Quest
             'Populate combo boxes
             .cmbItemReq.Items.Clear()
-            .cmbItemReq.Items.Add("None")
 
             For i = 0 To MAX_ITEMS
                 .cmbItemReq.Items.Add(i & ": " & Item(i).Name)
             Next
 
             .cmbQuestReq.Items.Clear()
-            .cmbQuestReq.Items.Add("None")
 
             For i = 0 To MAX_QUESTS
                 .cmbQuestReq.Items.Add(i & ": " & Quest(i).Name)
             Next
 
             .cmbClassReq.Items.Clear()
-            .cmbClassReq.Items.Add("None")
 
             For i = 0 To MAX_JOBS
                 .cmbClassReq.Items.Add(i & ": " & Job(i).Name)
@@ -673,28 +668,24 @@ Friend Module C_Quest
 
             'Populate combo boxes
             .cmbNpc.Items.Clear()
-            .cmbNpc.Items.Add("None")
 
             For i = 0 To MAX_NPCS
                 .cmbNpc.Items.Add(i & ": " & Npc(i).Name)
             Next
 
             .cmbItem.Items.Clear()
-            .cmbItem.Items.Add("None")
 
             For i = 0 To MAX_ITEMS
                 .cmbItem.Items.Add(i & ": " & Item(i).Name)
             Next
 
             .cmbMap.Items.Clear()
-            .cmbMap.Items.Add("None")
 
             For i = 0 To MAX_MAPS
                 .cmbMap.Items.Add(i)
             Next
 
             .cmbResource.Items.Clear()
-            .cmbResource.Items.Add("None")
 
             For i = 0 To MAX_RESOURCES
                 .cmbResource.Items.Add(i & ": " & Resource(i).Name)
@@ -829,6 +820,7 @@ Friend Module C_Quest
         buffer.Dispose()
 
     End Sub
+
     Friend Sub QuestEditorInit()
 
         If frmEditor_Quest.Visible = False Then Exit Sub
@@ -851,10 +843,6 @@ Friend Module C_Quest
             .cmbItemReq.Items.Clear()
             .cmbEndItem.Items.Clear()
             .cmbItemReward.Items.Clear()
-            .cmbStartItem.Items.Add("None")
-            .cmbItemReq.Items.Add("None")
-            .cmbEndItem.Items.Add("None")
-            .cmbItemReward.Items.Add("None")
 
             For i = 0 To MAX_ITEMS
                 .cmbStartItem.Items.Add(i & ": " & Item(i).Name)
@@ -869,7 +857,6 @@ Friend Module C_Quest
             .cmbItemReward.SelectedIndex = 0
 
             .cmbClassReq.Items.Clear()
-            .cmbClassReq.Items.Add("None")
             For i = 0 To MAX_JOBS
                 .cmbClassReq.Items.Add(Trim(Job(i).Name))
             Next
@@ -898,7 +885,7 @@ Friend Module C_Quest
                     Case 2
                         .lstRequirements.Items.Add(i & ":" & "Quest Requirement: " & Trim(Quest(Quest(Editorindex).RequirementIndex(i)).Name))
                     Case 3
-                        .lstRequirements.Items.Add(i & ":" & "Class Requirement: " & Trim(Job(Quest(Editorindex).RequirementIndex(i)).Name))
+                        .lstRequirements.Items.Add(i & ":" & "Job Requirement: " & Trim(Job(Quest(Editorindex).RequirementIndex(i)).Name))
                     Case Else
                         .lstRequirements.Items.Add(i & ":")
                 End Select

@@ -226,9 +226,7 @@ Module C_DataBase
 
     Sub ClearSkill(index As Integer)
         Skill(index) = Nothing
-        Skill(index) = New SkillStruct With {
-            .Name = ""
-        }
+        Skill(index).Name = ""
     End Sub
 
 #End Region

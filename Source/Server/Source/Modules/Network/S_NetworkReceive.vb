@@ -158,8 +158,8 @@ Module S_NetworkReceive
         Socket.PacketId(ClientPackets.CSaveProjectile) = AddressOf HandleSaveProjectile
         Socket.PacketId(ClientPackets.CRequestEditRecipes) = AddressOf Packet_RequestEditRecipes
         Socket.PacketId(ClientPackets.CSaveRecipe) = AddressOf Packet_SaveRecipe
-        Socket.PacketId(ClientPackets.CRequestEditClass) = AddressOf Packet_RequestEditJob
-        Socket.PacketId(ClientPackets.CSaveClass) = AddressOf Packet_SaveJob
+        Socket.PacketId(ClientPackets.CRequestEditJob) = AddressOf Packet_RequestEditJob
+        Socket.PacketId(ClientPackets.CSaveJob) = AddressOf Packet_SaveJob
         Socket.PacketId(ClientPackets.CRequestAutoMap) = AddressOf Packet_RequestAutoMap
         Socket.PacketId(ClientPackets.CSaveAutoMap) = AddressOf Packet_SaveAutoMap
 
@@ -701,7 +701,7 @@ Module S_NetworkReceive
             PlayerMsg(index, "Account:  " & Trim$(Player(i).Login) & ", Name: " & GetPlayerName(i), ColorType.Yellow)
 
             If GetPlayerAccess(index) > AdminType.Monitor Then
-                PlayerMsg(index, "-=- Stats for " & GetPlayerName(i) & " -=-", ColorType.Yellow)
+                PlayerMsg(index, " Stats for " & GetPlayerName(i) & " ", ColorType.Yellow)
                 PlayerMsg(index, "Level: " & GetPlayerLevel(i) & "  Exp: " & GetPlayerExp(i) & "/" & GetPlayerNextLevel(i), ColorType.Yellow)
                 PlayerMsg(index, "HP: " & GetPlayerVital(i, VitalType.HP) & "/" & GetPlayerMaxVital(i, VitalType.HP) & "  MP: " & GetPlayerVital(i, VitalType.MP) & "/" & GetPlayerMaxVital(i, VitalType.MP) & "  SP: " & GetPlayerVital(i, VitalType.SP) & "/" & GetPlayerMaxVital(i, VitalType.SP), ColorType.Yellow)
                 PlayerMsg(index, "Strength: " & GetPlayerStat(i, StatType.Strength) & "  Defense: " & GetPlayerStat(i, StatType.Endurance) & "  Magic: " & GetPlayerStat(i, StatType.Intelligence) & "  Speed: " & GetPlayerStat(i, StatType.Spirit), ColorType.Yellow)
@@ -822,7 +822,7 @@ Module S_NetworkReceive
 
         AddDebug("Recieved CMSG: CGetStats")
 
-        PlayerMsg(index, "-=- Stats for " & GetPlayerName(index) & " -=-", ColorType.Yellow)
+        PlayerMsg(index, "Stats: " & GetPlayerName(index), ColorType.Yellow)
         PlayerMsg(index, "Level: " & GetPlayerLevel(index) & "  Exp: " & GetPlayerExp(index) & "/" & GetPlayerNextLevel(index), ColorType.Yellow)
         PlayerMsg(index, "HP: " & GetPlayerVital(index, VitalType.HP) & "/" & GetPlayerMaxVital(index, VitalType.HP) & "  MP: " & GetPlayerVital(index, VitalType.MP) & "/" & GetPlayerMaxVital(index, VitalType.MP) & "  SP: " & GetPlayerVital(index, VitalType.SP) & "/" & GetPlayerMaxVital(index, VitalType.SP), ColorType.Yellow)
         PlayerMsg(index, "STR: " & GetPlayerStat(index, StatType.Strength) & "  DEF: " & GetPlayerStat(index, StatType.Endurance) & "  MAGI: " & GetPlayerStat(index, StatType.Intelligence) & "  Speed: " & GetPlayerStat(index, StatType.Spirit), ColorType.Yellow)

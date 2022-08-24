@@ -240,20 +240,20 @@ Public Class LanguageDef
         Public Level As String = "Lv : "
         Public Exp As String = "Exp : "
 
-        Public StatsLabel As String = "== Stats =="
-        Public Strength As String = "Strength : "
-        Public Endurance As String = "Endurance : "
-        Public Vitality As String = "Vitality : "
-        Public Intelligence As String = "Intelligence : "
-        Public Luck As String = "Luck : "
-        Public Spirit As String = "Spirit : "
-        Public Points As String = "Points Available : "
+        Public StatsLabel As String = "Stats:"
+        Public Strength As String = "Strength: "
+        Public Endurance As String = "Endurance: "
+        Public Vitality As String = "Vitality: "
+        Public Intelligence As String = "Intelligence: "
+        Public Luck As String = "Luck: "
+        Public Spirit As String = "Spirit: "
+        Public Points As String = "Points Available: "
 
-        Public SkillLabel As String = "== Skill Levels =="
-        Public Herbalist As String = "Herbalist : "
-        Public Woodcutter As String = "Woodcutter : "
-        Public Miner As String = "Miner : "
-        Public Fisherman As String = "Fisherman : "
+        Public SkillLabel As String = "Skill Levels"
+        Public Herbalist As String = "Herbalist: "
+        Public Woodcutter As String = "Woodcutter: "
+        Public Miner As String = "Miner: "
+        Public Fisherman As String = "Fisherman: "
 
     End Class
 End Class

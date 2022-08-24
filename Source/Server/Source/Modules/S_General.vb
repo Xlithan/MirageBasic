@@ -176,7 +176,7 @@ Module S_General
         InitNetwork()
 
         ' Init all the player sockets
-        Console.WriteLine("Initializing player array...")
+        Console.WriteLine("Initializing Players...")
 
         For x = 0 To MAX_PLAYERS
             ClearPlayer(x)
@@ -185,9 +185,9 @@ Module S_General
         ' Serves as a constructor
         ClearGameData()
         LoadGameData()
-        Console.WriteLine("Spawning map items...")
+        Console.WriteLine("Spawning Map Items...")
         SpawnAllMapsItems()
-        Console.WriteLine("Spawning map npcs...")
+        Console.WriteLine("Spawning Map Npcs...")
         SpawnAllMapNpcs()
 
         ' Check if the master charlist file exists for checking duplicate names, and if it doesnt make it
@@ -280,7 +280,7 @@ Module S_General
     End Sub
 
     Friend Sub ClearGameData()
-        Console.WriteLine("Clearing temp tile fields...") : ClearTempTiles()
+        Console.WriteLine("Clearing Temp Tiles...") : ClearTempTiles()
         Console.WriteLine("Clearing Maps...") : ClearMaps()
         Console.WriteLine("Clearing Map Items...") : ClearMapItems()
         Console.WriteLine("Clearing Map Npc's...") : ClearAllMapNpcs()
@@ -291,10 +291,10 @@ Module S_General
         Console.WriteLine("Clearing Skills...") : ClearSkills()
         Console.WriteLine("Clearing Animations...") : ClearAnimations()
         Console.WriteLine("Clearing Quests...") : ClearQuests()
-        Console.WriteLine("Clearing map projectiles...") : ClearMapProjectiles()
-        Console.WriteLine("Clearing projectiles...") : ClearProjectiles()
+        Console.WriteLine("Clearing Map Projectiles...") : ClearMapProjectiles()
+        Console.WriteLine("Clearing Projectiles...") : ClearProjectiles()
         Console.WriteLine("Clearing Recipes...") : ClearRecipes()
-        Console.WriteLine("Clearing pets...") : ClearPets()
+        Console.WriteLine("Clearing Pets...") : ClearPets()
     End Sub
 
     Private Sub LoadGameData()
@@ -310,8 +310,8 @@ Module S_General
         Console.WriteLine("Loading House Configurations...") : LoadHouses()
         Console.WriteLine("Loading Switches...") : LoadSwitches()
         Console.WriteLine("Loading Variables...") : LoadVariables()
-        Console.WriteLine("Spawning global events...") : SpawnAllMapGlobalEvents()
-        Console.WriteLine("Loading projectiles...") : LoadProjectiles()
+        Console.WriteLine("Spawning Global Events...") : SpawnAllMapGlobalEvents()
+        Console.WriteLine("Loading Projectiles...") : LoadProjectiles()
         Console.WriteLine("Loading Recipes...") : LoadRecipes()
         Console.WriteLine("Loading Pets...") : LoadPets()
     End Sub

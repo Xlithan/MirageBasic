@@ -45,6 +45,7 @@ Friend Class frmEditor_Resource
     End Sub
 
     Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
+        If lstIndex.SelectedIndex = 0 Then lstIndex.SelectedIndex = 1
         ResourceEditorInit()
     End Sub
 
@@ -76,7 +77,6 @@ Friend Class frmEditor_Resource
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         Dim tmpindex As Integer
 
-        If Editorindex = 0 Then Exit Sub
         tmpindex = lstIndex.SelectedIndex
         Resource(Editorindex).Name = Trim$(txtName.Text)
         lstIndex.Items.RemoveAt(EditorIndex)

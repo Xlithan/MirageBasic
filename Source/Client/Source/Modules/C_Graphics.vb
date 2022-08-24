@@ -1639,8 +1639,8 @@ Module C_Graphics
             If FurnitureHouse = Player(Myindex).InHouse Then
                 If FurnitureCount > 0 Then
                    For i = 0 To FurnitureCount
-                        If Furniture(I).ItemNum > 0 Then
-                            DrawFurniture(I, 0)
+                        If Furniture(i).ItemNum > 0 Then
+                            DrawFurniture(i, 0)
                         End If
                     Next
                 End If
@@ -1651,8 +1651,8 @@ Module C_Graphics
         If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
 
            For i = 0 To Map.CurrentEvents
-                If Map.MapEvents(I).Position = 0 Then
-                    DrawEvent(I)
+                If Map.MapEvents(i).Position = 0 Then
+                    DrawEvent(i)
                 End If
             Next
         End If
@@ -1665,8 +1665,8 @@ Module C_Graphics
         ' Draw out the items
         If NumItems > 0 Then
            For i = 0 To MAX_MAP_ITEMS
-                If MapItem(I).Num > 0 Then
-                    DrawItem(I)
+                If MapItem(i).Num > 0 Then
+                    DrawItem(i)
                 End If
             Next
         End If
@@ -1775,7 +1775,7 @@ Module C_Graphics
         If NumAnimations > 0 Then
            For i = 0 To MAX_ANIMATIONS
                 If AnimInstance(I).Used(1) Then
-                    DrawAnimation(I - 1, 1)
+                    DrawAnimation(i, 1)
                 End If
             Next
         End If
@@ -2394,7 +2394,7 @@ Module C_Graphics
         RenderSprite(ExpBarSprite, GameWindow, HudWindowX + HudexpBarX, HudWindowY + HudexpBarY + 4, rec.X, rec.Y, rec.Width, rec.Height)
 
         'draw text onto that
-        DrawText(HudWindowX + HudexpBarX + 65, HudWindowY + HudexpBarY + 4, GetPlayerExp(Myindex) & "/" & NextlevelExp, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(HudWindowX + 85, HudWindowY + 2, "Exp: " & GetPlayerExp(Myindex) & "/" & NextlevelExp, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
     End Sub
 
     Sub DrawActionPanel()
@@ -2848,7 +2848,7 @@ NextLoop:
         'Access
         DrawText(SkillWindowX - DescriptionGfxInfo.Width + 10, SkillWindowY + 176, "Access: " & SkillDescReqAccess, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'Class
-        DrawText(SkillWindowX - DescriptionGfxInfo.Width + 10, SkillWindowY + 192, "Class: " & SkillDescReqClass, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+        DrawText(SkillWindowX - DescriptionGfxInfo.Width + 10, SkillWindowY + 192, "Job: " & SkillDescReqClass, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
     End Sub
 
@@ -3066,6 +3066,9 @@ NextLoop:
         Dim Furniturenum As Integer
         Dim sRECT As Rectangle
         Dim dRECT As Rectangle
+
+        If Not InitEditor = EDITOR_ITEM Then Exit Sub
+
         Furniturenum = frmEditor_Item.nudFurniture.Value
 
         If Furniturenum < 1 OrElse Furniturenum > NumFurniture Then
@@ -3171,7 +3174,7 @@ NextLoop:
         End If
     End Sub
 
-    Friend Sub EditorSkill_BltIcon()
+    Friend Sub EditorSkill_DrawIcon()
         Dim iconnum As Integer
         Dim sRECT As Rectangle
         Dim dRECT As Rectangle

@@ -7,7 +7,6 @@ Friend Class frmEditor_Shop
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         Dim tmpindex As Integer
 
-        If Editorindex = 0 Then Exit Sub
         tmpindex = lstIndex.SelectedIndex
         Shop(Editorindex).Name = Trim$(txtName.Text)
         lstIndex.Items.RemoveAt(EditorIndex)
@@ -21,8 +20,8 @@ Friend Class frmEditor_Shop
 
     Private Sub BtnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         Dim index As Integer
+
         index = lstTradeItem.SelectedIndex
-        If index = 0 Then Exit Sub
         With Shop(Editorindex).TradeItem(index)
             .Item = cmbItem.SelectedIndex
             .ItemValue = nudItemValue.Value
@@ -34,8 +33,8 @@ Friend Class frmEditor_Shop
 
     Private Sub BtnDeleteTrade_Click(sender As Object, e As EventArgs) Handles btnDeleteTrade.Click
         Dim index As Integer
+
         index = lstTradeItem.SelectedIndex
-        If index = 0 Then Exit Sub
         With Shop(Editorindex).TradeItem(index)
             .Item = 0
             .ItemValue = 0
@@ -46,6 +45,7 @@ Friend Class frmEditor_Shop
     End Sub
 
     Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
+        If lstIndex.SelectedIndex = 0 Then lstIndex.SelectedIndex = 1
         ShopEditorInit()
     End Sub
 
@@ -83,7 +83,4 @@ Friend Class frmEditor_Shop
         Shop(Editorindex).Face = nudFace.Value
     End Sub
 
-    Private Sub DarkGroupBox3_Enter(sender As Object, e As EventArgs) Handles DarkGroupBox3.Enter
-
-    End Sub
 End Class

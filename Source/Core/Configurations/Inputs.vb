@@ -159,5 +159,6 @@ Public Module modInputs
         Dim writer = New StreamWriter(cf)
         
         x.Serialize(writer, Inputs)
+        writer.Close
     End Sub
 End Module

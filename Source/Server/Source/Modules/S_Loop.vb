@@ -569,7 +569,7 @@ Module modLoop
                     ' // This is used for checking if an NPC is dead or not //
                     ' ////////////////////////////////////////////////////////
                     ' Check if the npc is dead or not
-                    If MapNpc(mapNum).Npc(x).Num > 0 AndAlso MapNpc(mapNum).Npc(x).Vital(VitalType.HP) <= 0 Then
+                    If MapNpc(mapNum).Npc(x).Num > 0 AndAlso MapNpc(mapNum).Npc(x).Vital(VitalType.HP) <= 0 AndAlso MapNpc(mapNum).Npc(x).SpawnWait > 0 Then
                         MapNpc(mapNum).Npc(x).Num = 0
                         MapNpc(mapNum).Npc(x).SpawnWait = GetTimeMs()
                         MapNpc(mapNum).Npc(x).Vital(VitalType.HP) = 0
@@ -579,7 +579,7 @@ Module modLoop
                     ' // This is used for spawning an NPC //
                     ' //////////////////////////////////////
                     ' Check if we are supposed to spawn an npc or not
-                    If MapNpc(mapNum).Npc(x).Num = 0 AndAlso Map(mapNum).Npc(x) > 0 Then
+                    If MapNpc(mapNum).Npc(x).Num = 0 AndAlso Map(mapNum).Npc(x) > 0 AndAlso Npc(Map(mapNum).Npc(x)).SpawnSecs > 0 Then
                         If tickCount > MapNpc(mapNum).Npc(x).SpawnWait + (Npc(Map(mapNum).Npc(x)).SpawnSecs * 1000) Then
                             SpawnNpc(x, mapNum)
                         End If

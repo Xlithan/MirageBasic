@@ -283,7 +283,6 @@ Module C_UpdateUI
 
     Friend CraftPanelX As Integer = 25
     Friend CraftPanelY As Integer = 25
-    Friend LoadJobInfo As Boolean
 
 #End Region
 
@@ -379,27 +378,25 @@ Module C_UpdateUI
 
                 .cmbEvolve.Items.Clear()
 
-                .cmbEvolve.Items.Add("None")
-
                 ' Add the names
                 For i = 0 To MAX_PETS
                     .cmbEvolve.Items.Add(i & ": " & Trim$(Pet(i).Name))
                 Next
 
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 .cmbEvolve.SelectedIndex = 0
                 PetEditorInit()
             End With
             InitPetEditor = False
         End If
 
-        If QuestEditorShow = True Then
+        If InitQuestEditor = True Then
             With frmEditor_Quest
-                Editor = EditorTasks
+                Editor = EDITOR_QUEST
                 .lstIndex.Items.Clear()
                 .cmbQuestReq.Items.Clear()
-                .cmbQuestReq.Items.Add("None")
+
                 ' Add the names
                 For i = 0 To MAX_QUESTS
                     .lstIndex.Items.Add(I & ": " & Trim$(Quest(I).Name))
@@ -407,10 +404,10 @@ Module C_UpdateUI
                 Next
 
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 QuestEditorInit()
             End With
-            QuestEditorShow = False
+            InitQuestEditor = False
         End If
 
         If InitAnimationEditor = True Then
@@ -424,30 +421,80 @@ Module C_UpdateUI
                 Next
 
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 AnimationEditorInit()
             End With
             InitAnimationEditor = False
         End If
 
         If InitItemEditor = True Then
-            ItemEditorPreInit()
+            With frmEditor_Item
+                Editor = EDITOR_ITEM
+                .lstIndex.Items.Clear()
+
+                ' Add the names
+               For i = 0 To MAX_ITEMS
+                    .lstIndex.Items.Add(i & ": " & Trim$(Item(i).Name))
+                Next
+
+                .Show()
+                .lstIndex.SelectedIndex = 1
+                ItemEditorInit()
+            End With
             InitItemEditor = False
         End If
 
         If InitRecipeEditor = True Then
-            RecipeEditorPreInit()
+            With frmEditor_Recipe
+                Editor = EDITOR_RECIPE
+                .lstIndex.Items.Clear()
+
+                ' Add the names
+               For i = 0 To MAX_RECIPE
+                    .lstIndex.Items.Add(i & ": " & Trim$(Recipe(i).Name))
+                Next
+
+                'fill comboboxes
+                .cmbMakeItem.Items.Clear()
+                .cmbIngredient.Items.Clear()
+
+                For i = 0 To MAX_ITEMS
+                    .cmbMakeItem.Items.Add(Trim$(Item(i).Name))
+                    .cmbIngredient.Items.Add(Trim$(Item(i).Name))
+                Next
+
+                .Show()
+                .lstIndex.SelectedIndex = 1
+                RecipeEditorInit()
+            End With
             InitRecipeEditor = False
         End If
 
-        If InitClassEditor = True Then
-            JobEditorInit()
-            InitClassEditor = False
-        End If
+        If InitJobEditor = True Then
+            With frmEditor_Job
+                .lstIndex.Items.Clear() 
 
-        If LoadJobInfo = True Then
-            LoadJob()
-            LoadJobInfo = False
+                For i = 0 To MAX_JOBS
+                    .lstIndex.Items.Add(Trim(Job(i).Name))
+                Next
+
+                Editor = EDITOR_Job
+
+                .nudMaleSprite.Maximum = NumCharacters
+                .nudFemaleSprite.Maximum = NumCharacters
+
+                .cmbItems.Items.Clear()
+
+                For i = 0 To MAX_ITEMS
+                    .cmbItems.Items.Add(Trim(Item(i).Name))
+                Next
+
+                .Show()
+                .lstIndex.SelectedIndex = 1
+                JobEditorInit()
+            End With
+
+            InitJobEditor = False
         End If
 
         If InitResourceEditor = True Then
@@ -466,7 +513,7 @@ Module C_UpdateUI
                 Next
 
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 ResourceEditorInit()
             End With
             InitResourceEditor = False
@@ -482,8 +529,40 @@ Module C_UpdateUI
                     .lstIndex.Items.Add(i & ": " & Trim$(Npc(i).Name))
                 Next
 
+                'populate combo boxes
+                .cmbAnimation.Items.Clear()
+                For i = 0 To MAX_ANIMATIONS
+                    .cmbAnimation.Items.Add(i & ": " & Animation(i).Name)
+                Next
+
+                .cmbQuest.Items.Clear()
+                For i = 0 To MAX_QUESTS
+                    .cmbQuest.Items.Add(i & ": " & Quest(i).Name)
+                Next
+
+                .cmbItem.Items.Clear()
+                For i = 0 To MAX_ITEMS
+                    .cmbItem.Items.Add(i & ": " & Item(i).Name)
+                Next
+
+                .cmbSkill1.Items.Clear()
+                .cmbSkill2.Items.Clear()
+                .cmbSkill3.Items.Clear()
+                .cmbSkill4.Items.Clear()
+                .cmbSkill5.Items.Clear()
+                .cmbSkill6.Items.Clear()
+
+               For i = 0 To MAX_SKILLS
+                    .cmbSkill1.Items.Add(Skill(i).Name)
+                    .cmbSkill2.Items.Add(Skill(i).Name)
+                    .cmbSkill3.Items.Add(Skill(i).Name)
+                    .cmbSkill4.Items.Add(Skill(i).Name)
+                    .cmbSkill5.Items.Add(Skill(i).Name)
+                    .cmbSkill6.Items.Add(Skill(i).Name)
+                Next
+
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 NpcEditorInit()
             End With
             InitNPCEditor = False
@@ -500,7 +579,7 @@ Module C_UpdateUI
                 Next
 
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 SkillEditorInit()
             End With
             InitSkillEditor = False
@@ -516,28 +595,19 @@ Module C_UpdateUI
                     .lstIndex.Items.Add(i & ": " & Trim$(Shop(i).Name))
                 Next
 
-                .Show()
-                .lstIndex.SelectedIndex = 0
-                ShopEditorInit()
-            End With
-            InitShopEditor = False
-        End If
+                .cmbItem.Items.Clear()
+                .cmbCostItem.Items.Clear()
 
-        If InitAnimationEditor = True Then
-            With FrmEditor_Animation
-                Editor = EDITOR_ANIMATION
-                .lstIndex.Items.Clear()
-
-                ' Add the names
-                For i = 0 To MAX_ANIMATIONS
-                    .lstIndex.Items.Add(i & ": " & Trim$(Animation(i).Name))
+                For i = 0 To MAX_ITEMS
+                    .cmbItem.Items.Add(i & ": " & Trim$(Item(i).Name))
+                    .cmbCostItem.Items.Add(i & ": " & Trim$(Item(i).Name))
                 Next
 
                 .Show()
-                .lstIndex.SelectedIndex = 0
-                AnimationEditorInit()
+                .lstIndex.SelectedIndex = 1
+                ShopEditorInit()
             End With
-            InitAnimationEditor = False
+            InitShopEditor = False
         End If
 
         If HouseEdit = True Then
@@ -551,7 +621,7 @@ Module C_UpdateUI
                 Next
 
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
             End With
 
             HouseEditorInit()
@@ -570,7 +640,7 @@ Module C_UpdateUI
                 Next
 
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 ProjectileEditorInit()
             End With
 
@@ -639,7 +709,7 @@ Module C_UpdateUI
 
             For x = 0 To MAX_MAPS
                 FrmAdmin.lstMaps.Items.Add(x)
-                FrmAdmin.lstMaps.Items(x - 1).SubItems.Add(MapNames(x))
+                FrmAdmin.lstMaps.Items(x).SubItems.Add(MapNames(x))
             Next
 
             UpdateMapnames = False
@@ -728,19 +798,16 @@ Module C_UpdateUI
                 Next
                 ' items
                 .cmbHasItem.Items.Clear()
-                .cmbHasItem.Items.Add("None")
                 For i = 0 To MAX_ITEMS
                     .cmbHasItem.Items.Add(i & ": " & Trim$(Item(i).Name))
                 Next
                 ' variables
                 .cmbPlayerVar.Items.Clear()
-                .cmbPlayerVar.Items.Add("None")
                 For i = 0 To MaxVariables
                     .cmbPlayerVar.Items.Add(i & ". " & Variables(i))
                 Next
                 ' variables
                 .cmbPlayerSwitch.Items.Clear()
-                .cmbPlayerSwitch.Items.Add("None")
                 For i = 0 To MaxSwitches
                     .cmbPlayerSwitch.Items.Add(i & ". " & Switches(i))
                 Next
@@ -769,13 +836,13 @@ Module C_UpdateUI
         If OptionsVisible = True Then
 
             ' show in GUI
-            If Settings.Music = 1 Then
+            If Settings.Music = true Then
                 FrmOptions.optMOn.Checked = True
             Else
                 FrmOptions.optMOff.Checked = True
             End If
 
-            If Settings.Music = 1 Then
+            If Settings.Sound = true Then
                 FrmOptions.optSOn.Checked = True
             Else
                 FrmOptions.optSOff.Checked = True
@@ -797,6 +864,7 @@ Module C_UpdateUI
             Else
                 FrmOptions.chkNpcBars.Checked = False
             End If
+
 
             FrmOptions.Visible = True
             OptionsVisible = False

@@ -786,6 +786,8 @@
     End Structure
 
    Public Structure MapEventStruct
+        Dim Name As String
+        Dim Steps As Integer
         Dim Dir As Integer
         Dim X As Integer
         Dim Y As Integer
@@ -824,6 +826,13 @@
         Dim MoveTimer As Integer
         Dim SelfSwitches() As Integer '0 to 4
         Dim MoveRouteComplete As Integer
+
+        Dim XOffset As Integer
+        Dim YOffset As Integer
+        Dim Moving As Integer
+        Dim ShowDir As Integer
+        Dim WalkAnim As Integer
+        Dim DirFix As Integer
     End Structure
 
    Public Structure EventMapStruct
@@ -939,4 +948,8 @@
         Dim Timer As Integer
     End Structure
 
+    Public Structure EventListStruct
+        Dim CommandList As Integer
+        Dim CommandNum As Integer
+    End Structure
 End Module
