@@ -3,56 +3,38 @@
 Friend Class frmEditor_House
 
     Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
+        If lstIndex.SelectedIndex = 0 Then lstIndex.SelectedIndex = 1
         HouseEditorInit()
     End Sub
 
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         Dim tmpindex As Integer
 
-        If Editorindex <= 0 Then Exit Sub
-
         tmpindex = lstIndex.SelectedIndex
         House(Editorindex).ConfigName = Trim$(txtName.Text)
         lstIndex.Items.RemoveAt(EditorIndex)
         lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & House(Editorindex).ConfigName)
         lstIndex.SelectedIndex = tmpindex
-
     End Sub
 
     Private Sub NudBaseMap_ValueChanged(sender As Object, e As EventArgs) Handles nudBaseMap.KeyUp, nudBaseMap.Click
-        If Editorindex <= 0 Then Exit Sub
-
-        If nudBaseMap.Value < 1 OrElse nudBaseMap.Value > MAX_MAPS Then Exit Sub
         House(Editorindex).BaseMap = nudBaseMap.Value
     End Sub
 
     Private Sub NudX_ValueChanged(sender As Object, e As EventArgs) Handles nudX.KeyUp, nudX.Click
-        If Editorindex <= 0 Then Exit Sub
-
-        If nudX.Value < 0 OrElse nudX.Value > 255 Then Exit Sub
         House(Editorindex).X = nudX.Value
-
     End Sub
 
     Private Sub NudY_ValueChanged(sender As Object, e As EventArgs) Handles nudY.KeyUp, nudY.Click
-        If Editorindex <= 0 Then Exit Sub
-
-        If nudY.Value < 0 OrElse nudY.Value > 255 Then Exit Sub
         House(Editorindex).Y = nudY.Value
-
     End Sub
 
     Private Sub NudPrice_ValueChanged(sender As Object, e As EventArgs) Handles nudPrice.KeyUp, nudPrice.Click
-        If Editorindex <= 0 Then Exit Sub
-
         House(Editorindex).Price = nudPrice.Value
 
     End Sub
 
     Private Sub NudFurniture_ValueChanged(sender As Object, e As EventArgs) Handles nudFurniture.KeyUp, nudFurniture.Click
-        If Editorindex <= 0 Then Exit Sub
-
-        If nudFurniture.Value < 0 Then Exit Sub
         House(Editorindex).MaxFurniture = nudFurniture.Value
     End Sub
 

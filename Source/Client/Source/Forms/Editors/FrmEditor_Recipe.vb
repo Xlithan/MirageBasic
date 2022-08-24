@@ -13,8 +13,6 @@ Friend Class frmEditor_Recipe
     Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Dim tmpindex As Integer
 
-        If Editorindex = 0 OrElse Editorindex > MAX_RECIPE Then Exit Sub
-
         ClearRecipe(Editorindex)
 
         tmpindex = lstIndex.SelectedIndex
@@ -29,7 +27,7 @@ Friend Class frmEditor_Recipe
 
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         Dim tmpindex As Integer
-        If Editorindex = 0 OrElse Editorindex > MAX_RECIPE Then Exit Sub
+
         tmpindex = lstIndex.SelectedIndex
         Recipe(Editorindex).Name = Trim$(txtName.Text)
         lstIndex.Items.RemoveAt(EditorIndex)
@@ -37,19 +35,15 @@ Friend Class frmEditor_Recipe
         lstIndex.SelectedIndex = tmpindex
     End Sub
 
-    Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
-        If Editorindex = 0 OrElse Editorindex > MAX_RECIPE Then Exit Sub
+    Private Sub LstIndex_MouseClick(sender As Object, e As EventArgs) Handles lstIndex.MouseClick
         RecipeEditorInit()
     End Sub
 
     Private Sub BtnIngredientAdd_Click(sender As Object, e As EventArgs) Handles btnIngredientAdd.Click
-        If lstIngredients.SelectedIndex < 0 OrElse cmbIngredient.SelectedIndex = 0 Then Exit Sub
-
         Recipe(Editorindex).Ingredients(lstIngredients.SelectedIndex).ItemNum = cmbIngredient.SelectedIndex
         Recipe(Editorindex).Ingredients(lstIngredients.SelectedIndex).Value = numItemAmount.Value
 
         UpdateIngredient()
-
     End Sub
 
     Private Sub CmbMakeItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMakeItem.SelectedIndexChanged

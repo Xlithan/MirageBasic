@@ -7,6 +7,7 @@ Friend Class frmEditor_Projectile
     End Sub
 
     Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
+        If lstIndex.SelectedIndex = 0 Then lstIndex.SelectedIndex = 1
         ProjectileEditorInit()
     End Sub
 
@@ -21,8 +22,6 @@ Friend Class frmEditor_Projectile
     Private Sub TxtName_TextChanged(sender As System.Object, e As EventArgs) Handles txtName.TextChanged
         Dim tmpindex As Integer
 
-        If Editorindex < 1 OrElse Editorindex > MAX_PROJECTILES Then Exit Sub
-
         tmpindex = lstIndex.SelectedIndex
         Projectiles(Editorindex).Name = Trim$(txtName.Text)
         lstIndex.Items.RemoveAt(EditorIndex)
@@ -31,33 +30,23 @@ Friend Class frmEditor_Projectile
     End Sub
 
     Private Sub NudPic_ValueChanged(sender As Object, e As EventArgs) Handles nudPic.Click
-        If Editorindex < 1 OrElse Editorindex > MAX_PROJECTILES Then Exit Sub
-
         Projectiles(Editorindex).Sprite = nudPic.Value
     End Sub
 
     Private Sub NudRange_ValueChanged(sender As Object, e As EventArgs) Handles nudRange.Click
-        If Editorindex < 1 OrElse Editorindex > MAX_PROJECTILES Then Exit Sub
-
         Projectiles(Editorindex).Range = nudRange.Value
     End Sub
 
     Private Sub NudSpeed_ValueChanged(sender As Object, e As EventArgs) Handles nudSpeed.Click
-        If Editorindex < 1 OrElse Editorindex > MAX_PROJECTILES Then Exit Sub
-
         Projectiles(Editorindex).Speed = nudSpeed.Value
     End Sub
 
     Private Sub NudDamage_ValueChanged(sender As Object, e As EventArgs) Handles nudDamage.Click
-        If Editorindex < 1 OrElse Editorindex > MAX_PROJECTILES Then Exit Sub
-
         Projectiles(Editorindex).Damage = nudDamage.Value
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Dim tmpindex As Integer
-
-        If Editorindex < 1 OrElse Editorindex > MAX_PROJECTILES Then Exit Sub
 
         ClearProjectile(Editorindex)
 

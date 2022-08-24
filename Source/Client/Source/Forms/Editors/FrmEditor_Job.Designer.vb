@@ -73,8 +73,6 @@ Partial Class frmEditor_Job
         Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
         Me.txtName = New DarkUI.Controls.DarkTextBox()
         Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
-        Me.btnAddClass = New DarkUI.Controls.DarkButton()
-        Me.btnRemoveClass = New DarkUI.Controls.DarkButton()
         Me.btnCancel = New DarkUI.Controls.DarkButton()
         Me.btnSave = New DarkUI.Controls.DarkButton()
         Me.DarkGroupBox1.SuspendLayout
@@ -111,7 +109,7 @@ Partial Class frmEditor_Job
         Me.DarkGroupBox1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DarkGroupBox1.Name = "DarkGroupBox1"
         Me.DarkGroupBox1.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox1.Size = New System.Drawing.Size(202, 359)
+        Me.DarkGroupBox1.Size = New System.Drawing.Size(202, 472)
         Me.DarkGroupBox1.TabIndex = 0
         Me.DarkGroupBox1.TabStop = false
         Me.DarkGroupBox1.Text = "Job List"
@@ -126,7 +124,7 @@ Partial Class frmEditor_Job
         Me.lstIndex.Location = New System.Drawing.Point(7, 18)
         Me.lstIndex.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.lstIndex.Name = "lstIndex"
-        Me.lstIndex.Size = New System.Drawing.Size(186, 332)
+        Me.lstIndex.Size = New System.Drawing.Size(186, 437)
         Me.lstIndex.TabIndex = 0
         '
         'DarkGroupBox2
@@ -708,26 +706,6 @@ Partial Class frmEditor_Job
         Me.DarkLabel1.TabIndex = 0
         Me.DarkLabel1.Text = "Name:"
         '
-        'btnAddClass
-        '
-        Me.btnAddClass.Location = New System.Drawing.Point(9, 368)
-        Me.btnAddClass.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnAddClass.Name = "btnAddClass"
-        Me.btnAddClass.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnAddClass.Size = New System.Drawing.Size(187, 27)
-        Me.btnAddClass.TabIndex = 2
-        Me.btnAddClass.Text = "Add Class"
-        '
-        'btnRemoveClass
-        '
-        Me.btnRemoveClass.Location = New System.Drawing.Point(9, 402)
-        Me.btnRemoveClass.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnRemoveClass.Name = "btnRemoveClass"
-        Me.btnRemoveClass.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnRemoveClass.Size = New System.Drawing.Size(187, 27)
-        Me.btnRemoveClass.TabIndex = 3
-        Me.btnRemoveClass.Text = "Remove Class"
-        '
         'btnCancel
         '
         Me.btnCancel.Location = New System.Drawing.Point(9, 520)
@@ -757,8 +735,6 @@ Partial Class frmEditor_Job
         Me.ClientSize = New System.Drawing.Size(608, 549)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.btnRemoveClass)
-        Me.Controls.Add(Me.btnAddClass)
         Me.Controls.Add(Me.DarkGroupBox2)
         Me.Controls.Add(Me.DarkGroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -816,8 +792,6 @@ End Sub
     Friend WithEvents cmbFemaleSprite As DarkUI.Controls.DarkComboBox
     Friend WithEvents picFemale As Windows.Forms.PictureBox
     Friend WithEvents lblMaleSprite As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnAddClass As DarkUI.Controls.DarkButton
-    Friend WithEvents btnRemoveClass As DarkUI.Controls.DarkButton
     Friend WithEvents btnCancel As DarkUI.Controls.DarkButton
     Friend WithEvents btnSave As DarkUI.Controls.DarkButton
     Friend WithEvents DarkGroupBox5 As DarkUI.Controls.DarkGroupBox

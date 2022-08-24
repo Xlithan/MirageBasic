@@ -612,10 +612,10 @@ Module C_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Friend Sub SendRequestEditClass()
+    Friend Sub SendRequestEditJob()
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CRequestEditClass)
+        buffer.WriteInt32(ClientPackets.CRequestEditJob)
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
@@ -624,7 +624,7 @@ Module C_NetworkSend
         Dim i As Integer, n As Integer, q As Integer
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CSaveClass)
+        buffer.WriteInt32(ClientPackets.CSaveJob)
 
        For i = 0 To MAX_JOBS
             buffer.WriteString((Trim$(Job(i).Name)))
@@ -674,8 +674,6 @@ Module C_NetworkSend
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
-
-
     Sub SendSaveItem(itemNum As Integer)
         Dim buffer As New ByteStream(4)
 

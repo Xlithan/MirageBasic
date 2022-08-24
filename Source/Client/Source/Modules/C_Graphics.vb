@@ -3066,6 +3066,9 @@ NextLoop:
         Dim Furniturenum As Integer
         Dim sRECT As Rectangle
         Dim dRECT As Rectangle
+
+        If Not InitEditor = EDITOR_ITEM Then Exit Sub
+
         Furniturenum = frmEditor_Item.nudFurniture.Value
 
         If Furniturenum < 1 OrElse Furniturenum > NumFurniture Then
@@ -3171,7 +3174,7 @@ NextLoop:
         End If
     End Sub
 
-    Friend Sub EditorSkill_BltIcon()
+    Friend Sub EditorSkill_DrawIcon()
         Dim iconnum As Integer
         Dim sRECT As Rectangle
         Dim dRECT As Rectangle

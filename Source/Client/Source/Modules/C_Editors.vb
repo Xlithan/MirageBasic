@@ -8,22 +8,18 @@ Module C_Editors
 #Region "Animation Editor"
 
     Friend Sub AnimationEditorInit()
-
-        If FrmEditor_Animation.Visible = False Then Exit Sub
-
         Editorindex = FrmEditor_Animation.lstIndex.SelectedIndex
 
         With Animation(Editorindex)
-
             ' find the music we have set
             FrmEditor_Animation.cmbSound.Items.Clear()
             FrmEditor_Animation.cmbSound.Items.Add("None")
 
+            CacheSound
             For i = 0 To UBound(SoundCache)
                 FrmEditor_Animation.cmbSound.Items.Add(SoundCache(i))
             Next
 
-            CacheSound
             If Trim$(Animation(Editorindex).Sound) = "None" OrElse Trim$(Animation(Editorindex).Sound) = "" Then
                 FrmEditor_Animation.cmbSound.SelectedIndex = 0
             Else
@@ -45,8 +41,6 @@ Module C_Editors
             FrmEditor_Animation.nudFrameCount1.Value = .Frames(1)
             FrmEditor_Animation.nudLoopCount1.Value = .LoopCount(1)
             FrmEditor_Animation.nudLoopTime1.Value = .LoopTime(1)
-
-            Editorindex = FrmEditor_Animation.lstIndex.SelectedIndex
         End With
 
         EditorAnim_DrawAnim()
@@ -88,12 +82,8 @@ Module C_Editors
     Friend Sub NpcEditorInit()
         Dim i As Integer
 
-        If frmEditor_NPC.Visible = False Then Exit Sub
-        frmEditor_NPC.lstIndex.SelectedIndex = 1
         Editorindex = frmEditor_NPC.lstIndex.SelectedIndex
         frmEditor_NPC.cmbDropSlot.SelectedIndex = 0
-        If Npc(Editorindex).AttackSay Is Nothing Then Npc(Editorindex).AttackSay = ""
-        If Npc(Editorindex).Name Is Nothing Then Npc(Editorindex).Name = ""
 
         With frmEditor_NPC
             'populate combo boxes
@@ -222,8 +212,6 @@ Module C_Editors
     Friend Sub ResourceEditorInit()
         Dim i As Integer
 
-        If frmEditor_Resource.Visible = False Then Exit Sub
-        frmEditor_Resource.lstIndex.SelectedIndex = 1
         Editorindex = frmEditor_Resource.lstIndex.SelectedIndex
 
         With frmEditor_Resource
@@ -294,18 +282,9 @@ Module C_Editors
     Friend Sub SkillEditorInit()
         Dim i As Integer
 
-        If frmEditor_Skill.Visible = False Then Exit Sub
-        frmEditor_Skill.lstIndex.SelectedIndex = 1
         Editorindex = frmEditor_Skill.lstIndex.SelectedIndex
 
-        If Skill(Editorindex).Name Is Nothing Then Skill(Editorindex).Name = ""
-
         With frmEditor_Skill
-            ' set max values
-            .nudAoE.Maximum = Byte.MaxValue
-            .nudRange.Maximum = Byte.MaxValue
-            .nudMap.Maximum = MAX_MAPS
-
             ' build class combo
             .cmbClass.Items.Clear()
             .cmbClass.Items.Add("None")
@@ -373,7 +352,7 @@ Module C_Editors
             .cmbKnockBackTiles.SelectedIndex = Skill(Editorindex).KnockBackTiles
         End With
 
-        EditorSkill_BltIcon()
+        EditorSkill_DrawIcon()
 
         Skill_Changed(Editorindex) = True
     End Sub
@@ -409,12 +388,9 @@ Module C_Editors
 #End Region
 
 #Region "Shop editor"
-
     Friend Sub ShopEditorInit()
         Dim i As Integer
 
-        If frmEditor_Shop.Visible = False Then Exit Sub
-        frmEditor_Shop.lstIndex.SelectedIndex = 1
         Editorindex = frmEditor_Shop.lstIndex.SelectedIndex
 
         frmEditor_Shop.txtName.Text = Trim$(Shop(Editorindex).Name)
@@ -449,6 +425,7 @@ Module C_Editors
 
     Friend Sub UpdateShopTrade()
         Dim i As Integer
+
         frmEditor_Shop.lstTradeItem.Items.Clear()
 
        For i = 0 To MAX_TRADES
@@ -498,13 +475,12 @@ Module C_Editors
 #Region "Job Editor"
     Friend Sub JobEditorOk()
         SendSaveJob()
-
         frmEditor_Job.Visible = False
         Editor = 0
     End Sub
 
     Friend Sub JobEditorCancel()
-        SendRequestJob()
+        SendRequestEditJob()
         frmEditor_Job.Visible = False
         Editor = 0
     End Sub
@@ -512,34 +488,7 @@ Module C_Editors
     Friend Sub JobEditorInit()
         Dim i As Integer
 
-        frmEditor_Job.lstIndex.Items.Clear()
-        frmEditor_Job.lstIndex.SelectedIndex = 1
-
-       For i = 0 To MAX_JOBS
-            frmEditor_Job.lstIndex.Items.Add(Trim(Job(i).Name))
-        Next
-
-        Editor = EDITOR_Job
-
-        frmEditor_Job.nudMaleSprite.Maximum = NumCharacters
-        frmEditor_Job.nudFemaleSprite.Maximum = NumCharacters
-
-        frmEditor_Job.cmbItems.Items.Clear()
-
-        frmEditor_Job.cmbItems.Items.Add("None")
-       For i = 0 To MAX_ITEMS
-            frmEditor_Job.cmbItems.Items.Add(Trim(Item(i).Name))
-        Next
-
-        frmEditor_Job.lstIndex.SelectedIndex = 1
-
-        frmEditor_Job.Visible = True
-    End Sub
-
-    Friend Sub LoadJob()
-        Dim i As Integer
-
-        If Editorindex <= 0 OrElse Editorindex > MAX_JOBS Then Exit Sub
+        Editorindex = frmEditor_Job.lstIndex.SelectedIndex
 
         frmEditor_Job.txtName.Text = Job(Editorindex).Name
         frmEditor_Job.txtDescription.Text = Job(Editorindex).Desc
@@ -600,29 +549,9 @@ Module C_Editors
 
 #Region "Item"
 
-    Friend Sub ItemEditorPreInit()
-        Dim i As Integer
-
-        With frmEditor_Item
-            Editor = EDITOR_ITEM
-            .lstIndex.Items.Clear()
-
-            ' Add the names
-           For i = 0 To MAX_ITEMS
-                .lstIndex.Items.Add(i & ": " & Trim$(Item(i).Name))
-            Next
-
-            .Show()
-            .lstIndex.SelectedIndex = 1
-            ItemEditorInit()
-        End With
-    End Sub
-
     Friend Sub ItemEditorInit()
         Dim i As Integer
 
-        If frmEditor_Item.Visible = False Then Exit Sub
-        frmEditor_Item.lstIndex.SelectedIndex = 1
         Editorindex = frmEditor_Item.lstIndex.SelectedIndex
 
         With Item(Editorindex)
@@ -785,21 +714,12 @@ Module C_Editors
             Else
                 frmEditor_Item.chkStackable.Checked = False
             End If
-
-            Editorindex = frmEditor_Item.lstIndex.SelectedIndex
         End With
-
-        frmEditor_Item.nudPic.Maximum = NumItems
-
-        If NumPaperdolls > 0 Then
-            frmEditor_Item.nudPaperdoll.Maximum = NumPaperdolls + 1
-        End If
 
         EditorItem_DrawItem()
         EditorItem_DrawPaperdoll()
         EditorItem_DrawFurniture()
         Item_Changed(Editorindex) = True
-
     End Sub
 
     Friend Sub ItemEditorCancel()

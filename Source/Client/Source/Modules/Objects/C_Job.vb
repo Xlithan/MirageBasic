@@ -157,7 +157,7 @@ Module C_Job
 
 #Region "Outgoing Traffic"
 
-    Friend Sub SendRequestJob()
+    Friend Sub SendRequestJobs()
         Dim buffer As New ByteStream(4)
 
         buffer.WriteInt32(ClientPackets.CRequestClass)

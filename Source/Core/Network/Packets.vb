@@ -147,8 +147,8 @@
         CSaveAnimation
 
         'Class Editor
-        CRequestEditClass
-        CSaveClass
+        CRequestEditJob
+        CSaveJob
 
         'houses
         CRequestEditHouse

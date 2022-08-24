@@ -158,8 +158,8 @@ Module S_NetworkReceive
         Socket.PacketId(ClientPackets.CSaveProjectile) = AddressOf HandleSaveProjectile
         Socket.PacketId(ClientPackets.CRequestEditRecipes) = AddressOf Packet_RequestEditRecipes
         Socket.PacketId(ClientPackets.CSaveRecipe) = AddressOf Packet_SaveRecipe
-        Socket.PacketId(ClientPackets.CRequestEditClass) = AddressOf Packet_RequestEditJob
-        Socket.PacketId(ClientPackets.CSaveClass) = AddressOf Packet_SaveJob
+        Socket.PacketId(ClientPackets.CRequestEditJob) = AddressOf Packet_RequestEditJob
+        Socket.PacketId(ClientPackets.CSaveJob) = AddressOf Packet_SaveJob
         Socket.PacketId(ClientPackets.CRequestAutoMap) = AddressOf Packet_RequestAutoMap
         Socket.PacketId(ClientPackets.CSaveAutoMap) = AddressOf Packet_SaveAutoMap
 

@@ -221,7 +221,7 @@ Module C_Variables
     Friend InitSkillEditor As Boolean
     Friend InitShopEditor As Boolean
     Friend InitAnimationEditor As Boolean
-    Friend InitClassEditor As Boolean
+    Friend InitJobEditor As Boolean
     Friend InitAutoMapper As Boolean
 
     ' Game editor constants

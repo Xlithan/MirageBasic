@@ -225,7 +225,7 @@ Module C_NetworkReceive
         SaveSettings()
 
         ' Request Job.
-        SendRequestJob()
+        SendRequestEditJob()
 
         Dim buffer As New ByteStream(data)
         ' Now we can receive char data
@@ -1185,7 +1185,7 @@ Module C_NetworkReceive
     End Sub
 
     Private Sub Packet_ClassEditor(ByRef data() As Byte)
-        InitClassEditor = True
+        InitJobEditor = True
     End Sub
 
     Sub Packet_EditItem(ByRef data() As Byte)

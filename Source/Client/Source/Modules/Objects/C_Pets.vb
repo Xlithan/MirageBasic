@@ -685,7 +685,6 @@ Module C_Pets
     Friend Sub PetEditorInit()
         Dim i As Integer
 
-        If frmEditor_Pet.Visible = False Then Exit Sub
         Editorindex = frmEditor_Pet.lstIndex.SelectedIndex
 
         With frmEditor_Pet

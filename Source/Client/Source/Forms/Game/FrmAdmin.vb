@@ -130,8 +130,8 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        SendRequestJob()
-        SendRequestEditClass()
+        SendRequestJobs()
+        SendRequestEditJob()
     End Sub
 
     Private Sub btnhouseEditor_Click(sender As Object, e As EventArgs) Handles btnhouseEditor.Click

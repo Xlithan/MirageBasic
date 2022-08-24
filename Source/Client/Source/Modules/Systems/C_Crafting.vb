@@ -249,35 +249,6 @@ Friend Module C_Crafting
 
 #Region "Editor"
 
-    Friend Sub RecipeEditorPreInit()
-        Dim i As Integer
-
-        With frmEditor_Recipe
-            Editor = EDITOR_RECIPE
-            .lstIndex.Items.Clear()
-
-            ' Add the names
-           For i = 0 To MAX_RECIPE
-                .lstIndex.Items.Add(i & ": " & Trim$(Recipe(i).Name))
-            Next
-
-            'fill comboboxes
-            .cmbMakeItem.Items.Clear()
-            .cmbIngredient.Items.Clear()
-
-            .cmbMakeItem.Items.Add("None")
-            .cmbIngredient.Items.Add("None")
-           For i = 0 To MAX_ITEMS
-                .cmbMakeItem.Items.Add(Trim$(Item(i).Name))
-                .cmbIngredient.Items.Add(Trim$(Item(i).Name))
-            Next
-
-            .Show()
-            .lstIndex.SelectedIndex = 0
-            RecipeEditorInit()
-        End With
-    End Sub
-
     Friend Sub RecipeEditorInit()
 
         If frmEditor_Recipe.Visible = False Then Exit Sub

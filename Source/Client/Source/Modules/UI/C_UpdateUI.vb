@@ -283,7 +283,6 @@ Module C_UpdateUI
 
     Friend CraftPanelX As Integer = 25
     Friend CraftPanelY As Integer = 25
-    Friend LoadJobInfo As Boolean
 
 #End Region
 
@@ -400,6 +399,7 @@ Module C_UpdateUI
                 .lstIndex.Items.Clear()
                 .cmbQuestReq.Items.Clear()
                 .cmbQuestReq.Items.Add("None")
+
                 ' Add the names
                 For i = 0 To MAX_QUESTS
                     .lstIndex.Items.Add(I & ": " & Trim$(Quest(I).Name))
@@ -431,23 +431,77 @@ Module C_UpdateUI
         End If
 
         If InitItemEditor = True Then
-            ItemEditorPreInit()
+            With frmEditor_Item
+                Editor = EDITOR_ITEM
+                .lstIndex.Items.Clear()
+
+                ' Add the names
+               For i = 0 To MAX_ITEMS
+                    .lstIndex.Items.Add(i & ": " & Trim$(Item(i).Name))
+                Next
+
+                .Show()
+                .lstIndex.SelectedIndex = 1
+                ItemEditorInit()
+            End With
             InitItemEditor = False
         End If
 
         If InitRecipeEditor = True Then
-            RecipeEditorPreInit()
+            With frmEditor_Recipe
+                Editor = EDITOR_RECIPE
+                .lstIndex.Items.Clear()
+
+                ' Add the names
+               For i = 0 To MAX_RECIPE
+                    .lstIndex.Items.Add(i & ": " & Trim$(Recipe(i).Name))
+                Next
+
+                'fill comboboxes
+                .cmbMakeItem.Items.Clear()
+                .cmbIngredient.Items.Clear()
+
+                .cmbMakeItem.Items.Add("None")
+                .cmbIngredient.Items.Add("None")
+
+                For i = 0 To MAX_ITEMS
+                    .cmbMakeItem.Items.Add(Trim$(Item(i).Name))
+                    .cmbIngredient.Items.Add(Trim$(Item(i).Name))
+                Next
+
+                .Show()
+                .lstIndex.SelectedIndex = 1
+                RecipeEditorInit()
+            End With
             InitRecipeEditor = False
         End If
 
-        If InitClassEditor = True Then
-            JobEditorInit()
-            InitClassEditor = False
-        End If
+        If InitJobEditor = True Then
+            With frmEditor_Job
+                .lstIndex.Items.Clear() 
 
-        If LoadJobInfo = True Then
-            LoadJob()
-            LoadJobInfo = False
+                For i = 0 To MAX_JOBS
+                    .lstIndex.Items.Add(Trim(Job(i).Name))
+                Next
+
+                Editor = EDITOR_Job
+
+                .nudMaleSprite.Maximum = NumCharacters
+                .nudFemaleSprite.Maximum = NumCharacters
+
+                .cmbItems.Items.Clear()
+
+                .cmbItems.Items.Add("None")
+                For i = 0 To MAX_ITEMS
+                    .cmbItems.Items.Add(Trim(Item(i).Name))
+                Next
+
+                .Show()
+                .lstIndex.SelectedIndex = 1
+                JobEditorInit()
+            End With
+
+            InitJobEditor = False
         End If
 
         If InitResourceEditor = True Then
@@ -521,23 +575,6 @@ Module C_UpdateUI
                 ShopEditorInit()
             End With
             InitShopEditor = False
-        End If
-
-        If InitAnimationEditor = True Then
-            With FrmEditor_Animation
-                Editor = EDITOR_ANIMATION
-                .lstIndex.Items.Clear()
-
-                ' Add the names
-                For i = 0 To MAX_ANIMATIONS
-                    .lstIndex.Items.Add(i & ": " & Trim$(Animation(i).Name))
-                Next
-
-                .Show()
-                .lstIndex.SelectedIndex = 1
-                AnimationEditorInit()
-            End With
-            InitAnimationEditor = False
         End If
 
         If HouseEdit = True Then
