@@ -274,9 +274,9 @@ Friend Class FrmAdmin
 
         ' Check to make sure its a valid map #
         If lstMaps.FocusedItem.Index> 0 AndAlso lstMaps.FocusedItem.Index<= MAX_MAPS Then
-            WarpTo(lstMaps.FocusedItem.Index + 1)
+            WarpTo(lstMaps.FocusedItem.Index)
         Else
-            AddText("Invalid map number: " & lstMaps.FocusedItem.Index + 1, QColorType.AlertColor)
+            AddText("Invalid map number: " & lstMaps.FocusedItem.Index, QColorType.AlertColor)
         End If
     End Sub
 
@@ -328,6 +328,7 @@ Friend Class FrmAdmin
 
         SendMapRespawn()
     End Sub
+
 #End Region
 
 End Class
