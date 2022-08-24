@@ -40,7 +40,6 @@ Source/Editors/Source/Forms/Forms.rar
 *.opendb
 *.db-shm
 *.db-wal
-Source/.DS_Store
+*.DS_Store
 *.v5
-Source/Client/.DS_Store
 *.1
