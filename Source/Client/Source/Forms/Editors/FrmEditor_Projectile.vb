@@ -7,7 +7,6 @@ Friend Class frmEditor_Projectile
     End Sub
 
     Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
-        If lstIndex.SelectedIndex = 0 Then lstIndex.SelectedIndex = 1
         ProjectileEditorInit()
     End Sub
 
