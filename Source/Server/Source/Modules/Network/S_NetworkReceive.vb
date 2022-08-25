@@ -1012,7 +1012,7 @@ Module S_NetworkReceive
                                     ReDim Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount)
                                     For z = 0 To Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount
                                         With Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(z)
-                                            .Index = buffer.ReadInt32
+                                            .Index = buffer.ReadByte
                                             .Text1 = buffer.ReadString
                                             .Text2 = buffer.ReadString
                                             .Text3 = buffer.ReadString
@@ -2620,7 +2620,7 @@ Module S_NetworkReceive
                                     ReDim Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount)
                                     For z = 0 To Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount
                                         With Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(z)
-                                            .Index = buffer.ReadInt32
+                                            .Index = buffer.ReadByte
                                             .Text1 = buffer.ReadString
                                             .Text2 = buffer.ReadString
                                             .Text3 = buffer.ReadString

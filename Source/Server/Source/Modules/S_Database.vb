@@ -247,126 +247,123 @@ Module modDatabase
         Dim writer As New ByteStream(100)
  
         writer.WriteInt32(Map(mapNum).EventCount)
+        For i = 0 To Map(mapNum).EventCount
+            With Map(mapNum).Events(i)
+                writer.WriteString(.Name)
+                writer.WriteByte(.Globals)
+                writer.WriteInt32(.X)
+                writer.WriteInt32(.Y)
+                writer.WriteInt32(.PageCount)
+            End With
 
-        If Map(mapNum).EventCount > 0 Then
-            For i = 0 To Map(mapNum).EventCount
-                With Map(mapNum).Events(i)
-                    writer.WriteString(.Name)
-                    writer.WriteByte(.Globals)
-                    writer.WriteInt32(.X)
-                    writer.WriteInt32(.Y)
-                    writer.WriteInt32(.PageCount)
-                End With
+            If Map(mapNum).Events(i).PageCount > 0 Then
+                For x = 0 To Map(mapNum).Events(i).PageCount
+                    With Map(mapNum).Events(i).Pages(x)
+                        writer.WriteInt32(.ChkVariable)
+                        writer.WriteInt32(.Variableindex)
+                        writer.WriteInt32(.VariableCondition)
+                        writer.WriteInt32(.VariableCompare)
 
-                If Map(mapNum).Events(i).PageCount > 0 Then
-                    For x = 0 To Map(mapNum).Events(i).PageCount
-                        With Map(mapNum).Events(i).Pages(x)
-                            writer.WriteInt32(.ChkVariable)
-                            writer.WriteInt32(.Variableindex)
-                            writer.WriteInt32(.VariableCondition)
-                            writer.WriteInt32(.VariableCompare)
+                        writer.WriteInt32(.ChkSwitch)
+                        writer.WriteInt32(.Switchindex)
+                        writer.WriteInt32(.SwitchCompare)
 
-                            writer.WriteInt32(.ChkSwitch)
-                            writer.WriteInt32(.Switchindex)
-                            writer.WriteInt32(.SwitchCompare)
+                        writer.WriteInt32(.ChkHasItem)
+                        writer.WriteInt32(.HasItemindex)
+                        writer.WriteInt32(.HasItemAmount)
 
-                            writer.WriteInt32(.ChkHasItem)
-                            writer.WriteInt32(.HasItemindex)
-                            writer.WriteInt32(.HasItemAmount)
+                        writer.WriteInt32(.ChkSelfSwitch)
+                        writer.WriteInt32(.SelfSwitchindex)
+                        writer.WriteInt32(.SelfSwitchCompare)
 
-                            writer.WriteInt32(.ChkSelfSwitch)
-                            writer.WriteInt32(.SelfSwitchindex)
-                            writer.WriteInt32(.SelfSwitchCompare)
+                        writer.WriteByte(.GraphicType)
+                        writer.WriteInt32(.Graphic)
+                        writer.WriteInt32(.GraphicX)
+                        writer.WriteInt32(.GraphicY)
+                        writer.WriteInt32(.GraphicX2)
+                        writer.WriteInt32(.GraphicY2)
 
-                            writer.WriteByte(.GraphicType)
-                            writer.WriteInt32(.Graphic)
-                            writer.WriteInt32(.GraphicX)
-                            writer.WriteInt32(.GraphicY)
-                            writer.WriteInt32(.GraphicX2)
-                            writer.WriteInt32(.GraphicY2)
+                        writer.WriteByte(.MoveType)
+                        writer.WriteByte(.MoveSpeed)
+                        writer.WriteByte(.MoveFreq)
 
-                            writer.WriteByte(.MoveType)
-                            writer.WriteByte(.MoveSpeed)
-                            writer.WriteByte(.MoveFreq)
+                        writer.WriteInt32(.IgnoreMoveRoute)
+                        writer.WriteInt32(.RepeatMoveRoute)
 
-                            writer.WriteInt32(.IgnoreMoveRoute)
-                            writer.WriteInt32(.RepeatMoveRoute)
+                        writer.WriteInt32(.MoveRouteCount)
 
-                            writer.WriteInt32(.MoveRouteCount)
-
-                            If .MoveRouteCount > 0 Then
-                                For y = 0 To .MoveRouteCount
-                                    writer.WriteInt32(.MoveRoute(y).Index)
-                                    writer.WriteInt32(.MoveRoute(y).Data1)
-                                    writer.WriteInt32(.MoveRoute(y).Data2)
-                                    writer.WriteInt32(.MoveRoute(y).Data3)
-                                    writer.WriteInt32(.MoveRoute(y).Data4)
-                                    writer.WriteInt32(.MoveRoute(y).Data5)
-                                    writer.WriteInt32(.MoveRoute(y).Data6)
-                                Next
-                            End If
-
-                            writer.WriteInt32(.WalkAnim)
-                            writer.WriteInt32(.DirFix)
-                            writer.WriteInt32(.WalkThrough)
-                            writer.WriteInt32(.ShowName)
-                            writer.WriteByte(.Trigger)
-                            writer.WriteInt32(.CommandListCount)
-
-                            writer.WriteByte(.Position)
-                            writer.WriteInt32(.QuestNum)
-
-                            writer.WriteInt32(.ChkPlayerGender)
-                        End With
-
-                        If Map(mapNum).Events(i).Pages(x).CommandListCount > 0 Then
-                            For y = 0 To Map(mapNum).Events(i).Pages(x).CommandListCount
-                                writer.WriteInt32(Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount)
-                                writer.WriteInt32(Map(mapNum).Events(i).Pages(x).CommandList(y).ParentList)
-
-                                If Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
-                                    For z = 0 To Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount
-                                        With Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(z)
-                                            writer.WriteByte(.Index)
-                                            writer.WriteString(.Text1)
-                                            writer.WriteString(.Text2)
-                                            writer.WriteString(.Text3)
-                                            writer.WriteString(.Text4)
-                                            writer.WriteString(.Text5)
-                                            writer.WriteInt32(.Data1)
-                                            writer.WriteInt32(.Data2)
-                                            writer.WriteInt32(.Data3)
-                                            writer.WriteInt32(.Data4)
-                                            writer.WriteInt32(.Data5)
-                                            writer.WriteInt32(.Data6)
-                                            writer.WriteInt32(.ConditionalBranch.CommandList)
-                                            writer.WriteInt32(.ConditionalBranch.Condition)
-                                            writer.WriteInt32(.ConditionalBranch.Data1)
-                                            writer.WriteInt32(.ConditionalBranch.Data2)
-                                            writer.WriteInt32(.ConditionalBranch.Data3)
-                                            writer.WriteInt32(.ConditionalBranch.ElseCommandList)
-                                            writer.WriteInt32(.MoveRouteCount)
-
-                                            If .MoveRouteCount > 0 Then
-                                                For w = 0 To .MoveRouteCount
-                                                    writer.WriteInt32(.MoveRoute(w).Index)
-                                                    writer.WriteInt32(.MoveRoute(w).Data1)
-                                                    writer.WriteInt32(.MoveRoute(w).Data2)
-                                                    writer.WriteInt32(.MoveRoute(w).Data3)
-                                                    writer.WriteInt32(.MoveRoute(w).Data4)
-                                                    writer.WriteInt32(.MoveRoute(w).Data5)
-                                                    writer.WriteInt32(.MoveRoute(w).Data6)
-                                                Next
-                                            End If
-                                        End With
-                                    Next
-                                End If
+                        If .MoveRouteCount > 0 Then
+                            For y = 0 To .MoveRouteCount
+                                writer.WriteInt32(.MoveRoute(y).Index)
+                                writer.WriteInt32(.MoveRoute(y).Data1)
+                                writer.WriteInt32(.MoveRoute(y).Data2)
+                                writer.WriteInt32(.MoveRoute(y).Data3)
+                                writer.WriteInt32(.MoveRoute(y).Data4)
+                                writer.WriteInt32(.MoveRoute(y).Data5)
+                                writer.WriteInt32(.MoveRoute(y).Data6)
                             Next
                         End If
-                    Next
-                End If
-            Next
-        End If
+
+                        writer.WriteInt32(.WalkAnim)
+                        writer.WriteInt32(.DirFix)
+                        writer.WriteInt32(.WalkThrough)
+                        writer.WriteInt32(.ShowName)
+                        writer.WriteByte(.Trigger)
+                        writer.WriteInt32(.CommandListCount)
+
+                        writer.WriteByte(.Position)
+                        writer.WriteInt32(.QuestNum)
+
+                        writer.WriteInt32(.ChkPlayerGender)
+                    End With
+
+                    If Map(mapNum).Events(i).Pages(x).CommandListCount > 0 Then
+                        For y = 0 To Map(mapNum).Events(i).Pages(x).CommandListCount
+                            writer.WriteInt32(Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount)
+                            writer.WriteInt32(Map(mapNum).Events(i).Pages(x).CommandList(y).ParentList)
+
+                            If Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
+                                For z = 0 To Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount
+                                    With Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(z)
+                                        writer.WriteByte(.Index)
+                                        writer.WriteString(.Text1)
+                                        writer.WriteString(.Text2)
+                                        writer.WriteString(.Text3)
+                                        writer.WriteString(.Text4)
+                                        writer.WriteString(.Text5)
+                                        writer.WriteInt32(.Data1)
+                                        writer.WriteInt32(.Data2)
+                                        writer.WriteInt32(.Data3)
+                                        writer.WriteInt32(.Data4)
+                                        writer.WriteInt32(.Data5)
+                                        writer.WriteInt32(.Data6)
+                                        writer.WriteInt32(.ConditionalBranch.CommandList)
+                                        writer.WriteInt32(.ConditionalBranch.Condition)
+                                        writer.WriteInt32(.ConditionalBranch.Data1)
+                                        writer.WriteInt32(.ConditionalBranch.Data2)
+                                        writer.WriteInt32(.ConditionalBranch.Data3)
+                                        writer.WriteInt32(.ConditionalBranch.ElseCommandList)
+                                        writer.WriteInt32(.MoveRouteCount)
+
+                                        If .MoveRouteCount > 0 Then
+                                            For w = 0 To .MoveRouteCount
+                                                writer.WriteInt32(.MoveRoute(w).Index)
+                                                writer.WriteInt32(.MoveRoute(w).Data1)
+                                                writer.WriteInt32(.MoveRoute(w).Data2)
+                                                writer.WriteInt32(.MoveRoute(w).Data3)
+                                                writer.WriteInt32(.MoveRoute(w).Data4)
+                                                writer.WriteInt32(.MoveRoute(w).Data5)
+                                                writer.WriteInt32(.MoveRoute(w).Data6)
+                                            Next
+                                        End If
+                                    End With
+                                Next
+                            End If
+                        Next
+                    End If
+                Next
+            End If
+        Next
 
         ByteFile.Save(filename, writer)
     End Sub
@@ -414,6 +411,7 @@ Module modDatabase
                         .SelfSwitchCompare = reader.ReadInt32()
 
                         .GraphicType = reader.ReadByte()
+                        .Graphic = reader.ReadInt32()
                         .GraphicX = reader.ReadInt32()
                         .GraphicY = reader.ReadInt32()
                         .GraphicX2 = reader.ReadInt32()

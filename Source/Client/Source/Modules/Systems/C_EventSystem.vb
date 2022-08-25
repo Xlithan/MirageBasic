@@ -2196,8 +2196,8 @@ newlist:
             .Name = buffer.ReadString
             .Dir = buffer.ReadInt32
             .ShowDir = .Dir
-            .GraphicNum = buffer.ReadInt32
             .GraphicType = buffer.ReadByte
+            .Graphic = buffer.ReadInt32
             .GraphicX = buffer.ReadInt32
             .GraphicX2 = buffer.ReadInt32
             .GraphicY = buffer.ReadInt32
@@ -2373,7 +2373,7 @@ newlist:
                                     ReDim Map.Events(i).Pages(x).CommandList(y).Commands(Map.Events(i).Pages(x).CommandList(y).CommandCount)
                                     For z = 0 To Map.Events(i).Pages(x).CommandList(y).CommandCount
                                         With Map.Events(i).Pages(x).CommandList(y).Commands(z)
-                                            .Index = buffer.ReadInt32
+                                            .Index = buffer.ReadByte
                                             .Text1 = buffer.ReadString
                                             .Text2 = buffer.ReadString
                                             .Text3 = buffer.ReadString
@@ -2860,7 +2860,7 @@ nextevent:
             Case 0
                 Exit Sub
             Case 1
-                If Map.MapEvents(id).GraphicNum <= 0 OrElse Map.MapEvents(id).GraphicNum > NumCharacters Then Exit Sub
+                If Map.MapEvents(id).Graphic <= 0 OrElse Map.MapEvents(id).Graphic > NumCharacters Then Exit Sub
 
                 ' Reset frame
                 If Map.MapEvents(id).Steps = 3 Then
@@ -2895,23 +2895,23 @@ nextevent:
                 If Map.MapEvents(id).WalkAnim = 1 Then anim = 0
                 If Map.MapEvents(id).Moving = 0 Then anim = Map.MapEvents(id).GraphicX
 
-                width = CharacterGfxInfo(Map.MapEvents(id).GraphicNum).Width / 4
-                height = CharacterGfxInfo(Map.MapEvents(id).GraphicNum).Height / 4
+                width = CharacterGfxInfo(Map.MapEvents(id).Graphic).Width / 4
+                height = CharacterGfxInfo(Map.MapEvents(id).Graphic).Height / 4
 
-                sRect = New Rectangle((anim) * (CharacterGfxInfo(Map.MapEvents(id).GraphicNum).Width / 4), spritetop * (CharacterGfxInfo(Map.MapEvents(id).GraphicNum).Height / 4), (CharacterGfxInfo(Map.MapEvents(id).GraphicNum).Width / 4), (CharacterGfxInfo(Map.MapEvents(id).GraphicNum).Height / 4))
+                sRect = New Rectangle((anim) * (CharacterGfxInfo(Map.MapEvents(id).Graphic).Width / 4), spritetop * (CharacterGfxInfo(Map.MapEvents(id).Graphic).Height / 4), (CharacterGfxInfo(Map.MapEvents(id).Graphic).Width / 4), (CharacterGfxInfo(Map.MapEvents(id).Graphic).Height / 4))
                 ' Calculate the X
-                x = Map.MapEvents(id).X * PicX + Map.MapEvents(id).XOffset - ((CharacterGfxInfo(Map.MapEvents(id).GraphicNum).Width / 4 - 32) / 2)
+                x = Map.MapEvents(id).X * PicX + Map.MapEvents(id).XOffset - ((CharacterGfxInfo(Map.MapEvents(id).Graphic).Width / 4 - 32) / 2)
 
                 ' Is the player's height more than 32..?
-                If (CharacterGfxInfo(Map.MapEvents(id).GraphicNum).Height * 4) > 32 Then
+                If (CharacterGfxInfo(Map.MapEvents(id).Graphic).Height * 4) > 32 Then
                     ' Create a 32 pixel offset for larger sprites
-                    y = Map.MapEvents(id).Y * PicY + Map.MapEvents(id).YOffset - ((CharacterGfxInfo(Map.MapEvents(id).GraphicNum).Height / 4) - 32)
+                    y = Map.MapEvents(id).Y * PicY + Map.MapEvents(id).YOffset - ((CharacterGfxInfo(Map.MapEvents(id).Graphic).Height / 4) - 32)
                 Else
                     ' Proceed as normal
                     y = Map.MapEvents(id).Y * PicY + Map.MapEvents(id).YOffset
                 End If
                 ' render the actual sprite
-                DrawCharacter(Map.MapEvents(id).GraphicNum, x, y, sRect)
+                DrawCharacter(Map.MapEvents(id).Graphic, x, y, sRect)
 
                 If Map.MapEvents(id).Questnum > 0 Then
                     If CanStartQuest(Map.MapEvents(id).Questnum) Then
@@ -2923,7 +2923,7 @@ nextevent:
                     End If
                 End If
             Case 2
-                If Map.MapEvents(id).GraphicNum < 1 OrElse Map.MapEvents(id).GraphicNum > NumTileSets Then Exit Sub
+                If Map.MapEvents(id).Graphic < 1 OrElse Map.MapEvents(id).Graphic > NumTileSets Then Exit Sub
                 If Map.MapEvents(id).GraphicY2 > 0 OrElse Map.MapEvents(id).GraphicX2 > 0 Then
                     With sRect
                         .X = Map.MapEvents(id).GraphicX * 32
@@ -2940,11 +2940,11 @@ nextevent:
                     End With
                 End If
 
-                If TileSetTextureInfo(Map.MapEvents(id).GraphicNum).IsLoaded = False Then
-                    LoadTexture(Map.MapEvents(id).GraphicNum, 1)
+                If TileSetTextureInfo(Map.MapEvents(id).Graphic).IsLoaded = False Then
+                    LoadTexture(Map.MapEvents(id).Graphic, 1)
                 End If
                 ' we use it, lets update timer
-                With TileSetTextureInfo(Map.MapEvents(id).GraphicNum)
+                With TileSetTextureInfo(Map.MapEvents(id).Graphic)
                     .TextureTimer = GetTickCount() + 100000
                 End With
 
@@ -2954,9 +2954,9 @@ nextevent:
                 y = y - (sRect.Bottom - sRect.Top) + 32
 
                 If Map.MapEvents(id).GraphicY2 > 1 Then
-                    RenderSprite(TileSetSprite(Map.MapEvents(id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(id).X * PicX), ConvertMapY(Map.MapEvents(id).Y * PicY) - PicY, sRect.Left, sRect.Top, sRect.Width, sRect.Height)
+                    RenderSprite(TileSetSprite(Map.MapEvents(id).Graphic), GameWindow, ConvertMapX(Map.MapEvents(id).X * PicX), ConvertMapY(Map.MapEvents(id).Y * PicY) - PicY, sRect.Left, sRect.Top, sRect.Width, sRect.Height)
                 Else
-                    RenderSprite(TileSetSprite(Map.MapEvents(id).GraphicNum), GameWindow, ConvertMapX(Map.MapEvents(id).X * PicX), ConvertMapY(Map.MapEvents(id).Y * PicY), sRect.Left, sRect.Top, sRect.Width, sRect.Height)
+                    RenderSprite(TileSetSprite(Map.MapEvents(id).Graphic), GameWindow, ConvertMapX(Map.MapEvents(id).X * PicX), ConvertMapY(Map.MapEvents(id).Y * PicY), sRect.Left, sRect.Top, sRect.Width, sRect.Height)
                 End If
 
                 If Map.MapEvents(id).Questnum > 0 Then
@@ -3162,8 +3162,8 @@ nextevent:
                 .Name = ""
                 .Dir = 0
                 .ShowDir = 0
-                .GraphicNum = 0
                 .GraphicType = 0
+                .Graphic = 0
                 .GraphicX = 0
                 .GraphicX2 = 0
                 .GraphicY = 0

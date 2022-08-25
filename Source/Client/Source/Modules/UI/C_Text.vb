@@ -88,11 +88,11 @@ Module C_Text
         If Map.MapEvents(index).GraphicType = 0 Then
             textY = ConvertMapY(Map.MapEvents(index).Y * PicY) + Map.MapEvents(index).YOffset - 16
         ElseIf Map.MapEvents(index).GraphicType = 1 Then
-            If Map.MapEvents(index).GraphicNum < 1 OrElse Map.MapEvents(index).GraphicNum > NumCharacters Then
+            If Map.MapEvents(index).Graphic < 1 OrElse Map.MapEvents(index).Graphic > NumCharacters Then
                 textY = ConvertMapY(Map.MapEvents(index).Y * PicY) + Map.MapEvents(index).YOffset - 16
             Else
                 ' Determine location for text
-                textY = ConvertMapY(Map.MapEvents(index).Y * PicY) + Map.MapEvents(index).YOffset - (CharacterGfxInfo(Map.MapEvents(index).GraphicNum).Height \ 4) + 16
+                textY = ConvertMapY(Map.MapEvents(index).Y * PicY) + Map.MapEvents(index).YOffset - (CharacterGfxInfo(Map.MapEvents(index).Graphic).Height \ 4) + 16
             End If
         ElseIf Map.MapEvents(index).GraphicType = 2 Then
             If Map.MapEvents(index).GraphicY2 > 0 Then
