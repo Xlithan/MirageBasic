@@ -1651,7 +1651,7 @@ Module C_Graphics
         If InMapEditor = False Then
             if Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
 
-               For i = 1 To Map.CurrentEvents
+               For i = 0 To Map.CurrentEvents
                     If Map.MapEvents(i).Position = 0 Then
                         DrawEvent(i)
                     End If
@@ -1724,7 +1724,7 @@ Module C_Graphics
                 ' events
                 If InMapEditor = False Then
                     If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
-                       For i = 1 To Map.CurrentEvents
+                       For i = 0 To Map.CurrentEvents
                             If Map.MapEvents(I).Position = 1 Then
                                 If y = Map.MapEvents(I).Y Then
                                     DrawEvent(I)
@@ -1795,7 +1795,7 @@ Module C_Graphics
 
         'events
         If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
-           For i = 1 To Map.CurrentEvents
+           For i = 0 To Map.CurrentEvents
                 If Map.MapEvents(I).Position = 2 Then
                     DrawEvent(I)
                 End If
@@ -1874,7 +1874,7 @@ Module C_Graphics
         Next
 
         'draw event names
-       For i = 1 To Map.CurrentEvents
+       For i = 0 To Map.CurrentEvents
             If Map.MapEvents(I).Visible = 1 Then
                 If Map.MapEvents(I).ShowName = 1 Then
                     DrawEventName(I)

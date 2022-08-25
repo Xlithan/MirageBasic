@@ -12,7 +12,7 @@ Public Class InputsDef
         Public MoveLeft As Keys = Keys.A
         Public MoveRight As Keys = Keys.D
 
-        Public Attack As Keys = Keys.ControlKey
+        Public Attack As Keys = Keys.LControlKey
         Public Run As Keys = Keys.LShiftKey
         Public Loot As Keys = Keys.Space
 

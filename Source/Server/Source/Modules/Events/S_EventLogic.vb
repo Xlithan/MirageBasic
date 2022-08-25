@@ -7,11 +7,6 @@ Friend Module S_EventLogic
         Dim i As Integer, mapNum As Integer, x As Integer, id As Integer, page As Integer, compare As Integer
 
         For i = 0 To GetPlayersOnline()
-            If IsPlaying(i) = False Then
-                TempPlayer(i).EventMap.CurrentEvents = 0
-                Exit Sub
-            End If
-
             If TempPlayer(i).EventMap.CurrentEvents > 0 Then
                 mapNum = GetPlayerMap(i)
 
@@ -1977,13 +1972,9 @@ Friend Module S_EventLogic
         'Check Removing and Adding of Events (Did switches change or something?)
         If GettingMap Then Exit Sub
         RemoveDeadEvents()
-        If GettingMap Then Exit Sub
         SpawnNewEvents()
-        If GettingMap Then Exit Sub
         ProcessEventMovement()
-        If GettingMap Then Exit Sub
         ProcessLocalEventMovement()
-        If GettingMap Then Exit Sub
         ProcessEventCommands()
     End Sub
 
