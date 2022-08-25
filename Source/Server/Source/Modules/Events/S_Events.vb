@@ -1811,7 +1811,7 @@ Friend Module S_Events
                                 If Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
                                     For z = 0 To Map(mapNum).Events(i).Pages(x).CommandList(y).CommandCount
                                         With Map(mapNum).Events(i).Pages(x).CommandList(y).Commands(z)
-                                            buffer.WriteInt32(.Index)
+                                            buffer.WriteByte(.Index)
                                             buffer.WriteString((.Text1))
                                             buffer.WriteString((.Text2))
                                             buffer.WriteString((.Text3))

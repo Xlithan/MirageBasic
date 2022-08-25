@@ -653,7 +653,7 @@ Module S_NetworkSend
                                     If Map(mapNum).Events(i).Pages(X).CommandList(Y).CommandCount > 0 Then
                                         For z = 0 To Map(mapNum).Events(i).Pages(X).CommandList(Y).CommandCount
                                             With Map(mapNum).Events(i).Pages(X).CommandList(Y).Commands(z)
-                                                buffer.WriteInt32(.Index)
+                                                buffer.WriteByte(.Index)
                                                 buffer.WriteString((.Text1.Trim))
                                                 buffer.WriteString((.Text2.Trim))
                                                 buffer.WriteString((.Text3.Trim))

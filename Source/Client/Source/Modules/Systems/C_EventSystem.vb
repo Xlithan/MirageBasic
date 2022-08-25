@@ -2373,7 +2373,7 @@ newlist:
                                     ReDim Map.Events(i).Pages(x).CommandList(y).Commands(Map.Events(i).Pages(x).CommandList(y).CommandCount)
                                     For z = 0 To Map.Events(i).Pages(x).CommandList(y).CommandCount
                                         With Map.Events(i).Pages(x).CommandList(y).Commands(z)
-                                            .Index = buffer.ReadInt32
+                                            .Index = buffer.ReadByte
                                             .Text1 = buffer.ReadString
                                             .Text2 = buffer.ReadString
                                             .Text3 = buffer.ReadString
