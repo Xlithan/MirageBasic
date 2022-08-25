@@ -444,8 +444,6 @@ Module modDatabase
                         .WalkAnim = reader.ReadInt32()
                         .DirFix = reader.ReadInt32()
                         .WalkThrough = reader.ReadInt32()
-                        .DirFix = reader.ReadInt32()
-                        .WalkThrough = reader.ReadInt32()
                         .ShowName = reader.ReadInt32()
                         .Trigger = reader.ReadByte()
                         .CommandListCount = reader.ReadInt32()
