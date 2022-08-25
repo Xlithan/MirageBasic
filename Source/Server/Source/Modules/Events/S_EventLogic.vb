@@ -92,8 +92,8 @@ Friend Module S_EventLogic
                                 With TempPlayer(i).EventMap.EventPages(x)
                                     Buffer.WriteString((Trim(Map(GetPlayerMap(i)).Events(.EventId).Name)))
                                     Buffer.WriteInt32(.Dir)
-                                    Buffer.WriteInt32(.GraphicNum)
                                     Buffer.WriteByte(.GraphicType)
+                                    Buffer.WriteInt32(.Graphic)
                                     Buffer.WriteInt32(.GraphicX)
                                     Buffer.WriteInt32(.GraphicX2)
                                     Buffer.WriteInt32(.GraphicY)
@@ -242,7 +242,7 @@ Friend Module S_EventLogic
                                 Else
                                     .Dir = 0
                                 End If
-                                .GraphicNum = Map(mapNum).Events(id).Pages(z).Graphic
+                                .Graphic = Map(mapNum).Events(id).Pages(z).Graphic
                                 .GraphicType = Map(mapNum).Events(id).Pages(z).GraphicType
                                 .GraphicX = Map(mapNum).Events(id).Pages(z).GraphicX
                                 .GraphicY = Map(mapNum).Events(id).Pages(z).GraphicY
@@ -307,8 +307,8 @@ Friend Module S_EventLogic
                             With TempPlayer(i).EventMap.EventPages(x)
                                 Buffer.WriteString((Trim(Map(GetPlayerMap(i)).Events(.EventId).Name)))
                                 Buffer.WriteInt32(.Dir)
-                                Buffer.WriteInt32(.GraphicNum)
                                 Buffer.WriteByte(.GraphicType)
+                                Buffer.WriteInt32(.Graphic)
                                 Buffer.WriteInt32(.GraphicX)
                                 Buffer.WriteInt32(.GraphicX2)
                                 Buffer.WriteInt32(.GraphicY)
@@ -640,7 +640,7 @@ Friend Module S_EventLogic
                                                             sendupdate = True
                                                         Case 43
                                                             .GraphicType = .MoveRoute(.MoveRouteStep).Data1
-                                                            .GraphicNum = .MoveRoute(.MoveRouteStep).Data2
+                                                            .Graphic = .MoveRoute(.MoveRouteStep).Data2
                                                             .GraphicX = .MoveRoute(.MoveRouteStep).Data3
                                                             .GraphicX2 = .MoveRoute(.MoveRouteStep).Data4
                                                             .GraphicY = .MoveRoute(.MoveRouteStep).Data5
@@ -668,8 +668,8 @@ Friend Module S_EventLogic
                                                         With TempEventMap(i).Events(x)
                                                             Buffer.WriteString((Trim(Map(i).Events(x).Name)))
                                                             Buffer.WriteInt32(.Dir)
-                                                            Buffer.WriteInt32(.GraphicNum)
                                                             Buffer.WriteByte(.GraphicType)
+                                                            Buffer.WriteInt32(.Graphic)
                                                             Buffer.WriteInt32(.GraphicX)
                                                             Buffer.WriteInt32(.GraphicX2)
                                                             Buffer.WriteInt32(.GraphicY)
@@ -1035,7 +1035,7 @@ Friend Module S_EventLogic
                                                                 sendupdate = True
                                                             Case 43
                                                                 .GraphicType = .MoveRoute(.MoveRouteStep).Data1
-                                                                .GraphicNum = .MoveRoute(.MoveRouteStep).Data2
+                                                                .Graphic = .MoveRoute(.MoveRouteStep).Data2
                                                                 .GraphicX = .MoveRoute(.MoveRouteStep).Data3
                                                                 .GraphicX2 = .MoveRoute(.MoveRouteStep).Data4
                                                                 .GraphicY = .MoveRoute(.MoveRouteStep).Data5
@@ -1063,8 +1063,8 @@ Friend Module S_EventLogic
                                                             With TempPlayer(playerID).EventMap.EventPages(eventID)
                                                                 Buffer.WriteString((Trim(Map(GetPlayerMap(playerID)).Events(TempPlayer(playerID).EventMap.EventPages(eventID).EventId).Name)))
                                                                 Buffer.WriteInt32(.Dir)
-                                                                Buffer.WriteInt32(.GraphicNum)
                                                                 Buffer.WriteByte(.GraphicType)
+                                                                Buffer.WriteInt32(.Graphic)
                                                                 Buffer.WriteInt32(.GraphicX)
                                                                 Buffer.WriteInt32(.GraphicX2)
                                                                 Buffer.WriteInt32(.GraphicY)
@@ -2472,7 +2472,7 @@ Friend Module S_EventLogic
                                 Else
                                     .Dir = 0
                                 End If
-                                .GraphicNum = Map(mapNum).Events(i).Pages(z).Graphic
+                                .Graphic = Map(mapNum).Events(i).Pages(z).Graphic
                                 .GraphicType = Map(mapNum).Events(i).Pages(z).GraphicType
                                 .GraphicX = Map(mapNum).Events(i).Pages(z).GraphicX
                                 .GraphicY = Map(mapNum).Events(i).Pages(z).GraphicY
@@ -2553,8 +2553,8 @@ Friend Module S_EventLogic
                 With TempPlayer(index).EventMap.EventPages(i)
                     buffer.WriteString((Trim$(Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Name)))
                     buffer.WriteInt32(.Dir)
-                    buffer.WriteInt32(.GraphicNum)
                     buffer.WriteByte(.GraphicType)
+                    buffer.WriteInt32(.Graphic)
                     buffer.WriteInt32(.GraphicX)
                     buffer.WriteInt32(.GraphicX2)
                     buffer.WriteInt32(.GraphicY)

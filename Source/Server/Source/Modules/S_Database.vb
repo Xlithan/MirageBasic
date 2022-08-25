@@ -411,6 +411,7 @@ Module modDatabase
                         .SelfSwitchCompare = reader.ReadInt32()
 
                         .GraphicType = reader.ReadByte()
+                        .Graphic = reader.ReadInt32()
                         .GraphicX = reader.ReadInt32()
                         .GraphicY = reader.ReadInt32()
                         .GraphicX2 = reader.ReadInt32()

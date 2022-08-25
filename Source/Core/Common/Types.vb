@@ -637,7 +637,7 @@
         Dim Position As Integer
 
         Dim GraphicType As Byte
-        Dim GraphicNum As Integer
+        Dim Graphic As Integer
         Dim GraphicX As Integer
         Dim GraphicX2 As Integer
         Dim GraphicY As Integer
@@ -800,7 +800,7 @@
         Dim GraphicY As Integer
         Dim GraphicX2 As Integer
         Dim GraphicY2 As Integer
-        Dim GraphicNum As Integer
+        Dim Graphic As Integer
 
         Dim MovementSpeed As Integer
         Dim Position As Integer
