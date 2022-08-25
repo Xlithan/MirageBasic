@@ -949,8 +949,8 @@ Module S_NetworkReceive
                             .VariableCondition = buffer.ReadInt32
                             .VariableCompare = buffer.ReadInt32
 
-                            Map(mapNum).Events(i).Pages(x).ChkSwitch = buffer.ReadInt32
-                            Map(mapNum).Events(i).Pages(x).Switchindex = buffer.ReadInt32
+                            .ChkSwitch = buffer.ReadInt32
+                            .Switchindex = buffer.ReadInt32
                             .SwitchCompare = buffer.ReadInt32
 
                             .ChkHasItem = buffer.ReadInt32
@@ -961,16 +961,16 @@ Module S_NetworkReceive
                             .SelfSwitchindex = buffer.ReadInt32
                             .SelfSwitchCompare = buffer.ReadInt32
 
-                            .GraphicType = buffer.ReadInt32
+                            .GraphicType = buffer.ReadByte
                             .Graphic = buffer.ReadInt32
                             .GraphicX = buffer.ReadInt32
                             .GraphicY = buffer.ReadInt32
                             .GraphicX2 = buffer.ReadInt32
                             .GraphicY2 = buffer.ReadInt32
 
-                            .MoveType = buffer.ReadInt32
-                            .MoveSpeed = buffer.ReadInt32
-                            .MoveFreq = buffer.ReadInt32
+                            .MoveType = buffer.ReadByte
+                            .MoveSpeed = buffer.ReadByte
+                            .MoveFreq = buffer.ReadByte
 
                             .MoveRouteCount = buffer.ReadInt32
 
@@ -994,10 +994,10 @@ Module S_NetworkReceive
                             .DirFix = buffer.ReadInt32
                             .WalkThrough = buffer.ReadInt32
                             .ShowName = buffer.ReadInt32
-                            .Trigger = buffer.ReadInt32
+                            .Trigger = buffer.ReadByte
                             .CommandListCount = buffer.ReadInt32
 
-                            .Position = buffer.ReadInt32
+                            .Position = buffer.ReadByte
                             .QuestNum = buffer.ReadInt32
 
                             .ChkPlayerGender = buffer.ReadInt32
@@ -2542,7 +2542,7 @@ Module S_NetworkReceive
             For i = 0 To Map(mapNum).EventCount
                 With Map(mapNum).Events(i)
                     .Name = buffer.ReadString
-                    .Globals = buffer.ReadInt32
+                    .Globals = buffer.ReadByte
                     .X = buffer.ReadInt32
                     .Y = buffer.ReadInt32
                     .PageCount = buffer.ReadInt32
@@ -2557,8 +2557,8 @@ Module S_NetworkReceive
                             .VariableCondition = buffer.ReadInt32
                             .VariableCompare = buffer.ReadInt32
 
-                            Map(mapNum).Events(i).Pages(x).ChkSwitch = buffer.ReadInt32
-                            Map(mapNum).Events(i).Pages(x).Switchindex = buffer.ReadInt32
+                            .ChkSwitch = buffer.ReadInt32
+                            .Switchindex = buffer.ReadInt32
                             .SwitchCompare = buffer.ReadInt32
 
                             .ChkHasItem = buffer.ReadInt32
@@ -2569,16 +2569,16 @@ Module S_NetworkReceive
                             .SelfSwitchindex = buffer.ReadInt32
                             .SelfSwitchCompare = buffer.ReadInt32
 
-                            .GraphicType = buffer.ReadInt32
+                            .GraphicType = buffer.ReadByte
                             .Graphic = buffer.ReadInt32
                             .GraphicX = buffer.ReadInt32
                             .GraphicY = buffer.ReadInt32
                             .GraphicX2 = buffer.ReadInt32
                             .GraphicY2 = buffer.ReadInt32
 
-                            .MoveType = buffer.ReadInt32
-                            .MoveSpeed = buffer.ReadInt32
-                            .MoveFreq = buffer.ReadInt32
+                            .MoveType = buffer.ReadByte
+                            .MoveSpeed = buffer.ReadByte
+                            .MoveFreq = buffer.ReadByte
 
                             .MoveRouteCount = buffer.ReadInt32
 
@@ -2602,10 +2602,10 @@ Module S_NetworkReceive
                             .DirFix = buffer.ReadInt32
                             .WalkThrough = buffer.ReadInt32
                             .ShowName = buffer.ReadInt32
-                            .Trigger = buffer.ReadInt32
+                            .Trigger = buffer.ReadByte
                             .CommandListCount = buffer.ReadInt32
 
-                            .Position = buffer.ReadInt32
+                            .Position = buffer.ReadByte
                             .QuestNum = buffer.ReadInt32
 
                             .ChkPlayerGender = buffer.ReadInt32
@@ -2665,7 +2665,6 @@ Module S_NetworkReceive
 
         ' Save the map
         SaveMap(mapNum)
-
         SaveMapEvent(mapNum)
 
         Gettingmap = False

@@ -98,7 +98,7 @@ Friend Module S_EventLogic
                                     Buffer.WriteString((Trim(Map(GetPlayerMap(i)).Events(.EventId).Name)))
                                     Buffer.WriteInt32(.Dir)
                                     Buffer.WriteInt32(.GraphicNum)
-                                    Buffer.WriteInt32(.GraphicType)
+                                    Buffer.WriteByte(.GraphicType)
                                     Buffer.WriteInt32(.GraphicX)
                                     Buffer.WriteInt32(.GraphicX2)
                                     Buffer.WriteInt32(.GraphicY)
@@ -106,7 +106,7 @@ Friend Module S_EventLogic
                                     Buffer.WriteInt32(.MovementSpeed)
                                     Buffer.WriteInt32(.X)
                                     Buffer.WriteInt32(.Y)
-                                    Buffer.WriteInt32(.Position)
+                                    Buffer.WriteByte(.Position)
                                     Buffer.WriteInt32(.Visible)
                                     Buffer.WriteInt32(Map(mapNum).Events(id).Pages(page).WalkAnim)
                                     Buffer.WriteInt32(Map(mapNum).Events(id).Pages(page).DirFix)
@@ -140,12 +140,13 @@ Friend Module S_EventLogic
                 mapNum = GetPlayerMap(i)
                 For x = 0 To TempPlayer(i).EventMap.CurrentEvents
                     id = TempPlayer(i).EventMap.EventPages(x).EventId
+                    If id = 0 Then Exit for
                     pageID = TempPlayer(i).EventMap.EventPages(x).PageId
 
                     If TempPlayer(i).EventMap.EventPages(x).Visible = 0 Then pageID = 0
 
                     'If (Map(MapNum).Events Is Nothing) Then Continue For
-                    For z = Map(mapNum).Events(id).PageCount To 1 Step -1
+                    For z = Map(mapNum).Events(id).PageCount To 0 Step -1
 
                         spawnevent = True
 
@@ -312,7 +313,7 @@ Friend Module S_EventLogic
                                 Buffer.WriteString((Trim(Map(GetPlayerMap(i)).Events(.EventId).Name)))
                                 Buffer.WriteInt32(.Dir)
                                 Buffer.WriteInt32(.GraphicNum)
-                                Buffer.WriteInt32(.GraphicType)
+                                Buffer.WriteByte(.GraphicType)
                                 Buffer.WriteInt32(.GraphicX)
                                 Buffer.WriteInt32(.GraphicX2)
                                 Buffer.WriteInt32(.GraphicY)
@@ -320,7 +321,7 @@ Friend Module S_EventLogic
                                 Buffer.WriteInt32(.MovementSpeed)
                                 Buffer.WriteInt32(.X)
                                 Buffer.WriteInt32(.Y)
-                                Buffer.WriteInt32(.Position)
+                                Buffer.WriteByte(.Position)
                                 Buffer.WriteInt32(.Visible)
                                 Buffer.WriteInt32(Map(mapNum).Events(id).Pages(z).WalkAnim)
                                 Buffer.WriteInt32(Map(mapNum).Events(id).Pages(z).DirFix)
@@ -354,7 +355,7 @@ Friend Module S_EventLogic
             If PlayersOnMap(i) Then
                 'Manage Global Events First, then all the others.....
                 If TempEventMap(i).EventCount > 0 Then
-                    For x = 0 To TempEventMap(i).EventCount
+                    For x = 1 To TempEventMap(i).EventCount
                         If TempEventMap(i).Events(x).Active > 0 Then
                             pageNum = 1
                             If TempEventMap(i).Events(x).MoveTimer <= GetTimeMs() Then
@@ -673,15 +674,15 @@ Friend Module S_EventLogic
                                                             Buffer.WriteString((Trim(Map(i).Events(x).Name)))
                                                             Buffer.WriteInt32(.Dir)
                                                             Buffer.WriteInt32(.GraphicNum)
-                                                            Buffer.WriteInt32(.GraphicType)
+                                                            Buffer.WriteByte(.GraphicType)
                                                             Buffer.WriteInt32(.GraphicX)
                                                             Buffer.WriteInt32(.GraphicX2)
                                                             Buffer.WriteInt32(.GraphicY)
                                                             Buffer.WriteInt32(.GraphicY2)
-                                                            Buffer.WriteInt32(.MoveSpeed)
+                                                            Buffer.WriteByte(.MoveSpeed)
                                                             Buffer.WriteInt32(.X)
                                                             Buffer.WriteInt32(.Y)
-                                                            Buffer.WriteInt32(.Position)
+                                                            Buffer.WriteByte(.Position)
                                                             Buffer.WriteInt32(.Active)
                                                             Buffer.WriteInt32(.WalkingAnim)
                                                             Buffer.WriteInt32(.FixedDir)
@@ -1068,7 +1069,7 @@ Friend Module S_EventLogic
                                                                 Buffer.WriteString((Trim(Map(GetPlayerMap(playerID)).Events(TempPlayer(playerID).EventMap.EventPages(eventID).EventId).Name)))
                                                                 Buffer.WriteInt32(.Dir)
                                                                 Buffer.WriteInt32(.GraphicNum)
-                                                                Buffer.WriteInt32(.GraphicType)
+                                                                Buffer.WriteByte(.GraphicType)
                                                                 Buffer.WriteInt32(.GraphicX)
                                                                 Buffer.WriteInt32(.GraphicX2)
                                                                 Buffer.WriteInt32(.GraphicY)
@@ -1076,7 +1077,7 @@ Friend Module S_EventLogic
                                                                 Buffer.WriteInt32(.MoveSpeed)
                                                                 Buffer.WriteInt32(.X)
                                                                 Buffer.WriteInt32(.Y)
-                                                                Buffer.WriteInt32(.Position)
+                                                                Buffer.WriteByte(.Position)
                                                                 Buffer.WriteInt32(.Visible)
                                                                 Buffer.WriteInt32(.WalkingAnim)
                                                                 Buffer.WriteInt32(.FixedDir)
@@ -1976,9 +1977,13 @@ Friend Module S_EventLogic
         'Check Removing and Adding of Events (Did switches change or something?)
         If GettingMap Then Exit Sub
         RemoveDeadEvents()
+        If GettingMap Then Exit Sub
         SpawnNewEvents()
+        If GettingMap Then Exit Sub
         ProcessEventMovement()
+        If GettingMap Then Exit Sub
         ProcessLocalEventMovement()
+        If GettingMap Then Exit Sub
         ProcessEventCommands()
     End Sub
 
@@ -2376,6 +2381,7 @@ Friend Module S_EventLogic
 
         TempPlayer(index).EventMap.CurrentEvents = 0
         ReDim TempPlayer(index).EventMap.EventPages(0)
+
         If Map(mapNum).EventCount > 0 Then
             ReDim TempPlayer(index).EventProcessing(Map(mapNum).EventCount)
             TempPlayer(index).EventProcessingCount = Map(mapNum).EventCount
@@ -2387,7 +2393,7 @@ Friend Module S_EventLogic
         If Map(mapNum).EventCount <= 0 Then Exit Sub
         For i = 0 To Map(mapNum).EventCount
             If Map(mapNum).Events(i).PageCount > 0 Then
-                For z = Map(mapNum).Events(i).PageCount To 1 Step -1
+                For z = Map(mapNum).Events(i).PageCount To 0 Step -1
                     With Map(mapNum).Events(i).Pages(z)
                         spawncurrentevent = True
 
@@ -2549,7 +2555,7 @@ Friend Module S_EventLogic
 
         Dim buffer As ByteStream
         If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-            For i = 0 To TempPlayer(index).EventMap.CurrentEvents
+            For i = 1 To TempPlayer(index).EventMap.CurrentEvents
                 buffer = New ByteStream(4)
                 buffer.WriteInt32(ServerPackets.SSpawnEvent)
                 buffer.WriteInt32(TempPlayer(index).EventMap.EventPages(i).EventId)
@@ -2557,7 +2563,7 @@ Friend Module S_EventLogic
                     buffer.WriteString((Trim$(Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Name)))
                     buffer.WriteInt32(.Dir)
                     buffer.WriteInt32(.GraphicNum)
-                    buffer.WriteInt32(.GraphicType)
+                    buffer.WriteByte(.GraphicType)
                     buffer.WriteInt32(.GraphicX)
                     buffer.WriteInt32(.GraphicX2)
                     buffer.WriteInt32(.GraphicY)
@@ -2565,7 +2571,7 @@ Friend Module S_EventLogic
                     buffer.WriteInt32(.MovementSpeed)
                     buffer.WriteInt32(.X)
                     buffer.WriteInt32(.Y)
-                    buffer.WriteInt32(.Position)
+                    buffer.WriteByte(.Position)
                     buffer.WriteInt32(.Visible)
                     buffer.WriteInt32(Map(mapNum).Events(.EventId).Pages(.PageId).WalkAnim)
                     buffer.WriteInt32(Map(mapNum).Events(.EventId).Pages(.PageId).DirFix)

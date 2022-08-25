@@ -1648,14 +1648,16 @@ Module C_Graphics
         End If
 
         ' events
-        If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
+        If InMapEditor = False Then
+            if Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
 
-           For i = 0 To Map.CurrentEvents
-                If Map.MapEvents(i).Position = 0 Then
-                    DrawEvent(i)
-                End If
-            Next
-        End If
+               For i = 1 To Map.CurrentEvents
+                    If Map.MapEvents(i).Position = 0 Then
+                        DrawEvent(i)
+                    End If
+                Next
+            End If
+        End if
 
         'blood
        For i = 0 To Byte.MaxValue
@@ -1720,14 +1722,16 @@ Module C_Graphics
                 Next
 
                 ' events
-                If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
-                   For i = 0 To Map.CurrentEvents
-                        If Map.MapEvents(I).Position = 1 Then
-                            If y = Map.MapEvents(I).Y Then
-                                DrawEvent(I)
+                If InMapEditor = False Then
+                    If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
+                       For i = 1 To Map.CurrentEvents
+                            If Map.MapEvents(I).Position = 1 Then
+                                If y = Map.MapEvents(I).Y Then
+                                    DrawEvent(I)
+                                End If
                             End If
-                        End If
-                    Next
+                        Next
+                    End If
                 End If
 
                 ' Draw the target icon
@@ -1791,7 +1795,7 @@ Module C_Graphics
 
         'events
         If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
-           For i = 0 To Map.CurrentEvents
+           For i = 1 To Map.CurrentEvents
                 If Map.MapEvents(I).Position = 2 Then
                     DrawEvent(I)
                 End If
@@ -1870,7 +1874,7 @@ Module C_Graphics
         Next
 
         'draw event names
-       For i = 0 To Map.CurrentEvents
+       For i = 1 To Map.CurrentEvents
             If Map.MapEvents(I).Visible = 1 Then
                 If Map.MapEvents(I).ShowName = 1 Then
                     DrawEventName(I)

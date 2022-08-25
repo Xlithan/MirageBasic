@@ -214,6 +214,7 @@ Public Class FrmEditor_Events
     Private Sub BtnOK_Click(sender As Object, e As EventArgs) Handles btnOk.Click
         if fraGraphic.Visible = false Then
             EventEditorOK()
+            TmpEvent = Nothing
         Else
             If GraphicSelType = 0 Then
                 TmpEvent.Pages(CurPageNum).GraphicType = cmbGraphic.SelectedIndex
@@ -228,6 +229,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         If fraGraphic.Visible = False then
+            TmpEvent = Nothing
             Dispose()
         Else
             TmpEvent.Pages(CurPageNum).GraphicType = tmpGraphicType

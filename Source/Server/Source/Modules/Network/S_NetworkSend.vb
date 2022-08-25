@@ -589,7 +589,7 @@ Module S_NetworkSend
                 For i = 0 To Map(mapNum).EventCount
                     With Map(mapNum).Events(i)
                         buffer.WriteString((.Name.Trim))
-                        buffer.WriteInt32(.Globals)
+                        buffer.WriteByte(.Globals)
                         buffer.WriteInt32(.X)
                         buffer.WriteInt32(.Y)
                         buffer.WriteInt32(.PageCount)
@@ -610,18 +610,19 @@ Module S_NetworkSend
                                 buffer.WriteInt32(.ChkSelfSwitch)
                                 buffer.WriteInt32(.SelfSwitchindex)
                                 buffer.WriteInt32(.SelfSwitchCompare)
-                                buffer.WriteInt32(.GraphicType)
+                                buffer.WriteByte(.GraphicType)
                                 buffer.WriteInt32(.Graphic)
                                 buffer.WriteInt32(.GraphicX)
                                 buffer.WriteInt32(.GraphicY)
                                 buffer.WriteInt32(.GraphicX2)
                                 buffer.WriteInt32(.GraphicY2)
-                                buffer.WriteInt32(.MoveType)
-                                buffer.WriteInt32(.MoveSpeed)
-                                buffer.WriteInt32(.MoveFreq)
+                                buffer.WriteByte(.MoveType)
+                                buffer.WriteByte(.MoveSpeed)
+                                buffer.WriteByte(.MoveFreq)
                                 buffer.WriteInt32(.MoveRouteCount)
                                 buffer.WriteInt32(.IgnoreMoveRoute)
                                 buffer.WriteInt32(.RepeatMoveRoute)
+
                                 If .MoveRouteCount > 0 Then
                                     For Y = 0 To .MoveRouteCount
                                         buffer.WriteInt32(.MoveRoute(Y).Index)
@@ -633,17 +634,18 @@ Module S_NetworkSend
                                         buffer.WriteInt32(.MoveRoute(Y).Data6)
                                     Next
                                 End If
+
                                 buffer.WriteInt32(.WalkAnim)
                                 buffer.WriteInt32(.DirFix)
                                 buffer.WriteInt32(.WalkThrough)
                                 buffer.WriteInt32(.ShowName)
-                                buffer.WriteInt32(.Trigger)
+                                buffer.WriteByte(.Trigger)
                                 buffer.WriteInt32(.CommandListCount)
-                                buffer.WriteInt32(.Position)
+                                buffer.WriteByte(.Position)
                                 buffer.WriteInt32(.QuestNum)
-
                                 buffer.WriteInt32(.ChkPlayerGender)
                             End With
+
                             If Map(mapNum).Events(i).Pages(X).CommandListCount > 0 Then
                                 For Y = 0 To Map(mapNum).Events(i).Pages(X).CommandListCount
                                     buffer.WriteInt32(Map(mapNum).Events(i).Pages(X).CommandList(Y).CommandCount)
@@ -690,7 +692,6 @@ Module S_NetworkSend
                     End If
                 Next
             End If
-            'End Event Data
         Else
             buffer.WriteInt32(0)
         End If

@@ -965,7 +965,6 @@ Public Class FrmEditor_MapEditor
                 DeleteEvent(CurX, CurY)
             End If
         End If
-
     End Sub
 
     Public Sub MapEditorCancel()
