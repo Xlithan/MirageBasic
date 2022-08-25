@@ -394,7 +394,7 @@ Module modDatabase
 
             If Map(mapNum).Events(i).PageCount > 0 Then
                 ReDim Map(mapNum).Events(i).Pages(Map(mapNum).Events(i).PageCount)
-                For x = 1 To Map(mapNum).Events(i).PageCount
+                For x = 0 To Map(mapNum).Events(i).PageCount
                     With Map(mapNum).Events(i).Pages(x)
                         .ChkVariable = reader.ReadInt32()
                         .Variableindex = reader.ReadInt32()
@@ -449,10 +449,8 @@ Module modDatabase
                         .ShowName = reader.ReadInt32()
                         .Trigger = reader.ReadByte()
                         .CommandListCount = reader.ReadInt32()
-
                         .Position = reader.ReadByte()
                         .QuestNum = reader.ReadInt32()
-
                         .ChkPlayerGender = reader.ReadInt32()
                     End With
 

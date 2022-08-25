@@ -636,7 +636,7 @@
 
         Dim Position As Integer
 
-        Dim GraphicType As Integer
+        Dim GraphicType As Byte
         Dim GraphicNum As Integer
         Dim GraphicX As Integer
         Dim GraphicX2 As Integer
@@ -646,8 +646,8 @@
         'Server Only Options
         Dim MoveType As Integer
 
-        Dim MoveSpeed As Integer
-        Dim MoveFreq As Integer
+        Dim MoveSpeed As Byte
+        Dim MoveFreq As Byte
         Dim MoveRouteCount As Integer
         Dim MoveRoute() As MoveRouteStruct
         Dim MoveRouteStep As Integer
@@ -719,7 +719,6 @@
         Dim SelfSwitchindex As Integer
         Dim SelfSwitchCompare As Integer
         Dim ChkPlayerGender As Integer
-        'End Conditions
 
         'Handles the Event Sprite
         Dim GraphicType As Byte
@@ -732,7 +731,6 @@
 
         'Handles Movement - Move Routes to come soon.
         Dim MoveType As Byte
-
         Dim MoveSpeed As Byte
         Dim MoveFreq As Byte
         Dim MoveRouteCount As Integer
@@ -797,7 +795,7 @@
         Dim WalkThrough As Integer
         Dim ShowName As Integer
 
-        Dim GraphicType As Integer
+        Dim GraphicType As Byte
         Dim GraphicX As Integer
         Dim GraphicY As Integer
         Dim GraphicX2 As Integer
@@ -810,11 +808,9 @@
         Dim EventId As Integer
         Dim PageId As Integer
 
-        'Server Only Options
-        Dim MoveType As Integer
-
-        Dim MoveSpeed As Integer
-        Dim MoveFreq As Integer
+        Dim MoveType As Byte
+        Dim MoveSpeed As Byte
+        Dim MoveFreq As Byte
         Dim MoveRouteCount As Integer
         Dim MoveRoute() As MoveRouteStruct
         Dim MoveRouteStep As Integer

@@ -323,7 +323,7 @@ Module C_Maps
                    For i = 0 To Map.EventCount
                         With Map.Events(i)
                             .Name = Trim(buffer.ReadString)
-                            .Globals = buffer.ReadInt32
+                            .Globals = buffer.ReadByte
                             .X = buffer.ReadInt32
                             .Y = buffer.ReadInt32
                             .PageCount = buffer.ReadInt32
@@ -349,16 +349,16 @@ Module C_Maps
                                     .SelfSwitchindex = buffer.ReadInt32
                                     .SelfSwitchCompare = buffer.ReadInt32
 
-                                    .GraphicType = buffer.ReadInt32
+                                    .GraphicType = buffer.ReadByte
                                     .Graphic = buffer.ReadInt32
                                     .GraphicX = buffer.ReadInt32
                                     .GraphicY = buffer.ReadInt32
                                     .GraphicX2 = buffer.ReadInt32
                                     .GraphicY2 = buffer.ReadInt32
 
-                                    .MoveType = buffer.ReadInt32
-                                    .MoveSpeed = buffer.ReadInt32
-                                    .MoveFreq = buffer.ReadInt32
+                                    .MoveType = buffer.ReadByte
+                                    .MoveSpeed = buffer.ReadByte
+                                    .MoveFreq = buffer.ReadByte
 
                                     .MoveRouteCount = buffer.ReadInt32
 
@@ -382,10 +382,10 @@ Module C_Maps
                                     .DirFix = buffer.ReadInt32
                                     .WalkThrough = buffer.ReadInt32
                                     .ShowName = buffer.ReadInt32
-                                    .Trigger = buffer.ReadInt32
+                                    .Trigger = buffer.ReadByte
                                     .CommandListCount = buffer.ReadInt32
 
-                                    .Position = buffer.ReadInt32
+                                    .Position = buffer.ReadByte
                                     .Questnum = buffer.ReadInt32
 
                                     .ChkPlayerGender = buffer.ReadInt32
@@ -395,7 +395,7 @@ Module C_Maps
                                     ReDim Map.Events(i).Pages(x).CommandList(Map.Events(i).Pages(x).CommandListCount)
                                     For y = 0 To Map.Events(i).Pages(x).CommandListCount
                                         Map.Events(i).Pages(x).CommandList(y).CommandCount = buffer.ReadInt32
-                                        Map.Events(i).Pages(x).CommandList(y).ParentList = buffer.ReadInt32
+                                        Map.Events( i).Pages(x).CommandList(y).ParentList = buffer.ReadInt32
                                         If Map.Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
                                             ReDim Map.Events(i).Pages(x).CommandList(y).Commands(Map.Events(i).Pages(x).CommandList(y).CommandCount)
                                             For z = 0 To Map.Events(i).Pages(x).CommandList(y).CommandCount
@@ -659,6 +659,7 @@ Module C_Maps
         If Map.EventCount > 0 Then
            For i = 0 To Map.EventCount
                 With Map.Events(i)
+                    If .Name = Nothing Then .Name = ""
                     buffer.WriteString((.Name.Trim))
                     buffer.WriteInt32(.Globals)
                     buffer.WriteInt32(.X)
@@ -681,18 +682,19 @@ Module C_Maps
                             buffer.WriteInt32(.ChkSelfSwitch)
                             buffer.WriteInt32(.SelfSwitchindex)
                             buffer.WriteInt32(.SelfSwitchCompare)
-                            buffer.WriteInt32(.GraphicType)
+                            buffer.WriteByte(.GraphicType)
                             buffer.WriteInt32(.Graphic)
                             buffer.WriteInt32(.GraphicX)
                             buffer.WriteInt32(.GraphicY)
                             buffer.WriteInt32(.GraphicX2)
                             buffer.WriteInt32(.GraphicY2)
-                            buffer.WriteInt32(.MoveType)
-                            buffer.WriteInt32(.MoveSpeed)
-                            buffer.WriteInt32(.MoveFreq)
+                            buffer.WriteByte(.MoveType)
+                            buffer.WriteByte(.MoveSpeed)
+                            buffer.WriteByte(.MoveFreq)
                             buffer.WriteInt32(Map.Events(i).Pages(x).MoveRouteCount)
                             buffer.WriteInt32(.IgnoreMoveRoute)
                             buffer.WriteInt32(.RepeatMoveRoute)
+
                             If .MoveRouteCount > 0 Then
                                 For y = 0 To .MoveRouteCount
                                     buffer.WriteInt32(.MoveRoute(y).Index)
@@ -704,15 +706,15 @@ Module C_Maps
                                     buffer.WriteInt32(.MoveRoute(y).Data6)
                                 Next
                             End If
+
                             buffer.WriteInt32(.WalkAnim)
                             buffer.WriteInt32(.DirFix)
                             buffer.WriteInt32(.WalkThrough)
                             buffer.WriteInt32(.ShowName)
-                            buffer.WriteInt32(.Trigger)
+                            buffer.WriteByte(.Trigger)
                             buffer.WriteInt32(.CommandListCount)
-                            buffer.WriteInt32(.Position)
+                            buffer.WriteByte(.Position)
                             buffer.WriteInt32(.Questnum)
-
                             buffer.WriteInt32(.ChkPlayerGender)
                         End With
                         If Map.Events(i).Pages(x).CommandListCount > 0 Then

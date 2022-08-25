@@ -214,12 +214,12 @@ Module C_GameLogic
                             If Map.Npc(i) > 0 Then
                                 ProcessNpcMovement(i)
                             End If
-                        Next i
+                        Next
 
                         If Map.CurrentEvents > 0 Then
                            For i = 0 To Map.CurrentEvents
                                 ProcessEventMovement(i)
-                            Next i
+                            Next
                         End If
 
                         walkTimer = tick + 30 ' edit this value to change WalkTimer

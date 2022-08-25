@@ -1741,7 +1741,7 @@ Friend Module S_Events
             For i = 0 To Map(mapNum).EventCount
                 With Map(mapNum).Events(i)
                     buffer.WriteString((Trim(.Name)))
-                    buffer.WriteInt32(.Globals)
+                    buffer.WriteByte(.Globals)
                     buffer.WriteInt32(.X)
                     buffer.WriteInt32(.Y)
                     buffer.WriteInt32(.PageCount)
@@ -1766,16 +1766,16 @@ Friend Module S_Events
                             buffer.WriteInt32(.SelfSwitchindex)
                             buffer.WriteInt32(.SelfSwitchCompare)
 
-                            buffer.WriteInt32(.GraphicType)
+                            buffer.WriteByte(.GraphicType)
                             buffer.WriteInt32(.Graphic)
                             buffer.WriteInt32(.GraphicX)
                             buffer.WriteInt32(.GraphicY)
                             buffer.WriteInt32(.GraphicX2)
                             buffer.WriteInt32(.GraphicY2)
 
-                            buffer.WriteInt32(.MoveType)
-                            buffer.WriteInt32(.MoveSpeed)
-                            buffer.WriteInt32(.MoveFreq)
+                            buffer.WriteByte(.MoveType)
+                            buffer.WriteByte(.MoveSpeed)
+                            buffer.WriteByte(.MoveFreq)
                             buffer.WriteInt32(.MoveRouteCount)
 
                             buffer.WriteInt32(.IgnoreMoveRoute)
@@ -1797,10 +1797,10 @@ Friend Module S_Events
                             buffer.WriteInt32(.DirFix)
                             buffer.WriteInt32(.WalkThrough)
                             buffer.WriteInt32(.ShowName)
-                            buffer.WriteInt32(.Trigger)
+                            buffer.WriteByte(.Trigger)
                             buffer.WriteInt32(.CommandListCount)
 
-                            buffer.WriteInt32(.Position)
+                            buffer.WriteByte(.Position)
                             buffer.WriteInt32(.QuestNum)
                         End With
 
