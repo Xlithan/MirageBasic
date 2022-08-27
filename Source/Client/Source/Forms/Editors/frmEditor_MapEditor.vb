@@ -16,7 +16,6 @@ Public Class FrmEditor_MapEditor
         pnlAttributes.Visible = False
         pnlAttributes.Left = 4
         pnlAttributes.Top = 28
-        Me.Width = 525
         optBlocked.Checked = True
         tabpages.SelectedIndex = 0
 
@@ -70,14 +69,6 @@ Public Class FrmEditor_MapEditor
         'Overrides the paint sub
     End Sub
 
-    Private Sub ScrlPictureY_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlPictureY.ValueChanged
-        MapEditorTileScroll()
-    End Sub
-
-    Private Sub ScrlPictureX_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlPictureX.ValueChanged
-        MapEditorTileScroll()
-    End Sub
-
     Private Sub CmbTileSets_Click(sender As Object, e As EventArgs) Handles cmbTileSets.Click
         If cmbTileSets.SelectedIndex > NumTileSets Then
             cmbTileSets.SelectedIndex = 0
@@ -87,12 +78,6 @@ Public Class FrmEditor_MapEditor
 
         EditorTileSelStart = New Point(0, 0)
         EditorTileSelEnd = New Point(1, 1)
-
-        'picBackSelect.Height = TileSetTextureInfo(cmbTileSets.SelectedIndex).Height
-        'picBackSelect.Width = TileSetTextureInfo(cmbTileSets.SelectedIndex).Width
-
-        scrlPictureY.Maximum = (picBackSelect.Height \ PicY)
-        scrlPictureX.Maximum = (picBackSelect.Width \ PicX)
     End Sub
 
     Private Sub CmbAutoTile_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAutoTile.SelectedIndexChanged
@@ -677,13 +662,6 @@ Public Class FrmEditor_MapEditor
             .TextureTimer = GetTickCount() + 100000
         End With
 
-        ' set the scrollbars
-
-        scrlPictureY.Maximum = (TileSetTextureInfo(LastTileset).Height \ PicY) \ 2
-        scrlPictureX.Maximum = (TileSetTextureInfo(LastTileset).Width \ PicX) \ 2
-        'height = TileSetTextureInfo(tileset).Height
-        'width = TileSetTextureInfo(tileset).Width
-
         ' set shops for the shop attribute
         For i = 0 To MAX_SHOPS
             cmbShop.Items.Add(i & ": " & Shop(i).Name)
@@ -705,11 +683,6 @@ Public Class FrmEditor_MapEditor
 
         If MapData = True Then GettingMap = False
 
-    End Sub
-
-    Public Sub MapEditorTileScroll()
-        picbacktop = (scrlPictureY.Value * PicY) ' * -1
-        picbackleft = (scrlPictureX.Value * PicX) ' * -1
     End Sub
 
     Public Sub MapEditorChooseTile(ByVal Button As Integer, ByVal X As Single, ByVal Y As Single)
