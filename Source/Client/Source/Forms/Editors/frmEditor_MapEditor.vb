@@ -78,18 +78,18 @@ Public Class FrmEditor_MapEditor
         MapEditorTileScroll()
     End Sub
 
-    Private Sub CmbTileSets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTileSets.Click
-        If cmbTileSets.SelectedIndex + 1 > NumTileSets Then
+    Private Sub CmbTileSets_Click(sender As Object, e As EventArgs) Handles cmbTileSets.Click
+        If cmbTileSets.SelectedIndex > NumTileSets Then
             cmbTileSets.SelectedIndex = 0
         End If
 
-        Map.Tileset = cmbTileSets.SelectedIndex + 1
+        Map.Tileset = cmbTileSets.SelectedIndex
 
         EditorTileSelStart = New Point(0, 0)
         EditorTileSelEnd = New Point(1, 1)
 
-        'picBackSelect.Height = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).Height
-        'picBackSelect.Width = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).Width
+        'picBackSelect.Height = TileSetTextureInfo(cmbTileSets.SelectedIndex).Height
+        'picBackSelect.Width = TileSetTextureInfo(cmbTileSets.SelectedIndex).Width
 
         scrlPictureY.Maximum = (picBackSelect.Height \ PicY)
         scrlPictureX.Maximum = (picBackSelect.Width \ PicX)
@@ -784,7 +784,7 @@ Public Class FrmEditor_MapEditor
         Dim i As Integer
         Dim CurLayer As Integer
 
-        CurLayer = cmbLayers.SelectedIndex + 1
+        CurLayer = cmbLayers.SelectedIndex
 
         If Not IsInBounds() Then Exit Sub
         If Button = MouseButtons.Left Then
@@ -996,7 +996,7 @@ Public Class FrmEditor_MapEditor
                 ' set layer
                 .Layer(CurLayer).X = EditorTileX
                 .Layer(CurLayer).Y = EditorTileY
-                .Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex + 1
+                .Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex
                 .Layer(CurLayer).AutoTile = theAutotile
                 CacheRenderState(X, Y, CurLayer)
             End With
@@ -1010,7 +1010,7 @@ Public Class FrmEditor_MapEditor
                 ' set layer
                 .Layer(CurLayer).X = EditorTileX
                 .Layer(CurLayer).Y = EditorTileY
-                .Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex + 1
+                .Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex
                 .Layer(CurLayer).AutoTile = 0
                 CacheRenderState(X, Y, CurLayer)
             End With
@@ -1024,7 +1024,7 @@ Public Class FrmEditor_MapEditor
                             With Map.Tile(X, Y)
                                 .Layer(CurLayer).X = EditorTileX + x2
                                 .Layer(CurLayer).Y = EditorTileY + y2
-                                .Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex + 1
+                                .Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex
                                 .Layer(CurLayer).AutoTile = 0
                                 CacheRenderState(X, Y, CurLayer)
                             End With
@@ -1075,7 +1075,7 @@ Public Class FrmEditor_MapEditor
                     For Y = 0 To Map.MaxY
                         Map.Tile(X, Y).Layer(CurLayer).X = EditorTileX
                         Map.Tile(X, Y).Layer(CurLayer).Y = EditorTileY
-                        Map.Tile(X, Y).Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex + 1
+                        Map.Tile(X, Y).Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex
                         Map.Tile(X, Y).Layer(CurLayer).AutoTile = theAutotile
                         CacheRenderState(X, Y, CurLayer)
                     Next
@@ -1088,7 +1088,7 @@ Public Class FrmEditor_MapEditor
                     For Y = 0 To Map.MaxY
                         Map.Tile(X, Y).Layer(CurLayer).X = EditorTileX
                         Map.Tile(X, Y).Layer(CurLayer).Y = EditorTileY
-                        Map.Tile(X, Y).Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex + 1
+                        Map.Tile(X, Y).Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex
                         CacheRenderState(X, Y, CurLayer)
                     Next
                 Next
@@ -1152,7 +1152,7 @@ Public Class FrmEditor_MapEditor
         TilesetWindow.Clear(SFML.Graphics.Color.Black)
 
         ' find tileset number
-        tileset = Me.cmbTileSets.SelectedIndex + 1
+        tileset = Me.cmbTileSets.SelectedIndex
 
         ' exit out if doesn't exist
         If tileset <= 0 OrElse tileset > NumTileSets Then Exit Sub
@@ -1255,6 +1255,10 @@ Public Class FrmEditor_MapEditor
         MapEditorCancel()
     End Sub
 
+    Private Sub cmbTileSets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTileSets.SelectedIndexChanged
+       If cmbTileSets.SelectedIndex = 0 Then cmbTileSets.SelectedIndex = 1
+    End Sub
+
     Friend Sub DrawTileOutline()
         Dim rec As Rectangle
         If Me.tabpages.SelectedTab Is Me.tpDirBlock Then Exit Sub
@@ -1275,25 +1279,25 @@ Public Class FrmEditor_MapEditor
         If Me.tabpages.SelectedTab Is Me.tpAttributes Then
             rec2.Size = New Vector2f(rec.Width, rec.Height)
         Else
-            If TileSetTextureInfo(Me.cmbTileSets.SelectedIndex + 1).IsLoaded = False Then
-                LoadTexture(Me.cmbTileSets.SelectedIndex + 1, 1)
+            If TileSetTextureInfo(Me.cmbTileSets.SelectedIndex).IsLoaded = False Then
+                LoadTexture(Me.cmbTileSets.SelectedIndex, 1)
             End If
             ' we use it, lets update timer
-            With TileSetTextureInfo(Me.cmbTileSets.SelectedIndex + 1)
+            With TileSetTextureInfo(Me.cmbTileSets.SelectedIndex)
                 .TextureTimer = GetTickCount() + 100000
             End With
 
             If EditorTileWidth = 1 AndAlso EditorTileHeight = 1 Then
-                RenderSprite(TileSetSprite(Me.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, rec.Width, rec.Height)
+                RenderSprite(TileSetSprite(Me.cmbTileSets.SelectedIndex), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, rec.Width, rec.Height)
 
                 rec2.Size = New Vector2f(rec.Width, rec.Height)
             Else
                 If Me.cmbAutoTile.SelectedIndex > 0 Then
-                    RenderSprite(TileSetSprite(Me.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, rec.Width, rec.Height)
+                    RenderSprite(TileSetSprite(Me.cmbTileSets.SelectedIndex), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, rec.Width, rec.Height)
 
                     rec2.Size = New Vector2f(rec.Width, rec.Height)
                 Else
-                    RenderSprite(TileSetSprite(Me.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, EditorTileSelEnd.X * PicX, EditorTileSelEnd.Y * PicY)
+                    RenderSprite(TileSetSprite(Me.cmbTileSets.SelectedIndex), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, EditorTileSelEnd.X * PicX, EditorTileSelEnd.Y * PicY)
 
                     rec2.Size = New Vector2f(EditorTileSelEnd.X * PicX, EditorTileSelEnd.Y * PicY)
                 End If
