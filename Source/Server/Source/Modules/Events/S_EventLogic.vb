@@ -1969,8 +1969,6 @@ Friend Module S_EventLogic
     End Sub
 
     Friend Sub UpdateEventLogic()
-        'Check Removing and Adding of Events (Did switches change or something?)
-        If GettingMap Then Exit Sub
         RemoveDeadEvents()
         SpawnNewEvents()
         ProcessEventMovement()

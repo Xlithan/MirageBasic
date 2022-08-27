@@ -959,7 +959,7 @@ newlist:
         End If
 
         oldCommandList = TmpEvent.Pages(CurPageNum).CommandList(curlist)
-        TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount + 1
+        TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
         p = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
         If p <= 0 Then
             ReDim TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(0)

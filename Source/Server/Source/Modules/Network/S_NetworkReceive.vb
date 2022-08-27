@@ -160,8 +160,6 @@ Module S_NetworkReceive
         Socket.PacketId(ClientPackets.CSaveRecipe) = AddressOf Packet_SaveRecipe
         Socket.PacketId(ClientPackets.CRequestEditJob) = AddressOf Packet_RequestEditJob
         Socket.PacketId(ClientPackets.CSaveJob) = AddressOf Packet_SaveJob
-        Socket.PacketId(ClientPackets.CRequestAutoMap) = AddressOf Packet_RequestAutoMap
-        Socket.PacketId(ClientPackets.CSaveAutoMap) = AddressOf Packet_SaveAutoMap
 
         'pet
         Socket.PacketId(ClientPackets.CRequestEditPet) = AddressOf Packet_RequestEditPet
@@ -863,8 +861,6 @@ Module S_NetworkReceive
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
 
-        Gettingmap = True
-
         mapNum = GetPlayerMap(index)
 
         i = Map(mapNum).Revision + 1
@@ -1053,8 +1049,6 @@ Module S_NetworkReceive
         ' Save the map
         SaveMap(mapNum)
         SaveMapEvent(mapNum)
-
-        Gettingmap = False
 
         SendMapNpcsToMap(mapNum)
         SpawnMapNpcs(mapNum)
@@ -2466,8 +2460,6 @@ Module S_NetworkReceive
 
         Dim buffer As New ByteStream(Compression.DecompressBytes(data))
 
-        Gettingmap = True
-
         mapNum = buffer.ReadInt32
 
         i = Map(mapNum).Revision + 1
@@ -2656,8 +2648,6 @@ Module S_NetworkReceive
         ' Save the map
         SaveMap(mapNum)
         SaveMapEvent(mapNum)
-
-        Gettingmap = False
 
         SendMapNpcsToMap(mapNum)
         SpawnMapNpcs(mapNum)

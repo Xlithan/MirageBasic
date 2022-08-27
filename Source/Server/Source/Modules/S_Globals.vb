@@ -27,6 +27,5 @@
     Friend Secs As Integer
     Friend TempMapData As Byte
 
-    Friend Gettingmap As Boolean
     Friend EKeyPair As New Asfw.IO.Encryption.KeyPair()
 End Module

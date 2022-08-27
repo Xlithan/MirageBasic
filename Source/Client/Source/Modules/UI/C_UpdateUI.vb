@@ -651,11 +651,6 @@ Module C_UpdateUI
             EditorProjectile_DrawProjectile()
         End If
 
-        If InitAutoMapper = True Then
-            OpenAutomapper()
-            InitAutoMapper = False
-        End If
-
         If InitCrafting = True Then
             CraftingInit()
             InitCrafting = False

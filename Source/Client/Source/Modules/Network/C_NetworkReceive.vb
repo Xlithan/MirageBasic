@@ -149,7 +149,6 @@ Module C_NetworkReceive
         Socket.PacketId(ServerPackets.SClock) = AddressOf Packet_Clock
         Socket.PacketId(ServerPackets.STime) = AddressOf Packet_Time
 
-        ' EDITOR PACKETS ONLY
         Socket.PacketId(ServerPackets.SItemEditor) = AddressOf Packet_EditItem
         Socket.PacketId(ServerPackets.SREditor) = AddressOf Packet_ResourceEditor
         Socket.PacketId(ServerPackets.SNpcEditor) = AddressOf Packet_NPCEditor
@@ -161,8 +160,7 @@ Module C_NetworkReceive
         Socket.PacketId(ServerPackets.SHouseEdit) = AddressOf Packet_EditHouses
         Socket.PacketId(ServerPackets.SProjectileEditor) = AddressOf HandleProjectileEditor
         Socket.PacketId(ServerPackets.SRecipeEditor) = AddressOf Packet_RecipeEditor
-        Socket.PacketId(ServerPackets.SClassEditor) = AddressOf Packet_ClassEditor
-        Socket.PacketId(ServerPackets.SAutoMapper) = AddressOf Packet_AutoMapper
+        Socket.PacketId(ServerPackets.SJobEditor) = AddressOf Packet_ClassEditor
         Socket.PacketId(ServerPackets.SPetEditor) = AddressOf Packet_PetEditor
     End Sub
 

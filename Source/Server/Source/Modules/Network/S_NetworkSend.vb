@@ -1418,7 +1418,7 @@ Module S_NetworkSend
     Sub SendClassEditor(index As Integer)
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ServerPackets.SClassEditor)
+        buffer.WriteInt32(ServerPackets.SJobEditor)
 
         AddDebug("Sent SMSG: SClassEditor")
 

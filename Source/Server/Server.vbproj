@@ -84,9 +84,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Update="Database\AutoMapper.ini">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Database\SkillExp.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
