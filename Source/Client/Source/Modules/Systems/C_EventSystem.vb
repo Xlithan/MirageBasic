@@ -438,9 +438,8 @@ Friend Module C_EventSystem
         FrmEditor_Events.lstCommands.Items.Clear()
 
         If TmpEvent.Pages(CurPageNum).CommandListCount > 0 Then
-            ReDim listleftoff(0 To TmpEvent.Pages(CurPageNum).CommandListCount)
-            ReDim conditionalstage(0 To TmpEvent.Pages(CurPageNum).CommandListCount)
-            'Start Up at 1
+            ReDim listleftoff(TmpEvent.Pages(CurPageNum).CommandListCount)
+            ReDim conditionalstage(TmpEvent.Pages(CurPageNum).CommandListCount)
             curlist = 1
             X = -1
 newlist:
@@ -953,12 +952,14 @@ newlist:
         Else
             curlist = EventList(FrmEditor_Events.lstCommands.SelectedIndex + 1).CommandList
         End If
+
         If TmpEvent.Pages(CurPageNum).CommandListCount = 0 Then
             TmpEvent.Pages(CurPageNum).CommandListCount = 1
             ReDim TmpEvent.Pages(CurPageNum).CommandList(curlist)
         End If
+
         oldCommandList = TmpEvent.Pages(CurPageNum).CommandList(curlist)
-        TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
+        TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount + 1
         p = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
         If p <= 0 Then
             ReDim TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(0)
@@ -966,7 +967,7 @@ newlist:
             ReDim TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(p)
             TmpEvent.Pages(CurPageNum).CommandList(curlist).ParentList = oldCommandList.ParentList
             TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = p
-            For i = 1 To p
+            For i = 0 To p - 1
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i) = oldCommandList.Commands(i)
             Next
         End If
@@ -974,7 +975,7 @@ newlist:
             curslot = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
         Else
             i = EventList(FrmEditor_Events.lstCommands.SelectedIndex + 1).CommandNum
-            If i < TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount Then
+            If i <= TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount Then
                 For X = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount To i Step -1
                     TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(X) = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(X)
                 Next
@@ -2299,8 +2300,9 @@ newlist:
     Sub Packet_MapEventData(ByRef data() As Byte)
         Dim i As Integer, x As Integer, y As Integer, z As Integer, w As Integer
         Dim buffer As New ByteStream(data)
-        'Event Data!
+
         Map.EventCount = buffer.ReadInt32
+
         If Map.EventCount > 0 Then
             ReDim Map.Events(Map.EventCount)
             For i = 0 To Map.EventCount 
@@ -2364,6 +2366,7 @@ newlist:
                             .Position = buffer.ReadByte
                             .Questnum = buffer.ReadInt32
                         End With
+
                         If Map.Events(i).Pages(x).CommandListCount > 0 Then
                             ReDim Map.Events(i).Pages(x).CommandList(Map.Events(i).Pages(x).CommandListCount)
                             For y = 0 To Map.Events(i).Pages(x).CommandListCount
@@ -2413,7 +2416,7 @@ newlist:
                 End If
             Next
         End If
-        'End Event Data
+
         buffer.Dispose()
 
     End Sub
@@ -3152,37 +3155,6 @@ nextevent:
             EventChat = False
         End If
         PnlEventChatVisible = False
-    End Sub
-
-    Friend Sub ResetEventdata()
-        For i = 0 To Map.EventCount 
-            ReDim Map.MapEvents(Map.EventCount)
-            Map.CurrentEvents = 0
-            With Map.MapEvents(i)
-                .Name = ""
-                .Dir = 0
-                .ShowDir = 0
-                .GraphicType = 0
-                .Graphic = 0
-                .GraphicX = 0
-                .GraphicX2 = 0
-                .GraphicY = 0
-                .GraphicY2 = 0
-                .MovementSpeed = 0
-                .Moving = 0
-                .X = 0
-                .Y = 0
-                .XOffset = 0
-                .YOffset = 0
-                .Position = 0
-                .Visible = 0
-                .WalkAnim = 0
-                .DirFix = 0
-                .WalkThrough = 0
-                .ShowName = 0
-                .Questnum = 0
-            End With
-        Next
     End Sub
 
 #End Region

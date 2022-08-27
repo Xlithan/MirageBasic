@@ -971,9 +971,7 @@ Module S_NetworkReceive
                             .MoveType = buffer.ReadByte
                             .MoveSpeed = buffer.ReadByte
                             .MoveFreq = buffer.ReadByte
-
                             .MoveRouteCount = buffer.ReadInt32
-
                             .IgnoreMoveRoute = buffer.ReadInt32
                             .RepeatMoveRoute = buffer.ReadInt32
 
@@ -996,11 +994,8 @@ Module S_NetworkReceive
                             .ShowName = buffer.ReadInt32
                             .Trigger = buffer.ReadByte
                             .CommandListCount = buffer.ReadInt32
-
                             .Position = buffer.ReadByte
                             .QuestNum = buffer.ReadInt32
-
-                            .ChkPlayerGender = buffer.ReadInt32
                         End With
 
                         If Map(mapNum).Events(i).Pages(x).CommandListCount > 0 Then
@@ -2579,9 +2574,7 @@ Module S_NetworkReceive
                             .MoveType = buffer.ReadByte
                             .MoveSpeed = buffer.ReadByte
                             .MoveFreq = buffer.ReadByte
-
                             .MoveRouteCount = buffer.ReadInt32
-
                             .IgnoreMoveRoute = buffer.ReadInt32
                             .RepeatMoveRoute = buffer.ReadInt32
 
@@ -2604,11 +2597,8 @@ Module S_NetworkReceive
                             .ShowName = buffer.ReadInt32
                             .Trigger = buffer.ReadByte
                             .CommandListCount = buffer.ReadInt32
-
                             .Position = buffer.ReadByte
                             .QuestNum = buffer.ReadInt32
-
-                            .ChkPlayerGender = buffer.ReadInt32
                         End With
 
                         If Map(mapNum).Events(i).Pages(x).CommandListCount > 0 Then

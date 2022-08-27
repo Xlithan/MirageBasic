@@ -1799,7 +1799,6 @@ Friend Module S_Events
                             buffer.WriteInt32(.ShowName)
                             buffer.WriteByte(.Trigger)
                             buffer.WriteInt32(.CommandListCount)
-
                             buffer.WriteByte(.Position)
                             buffer.WriteInt32(.QuestNum)
                         End With

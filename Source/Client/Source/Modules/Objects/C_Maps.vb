@@ -313,9 +313,6 @@ Module C_Maps
                     Next
                 Next
 
-                'Event Data!
-                ResetEventdata()
-
                 Map.EventCount = buffer.ReadInt32
 
                 If Map.EventCount > 0 Then
@@ -359,9 +356,7 @@ Module C_Maps
                                     .MoveType = buffer.ReadByte
                                     .MoveSpeed = buffer.ReadByte
                                     .MoveFreq = buffer.ReadByte
-
                                     .MoveRouteCount = buffer.ReadInt32
-
                                     .IgnoreMoveRoute = buffer.ReadInt32
                                     .RepeatMoveRoute = buffer.ReadInt32
 
@@ -384,11 +379,8 @@ Module C_Maps
                                     .ShowName = buffer.ReadInt32
                                     .Trigger = buffer.ReadByte
                                     .CommandListCount = buffer.ReadInt32
-
                                     .Position = buffer.ReadByte
                                     .Questnum = buffer.ReadInt32
-
-                                    .ChkPlayerGender = buffer.ReadInt32
                                 End With
 
                                 If Map.Events(i).Pages(x).CommandListCount > 0 Then
@@ -715,8 +707,8 @@ Module C_Maps
                             buffer.WriteInt32(.CommandListCount)
                             buffer.WriteByte(.Position)
                             buffer.WriteInt32(.Questnum)
-                            buffer.WriteInt32(.ChkPlayerGender)
                         End With
+
                         If Map.Events(i).Pages(x).CommandListCount > 0 Then
                             For y = 0 To Map.Events(i).Pages(x).CommandListCount
                                 buffer.WriteInt32(Map.Events(i).Pages(x).CommandList(y).CommandCount)
