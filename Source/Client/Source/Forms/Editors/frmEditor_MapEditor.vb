@@ -912,20 +912,16 @@ Public Class FrmEditor_MapEditor
 
         If Button = MouseButtons.Right Then
             If tabpages.SelectedTab Is tpTiles Then
+                If EditorTileWidth = 1 AndAlso EditorTileHeight = 1 Then 'single tile
 
-                With Map.Tile(CurX, CurY)
-                    ' clear layer
-                    .Layer(CurLayer).X = 0
-                    .Layer(CurLayer).Y = 0
-                    .Layer(CurLayer).Tileset = 0
-                    If .Layer(CurLayer).AutoTile > 0 Then
-                        .Layer(CurLayer).AutoTile = 0
-                        ' do a re-init so we can see our changes
-                        InitAutotiles()
+                    MapEditorSetTile(CurX, CurY, CurLayer, False, cmbAutoTile.SelectedIndex, 1)
+                Else ' multi tile!
+                    If cmbAutoTile.SelectedIndex = 0 Then
+                        MapEditorSetTile(CurX, CurY, CurLayer, True, 0, 1)
+                    Else
+                        MapEditorSetTile(CurX, CurY, CurLayer, , cmbAutoTile.SelectedIndex, 1)
                     End If
-                    CacheRenderState(X, Y, CurLayer)
-                End With
-
+                End If
             ElseIf tabpages.SelectedTab Is tpAttributes Then
                 With Map.Tile(CurX, CurY)
                     ' clear attribute
@@ -961,16 +957,28 @@ Public Class FrmEditor_MapEditor
         GettingMap = True
     End Sub
 
-    Public Sub MapEditorSetTile(ByVal X As Integer, ByVal Y As Integer, ByVal CurLayer As Integer, Optional ByVal multitile As Boolean = False, Optional ByVal theAutotile As Byte = 0)
-        Dim x2 As Integer, y2 As Integer
+    Public Sub MapEditorSetTile(ByVal X As Integer, ByVal Y As Integer, ByVal CurLayer As Integer, Optional ByVal multitile As Boolean = False, Optional ByVal theAutotile As Byte = 0, Optional eraseTile As Byte = 0)
+        Dim x2 As Integer, y2 As Integer, newTileX As Integer, newTileY As integer
+
+        newTileX = EditorTileX
+        newTileY = EditorTileY
+
+        If eraseTile Then
+            newTileX = 0
+            newTileY = 0
+        End If
 
         If theAutotile > 0 Then
             With Map.Tile(X, Y)
                 ' set layer
-                .Layer(CurLayer).X = EditorTileX
-                .Layer(CurLayer).Y = EditorTileY
-                .Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex
-                .Layer(CurLayer).AutoTile = theAutotile
+                .Layer(CurLayer).X = newTileX
+                .Layer(CurLayer).Y = newTileY
+                If eraseTile Then
+                    .Layer(CurLayer).Tileset = 0
+                Else
+                    .Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex
+                End If
+                 .Layer(CurLayer).AutoTile = theAutotile
                 CacheRenderState(X, Y, CurLayer)
             End With
             ' do a re-init so we can see our changes
@@ -981,9 +989,13 @@ Public Class FrmEditor_MapEditor
         If Not multitile Then ' single
             With Map.Tile(X, Y)
                 ' set layer
-                .Layer(CurLayer).X = EditorTileX
-                .Layer(CurLayer).Y = EditorTileY
-                .Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex
+                .Layer(CurLayer).X = newTileX
+                .Layer(CurLayer).Y = newTileY
+                If eraseTile Then
+                    .Layer(CurLayer).Tileset = 0
+                Else
+                    .Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex
+                End If
                 .Layer(CurLayer).AutoTile = 0
                 CacheRenderState(X, Y, CurLayer)
             End With
@@ -995,9 +1007,13 @@ Public Class FrmEditor_MapEditor
                     If X >= 0 AndAlso X <= Map.MaxX Then
                         If Y >= 0 AndAlso Y <= Map.MaxY Then
                             With Map.Tile(X, Y)
-                                .Layer(CurLayer).X = EditorTileX + x2
-                                .Layer(CurLayer).Y = EditorTileY + y2
-                                .Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex
+                                .Layer(CurLayer).X = newTileX + x2
+                                .Layer(CurLayer).Y = newTileY + y2
+                                If eraseTile Then
+                                    .Layer(CurLayer).Tileset = 0
+                                Else
+                                    .Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex
+                                End If
                                 .Layer(CurLayer).AutoTile = 0
                                 CacheRenderState(X, Y, CurLayer)
                             End With
