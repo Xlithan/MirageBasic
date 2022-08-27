@@ -134,10 +134,6 @@
         CMapReport
         CSaveMap
 
-        ' AutoMapper Packets
-        CRequestAutoMap
-        CSaveAutoMap
-
         ' ####################
         ' ### Dev+ Packets ###
         ' ####################
@@ -330,11 +326,8 @@
         SUpdateCraft
 
         'Class Editor
-        SClassEditor
-        SUpdateClass
-
-        'AutoMapper
-        SAutoMapper
+        SJobEditor
+        SUpdateJob
 
         'emotes
         SEmote

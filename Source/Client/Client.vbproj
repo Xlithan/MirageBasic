@@ -69,9 +69,6 @@
     <Compile Update="Source\Forms\Editors\FrmEditor_Animation.Designer.vb">
       <DependentUpon>FrmEditor_Animation.vb</DependentUpon>
     </Compile>
-    <Compile Update="Source\Forms\Editors\FrmEditor_AutoMapper.Designer.vb">
-      <DependentUpon>FrmEditor_AutoMapper.vb</DependentUpon>
-    </Compile>
     <Compile Update="Source\Forms\Editors\FrmEditor_Job.Designer.vb">
       <DependentUpon>FrmEditor_Job.vb</DependentUpon>
     </Compile>
@@ -111,9 +108,6 @@
     <Compile Update="Source\Forms\Editors\FrmEditor_Skill.Designer.vb">
       <DependentUpon>FrmEditor_Skill.vb</DependentUpon>
     </Compile>
-    <Compile Update="Source\Forms\Editors\FrmEditor_VisualWarp.Designer.vb">
-      <DependentUpon>FrmEditor_VisualWarp.vb</DependentUpon>
-    </Compile>
     <Compile Update="Source\Forms\Game\FrmAdmin.Designer.vb">
       <DependentUpon>FrmAdmin.vb</DependentUpon>
     </Compile>
@@ -128,9 +122,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Update="Contents\AutoMapper.ini">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Contents\Gui\Menu\btn_createacc.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -718,7 +718,6 @@
         Dim ChkSelfSwitch As Integer
         Dim SelfSwitchindex As Integer
         Dim SelfSwitchCompare As Integer
-        Dim ChkPlayerGender As Integer
 
         'Handles the Event Sprite
         Dim GraphicType As Byte

@@ -56,7 +56,6 @@ Partial Class FrmAdmin
         Me.cmbSpawnItem = New System.Windows.Forms.ComboBox()
         Me.tabEditors = New System.Windows.Forms.TabPage()
         Me.btnPetEditor = New System.Windows.Forms.Button()
-        Me.btnAutoMapper = New System.Windows.Forms.Button()
         Me.btnJobEditor = New System.Windows.Forms.Button()
         Me.btnRecipeEditor = New System.Windows.Forms.Button()
         Me.btnProjectiles = New System.Windows.Forms.Button()
@@ -410,7 +409,6 @@ Partial Class FrmAdmin
         'tabEditors
         '
         Me.tabEditors.Controls.Add(Me.btnPetEditor)
-        Me.tabEditors.Controls.Add(Me.btnAutoMapper)
         Me.tabEditors.Controls.Add(Me.btnJobEditor)
         Me.tabEditors.Controls.Add(Me.btnRecipeEditor)
         Me.tabEditors.Controls.Add(Me.btnProjectiles)
@@ -441,16 +439,6 @@ Partial Class FrmAdmin
         Me.btnPetEditor.TabIndex = 68
         Me.btnPetEditor.Text = "Pet Editor"
         Me.btnPetEditor.UseVisualStyleBackColor = true
-        '
-        'btnAutoMapper
-        '
-        Me.btnAutoMapper.Location = New System.Drawing.Point(7, 150)
-        Me.btnAutoMapper.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnAutoMapper.Name = "btnAutoMapper"
-        Me.btnAutoMapper.Size = New System.Drawing.Size(131, 29)
-        Me.btnAutoMapper.TabIndex = 67
-        Me.btnAutoMapper.Text = "Map Editor (Auto)"
-        Me.btnAutoMapper.UseVisualStyleBackColor = true
         '
         'btnJobEditor
         '
@@ -633,7 +621,6 @@ End Sub
     Friend WithEvents nudSpawnItemAmount As Windows.Forms.NumericUpDown
     Friend WithEvents tabEditors As Windows.Forms.TabPage
     Friend WithEvents btnPetEditor As Windows.Forms.Button
-    Friend WithEvents btnAutoMapper As Windows.Forms.Button
     Friend WithEvents btnJobEditor As Windows.Forms.Button
     Friend WithEvents btnRecipeEditor As Windows.Forms.Button
     Friend WithEvents btnProjectiles As Windows.Forms.Button

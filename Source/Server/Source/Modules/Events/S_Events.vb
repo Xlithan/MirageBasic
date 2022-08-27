@@ -228,10 +228,7 @@ Friend Module S_Events
         Dim n As Integer, z As Integer, begineventprocessing As Boolean
 
         ' Check for subscript out of range
-
         If mapNum <= 0 OrElse mapNum > MAX_MAPS OrElse dir < DirectionType.Up OrElse dir > DirectionType.Right Then Exit Function
-
-        If Gettingmap = True Then Exit Function
 
         CanEventMove = True
 
@@ -590,9 +587,6 @@ Friend Module S_Events
         Dim eventindex As Integer, i As Integer
 
         ' Check for subscript out of range
-
-        If Gettingmap = True Then Exit Sub
-
         If mapNum <= 0 OrElse mapNum > MAX_MAPS OrElse dir < DirectionType.Up OrElse dir > DirectionType.Right Then
             Exit Sub
         End If
@@ -640,8 +634,6 @@ Friend Module S_Events
         Dim eventindex As Integer, i As Integer
 
         ' Check for subscript out of range
-        If Gettingmap = True Then Exit Sub
-
         If mapNum <= 0 OrElse mapNum > MAX_MAPS OrElse dir < DirectionType.Up OrElse dir > DirectionType.Right Then Exit Sub
 
         If globalevent = False Then
@@ -898,7 +890,6 @@ Friend Module S_Events
         If playerId <= 0 OrElse playerId > MAX_PLAYERS Then Exit Function
         If mapNum <= 0 OrElse mapNum > MAX_MAPS Then Exit Function
         If eventId <= 0 OrElse eventId > TempPlayer(playerId).EventMap.CurrentEvents Then Exit Function
-        If Gettingmap = True Then Exit Function
 
         x = GetPlayerX(playerId)
         y = GetPlayerY(playerId)
@@ -1260,7 +1251,6 @@ Friend Module S_Events
         If playerId <= 0 OrElse playerId > MAX_PLAYERS Then Exit Function
         If mapNum <= 0 OrElse mapNum > MAX_MAPS Then Exit Function
         If eventId <= 0 OrElse eventId > TempPlayer(playerId).EventMap.CurrentEvents Then Exit Function
-        If Gettingmap = True Then Exit Function
 
         x = GetPlayerX(playerId)
         y = GetPlayerY(playerId)
@@ -1799,7 +1789,6 @@ Friend Module S_Events
                             buffer.WriteInt32(.ShowName)
                             buffer.WriteByte(.Trigger)
                             buffer.WriteInt32(.CommandListCount)
-
                             buffer.WriteByte(.Position)
                             buffer.WriteInt32(.QuestNum)
                         End With

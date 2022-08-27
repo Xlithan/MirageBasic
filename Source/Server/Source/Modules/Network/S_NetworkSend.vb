@@ -643,7 +643,6 @@ Module S_NetworkSend
                                 buffer.WriteInt32(.CommandListCount)
                                 buffer.WriteByte(.Position)
                                 buffer.WriteInt32(.QuestNum)
-                                buffer.WriteInt32(.ChkPlayerGender)
                             End With
 
                             If Map(mapNum).Events(i).Pages(X).CommandListCount > 0 Then
@@ -1419,7 +1418,7 @@ Module S_NetworkSend
     Sub SendClassEditor(index As Integer)
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ServerPackets.SClassEditor)
+        buffer.WriteInt32(ServerPackets.SJobEditor)
 
         AddDebug("Sent SMSG: SClassEditor")
 

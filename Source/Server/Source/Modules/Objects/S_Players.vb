@@ -1171,6 +1171,9 @@ Module S_Players
         TempPlayer(index).TargetType = TargetType.None
         SendTarget(index, 0, TargetType.None)
 
+        ' clear events
+        TempPlayer(index).EventMap.CurrentEvents = 0
+
         ' Save old map to send erase player data to
         OldMap = GetPlayerMap(index)
 

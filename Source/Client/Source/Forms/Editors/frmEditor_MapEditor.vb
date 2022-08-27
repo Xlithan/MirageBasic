@@ -16,7 +16,6 @@ Public Class FrmEditor_MapEditor
         pnlAttributes.Visible = False
         pnlAttributes.Left = 4
         pnlAttributes.Top = 28
-        Me.Width = 525
         optBlocked.Checked = True
         tabpages.SelectedIndex = 0
 
@@ -70,29 +69,15 @@ Public Class FrmEditor_MapEditor
         'Overrides the paint sub
     End Sub
 
-    Private Sub ScrlPictureY_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlPictureY.ValueChanged
-        MapEditorTileScroll()
-    End Sub
-
-    Private Sub ScrlPictureX_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlPictureX.ValueChanged
-        MapEditorTileScroll()
-    End Sub
-
-    Private Sub CmbTileSets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTileSets.Click
-        If cmbTileSets.SelectedIndex + 1 > NumTileSets Then
+    Private Sub CmbTileSets_Click(sender As Object, e As EventArgs) Handles cmbTileSets.Click
+        If cmbTileSets.SelectedIndex > NumTileSets Then
             cmbTileSets.SelectedIndex = 0
         End If
 
-        Map.Tileset = cmbTileSets.SelectedIndex + 1
+        Map.Tileset = cmbTileSets.SelectedIndex
 
         EditorTileSelStart = New Point(0, 0)
         EditorTileSelEnd = New Point(1, 1)
-
-        'picBackSelect.Height = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).Height
-        'picBackSelect.Width = TileSetTextureInfo(cmbTileSets.SelectedIndex + 1).Width
-
-        scrlPictureY.Maximum = (picBackSelect.Height \ PicY)
-        scrlPictureX.Maximum = (picBackSelect.Width \ PicX)
     End Sub
 
     Private Sub CmbAutoTile_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAutoTile.SelectedIndexChanged
@@ -677,13 +662,6 @@ Public Class FrmEditor_MapEditor
             .TextureTimer = GetTickCount() + 100000
         End With
 
-        ' set the scrollbars
-
-        scrlPictureY.Maximum = (TileSetTextureInfo(LastTileset).Height \ PicY) \ 2
-        scrlPictureX.Maximum = (TileSetTextureInfo(LastTileset).Width \ PicX) \ 2
-        'height = TileSetTextureInfo(tileset).Height
-        'width = TileSetTextureInfo(tileset).Width
-
         ' set shops for the shop attribute
         For i = 0 To MAX_SHOPS
             cmbShop.Items.Add(i & ": " & Shop(i).Name)
@@ -705,11 +683,6 @@ Public Class FrmEditor_MapEditor
 
         If MapData = True Then GettingMap = False
 
-    End Sub
-
-    Public Sub MapEditorTileScroll()
-        picbacktop = (scrlPictureY.Value * PicY) ' * -1
-        picbackleft = (scrlPictureX.Value * PicX) ' * -1
     End Sub
 
     Public Sub MapEditorChooseTile(ByVal Button As Integer, ByVal X As Single, ByVal Y As Single)
@@ -784,7 +757,7 @@ Public Class FrmEditor_MapEditor
         Dim i As Integer
         Dim CurLayer As Integer
 
-        CurLayer = cmbLayers.SelectedIndex + 1
+        CurLayer = cmbLayers.SelectedIndex
 
         If Not IsInBounds() Then Exit Sub
         If Button = MouseButtons.Left Then
@@ -939,20 +912,16 @@ Public Class FrmEditor_MapEditor
 
         If Button = MouseButtons.Right Then
             If tabpages.SelectedTab Is tpTiles Then
+                If EditorTileWidth = 1 AndAlso EditorTileHeight = 1 Then 'single tile
 
-                With Map.Tile(CurX, CurY)
-                    ' clear layer
-                    .Layer(CurLayer).X = 0
-                    .Layer(CurLayer).Y = 0
-                    .Layer(CurLayer).Tileset = 0
-                    If .Layer(CurLayer).AutoTile > 0 Then
-                        .Layer(CurLayer).AutoTile = 0
-                        ' do a re-init so we can see our changes
-                        InitAutotiles()
+                    MapEditorSetTile(CurX, CurY, CurLayer, False, cmbAutoTile.SelectedIndex, 1)
+                Else ' multi tile!
+                    If cmbAutoTile.SelectedIndex = 0 Then
+                        MapEditorSetTile(CurX, CurY, CurLayer, True, 0, 1)
+                    Else
+                        MapEditorSetTile(CurX, CurY, CurLayer, , cmbAutoTile.SelectedIndex, 1)
                     End If
-                    CacheRenderState(X, Y, CurLayer)
-                End With
-
+                End If
             ElseIf tabpages.SelectedTab Is tpAttributes Then
                 With Map.Tile(CurX, CurY)
                     ' clear attribute
@@ -988,16 +957,28 @@ Public Class FrmEditor_MapEditor
         GettingMap = True
     End Sub
 
-    Public Sub MapEditorSetTile(ByVal X As Integer, ByVal Y As Integer, ByVal CurLayer As Integer, Optional ByVal multitile As Boolean = False, Optional ByVal theAutotile As Byte = 0)
-        Dim x2 As Integer, y2 As Integer
+    Public Sub MapEditorSetTile(ByVal X As Integer, ByVal Y As Integer, ByVal CurLayer As Integer, Optional ByVal multitile As Boolean = False, Optional ByVal theAutotile As Byte = 0, Optional eraseTile As Byte = 0)
+        Dim x2 As Integer, y2 As Integer, newTileX As Integer, newTileY As integer
+
+        newTileX = EditorTileX
+        newTileY = EditorTileY
+
+        If eraseTile Then
+            newTileX = 0
+            newTileY = 0
+        End If
 
         If theAutotile > 0 Then
             With Map.Tile(X, Y)
                 ' set layer
-                .Layer(CurLayer).X = EditorTileX
-                .Layer(CurLayer).Y = EditorTileY
-                .Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex + 1
-                .Layer(CurLayer).AutoTile = theAutotile
+                .Layer(CurLayer).X = newTileX
+                .Layer(CurLayer).Y = newTileY
+                If eraseTile Then
+                    .Layer(CurLayer).Tileset = 0
+                Else
+                    .Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex
+                End If
+                 .Layer(CurLayer).AutoTile = theAutotile
                 CacheRenderState(X, Y, CurLayer)
             End With
             ' do a re-init so we can see our changes
@@ -1008,9 +989,13 @@ Public Class FrmEditor_MapEditor
         If Not multitile Then ' single
             With Map.Tile(X, Y)
                 ' set layer
-                .Layer(CurLayer).X = EditorTileX
-                .Layer(CurLayer).Y = EditorTileY
-                .Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex + 1
+                .Layer(CurLayer).X = newTileX
+                .Layer(CurLayer).Y = newTileY
+                If eraseTile Then
+                    .Layer(CurLayer).Tileset = 0
+                Else
+                    .Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex
+                End If
                 .Layer(CurLayer).AutoTile = 0
                 CacheRenderState(X, Y, CurLayer)
             End With
@@ -1022,9 +1007,13 @@ Public Class FrmEditor_MapEditor
                     If X >= 0 AndAlso X <= Map.MaxX Then
                         If Y >= 0 AndAlso Y <= Map.MaxY Then
                             With Map.Tile(X, Y)
-                                .Layer(CurLayer).X = EditorTileX + x2
-                                .Layer(CurLayer).Y = EditorTileY + y2
-                                .Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex + 1
+                                .Layer(CurLayer).X = newTileX + x2
+                                .Layer(CurLayer).Y = newTileY + y2
+                                If eraseTile Then
+                                    .Layer(CurLayer).Tileset = 0
+                                Else
+                                    .Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex
+                                End If
                                 .Layer(CurLayer).AutoTile = 0
                                 CacheRenderState(X, Y, CurLayer)
                             End With
@@ -1075,7 +1064,7 @@ Public Class FrmEditor_MapEditor
                     For Y = 0 To Map.MaxY
                         Map.Tile(X, Y).Layer(CurLayer).X = EditorTileX
                         Map.Tile(X, Y).Layer(CurLayer).Y = EditorTileY
-                        Map.Tile(X, Y).Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex + 1
+                        Map.Tile(X, Y).Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex
                         Map.Tile(X, Y).Layer(CurLayer).AutoTile = theAutotile
                         CacheRenderState(X, Y, CurLayer)
                     Next
@@ -1088,7 +1077,7 @@ Public Class FrmEditor_MapEditor
                     For Y = 0 To Map.MaxY
                         Map.Tile(X, Y).Layer(CurLayer).X = EditorTileX
                         Map.Tile(X, Y).Layer(CurLayer).Y = EditorTileY
-                        Map.Tile(X, Y).Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex + 1
+                        Map.Tile(X, Y).Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex
                         CacheRenderState(X, Y, CurLayer)
                     Next
                 Next
@@ -1152,7 +1141,7 @@ Public Class FrmEditor_MapEditor
         TilesetWindow.Clear(SFML.Graphics.Color.Black)
 
         ' find tileset number
-        tileset = Me.cmbTileSets.SelectedIndex + 1
+        tileset = Me.cmbTileSets.SelectedIndex
 
         ' exit out if doesn't exist
         If tileset <= 0 OrElse tileset > NumTileSets Then Exit Sub
@@ -1255,6 +1244,10 @@ Public Class FrmEditor_MapEditor
         MapEditorCancel()
     End Sub
 
+    Private Sub cmbTileSets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTileSets.SelectedIndexChanged
+       If cmbTileSets.SelectedIndex = 0 Then cmbTileSets.SelectedIndex = 1
+    End Sub
+
     Friend Sub DrawTileOutline()
         Dim rec As Rectangle
         If Me.tabpages.SelectedTab Is Me.tpDirBlock Then Exit Sub
@@ -1275,25 +1268,25 @@ Public Class FrmEditor_MapEditor
         If Me.tabpages.SelectedTab Is Me.tpAttributes Then
             rec2.Size = New Vector2f(rec.Width, rec.Height)
         Else
-            If TileSetTextureInfo(Me.cmbTileSets.SelectedIndex + 1).IsLoaded = False Then
-                LoadTexture(Me.cmbTileSets.SelectedIndex + 1, 1)
+            If TileSetTextureInfo(Me.cmbTileSets.SelectedIndex).IsLoaded = False Then
+                LoadTexture(Me.cmbTileSets.SelectedIndex, 1)
             End If
             ' we use it, lets update timer
-            With TileSetTextureInfo(Me.cmbTileSets.SelectedIndex + 1)
+            With TileSetTextureInfo(Me.cmbTileSets.SelectedIndex)
                 .TextureTimer = GetTickCount() + 100000
             End With
 
             If EditorTileWidth = 1 AndAlso EditorTileHeight = 1 Then
-                RenderSprite(TileSetSprite(Me.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, rec.Width, rec.Height)
+                RenderSprite(TileSetSprite(Me.cmbTileSets.SelectedIndex), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, rec.Width, rec.Height)
 
                 rec2.Size = New Vector2f(rec.Width, rec.Height)
             Else
                 If Me.cmbAutoTile.SelectedIndex > 0 Then
-                    RenderSprite(TileSetSprite(Me.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, rec.Width, rec.Height)
+                    RenderSprite(TileSetSprite(Me.cmbTileSets.SelectedIndex), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, rec.Width, rec.Height)
 
                     rec2.Size = New Vector2f(rec.Width, rec.Height)
                 Else
-                    RenderSprite(TileSetSprite(Me.cmbTileSets.SelectedIndex + 1), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, EditorTileSelEnd.X * PicX, EditorTileSelEnd.Y * PicY)
+                    RenderSprite(TileSetSprite(Me.cmbTileSets.SelectedIndex), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, EditorTileSelEnd.X * PicX, EditorTileSelEnd.Y * PicY)
 
                     rec2.Size = New Vector2f(EditorTileSelEnd.X * PicX, EditorTileSelEnd.Y * PicY)
                 End If

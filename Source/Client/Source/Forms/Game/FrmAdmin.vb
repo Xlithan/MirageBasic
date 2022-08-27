@@ -134,15 +134,6 @@ Friend Class FrmAdmin
         SendRequestEditItem()
     End Sub
 
-    Private Sub btnMapAuto_Click(sender As Object, e As EventArgs) Handles btnAutoMapper.Click
-        If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-            Exit Sub
-        End If
-
-        SendRequestAutoMapper()
-    End Sub
-
     Private Sub BtnMapEditor_Click(sender As Object, e As EventArgs) Handles btnMapEditor.Click
         If GetPlayerAccess(Myindex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)

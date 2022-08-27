@@ -310,11 +310,8 @@ Module modDatabase
                         writer.WriteInt32(.ShowName)
                         writer.WriteByte(.Trigger)
                         writer.WriteInt32(.CommandListCount)
-
                         writer.WriteByte(.Position)
                         writer.WriteInt32(.QuestNum)
-
-                        writer.WriteInt32(.ChkPlayerGender)
                     End With
 
                     If Map(mapNum).Events(i).Pages(x).CommandListCount > 0 Then
@@ -420,14 +417,12 @@ Module modDatabase
                         .MoveType = reader.ReadByte()
                         .MoveSpeed = reader.ReadByte()
                         .MoveFreq = reader.ReadByte()
-
                         .IgnoreMoveRoute = reader.ReadInt32()
                         .RepeatMoveRoute = reader.ReadInt32()
-
                         .MoveRouteCount = reader.ReadInt32()
 
                         If .MoveRouteCount > 0 Then
-                            ReDim Map(mapNum).Events(i).Pages(x).MoveRoute(.MoveRouteCount)
+                            ReDim Preserve Map(mapNum).Events(i).Pages(x).MoveRoute(.MoveRouteCount)
                             For y = 0 To .MoveRouteCount
                                 .MoveRoute(y).Index = reader.ReadInt32()
                                 .MoveRoute(y).Data1 = reader.ReadInt32()
@@ -447,7 +442,6 @@ Module modDatabase
                         .CommandListCount = reader.ReadInt32()
                         .Position = reader.ReadByte()
                         .QuestNum = reader.ReadInt32()
-                        .ChkPlayerGender = reader.ReadInt32()
                     End With
 
                     If Map(mapNum).Events(i).Pages(x).CommandListCount > 0 Then

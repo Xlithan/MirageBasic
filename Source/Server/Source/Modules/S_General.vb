@@ -121,8 +121,6 @@ Module S_General
             ReDim TempPlayer(i).TradeOffer(MAX_INV)
         Next
 
-        LoadTilePrefab()
-
         ReDim Job(MAX_JOBS)
         For i = 0 To MAX_JOBS
             ReDim Job(i).Stat(StatType.Count - 1)
