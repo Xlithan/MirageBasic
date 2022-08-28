@@ -9,13 +9,11 @@ Friend Module S_EventLogic
         For i = 0 To GetPlayersOnline()
             If TempPlayer(i).EventMap.CurrentEvents > 0 Then
                 mapNum = GetPlayerMap(i)
-
-                For x = 0 To TempPlayer(i).EventMap.CurrentEvents
+                For x = 1 To TempPlayer(i).EventMap.CurrentEvents
                     id = TempPlayer(i).EventMap.EventPages(x).EventId
                     page = TempPlayer(i).EventMap.EventPages(x).PageId
 
                     If Map(mapNum).Events(id).PageCount >= page Then
-
                         'See if there is any reason to delete this event....
                         'In other words, go back through conditions and make sure they all check up.
                         If TempPlayer(i).EventMap.EventPages(x).Visible = 1 Then
@@ -133,9 +131,8 @@ Friend Module S_EventLogic
         For i = 0 To GetPlayersOnline()
             If TempPlayer(i).EventMap.CurrentEvents > 0 Then
                 mapNum = GetPlayerMap(i)
-                For x = 0 To TempPlayer(i).EventMap.CurrentEvents
+                For x = 1 To TempPlayer(i).EventMap.CurrentEvents
                     id = TempPlayer(i).EventMap.EventPages(x).EventId
-                    If id = 0 Then Exit for
                     pageID = TempPlayer(i).EventMap.EventPages(x).PageId
 
                     If TempPlayer(i).EventMap.EventPages(x).Visible = 0 Then pageID = 0
@@ -729,7 +726,7 @@ Friend Module S_EventLogic
             If IsPlaying(i) Then
                 playerID = i
                 If TempPlayer(i).EventMap.CurrentEvents > 0 Then
-                    For x = 0 To TempPlayer(i).EventMap.CurrentEvents
+                    For x = 1 To TempPlayer(i).EventMap.CurrentEvents
                         If Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Globals = 0 Then
                             If TempPlayer(i).EventMap.EventPages(x).Visible = 1 Then
                                 If TempPlayer(i).EventMap.EventPages(x).MoveTimer <= GetTimeMs() Then
@@ -1119,44 +1116,32 @@ Friend Module S_EventLogic
 
         For i = 0 To GetPlayersOnline()
             If IsPlaying(i) Then
-                For x = 0 To TempPlayer(i).EventMap.CurrentEvents
-                    If TempPlayer(i).EventProcessingCount > 0 Then
-                        If TempPlayer(i).EventMap.EventPages(x).Visible Then
-                            If Map(Player(i).Map).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Pages(TempPlayer(i).EventMap.EventPages(x).PageId).Trigger = 2 Then 'Parallel Process baby!
+                If TempPlayer(i).EventMap.CurrentEvents > 0 Then
+                    For x = 1 To TempPlayer(i).EventMap.CurrentEvents
+                        If TempPlayer(i).EventProcessingCount > 0 Then
+                            If TempPlayer(i).EventMap.EventPages(x).Visible Then
+                                If Map(Player(i).Map).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Pages(TempPlayer(i).EventMap.EventPages(x).PageId).Trigger = 2 Then 'Parallel Process baby!
                             
-                                If TempPlayer(i).EventProcessing(x).Active = 0 Then
-                                    If Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Pages(TempPlayer(i).EventMap.EventPages(x).PageId).CommandListCount > 0 Then
-                                        'start new event processing
-                                        TempPlayer(i).EventProcessing(TempPlayer(i).EventMap.EventPages(x).EventId).Active = 1
-                                        With TempPlayer(i).EventProcessing(TempPlayer(i).EventMap.EventPages(x).EventId)
-                                            .ActionTimer = GetTimeMs()
-                                            .CurList = 1
-                                            .CurSlot = 1
-                                            .EventId = TempPlayer(i).EventMap.EventPages(x).EventId
-                                            .PageId = TempPlayer(i).EventMap.EventPages(x).PageId
-                                            .WaitingForResponse = 0
-                                            ReDim .ListLeftOff(Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Pages(TempPlayer(i).EventMap.EventPages(x).PageId).CommandListCount)
-                                        End With
+                                    If TempPlayer(i).EventProcessing(x).Active = 0 Then
+                                        If Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Pages(TempPlayer(i).EventMap.EventPages(x).PageId).CommandListCount > 0 Then
+                                            'start new event processing
+                                            TempPlayer(i).EventProcessing(TempPlayer(i).EventMap.EventPages(x).EventId).Active = 1
+                                            With TempPlayer(i).EventProcessing(TempPlayer(i).EventMap.EventPages(x).EventId)
+                                                .ActionTimer = GetTimeMs()
+                                                .CurList = 1
+                                                .CurSlot = 1
+                                                .EventId = TempPlayer(i).EventMap.EventPages(x).EventId
+                                                .PageId = TempPlayer(i).EventMap.EventPages(x).PageId
+                                                .WaitingForResponse = 0
+                                                ReDim .ListLeftOff(Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Pages(TempPlayer(i).EventMap.EventPages(x).PageId).CommandListCount)
+                                            End With
+                                        End If
                                     End If
-                                End If
-                            Else
-                                If Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Pages(TempPlayer(i).EventMap.EventPages(x).PageId).CommandListCount > 0 Then
-                                    'Clearly need to start it!
-                                    TempPlayer(i).EventProcessing(TempPlayer(i).EventMap.EventPages(x).EventId).Active = 1
-                                    With TempPlayer(i).EventProcessing(TempPlayer(i).EventMap.EventPages(x).EventId)
-                                        .ActionTimer = GetTimeMs()
-                                        .CurList = 1
-                                        .CurSlot = 1
-                                        .EventId = TempPlayer(i).EventMap.EventPages(x).EventId
-                                        .PageId = TempPlayer(i).EventMap.EventPages(x).PageId
-                                        .WaitingForResponse = 0
-                                        ReDim .ListLeftOff(Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Pages(TempPlayer(i).EventMap.EventPages(x).PageId).CommandListCount)
-                                    End With
                                 End If
                             End If
                         End If
-                    End If
-                Next
+                    Next
+                End If
             End If
         Next
 
@@ -1719,7 +1704,7 @@ Friend Module S_EventLogic
                                                                 End If
                                                             End If
                                                             SendPlayerSkills(i)
-                                                        Case EventType.EvChangeClass
+                                                        Case EventType.EvChangeJob
                                                             Player(i).Job = Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1
                                                             SendPlayerData(i)
                                                         Case EventType.EvChangeSprite

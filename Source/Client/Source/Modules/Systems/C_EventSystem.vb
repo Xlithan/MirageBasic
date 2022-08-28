@@ -2,7 +2,6 @@
 Imports MirageBasic.Core
 Imports SFML.Graphics
 Imports SFML.System
-Imports SFML.Window
 
 Friend Module C_EventSystem
 
@@ -48,11 +47,8 @@ Friend Module C_EventSystem
     Friend AnotherChat As Integer 'Determines if another showtext/showchoices is comming up, if so, dont close the event chatbox...
 
     'constants
-    Friend Switches(MaxSwitches) As String
-
-    Friend Variables(MaxVariables) As String
-    Friend Const MaxSwitches As Integer = 500
-    Friend Const MaxVariables As Integer = 500
+    Friend Switches(MAX_SWITCHES) As String
+    Friend Variables(NAX_VARIABLES) As String
 
     Friend CpEvent As EventStruct
     Friend EventCopy As Boolean
@@ -64,139 +60,6 @@ Friend Module C_EventSystem
     Friend InEvent As Boolean
     Friend HoldPlayer As Boolean
     Friend InitEventEditorForm As Boolean
-
-#End Region
-
-#Region "Enums"
-
-    Friend Enum MoveRouteOpts
-        MoveUp = 1
-        MoveDown
-        MoveLeft
-        MoveRight
-        MoveRandom
-        MoveTowardsPlayer
-        MoveAwayFromPlayer
-        StepForward
-        StepBack
-        Wait100Ms
-        Wait500Ms
-        Wait1000Ms
-        TurnUp
-        TurnDown
-        TurnLeft
-        TurnRight
-        Turn90Right
-        Turn90Left
-        Turn180
-        TurnRandom
-        TurnTowardPlayer
-        TurnAwayFromPlayer
-        SetSpeed8XSlower
-        SetSpeed4XSlower
-        SetSpeed2XSlower
-        SetSpeedNormal
-        SetSpeed2XFaster
-        SetSpeed4XFaster
-        SetFreqLowest
-        SetFreqLower
-        SetFreqNormal
-        SetFreqHigher
-        SetFreqHighest
-        WalkingAnimOn
-        WalkingAnimOff
-        DirFixOn
-        DirFixOff
-        WalkThroughOn
-        WalkThroughOff
-        PositionBelowPlayer
-        PositionWithPlayer
-        PositionAbovePlayer
-        ChangeGraphic
-    End Enum
-
-    ' Event Types
-    Friend Enum EventType
-
-        ' Message
-        EvAddText = 1
-
-        EvShowText
-        EvShowChoices
-
-        ' Game Progression
-        EvPlayerVar
-
-        EvPlayerSwitch
-        EvSelfSwitch
-
-        ' Flow Control
-        EvCondition
-
-        EvExitProcess
-
-        ' Player
-        EvChangeItems
-
-        EvRestoreHp
-        EvRestoreMp
-        EvLevelUp
-        EvChangeLevel
-        EvChangeSkills
-        EvChangeJob
-        EvChangeSprite
-        EvChangeSex
-        EvChangePk
-
-        ' Movement
-        EvWarpPlayer
-
-        EvSetMoveRoute
-
-        ' Character
-        EvPlayAnimation
-
-        ' Music and Sounds
-        EvPlayBgm
-
-        EvFadeoutBgm
-        EvPlaySound
-        EvStopSound
-
-        'Etc...
-        EvCustomScript
-
-        EvSetAccess
-
-        'Shop/Bank
-        EvOpenBank
-
-        EvOpenShop
-
-        'New
-        EvGiveExp
-
-        EvShowChatBubble
-        EvLabel
-        EvGotoLabel
-        EvSpawnNpc
-        EvFadeIn
-        EvFadeOut
-        EvFlashWhite
-        EvSetFog
-        EvSetWeather
-        EvSetTint
-        EvWait
-        EvOpenMail
-        EvBeginQuest
-        EvEndQuest
-        EvQuestTask
-        EvShowPicture
-        EvHidePicture
-        EvWaitMovement
-        EvHoldPlayer
-        EvReleasePlayer
-    End Enum
 
 #End Region
 
@@ -944,7 +807,6 @@ newlist:
 
         If TmpEvent.Pages(CurPageNum).CommandListCount = 0 Then
             TmpEvent.Pages(CurPageNum).CommandListCount = 1
-            ReDim TmpEvent.Pages(CurPageNum).CommandList(1)
         End If
 
         If FrmEditor_Events.lstCommands.SelectedIndex + 1 = FrmEditor_Events.lstCommands.Items.Count Then
@@ -953,24 +815,26 @@ newlist:
             curlist = EventList(FrmEditor_Events.lstCommands.SelectedIndex + 1).CommandList
         End If
 
-        If TmpEvent.Pages(CurPageNum).CommandListCount = 0 Then
-            TmpEvent.Pages(CurPageNum).CommandListCount = 1
-            ReDim TmpEvent.Pages(CurPageNum).CommandList(curlist)
+        ReDim TmpEvent.Pages(CurPageNum).CommandList(curlist)
+        TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount + 1
+
+        If TmpEvent.Pages(CurPageNum).CommandListCount > 1 Then
+            oldCommandList = TmpEvent.Pages(CurPageNum).CommandList(curlist)     
         End If
 
-        oldCommandList = TmpEvent.Pages(CurPageNum).CommandList(curlist)
-        TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
-        p = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
-        If p <= 0 Then
-            ReDim TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(0)
+        p = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount        
+
+        If p = 1 Then
+            ReDim TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curlist)
         Else
             ReDim TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(p)
             TmpEvent.Pages(CurPageNum).CommandList(curlist).ParentList = oldCommandList.ParentList
             TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = p
-            For i = 0 To p - 1
+            For i = 1 To p - 1
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i) = oldCommandList.Commands(i)
             Next
         End If
+
         If FrmEditor_Events.lstCommands.SelectedIndex + 1 = FrmEditor_Events.lstCommands.Items.Count Then
             curslot = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
         Else
@@ -1348,7 +1212,7 @@ newlist:
     Public Sub EditEventCommand()
         Dim i As Integer, X As Integer, curlist As Integer, curslot As Integer
 
-        i = FrmEditor_Events.lstCommands.SelectedIndex + 1
+        i = FrmEditor_Events.lstCommands.SelectedIndex
         If i = -1 Then Exit Sub
         If i > UBound(EventList) Then Exit Sub
 
@@ -1893,7 +1757,7 @@ newlist:
     Public Sub DeleteEventCommand()
         Dim i As Integer, X As Integer, curlist As Integer, curslot As Integer, p As Integer, oldCommandList As CommandListStruct
 
-        i = FrmEditor_Events.lstCommands.SelectedIndex + 1
+        i = FrmEditor_Events.lstCommands.SelectedIndex
         If i = -1 Then Exit Sub
         If i > UBound(EventList) Then Exit Sub
         curlist = EventList(i).CommandList
@@ -1954,7 +1818,7 @@ newlist:
     Public Sub EditCommand()
         Dim i As Integer, curlist As Integer, curslot As Integer
 
-        i = FrmEditor_Events.lstCommands.SelectedIndex + 1
+        i = FrmEditor_Events.lstCommands.SelectedIndex
         If i = -1 Then Exit Sub
         If i > UBound(EventList) Then Exit Sub
 
@@ -2286,10 +2150,10 @@ newlist:
     Sub Packet_SwitchesAndVariables(ByRef data() As Byte)
         Dim i As Integer
         Dim buffer As New ByteStream(data)
-        For i = 0 To MaxSwitches
+        For i = 0 To MAX_SWITCHES
             Switches(i) = buffer.ReadString
         Next
-        For i = 0 To MaxVariables
+        For i = 0 To NAX_VARIABLES
             Variables(i) = buffer.ReadString
         Next
 
@@ -2337,6 +2201,7 @@ newlist:
                             .GraphicY = buffer.ReadInt32
                             .GraphicX2 = buffer.ReadInt32
                             .GraphicY2 = buffer.ReadInt32
+
                             .MoveType = buffer.ReadByte
                             .MoveSpeed = buffer.ReadByte
                             .MoveFreq = buffer.ReadByte
@@ -2395,8 +2260,9 @@ newlist:
                                             .ConditionalBranch.Data3 = buffer.ReadInt32
                                             .ConditionalBranch.ElseCommandList = buffer.ReadInt32
                                             .MoveRouteCount = buffer.ReadInt32
+
                                             If .MoveRouteCount > 0 Then
-                                                ReDim Preserve .MoveRoute(.MoveRouteCount)
+                                                ReDim .MoveRoute(.MoveRouteCount)
                                                 For w = 0 To .MoveRouteCount
                                                     .MoveRoute(w).Index = buffer.ReadInt32
                                                     .MoveRoute(w).Data1 = buffer.ReadInt32
@@ -2555,10 +2421,10 @@ newlist:
 
         buffer.WriteInt32(ClientPackets.CSwitchesAndVariables)
 
-        For i = 0 To MaxSwitches
+        For i = 0 To MAX_SWITCHES
             buffer.WriteString((Trim$(Switches(i))))
         Next
-        For i = 0 To MaxVariables
+        For i = 0 To NAX_VARIABLES
             buffer.WriteString((Trim$(Variables(i))))
         Next
 

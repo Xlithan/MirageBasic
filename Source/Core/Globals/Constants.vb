@@ -22,9 +22,7 @@
     Public Const MAX_RESOURCES As Integer = 100
     Public Const MAX_SHOPS As Integer = 50
     Public Const MAX_SKILLS As Integer = 255
-    Public Const MAX_SWITCHES As Integer = 500
     Public Const MAX_TRADES As Byte = 20
-    Public Const MAX_VARIABLES As Integer = 500
     Public Const NAME_LENGTH As Byte = 20
     Public Const MAX_INSTANCED_MAPS As Integer = 100
     Public Const MAX_CACHED_MAPS As Integer = MAX_MAPS + MAX_INSTANCED_MAPS
@@ -35,4 +33,7 @@
     Public Const MAX_MAPY As Byte = 50
     Public Const MAX_PROJECTILES As Integer = 255
     Public const MAX_DROP_ITEMS As Byte = 5
+    Public const MAX_EVENTS As Byte = 100
+    Public Const MAX_SWITCHES As Integer = 100
+    Public Const NAX_VARIABLES As Integer = 100
 End Module

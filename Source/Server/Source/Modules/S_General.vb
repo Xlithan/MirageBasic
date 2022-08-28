@@ -66,7 +66,7 @@ Module S_General
 
         'event
         ReDim Switches(MAX_SWITCHES)
-        ReDim Variables(MAX_VARIABLES)
+        ReDim Variables(NAX_VARIABLES)
         ReDim TempEventMap(MAX_CACHED_MAPS)
 
         'Housing
@@ -94,7 +94,7 @@ Module S_General
 
         For i = 0 To MAX_PLAYERS
             ReDim Player(i).Switches(MAX_SWITCHES)
-            ReDim Player(i).Variables(MAX_VARIABLES)
+            ReDim Player(i).Variables(NAX_VARIABLES)
             ReDim Player(i).Vital(VitalType.Count - 1)
             ReDim Player(i).Stat(StatType.Count - 1)
             ReDim Player(i).Equipment(EquipmentType.Count - 1)

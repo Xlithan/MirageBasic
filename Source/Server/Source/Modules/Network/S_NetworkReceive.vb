@@ -389,7 +389,7 @@ Module S_NetworkReceive
             slot = buffer.ReadInt32
             Name = buffer.ReadString
             Sex = buffer.ReadInt32
-            Job = buffer.ReadInt32
+            Job = buffer.ReadInt32 + 1
             Sprite = buffer.ReadInt32
 
             ' Prevent hacking
@@ -427,8 +427,6 @@ Module S_NetworkReceive
             ' Everything went ok, add the character
             AddChar(index, slot, Name, Sex, Job, Sprite)
             Addlog("Character " & Name & " added to " & GetPlayerLogin(index) & "'s account.", PLAYER_LOG)
-
-            ' log them in!!
             HandleUseChar(index)
 
             buffer.Dispose()
@@ -922,7 +920,6 @@ Module S_NetworkReceive
 
         End With
 
-        'Event Data!
         Map(mapNum).EventCount = buffer.ReadInt32
 
         If Map(mapNum).EventCount > 0 Then
@@ -930,11 +927,12 @@ Module S_NetworkReceive
             For i = 0 To Map(mapNum).EventCount
                 With Map(mapNum).Events(i)
                     .Name = buffer.ReadString
-                    .Globals = buffer.ReadInt32
+                    .Globals = buffer.ReadByte
                     .X = buffer.ReadInt32
                     .Y = buffer.ReadInt32
                     .PageCount = buffer.ReadInt32
                 End With
+
                 If Map(mapNum).Events(i).PageCount > 0 Then
                     ReDim Map(mapNum).Events(i).Pages(Map(mapNum).Events(i).PageCount)
                     ReDim TempPlayer(i).EventMap.EventPages(Map(mapNum).Events(i).PageCount)

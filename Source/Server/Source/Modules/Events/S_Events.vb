@@ -24,139 +24,6 @@ Friend Module S_Events
 
 #End Region
 
-#Region "Enums"
-
-    Friend Enum MoveRouteOpts
-        MoveUp = 1
-        MoveDown
-        MoveLeft
-        MoveRight
-        MoveRandom
-        MoveTowardsPlayer
-        MoveAwayFromPlayer
-        StepForward
-        StepBack
-        Wait100Ms
-        Wait500Ms
-        Wait1000Ms
-        TurnUp
-        TurnDown
-        TurnLeft
-        TurnRight
-        Turn90Right
-        Turn90Left
-        Turn180
-        TurnRandom
-        TurnTowardPlayer
-        TurnAwayFromPlayer
-        SetSpeed8XSlower
-        SetSpeed4XSlower
-        SetSpeed2XSlower
-        SetSpeedNormal
-        SetSpeed2XFaster
-        SetSpeed4XFaster
-        SetFreqLowest
-        SetFreqLower
-        SetFreqNormal
-        SetFreqHigher
-        SetFreqHighest
-        WalkingAnimOn
-        WalkingAnimOff
-        DirFixOn
-        DirFixOff
-        WalkThroughOn
-        WalkThroughOff
-        PositionBelowPlayer
-        PositionWithPlayer
-        PositionAbovePlayer
-        ChangeGraphic
-    End Enum
-
-    ' Event Types
-    Friend Enum EventType
-
-        ' Message
-        EvAddText = 1
-
-        EvShowText
-        EvShowChoices
-
-        ' Game Progression
-        EvPlayerVar
-
-        EvPlayerSwitch
-        EvSelfSwitch
-
-        ' Flow Control
-        EvCondition
-
-        EvExitProcess
-
-        ' Player
-        EvChangeItems
-
-        EvRestoreHp
-        EvRestoreMp
-        EvLevelUp
-        EvChangeLevel
-        EvChangeSkills
-        EvChangeClass
-        EvChangeSprite
-        EvChangeSex
-        EvChangePk
-
-        ' Movement
-        EvWarpPlayer
-
-        EvSetMoveRoute
-
-        ' Character
-        EvPlayAnimation
-
-        ' Music and Sounds
-        EvPlayBgm
-
-        EvFadeoutBgm
-        EvPlaySound
-        EvStopSound
-
-        'Etc...
-        EvCustomScript
-
-        EvSetAccess
-
-        'Shop/Bank
-        EvOpenBank
-
-        EvOpenShop
-
-        'New
-        EvGiveExp
-
-        EvShowChatBubble
-        EvLabel
-        EvGotoLabel
-        EvSpawnNpc
-        EvFadeIn
-        EvFadeOut
-        EvFlashWhite
-        EvSetFog
-        EvSetWeather
-        EvSetTint
-        EvWait
-        EvOpenMail
-        EvBeginQuest
-        EvEndQuest
-        EvQuestTask
-        EvShowPicture
-        EvHidePicture
-        EvWaitMovement
-        EvHoldPlayer
-        EvReleasePlayer
-    End Enum
-
-#End Region
-
 #Region "Database"
 
     Sub CreateSwitches()
@@ -168,7 +35,7 @@ Friend Module S_Events
     End Sub
 
     Sub CreateVariables()
-        For i = 0 To MAX_VARIABLES
+        For i = 0 To NAX_VARIABLES
             Variables(i) = ""
         Next
 
@@ -188,7 +55,7 @@ Friend Module S_Events
         Dim cf = Paths.Database & "Variables.ini"
         If Not File.Exists(cf) Then File.Create(cf).Dispose()
 
-        For i = 0 To MAX_VARIABLES
+        For i = 0 To NAX_VARIABLES
             Ini.PutVar(cf, "Variables", i, Variables(i))
         Next
     End Sub
@@ -214,7 +81,7 @@ Friend Module S_Events
             Exit Sub
         End If
 
-        For i = 0 To MAX_VARIABLES
+        For i = 0 To NAX_VARIABLES
             Variables(i) = Ini.GetVar(cf, "Variables", i)
         Next
     End Sub
@@ -302,7 +169,7 @@ Friend Module S_Events
                         Next
                     Else
                         If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-                            For z = 0 To TempPlayer(index).EventMap.CurrentEvents
+                            For z = 1 To TempPlayer(index).EventMap.CurrentEvents
                                 If (TempPlayer(index).EventMap.EventPages(z).EventId <> eventId) AndAlso (eventId > 0) AndAlso (TempPlayer(index).EventMap.EventPages(z).X = TempPlayer(index).EventMap.EventPages(eventId).X) AndAlso (TempPlayer(index).EventMap.EventPages(z).Y = TempPlayer(index).EventMap.EventPages(eventId).Y - 1) AndAlso (TempPlayer(index).EventMap.EventPages(z).WalkThrough = 0) Then
                                     CanEventMove = False
                                     Exit Function
@@ -388,7 +255,7 @@ Friend Module S_Events
                         Next
                     Else
                         If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-                            For z = 0 To TempPlayer(index).EventMap.CurrentEvents
+                            For z = 1 To TempPlayer(index).EventMap.CurrentEvents
                                 If (TempPlayer(index).EventMap.EventPages(z).EventId <> eventId) AndAlso (eventId > 0) AndAlso (TempPlayer(index).EventMap.EventPages(z).X = TempPlayer(index).EventMap.EventPages(eventId).X) AndAlso (TempPlayer(index).EventMap.EventPages(z).Y = TempPlayer(index).EventMap.EventPages(eventId).Y + 1) AndAlso (TempPlayer(index).EventMap.EventPages(z).WalkThrough = 0) Then
                                     CanEventMove = False
                                     Exit Function
@@ -474,7 +341,7 @@ Friend Module S_Events
                         Next
                     Else
                         If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-                            For z = 0 To TempPlayer(index).EventMap.CurrentEvents
+                            For z = 1 To TempPlayer(index).EventMap.CurrentEvents
                                 If (TempPlayer(index).EventMap.EventPages(z).EventId <> eventId) AndAlso (eventId > 0) AndAlso (TempPlayer(index).EventMap.EventPages(z).X = TempPlayer(index).EventMap.EventPages(eventId).X - 1) AndAlso (TempPlayer(index).EventMap.EventPages(z).Y = TempPlayer(index).EventMap.EventPages(eventId).Y) AndAlso (TempPlayer(index).EventMap.EventPages(z).WalkThrough = 0) Then
                                     CanEventMove = False
                                     Exit Function
@@ -560,7 +427,7 @@ Friend Module S_Events
                         Next
                     Else
                         If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-                            For z = 0 To TempPlayer(index).EventMap.CurrentEvents
+                            For z = 1 To TempPlayer(index).EventMap.CurrentEvents
                                 If (TempPlayer(index).EventMap.EventPages(z).EventId <> eventId) AndAlso (eventId > 0) AndAlso (TempPlayer(index).EventMap.EventPages(z).X = TempPlayer(index).EventMap.EventPages(eventId).X + 1) AndAlso (TempPlayer(index).EventMap.EventPages(z).Y = TempPlayer(index).EventMap.EventPages(eventId).Y) AndAlso (TempPlayer(index).EventMap.EventPages(z).WalkThrough = 0) Then
                                     CanEventMove = False
                                     Exit Function
@@ -593,7 +460,7 @@ Friend Module S_Events
 
         If globalevent = False Then
             If TempPlayer(playerindex).EventMap.CurrentEvents > 0 Then
-                For i = 0 To TempPlayer(playerindex).EventMap.CurrentEvents
+                For i = 1 To TempPlayer(playerindex).EventMap.CurrentEvents
                     If eventId = i Then
                         eventindex = eventId
                         eventId = TempPlayer(playerindex).EventMap.EventPages(i).EventId
@@ -638,7 +505,7 @@ Friend Module S_Events
 
         If globalevent = False Then
             If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-                For i = 0 To TempPlayer(index).EventMap.CurrentEvents
+                For i = 1 To TempPlayer(index).EventMap.CurrentEvents
                     If eventId = i Then
                         eventindex = eventId
                         eventId = TempPlayer(index).EventMap.EventPages(i).EventId
@@ -1063,7 +930,7 @@ Friend Module S_Events
 
             ReDim pos(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
-            For i = 0 To TempPlayer(playerId).EventMap.CurrentEvents
+            For i = 1 To TempPlayer(playerId).EventMap.CurrentEvents
                 If TempPlayer(playerId).EventMap.EventPages(i).Visible Then
                     If TempPlayer(playerId).EventMap.EventPages(i).WalkThrough = 1 Then
                         pos(TempPlayer(playerId).EventMap.EventPages(i).X, TempPlayer(playerId).EventMap.EventPages(i).Y) = 9
@@ -1591,7 +1458,7 @@ Friend Module S_Events
         End Select
 
         If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-            For z = 0 To TempPlayer(index).EventMap.CurrentEvents
+            For z = 1 To TempPlayer(index).EventMap.CurrentEvents
                 If TempPlayer(index).EventMap.EventPages(z).EventId = i Then
                     i = z
                     begineventprocessing = True
@@ -1637,7 +1504,7 @@ Friend Module S_Events
             Switches(i) = buffer.ReadString
         Next
 
-        For i = 0 To MAX_VARIABLES
+        For i = 0 To NAX_VARIABLES
             Variables(i) = buffer.ReadString
         Next
 
@@ -1701,7 +1568,7 @@ Friend Module S_Events
             buffer.WriteString((Trim(Switches(i))))
         Next
 
-        For i = 0 To MAX_VARIABLES
+        For i = 0 To NAX_VARIABLES
             buffer.WriteString((Trim(Variables(i))))
         Next
 

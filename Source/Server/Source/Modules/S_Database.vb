@@ -286,10 +286,8 @@ Module modDatabase
                         writer.WriteByte(.MoveType)
                         writer.WriteByte(.MoveSpeed)
                         writer.WriteByte(.MoveFreq)
-
                         writer.WriteInt32(.IgnoreMoveRoute)
                         writer.WriteInt32(.RepeatMoveRoute)
-
                         writer.WriteInt32(.MoveRouteCount)
 
                         If .MoveRouteCount > 0 Then
@@ -1267,8 +1265,8 @@ Module modDatabase
         For i = 0 To MAX_SWITCHES
            Player(Index).Switches(i) = 0
         Next
-        ReDim Player(Index).Variables(MAX_VARIABLES)
-        For i = 0 To MAX_VARIABLES
+        ReDim Player(Index).Variables(NAX_VARIABLES)
+        For i = 0 To NAX_VARIABLES
            Player(Index).Variables(i) = 0
         Next
 
@@ -1414,8 +1412,8 @@ Module modDatabase
         For i = 0 To MAX_SWITCHES
            Player(Index).Switches(i) = reader.ReadByte()
         Next
-        ReDim Player(Index).Variables(MAX_VARIABLES)
-        For i = 0 To MAX_VARIABLES
+        ReDim Player(Index).Variables(NAX_VARIABLES)
+        For i = 0 To NAX_VARIABLES
            Player(Index).Variables(i) = reader.ReadInt32()
         Next
 
@@ -1560,7 +1558,7 @@ Module modDatabase
             writer.WriteByte(Player(index).Switches(i))
         Next
 
-        For i = 0 To MAX_VARIABLES
+        For i = 0 To NAX_VARIABLES
             writer.WriteInt32(Player(index).Variables(i))
         Next
 

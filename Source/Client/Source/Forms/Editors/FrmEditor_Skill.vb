@@ -40,7 +40,6 @@ Friend Class frmEditor_Skill
     End Sub
 
     Private Sub NudIcon_Scroll(sender As Object, e As EventArgs) Handles nudIcon.ValueChanged
-
         Skill(Editorindex).Icon = nudIcon.Value
         EditorSkill_DrawIcon()
     End Sub

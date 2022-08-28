@@ -152,6 +152,12 @@ Module C_Maps
                 Next
             Next
 
+            ReDim Map.Events(MAX_EVENTS)
+
+            For x = 0 To MAX_EVENTS
+                Map.Events(x).Name = ""
+            Next
+
         End SyncLock
 
     End Sub
@@ -231,6 +237,7 @@ Module C_Maps
         ClearMapItems()
         ClearBlood()
         ClearMap()
+        ClearMapEveents()
 
         ' Get map num
         x = buffer.ReadInt32
@@ -325,6 +332,7 @@ Module C_Maps
                             .Y = buffer.ReadInt32
                             .PageCount = buffer.ReadInt32
                         End With
+
                         If Map.Events(i).PageCount > 0 Then
                             ReDim Map.Events(i).Pages(Map.Events(i).PageCount)
                             For x = 0 To Map.Events(i).PageCount
@@ -653,7 +661,7 @@ Module C_Maps
                 With Map.Events(i)
                     If .Name = Nothing Then .Name = ""
                     buffer.WriteString((.Name.Trim))
-                    buffer.WriteInt32(.Globals)
+                    buffer.WriteByte(.Globals)
                     buffer.WriteInt32(.X)
                     buffer.WriteInt32(.Y)
                     buffer.WriteInt32(.PageCount)
@@ -774,6 +782,14 @@ Module C_Maps
 
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
+    End Sub
+
+    Friend Sub ClearMapEveents()
+        ReDim Map.MapEvents(MAX_EVENTS)
+
+        For i = 1 To MAX_EVENTS
+            Map.MapEvents(i).Name = ""
+        Next
     End Sub
 
 #End Region

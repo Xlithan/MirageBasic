@@ -1277,7 +1277,7 @@ Module S_Players
                                 End If
 
                                 'check for event
-                                For i = 0 To TempPlayer(index).EventMap.CurrentEvents
+                                For i = 1 To TempPlayer(index).EventMap.CurrentEvents
                                     If TempPlayer(index).EventMap.EventPages(i).X = GetPlayerX(index) AndAlso TempPlayer(index).EventMap.EventPages(i).Y = GetPlayerY(index) - 1 Then
                                         If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).Trigger = 1 Then
                                             'PlayerMsg(Index, "OnTouch event", ColorType.Red)
@@ -1330,7 +1330,7 @@ Module S_Players
                                 End If
 
                                 'check for event
-                                For i = 0 To TempPlayer(index).EventMap.CurrentEvents
+                                For i = 1 To TempPlayer(index).EventMap.CurrentEvents
                                     If TempPlayer(index).EventMap.EventPages(i).X = GetPlayerX(index) AndAlso TempPlayer(index).EventMap.EventPages(i).Y = GetPlayerY(index) + 1 Then
                                         If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).Trigger = 1 Then
                                             'PlayerMsg(Index, "OnTouch event", ColorType.Red)
@@ -1381,7 +1381,7 @@ Module S_Players
                                 End If
 
                                 'check for event
-                                For i = 0 To TempPlayer(index).EventMap.CurrentEvents
+                                For i = 1 To TempPlayer(index).EventMap.CurrentEvents
                                     If TempPlayer(index).EventMap.EventPages(i).X = GetPlayerX(index) - 1 AndAlso TempPlayer(index).EventMap.EventPages(i).Y = GetPlayerY(index) Then
                                         If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).Trigger = 1 Then
                                             'PlayerMsg(Index, "OnTouch event", ColorType.Red)
@@ -1433,7 +1433,7 @@ Module S_Players
                                 End If
 
                                 'check for event
-                                For i = 0 To TempPlayer(index).EventMap.CurrentEvents
+                                For i = 1 To TempPlayer(index).EventMap.CurrentEvents
                                     If TempPlayer(index).EventMap.EventPages(i).X = GetPlayerX(index) AndAlso TempPlayer(index).EventMap.EventPages(i).Y = GetPlayerY(index) Then
                                         If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).Trigger = 1 Then
                                             'PlayerMsg(Index, "OnTouch event", ColorType.Red)
@@ -1633,7 +1633,7 @@ Module S_Players
 
         If Moved = True Then
             If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-                For i = 0 To TempPlayer(index).EventMap.CurrentEvents
+                For i = 1 To TempPlayer(index).EventMap.CurrentEvents
                     If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Globals = 1 Then
                         If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).X = x AndAlso Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Y = y AndAlso Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).Trigger = 1 AndAlso TempPlayer(index).EventMap.EventPages(i).Visible = 1 Then begineventprocessing = True
                     Else

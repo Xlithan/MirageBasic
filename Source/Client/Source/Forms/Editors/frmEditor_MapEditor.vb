@@ -236,7 +236,7 @@ Public Class FrmEditor_MapEditor
     End Sub
 
     Private Sub BtnNpcSpawn_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNpcSpawn.Click
-        SpawnNpcNum = lstNpc.SelectedIndex + 1
+        SpawnNpcNum = lstNpc.SelectedIndex
         SpawnNpcDir = scrlNpcDir.Value
         pnlAttributes.Visible = False
         fraNpcSpawn.Visible = False
@@ -279,7 +279,7 @@ Public Class FrmEditor_MapEditor
     End Sub
 
     Private Sub BtnHeal_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnHeal.Click
-        MapEditorHealType = cmbHeal.SelectedIndex + 1
+        MapEditorHealType = cmbHeal.SelectedIndex
         MapEditorHealAmount = scrlHeal.Value
         pnlAttributes.Visible = False
         fraHeal.Visible = False
@@ -942,7 +942,7 @@ Public Class FrmEditor_MapEditor
         Buffer = New ByteStream(4)
         Buffer.WriteInt32(ClientPackets.CNeedMap)
         Buffer.WriteInt32(1)
-        Socket.SendData(Buffer.Data, Buffer.Head)
+        Socket?.SendData(Buffer.Data, Buffer.Head)
         InMapEditor = False
         Visible = False
         GettingMap = True
@@ -1031,7 +1031,7 @@ Public Class FrmEditor_MapEditor
         Dim Y As Integer
         Dim CurLayer As Integer
 
-        CurLayer = cmbLayers.SelectedIndex + 1
+        CurLayer = cmbLayers.SelectedIndex
 
         If CurLayer = 0 Then Exit Sub
 
@@ -1056,7 +1056,7 @@ Public Class FrmEditor_MapEditor
         Dim Y As Integer
         Dim CurLayer As Integer
 
-        CurLayer = cmbLayers.SelectedIndex + 1
+        CurLayer = cmbLayers.SelectedIndex
 
         If MsgBox("Are you sure you wish to fill this layer?", vbYesNo, "Map Editor") = vbYes Then
             If theAutotile > 0 Then

@@ -433,7 +433,7 @@ Module C_Player
             End If
         Next
 
-       For i = 0 To Map.CurrentEvents
+       For i = 1 To Map.CurrentEvents
             If Map.MapEvents(i).Visible = 1 Then
                 If Map.MapEvents(i).X = x AndAlso Map.MapEvents(i).Y = y Then
                     If Map.MapEvents(i).WalkThrough = 0 Then
@@ -548,7 +548,7 @@ Module C_Player
             End Select
 
             If GetTickCount() > Player(Myindex).EventTimer Then
-               For i = 0 To Map.CurrentEvents
+               For i = 1 To Map.CurrentEvents
                     If Map.MapEvents(i).Visible = 1 Then
                         If Map.MapEvents(i).X = x AndAlso Map.MapEvents(i).Y = y Then
                             buffer = New ByteStream(4)
