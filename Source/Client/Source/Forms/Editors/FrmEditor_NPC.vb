@@ -140,23 +140,23 @@ Friend Class frmEditor_NPC
 #Region "Drop Items"
 
     Private Sub CmbDropSlot_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDropSlot.SelectedIndexChanged
-        cmbItem.SelectedIndex = Npc(Editorindex).DropItem(cmbDropSlot.SelectedIndex + 1)
+        cmbItem.SelectedIndex = Npc(Editorindex).DropItem(cmbDropSlot.SelectedIndex)
 
-        nudAmount.Value = Npc(Editorindex).DropItemValue(cmbDropSlot.SelectedIndex + 1)
+        nudAmount.Value = Npc(Editorindex).DropItemValue(cmbDropSlot.SelectedIndex)
 
-        nudChance.Value = Npc(Editorindex).DropChance(cmbDropSlot.SelectedIndex + 1)
+        nudChance.Value = Npc(Editorindex).DropChance(cmbDropSlot.SelectedIndex)
     End Sub
 
     Private Sub CmbItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbItem.SelectedIndexChanged
-        Npc(Editorindex).DropItem(cmbDropSlot.SelectedIndex + 1) = cmbItem.SelectedIndex
+        Npc(Editorindex).DropItem(cmbDropSlot.SelectedIndex) = cmbItem.SelectedIndex
     End Sub
 
     Private Sub ScrlValue_Scroll(sender As Object, e As EventArgs) Handles nudAmount.ValueChanged
-        Npc(Editorindex).DropItemValue(cmbDropSlot.SelectedIndex + 1) = nudAmount.Value
+        Npc(Editorindex).DropItemValue(cmbDropSlot.SelectedIndex) = nudAmount.Value
     End Sub
 
     Private Sub NudChance_ValueChanged(sender As Object, e As EventArgs) Handles nudChance.ValueChanged
-        Npc(Editorindex).DropChance(cmbDropSlot.SelectedIndex + 1) = nudChance.Value
+        Npc(Editorindex).DropChance(cmbDropSlot.SelectedIndex) = nudChance.Value
     End Sub
 
 #End Region

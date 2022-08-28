@@ -583,8 +583,8 @@ Module S_NetworkSend
                 Next
             Next
 
-            'Event Data
             buffer.WriteInt32(Map(mapNum).EventCount)
+
             If Map(mapNum).EventCount > 0 Then
                 For i = 0 To Map(mapNum).EventCount
                     With Map(mapNum).Events(i)
@@ -594,6 +594,7 @@ Module S_NetworkSend
                         buffer.WriteInt32(.Y)
                         buffer.WriteInt32(.PageCount)
                     End With
+
                     If Map(mapNum).Events(i).PageCount > 0 Then
                         For X = 0 To Map(mapNum).Events(i).PageCount
                             With Map(mapNum).Events(i).Pages(X)

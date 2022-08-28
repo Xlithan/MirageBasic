@@ -24,139 +24,6 @@ Friend Module S_Events
 
 #End Region
 
-#Region "Enums"
-
-    Friend Enum MoveRouteOpts
-        MoveUp = 1
-        MoveDown
-        MoveLeft
-        MoveRight
-        MoveRandom
-        MoveTowardsPlayer
-        MoveAwayFromPlayer
-        StepForward
-        StepBack
-        Wait100Ms
-        Wait500Ms
-        Wait1000Ms
-        TurnUp
-        TurnDown
-        TurnLeft
-        TurnRight
-        Turn90Right
-        Turn90Left
-        Turn180
-        TurnRandom
-        TurnTowardPlayer
-        TurnAwayFromPlayer
-        SetSpeed8XSlower
-        SetSpeed4XSlower
-        SetSpeed2XSlower
-        SetSpeedNormal
-        SetSpeed2XFaster
-        SetSpeed4XFaster
-        SetFreqLowest
-        SetFreqLower
-        SetFreqNormal
-        SetFreqHigher
-        SetFreqHighest
-        WalkingAnimOn
-        WalkingAnimOff
-        DirFixOn
-        DirFixOff
-        WalkThroughOn
-        WalkThroughOff
-        PositionBelowPlayer
-        PositionWithPlayer
-        PositionAbovePlayer
-        ChangeGraphic
-    End Enum
-
-    ' Event Types
-    Friend Enum EventType
-
-        ' Message
-        EvAddText = 1
-
-        EvShowText
-        EvShowChoices
-
-        ' Game Progression
-        EvPlayerVar
-
-        EvPlayerSwitch
-        EvSelfSwitch
-
-        ' Flow Control
-        EvCondition
-
-        EvExitProcess
-
-        ' Player
-        EvChangeItems
-
-        EvRestoreHp
-        EvRestoreMp
-        EvLevelUp
-        EvChangeLevel
-        EvChangeSkills
-        EvChangeClass
-        EvChangeSprite
-        EvChangeSex
-        EvChangePk
-
-        ' Movement
-        EvWarpPlayer
-
-        EvSetMoveRoute
-
-        ' Character
-        EvPlayAnimation
-
-        ' Music and Sounds
-        EvPlayBgm
-
-        EvFadeoutBgm
-        EvPlaySound
-        EvStopSound
-
-        'Etc...
-        EvCustomScript
-
-        EvSetAccess
-
-        'Shop/Bank
-        EvOpenBank
-
-        EvOpenShop
-
-        'New
-        EvGiveExp
-
-        EvShowChatBubble
-        EvLabel
-        EvGotoLabel
-        EvSpawnNpc
-        EvFadeIn
-        EvFadeOut
-        EvFlashWhite
-        EvSetFog
-        EvSetWeather
-        EvSetTint
-        EvWait
-        EvOpenMail
-        EvBeginQuest
-        EvEndQuest
-        EvQuestTask
-        EvShowPicture
-        EvHidePicture
-        EvWaitMovement
-        EvHoldPlayer
-        EvReleasePlayer
-    End Enum
-
-#End Region
-
 #Region "Database"
 
     Sub CreateSwitches()
@@ -168,7 +35,7 @@ Friend Module S_Events
     End Sub
 
     Sub CreateVariables()
-        For i = 0 To MAX_VARIABLES
+        For i = 0 To NAX_VARIABLES
             Variables(i) = ""
         Next
 
@@ -188,7 +55,7 @@ Friend Module S_Events
         Dim cf = Paths.Database & "Variables.ini"
         If Not File.Exists(cf) Then File.Create(cf).Dispose()
 
-        For i = 0 To MAX_VARIABLES
+        For i = 0 To NAX_VARIABLES
             Ini.PutVar(cf, "Variables", i, Variables(i))
         Next
     End Sub
@@ -214,7 +81,7 @@ Friend Module S_Events
             Exit Sub
         End If
 
-        For i = 0 To MAX_VARIABLES
+        For i = 0 To NAX_VARIABLES
             Variables(i) = Ini.GetVar(cf, "Variables", i)
         Next
     End Sub
@@ -1637,7 +1504,7 @@ Friend Module S_Events
             Switches(i) = buffer.ReadString
         Next
 
-        For i = 0 To MAX_VARIABLES
+        For i = 0 To NAX_VARIABLES
             Variables(i) = buffer.ReadString
         Next
 
@@ -1701,7 +1568,7 @@ Friend Module S_Events
             buffer.WriteString((Trim(Switches(i))))
         Next
 
-        For i = 0 To MAX_VARIABLES
+        For i = 0 To NAX_VARIABLES
             buffer.WriteString((Trim(Variables(i))))
         Next
 

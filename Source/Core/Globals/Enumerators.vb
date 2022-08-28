@@ -265,4 +265,133 @@
         Repeatable
     End Enum
 
+    Public Enum MoveRouteOpts
+        MoveUp
+        MoveDown
+        MoveLeft
+        MoveRight
+        MoveRandom
+        MoveTowardsPlayer
+        MoveAwayFromPlayer
+        StepForward
+        StepBack
+        Wait100Ms
+        Wait500Ms
+        Wait1000Ms
+        TurnUp
+        TurnDown
+        TurnLeft
+        TurnRight
+        Turn90Right
+        Turn90Left
+        Turn180
+        TurnRandom
+        TurnTowardPlayer
+        TurnAwayFromPlayer
+        SetSpeed8XSlower
+        SetSpeed4XSlower
+        SetSpeed2XSlower
+        SetSpeedNormal
+        SetSpeed2XFaster
+        SetSpeed4XFaster
+        SetFreqLowest
+        SetFreqLower
+        SetFreqNormal
+        SetFreqHigher
+        SetFreqHighest
+        WalkingAnimOn
+        WalkingAnimOff
+        DirFixOn
+        DirFixOff
+        WalkThroughOn
+        WalkThroughOff
+        PositionBelowPlayer
+        PositionWithPlayer
+        PositionAbovePlayer
+        ChangeGraphic
+    End Enum
+
+    ' Event Types
+    Public Enum EventType
+
+        ' Message
+        EvAddText
+
+        EvShowText
+        EvShowChoices
+
+        ' Game Progression
+        EvPlayerVar
+
+        EvPlayerSwitch
+        EvSelfSwitch
+
+        ' Flow Control
+        EvCondition
+
+        EvExitProcess
+
+        ' Player
+        EvChangeItems
+
+        EvRestoreHp
+        EvRestoreMp
+        EvLevelUp
+        EvChangeLevel
+        EvChangeSkills
+        EvChangeJob
+        EvChangeSprite
+        EvChangeSex
+        EvChangePk
+
+        ' Movement
+        EvWarpPlayer
+
+        EvSetMoveRoute
+
+        ' Character
+        EvPlayAnimation
+
+        ' Music and Sounds
+        EvPlayBgm
+
+        EvFadeoutBgm
+        EvPlaySound
+        EvStopSound
+
+        'Etc...
+        EvCustomScript
+
+        EvSetAccess
+
+        'Shop/Bank
+        EvOpenBank
+
+        EvOpenShop
+
+        'New
+        EvGiveExp
+
+        EvShowChatBubble
+        EvLabel
+        EvGotoLabel
+        EvSpawnNpc
+        EvFadeIn
+        EvFadeOut
+        EvFlashWhite
+        EvSetFog
+        EvSetWeather
+        EvSetTint
+        EvWait
+        EvOpenMail
+        EvBeginQuest
+        EvEndQuest
+        EvQuestTask
+        EvShowPicture
+        EvHidePicture
+        EvWaitMovement
+        EvHoldPlayer
+        EvReleasePlayer
+    End Enum
+
 End Module

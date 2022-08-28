@@ -231,6 +231,7 @@ Module C_Maps
         ClearMapItems()
         ClearBlood()
         ClearMap()
+        ClearMapEveents()
 
         ' Get map num
         x = buffer.ReadInt32
@@ -774,6 +775,14 @@ Module C_Maps
 
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
+    End Sub
+
+    Friend Sub ClearMapEveents()
+        ReDim Map.MapEvents(MAX_EVENTS)
+
+        For i = 1 To MAX_EVENTS
+            Map.MapEvents(i).Name = ""
+        Next
     End Sub
 
 #End Region

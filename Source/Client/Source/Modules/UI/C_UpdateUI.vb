@@ -798,12 +798,12 @@ Module C_UpdateUI
                 Next
                 ' variables
                 .cmbPlayerVar.Items.Clear()
-                For i = 0 To MaxVariables
+                For i = 0 To NAX_VARIABLES
                     .cmbPlayerVar.Items.Add(i & ". " & Variables(i))
                 Next
                 ' variables
                 .cmbPlayerSwitch.Items.Clear()
-                For i = 0 To MaxSwitches
+                For i = 0 To MAX_SWITCHES
                     .cmbPlayerSwitch.Items.Add(i & ". " & Switches(i))
                 Next
                 ' name

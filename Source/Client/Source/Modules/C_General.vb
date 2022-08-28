@@ -153,9 +153,9 @@ Module C_General
                     SetStatus(Language.MainMenu.SendNewCharacter)
 
                     If FrmMenu.rdoMale.Checked = True Then
-                        SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Male, FrmMenu.cmbJob.SelectedIndex + 1, NewCharSprite)
+                        SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Male, FrmMenu.cmbJob.SelectedIndex, NewCharSprite)
                     Else
-                        SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Female, FrmMenu.cmbJob.SelectedIndex + 1, NewCharSprite)
+                        SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Female, FrmMenu.cmbJob.SelectedIndex, NewCharSprite)
                     End If
                 End If
 

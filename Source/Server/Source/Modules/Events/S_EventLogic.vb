@@ -1719,7 +1719,7 @@ Friend Module S_EventLogic
                                                                 End If
                                                             End If
                                                             SendPlayerSkills(i)
-                                                        Case EventType.EvChangeClass
+                                                        Case EventType.EvChangeJob
                                                             Player(i).Job = Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1
                                                             SendPlayerData(i)
                                                         Case EventType.EvChangeSprite
