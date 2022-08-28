@@ -83,13 +83,8 @@ Public Class FrmEditor_Events
         cmbCondition_Time.Enabled = False
     End Sub
 
-    Public Sub InitEventEditorForm()
+    Private Sub FrmEditor_Events_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim i As Integer
-
-        nudShowTextFace.Maximum = NumFaces
-        nudShowChoicesFace.Maximum = NumFaces
-
-        nudWPMap.Maximum = MAX_MAPS
 
         cmbSwitch.Items.Clear()
 
@@ -182,22 +177,8 @@ Public Class FrmEditor_Events
             cmbEventQuest.Items.Add(i & ". " & Trim$(Quest(i).Name))
         Next
 
-        'If NumPics > 0 Then
-        '    btnCommands45.Enabled = True
-        '    scrlShowPicture.Maximum = NumPics
-        '    cmbPicIndex.SelectedIndex = 0
-        'Else
+        nudWPMap.Maximum = MAX_MAPS
 
-        'End If
-
-        fraDialogue.Visible = False
-
-        If tabPages.SelectedIndex = 0 Then tabPages.Selectedindex = 1
-
-        EditorEvent_DrawGraphic()
-    End Sub
-
-    Private Sub FrmEditor_Events_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Width = 946
 
         fraDialogue.Width = Width
@@ -209,6 +190,50 @@ Public Class FrmEditor_Events
         fraMoveRoute.Height = Height
         fraMoveRoute.Top = 0
         fraMoveRoute.Left = 0
+
+        ' set the tabs
+        tabPages.TabPages.Clear()
+
+        For i = 0 To TmpEvent.PageCount
+            tabPages.TabPages.Add(Str(i))
+        Next
+        ' items
+        cmbHasItem.Items.Clear()
+        For i = 0 To MAX_ITEMS
+            cmbHasItem.Items.Add(i & ": " & Trim$(Item(i).Name))
+        Next
+        ' variables
+        cmbPlayerVar.Items.Clear()
+        For i = 0 To NAX_VARIABLES
+            cmbPlayerVar.Items.Add(i & ". " & Variables(i))
+        Next
+        ' variables
+        cmbPlayerSwitch.Items.Clear()
+        For i = 0 To MAX_SWITCHES
+            cmbPlayerSwitch.Items.Add(i & ". " & Switches(i))
+        Next
+
+        ' enable delete button
+        If TmpEvent.PageCount > 1 Then
+            btnDeletePage.Enabled = True
+        Else
+            btnDeletePage.Enabled = False
+        End If
+        btnPastePage.Enabled = False
+
+        nudShowTextFace.Maximum = NumFaces
+        nudShowChoicesFace.Maximum = NumFaces
+
+        fraDialogue.Visible = False
+
+        If tabPages.SelectedIndex = 0 Then tabPages.Selectedindex = 1
+
+         ' Load page 1 to start off with
+        CurPageNum = 1
+        txtName.Text = TmpEvent.Name
+
+        EventEditorLoadPage(CurPageNum) 
+        EditorEvent_DrawGraphic()
     End Sub
 
     Private Sub BtnOK_Click(sender As Object, e As EventArgs) Handles btnOk.Click

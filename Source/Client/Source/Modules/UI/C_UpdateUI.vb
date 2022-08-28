@@ -781,50 +781,10 @@ Module C_UpdateUI
         End If
 
         If InitEventEditorForm = True Then
-            FrmEditor_Events.InitEventEditorForm()
-
             ' populate form
-            With FrmEditor_Events
-                ' set the tabs
-                .tabPages.TabPages.Clear()
-
-                For i = 0 To TmpEvent.PageCount
-                    .tabPages.TabPages.Add(Str(i))
-                Next
-                ' items
-                .cmbHasItem.Items.Clear()
-                For i = 0 To MAX_ITEMS
-                    .cmbHasItem.Items.Add(i & ": " & Trim$(Item(i).Name))
-                Next
-                ' variables
-                .cmbPlayerVar.Items.Clear()
-                For i = 0 To NAX_VARIABLES
-                    .cmbPlayerVar.Items.Add(i & ". " & Variables(i))
-                Next
-                ' variables
-                .cmbPlayerSwitch.Items.Clear()
-                For i = 0 To MAX_SWITCHES
-                    .cmbPlayerSwitch.Items.Add(i & ". " & Switches(i))
-                Next
-                ' name
-                .txtName.Text = TmpEvent.Name
-                ' enable delete button
-                If TmpEvent.PageCount > 1 Then
-                    .btnDeletePage.Enabled = True
-                Else
-                    .btnDeletePage.Enabled = False
-                End If
-                .btnPastePage.Enabled = False
-                ' Load page 1 to start off with
-                CurPageNum = 1
-                EventEditorLoadPage(CurPageNum)
-
-                .nudShowTextFace.Maximum = NumFaces
-                .nudShowChoicesFace.Maximum = NumFaces
+            With FrmEditor_Events               
+                .Show()
             End With
-            ' show the editor
-            FrmEditor_Events.Show()
-
             InitEventEditorForm = False
         End If
 
