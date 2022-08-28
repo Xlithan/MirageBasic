@@ -942,7 +942,7 @@ Public Class FrmEditor_MapEditor
         Buffer = New ByteStream(4)
         Buffer.WriteInt32(ClientPackets.CNeedMap)
         Buffer.WriteInt32(1)
-        Socket.SendData(Buffer.Data, Buffer.Head)
+        Socket?.SendData(Buffer.Data, Buffer.Head)
         InMapEditor = False
         Visible = False
         GettingMap = True
