@@ -35,4 +35,5 @@
     Public Const MAX_MAPY As Byte = 50
     Public Const MAX_PROJECTILES As Integer = 255
     Public const MAX_DROP_ITEMS As Byte = 5
+    Public const MAX_EVENTS As Byte = 100
 End Module
