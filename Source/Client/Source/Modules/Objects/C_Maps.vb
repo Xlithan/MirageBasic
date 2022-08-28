@@ -152,6 +152,12 @@ Module C_Maps
                 Next
             Next
 
+            ReDim Map.Events(MAX_EVENTS)
+
+            For x = 0 To MAX_EVENTS
+                Map.Events(x).Name = ""
+            Next
+
         End SyncLock
 
     End Sub
@@ -326,6 +332,7 @@ Module C_Maps
                             .Y = buffer.ReadInt32
                             .PageCount = buffer.ReadInt32
                         End With
+
                         If Map.Events(i).PageCount > 0 Then
                             ReDim Map.Events(i).Pages(Map.Events(i).PageCount)
                             For x = 0 To Map.Events(i).PageCount

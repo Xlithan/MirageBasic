@@ -807,42 +807,43 @@ newlist:
 
         If TmpEvent.Pages(CurPageNum).CommandListCount = 0 Then
             TmpEvent.Pages(CurPageNum).CommandListCount = 1
-            ReDim TmpEvent.Pages(CurPageNum).CommandList(1)
         End If
 
-        If FrmEditor_Events.lstCommands.SelectedIndex = FrmEditor_Events.lstCommands.Items.Count Then
+        If FrmEditor_Events.lstCommands.SelectedIndex + 1 = FrmEditor_Events.lstCommands.Items.Count Then
             curlist = 1
         Else
-            curlist = EventList(FrmEditor_Events.lstCommands.SelectedIndex).CommandList
+            curlist = EventList(FrmEditor_Events.lstCommands.SelectedIndex + 1).CommandList
         End If
 
-        If TmpEvent.Pages(CurPageNum).CommandListCount = 0 Then
-            TmpEvent.Pages(CurPageNum).CommandListCount = 1
-            ReDim TmpEvent.Pages(CurPageNum).CommandList(curlist)
+        ReDim TmpEvent.Pages(CurPageNum).CommandList(curlist)
+        TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount + 1
+
+        If TmpEvent.Pages(CurPageNum).CommandListCount > 1 Then
+            oldCommandList = TmpEvent.Pages(CurPageNum).CommandList(curlist)     
         End If
 
-        oldCommandList = TmpEvent.Pages(CurPageNum).CommandList(curlist)
-        TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
-        p = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
-        If p <= 0 Then
-            ReDim TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(0)
+        p = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount        
+
+        If p = 1 Then
+            ReDim TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curlist)
         Else
             ReDim TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(p)
             TmpEvent.Pages(CurPageNum).CommandList(curlist).ParentList = oldCommandList.ParentList
             TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = p
-            For i = 0 To p - 1
+            For i = 1 To p - 1
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i) = oldCommandList.Commands(i)
             Next
         End If
-        If FrmEditor_Events.lstCommands.SelectedIndex = FrmEditor_Events.lstCommands.Items.Count Then
+
+        If FrmEditor_Events.lstCommands.SelectedIndex + 1 = FrmEditor_Events.lstCommands.Items.Count Then
             curslot = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
         Else
-            i = EventList(FrmEditor_Events.lstCommands.SelectedIndex).CommandNum
+            i = EventList(FrmEditor_Events.lstCommands.SelectedIndex + 1).CommandNum
             If i <= TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount Then
                 For X = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount To i Step -1
                     TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(X) = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(X)
                 Next
-                curslot = EventList(FrmEditor_Events.lstCommands.SelectedIndex).CommandNum
+                curslot = EventList(FrmEditor_Events.lstCommands.SelectedIndex + 1).CommandNum
             Else
                 curslot = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
             End If

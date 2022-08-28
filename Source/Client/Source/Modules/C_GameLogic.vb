@@ -216,11 +216,9 @@ Module C_GameLogic
                             End If
                         Next
 
-                        If Map.CurrentEvents > 0 Then
-                           For i = 0 To Map.CurrentEvents
-                                ProcessEventMovement(i)
-                            Next
-                        End If
+                        For i = 1 To Map.CurrentEvents
+                            ProcessEventMovement(i)
+                        Next
 
                         walkTimer = tick + 30 ' edit this value to change WalkTimer
                     End If
