@@ -934,6 +934,7 @@ Module S_NetworkReceive
                     .Y = buffer.ReadInt32
                     .PageCount = buffer.ReadInt32
                 End With
+
                 If Map(mapNum).Events(i).PageCount > 0 Then
                     ReDim Map(mapNum).Events(i).Pages(Map(mapNum).Events(i).PageCount)
                     ReDim TempPlayer(i).EventMap.EventPages(Map(mapNum).Events(i).PageCount)

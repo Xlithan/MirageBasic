@@ -253,7 +253,7 @@ Friend Class FrmAdmin
 #Region "Misc"
 
     Private Sub CmbSpawnItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSpawnItem.SelectedIndexChanged
-        If Item(cmbSpawnItem.SelectedIndex).Type = ItemType.Currency OrElse Item(cmbSpawnItem.SelectedIndex + 1).Stackable = 1 Then
+        If Item(cmbSpawnItem.SelectedIndex).Type = ItemType.Currency OrElse Item(cmbSpawnItem.SelectedIndex).Stackable = 1 Then
             nudSpawnItemAmount.Enabled = True
             Exit Sub
         End If

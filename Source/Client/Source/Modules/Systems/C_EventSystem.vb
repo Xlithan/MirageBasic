@@ -947,10 +947,10 @@ newlist:
             ReDim TmpEvent.Pages(CurPageNum).CommandList(1)
         End If
 
-        If FrmEditor_Events.lstCommands.SelectedIndex + 1 = FrmEditor_Events.lstCommands.Items.Count Then
+        If FrmEditor_Events.lstCommands.SelectedIndex = FrmEditor_Events.lstCommands.Items.Count Then
             curlist = 1
         Else
-            curlist = EventList(FrmEditor_Events.lstCommands.SelectedIndex + 1).CommandList
+            curlist = EventList(FrmEditor_Events.lstCommands.SelectedIndex).CommandList
         End If
 
         If TmpEvent.Pages(CurPageNum).CommandListCount = 0 Then
@@ -971,15 +971,15 @@ newlist:
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i) = oldCommandList.Commands(i)
             Next
         End If
-        If FrmEditor_Events.lstCommands.SelectedIndex + 1 = FrmEditor_Events.lstCommands.Items.Count Then
+        If FrmEditor_Events.lstCommands.SelectedIndex = FrmEditor_Events.lstCommands.Items.Count Then
             curslot = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
         Else
-            i = EventList(FrmEditor_Events.lstCommands.SelectedIndex + 1).CommandNum
+            i = EventList(FrmEditor_Events.lstCommands.SelectedIndex).CommandNum
             If i <= TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount Then
                 For X = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount To i Step -1
                     TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(X) = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(X)
                 Next
-                curslot = EventList(FrmEditor_Events.lstCommands.SelectedIndex + 1).CommandNum
+                curslot = EventList(FrmEditor_Events.lstCommands.SelectedIndex).CommandNum
             Else
                 curslot = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
             End If
@@ -1348,7 +1348,7 @@ newlist:
     Public Sub EditEventCommand()
         Dim i As Integer, X As Integer, curlist As Integer, curslot As Integer
 
-        i = FrmEditor_Events.lstCommands.SelectedIndex + 1
+        i = FrmEditor_Events.lstCommands.SelectedIndex
         If i = -1 Then Exit Sub
         If i > UBound(EventList) Then Exit Sub
 
@@ -1893,7 +1893,7 @@ newlist:
     Public Sub DeleteEventCommand()
         Dim i As Integer, X As Integer, curlist As Integer, curslot As Integer, p As Integer, oldCommandList As CommandListStruct
 
-        i = FrmEditor_Events.lstCommands.SelectedIndex + 1
+        i = FrmEditor_Events.lstCommands.SelectedIndex
         If i = -1 Then Exit Sub
         If i > UBound(EventList) Then Exit Sub
         curlist = EventList(i).CommandList
@@ -1954,7 +1954,7 @@ newlist:
     Public Sub EditCommand()
         Dim i As Integer, curlist As Integer, curslot As Integer
 
-        i = FrmEditor_Events.lstCommands.SelectedIndex + 1
+        i = FrmEditor_Events.lstCommands.SelectedIndex
         If i = -1 Then Exit Sub
         If i > UBound(EventList) Then Exit Sub
 

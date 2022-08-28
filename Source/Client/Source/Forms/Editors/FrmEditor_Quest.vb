@@ -118,7 +118,7 @@ Friend Class frmEditor_Quest
         ReDim tmpRewardItemIndex(Quest(Editorindex).RewardCount - 1)
 
        For i = 0 To Quest(Editorindex).RewardCount
-            If Not i = lstRewards.SelectedIndex + 1 Then
+            If Not i = lstRewards.SelectedIndex Then
                 tmpRewardItem(i) = Quest(Editorindex).RewardItem(i)
                 tmpRewardItemIndex(i) = Quest(Editorindex).RewardItemAmount(i)
             End If
@@ -148,7 +148,7 @@ Friend Class frmEditor_Quest
     Private Sub LstTasks_DoubleClick(sender As Object, e As EventArgs) Handles lstTasks.DoubleClick
         If lstTasks.SelectedIndex < 0 Then Exit Sub
 
-        SelectedTask = lstTasks.SelectedIndex + 1
+        SelectedTask = lstTasks.SelectedIndex
         LoadTask(Editorindex, SelectedTask)
         fraTasks.Visible = True
         fraTasks.BringToFront()
@@ -176,7 +176,7 @@ Friend Class frmEditor_Quest
         ReDim tmptask(Quest(Editorindex).TaskCount - 1)
 
        For i = 0 To Quest(Editorindex).TaskCount
-            If Not i = lstTasks.SelectedIndex + 1 Then
+            If Not i = lstTasks.SelectedIndex Then
                 tmptask(i) = Quest(Editorindex).Task(i)
             End If
         Next
@@ -186,7 +186,7 @@ Friend Class frmEditor_Quest
         ReDim Quest(Editorindex).Task(Quest(Editorindex).TaskCount)
 
        For i = 0 To Quest(Editorindex).TaskCount
-            If Not i = lstTasks.SelectedIndex + 1 Then
+            If Not i = lstTasks.SelectedIndex Then
                 Quest(Editorindex).Task(i) = tmptask(i)
             End If
         Next
@@ -203,7 +203,7 @@ Friend Class frmEditor_Quest
         If lstTasks.SelectedIndex < 0 Then
             SelectedTask = Quest(Editorindex).TaskCount
         Else
-            SelectedTask = lstTasks.SelectedIndex + 1
+            SelectedTask = lstTasks.SelectedIndex
         End If
 
         Quest(Editorindex).Task(SelectedTask).TaskLog = Trim$(txtTaskLog.Text)
@@ -362,7 +362,7 @@ Friend Class frmEditor_Quest
         ReDim tmpRequirementIndex(Quest(Editorindex).ReqCount - 1)
 
        For i = 0 To Quest(Editorindex).ReqCount
-            If Not i = lstRequirements.SelectedIndex + 1 Then
+            If Not i = lstRequirements.SelectedIndex Then
                 tmpRequirement(i) = Quest(Editorindex).Requirement(i)
                 tmpRequirementIndex(i) = Quest(Editorindex).RequirementIndex(i)
             End If
@@ -374,7 +374,7 @@ Friend Class frmEditor_Quest
         ReDim Quest(Editorindex).RequirementIndex(Quest(Editorindex).ReqCount)
 
        For i = 0 To Quest(Editorindex).ReqCount
-            If Not i = lstRequirements.SelectedIndex + 1 Then
+            If Not i = lstRequirements.SelectedIndex Then
                 Quest(Editorindex).Requirement(i) = tmpRequirement(i)
                 Quest(Editorindex).RequirementIndex(i) = tmpRequirementIndex(i)
             End If
@@ -397,7 +397,7 @@ Friend Class frmEditor_Quest
     End Sub
 
     Private Sub LstRequirements_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstRequirements.SelectedIndexChanged
-        LoadRequirement(Editorindex, lstRequirements.SelectedIndex + 1)
+        LoadRequirement(Editorindex, lstRequirements.SelectedIndex)
         fraRequirements.Visible = True
         fraRequirements.BringToFront()
     End Sub
