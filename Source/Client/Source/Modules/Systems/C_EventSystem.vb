@@ -2,7 +2,6 @@
 Imports MirageBasic.Core
 Imports SFML.Graphics
 Imports SFML.System
-Imports SFML.Window
 
 Friend Module C_EventSystem
 
@@ -48,11 +47,8 @@ Friend Module C_EventSystem
     Friend AnotherChat As Integer 'Determines if another showtext/showchoices is comming up, if so, dont close the event chatbox...
 
     'constants
-    Friend Switches(MaxSwitches) As String
-
-    Friend Variables(MaxVariables) As String
-    Friend Const MaxSwitches As Integer = 500
-    Friend Const MaxVariables As Integer = 500
+    Friend Switches(MAX_SWITCHES) As String
+    Friend Variables(NAX_VARIABLES) As String
 
     Friend CpEvent As EventStruct
     Friend EventCopy As Boolean
@@ -64,139 +60,6 @@ Friend Module C_EventSystem
     Friend InEvent As Boolean
     Friend HoldPlayer As Boolean
     Friend InitEventEditorForm As Boolean
-
-#End Region
-
-#Region "Enums"
-
-    Friend Enum MoveRouteOpts
-        MoveUp
-        MoveDown
-        MoveLeft
-        MoveRight
-        MoveRandom
-        MoveTowardsPlayer
-        MoveAwayFromPlayer
-        StepForward
-        StepBack
-        Wait100Ms
-        Wait500Ms
-        Wait1000Ms
-        TurnUp
-        TurnDown
-        TurnLeft
-        TurnRight
-        Turn90Right
-        Turn90Left
-        Turn180
-        TurnRandom
-        TurnTowardPlayer
-        TurnAwayFromPlayer
-        SetSpeed8XSlower
-        SetSpeed4XSlower
-        SetSpeed2XSlower
-        SetSpeedNormal
-        SetSpeed2XFaster
-        SetSpeed4XFaster
-        SetFreqLowest
-        SetFreqLower
-        SetFreqNormal
-        SetFreqHigher
-        SetFreqHighest
-        WalkingAnimOn
-        WalkingAnimOff
-        DirFixOn
-        DirFixOff
-        WalkThroughOn
-        WalkThroughOff
-        PositionBelowPlayer
-        PositionWithPlayer
-        PositionAbovePlayer
-        ChangeGraphic
-    End Enum
-
-    ' Event Types
-    Friend Enum EventType
-
-        ' Message
-        EvAddText
-
-        EvShowText
-        EvShowChoices
-
-        ' Game Progression
-        EvPlayerVar
-
-        EvPlayerSwitch
-        EvSelfSwitch
-
-        ' Flow Control
-        EvCondition
-
-        EvExitProcess
-
-        ' Player
-        EvChangeItems
-
-        EvRestoreHp
-        EvRestoreMp
-        EvLevelUp
-        EvChangeLevel
-        EvChangeSkills
-        EvChangeJob
-        EvChangeSprite
-        EvChangeSex
-        EvChangePk
-
-        ' Movement
-        EvWarpPlayer
-
-        EvSetMoveRoute
-
-        ' Character
-        EvPlayAnimation
-
-        ' Music and Sounds
-        EvPlayBgm
-
-        EvFadeoutBgm
-        EvPlaySound
-        EvStopSound
-
-        'Etc...
-        EvCustomScript
-
-        EvSetAccess
-
-        'Shop/Bank
-        EvOpenBank
-
-        EvOpenShop
-
-        'New
-        EvGiveExp
-
-        EvShowChatBubble
-        EvLabel
-        EvGotoLabel
-        EvSpawnNpc
-        EvFadeIn
-        EvFadeOut
-        EvFlashWhite
-        EvSetFog
-        EvSetWeather
-        EvSetTint
-        EvWait
-        EvOpenMail
-        EvBeginQuest
-        EvEndQuest
-        EvQuestTask
-        EvShowPicture
-        EvHidePicture
-        EvWaitMovement
-        EvHoldPlayer
-        EvReleasePlayer
-    End Enum
 
 #End Region
 
@@ -2286,10 +2149,10 @@ newlist:
     Sub Packet_SwitchesAndVariables(ByRef data() As Byte)
         Dim i As Integer
         Dim buffer As New ByteStream(data)
-        For i = 0 To MaxSwitches
+        For i = 0 To MAX_SWITCHES
             Switches(i) = buffer.ReadString
         Next
-        For i = 0 To MaxVariables
+        For i = 0 To NAX_VARIABLES
             Variables(i) = buffer.ReadString
         Next
 
@@ -2557,10 +2420,10 @@ newlist:
 
         buffer.WriteInt32(ClientPackets.CSwitchesAndVariables)
 
-        For i = 0 To MaxSwitches
+        For i = 0 To MAX_SWITCHES
             buffer.WriteString((Trim$(Switches(i))))
         Next
-        For i = 0 To MaxVariables
+        For i = 0 To NAX_VARIABLES
             buffer.WriteString((Trim$(Variables(i))))
         Next
 
