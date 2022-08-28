@@ -1137,20 +1137,6 @@ Friend Module S_EventLogic
                                             End With
                                         End If
                                     End If
-                                Else
-                                    If Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Pages(TempPlayer(i).EventMap.EventPages(x).PageId).CommandListCount > 0 Then
-                                        'Clearly need to start it!
-                                        TempPlayer(i).EventProcessing(TempPlayer(i).EventMap.EventPages(x).EventId).Active = 1
-                                        With TempPlayer(i).EventProcessing(TempPlayer(i).EventMap.EventPages(x).EventId)
-                                            .ActionTimer = GetTimeMs()
-                                            .CurList = 1
-                                            .CurSlot = 1
-                                            .EventId = TempPlayer(i).EventMap.EventPages(x).EventId
-                                            .PageId = TempPlayer(i).EventMap.EventPages(x).PageId
-                                            .WaitingForResponse = 0
-                                            ReDim .ListLeftOff(Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Pages(TempPlayer(i).EventMap.EventPages(x).PageId).CommandListCount)
-                                        End With
-                                    End If
                                 End If
                             End If
                         End If
