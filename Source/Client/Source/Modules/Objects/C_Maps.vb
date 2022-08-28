@@ -653,7 +653,7 @@ Module C_Maps
                 With Map.Events(i)
                     If .Name = Nothing Then .Name = ""
                     buffer.WriteString((.Name.Trim))
-                    buffer.WriteInt32(.Globals)
+                    buffer.WriteByte(.Globals)
                     buffer.WriteInt32(.X)
                     buffer.WriteInt32(.Y)
                     buffer.WriteInt32(.PageCount)

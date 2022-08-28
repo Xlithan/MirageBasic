@@ -70,7 +70,7 @@ Friend Module C_EventSystem
 #Region "Enums"
 
     Friend Enum MoveRouteOpts
-        MoveUp = 1
+        MoveUp
         MoveDown
         MoveLeft
         MoveRight
@@ -119,7 +119,7 @@ Friend Module C_EventSystem
     Friend Enum EventType
 
         ' Message
-        EvAddText = 1
+        EvAddText
 
         EvShowText
         EvShowChoices
@@ -2337,6 +2337,7 @@ newlist:
                             .GraphicY = buffer.ReadInt32
                             .GraphicX2 = buffer.ReadInt32
                             .GraphicY2 = buffer.ReadInt32
+
                             .MoveType = buffer.ReadByte
                             .MoveSpeed = buffer.ReadByte
                             .MoveFreq = buffer.ReadByte
@@ -2395,8 +2396,9 @@ newlist:
                                             .ConditionalBranch.Data3 = buffer.ReadInt32
                                             .ConditionalBranch.ElseCommandList = buffer.ReadInt32
                                             .MoveRouteCount = buffer.ReadInt32
+
                                             If .MoveRouteCount > 0 Then
-                                                ReDim Preserve .MoveRoute(.MoveRouteCount)
+                                                ReDim .MoveRoute(.MoveRouteCount)
                                                 For w = 0 To .MoveRouteCount
                                                     .MoveRoute(w).Index = buffer.ReadInt32
                                                     .MoveRoute(w).Data1 = buffer.ReadInt32

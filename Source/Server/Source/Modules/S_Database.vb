@@ -286,10 +286,8 @@ Module modDatabase
                         writer.WriteByte(.MoveType)
                         writer.WriteByte(.MoveSpeed)
                         writer.WriteByte(.MoveFreq)
-
                         writer.WriteInt32(.IgnoreMoveRoute)
                         writer.WriteInt32(.RepeatMoveRoute)
-
                         writer.WriteInt32(.MoveRouteCount)
 
                         If .MoveRouteCount > 0 Then

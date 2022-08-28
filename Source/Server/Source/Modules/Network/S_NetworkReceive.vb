@@ -922,7 +922,6 @@ Module S_NetworkReceive
 
         End With
 
-        'Event Data!
         Map(mapNum).EventCount = buffer.ReadInt32
 
         If Map(mapNum).EventCount > 0 Then
@@ -930,7 +929,7 @@ Module S_NetworkReceive
             For i = 0 To Map(mapNum).EventCount
                 With Map(mapNum).Events(i)
                     .Name = buffer.ReadString
-                    .Globals = buffer.ReadInt32
+                    .Globals = buffer.ReadByte
                     .X = buffer.ReadInt32
                     .Y = buffer.ReadInt32
                     .PageCount = buffer.ReadInt32
