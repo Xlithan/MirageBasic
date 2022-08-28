@@ -338,7 +338,7 @@ Friend Class FrmMenu
     ''' Changes selected class.
     ''' </summary>
     Private Sub CmbClass_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJob.SelectedIndexChanged
-        NewCharJob = cmbJob.SelectedIndex
+        NewCharJob = cmbJob.SelectedIndex + 1
         txtDescription.Text = Job(NewCharJob).Desc
         DrawCharacter()
     End Sub

@@ -389,7 +389,7 @@ Module S_NetworkReceive
             slot = buffer.ReadInt32
             Name = buffer.ReadString
             Sex = buffer.ReadInt32
-            Job = buffer.ReadInt32
+            Job = buffer.ReadInt32 + 1
             Sprite = buffer.ReadInt32
 
             ' Prevent hacking
@@ -427,8 +427,6 @@ Module S_NetworkReceive
             ' Everything went ok, add the character
             AddChar(index, slot, Name, Sex, Job, Sprite)
             Addlog("Character " & Name & " added to " & GetPlayerLogin(index) & "'s account.", PLAYER_LOG)
-
-            ' log them in!!
             HandleUseChar(index)
 
             buffer.Dispose()
