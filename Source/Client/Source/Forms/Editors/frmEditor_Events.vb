@@ -1182,7 +1182,7 @@ Public Class FrmEditor_Events
 #Region "Commands"
 
     Private Sub LstCommands_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstCommands.SelectedIndexChanged
-        CurCommand = lstCommands.SelectedIndex
+        CurCommand = lstCommands.SelectedIndex + 1
     End Sub
 
     Private Sub BtnAddCommand_Click(sender As Object, e As EventArgs) Handles btnAddCommand.Click
