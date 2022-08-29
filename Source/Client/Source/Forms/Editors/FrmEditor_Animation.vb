@@ -69,6 +69,13 @@ Friend Class FrmEditor_Animation
     End Sub
 
     Private Sub FrmEditor_Animation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lstIndex.Items.Clear()
+
+        ' Add the names
+        For i = 0 To MAX_ANIMATIONS
+            lstIndex.Items.Add(i & ": " & Trim$(Animation(i).Name))
+        Next
+
         nudSprite0.Maximum = NumAnimations
         nudSprite1.Maximum = NumAnimations
     End Sub

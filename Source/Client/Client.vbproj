@@ -81,8 +81,8 @@
     <Compile Update="Source\Forms\Editors\FrmEditor_Item.Designer.vb">
       <DependentUpon>FrmEditor_Item.vb</DependentUpon>
     </Compile>
-    <Compile Update="Source\Forms\Editors\FrmEditor_MapEditor.designer.vb">
-      <DependentUpon>FrmEditor_MapEditor.vb</DependentUpon>
+    <Compile Update="Source\Forms\Editors\frmEditor_Map.designer.vb">
+      <DependentUpon>frmEditor_Map.vb</DependentUpon>
     </Compile>
     <Compile Update="Source\Forms\Editors\FrmEditor_NPC.Designer.vb">
       <DependentUpon>FrmEditor_NPC.vb</DependentUpon>
@@ -950,7 +950,7 @@
     <ProjectReference Include="..\Core\Core.vbproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Asfw-Networking" Version="1.0.0" />
+    <PackageReference Include="Asfw-NoTCPDelay" Version="1.0.0" />
     <PackageReference Include="DarkUI-NET6" Version="1.0.0" />
     <PackageReference Include="SFML.Audio" Version="2.5.0" />
     <PackageReference Include="SFML.Graphics" Version="2.5.0" />

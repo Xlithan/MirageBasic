@@ -6,9 +6,48 @@ Friend Class frmEditor_NPC
 
     Private Sub FrmEditor_NPC_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         nudSprite.Maximum = NumCharacters
+        lstIndex.Items.Clear()
+
+        ' Add the names
+        For i = 0 To MAX_NPCS
+            lstIndex.Items.Add(i & ": " & Trim$(Npc(i).Name))
+        Next
+
+        'populate combo boxes
+        cmbAnimation.Items.Clear()
+        For i = 0 To MAX_ANIMATIONS
+            cmbAnimation.Items.Add(i & ": " & Animation(i).Name)
+        Next
+
+        cmbQuest.Items.Clear()
+        For i = 0 To MAX_QUESTS
+            cmbQuest.Items.Add(i & ": " & Quest(i).Name)
+        Next
 
         cmbItem.Items.Clear()
-       For i = 0 To MAX_ITEMS
+        For i = 0 To MAX_ITEMS
+            cmbItem.Items.Add(i & ": " & Item(i).Name)
+        Next
+
+        cmbSkill1.Items.Clear()
+        cmbSkill2.Items.Clear()
+        cmbSkill3.Items.Clear()
+        cmbSkill4.Items.Clear()
+        cmbSkill5.Items.Clear()
+        cmbSkill6.Items.Clear()
+
+        For i = 0 To MAX_SKILLS
+            cmbSkill1.Items.Add(Skill(i).Name)
+            cmbSkill2.Items.Add(Skill(i).Name)
+            cmbSkill3.Items.Add(Skill(i).Name)
+            cmbSkill4.Items.Add(Skill(i).Name)
+            cmbSkill5.Items.Add(Skill(i).Name)
+            cmbSkill6.Items.Add(Skill(i).Name)
+        Next
+
+        cmbItem.Items.Clear()
+
+        For i = 0 To MAX_ITEMS
             cmbItem.Items.Add(i & ": " & Item(i).Name)
         Next
     End Sub

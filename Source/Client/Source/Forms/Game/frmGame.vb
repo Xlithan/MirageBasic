@@ -158,7 +158,7 @@ Friend Class FrmGame
         If Not CheckGuiClick(e.X, e.Y, e) Then
 
             If InMapEditor Then
-                FrmEditor_MapEditor.MapEditorMouseDown(e.Button, e.X, e.Y, False)
+                FrmEditor_Map.MapEditorMouseDown(e.Button, e.X, e.Y, False)
             End If
 
             ' left click
@@ -227,7 +227,7 @@ Friend Class FrmGame
 
         If InMapEditor Then
             If e.Button = MouseButtons.Left OrElse e.Button = MouseButtons.Right Then
-                FrmEditor_MapEditor.MapEditorMouseDown(e.Button, e.X, e.Y)
+                FrmEditor_Map.MapEditorMouseDown(e.Button, e.X, e.Y)
             End If
         End If
     End Sub

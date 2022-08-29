@@ -50,7 +50,7 @@ Module C_Resources
 
 #Region "Incoming Packets"
 
-    Sub Packet_ResourceCache(ByRef data() As Byte)
+    Sub Packet_MapResource(ByRef data() As Byte)
         Dim i As Integer
         Dim buffer As New ByteStream(data)
         ResourceIndex = buffer.ReadInt32
@@ -60,14 +60,12 @@ Module C_Resources
             ReDim Preserve MapResource(ResourceIndex)
 
             For i = 0 To ResourceIndex
-                MapResource(i).ResourceState = buffer.ReadInt32
+                MapResource(i).State = buffer.ReadInt32
                 MapResource(i).X = buffer.ReadInt32
                 MapResource(i).Y = buffer.ReadInt32
             Next
 
             ResourcesInit = True
-        Else
-            ReDim MapResource(1)
         End If
 
         buffer.Dispose()
@@ -165,7 +163,7 @@ Module C_Resources
         If Resource(resourceMaster).ResourceImage = 0 Then Exit Sub
 
         ' Get the Resource state
-        resourceState = MapResource(resourceNum).ResourceState
+        resourceState = MapResource(resourceNum).State
 
         If resourceState = 0 Then ' normal
             resourceSprite = Resource(resourceMaster).ResourceImage

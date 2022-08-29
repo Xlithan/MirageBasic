@@ -1689,6 +1689,8 @@ Module S_Players
     Function FindItemSlot(index As Integer, ItemNum As Integer) As Integer
         Dim i As Integer
 
+        FindItemSlot = -1
+
         ' Check for subscript out of range
         If IsPlaying(index) = False OrElse ItemNum <= 0 OrElse ItemNum > MAX_ITEMS Then
             Exit Function
@@ -1817,6 +1819,8 @@ Module S_Players
     Function FindOpenInvSlot(index As Integer, ItemNum As Integer) As Integer
         Dim i As Integer
 
+        FindOpenInvSlot = -1
+
         ' Check for subscript out of range
         If IsPlaying(index) = False OrElse ItemNum <= 0 OrElse ItemNum > MAX_ITEMS Then
             Exit Function
@@ -1824,7 +1828,7 @@ Module S_Players
 
         If Item(ItemNum).Type = ItemType.Currency OrElse Item(ItemNum).Stackable = 1 Then
             ' If currency then check to see if they already have an instance of the item and add it to that
-            For i = 0 To MAX_INV
+            For i = 1 To MAX_INV
                 If GetPlayerInvItemNum(index, i) = ItemNum Then
                     FindOpenInvSlot = i
                     Exit Function
@@ -1832,7 +1836,7 @@ Module S_Players
             Next
         End If
 
-        For i = 0 To MAX_INV
+        For i = 1 To MAX_INV
             ' Try to find an open free slot
             If GetPlayerInvItemNum(index, i) = 0 Then
                 FindOpenInvSlot = i
@@ -2865,9 +2869,10 @@ Module S_Players
         SendUpdatePlayerPet(index, True)
         SendTimeTo(index)
         SendGameClockTo(index)
+        SendResources(index)
 
-        For i = 0 To ResourceCache(GetPlayerMap(index)).ResourceCount
-            SendResourceCacheTo(index, i)
+        For i = 0 To MapResource(GetPlayerMap(index)).ResourceCount
+            SendMapResourceTo(index, i)
         Next
 
         SendTotalOnlineToAll()

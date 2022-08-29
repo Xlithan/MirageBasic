@@ -193,7 +193,7 @@ Friend Module S_Items
 
     Function ItemsData() As Byte()
         Dim buffer As New ByteStream(4)
-       For i = 0 To MAX_ITEMS
+        For i = 0 To MAX_ITEMS
             If Not Len(Trim$(Item(i).Name)) > 0 Then Continue For
             buffer.WriteBlock(ItemData(i))
         Next
@@ -261,7 +261,6 @@ Friend Module S_Items
 #End Region
 
 #Region "Map Items"
-
     Sub SendMapItemsTo(index As Integer, mapNum As Integer)
         Dim i As Integer
         Dim buffer As ByteStream
@@ -313,7 +312,7 @@ Friend Module S_Items
         ' Find open map item slot
         i = FindOpenMapItemSlot(mapNum)
 
-        If i = 0 Then Exit Sub
+        If i = -1 Then Exit Sub
 
         SpawnItemSlot(i, itemNum, ItemVal, mapNum, x, y)
     End Sub
@@ -327,7 +326,7 @@ Friend Module S_Items
 
         i = MapItemSlot
 
-        If i <> 0 Then
+        If i <> -1 Then
             If itemNum >= 0 AndAlso itemNum <= MAX_ITEMS Then
                 MapItem(mapNum, i).Num = itemNum
                 MapItem(mapNum, i).Value = ItemVal
@@ -353,12 +352,13 @@ Friend Module S_Items
 
     Function FindOpenMapItemSlot(mapNum As Integer) As Integer
         Dim i As Integer
-        FindOpenMapItemSlot = 0
+
+        FindOpenMapItemSlot = -1
 
         ' Check for subscript out of range
         If mapNum <= 0 OrElse mapNum > MAX_CACHED_MAPS Then Exit Function
 
-       For i = 0 To MAX_MAP_ITEMS
+       For i = 1 To MAX_MAP_ITEMS
             If MapItem(mapNum, i).Num = 0 Then
                 FindOpenMapItemSlot = i
                 Exit Function

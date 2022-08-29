@@ -764,6 +764,8 @@ Module C_Pets
 
             .nudEvolveLvl.Value = Pet(Editorindex).EvolveLevel
             .cmbEvolve.SelectedIndex = Pet(Editorindex).EvolveNum
+
+            .EditorPet_DrawPet()
         End With
 
         ClearChanged_Pet()

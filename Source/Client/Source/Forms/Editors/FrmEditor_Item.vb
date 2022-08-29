@@ -48,7 +48,13 @@ Friend Class frmEditor_Item
         nudPaperdoll.Maximum = NumPaperdolls
         nudFurniture.Maximum = NumFurniture
         cmbFurnitureType.SelectedIndex = 0
-        nudPic.Maximum = NumItems
+
+        lstIndex.Items.Clear()
+
+        ' Add the names
+        For i = 0 To MAX_ITEMS
+            lstIndex.Items.Add(i & ": " & Trim$(Item(i).Name))
+        Next
 
         If NumPaperdolls > 0 Then
             nudPaperdoll.Maximum = NumPaperdolls + 1

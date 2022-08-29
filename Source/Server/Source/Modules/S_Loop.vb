@@ -260,20 +260,19 @@ Module modLoop
             End If
 
             ' Respawning Resources
-            If ResourceCache Is Nothing Then Exit Sub
-            If ResourceCache(mapNum).ResourceCount > 0 Then
-                For i = 0 To ResourceCache(mapNum).ResourceCount
+            If MapResource(mapNum).ResourceCount > 0 Then
+                For i = 0 To MapResource(mapNum).ResourceCount
 
-                    resourceIndex = Map(mapNum).Tile(ResourceCache(mapNum).ResourceData(i).X, ResourceCache(mapNum).ResourceData(i).Y).Data1
+                    resourceIndex = Map(mapNum).Tile(MapResource(mapNum).ResourceData(i).X, MapResource(mapNum).ResourceData(i).Y).Data1
 
                     If resourceIndex > 0 Then
-                        If ResourceCache(mapNum).ResourceData(i).ResourceState = 1 OrElse ResourceCache(mapNum).ResourceData(i).CurHealth < 1 Then  ' dead or fucked up
-                            If ResourceCache(mapNum).ResourceData(i).ResourceTimer + (Resource(resourceIndex).RespawnTime * 1000) < GetTimeMs() Then
-                                ResourceCache(mapNum).ResourceData(i).ResourceTimer = GetTimeMs()
-                                ResourceCache(mapNum).ResourceData(i).ResourceState = 0 ' normal
+                        If MapResource(mapNum).ResourceData(i).State = 1 OrElse MapResource(mapNum).ResourceData(i).Health < 1 Then  ' dead or fucked up
+                            If MapResource(mapNum).ResourceData(i).Timer + (Resource(resourceIndex).RespawnTime * 1000) < GetTimeMs() Then
+                                MapResource(mapNum).ResourceData(i).Timer = GetTimeMs()
+                                MapResource(mapNum).ResourceData(i).State = 0 ' normal
                                 ' re-set health to resource root
-                                ResourceCache(mapNum).ResourceData(i).CurHealth = Resource(resourceIndex).Health
-                                SendResourceCacheToMap(mapNum, i)
+                                MapResource(mapNum).ResourceData(i).Health = Resource(resourceIndex).Health
+                                SendMapResourceToMap(mapNum, i)
                             End If
                         End If
                     End If

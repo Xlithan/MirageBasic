@@ -26,6 +26,8 @@
     Public MapProjectiles(MAX_PROJECTILES) As MapProjectileStruct
     Public TradeYourOffer(MAX_INV) As PlayerInvStruct
     Public TradeTheirOffer(MAX_INV) As PlayerInvStruct
+    Public Party As PartyStruct
+    Public MapResource() As MapResourceStruct
 
     ' Common data structures
     Public Structure RandInvStruct
@@ -946,5 +948,24 @@
     Public Structure EventListStruct
         Dim CommandList As Integer
         Dim CommandNum As Integer
+    End Structure
+
+    Public Structure PartyStruct
+        Dim Leader As Integer
+        Dim Member() As Integer
+        Dim MemberCount As Integer
+    End Structure
+
+    Public Structure MapResourceStruct
+        Dim ResourceCount As Integer
+        Dim ResourceData() as MapResourceCacheStruct
+    End Structure
+
+    Public Structure MapResourceCacheStruct
+        Dim X As Integer
+        Dim Y As Integer
+        Dim State As Byte
+        Dim Timer As Integer
+        Dim Health As Byte
     End Structure
 End Module

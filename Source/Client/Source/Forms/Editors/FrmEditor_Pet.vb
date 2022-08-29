@@ -6,13 +6,24 @@ Friend Class frmEditor_Pet
 #Region "Basics"
 
     Private Sub FrmEditor_Pet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        EditorPet_DrawPet()
-
         nudSprite.Maximum = NumCharacters
         nudRange.Maximum = 50
         nudLevel.Maximum = MAX_LEVELS
         nudMaxLevel.Maximum = MAX_LEVELS
 
+        lstIndex.Items.Clear()
+
+        ' Add the names
+        For i = 0 To MAX_PETS
+            lstIndex.Items.Add(i & ": " & Trim$(Pet(i).Name))
+        Next
+
+        cmbEvolve.Items.Clear()
+
+        ' Add the names
+        For i = 0 To MAX_PETS
+            cmbEvolve.Items.Add(i & ": " & Trim$(Pet(i).Name))
+        Next
     End Sub
 
     Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click

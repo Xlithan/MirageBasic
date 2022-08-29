@@ -24,7 +24,7 @@ Friend Module C_EventSystem
 
     Friend EditorEvent As Integer
 
-    Friend GraphicSelType As Integer 'Are we selecting a graphic for a move route? A page sprite? What???
+    Friend GraphicSelType As Integer
     Friend TempMoveRouteCount As Integer
     Friend TempMoveRoute() As MoveRouteStruct
     Friend IsMoveRouteCommand As Boolean
@@ -44,13 +44,12 @@ Friend Module C_EventSystem
     Friend EventChoices(4) As String
     Friend EventChoiceVisible(4) As Boolean
     Friend EventChatType As Integer
-    Friend AnotherChat As Integer 'Determines if another showtext/showchoices is comming up, if so, dont close the event chatbox...
+    Friend AnotherChat As Integer
 
     'constants
     Friend Switches(MAX_SWITCHES) As String
     Friend Variables(NAX_VARIABLES) As String
 
-    Friend CpEvent As EventStruct
     Friend EventCopy As Boolean
     Friend EventPaste As Boolean
     Friend EventList() As EventListStruct
@@ -64,8 +63,6 @@ Friend Module C_EventSystem
 #End Region
 
 #Region "EventEditor"
-
-    'Event Editor Stuffz Also includes event functions from the map editor (copy/paste/delete)
     Sub CopyEvent_Map(ByVal X As Integer, ByVal Y As Integer)
         Dim count As Integer, i As Integer
 
@@ -193,17 +190,12 @@ Friend Module C_EventSystem
     End Sub
 
     Sub EventEditorInit(ByVal EventNum As Integer)
-
         EditorEvent = EventNum
-
         TmpEvent = Map.Events(EventNum)
         InitEventEditorForm = True
-
     End Sub
 
     Sub EventEditorLoadPage(ByVal PageNum As Integer)
-        ' populate form
-
         With TmpEvent.Pages(PageNum)
             GraphicSelX = .GraphicX
             GraphicSelY = .GraphicY
@@ -275,10 +267,8 @@ Friend Module C_EventSystem
             Else
                 FrmEditor_Events.btnMoveRoute.Enabled = False
             End If
-            FrmEditor_Events.cmbPositioning.SelectedIndex = Integer.Parse(.Position)
-            ' show the commands
+            FrmEditor_Events.cmbPositioning.SelectedIndex = Integer.Parse(.Position)   
             EventListCommands()
-
             EditorEvent_DrawGraphic()
         End With
 
@@ -286,13 +276,11 @@ Friend Module C_EventSystem
 
     Sub EventEditorOK()
         ' copy the event data from the temp event
-
         Map.Events(EditorEvent) = TmpEvent
         TmpEvent = Nothing
 
         ' unload the form
         FrmEditor_Events.Dispose()
-
     End Sub
 
     Public Sub EventListCommands()
@@ -304,9 +292,10 @@ Friend Module C_EventSystem
             ReDim listleftoff(TmpEvent.Pages(CurPageNum).CommandListCount)
             ReDim conditionalstage(TmpEvent.Pages(CurPageNum).CommandListCount)
             curlist = 1
-            X = -1
+            X = 0
+            ReDim Preserve EventList(X)
 newlist:
-            For i = 0 To TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
+            For i = 1 To TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
                 If listleftoff(curlist) > 0 Then
                     If (TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(listleftoff(curlist)).Index = EventType.EvCondition OrElse TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(listleftoff(curlist)).Index = EventType.EvShowChoices) AndAlso conditionalstage(curlist) <> 0 Then
                         i = listleftoff(curlist)
@@ -317,9 +306,9 @@ newlist:
                 If i <= TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount Then
                     If TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Index = EventType.EvCondition Then
                         X = X + 1
+                        ReDim Preserve EventList(X)
                         Select Case conditionalstage(curlist)
                             Case 0
-                                ReDim Preserve EventList(X)
                                 EventList(X).CommandList = curlist
                                 EventList(X).CommandNum = i
                                 Select Case TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.Condition
@@ -431,7 +420,6 @@ newlist:
                                 curlist = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.CommandList
                                 GoTo newlist
                             Case 1
-                                ReDim Preserve EventList(X)
                                 EventList(X).CommandList = curlist
                                 EventList(X).CommandNum = 0
                                 FrmEditor_Events.lstCommands.Items.Add(Mid(indent, 1, Len(indent) - 4) & " : " & "Else")
@@ -440,7 +428,6 @@ newlist:
                                 curlist = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).ConditionalBranch.ElseCommandList
                                 GoTo newlist
                             Case 2
-                                ReDim Preserve EventList(X)
                                 EventList(X).CommandList = curlist
                                 EventList(X).CommandNum = 0
                                 FrmEditor_Events.lstCommands.Items.Add(Mid(indent, 1, Len(indent) - 4) & " : " & "End Branch")
@@ -476,6 +463,7 @@ newlist:
                                     GoTo newlist
                                 Else
                                     X = X - 1
+                                    ReDim Preserve EventList(X)
                                     listleftoff(curlist) = i
                                     conditionalstage(curlist) = 2
                                     curlist = curlist
@@ -493,6 +481,7 @@ newlist:
                                     GoTo newlist
                                 Else
                                     X = X - 1
+                                    ReDim Preserve EventList(X)
                                     listleftoff(curlist) = i
                                     conditionalstage(curlist) = 3
                                     curlist = curlist
@@ -510,6 +499,7 @@ newlist:
                                     GoTo newlist
                                 Else
                                     X = X - 1
+                                    ReDim Preserve EventList(X)
                                     listleftoff(curlist) = i
                                     conditionalstage(curlist) = 4
                                     curlist = curlist
@@ -527,6 +517,7 @@ newlist:
                                     GoTo newlist
                                 Else
                                     X = X - 1
+                                    ReDim Preserve EventList(X)
                                     listleftoff(curlist) = i
                                     conditionalstage(curlist) = 5
                                     curlist = curlist
@@ -782,6 +773,7 @@ newlist:
                     End If
                 End If
             Next
+
             If curlist > 1 Then
                 X = X + 1
                 ReDim Preserve EventList(X)
@@ -796,64 +788,36 @@ newlist:
 
         Dim z As Integer
         X = 0
-        For i = 0 To FrmEditor_Events.lstCommands.Items.Count - 1
+        For i = 1 To FrmEditor_Events.lstCommands.Items.Count
             If X > z Then z = X
         Next
 
     End Sub
 
     Sub AddCommand(ByVal Index As Integer)
-        Dim curlist As Integer, i As Integer, X As Integer, curslot As Integer, p As Integer, oldCommandList As CommandListStruct
+        Dim curlist As Integer, i As Integer, X As Integer, curslot As Integer, p As Integer
 
         If TmpEvent.Pages(CurPageNum).CommandListCount = 0 Then
             TmpEvent.Pages(CurPageNum).CommandListCount = 1
+        Else
+            TmpEvent.Pages(CurPageNum).CommandListCount = TmpEvent.Pages(CurPageNum).CommandListCount  + 1
         End If
 
-        If FrmEditor_Events.lstCommands.SelectedIndex + 1 = FrmEditor_Events.lstCommands.Items.Count Then
+        If FrmEditor_Events.lstCommands.SelectedIndex = 0 Then
             curlist = 1
         Else
-            curlist = EventList(FrmEditor_Events.lstCommands.SelectedIndex + 1).CommandList
+            curlist = FrmEditor_Events.lstCommands.SelectedIndex + 1
         End If
 
-        ReDim TmpEvent.Pages(CurPageNum).CommandList(curlist)
+        ReDim Preserve TmpEvent.Pages(CurPageNum).CommandList(curlist)
         TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount + 1
-
-        If TmpEvent.Pages(CurPageNum).CommandListCount > 1 Then
-            oldCommandList = TmpEvent.Pages(CurPageNum).CommandList(curlist)     
-        End If
-
-        p = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount        
-
-        If p = 1 Then
-            ReDim TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curlist)
-        Else
-            ReDim TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(p)
-            TmpEvent.Pages(CurPageNum).CommandList(curlist).ParentList = oldCommandList.ParentList
-            TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = p
-            For i = 1 To p - 1
-                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i) = oldCommandList.Commands(i)
-            Next
-        End If
-
-        If FrmEditor_Events.lstCommands.SelectedIndex + 1 = FrmEditor_Events.lstCommands.Items.Count Then
-            curslot = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
-        Else
-            i = EventList(FrmEditor_Events.lstCommands.SelectedIndex + 1).CommandNum
-            If i <= TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount Then
-                For X = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount To i Step -1
-                    TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(X) = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(X)
-                Next
-                curslot = EventList(FrmEditor_Events.lstCommands.SelectedIndex + 1).CommandNum
-            Else
-                curslot = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
-            End If
-        End If
+        ReDim Preserve TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount)
+        curslot = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
 
         Select Case Index
             Case EventType.EvAddText
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Index = Index
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Text1 = FrmEditor_Events.txtAddText_Text.Text
-                'tmpEvent.Pages(curPageNum).CommandList(curlist).Commands(curslot).Data1 = frmEditor_Events.scrlAddText_Colour.Value
                 If FrmEditor_Events.optAddText_Player.Checked = True Then
                     TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data2 = 0
                 ElseIf FrmEditor_Events.optAddText_Map.Checked = True Then
@@ -862,10 +826,8 @@ newlist:
                     TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data2 = 2
                 End If
             Case EventType.EvCondition
-                'This is the part where the whole entire source goes to hell :D
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Index = Index
                 TmpEvent.Pages(CurPageNum).CommandListCount = TmpEvent.Pages(CurPageNum).CommandListCount + 2
-                ReDim Preserve TmpEvent.Pages(CurPageNum).CommandList(TmpEvent.Pages(CurPageNum).CommandListCount)
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.CommandList = TmpEvent.Pages(CurPageNum).CommandListCount - 1
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.ElseCommandList = TmpEvent.Pages(CurPageNum).CommandListCount
                 TmpEvent.Pages(CurPageNum).CommandList(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).ConditionalBranch.CommandList).ParentList = curlist
@@ -1212,7 +1174,7 @@ newlist:
     Public Sub EditEventCommand()
         Dim i As Integer, X As Integer, curlist As Integer, curslot As Integer
 
-        i = FrmEditor_Events.lstCommands.SelectedIndex
+        i = FrmEditor_Events.lstCommands.SelectedIndex + 1
         If i = -1 Then Exit Sub
         If i > UBound(EventList) Then Exit Sub
 
@@ -1225,6 +1187,7 @@ newlist:
         If curslot = 0 Then Exit Sub
         If curlist > TmpEvent.Pages(CurPageNum).CommandListCount Then Exit Sub
         If curslot > TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount Then Exit Sub
+
         Select Case TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Index
             Case EventType.EvAddText
                 IsEdit = True
@@ -1757,15 +1720,18 @@ newlist:
     Public Sub DeleteEventCommand()
         Dim i As Integer, X As Integer, curlist As Integer, curslot As Integer, p As Integer, oldCommandList As CommandListStruct
 
-        i = FrmEditor_Events.lstCommands.SelectedIndex
+        i = FrmEditor_Events.lstCommands.SelectedIndex + 1
         If i = -1 Then Exit Sub
         If i > UBound(EventList) Then Exit Sub
+
         curlist = EventList(i).CommandList
         curslot = EventList(i).CommandNum
+
         If curlist = 0 Then Exit Sub
         If curslot = 0 Then Exit Sub
         If curlist > TmpEvent.Pages(CurPageNum).CommandListCount Then Exit Sub
         If curslot > TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount Then Exit Sub
+
         If curslot = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount Then
             TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount - 1
             p = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
@@ -1810,7 +1776,7 @@ newlist:
     Public Sub ClearEventCommands()
 
         ReDim TmpEvent.Pages(CurPageNum).CommandList(1)
-        TmpEvent.Pages(CurPageNum).CommandListCount = 1
+        TmpEvent.Pages(CurPageNum).CommandListCount = 0
         EventListCommands()
 
     End Sub
@@ -1818,7 +1784,7 @@ newlist:
     Public Sub EditCommand()
         Dim i As Integer, curlist As Integer, curslot As Integer
 
-        i = FrmEditor_Events.lstCommands.SelectedIndex
+        i = FrmEditor_Events.lstCommands.SelectedIndex + 1
         If i = -1 Then Exit Sub
         If i > UBound(EventList) Then Exit Sub
 

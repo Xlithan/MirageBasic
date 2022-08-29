@@ -46,7 +46,7 @@ Module C_NetworkReceive
         Socket.PacketId(ServerPackets.SUpdateSkill) = AddressOf Packet_UpdateSkill
         Socket.PacketId(ServerPackets.SSkills) = AddressOf Packet_Skills
         Socket.PacketId(ServerPackets.SLeftMap) = AddressOf Packet_LeftMap
-        Socket.PacketId(ServerPackets.SResourceCache) = AddressOf Packet_ResourceCache
+        Socket.PacketId(ServerPackets.SMapResource) = AddressOf Packet_MapResource
         Socket.PacketId(ServerPackets.SUpdateResource) = AddressOf Packet_UpdateResource
         Socket.PacketId(ServerPackets.SSendPing) = AddressOf Packet_Ping
         Socket.PacketId(ServerPackets.SDoorAnimation) = AddressOf Packet_DoorAnimation
@@ -74,7 +74,7 @@ Module C_NetworkReceive
         Socket.PacketId(ServerPackets.STradeStatus) = AddressOf Packet_TradeStatus
 
         Socket.PacketId(ServerPackets.SGameData) = AddressOf Packet_GameData
-        Socket.PacketId(ServerPackets.SMapReport) = AddressOf Packet_Mapreport 'Mapreport
+        Socket.PacketId(ServerPackets.SMapReport) = AddressOf Packet_Mapreport
         Socket.PacketId(ServerPackets.STarget) = AddressOf Packet_Target
 
         Socket.PacketId(ServerPackets.SAdmin) = AddressOf Packet_Admin

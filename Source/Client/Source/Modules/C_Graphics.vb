@@ -311,7 +311,7 @@ Module C_Graphics
     Sub InitGraphics()
 
         GameWindow = New RenderWindow(FrmGame.picscreen.Handle)
-        TilesetWindow = New RenderWindow(FrmEditor_MapEditor.picBackSelect.Handle)
+        TilesetWindow = New RenderWindow(FrmEditor_Map.picBackSelect.Handle)
 
         EditorItem_Furniture = New RenderWindow(frmEditor_Item.picFurniture.Handle)
         EditorSkill_Icon = New RenderWindow(frmEditor_Skill.picSprite.Handle)
@@ -1108,8 +1108,6 @@ Module C_Graphics
         ConvertMapY = y - (TileView.Top * PicY) - Camera.Top
     End Function
 
-
-
     Friend Sub DrawPaperdoll(x2 As Integer, y2 As Integer, sprite As Integer, anim As Integer, spritetop As Integer)
         Dim rec As Rectangle
         Dim x As Integer, y As Integer
@@ -1346,8 +1344,14 @@ Module C_Graphics
 
         offsetX = Player(Myindex).XOffset + PicX
         offsetY = Player(Myindex).YOffset + PicY
-        startX = GetPlayerX(Myindex) - ((ScreenMapx + 1) \ 2) - 1
-        startY = GetPlayerY(Myindex) - ((ScreenMapy + 1) \ 2) - 1
+
+        If Settings.CameraType = 1 Then
+            startX = GetPlayerX(Myindex) - ScreenMapx
+            startY = GetPlayerY(Myindex) - ScreenMapy
+        Else
+            startX = Math.Floor(GetPlayerX(MyIndex) - (ScreenMapx \ 2))
+            startY = Math.Floor(GetPlayerY(MyIndex) - (ScreenMapy \ 2))
+        End If
 
         If startX < 0 Then
             offsetX = 0
@@ -1373,8 +1377,8 @@ Module C_Graphics
             startY = 0
         End If
 
-        endX = startX + (ScreenMapx + 1) + 1
-        endY = startY + (ScreenMapy + 1) + 1
+        endX = startX + ScreenMapx
+        endY = startY + ScreenMapy
 
         If endX > Map.MaxX Then
             offsetX = 32
@@ -1411,9 +1415,14 @@ Module C_Graphics
 
         With Camera
             .Y = offsetY
-            .Height = ScreenY + 32
+            If Settings.CameraType = 1 Then
+                .Height = .Top + ScreenY
+                .Width = .Left + ScreenX
+            Else
+                .Height = ScreenY
+                .Width = ScreenX
+            End If
             .X = offsetX
-            .Width = ScreenX + 32
         End With
 
         UpdateDrawMapName()
@@ -1837,7 +1846,7 @@ Module C_Graphics
             DrawGrid()
         End If
 
-        If FrmEditor_MapEditor.tabpages.SelectedTab Is FrmEditor_MapEditor.tpDirBlock Then
+        If FrmEditor_Map.tabpages.SelectedTab Is FrmEditor_Map.tpDirBlock Then
             For x = TileView.Left To TileView.Right
                 For y = TileView.Top To TileView.Bottom
                     If IsValidMapPoint(x, y) Then
@@ -1847,7 +1856,7 @@ Module C_Graphics
             Next
         End If
 
-        If InMapEditor Then FrmEditor_MapEditor.DrawTileOutline()
+        If InMapEditor Then FrmEditor_Map.DrawTileOutline()
 
         'furniture
         If FurnitureSelected > 0 Then
@@ -1910,7 +1919,7 @@ Module C_Graphics
             DrawMapAttributes()
         End If
 
-        If InMapEditor AndAlso FrmEditor_MapEditor.tabpages.SelectedTab Is FrmEditor_MapEditor.tpEvents Then
+        If InMapEditor AndAlso FrmEditor_Map.tabpages.SelectedTab Is FrmEditor_Map.tpEvents Then
             DrawEvents()
             EditorEvent_DrawGraphic()
         End If
@@ -2311,7 +2320,7 @@ Module C_Graphics
             Dim tmpSprite As Sprite = New Sprite(FacesGfx(Player(Myindex).Sprite))
 
             If FacesGfxInfo(Player(Myindex).Sprite).IsLoaded = False Then
-                'LoadTexture(Player(Myindex).Sprite, 7)
+                LoadTexture(Player(Myindex).Sprite, 7)
             End If
 
             'seeying we still use it, lets update timer

@@ -7,22 +7,10 @@ Imports SFML.Window
 
 Module C_Parties
 
-#Region "Types and Globals"
-
-    Friend Party As PartyRec
-
-    Public Structure PartyRec
-        Dim Leader As Integer
-        Dim Member() As Integer
-        Dim MemberCount As Integer
-    End Structure
-
-#End Region
-
 #Region "Database"
 
     Sub ClearParty()
-        Party = New PartyRec With {
+        Party = New PartyStruct With {
             .Leader = 0,
             .MemberCount = 0
         }
