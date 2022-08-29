@@ -426,59 +426,61 @@ Module C_Editors
     Friend Sub JobEditorInit()
         Dim i As Integer
 
-        Editorindex = frmEditor_Job.lstIndex.SelectedIndex
+        With frmEditor_Job
+            Editorindex = .lstIndex.SelectedIndex
 
-        frmEditor_Job.txtName.Text = Job(Editorindex).Name
-        frmEditor_Job.txtDescription.Text = Job(Editorindex).Desc
+            .txtName.Text = Job(Editorindex).Name
+            .txtDescription.Text = Job(Editorindex).Desc
 
-        frmEditor_Job.cmbMaleSprite.Items.Clear()
+            .cmbMaleSprite.Items.Clear()
 
-        For i = 0 To UBound(Job(Editorindex).MaleSprite)
-            frmEditor_Job.cmbMaleSprite.Items.Add("Sprite " & i + 1)
-        Next
+            For i = 0 To UBound(Job(Editorindex).MaleSprite)
+                .cmbMaleSprite.Items.Add("Sprite " & i + 1)
+            Next
 
-        frmEditor_Job.cmbFemaleSprite.Items.Clear()
+            .cmbFemaleSprite.Items.Clear()
 
-        For i = 0 To UBound(Job(Editorindex).FemaleSprite)
-            frmEditor_Job.cmbFemaleSprite.Items.Add("Sprite " & i + 1)
-        Next
+            For i = 0 To UBound(Job(Editorindex).FemaleSprite)
+                .cmbFemaleSprite.Items.Add("Sprite " & i + 1)
+            Next
 
-        frmEditor_Job.nudMaleSprite.Value = Job(Editorindex).MaleSprite(0)
-        frmEditor_Job.nudFemaleSprite.Value = Job(Editorindex).FemaleSprite(0)
+            .nudMaleSprite.Value = Job(Editorindex).MaleSprite(0)
+            .nudFemaleSprite.Value = Job(Editorindex).FemaleSprite(0)
 
-        frmEditor_Job.cmbMaleSprite.SelectedIndex = 0
-        frmEditor_Job.cmbFemaleSprite.SelectedIndex = 0
+            .cmbMaleSprite.SelectedIndex = 0
+            .cmbFemaleSprite.SelectedIndex = 0
 
-        frmEditor_Job.DrawPreview()
+            .DrawPreview()
 
-        For i = 0 To StatType.Count - 1
-            If Job(Editorindex).Stat(i) = 0 Then Job(Editorindex).Stat(i) = 1
-        Next
+            For i = 0 To StatType.Count - 1
+                If Job(Editorindex).Stat(i) = 0 Then Job(Editorindex).Stat(i) = 1
+            Next
 
-        frmEditor_Job.nudStrength.Value = Job(Editorindex).Stat(StatType.Strength)
-        frmEditor_Job.nudLuck.Value = Job(Editorindex).Stat(StatType.Luck)
-        frmEditor_Job.nudEndurance.Value = Job(Editorindex).Stat(StatType.Endurance)
-        frmEditor_Job.nudIntelligence.Value = Job(Editorindex).Stat(StatType.Intelligence)
-        frmEditor_Job.nudVitality.Value = Job(Editorindex).Stat(StatType.Vitality)
-        frmEditor_Job.nudSpirit.Value = Job(Editorindex).Stat(StatType.Spirit)
+            .nudStrength.Value = Job(Editorindex).Stat(StatType.Strength)
+            .nudLuck.Value = Job(Editorindex).Stat(StatType.Luck)
+            .nudEndurance.Value = Job(Editorindex).Stat(StatType.Endurance)
+            .nudIntelligence.Value = Job(Editorindex).Stat(StatType.Intelligence)
+            .nudVitality.Value = Job(Editorindex).Stat(StatType.Vitality)
+            .nudSpirit.Value = Job(Editorindex).Stat(StatType.Spirit)
 
-        If Job(Editorindex).BaseExp < 10 Then
-            frmEditor_Job.nudBaseExp.Value = 10
-        Else
-            frmEditor_Job.nudBaseExp.Value = Job(Editorindex).BaseExp
-        End If
-
-        frmEditor_Job.lstStartItems.Items.Clear()
-
-       For i = 0 To MAX_DROP_ITEMS
-            If Job(Editorindex).StartItem(i) > 0 Then
-                frmEditor_Job.lstStartItems.Items.Add(Item(Job(Editorindex).StartItem(i)).Name & " X " & Job(Editorindex).StartValue(i))
+            If Job(Editorindex).BaseExp < 10 Then
+                .nudBaseExp.Value = 10
+            Else
+                .nudBaseExp.Value = Job(Editorindex).BaseExp
             End If
-        Next
 
-        frmEditor_Job.nudStartMap.Value = Job(Editorindex).StartMap
-        frmEditor_Job.nudStartX.Value = Job(Editorindex).StartX
-        frmEditor_Job.nudStartY.Value = Job(Editorindex).StartY
+            .lstStartItems.Items.Clear()
+
+           For i = 0 To MAX_DROP_ITEMS
+                If Job(Editorindex).StartItem(i) > 0 Then
+                    .lstStartItems.Items.Add(Item(Job(Editorindex).StartItem(i)).Name & " X " & Job(Editorindex).StartValue(i))
+                End If
+            Next
+
+            .nudStartMap.Value = Job(Editorindex).StartMap
+            .nudStartX.Value = Job(Editorindex).StartX
+            .nudStartY.Value = Job(Editorindex).StartY
+        End With
     End Sub
 
 #End Region

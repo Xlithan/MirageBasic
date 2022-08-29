@@ -9,7 +9,22 @@ Friend Class frmEditor_Job
         nudMaleSprite.Maximum = NumCharacters
         nudFemaleSprite.Maximum = NumCharacters
 
-        DrawPreview()
+        lstIndex.Items.Clear() 
+
+        For i = 0 To MAX_JOBS
+            lstIndex.Items.Add(Trim(Job(i).Name))
+        Next
+
+        Editor = EDITOR_Job
+
+        nudMaleSprite.Maximum = NumCharacters
+        nudFemaleSprite.Maximum = NumCharacters
+
+        cmbItems.Items.Clear()
+
+        For i = 0 To MAX_ITEMS
+            cmbItems.Items.Add(Trim(Item(i).Name))
+        Next
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click

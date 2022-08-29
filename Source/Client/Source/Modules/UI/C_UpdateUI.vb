@@ -365,7 +365,6 @@ Module C_UpdateUI
             FrmGame.Visible = Frmmaingamevisible
         End If
 
-
         If InitPetEditor = True Then
             With frmEditor_Pet
                 Editor = EDITOR_PET
@@ -419,23 +418,6 @@ Module C_UpdateUI
 
         If InitJobEditor = True Then
             With frmEditor_Job
-                .lstIndex.Items.Clear() 
-
-                For i = 0 To MAX_JOBS
-                    .lstIndex.Items.Add(Trim(Job(i).Name))
-                Next
-
-                Editor = EDITOR_Job
-
-                .nudMaleSprite.Maximum = NumCharacters
-                .nudFemaleSprite.Maximum = NumCharacters
-
-                .cmbItems.Items.Clear()
-
-                For i = 0 To MAX_ITEMS
-                    .cmbItems.Items.Add(Trim(Item(i).Name))
-                Next
-
                 .Show()
                 .lstIndex.SelectedIndex = 1
                 JobEditorInit()
