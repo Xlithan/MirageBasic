@@ -240,7 +240,7 @@
         SUpdateSkill
         SSkills
         SLeftMap
-        SResourceCache
+        SMapResource
         SResourceEditor
         SUpdateResource
         SSendPing

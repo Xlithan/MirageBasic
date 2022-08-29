@@ -81,8 +81,8 @@
     <Compile Update="Source\Forms\Editors\FrmEditor_Item.Designer.vb">
       <DependentUpon>FrmEditor_Item.vb</DependentUpon>
     </Compile>
-    <Compile Update="Source\Forms\Editors\FrmEditor_MapEditor.designer.vb">
-      <DependentUpon>FrmEditor_MapEditor.vb</DependentUpon>
+    <Compile Update="Source\Forms\Editors\frmEditor_Map.designer.vb">
+      <DependentUpon>frmEditor_Map.vb</DependentUpon>
     </Compile>
     <Compile Update="Source\Forms\Editors\FrmEditor_NPC.Designer.vb">
       <DependentUpon>FrmEditor_NPC.vb</DependentUpon>

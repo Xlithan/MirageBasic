@@ -311,7 +311,7 @@ Module C_Graphics
     Sub InitGraphics()
 
         GameWindow = New RenderWindow(FrmGame.picscreen.Handle)
-        TilesetWindow = New RenderWindow(FrmEditor_MapEditor.picBackSelect.Handle)
+        TilesetWindow = New RenderWindow(FrmEditor_Map.picBackSelect.Handle)
 
         EditorItem_Furniture = New RenderWindow(frmEditor_Item.picFurniture.Handle)
         EditorSkill_Icon = New RenderWindow(frmEditor_Skill.picSprite.Handle)
@@ -1846,7 +1846,7 @@ Module C_Graphics
             DrawGrid()
         End If
 
-        If FrmEditor_MapEditor.tabpages.SelectedTab Is FrmEditor_MapEditor.tpDirBlock Then
+        If FrmEditor_Map.tabpages.SelectedTab Is FrmEditor_Map.tpDirBlock Then
             For x = TileView.Left To TileView.Right
                 For y = TileView.Top To TileView.Bottom
                     If IsValidMapPoint(x, y) Then
@@ -1856,7 +1856,7 @@ Module C_Graphics
             Next
         End If
 
-        If InMapEditor Then FrmEditor_MapEditor.DrawTileOutline()
+        If InMapEditor Then FrmEditor_Map.DrawTileOutline()
 
         'furniture
         If FurnitureSelected > 0 Then
@@ -1919,7 +1919,7 @@ Module C_Graphics
             DrawMapAttributes()
         End If
 
-        If InMapEditor AndAlso FrmEditor_MapEditor.tabpages.SelectedTab Is FrmEditor_MapEditor.tpEvents Then
+        If InMapEditor AndAlso FrmEditor_Map.tabpages.SelectedTab Is FrmEditor_Map.tpEvents Then
             DrawEvents()
             EditorEvent_DrawGraphic()
         End If

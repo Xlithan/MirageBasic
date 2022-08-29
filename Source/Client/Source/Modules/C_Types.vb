@@ -36,7 +36,7 @@ Module C_Types2
     Public Structure MapResourceRec
         Dim X As Integer
         Dim Y As Integer
-        Dim ResourceState As Byte
+        Dim State As Byte
     End Structure
 
     Public Structure ActionMsgRec

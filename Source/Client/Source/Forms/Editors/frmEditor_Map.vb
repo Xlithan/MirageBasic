@@ -5,13 +5,12 @@ Imports SFML.Window
 Imports MirageBasic.Core
 Imports SFML.System
 
-Public Class FrmEditor_MapEditor
+Public Class frmEditor_Map
     Dim picbacktop As Integer, picbackleft As Integer
 #Region "Frm"
 
     Private Sub FrmEditor_Map_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         cmbTileSets.SelectedIndex = 0
-        EditorMap_DrawTileset()
         pnlAttributes.BringToFront()
         pnlAttributes.Visible = False
         pnlAttributes.Left = 4
@@ -631,9 +630,6 @@ Public Class FrmEditor_MapEditor
             cmbParallax.Items.Add("Parallax" & i)
         Next
 
-        ' render the tiles
-        EditorMap_DrawTileset()
-
         tabpages.SelectedIndex = 0
 
         ' show the form
@@ -1238,10 +1234,6 @@ Public Class FrmEditor_MapEditor
             Me.picMapKey.BackgroundImage = Drawing.Image.FromFile(Paths.Graphics & "items\" & itemnum & GfxExt)
         End If
 
-    End Sub
-
-    Private Sub FrmEditor_MapEditor_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
-        MapEditorCancel()
     End Sub
 
     Private Sub cmbTileSets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTileSets.SelectedIndexChanged

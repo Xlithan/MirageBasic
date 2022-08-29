@@ -152,11 +152,7 @@ Module C_Maps
                 Next
             Next
 
-            ReDim Map.Events(MAX_EVENTS)
-
-            For x = 0 To MAX_EVENTS
-                Map.Events(x).Name = ""
-            Next
+            ClearMapEvents
 
         End SyncLock
 
@@ -237,7 +233,7 @@ Module C_Maps
         ClearMapItems()
         ClearBlood()
         ClearMap()
-        ClearMapEveents()
+        ClearMapEvents()
 
         ' Get map num
         x = buffer.ReadInt32
@@ -464,17 +460,13 @@ Module C_Maps
                 ResourcesInit = False
 
                 If ResourceIndex > 0 Then
-                    ReDim MapResource(ResourceIndex)
-
                     For i = 0 To ResourceIndex
-                        MapResource(i).ResourceState = buffer.ReadInt32
+                        MapResource(i).State = buffer.ReadInt32
                         MapResource(i).X = buffer.ReadInt32
                         MapResource(i).Y = buffer.ReadInt32
                     Next
 
                     ResourcesInit = True
-                Else
-                    ReDim MapResource(1)
                 End If
             End If
 
@@ -784,7 +776,7 @@ Module C_Maps
         buffer.Dispose()
     End Sub
 
-    Friend Sub ClearMapEveents()
+    Friend Sub ClearMapEvents()
         ReDim Map.MapEvents(MAX_EVENTS)
 
         For i = 1 To MAX_EVENTS

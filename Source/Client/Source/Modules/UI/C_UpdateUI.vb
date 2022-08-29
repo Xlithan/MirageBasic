@@ -661,25 +661,24 @@ Module C_UpdateUI
         End If
 
         If InitMapEditor = True Then
-            FrmEditor_MapEditor.MapEditorInit()
+            FrmEditor_Map.MapEditorInit()
             InitMapEditor = False
         End If
 
         If InitMapProperties = True Then
-            FrmEditor_MapEditor.MapPropertiesInit()
+            FrmEditor_Map.MapPropertiesInit()
             InitMapProperties = False
         End If
 
         If InitEventEditorForm = True Then
             ' populate form
-            With FrmEditor_Events               
+            With FrmEditor_Events     
                 .Show()
             End With
             InitEventEditorForm = False
         End If
 
         If OptionsVisible = True Then
-
             ' show in GUI
             If Settings.Music = true Then
                 FrmOptions.optMOn.Checked = True
@@ -709,7 +708,6 @@ Module C_UpdateUI
             Else
                 FrmOptions.chkNpcBars.Checked = False
             End If
-
 
             FrmOptions.Visible = True
             OptionsVisible = False

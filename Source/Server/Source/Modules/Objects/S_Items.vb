@@ -193,7 +193,7 @@ Friend Module S_Items
 
     Function ItemsData() As Byte()
         Dim buffer As New ByteStream(4)
-       For i = 0 To MAX_ITEMS
+        For i = 0 To MAX_ITEMS
             If Not Len(Trim$(Item(i).Name)) > 0 Then Continue For
             buffer.WriteBlock(ItemData(i))
         Next
@@ -261,7 +261,6 @@ Friend Module S_Items
 #End Region
 
 #Region "Map Items"
-
     Sub SendMapItemsTo(index As Integer, mapNum As Integer)
         Dim i As Integer
         Dim buffer As ByteStream

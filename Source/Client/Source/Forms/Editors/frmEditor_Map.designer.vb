@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class FrmEditor_MapEditor
+Partial Class frmEditor_Map
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class FrmEditor_MapEditor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmEditor_MapEditor))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEditor_Map))
         Me.optHouse = New System.Windows.Forms.RadioButton()
         Me.btnClearAttribute = New System.Windows.Forms.Button()
         Me.optTrap = New System.Windows.Forms.RadioButton()
@@ -1992,20 +1992,21 @@ Partial Class FrmEditor_MapEditor
         Me.cmbWeather.Size = New System.Drawing.Size(168, 23)
         Me.cmbWeather.TabIndex = 0
         '
-        'FrmEditor_MapEditor
+        'frmEditor_Map
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = true
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(552, 650)
+        Me.ControlBox = false
         Me.Controls.Add(Me.tabpages)
         Me.Controls.Add(Me.ToolStrip)
         Me.Controls.Add(Me.pnlAttributes)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.MaximizeBox = false
-        Me.Name = "FrmEditor_MapEditor"
+        Me.Name = "frmEditor_Map"
         Me.Text = "Map Editor"
         Me.pnlBack.ResumeLayout(false)
         CType(Me.picBackSelect,System.ComponentModel.ISupportInitialize).EndInit

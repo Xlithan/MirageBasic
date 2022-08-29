@@ -9,20 +9,6 @@ Friend Module S_Resources
 #Region "Globals & Types"
 
     Friend SkillExpTable(100) As Integer
-    Friend ResourceCache(MAX_CACHED_MAPS) As ResourceCacheRec
-
-    Public Structure MapResourceRec
-        Dim ResourceState As Byte
-        Dim ResourceTimer As Integer
-        Dim X As Integer
-        Dim Y As Integer
-        Dim CurHealth As Byte
-    End Structure
-
-    Public Structure ResourceCacheRec
-        Dim ResourceCount As Integer
-        Dim ResourceData() As MapResourceRec
-    End Structure
 
 #End Region
 
@@ -121,6 +107,9 @@ Friend Module S_Resources
     End Sub
 
     Sub ClearResources()
+        ReDim MapResource(MAX_CACHED_MAPS)
+        ReDim MapResource(MAX_CACHED_MAPS).ResourceData(MAX_RESOURCES)
+
         For i = 0 To MAX_RESOURCES
             ClearResource(i)
         Next
@@ -128,23 +117,22 @@ Friend Module S_Resources
 
     Friend Sub CacheResources(mapNum As Integer)
         Dim x As Integer, y As Integer, Resource_Count As Integer
-        Resource_Count = 0
 
         For X = 0 To Map(mapNum).MaxX
             For Y = 0 To Map(mapNum).MaxY
 
                 If Map(mapNum).Tile(x, y).Type = TileType.Resource Then
                     Resource_Count += 1
-                    ReDim Preserve ResourceCache(mapNum).ResourceData(Resource_Count)
-                    ResourceCache(mapNum).ResourceData(Resource_Count).X = x
-                    ResourceCache(mapNum).ResourceData(Resource_Count).Y = y
-                    ResourceCache(mapNum).ResourceData(Resource_Count).CurHealth = Resource(Map(mapNum).Tile(x, y).Data1).Health
+                    ReDim Preserve MapResource(mapNum).ResourceData(Resource_Count)
+                    MapResource(mapNum).ResourceData(Resource_Count).X = x
+                    MapResource(mapNum).ResourceData(Resource_Count).Y = y
+                    MapResource(mapNum).ResourceData(Resource_Count).Health = Resource(Map(mapNum).Tile(x, y).Data1).Health
                 End If
 
             Next
         Next
 
-        ResourceCache(mapNum).ResourceCount = Resource_Count
+        MapResource(mapNum).ResourceCount = Resource_Count
     End Sub
 
     Function ResourcesData() As Byte()
@@ -353,23 +341,23 @@ Friend Module S_Resources
 
 #Region "Outgoing Packets"
 
-    Sub SendResourceCacheTo(index As Integer, Resource_num As long)
+    Sub SendMapResourceTo(index As Integer, Resource_num As long)
         Dim i As Integer, mapnum As Integer
         Dim buffer As New ByteStream(4)
 
         mapnum = GetPlayerMap(index)
 
-        buffer.WriteInt32(ServerPackets.SResourceCache)
-        buffer.WriteInt32(ResourceCache(mapnum).ResourceCount)
+        buffer.WriteInt32(ServerPackets.SMapResource)
+        buffer.WriteInt32(MapResource(mapnum).ResourceCount)
 
         AddDebug("Sent SMSG: SResourcesCache")
 
-        If ResourceCache(mapnum).ResourceCount > 0 Then
+        If MapResource(mapnum).ResourceCount > 0 Then
 
-            For i = 0 To ResourceCache(mapnum).ResourceCount
-                buffer.WriteInt32(ResourceCache(mapnum).ResourceData(i).ResourceState)
-                buffer.WriteInt32(ResourceCache(mapnum).ResourceData(i).X)
-                buffer.WriteInt32(ResourceCache(mapnum).ResourceData(i).Y)
+            For i = 0 To MapResource(mapnum).ResourceCount
+                buffer.WriteInt32(MapResource(mapnum).ResourceData(i).State)
+                buffer.WriteInt32(MapResource(mapnum).ResourceData(i).X)
+                buffer.WriteInt32(MapResource(mapnum).ResourceData(i).Y)
             Next
 
         End If
@@ -378,21 +366,21 @@ Friend Module S_Resources
         buffer.Dispose()
     End Sub
 
-    Sub SendResourceCacheToMap(mapNum As Integer, Resource_num As Integer)
+    Sub SendMapResourceToMap(mapNum As Integer, Resource_num As Integer)
         Dim i As Integer
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ServerPackets.SResourceCache)
-        buffer.WriteInt32(ResourceCache(mapNum).ResourceCount)
+        buffer.WriteInt32(ServerPackets.SMapResource)
+        buffer.WriteInt32(MapResource(mapNum).ResourceCount)
 
-        AddDebug("Sent SMSG: SResourceCache")
+        AddDebug("Sent SMSG: SMapResource")
 
-        If ResourceCache(mapNum).ResourceCount > 0 Then
+        If MapResource(mapNum).ResourceCount > 0 Then
 
-            For i = 0 To ResourceCache(mapNum).ResourceCount
-                buffer.WriteInt32(ResourceCache(mapNum).ResourceData(i).ResourceState)
-                buffer.WriteInt32(ResourceCache(mapNum).ResourceData(i).X)
-                buffer.WriteInt32(ResourceCache(mapNum).ResourceData(i).Y)
+            For i = 0 To MapResource(mapNum).ResourceCount
+                buffer.WriteInt32(MapResource(mapNum).ResourceData(i).State)
+                buffer.WriteInt32(MapResource(mapNum).ResourceData(i).X)
+                buffer.WriteInt32(MapResource(mapNum).ResourceData(i).Y)
             Next
 
         End If
@@ -456,9 +444,9 @@ Friend Module S_Resources
             ResourceType = Resource(Resource_index).ResourceType
 
             ' Get the cache number
-            For i = 0 To ResourceCache(GetPlayerMap(index)).ResourceCount
-                If ResourceCache(GetPlayerMap(index)).ResourceData(i).X = x Then
-                    If ResourceCache(GetPlayerMap(index)).ResourceData(i).Y = y Then
+            For i = 0 To MapResource(GetPlayerMap(index)).ResourceCount
+                If MapResource(GetPlayerMap(index)).ResourceData(i).X = x Then
+                    If MapResource(GetPlayerMap(index)).ResourceData(i).Y = y Then
                         Resource_num = i
                     End If
                 End If
@@ -483,10 +471,10 @@ Friend Module S_Resources
                         End If
 
                         ' check if already cut down
-                        If ResourceCache(GetPlayerMap(index)).ResourceData(Resource_num).ResourceState = 0 Then
+                        If MapResource(GetPlayerMap(index)).ResourceData(Resource_num).State = 0 Then
 
-                            rX = ResourceCache(GetPlayerMap(index)).ResourceData(Resource_num).X
-                            rY = ResourceCache(GetPlayerMap(index)).ResourceData(Resource_num).Y
+                            rX = MapResource(GetPlayerMap(index)).ResourceData(Resource_num).X
+                            rY = MapResource(GetPlayerMap(index)).ResourceData(Resource_num).Y
 
                             If Resource(Resource_index).ToolRequired = 0 Then
                                 Damage = 1 * GetPlayerGatherSkillLvl(index, ResourceType)
@@ -497,10 +485,10 @@ Friend Module S_Resources
                             ' check if damage is more than health
                             If Damage > 0 Then
                                 ' cut it down!
-                                If ResourceCache(GetPlayerMap(index)).ResourceData(Resource_num).CurHealth - Damage <= 0 Then
-                                    ResourceCache(GetPlayerMap(index)).ResourceData(Resource_num).ResourceState = 1 ' Cut
-                                    ResourceCache(GetPlayerMap(index)).ResourceData(Resource_num).ResourceTimer = GetTimeMs()
-                                    SendResourceCacheToMap(GetPlayerMap(index), Resource_num)
+                                If MapResource(GetPlayerMap(index)).ResourceData(Resource_num).Health - Damage <= 0 Then
+                                    MapResource(GetPlayerMap(index)).ResourceData(Resource_num).State = 1 ' Cut
+                                    MapResource(GetPlayerMap(index)).ResourceData(Resource_num).Timer = GetTimeMs()
+                                    SendMapResourceToMap(GetPlayerMap(index), Resource_num)
                                     SendActionMsg(GetPlayerMap(index), Trim$(Resource(Resource_index).SuccessMessage), ColorType.BrightGreen, 1, (GetPlayerX(index) * 32), (GetPlayerY(index) * 32))
                                     GiveInvItem(index, Resource(Resource_index).ItemReward, 1)
                                     SendAnimation(GetPlayerMap(index), Resource(Resource_index).Animation, rX, rY)
@@ -512,7 +500,7 @@ Friend Module S_Resources
                                     CheckResourceLevelUp(index, ResourceType)
                                 Else
                                     ' just do the damage
-                                    ResourceCache(GetPlayerMap(index)).ResourceData(Resource_num).CurHealth = ResourceCache(GetPlayerMap(index)).ResourceData(Resource_num).CurHealth - Damage
+                                    MapResource(GetPlayerMap(index)).ResourceData(Resource_num).Health = MapResource(GetPlayerMap(index)).ResourceData(Resource_num).Health - Damage
                                     SendActionMsg(GetPlayerMap(index), "-" & Damage, ColorType.BrightRed, 1, (rX * 32), (rY * 32))
                                     SendAnimation(GetPlayerMap(index), Resource(Resource_index).Animation, rX, rY)
                                 End If

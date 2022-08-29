@@ -2404,15 +2404,13 @@ Module S_NetworkReceive
                 SendHouseConfigs(index)
                 SendPets(index)
             Else
-                AlertMsg(index, "not authorized.")
+                AlertMsg(index, "Not authorized.")
                 Exit Sub
             End If
 
             ' Show the player up on the socket status
             Addlog(GetPlayerLogin(index) & " has logged in from " & Socket.ClientIp(index) & ".", PLAYER_LOG)
-
             Console.WriteLine(GetPlayerLogin(index) & " has logged in from " & Socket.ClientIp(index) & ".")
-
         End If
 
         buffer.Dispose()

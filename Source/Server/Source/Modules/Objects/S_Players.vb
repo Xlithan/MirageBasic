@@ -2869,9 +2869,10 @@ Module S_Players
         SendUpdatePlayerPet(index, True)
         SendTimeTo(index)
         SendGameClockTo(index)
+        SendResources(index)
 
-        For i = 0 To ResourceCache(GetPlayerMap(index)).ResourceCount
-            SendResourceCacheTo(index, i)
+        For i = 0 To MapResource(GetPlayerMap(index)).ResourceCount
+            SendMapResourceTo(index, i)
         Next
 
         SendTotalOnlineToAll()

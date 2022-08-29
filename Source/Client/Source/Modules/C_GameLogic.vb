@@ -267,7 +267,7 @@ Module C_GameLogic
                         FadeOut()
                     End If
 
-                    If InMapEditor Then FrmEditor_MapEditor.EditorMap_DrawTileset()
+                    If InMapEditor Then FrmEditor_Map.EditorMap_DrawTileset()
 
                     Application.DoEvents()
 
