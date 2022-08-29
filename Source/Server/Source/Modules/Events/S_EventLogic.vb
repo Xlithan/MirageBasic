@@ -12,6 +12,7 @@ Friend Module S_EventLogic
                 For x = 1 To TempPlayer(i).EventMap.CurrentEvents
                     id = TempPlayer(i).EventMap.EventPages(x).EventId
                     page = TempPlayer(i).EventMap.EventPages(x).PageId
+                    If id > x Then Exit For
 
                     If Map(mapNum).Events(id).PageCount >= page Then
                         'See if there is any reason to delete this event....
