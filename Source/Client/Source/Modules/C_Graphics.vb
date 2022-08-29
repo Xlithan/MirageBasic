@@ -2311,7 +2311,7 @@ Module C_Graphics
             Dim tmpSprite As Sprite = New Sprite(FacesGfx(Player(Myindex).Sprite))
 
             If FacesGfxInfo(Player(Myindex).Sprite).IsLoaded = False Then
-                'LoadTexture(Player(Myindex).Sprite, 7)
+                LoadTexture(Player(Myindex).Sprite, 7)
             End If
 
             'seeying we still use it, lets update timer
