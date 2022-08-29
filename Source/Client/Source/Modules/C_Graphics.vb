@@ -1108,8 +1108,6 @@ Module C_Graphics
         ConvertMapY = y - (TileView.Top * PicY) - Camera.Top
     End Function
 
-
-
     Friend Sub DrawPaperdoll(x2 As Integer, y2 As Integer, sprite As Integer, anim As Integer, spritetop As Integer)
         Dim rec As Rectangle
         Dim x As Integer, y As Integer
@@ -1346,8 +1344,14 @@ Module C_Graphics
 
         offsetX = Player(Myindex).XOffset + PicX
         offsetY = Player(Myindex).YOffset + PicY
-        startX = GetPlayerX(Myindex) - ((ScreenMapx) \ 2)
-        startY = GetPlayerY(Myindex) - ((ScreenMapy) \ 2)
+
+        If Settings.CameraType = 1 Then
+            startX = GetPlayerX(Myindex) - ScreenMapx
+            startY = GetPlayerY(Myindex) - ScreenMapy
+        Else
+            startX = GetPlayerX(MyIndex) - (ScreenMapx \ 2)
+            startY = GetPlayerY(MyIndex) - (ScreenMapy \ 2)
+        End If
 
         If startX < 0 Then
             offsetX = 0
@@ -1373,8 +1377,8 @@ Module C_Graphics
             startY = 0
         End If
 
-        endX = startX + (ScreenMapx + 1) + 1
-        endY = startY + (ScreenMapy + 1) + 1
+        endX = startX + ScreenMapx
+        endY = startY + ScreenMapy
 
         If endX > Map.MaxX Then
             offsetX = 32
@@ -1411,9 +1415,14 @@ Module C_Graphics
 
         With Camera
             .Y = offsetY
-            .Height = ScreenY + 32
+            If Settings.CameraType = 1 Then
+                .Height = .Top + ScreenY
+                .Width = .Left + ScreenX
+            Else
+                .Height = ScreenY
+                .Width = ScreenX
+            End If
             .X = offsetX
-            .Width = ScreenX + 32
         End With
 
         UpdateDrawMapName()

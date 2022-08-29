@@ -18,6 +18,7 @@ Public Class SettingsDef
     Public ScreenSize As Byte = 0
     Public HighEnd As Byte = 0
     Public ShowNpcBar As Byte = 1
+    Public CameraType As Byte = 0
 
     <XmlIgnore()> Public Ip As String = "127.0.0.1"
     <XmlIgnore()> Public Port As Integer = 7001
