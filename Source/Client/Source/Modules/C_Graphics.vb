@@ -1346,8 +1346,8 @@ Module C_Graphics
 
         offsetX = Player(Myindex).XOffset + PicX
         offsetY = Player(Myindex).YOffset + PicY
-        startX = GetPlayerX(Myindex) - ((ScreenMapx + 1) \ 2) - 1
-        startY = GetPlayerY(Myindex) - ((ScreenMapy + 1) \ 2) - 1
+        startX = GetPlayerX(Myindex) - ((ScreenMapx) \ 2)
+        startY = GetPlayerY(Myindex) - ((ScreenMapy) \ 2)
 
         If startX < 0 Then
             offsetX = 0
