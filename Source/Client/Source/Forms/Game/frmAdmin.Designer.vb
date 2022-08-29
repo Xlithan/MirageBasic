@@ -532,7 +532,7 @@ Partial Class FrmAdmin
         '
         'btnSkillEditor
         '
-        Me.btnSkillEditor.Location = New System.Drawing.Point(152, 222)
+        Me.btnSkillEditor.Location = New System.Drawing.Point(7, 149)
         Me.btnSkillEditor.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnSkillEditor.Name = "btnSkillEditor"
         Me.btnSkillEditor.Size = New System.Drawing.Size(131, 29)

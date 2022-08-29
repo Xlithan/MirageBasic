@@ -236,7 +236,7 @@ Partial Class FrmEditor_MapEditor
         '
         'btnClearAttribute
         '
-        Me.btnClearAttribute.Location = New System.Drawing.Point(373, 504)
+        Me.btnClearAttribute.Location = New System.Drawing.Point(342, 553)
         Me.btnClearAttribute.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnClearAttribute.Name = "btnClearAttribute"
         Me.btnClearAttribute.Size = New System.Drawing.Size(192, 29)
@@ -1157,7 +1157,7 @@ Partial Class FrmEditor_MapEditor
         Me.tpAttributes.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.tpAttributes.Name = "tpAttributes"
         Me.tpAttributes.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.tpAttributes.Size = New System.Drawing.Size(574, 601)
+        Me.tpAttributes.Size = New System.Drawing.Size(542, 601)
         Me.tpAttributes.TabIndex = 3
         Me.tpAttributes.Text = "Attributes"
         Me.tpAttributes.UseVisualStyleBackColor = true
@@ -1193,7 +1193,7 @@ Partial Class FrmEditor_MapEditor
         Me.tpNpcs.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.tpNpcs.Name = "tpNpcs"
         Me.tpNpcs.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.tpNpcs.Size = New System.Drawing.Size(574, 601)
+        Me.tpNpcs.Size = New System.Drawing.Size(542, 601)
         Me.tpNpcs.TabIndex = 1
         Me.tpNpcs.Text = "Npc's"
         Me.tpNpcs.UseVisualStyleBackColor = true
@@ -1217,7 +1217,7 @@ Partial Class FrmEditor_MapEditor
         'Label18
         '
         Me.Label18.AutoSize = true
-        Me.Label18.Location = New System.Drawing.Point(301, 33)
+        Me.Label18.Location = New System.Drawing.Point(228, 33)
         Me.Label18.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(148, 15)
@@ -1237,10 +1237,10 @@ Partial Class FrmEditor_MapEditor
         'cmbNpcList
         '
         Me.cmbNpcList.FormattingEnabled = true
-        Me.cmbNpcList.Location = New System.Drawing.Point(304, 52)
+        Me.cmbNpcList.Location = New System.Drawing.Point(228, 52)
         Me.cmbNpcList.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbNpcList.Name = "cmbNpcList"
-        Me.cmbNpcList.Size = New System.Drawing.Size(248, 23)
+        Me.cmbNpcList.Size = New System.Drawing.Size(299, 23)
         Me.cmbNpcList.TabIndex = 70
         '
         'lstMapNpc
@@ -1277,14 +1277,14 @@ Partial Class FrmEditor_MapEditor
         Me.tpSettings.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.tpSettings.Name = "tpSettings"
         Me.tpSettings.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.tpSettings.Size = New System.Drawing.Size(574, 601)
+        Me.tpSettings.Size = New System.Drawing.Size(542, 601)
         Me.tpSettings.TabIndex = 2
         Me.tpSettings.Text = "Settings"
         Me.tpSettings.UseVisualStyleBackColor = true
         '
         'btnSaveSettings
         '
-        Me.btnSaveSettings.Location = New System.Drawing.Point(440, 507)
+        Me.btnSaveSettings.Location = New System.Drawing.Point(408, 555)
         Me.btnSaveSettings.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnSaveSettings.Name = "btnSaveSettings"
         Me.btnSaveSettings.Size = New System.Drawing.Size(126, 27)
@@ -1484,7 +1484,7 @@ Partial Class FrmEditor_MapEditor
         Me.fraMaxSizes.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraMaxSizes.Name = "fraMaxSizes"
         Me.fraMaxSizes.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraMaxSizes.Size = New System.Drawing.Size(281, 90)
+        Me.fraMaxSizes.Size = New System.Drawing.Size(249, 90)
         Me.fraMaxSizes.TabIndex = 12
         Me.fraMaxSizes.TabStop = false
         Me.fraMaxSizes.Text = "Map Sizes"
@@ -1560,7 +1560,7 @@ Partial Class FrmEditor_MapEditor
         Me.lstMusic.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.lstMusic.Name = "lstMusic"
         Me.lstMusic.ScrollAlwaysVisible = true
-        Me.lstMusic.Size = New System.Drawing.Size(266, 184)
+        Me.lstMusic.Size = New System.Drawing.Size(242, 184)
         Me.lstMusic.TabIndex = 3
         '
         'txtName
@@ -1588,7 +1588,7 @@ Partial Class FrmEditor_MapEditor
         Me.tpDirBlock.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.tpDirBlock.Name = "tpDirBlock"
         Me.tpDirBlock.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.tpDirBlock.Size = New System.Drawing.Size(574, 601)
+        Me.tpDirBlock.Size = New System.Drawing.Size(542, 601)
         Me.tpDirBlock.TabIndex = 4
         Me.tpDirBlock.Text = "Directional Block"
         Me.tpDirBlock.UseVisualStyleBackColor = true
@@ -1616,7 +1616,7 @@ Partial Class FrmEditor_MapEditor
         Me.tpEvents.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.tpEvents.Name = "tpEvents"
         Me.tpEvents.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.tpEvents.Size = New System.Drawing.Size(574, 601)
+        Me.tpEvents.Size = New System.Drawing.Size(542, 601)
         Me.tpEvents.TabIndex = 5
         Me.tpEvents.Text = "Events"
         Me.tpEvents.UseVisualStyleBackColor = true
@@ -1702,7 +1702,7 @@ Partial Class FrmEditor_MapEditor
         Me.TabPage1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.TabPage1.Size = New System.Drawing.Size(574, 601)
+        Me.TabPage1.Size = New System.Drawing.Size(542, 601)
         Me.TabPage1.TabIndex = 6
         Me.TabPage1.Text = "Map Effects"
         Me.TabPage1.UseVisualStyleBackColor = true
@@ -1723,7 +1723,7 @@ Partial Class FrmEditor_MapEditor
         'Label20
         '
         Me.Label20.AutoSize = true
-        Me.Label20.Location = New System.Drawing.Point(7, 25)
+        Me.Label20.Location = New System.Drawing.Point(0, 25)
         Me.Label20.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(51, 15)
@@ -1733,7 +1733,7 @@ Partial Class FrmEditor_MapEditor
         'cmbParallax
         '
         Me.cmbParallax.FormattingEnabled = true
-        Me.cmbParallax.Location = New System.Drawing.Point(82, 22)
+        Me.cmbParallax.Location = New System.Drawing.Point(53, 21)
         Me.cmbParallax.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbParallax.Name = "cmbParallax"
         Me.cmbParallax.Size = New System.Drawing.Size(186, 23)
@@ -1845,7 +1845,7 @@ Partial Class FrmEditor_MapEditor
         'scrlMapAlpha
         '
         Me.scrlMapAlpha.LargeChange = 1
-        Me.scrlMapAlpha.Location = New System.Drawing.Point(100, 108)
+        Me.scrlMapAlpha.Location = New System.Drawing.Point(74, 109)
         Me.scrlMapAlpha.Maximum = 255
         Me.scrlMapAlpha.Name = "scrlMapAlpha"
         Me.scrlMapAlpha.Size = New System.Drawing.Size(169, 17)
@@ -1854,7 +1854,7 @@ Partial Class FrmEditor_MapEditor
         'scrlMapBlue
         '
         Me.scrlMapBlue.LargeChange = 1
-        Me.scrlMapBlue.Location = New System.Drawing.Point(100, 87)
+        Me.scrlMapBlue.Location = New System.Drawing.Point(74, 88)
         Me.scrlMapBlue.Maximum = 255
         Me.scrlMapBlue.Name = "scrlMapBlue"
         Me.scrlMapBlue.Size = New System.Drawing.Size(169, 17)
@@ -1863,7 +1863,7 @@ Partial Class FrmEditor_MapEditor
         'scrlMapGreen
         '
         Me.scrlMapGreen.LargeChange = 1
-        Me.scrlMapGreen.Location = New System.Drawing.Point(100, 65)
+        Me.scrlMapGreen.Location = New System.Drawing.Point(74, 64)
         Me.scrlMapGreen.Maximum = 255
         Me.scrlMapGreen.Name = "scrlMapGreen"
         Me.scrlMapGreen.Size = New System.Drawing.Size(169, 17)
@@ -1872,7 +1872,7 @@ Partial Class FrmEditor_MapEditor
         'scrlMapRed
         '
         Me.scrlMapRed.LargeChange = 1
-        Me.scrlMapRed.Location = New System.Drawing.Point(100, 43)
+        Me.scrlMapRed.Location = New System.Drawing.Point(74, 46)
         Me.scrlMapRed.Maximum = 255
         Me.scrlMapRed.Name = "scrlMapRed"
         Me.scrlMapRed.Size = New System.Drawing.Size(169, 17)
