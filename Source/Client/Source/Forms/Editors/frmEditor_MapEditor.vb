@@ -1248,6 +1248,10 @@ Public Class FrmEditor_MapEditor
        If cmbTileSets.SelectedIndex = 0 Then cmbTileSets.SelectedIndex = 1
     End Sub
 
+    Private Sub txtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
+        Map.Name = txtName.Text
+    End Sub
+
     Friend Sub DrawTileOutline()
         Dim rec As Rectangle
         If Me.tabpages.SelectedTab Is Me.tpDirBlock Then Exit Sub
