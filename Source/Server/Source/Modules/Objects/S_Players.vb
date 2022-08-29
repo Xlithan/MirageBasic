@@ -1824,7 +1824,7 @@ Module S_Players
 
         If Item(ItemNum).Type = ItemType.Currency OrElse Item(ItemNum).Stackable = 1 Then
             ' If currency then check to see if they already have an instance of the item and add it to that
-            For i = 0 To MAX_INV
+            For i = 1 To MAX_INV
                 If GetPlayerInvItemNum(index, i) = ItemNum Then
                     FindOpenInvSlot = i
                     Exit Function
@@ -1832,7 +1832,7 @@ Module S_Players
             Next
         End If
 
-        For i = 0 To MAX_INV
+        For i = 1 To MAX_INV
             ' Try to find an open free slot
             If GetPlayerInvItemNum(index, i) = 0 Then
                 FindOpenInvSlot = i

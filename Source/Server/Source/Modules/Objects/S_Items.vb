@@ -353,12 +353,11 @@ Friend Module S_Items
 
     Function FindOpenMapItemSlot(mapNum As Integer) As Integer
         Dim i As Integer
-        FindOpenMapItemSlot = 0
 
         ' Check for subscript out of range
         If mapNum <= 0 OrElse mapNum > MAX_CACHED_MAPS Then Exit Function
 
-       For i = 0 To MAX_MAP_ITEMS
+       For i = 1 To MAX_MAP_ITEMS
             If MapItem(mapNum, i).Num = 0 Then
                 FindOpenMapItemSlot = i
                 Exit Function
