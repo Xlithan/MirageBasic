@@ -63,4 +63,21 @@ Friend Class frmEditor_Recipe
         Recipe(Editorindex).CreateTime = nudCreateTime.Value
     End Sub
 
+    Private Sub frmEditor_Recipe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lstIndex.Items.Clear()
+
+        ' Add the names
+        For i = 0 To MAX_RECIPE
+            lstIndex.Items.Add(i & ": " & Trim$(Recipe(i).Name))
+        Next
+
+        'fill comboboxes
+        cmbMakeItem.Items.Clear()
+        cmbIngredient.Items.Clear()
+
+        For i = 0 To MAX_ITEMS
+            cmbMakeItem.Items.Add(Trim$(Item(i).Name))
+            cmbIngredient.Items.Add(Trim$(Item(i).Name))
+        Next
+    End Sub
 End Class

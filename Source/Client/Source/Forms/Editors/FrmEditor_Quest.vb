@@ -4,19 +4,23 @@ Friend Class frmEditor_Quest
     Dim SelectedTask As Integer
 
     Private Sub FrmEditor_Quest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Width = 857
-
         fraRequirements.Location = fraQuestList.Location
         fraRequirements.Visible = False
         fraTasks.Location = fraQuestList.Location
         fraTasks.Visible = False
-
         nudAmount.Maximum = 999999
-
         nudGiveAmount.Maximum = Byte.MaxValue
         nudTakeAmount.Maximum = Byte.MaxValue
         nudItemRewValue.Maximum = 999999
 
+        lstIndex.Items.Clear()
+        cmbQuestReq.Items.Clear()
+
+        ' Add the names
+        For i = 0 To MAX_QUESTS
+            lstIndex.Items.Add(I & ": " & Trim$(Quest(I).Name))
+            cmbQuestReq.Items.Add(I & ": " & Trim$(Quest(I).Name))
+        Next
     End Sub
 
     Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
