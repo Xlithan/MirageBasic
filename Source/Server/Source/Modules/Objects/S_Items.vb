@@ -313,7 +313,7 @@ Friend Module S_Items
         ' Find open map item slot
         i = FindOpenMapItemSlot(mapNum)
 
-        If i = 0 Then Exit Sub
+        If i = -1 Then Exit Sub
 
         SpawnItemSlot(i, itemNum, ItemVal, mapNum, x, y)
     End Sub
@@ -327,7 +327,7 @@ Friend Module S_Items
 
         i = MapItemSlot
 
-        If i <> 0 Then
+        If i <> -1 Then
             If itemNum >= 0 AndAlso itemNum <= MAX_ITEMS Then
                 MapItem(mapNum, i).Num = itemNum
                 MapItem(mapNum, i).Value = ItemVal
@@ -353,6 +353,8 @@ Friend Module S_Items
 
     Function FindOpenMapItemSlot(mapNum As Integer) As Integer
         Dim i As Integer
+
+        FindOpenMapItemSlot = -1
 
         ' Check for subscript out of range
         If mapNum <= 0 OrElse mapNum > MAX_CACHED_MAPS Then Exit Function

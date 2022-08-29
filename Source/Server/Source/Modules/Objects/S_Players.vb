@@ -1689,6 +1689,8 @@ Module S_Players
     Function FindItemSlot(index As Integer, ItemNum As Integer) As Integer
         Dim i As Integer
 
+        FindItemSlot = -1
+
         ' Check for subscript out of range
         If IsPlaying(index) = False OrElse ItemNum <= 0 OrElse ItemNum > MAX_ITEMS Then
             Exit Function
@@ -1816,6 +1818,8 @@ Module S_Players
 
     Function FindOpenInvSlot(index As Integer, ItemNum As Integer) As Integer
         Dim i As Integer
+
+        FindOpenInvSlot = -1
 
         ' Check for subscript out of range
         If IsPlaying(index) = False OrElse ItemNum <= 0 OrElse ItemNum > MAX_ITEMS Then
