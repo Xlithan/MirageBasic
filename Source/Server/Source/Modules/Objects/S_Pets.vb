@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.Drawing
+Imports System.IO
 Imports Asfw
 Imports Asfw.IO
 Imports MirageBasic.Core
@@ -28,7 +29,6 @@ Module S_Pets
 
         For i = 0 To MAX_PETS
             SavePet(i)
-            Application.DoEvents()
         Next
 
     End Sub
@@ -411,7 +411,7 @@ Module S_Pets
 
     Sub Packet_SummonPet(index As Integer, ByRef data() As Byte)
         If PetAlive(index) Then
-            ReCallPet(index)
+            RecallPet(index)
         Else
             SummonPet(index)
         End If
@@ -1607,8 +1607,6 @@ Module S_Pets
                             End If
                         End If
                     End If
-
-                    Application.DoEvents()
                 Next
             Next
 
@@ -1701,9 +1699,6 @@ Module S_Pets
 
             path(tim).X = lastX
             path(tim).Y = lastY
-
-            'Now we loop back and decrease tim, and look for the next square with lower value
-            Application.DoEvents()
         Loop
 
         'Ok we got a Paths. Now, lets look at the first step and see what direction we should take.
@@ -2261,7 +2256,7 @@ Module S_Pets
 
             ' kill pet
             PlayerMsg(victim, "Your " & Trim$(GetPetName(victim)) & " was killed by a " & Trim$(Npc(MapNpc(mapNum).Npc(mapnpcnum).Num).Name) & ".", ColorType.BrightRed)
-            ReCallPet(victim)
+            RecallPet(victim)
 
             ' Now that pet is dead, go for owner
             MapNpc(mapNum).Npc(mapnpcnum).Target = victim
@@ -3608,7 +3603,7 @@ Module S_Pets
             Next
 
             PlayerMsg(victim, ("Your " & GetPetName(victim).Trim & " was killed by  " & GetPlayerName(attacker).Trim & "."), ColorType.BrightRed)
-            ReCallPet(victim)
+            RecallPet(victim)
         Else
             ' Pet not dead, just do the damage
             SetPetVital(victim, VitalType.HP, GetPetVital(victim, VitalType.HP) - damage)

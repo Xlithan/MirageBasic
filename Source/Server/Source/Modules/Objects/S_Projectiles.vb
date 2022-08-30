@@ -79,8 +79,6 @@ Friend Module S_Projectiles
             Projectiles(i).Range = reader.ReadByte()
             Projectiles(i).Speed = reader.ReadInt32()
             Projectiles(i).Damage = reader.ReadInt32()
-
-            Application.DoEvents()
         Next
 
     End Sub

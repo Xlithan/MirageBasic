@@ -2,11 +2,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "Client", "Source\Client\Client.vbproj", "{531B337C-BC02-44ED-90C2-C448FE5190A2}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Client", "Source\Client\Client.vbproj", "{531B337C-BC02-44ED-90C2-C448FE5190A2}"
 EndProject
-Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "Server", "Source\Server\Server.vbproj", "{B554FD23-0844-49D1-A05A-D79CEAD3FA7A}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Server", "Source\Server\Server.vbproj", "{B554FD23-0844-49D1-A05A-D79CEAD3FA7A}"
 EndProject
-Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "Core", "Source\Core\Core.vbproj", "{384120CA-8F90-4B6E-B38E-2A524893403F}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Core", "Source\Core\Core.vbproj", "{384120CA-8F90-4B6E-B38E-2A524893403F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asfw", "Source\Network\Asfw.csproj", "{1919AC79-B888-4705-AF34-56FD9A26EC3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,6 +70,22 @@ Global
 		{384120CA-8F90-4B6E-B38E-2A524893403F}.RelWithDebInfo|Any CPU.Build.0 = Release|Any CPU
 		{384120CA-8F90-4B6E-B38E-2A524893403F}.RelWithDebInfo|x64.ActiveCfg = Release|Any CPU
 		{384120CA-8F90-4B6E-B38E-2A524893403F}.RelWithDebInfo|x64.Build.0 = Release|Any CPU
+		{1919AC79-B888-4705-AF34-56FD9A26EC3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1919AC79-B888-4705-AF34-56FD9A26EC3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1919AC79-B888-4705-AF34-56FD9A26EC3C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1919AC79-B888-4705-AF34-56FD9A26EC3C}.Debug|x64.Build.0 = Debug|Any CPU
+		{1919AC79-B888-4705-AF34-56FD9A26EC3C}.MinSizeRel|Any CPU.ActiveCfg = Debug|Any CPU
+		{1919AC79-B888-4705-AF34-56FD9A26EC3C}.MinSizeRel|Any CPU.Build.0 = Debug|Any CPU
+		{1919AC79-B888-4705-AF34-56FD9A26EC3C}.MinSizeRel|x64.ActiveCfg = Debug|Any CPU
+		{1919AC79-B888-4705-AF34-56FD9A26EC3C}.MinSizeRel|x64.Build.0 = Debug|Any CPU
+		{1919AC79-B888-4705-AF34-56FD9A26EC3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1919AC79-B888-4705-AF34-56FD9A26EC3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1919AC79-B888-4705-AF34-56FD9A26EC3C}.Release|x64.ActiveCfg = Release|Any CPU
+		{1919AC79-B888-4705-AF34-56FD9A26EC3C}.Release|x64.Build.0 = Release|Any CPU
+		{1919AC79-B888-4705-AF34-56FD9A26EC3C}.RelWithDebInfo|Any CPU.ActiveCfg = Debug|Any CPU
+		{1919AC79-B888-4705-AF34-56FD9A26EC3C}.RelWithDebInfo|Any CPU.Build.0 = Debug|Any CPU
+		{1919AC79-B888-4705-AF34-56FD9A26EC3C}.RelWithDebInfo|x64.ActiveCfg = Debug|Any CPU
+		{1919AC79-B888-4705-AF34-56FD9A26EC3C}.RelWithDebInfo|x64.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

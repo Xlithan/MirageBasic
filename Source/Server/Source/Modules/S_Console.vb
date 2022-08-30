@@ -1,4 +1,5 @@
-﻿Imports System.Threading
+﻿Imports System
+Imports System.Threading
 Imports MirageBasic.Core
 
 Module S_Console

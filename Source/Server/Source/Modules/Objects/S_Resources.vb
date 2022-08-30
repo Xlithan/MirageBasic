@@ -55,7 +55,6 @@ Friend Module S_Resources
 
         For i = 0 To MAX_RESOURCES
             LoadResource(i)
-            Application.DoEvents()
         Next
 
     End Sub

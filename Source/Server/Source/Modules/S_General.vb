@@ -1,4 +1,7 @@
-﻿Imports System.IO
+﻿Imports System
+Imports System.Diagnostics
+Imports System.IO
+Imports System.Net
 Imports MirageBasic.Core
 
 Module S_General
@@ -17,16 +20,6 @@ Module S_General
 
         myStopWatch.Start()
 
-        If Debugger.IsAttached Then
-            ' Since there is a debugger attached,
-            ' assume we are running from the IDE
-            Debugging = True
-        Else
-            ' Assume we aren't running from the IDE
-            Dim currentDomain As AppDomain = AppDomain.CurrentDomain
-            AddHandler currentDomain.UnhandledException, AddressOf ErrorHandler
-        End If
-
         LoadSettings()
 
         Console.Title = "MirageBasic Server"
@@ -37,11 +30,8 @@ Module S_General
 
         time1 = GetTimeMs()
 
-        ' Initialize the random-number generator
-        Randomize()
-
         ' LOAD ENCRYPTION
-        Dim fi = Application.StartupPath & "\AsyncKeys.xml"
+        Dim fi = Paths.Database & "\AsyncKeys.xml"
         If Not File.Exists(fi) Then
             EKeyPair.GenerateKeys()
             EKeyPair.ExportKey(fi, True) ' True exports private key too.
@@ -160,10 +150,10 @@ Module S_General
         CheckDir(Paths.Npcs)
         CheckDir(Paths.Shops)
         CheckDir(Paths.Skills)
-        CheckDir(Paths.accounts)
-        CheckDir(Paths.resources)
+        CheckDir(Paths.Accounts)
+        CheckDir(Paths.Resources)
         CheckDir(Paths.Animations)
-        CheckDir(Paths.logs)
+        CheckDir(Paths.Logs)
         CheckDir(Paths.Quests)
         CheckDir(Paths.Recipes)
         CheckDir(Paths.Pets)
@@ -188,11 +178,6 @@ Module S_General
         Console.WriteLine("Spawning Map Npcs...")
         SpawnAllMapNpcs()
 
-        ' Check if the master charlist file exists for checking duplicate names, and if it doesnt make it
-        If Not File.Exists("data\accounts\charlist.txt") Then
-            F = FreeFile()
-        End If
-
         'resource system
         LoadSkillExp()
 
@@ -214,8 +199,6 @@ Module S_General
         Console.WriteLine("Initialization complete. Server loaded in " & time2 - time1 & "ms.")
         Console.WriteLine("")
         Console.WriteLine("Use /help for the available commands.")
-
-        MyIPAddress = GetIP()
 
         UpdateCaption()
 
@@ -268,13 +251,7 @@ Module S_General
         DestroyNetwork()
         ClearGameData()
 
-#If DEBUG Then
-        Application.Exit()
-        Application.ExitThread()
-        Process.GetCurrentProcess.Kill()
-#Else
         Environment.Exit(0)
-#End If
     End Sub
 
     Friend Sub ClearGameData()
@@ -350,7 +327,7 @@ Module S_General
         Dim st As New StackTrace(ex, True)
         For Each sf As StackFrame In st.GetFrames
             If sf.GetFileLineNumber() > 0 Then
-                Result &= "Line:" & sf.GetFileLineNumber() & " Filename: " & System.IO.Path.GetFileName(sf.GetFileName) & Environment.NewLine
+                Result &= "Line:" & sf.GetFileLineNumber() & " Filename: " & Path.GetFileName(sf.GetFileName) & Environment.NewLine
             End If
         Next
         Return Result

@@ -1,4 +1,5 @@
-﻿Imports Asfw
+﻿Imports System.Drawing
+Imports Asfw
 Imports MirageBasic.Core
 
 Friend Module S_EventLogic
@@ -713,7 +714,6 @@ Friend Module S_EventLogic
                     Next
                 End If
             End If
-            Application.DoEvents()
         Next
 
     End Sub
@@ -1104,7 +1104,6 @@ Friend Module S_EventLogic
                     Next
                 End If
             End If
-            Application.DoEvents()
         Next
 
     End Sub
@@ -1122,7 +1121,7 @@ Friend Module S_EventLogic
                         If TempPlayer(i).EventProcessingCount > 0 Then
                             If TempPlayer(i).EventMap.EventPages(x).Visible Then
                                 If Map(Player(i).Map).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Pages(TempPlayer(i).EventMap.EventPages(x).PageId).Trigger = 2 Then 'Parallel Process baby!
-                            
+
                                     If TempPlayer(i).EventProcessing(x).Active = 0 Then
                                         If Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Pages(TempPlayer(i).EventMap.EventPages(x).PageId).CommandListCount > 0 Then
                                             'start new event processing
@@ -2173,7 +2172,6 @@ Friend Module S_EventLogic
                             End If
                         End If
                     End If
-                    Application.DoEvents()
                 Next i
             Next j
 
@@ -2264,9 +2262,6 @@ Friend Module S_EventLogic
 
             path(tim).X = LastX
             path(tim).Y = LastY
-
-            'Now we loop back and decrease tim, and look for the next square with lower value
-            Application.DoEvents()
         Loop
 
         'Ok we got a Paths. Now, lets look at the first step and see what direction we should take.
