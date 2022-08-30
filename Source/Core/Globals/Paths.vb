@@ -1,31 +1,34 @@
-﻿Namespace Paths
+﻿Imports System.IO
+Imports System.Reflection
+
+Namespace Paths
     Public Module modPaths
 
         ''' <summary> Returns app directory </summary>
         Public ReadOnly Property Local As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)
             End Get
         End Property
 
         ''' <summary> Returns contents directory </summary>
         Public ReadOnly Property Contents As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "Contents\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Contents\"
             End Get
         End Property
 
         ''' <summary> Returns database directory </summary>
         Public ReadOnly Property Database As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "Database\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\"
             End Get
         End Property
 
         ''' <summary> Returns configuration directory </summary>
         Public ReadOnly Property Config As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "Configuration\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Configuration\"
             End Get
         End Property
 
@@ -64,7 +67,7 @@
         ''' <summary> Returns accounts directory <\summary>
         Public ReadOnly Property Accounts As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Accounts\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Accounts\"
             End Get
         End Property
 
@@ -76,7 +79,7 @@
         ''' <summary> Returns animations directory <\summary>
         Public ReadOnly Property Animations As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Animations\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Animations\"
             End Get
         End Property
 
@@ -88,7 +91,7 @@
         ''' <summary> Returns items directory <\summary>
         Public ReadOnly Property Items As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Items\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Items\"
             End Get
         End Property
 
@@ -100,23 +103,23 @@
         ''' <summary> Returns logs directory <\summary>
         Public ReadOnly Property Logs As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "\Logs\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Logs\"
             End Get
         End Property
 
         ''' <summary> Returns maps directory <\summary>
         Public ReadOnly Property Maps As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Maps\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Maps\"
             End Get
         End Property
 
-         ''' <summary> Returns map file <\summary>
+        ''' <summary> Returns map file <\summary>
         Public Function Map(index As Integer) As String
             Return Maps & index & ".dat"
         End Function
 
-         ''' <summary> Returns map file <\summary>
+        ''' <summary> Returns map file <\summary>
         Public Function EventMap(index As Integer) As String
             Return Maps & index & "_event.dat"
         End Function
@@ -124,7 +127,7 @@
         ''' <summary> Returns npcs directory <\summary>
         Public ReadOnly Property Npcs As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Npcs\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Npcs\"
             End Get
         End Property
 
@@ -136,7 +139,7 @@
         ''' <summary> Returns pets directory <\summary>
         Public ReadOnly Property Pets As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Pets\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Pets\"
             End Get
         End Property
 
@@ -148,7 +151,7 @@
         ''' <summary> Returns projectiles directory <\summary>
         Public ReadOnly Property Projectiles As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Projectiles\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Projectiles\"
             End Get
         End Property
 
@@ -160,7 +163,7 @@
         ''' <summary> Returns quests directory <\summary>
         Public ReadOnly Property Quests As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Quests\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Quests\"
             End Get
         End Property
 
@@ -172,7 +175,7 @@
         ''' <summary> Returns recipes directory <\summary>
         Public ReadOnly Property Recipes As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Recipes\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Recipes\"
             End Get
         End Property
 
@@ -184,7 +187,7 @@
         ''' <summary> Returns resources directory <\summary>
         Public ReadOnly Property Resources As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Resources\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Resources\"
             End Get
         End Property
 
@@ -196,7 +199,7 @@
         ''' <summary> Returns shops directory <\summary>
         Public ReadOnly Property Shops As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Shops\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Shops\"
             End Get
         End Property
 
@@ -208,7 +211,7 @@
         ''' <summary> Returns skills directory <\summary>
         Public ReadOnly Property Skills As String
             Get
-                Return AppDomain.CurrentDomain.BaseDirectory & "\Database\Skills\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Skills\"
             End Get
         End Property
 
