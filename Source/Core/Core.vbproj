@@ -9,10 +9,4 @@
     <DefineDebug>false</DefineDebug>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Reference Include="System.Windows.Forms">
-      <HintPath>C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\6.0.8\ref\net6.0\System.Windows.Forms.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>

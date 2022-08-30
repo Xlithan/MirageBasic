@@ -2,11 +2,12 @@
 Imports System.Diagnostics.Metrics
 Imports System.IO
 Imports System.Runtime.ConstrainedExecution
-Imports System.Windows.Forms
 Imports System.Xml.Serialization
+Imports MirageBasic.Core
 
 Public Class InputsDef
     Public Class Input
+
         Public MoveUp As Keys = Keys.W
         Public MoveDown As Keys = Keys.S
         Public MoveLeft As Keys = Keys.A
@@ -157,7 +158,7 @@ Public Module modInputs
 
         Dim x As New XmlSerializer(GetType(InputsDef), New XmlRootAttribute("Inputs"))
         Dim writer = New StreamWriter(cf)
-        
+
         x.Serialize(writer, Inputs)
         writer.Close
     End Sub
