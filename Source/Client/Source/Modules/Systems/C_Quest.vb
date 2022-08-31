@@ -56,7 +56,7 @@ Friend Module C_Quest
     Friend QuestAcceptTag As Integer
 #End Region
 
-#Region "DataBase"
+#Region "Database"
 
     Sub ClearQuest(questNum As Integer)
         Dim i As Integer

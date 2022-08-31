@@ -59,6 +59,7 @@ Public Class InputsDef
         Return keyCode = Primary.Attack OrElse
                keyCode = Secondary.Attack
     End Function
+
     Public Function Run(keyCode As Keys) As Boolean
         Return keyCode = Primary.Run OrElse
                keyCode = Secondary.Run
@@ -72,6 +73,7 @@ Public Class InputsDef
         Return keyCode = Primary.HotBar1 OrElse
                keyCode = Secondary.HotBar1
     End Function
+
     Public Function HotBar2(keyCode As Keys) As Boolean
         Return keyCode = Primary.HotBar2 OrElse
                keyCode = Secondary.HotBar2
@@ -80,18 +82,22 @@ Public Class InputsDef
         Return keyCode = Primary.HotBar3 OrElse
                keyCode = Secondary.HotBar3
     End Function
+
     Public Function HotBar4(keyCode As Keys) As Boolean
         Return keyCode = Primary.HotBar4 OrElse
                keyCode = Secondary.HotBar4
     End Function
+
     Public Function HotBar5(keyCode As Keys) As Boolean
         Return keyCode = Primary.HotBar5 OrElse
                keyCode = Secondary.HotBar5
     End Function
+
     Public Function HotBar6(keyCode As Keys) As Boolean
         Return keyCode = Primary.HotBar6 OrElse
                keyCode = Secondary.HotBar6
     End Function
+
     Public Function HotBar7(keyCode As Keys) As Boolean
         Return keyCode = Primary.HotBar7 OrElse
                keyCode = Secondary.HotBar7
@@ -142,12 +148,12 @@ Public Module modInputs
             File.Create(cf).Dispose()
             Dim writer = New StreamWriter(cf)
             x.Serialize(writer, Inputs)
-            writer.Close
+            writer.Close()
         End If
 
         Dim reader = New StreamReader(cf)
         Inputs = x.Deserialize(reader)
-        reader.Close
+        reader.Close()
     End Sub
 
     Public Sub SaveInputs()
@@ -160,6 +166,6 @@ Public Module modInputs
         Dim writer = New StreamWriter(cf)
 
         x.Serialize(writer, Inputs)
-        writer.Close
+        writer.Close()
     End Sub
 End Module

@@ -1,16 +1,21 @@
-﻿<Properties>
-  <MultiItemStartupConfigurations />
+﻿<Properties StartupConfiguration="{B554FD23-0844-49D1-A05A-D79CEAD3FA7A}|Default">
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Source/Server/Source/Modules/S_General.vb">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <Debugger.DebugSourceFolders>
+    <String>/Users/seth/Documents/GitHub/MirageBasic/Source/Network/IO</String>
+  </Debugger.DebugSourceFolders>
+  <MonoDevelop.Ide.ItemProperties.Server PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Source/Server/Source/Modules/Network/S_NetworkReceive.vb">
     <Files>
-      <File FileName="Source/Server/Server.vbproj" Line="32" Column="9" />
-      <File FileName="Source/Server/My Project/Settings.Designer.vb" Line="24" Column="53" />
-      <File FileName="Source/Server/System/Configuration/ApplicationSettingsBase.vb" Line="12" Column="41" />
-      <File FileName="Source/Server/My Project/GlobalSuppressions.vb" Line="6" Column="1" />
-      <File FileName="Source/Server/System/Diagnostics.vb" Line="1" Column="1" />
-      <File FileName="Source/Server/My/MySettings.vb" Line="20" Column="1" />
-      <File FileName="Source/Server/Source/Modules/Network/S_NetworkConfig.vb" Line="24" Column="12" />
-      <File FileName="Source/Server/Source/Modules/S_General.vb" Line="330" Column="56" />
+      <File FileName="Source/Server/Source/Modules/Network/S_NetworkReceive.vb" Line="2360" Column="35" />
+      <File FileName="Source/Server/Source/Modules/S_Database.vb" Line="44" Column="1" />
+      <File FileName="Source/Core/Globals/Paths.vb" Line="32" Column="20" />
+      <File FileName="Source/Server/Source/Modules/Objects/S_Resources.vb" Line="167" Column="7" />
+      <File FileName="Source/Core/Configurations/Language.vb" Line="47" Column="58" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -18,25 +23,13 @@
           <Node name="MirageBasic Game Engine" expanded="True">
             <Node name="Asfw" expanded="True">
               <Node name="IO" expanded="True" />
-              <Node name="Network" expanded="True" />
             </Node>
-            <Node name="Server" expanded="True">
-              <Node name="Dependencies" expanded="True">
-                <Node name="ProjectDependencies" expanded="True" />
-              </Node>
-              <Node name="My" expanded="True" />
-              <Node name="My Project" expanded="True" />
-              <Node name="Source" expanded="True">
-                <Node name="Modules" expanded="True">
-                  <Node name="Events" expanded="True" />
-                  <Node name="Network" expanded="True" />
-                  <Node name="Objects" expanded="True" />
-                </Node>
-              </Node>
-              <Node name="System" expanded="True">
-                <Node name="Configuration" expanded="True" />
+            <Node name="Core" expanded="True">
+              <Node name="Configurations" expanded="True">
+                <Node name="Language.vb" selected="True" />
               </Node>
             </Node>
+            <Node name="Server" expanded="True" />
           </Node>
         </State>
       </Pad>
@@ -45,8 +38,4 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x64" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

@@ -3,11 +3,22 @@ Imports System.IO
 Imports Asfw
 Imports Asfw.IO
 Imports MirageBasic.Core
-Imports Ini = Asfw.IO.TextFile
 
 Module modDatabase
 
 #Region "Job"
+
+    Sub CheckJobs()
+        Dim i As Integer
+
+        For i = 0 To MAX_JOBS
+
+            If Not File.Exists(Paths.Job(i)) Then
+                SaveJob(i)
+            End If
+
+        Next
+    End Sub
 
     Sub ClearJobs()
         Dim i As Integer
@@ -15,94 +26,104 @@ Module modDatabase
         ReDim Job(MAX_JOBS)
 
         For i = 0 To MAX_JOBS
-            Job(i).Name = ""
-            Job(i).Desc = ""
-            ReDim Job(i).Stat(StatType.Count - 1)
-            ReDim Job(i).StartItem(5)
-            ReDim Job(i).StartValue(5)
+            ClearJob(i)
+        Next
+    End Sub
+
+    Sub ClearJob(jobNum As Integer)
+        Job(jobNum).Name = ""
+        Job(jobNum).Desc = ""
+        ReDim Job(jobNum).Stat(StatType.Count - 1)
+        ReDim Job(jobNum).StartItem(5)
+        ReDim Job(jobNum).StartValue(5)
+        ReDim Job(jobNum).MaleSprite(5)
+        ReDim Job(jobNum).FemaleSprite(5)
+        ReDim Job(jobNum).Vital(VitalType.Count - 1)
+    End Sub
+
+    Sub LoadJob(jobNum As Integer)
+        Dim filename As String, i As Integer
+
+        filename = Paths.Job(jobNum)
+        Dim reader As New ByteStream()
+        ByteFile.Load(filename, reader)
+
+        Job(jobNum).Name = reader.ReadString()
+        Job(jobNum).Desc = reader.ReadString()
+
+        For i = 0 To StatType.Count - 1
+            Job(jobNum).Stat(i) = reader.ReadByte
         Next
 
+        For i = 0 To 5
+            Job(jobNum).MaleSprite(i) = reader.ReadInt32
+            Job(jobNum).FemaleSprite(i) = reader.ReadInt32
+            Job(jobNum).StartItem(i) = reader.ReadInt32
+            Job(jobNum).StartValue(i) = reader.ReadInt32
+        Next
+
+        Job(jobNum).StartMap = reader.ReadInt32
+        Job(jobNum).StartX = reader.ReadByte
+        Job(jobNum).StartY = reader.ReadByte
+        Job(jobNum).BaseExp = reader.ReadInt32
+
+        For i = 0 To VitalType.Count - 1
+            Job(jobNum).Vital(i) = reader.ReadInt32
+        Next
+
+        If Job(jobNum).Name Is Nothing Then Animation(jobNum).Name = ""
+        If Job(jobNum).Desc Is Nothing Then Job(jobNum).Desc = ""
     End Sub
 
     Sub LoadJobs()
-        Dim cf = Paths.Database & "Job.ini"
-        Dim i, n, x As Integer
+        Dim i As Integer
 
-        ClearJobs()
+        CheckJobs()
 
         For i = 0 To MAX_JOBS
-            Job(i).Name = Ini.Read(cf, "CLASS" & i, "Name")
-            Job(i).Desc = Ini.Read(cf, "CLASS" & i, "Desc")
-            Job(i).BaseExp = Val(Ini.Read(cf, "CLASS" & i, "BaseExp"))
-
-            n = Val(Ini.Read(cf, "CLASS" & i, "MaxMaleSprite"))
-            ReDim Job(i).MaleSprite(n)
-            For x = 0 To n
-                Job(i).MaleSprite(x) = Val(Ini.Read(cf, "CLASS" & i, "Sprite_Male" & x))
-            Next
-
-            n = Val(Ini.Read(cf, "CLASS" & i, "MaxFemaleSprite"))
-            ReDim Job(i).FemaleSprite(n)
-            For x = 0 To n
-                Job(i).FemaleSprite(x) = Val(Ini.Read(cf, "CLASS" & i, "Sprite_Female" & x))
-            Next
-
-            Job(i).Stat(StatType.Strength) = Val(Ini.Read(cf, "CLASS" & i, "Str"))
-            Job(i).Stat(StatType.Endurance) = Val(Ini.Read(cf, "CLASS" & i, "End"))
-            Job(i).Stat(StatType.Vitality) = Val(Ini.Read(cf, "CLASS" & i, "Vit"))
-            Job(i).Stat(StatType.Luck) = Val(Ini.Read(cf, "CLASS" & i, "Luck"))
-            Job(i).Stat(StatType.Intelligence) = Val(Ini.Read(cf, "CLASS" & i, "Int"))
-            Job(i).Stat(StatType.Spirit) = Val(Ini.Read(cf, "CLASS" & i, "Speed"))
-
-            Job(i).StartMap = Val(Ini.Read(cf, "CLASS" & i, "StartMap"))
-            Job(i).StartX = Val(Ini.Read(cf, "CLASS" & i, "StartX"))
-            Job(i).StartY = Val(Ini.Read(cf, "CLASS" & i, "StartY"))
-
-            ' loop for items & values
-            For x = 0 To MAX_DROP_ITEMS
-                Job(i).StartItem(x) = Val(Ini.Read(cf, "CLASS" & i, "StartItem" & x))
-                Job(i).StartValue(x) = Val(Ini.Read(cf, "CLASS" & i, "StartValue" & x))
-            Next
+            LoadJob(i)
         Next
     End Sub
 
+    Sub SaveJob(jobNum As Integer)
+        Dim filename As String
+        Dim x As Integer
+
+        filename = Paths.Job(jobNum)
+
+        Dim writer As New ByteStream(100)
+
+        writer.WriteString(Job(jobNum).Name)
+        writer.WriteString(Job(jobNum).Desc)
+
+        For x = 0 To StatType.Count - 1
+            writer.WriteByte(Job(jobNum).Stat(x))
+        Next
+
+        For x = 0 To 5
+            writer.WriteInt32(Job(jobNum).MaleSprite(x))
+            writer.WriteInt32(Job(jobNum).FemaleSprite(x))
+            writer.WriteInt32(Job(jobNum).StartItem(x))
+            writer.WriteInt32(Job(jobNum).StartValue(x))
+        Next
+
+        writer.WriteInt32(Job(jobNum).StartMap)
+        writer.WriteByte(Job(jobNum).StartX)
+        writer.WriteByte(Job(jobNum).StartY)
+        writer.WriteInt32(Job(jobNum).BaseExp)
+
+        For x = 0 To VitalType.Count - 1
+            writer.WriteInt32(Job(jobNum).Vital(x))
+        Next
+
+        ByteFile.Save(filename, writer)
+    End Sub
+
     Sub SaveJobs()
-        Dim cf = Paths.Database & "Job.ini"
-        Dim i, n, x As Integer
+        Dim i As Integer
 
         For i = 0 To MAX_JOBS
-            Ini.Write(cf, "CLASS" & i, "Name", Trim$(Job(i).Name))
-            Ini.Write(cf, "CLASS" & i, "Desc", Trim$(Job(i).Desc))
-            Ini.Write(cf, "CLASS" & i, "BaseExp", Job(i).BaseExp)
-
-            n = UBound(Job(i).MaleSprite)
-            Ini.Write(cf, "CLASS" & i, "MaxMaleSprite", n)
-            For x = 0 To n
-                Ini.Write(cf, "CLASS" & i, "Sprite_Male" & x, Job(i).MaleSprite(x))
-            Next
-
-            n = UBound(Job(i).FemaleSprite)
-            Ini.Write(cf, "CLASS" & i, "MaxFemaleSprite", n)
-            For x = 0 To n
-                Ini.Write(cf, "CLASS" & i, "Sprite_Female" & x, Job(i).FemaleSprite(x))
-            Next
-
-            Ini.Write(cf, "CLASS" & i, "Str", Job(i).Stat(StatType.Strength))
-            Ini.Write(cf, "CLASS" & i, "End", Job(i).Stat(StatType.Endurance))
-            Ini.Write(cf, "CLASS" & i, "Vit", Job(i).Stat(StatType.Vitality))
-            Ini.Write(cf, "CLASS" & i, "Luck", Job(i).Stat(StatType.Luck))
-            Ini.Write(cf, "CLASS" & i, "Int", Job(i).Stat(StatType.Intelligence))
-            Ini.Write(cf, "CLASS" & i, "Speed", Job(i).Stat(StatType.Spirit))
-
-            Ini.Write(cf, "CLASS" & i, "StartMap", Job(i).StartMap)
-            Ini.Write(cf, "CLASS" & i, "StartX", Job(i).StartX)
-            Ini.Write(cf, "CLASS" & i, "StartY", Job(i).StartY)
-
-            ' loop for items & values
-            For x = 0 To MAX_DROP_ITEMS
-                Ini.Write(cf, "CLASS" & i, "StartItem" & x, Job(i).StartItem(x))
-                Ini.Write(cf, "CLASS" & i, "StartValue" & x, Job(i).StartValue(x))
-            Next
+            SaveJob(i)
         Next
     End Sub
 

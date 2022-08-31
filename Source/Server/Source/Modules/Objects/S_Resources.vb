@@ -6,13 +6,7 @@ Imports Ini = Asfw.IO.TextFile
 
 Friend Module S_Resources
 
-#Region "Globals & Types"
-
-    Friend SkillExpTable(100) As Integer
-
-#End Region
-
-#Region "DataBase"
+#Region "Database"
 
     Sub SaveResources()
         Dim i As Integer
@@ -163,15 +157,6 @@ Friend Module S_Resources
         Return buffer.ToArray
     End Function
 
-    Sub LoadSkillExp()
-        Dim i As Integer
-        Dim cf As String = Paths.Database & "SkillExp.ini"
-
-        For i = 1 To 100
-            SkillExpTable(i) = Ini.Read(cf, "Level", i.ToString())
-        Next
-    End Sub
-
 #End Region
 
 #Region "Gather Skills"
@@ -269,7 +254,7 @@ Friend Module S_Resources
         GetSkillNextLevel = 0
         If index < 0 OrElse index > MAX_PLAYERS Then Exit Function
 
-        GetSkillNextLevel = SkillExpTable(GetPlayerGatherSkillLvl(index, SkillSlot) + 1)
+        GetSkillNextLevel = (50 / 3) * ((GetPlayerGatherSkillLvl(index, SkillSlot) + 1) ^ 3 - (6 * (GetPlayerGatherSkillLvl(index, SkillSlot) + 1) ^ 2) + 17 * (GetPlayerGatherSkillLvl(index, SkillSlot) + 1) - 12)
     End Function
 
 #End Region

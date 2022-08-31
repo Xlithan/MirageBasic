@@ -104,7 +104,7 @@ Module C_Maps
     End Structure
 #End Region
 
-#Region "DataBase"
+#Region "Database"
 
     Friend Sub CheckTilesets()
         Dim i As Integer

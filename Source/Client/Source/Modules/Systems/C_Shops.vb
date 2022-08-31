@@ -11,7 +11,7 @@ Module C_Shops
 
 #End Region
 
-#Region "DataBase"
+#Region "Database"
 
     Sub ClearShop(index As Integer)
         Shop(index) = Nothing

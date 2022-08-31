@@ -2340,9 +2340,6 @@ Module S_NetworkReceive
         buffer.Dispose()
 
         SaveJobs()
-
-        LoadJobs()
-
         SendJobToAll()
     End Sub
 

@@ -23,10 +23,6 @@ Module S_General
         LoadSettings()
 
         Console.Title = "MirageBasic Server"
-        Console.SetWindowSize(120, 20)
-
-        handler = New ConsoleEventDelegate(AddressOf ConsoleEventCallback)
-        SetConsoleCtrlHandler(handler, True)
 
         time1 = GetTimeMs()
 
@@ -145,6 +141,7 @@ Module S_General
 
         ' Check if the directory is there, if its not make it
         CheckDir(Paths.Database)
+        CheckDir(Paths.Jobs)
         CheckDir(Paths.Items)
         CheckDir(Paths.Maps)
         CheckDir(Paths.Npcs)
@@ -177,9 +174,6 @@ Module S_General
         SpawnAllMapsItems()
         Console.WriteLine("Spawning Map Npcs...")
         SpawnAllMapNpcs()
-
-        'resource system
-        LoadSkillExp()
 
         InitTime()
 
@@ -255,6 +249,7 @@ Module S_General
     End Sub
 
     Friend Sub ClearGameData()
+        Console.WriteLine("Clearing Jobs...") : ClearJobs()
         Console.WriteLine("Clearing Temp Tiles...") : ClearTempTiles()
         Console.WriteLine("Clearing Maps...") : ClearMaps()
         Console.WriteLine("Clearing Map Items...") : ClearMapItems()
@@ -273,7 +268,7 @@ Module S_General
     End Sub
 
     Private Sub LoadGameData()
-        Console.WriteLine("Loading Classes...") : LoadJobs()
+        Console.WriteLine("Loading Jobs...") : LoadJobs()
         Console.WriteLine("Loading Maps...") : LoadMaps()
         Console.WriteLine("Loading Items...") : LoadItems()
         Console.WriteLine("Loading Npc's...") : LoadNpcs()

@@ -11,7 +11,7 @@ Module C_Animations
 
 #End Region
 
-#Region "DataBase"
+#Region "Database"
 
     Sub ClearAnimation(index As Integer)
         Animation(index) = Nothing
