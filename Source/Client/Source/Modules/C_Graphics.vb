@@ -1349,8 +1349,8 @@ Module C_Graphics
             startX = GetPlayerX(Myindex) - ScreenMapx
             startY = GetPlayerY(Myindex) - ScreenMapy
         Else
-            startX = GetPlayerX(MyIndex) - (ScreenMapx \ 4)
-            startY = GetPlayerY(MyIndex) - (ScreenMapy \ 4)
+            StartX =Math.Floor( GetPlayerX(MyIndex) - ((ScreenMapx + 1) \ 2) - 1)
+            StartY = Math.Floor(GetPlayerY(MyIndex) - ((ScreenMapy + 1) \ 2) - 1)
         End If
 
         If startX < 0 Then
@@ -1377,13 +1377,13 @@ Module C_Graphics
             startY = 0
         End If
 
-        endX = startX + ScreenMapx
-        endY = startY + ScreenMapy
+        endX = startX + (ScreenMapx + 1) + 1
+        endY = startY + (ScreenMapy + 1) + 1    
 
         If endX > Map.MaxX Then
             offsetX = 32
 
-            If endX = Map.MaxX + 1 Then
+            If endX = Map.MaxX Then
                 If Player(Myindex).XOffset < 0 Then
                     offsetX = Player(Myindex).XOffset + PicX
                 End If
@@ -1396,7 +1396,7 @@ Module C_Graphics
         If endY > Map.MaxY Then
             offsetY = 32
 
-            If endY = Map.MaxY + 1 Then
+            If endY = Map.MaxY Then
                 If Player(Myindex).YOffset < 0 Then
                     offsetY = Player(Myindex).YOffset + PicY
                 End If

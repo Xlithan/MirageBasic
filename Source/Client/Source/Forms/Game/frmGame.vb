@@ -15,7 +15,19 @@ Friend Class FrmGame
     End Property
 
     Private Sub FrmMainGame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        RePositionGui()
+        Dim screenWidth As String = Screen.PrimaryScreen.Bounds.Width.ToString()
+        Dim screenHeight As String = Screen.PrimaryScreen.Bounds.Height.ToString()
+        Dim resolution As String()
+
+        If Settings.Fullscreen = 0 Then
+            resolution = Settings.ScreenSize.ToLower.ToString.Split("x")
+            screenWidth = resolution(0)
+            screenHeight = resolution(1)
+        Else
+            FormBorderStyle = 0
+        End If
+       
+        RePositionGui(screenWidth, screenHeight)
     End Sub
 
     Private Sub FrmMainGame_Closing(sender As Object, e As EventArgs) Handles MyBase.Closing
@@ -24,6 +36,10 @@ Friend Class FrmGame
 
     Private Sub FrmMainGame_KeyPress(sender As Object, e As KeyPressEventArgs) Handles MyBase.KeyPress
         ChatInput.ProcessCharacter(e)
+    End Sub
+
+    Private Sub FrmGame_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        CenterToScreen()
     End Sub
 
     Private Sub FrmMainGame_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown

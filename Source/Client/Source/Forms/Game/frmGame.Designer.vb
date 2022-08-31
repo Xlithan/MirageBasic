@@ -29,17 +29,18 @@ Partial Class FrmGame
         Me.lblCurrencyOk = New System.Windows.Forms.Label()
         Me.txtCurrency = New System.Windows.Forms.TextBox()
         Me.lblCurrency = New System.Windows.Forms.Label()
-        CType(Me.picscreen, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.pnlCurrency.SuspendLayout()
-        Me.SuspendLayout()
+        CType(Me.picscreen,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.pnlCurrency.SuspendLayout
+        Me.SuspendLayout
         '
         'picscreen
         '
         Me.picscreen.Location = New System.Drawing.Point(0, 0)
+        Me.picscreen.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.picscreen.Name = "picscreen"
-        Me.picscreen.Size = New System.Drawing.Size(630, 440)
+        Me.picscreen.Size = New System.Drawing.Size(735, 508)
         Me.picscreen.TabIndex = 4
-        Me.picscreen.TabStop = False
+        Me.picscreen.TabStop = false
         '
         'pnlCurrency
         '
@@ -48,20 +49,22 @@ Partial Class FrmGame
         Me.pnlCurrency.Controls.Add(Me.lblCurrencyOk)
         Me.pnlCurrency.Controls.Add(Me.txtCurrency)
         Me.pnlCurrency.Controls.Add(Me.lblCurrency)
-        Me.pnlCurrency.Location = New System.Drawing.Point(130, 235)
+        Me.pnlCurrency.Location = New System.Drawing.Point(152, 271)
+        Me.pnlCurrency.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.pnlCurrency.Name = "pnlCurrency"
-        Me.pnlCurrency.Size = New System.Drawing.Size(351, 98)
+        Me.pnlCurrency.Size = New System.Drawing.Size(410, 113)
         Me.pnlCurrency.TabIndex = 16
-        Me.pnlCurrency.Visible = False
+        Me.pnlCurrency.Visible = false
         '
         'lblCurrencyCancel
         '
         Me.lblCurrencyCancel.BackColor = System.Drawing.Color.Transparent
-        Me.lblCurrencyCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCurrencyCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
         Me.lblCurrencyCancel.ForeColor = System.Drawing.Color.White
-        Me.lblCurrencyCancel.Location = New System.Drawing.Point(214, 71)
+        Me.lblCurrencyCancel.Location = New System.Drawing.Point(250, 82)
+        Me.lblCurrencyCancel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblCurrencyCancel.Name = "lblCurrencyCancel"
-        Me.lblCurrencyCancel.Size = New System.Drawing.Size(108, 16)
+        Me.lblCurrencyCancel.Size = New System.Drawing.Size(126, 18)
         Me.lblCurrencyCancel.TabIndex = 4
         Me.lblCurrencyCancel.Text = "Cancel"
         Me.lblCurrencyCancel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -69,56 +72,61 @@ Partial Class FrmGame
         'lblCurrencyOk
         '
         Me.lblCurrencyOk.BackColor = System.Drawing.Color.Transparent
-        Me.lblCurrencyOk.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCurrencyOk.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
         Me.lblCurrencyOk.ForeColor = System.Drawing.Color.White
-        Me.lblCurrencyOk.Location = New System.Drawing.Point(13, 71)
+        Me.lblCurrencyOk.Location = New System.Drawing.Point(15, 82)
+        Me.lblCurrencyOk.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblCurrencyOk.Name = "lblCurrencyOk"
-        Me.lblCurrencyOk.Size = New System.Drawing.Size(102, 16)
+        Me.lblCurrencyOk.Size = New System.Drawing.Size(119, 18)
         Me.lblCurrencyOk.TabIndex = 3
         Me.lblCurrencyOk.Text = "Okay"
         Me.lblCurrencyOk.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'txtCurrency
         '
-        Me.txtCurrency.Location = New System.Drawing.Point(84, 35)
+        Me.txtCurrency.Location = New System.Drawing.Point(98, 40)
+        Me.txtCurrency.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.txtCurrency.Name = "txtCurrency"
-        Me.txtCurrency.Size = New System.Drawing.Size(180, 20)
+        Me.txtCurrency.Size = New System.Drawing.Size(209, 23)
         Me.txtCurrency.TabIndex = 2
         '
         'lblCurrency
         '
         Me.lblCurrency.BackColor = System.Drawing.Color.Transparent
-        Me.lblCurrency.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCurrency.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
         Me.lblCurrency.ForeColor = System.Drawing.Color.White
-        Me.lblCurrency.Location = New System.Drawing.Point(3, 0)
+        Me.lblCurrency.Location = New System.Drawing.Point(4, 0)
+        Me.lblCurrency.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblCurrency.Name = "lblCurrency"
-        Me.lblCurrency.Size = New System.Drawing.Size(345, 24)
+        Me.lblCurrency.Size = New System.Drawing.Size(402, 28)
         Me.lblCurrency.TabIndex = 1
         Me.lblCurrency.Text = "How many do you want to drop?"
         Me.lblCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'FrmGame
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(635, 447)
+        Me.ClientSize = New System.Drawing.Size(741, 516)
         Me.Controls.Add(Me.pnlCurrency)
         Me.Controls.Add(Me.picscreen)
-        Me.DoubleBuffered = True
+        Me.DoubleBuffered = true
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MaximizeBox = False
+        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.MaximizeBox = false
         Me.Name = "FrmGame"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmMainGame"
-        CType(Me.picscreen, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.pnlCurrency.ResumeLayout(False)
-        Me.pnlCurrency.PerformLayout()
-        Me.ResumeLayout(False)
+        CType(Me.picscreen,System.ComponentModel.ISupportInitialize).EndInit
+        Me.pnlCurrency.ResumeLayout(false)
+        Me.pnlCurrency.PerformLayout
+        Me.ResumeLayout(false)
 
-    End Sub
+End Sub
     Friend WithEvents picscreen As System.Windows.Forms.PictureBox
     Friend WithEvents pnlCurrency As System.Windows.Forms.Panel
     Friend WithEvents lblCurrency As System.Windows.Forms.Label

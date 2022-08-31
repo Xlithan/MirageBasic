@@ -115,7 +115,7 @@
     <Compile Update="Source\Forms\Game\FrmGame.Designer.vb">
       <DependentUpon>FrmGame.vb</DependentUpon>
     </Compile>
-    <Compile Update="Source\Forms\FrmMenu.Designer.vb">
+    <Compile Update="Source\Forms\Game\frmMenu.Designer.vb">
       <DependentUpon>FrmMenu.vb</DependentUpon>
     </Compile>
     <Compile Update="Source\Forms\Game\FrmOptions.Designer.vb">
