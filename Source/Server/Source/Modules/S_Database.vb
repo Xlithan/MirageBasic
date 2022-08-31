@@ -33,6 +33,7 @@ Module modDatabase
     Sub ClearJob(jobNum As Integer)
         Job(jobNum).Name = ""
         Job(jobNum).Desc = ""
+        Job(jobNum).StartMap = 1
         ReDim Job(jobNum).Stat(StatType.Count - 1)
         ReDim Job(jobNum).StartItem(5)
         ReDim Job(jobNum).StartValue(5)

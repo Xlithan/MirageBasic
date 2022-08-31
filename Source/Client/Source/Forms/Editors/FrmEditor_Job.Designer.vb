@@ -174,11 +174,9 @@ Partial Class frmEditor_Job
         '
         Me.nudStartY.Location = New System.Drawing.Point(320, 16)
         Me.nudStartY.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudStartY.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudStartY.Name = "nudStartY"
         Me.nudStartY.Size = New System.Drawing.Size(56, 23)
         Me.nudStartY.TabIndex = 5
-        Me.nudStartY.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'DarkLabel15
         '
@@ -195,11 +193,9 @@ Partial Class frmEditor_Job
         '
         Me.nudStartX.Location = New System.Drawing.Point(196, 16)
         Me.nudStartX.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudStartX.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudStartX.Name = "nudStartX"
         Me.nudStartX.Size = New System.Drawing.Size(56, 23)
         Me.nudStartX.TabIndex = 3
-        Me.nudStartX.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'DarkLabel14
         '

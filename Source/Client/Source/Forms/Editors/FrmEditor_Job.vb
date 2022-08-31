@@ -9,10 +9,8 @@ Friend Class frmEditor_Job
         nudMaleSprite.Maximum = NumCharacters
         nudFemaleSprite.Maximum = NumCharacters
 
-        lstIndex.Items.Clear() 
-
         For i = 0 To MAX_JOBS
-            lstIndex.Items.Add(Trim(Job(i).Name))
+            lstIndex.Items.Add(i & ": " & Trim(Job(i).Name))
         Next
 
         Editor = EDITOR_Job
@@ -45,7 +43,7 @@ Friend Class frmEditor_Job
         tmpindex = lstIndex.SelectedIndex
         Job(Editorindex).Name = Trim$(txtName.Text)
         lstIndex.Items.RemoveAt(EditorIndex)
-        lstIndex.Items.Insert(EditorIndex, Trim(Job(Editorindex).Name))
+        lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & Job(Editorindex).Name)
         lstIndex.SelectedIndex = tmpindex
     End Sub
 

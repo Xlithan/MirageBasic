@@ -261,7 +261,6 @@ Module C_Maps
 
         SyncLock MapLock
             If buffer.ReadInt32 = 1 Then
-
                 mapNum = buffer.ReadInt32
                 Map.Name = Trim(buffer.ReadString)
                 Map.Music = Trim(buffer.ReadString)
