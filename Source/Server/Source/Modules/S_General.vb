@@ -23,10 +23,6 @@ Module S_General
         LoadSettings()
 
         Console.Title = "MirageBasic Server"
-        Console.SetWindowSize(120, 20)
-
-        handler = New ConsoleEventDelegate(AddressOf ConsoleEventCallback)
-        SetConsoleCtrlHandler(handler, True)
 
         time1 = GetTimeMs()
 
@@ -179,7 +175,7 @@ Module S_General
         SpawnAllMapNpcs()
 
         'resource system
-        LoadSkillExp()
+        'LoadSkillExp()
 
         InitTime()
 
@@ -273,7 +269,7 @@ Module S_General
     End Sub
 
     Private Sub LoadGameData()
-        Console.WriteLine("Loading Classes...") : LoadJobs()
+        'Console.WriteLine("Loading Jobs...") : LoadJobs()
         Console.WriteLine("Loading Maps...") : LoadMaps()
         Console.WriteLine("Loading Items...") : LoadItems()
         Console.WriteLine("Loading Npc's...") : LoadNpcs()
