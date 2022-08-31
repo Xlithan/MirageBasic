@@ -26,6 +26,24 @@ Module S_General
 
         time1 = GetTimeMs()
 
+         ' Check if the directory is there, if its not make it
+        CheckDir(Paths.Database)
+        CheckDir(Paths.Jobs)
+        CheckDir(Paths.Items)
+        CheckDir(Paths.Maps)
+        CheckDir(Paths.Npcs)
+        CheckDir(Paths.Shops)
+        CheckDir(Paths.Skills)
+        CheckDir(Paths.Accounts)
+        CheckDir(Paths.Resources)
+        CheckDir(Paths.Animations)
+        CheckDir(Paths.Logs)
+        CheckDir(Paths.Quests)
+        CheckDir(Paths.Recipes)
+        CheckDir(Paths.Pets)
+        CheckDir(Paths.Projectiles)
+        CheckDir(Paths.Quests)
+
         ' LOAD ENCRYPTION
         Dim fi = Paths.Database & "\AsyncKeys.xml"
         If Not File.Exists(fi) Then
@@ -138,24 +156,6 @@ Module S_General
         'pets
         ReDim Pet(MAX_PETS)
         ClearPets()
-
-        ' Check if the directory is there, if its not make it
-        CheckDir(Paths.Database)
-        CheckDir(Paths.Jobs)
-        CheckDir(Paths.Items)
-        CheckDir(Paths.Maps)
-        CheckDir(Paths.Npcs)
-        CheckDir(Paths.Shops)
-        CheckDir(Paths.Skills)
-        CheckDir(Paths.Accounts)
-        CheckDir(Paths.Resources)
-        CheckDir(Paths.Animations)
-        CheckDir(Paths.Logs)
-        CheckDir(Paths.Quests)
-        CheckDir(Paths.Recipes)
-        CheckDir(Paths.Pets)
-        CheckDir(Paths.Projectiles)
-        CheckDir(Paths.Quests)
 
         ' Get that network READY SUN! ~ SpiceyWOlf
         InitNetwork()
