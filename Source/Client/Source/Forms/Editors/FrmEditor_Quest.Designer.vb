@@ -99,9 +99,9 @@ Partial Class frmEditor_Quest
         Me.DarkLabel22 = New DarkUI.Controls.DarkLabel()
         Me.cmbStartItem = New DarkUI.Controls.DarkComboBox()
         Me.DarkLabel21 = New DarkUI.Controls.DarkLabel()
-        Me.cmbClassReq = New DarkUI.Controls.DarkComboBox()
+        Me.cmbJobReq = New DarkUI.Controls.DarkComboBox()
         Me.DarkLabel20 = New DarkUI.Controls.DarkLabel()
-        Me.rdbClassReq = New DarkUI.Controls.DarkRadioButton()
+        Me.rdbJobReq = New DarkUI.Controls.DarkRadioButton()
         Me.cmbQuestReq = New DarkUI.Controls.DarkComboBox()
         Me.DarkLabel19 = New DarkUI.Controls.DarkLabel()
         Me.rdbQuestReq = New DarkUI.Controls.DarkRadioButton()
@@ -907,9 +907,9 @@ Partial Class frmEditor_Quest
         Me.fraRequirements.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
         Me.fraRequirements.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraRequirements.Controls.Add(Me.DarkGroupBox6)
-        Me.fraRequirements.Controls.Add(Me.cmbClassReq)
+        Me.fraRequirements.Controls.Add(Me.cmbJobReq)
         Me.fraRequirements.Controls.Add(Me.DarkLabel20)
-        Me.fraRequirements.Controls.Add(Me.rdbClassReq)
+        Me.fraRequirements.Controls.Add(Me.rdbJobReq)
         Me.fraRequirements.Controls.Add(Me.cmbQuestReq)
         Me.fraRequirements.Controls.Add(Me.DarkLabel19)
         Me.fraRequirements.Controls.Add(Me.rdbQuestReq)
@@ -1052,15 +1052,15 @@ Partial Class frmEditor_Quest
         Me.DarkLabel21.TabIndex = 0
         Me.DarkLabel21.Text = "Give Item:"
         '
-        'cmbClassReq
+        'cmbJobReq
         '
-        Me.cmbClassReq.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbClassReq.FormattingEnabled = true
-        Me.cmbClassReq.Location = New System.Drawing.Point(216, 147)
-        Me.cmbClassReq.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbClassReq.Name = "cmbClassReq"
-        Me.cmbClassReq.Size = New System.Drawing.Size(185, 24)
-        Me.cmbClassReq.TabIndex = 9
+        Me.cmbJobReq.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbJobReq.FormattingEnabled = true
+        Me.cmbJobReq.Location = New System.Drawing.Point(216, 147)
+        Me.cmbJobReq.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbJobReq.Name = "cmbJobReq"
+        Me.cmbJobReq.Size = New System.Drawing.Size(185, 24)
+        Me.cmbJobReq.TabIndex = 9
         '
         'DarkLabel20
         '
@@ -1073,16 +1073,16 @@ Partial Class frmEditor_Quest
         Me.DarkLabel20.TabIndex = 8
         Me.DarkLabel20.Text = "Job Requirement:"
         '
-        'rdbClassReq
+        'rdbJobReq
         '
-        Me.rdbClassReq.AutoSize = true
-        Me.rdbClassReq.Location = New System.Drawing.Point(12, 148)
-        Me.rdbClassReq.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.rdbClassReq.Name = "rdbClassReq"
-        Me.rdbClassReq.Size = New System.Drawing.Size(52, 19)
-        Me.rdbClassReq.TabIndex = 7
-        Me.rdbClassReq.TabStop = true
-        Me.rdbClassReq.Text = "Job"
+        Me.rdbJobReq.AutoSize = true
+        Me.rdbJobReq.Location = New System.Drawing.Point(12, 148)
+        Me.rdbJobReq.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.rdbJobReq.Name = "rdbJobReq"
+        Me.rdbJobReq.Size = New System.Drawing.Size(52, 19)
+        Me.rdbJobReq.TabIndex = 7
+        Me.rdbJobReq.TabStop = true
+        Me.rdbJobReq.Text = "Job"
         '
         'cmbQuestReq
         '
@@ -1269,9 +1269,9 @@ End Sub
     Friend WithEvents cmbQuestReq As DarkUI.Controls.DarkComboBox
     Friend WithEvents DarkLabel19 As DarkUI.Controls.DarkLabel
     Friend WithEvents rdbQuestReq As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents cmbClassReq As DarkUI.Controls.DarkComboBox
+    Friend WithEvents cmbJobReq As DarkUI.Controls.DarkComboBox
     Friend WithEvents DarkLabel20 As DarkUI.Controls.DarkLabel
-    Friend WithEvents rdbClassReq As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents rdbJobReq As DarkUI.Controls.DarkRadioButton
     Friend WithEvents DarkGroupBox6 As DarkUI.Controls.DarkGroupBox
     Friend WithEvents cmbStartItem As DarkUI.Controls.DarkComboBox
     Friend WithEvents DarkLabel21 As DarkUI.Controls.DarkLabel

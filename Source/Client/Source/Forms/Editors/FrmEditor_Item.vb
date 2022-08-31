@@ -213,8 +213,8 @@ Friend Class frmEditor_Item
 
 #Region "Requirements"
 
-    Private Sub CmbClassReq_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJobReq.SelectedIndexChanged
-        Item(Editorindex).ClassReq = cmbJobReq.SelectedIndex
+    Private Sub CmbJobReq_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJobReq.SelectedIndexChanged
+        Item(Editorindex).JobReq = cmbJobReq.SelectedIndex
     End Sub
 
     Private Sub CmbAccessReq_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAccessReq.SelectedIndexChanged

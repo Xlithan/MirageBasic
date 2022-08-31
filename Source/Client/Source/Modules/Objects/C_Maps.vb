@@ -261,7 +261,6 @@ Module C_Maps
 
         SyncLock MapLock
             If buffer.ReadInt32 = 1 Then
-
                 mapNum = buffer.ReadInt32
                 Map.Name = Trim(buffer.ReadString)
                 Map.Music = Trim(buffer.ReadString)
@@ -651,7 +650,6 @@ Module C_Maps
         If Map.EventCount > 0 Then
            For i = 0 To Map.EventCount
                 With Map.Events(i)
-                    If .Name = Nothing Then .Name = ""
                     buffer.WriteString((.Name.Trim))
                     buffer.WriteByte(.Globals)
                     buffer.WriteInt32(.X)

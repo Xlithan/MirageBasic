@@ -1317,7 +1317,7 @@ Module S_NetworkReceive
         Skill(skillnum).CastAnim = buffer.ReadInt32()
         Skill(skillnum).CastTime = buffer.ReadInt32()
         Skill(skillnum).CdTime = buffer.ReadInt32()
-        Skill(skillnum).ClassReq = buffer.ReadInt32()
+        Skill(skillnum).JobReq = buffer.ReadInt32()
         Skill(skillnum).Dir = buffer.ReadInt32()
         Skill(skillnum).Duration = buffer.ReadInt32()
         Skill(skillnum).Icon = buffer.ReadInt32()

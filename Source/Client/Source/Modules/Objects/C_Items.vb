@@ -77,7 +77,7 @@ Module C_Items
 
         Item(n).Animation = buffer.ReadInt32()
         Item(n).BindType = buffer.ReadInt32()
-        Item(n).ClassReq = buffer.ReadInt32()
+        Item(n).JobReq = buffer.ReadInt32()
         Item(n).Data1 = buffer.ReadInt32()
         Item(n).Data2 = buffer.ReadInt32()
         Item(n).Data3 = buffer.ReadInt32()

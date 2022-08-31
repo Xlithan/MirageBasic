@@ -416,9 +416,9 @@ Friend Class frmEditor_Quest
         ElseIf rdbQuestReq.Checked = True Then
             Quest(Editorindex).Requirement(Quest(Editorindex).ReqCount) = 2
             Quest(Editorindex).RequirementIndex(Quest(Editorindex).ReqCount) = cmbQuestReq.SelectedIndex
-        ElseIf rdbClassReq.Checked = True Then
+        ElseIf rdbJobReq.Checked = True Then
             Quest(Editorindex).Requirement(Quest(Editorindex).ReqCount) = 3
-            Quest(Editorindex).RequirementIndex(Quest(Editorindex).ReqCount) = cmbClassReq.SelectedIndex
+            Quest(Editorindex).RequirementIndex(Quest(Editorindex).ReqCount) = cmbJobReq.SelectedIndex
         End If
 
         lstRequirements.Items.Clear()
@@ -450,8 +450,8 @@ Friend Class frmEditor_Quest
         cmbQuestReq.SelectedIndex = 0
         cmbQuestReq.Enabled = False
 
-        cmbClassReq.SelectedIndex = 0
-        cmbClassReq.Enabled = False
+        cmbJobReq.SelectedIndex = 0
+        cmbJobReq.Enabled = False
     End Sub
 
     Private Sub RdbItemReq_CheckedChanged(sender As Object, e As EventArgs) Handles rdbItemReq.CheckedChanged
@@ -462,8 +462,8 @@ Friend Class frmEditor_Quest
         cmbQuestReq.Enabled = True
     End Sub
 
-    Private Sub RdbClassReq_CheckedChanged(sender As Object, e As EventArgs) Handles rdbClassReq.CheckedChanged
-        cmbClassReq.Enabled = True
+    Private Sub RdbJobReq_CheckedChanged(sender As Object, e As EventArgs) Handles rdbJobReq.CheckedChanged
+        cmbJobReq.Enabled = True
     End Sub
 
 #End Region

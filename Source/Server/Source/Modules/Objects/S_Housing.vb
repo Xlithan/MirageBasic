@@ -236,8 +236,8 @@ Friend Module S_Housing
                 End If
 
                 ' class requirement
-                If Item(ItemNum).ClassReq > 0 Then
-                    If Not GetPlayerClass(index) = Item(ItemNum).ClassReq Then
+                If Item(ItemNum).JobReq > 0 Then
+                    If Not GetPlayerJob(index) = Item(ItemNum).JobReq Then
                         PlayerMsg(index, "You do not meet the class requirement to use this item.", ColorType.BrightRed)
                         Exit Sub
                     End If

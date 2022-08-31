@@ -1157,8 +1157,8 @@ Continue1:
         SkillDescReqLvl = Skill(skillnum).LevelReq
         SkillDescReqAccess = Skill(skillnum).AccessReq
 
-        If Skill(skillnum).ClassReq > 0 Then
-            SkillDescReqClass = Trim$(Job(Skill(skillnum).ClassReq).Name)
+        If Skill(skillnum).JobReq > 0 Then
+            SkillDescReqClass = Trim$(Job(Skill(skillnum).JobReq).Name)
         Else
             SkillDescReqClass = Language.SkillDescription.None
         End If

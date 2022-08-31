@@ -84,7 +84,7 @@
         Dim MpCost As Integer
         Dim LevelReq As Integer
         Dim AccessReq As Integer
-        Dim ClassReq As Integer
+        Dim JobReq As Integer
         Dim CastTime As Integer
         Dim CdTime As Integer
         Dim Icon As Integer
@@ -153,7 +153,7 @@
         Dim Data1 As Integer
         Dim Data2 As Integer
         Dim Data3 As Integer
-        Dim ClassReq As Integer
+        Dim JobReq As Integer
         Dim AccessReq As Integer
         Dim LevelReq As Integer
         Dim Mastery As Byte
