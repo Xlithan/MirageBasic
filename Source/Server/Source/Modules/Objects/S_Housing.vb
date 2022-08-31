@@ -34,7 +34,7 @@ Friend Module S_Housing
 
 #End Region
 
-#Region "DataBase"
+#Region "Database"
     Sub LoadHouses()
         Dim cf = Paths.Database & "houseconfig.ini"
         If Not File.Exists(cf) Then

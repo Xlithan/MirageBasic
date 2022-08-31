@@ -16,7 +16,7 @@ Module C_Resources
 
 #End Region
 
-#Region "DataBase"
+#Region "Database"
 
     Friend Sub CheckResources()
         Dim i As Integer

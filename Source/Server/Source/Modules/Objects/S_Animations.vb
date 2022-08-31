@@ -89,7 +89,7 @@ Friend Module S_Animations
     Sub CheckAnimations()
         Dim i As Integer
 
-       For i = 0 To MAX_ANIMATIONS
+        For i = 0 To MAX_ANIMATIONS
 
             If Not File.Exists(Paths.Animation(i)) Then
                 SaveAnimation(i)
@@ -144,7 +144,7 @@ Friend Module S_Animations
         buffer.WriteString((Animation(AnimationNum).Name))
         buffer.WriteString((Animation(AnimationNum).Sound))
 
-        For i = 0 To Animation(AnimationNum).Sprite.Length
+        For i = 0 To UBound(Animation(AnimationNum).Sprite)
             buffer.WriteInt32(Animation(AnimationNum).Sprite(i))
         Next
 

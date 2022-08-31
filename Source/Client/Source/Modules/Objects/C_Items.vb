@@ -18,7 +18,7 @@ Module C_Items
 
 #End Region
 
-#Region "DataBase"
+#Region "Database"
 
     Friend Sub CheckItems()
         Dim i As Integer

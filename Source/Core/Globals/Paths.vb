@@ -219,5 +219,17 @@ Namespace Paths
         Public Function Skill(index As Integer) As String
             Return Skills() & index & ".dat"
         End Function
+
+        ''' <summary> Returns jobs directory </summary>
+        Public ReadOnly Property Jobs As String
+            Get
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Jobs\"
+            End Get
+        End Property
+
+        ''' <summary> Returns job file </summary>
+        Public function Job(index As Integer) As String
+            Return Jobs() & index & ".dat"
+        End function
     End Module
 End Namespace
