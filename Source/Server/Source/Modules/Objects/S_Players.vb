@@ -1076,8 +1076,9 @@ Module S_Players
         End If
     End Sub
 
-    Function GetPlayerClass(index As Integer) As Integer
-        GetPlayerClass = Player(index).Job
+    Function GetPlayerJob(index As Integer) As Integer
+        If Player(index).Job = 0 Then Player(index).Job = 1
+        GetPlayerJob = Player(index).Job
     End Function
 
     Sub SetPlayerPK(index As Integer, PK As Integer)
@@ -2030,7 +2031,7 @@ Module S_Players
                     End If
 
                     ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(index) AndAlso Not Item(InvItemNum).ClassReq = 0 Then
+                    If Not Item(InvItemNum).JobReq = GetPlayerJob(index) AndAlso Not Item(InvItemNum).JobReq = 0 Then
                         PlayerMsg(index, "You do not meet the class requirements to equip this item.", ColorType.BrightRed)
                         Exit Sub
                     End If
@@ -2446,7 +2447,7 @@ Module S_Players
                     End If
 
                     ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(index) AndAlso Not Item(InvItemNum).ClassReq = 0 Then
+                    If Not Item(InvItemNum).JobReq = GetPlayerJob(index) AndAlso Not Item(InvItemNum).JobReq = 0 Then
                         PlayerMsg(index, "You do not meet the class requirements to use this item.", ColorType.BrightRed)
                         Exit Sub
                     End If
@@ -2524,7 +2525,7 @@ Module S_Players
                     End If
 
                     ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(index) AndAlso Not Item(InvItemNum).ClassReq = 0 Then
+                    If Not Item(InvItemNum).JobReq = GetPlayerJob(index) AndAlso Not Item(InvItemNum).JobReq = 0 Then
                         PlayerMsg(index, "You do not meet the class requirements to use this item.", ColorType.BrightRed)
                         Exit Sub
                     End If
@@ -2599,7 +2600,7 @@ Module S_Players
                     Next
 
                     ' Make sure they are the right class
-                    If Not Item(InvItemNum).ClassReq = GetPlayerClass(index) AndAlso Not Item(InvItemNum).ClassReq = 0 Then
+                    If Not Item(InvItemNum).JobReq = GetPlayerJob(index) AndAlso Not Item(InvItemNum).JobReq = 0 Then
                         PlayerMsg(index, "You do not meet the class requirements to use this item.", ColorType.BrightRed)
                         Exit Sub
                     End If
@@ -2610,7 +2611,7 @@ Module S_Players
                     If n > 0 Then
 
                         ' Make sure they are the right class
-                        If Skill(n).ClassReq = GetPlayerClass(index) OrElse Skill(n).ClassReq = 0 Then
+                        If Skill(n).JobReq = GetPlayerJob(index) OrElse Skill(n).JobReq = 0 Then
                             ' Make sure they are the right level
                             i = Skill(n).LevelReq
 
@@ -2637,7 +2638,7 @@ Module S_Players
                                 PlayerMsg(index, "You must be level " & i & " to learn this skill.", ColorType.Yellow)
                             End If
                         Else
-                            PlayerMsg(index, "This skill can only be learned by " & CheckGrammar(GetJobName(Skill(n).ClassReq)) & ".", ColorType.Yellow)
+                            PlayerMsg(index, "This skill can only be learned by " & CheckGrammar(GetJobName(Skill(n).JobReq)) & ".", ColorType.Yellow)
                         End If
                     Else
                         PlayerMsg(index, "This scroll is not connected to a skill, please inform an admin!", ColorType.BrightRed)
@@ -3140,7 +3141,7 @@ Module S_Players
         Dim LevelReq As Integer
         Dim mapNum As Integer
         Dim SkillCastType As Integer
-        Dim ClassReq As Integer
+        Dim JobReq As Integer
         Dim AccessReq As Integer
         Dim range As Integer
         Dim HasBuffered As Boolean
@@ -3189,12 +3190,12 @@ Module S_Players
             Exit Sub
         End If
 
-        ClassReq = Skill(skillnum).ClassReq
+        JobReq = Skill(skillnum).JobReq
 
-        ' make sure the classreq > 0
-        If ClassReq > 0 Then ' 0 = no req
-            If ClassReq <> GetPlayerClass(index) Then
-                PlayerMsg(index, "Only " & CheckGrammar(Trim$(Job(ClassReq).Name)) & " can use this skill.", ColorType.Yellow)
+        ' make sure the JobReq > 0
+        If JobReq > 0 Then ' 0 = no req
+            If JobReq <> GetPlayerJob(index) Then
+                PlayerMsg(index, "Only " & CheckGrammar(Trim$(Job(JobReq).Name)) & " can use this skill.", ColorType.Yellow)
                 Exit Sub
             End If
         End If

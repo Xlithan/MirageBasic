@@ -651,7 +651,6 @@ Module C_Maps
         If Map.EventCount > 0 Then
            For i = 0 To Map.EventCount
                 With Map.Events(i)
-                    If .Name = Nothing Then .Name = ""
                     buffer.WriteString((.Name.Trim))
                     buffer.WriteByte(.Globals)
                     buffer.WriteInt32(.X)

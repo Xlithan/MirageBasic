@@ -22,8 +22,10 @@ Module C_Job
 
                 ' get array size
                 z = buffer.ReadInt32
+
                 ' redim array
                 ReDim .MaleSprite(z)
+
                 ' loop-receive data
                 For x = 0 To z
                     .MaleSprite(x) = buffer.ReadInt32
@@ -31,6 +33,7 @@ Module C_Job
 
                 ' get array size
                 z = buffer.ReadInt32
+
                 ' redim array
                 ReDim .FemaleSprite(z)
                 ' loop-receive data
@@ -88,8 +91,6 @@ Module C_Job
         Dim i As Integer, z As Integer, x As Integer
         Dim buffer As New ByteStream(data)
 
-        NewCharSprite = 0
-
         For i = 0 To MAX_JOBS
             With Job(i)
                 .Name = Trim(buffer.ReadString)
@@ -103,8 +104,10 @@ Module C_Job
 
                 ' get array size
                 z = buffer.ReadInt32
+
                 ' redim array
                 ReDim .MaleSprite(z)
+
                 ' loop-receive data
                 For x = 0 To z
                     .MaleSprite(x) = buffer.ReadInt32
@@ -112,8 +115,10 @@ Module C_Job
 
                 ' get array size
                 z = buffer.ReadInt32
+
                 ' redim array
                 ReDim .FemaleSprite(z)
+
                 ' loop-receive data
                 For x = 0 To z
                     .FemaleSprite(x) = buffer.ReadInt32
@@ -130,6 +135,7 @@ Module C_Job
 
                 ReDim .StartItem(5)
                 ReDim .StartValue(5)
+
                 For q = 0 To 5
                     .StartItem(q) = buffer.ReadInt32
                     .StartValue(q) = buffer.ReadInt32

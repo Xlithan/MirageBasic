@@ -127,19 +127,19 @@ Module modDatabase
         Next
     End Sub
 
-    Function GetJobMaxVital(ClassNum As Integer, Vital As VitalType) As Integer
+    Function GetJobMaxVital(jobNum As Integer, Vital As VitalType) As Integer
         Select Case Vital
             Case VitalType.HP
-                GetJobMaxVital = (1 + (Job(ClassNum).Stat(StatType.Vitality) \ 2) + Job(ClassNum).Stat(StatType.Vitality)) * 2
+                GetJobMaxVital = (1 + (Job(jobNum).Stat(StatType.Vitality) \ 2) + Job(jobNum).Stat(StatType.Vitality)) * 2
             Case VitalType.MP
-                GetJobMaxVital = (1 + (Job(ClassNum).Stat(StatType.Intelligence) \ 2) + Job(ClassNum).Stat(StatType.Intelligence)) * 2
+                GetJobMaxVital = (1 + (Job(jobNum).Stat(StatType.Intelligence) \ 2) + Job(jobNum).Stat(StatType.Intelligence)) * 2
             Case VitalType.SP
-                GetJobMaxVital = (1 + (Job(ClassNum).Stat(StatType.Spirit) \ 2) + Job(ClassNum).Stat(StatType.Spirit)) * 2
+                GetJobMaxVital = (1 + (Job(jobNum).Stat(StatType.Spirit) \ 2) + Job(jobNum).Stat(StatType.Spirit)) * 2
         End Select
     End Function
 
-    Function GetJobName(ClassNum As Integer) As String
-        GetJobName = Trim$(Job(ClassNum).Name)
+    Function GetJobName(jobNum As Integer) As String
+        GetJobName = Trim$(Job(jobNum).Name)
     End Function
 
 #End Region
@@ -928,7 +928,7 @@ Module modDatabase
         writer.WriteInt32(Skill(skillnum).MpCost)
         writer.WriteInt32(Skill(skillnum).LevelReq)
         writer.WriteInt32(Skill(skillnum).AccessReq)
-        writer.WriteInt32(Skill(skillnum).ClassReq)
+        writer.WriteInt32(Skill(skillnum).JobReq)
         writer.WriteInt32(Skill(skillnum).CastTime)
         writer.WriteInt32(Skill(skillnum).CdTime)
         writer.WriteInt32(Skill(skillnum).Icon)
@@ -978,7 +978,7 @@ Module modDatabase
         Skill(SkillNum).MpCost = reader.ReadInt32()
         Skill(SkillNum).LevelReq = reader.ReadInt32()
         Skill(SkillNum).AccessReq = reader.ReadInt32()
-        Skill(SkillNum).ClassReq = reader.ReadInt32()
+        Skill(SkillNum).JobReq = reader.ReadInt32()
         Skill(SkillNum).CastTime = reader.ReadInt32()
         Skill(SkillNum).CdTime = reader.ReadInt32()
         Skill(SkillNum).Icon = reader.ReadInt32()
@@ -1638,30 +1638,30 @@ Module modDatabase
         Return Player(index).Name.Trim.Length > 0
     End Function
 
-    Sub AddChar(index As Integer, CharNum As Integer, Name As String, Sex As Byte, ClassNum As Byte, Sprite As Integer)
+    Sub AddChar(index As Integer, CharNum As Integer, Name As String, Sex As Byte, jobNum As Byte, Sprite As Integer)
         Dim n As Integer, i As Integer
 
         If Len(Trim$(Player(index).Name)) = 0 Then
             Player(index).Name = Name
             Player(index).Sex = Sex
-            Player(index).Job = ClassNum
+            Player(index).Job = jobNum
 
             If Player(index).Sex = SexType.Male Then
-                Player(index).Sprite = Job(ClassNum).MaleSprite(Sprite)
+                Player(index).Sprite = Job(jobNum).MaleSprite(Sprite)
             Else
-                Player(index).Sprite = Job(ClassNum).FemaleSprite(Sprite)
+                Player(index).Sprite = Job(jobNum).FemaleSprite(Sprite)
             End If
 
             Player(index).Level = 1
 
             For n = 0 To StatType.Count - 1
-                Player(index).Stat(n) = Job(ClassNum).Stat(n)
+                Player(index).Stat(n) = Job(jobNum).Stat(n)
             Next n
 
             Player(index).Dir = DirectionType.Down
-            Player(index).Map = Job(ClassNum).StartMap
-            Player(index).X = Job(ClassNum).StartX
-            Player(index).Y = Job(ClassNum).StartY
+            Player(index).Map = Job(jobNum).StartMap
+            Player(index).X = Job(jobNum).StartX
+            Player(index).Y = Job(jobNum).StartY
             Player(index).Dir = DirectionType.Down
             Player(index).Vital(VitalType.HP) = GetPlayerMaxVital(index, VitalType.HP)
             Player(index).Vital(VitalType.MP) = GetPlayerMaxVital(index, VitalType.MP)
@@ -1669,18 +1669,18 @@ Module modDatabase
 
             ' set starter equipment
             For n = 0 To 5
-                If Job(ClassNum).StartItem(n) > 0 Then
-                    Player(index).Inv(n).Num = Job(ClassNum).StartItem(n)
-                    Player(index).Inv(n).Value = Job(ClassNum).StartValue(n)
+                If Job(jobNum).StartItem(n) > 0 Then
+                    Player(index).Inv(n).Num = Job(jobNum).StartItem(n)
+                    Player(index).Inv(n).Value = Job(jobNum).StartValue(n)
 
-                    If Item(Job(ClassNum).StartItem(n)).Randomize Then
+                    If Item(Job(jobNum).StartItem(n)).Randomize Then
                         Player(index).RandInv(n).Prefix = ""
                         Player(index).RandInv(n).Suffix = ""
                         Player(index).RandInv(n).Rarity = RarityType.RARITY_COMMON
-                        Player(index).RandInv(n).Damage = Item(Job(ClassNum).StartItem(n)).Data2
-                        Player(index).RandInv(n).Speed = Item(Job(ClassNum).StartItem(n)).Speed
+                        Player(index).RandInv(n).Damage = Item(Job(jobNum).StartItem(n)).Data2
+                        Player(index).RandInv(n).Speed = Item(Job(jobNum).StartItem(n)).Speed
                         For i = 0 To StatType.Count - 1
-                            Player(index).RandInv(n).Stat(i) = Item(Job(ClassNum).StartItem(n)).Add_Stat(i)
+                            Player(index).RandInv(n).Stat(i) = Item(Job(jobNum).StartItem(n)).Add_Stat(i)
                         Next
                     End If
                 End If
@@ -2005,7 +2005,7 @@ Module modDatabase
         buffer.WriteInt32(Skill(skillnum).CastAnim)
         buffer.WriteInt32(Skill(skillnum).CastTime)
         buffer.WriteInt32(Skill(skillnum).CdTime)
-        buffer.WriteInt32(Skill(skillnum).ClassReq)
+        buffer.WriteInt32(Skill(skillnum).JobReq)
         buffer.WriteInt32(Skill(skillnum).Dir)
         buffer.WriteInt32(Skill(skillnum).Duration)
         buffer.WriteInt32(Skill(skillnum).Icon)

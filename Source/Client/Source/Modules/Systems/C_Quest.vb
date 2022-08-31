@@ -606,15 +606,15 @@ Friend Module C_Quest
                 .cmbQuestReq.Items.Add(i & ": " & Quest(i).Name)
             Next
 
-            .cmbClassReq.Items.Clear()
+            .cmbJobReq.Items.Clear()
 
             For i = 0 To MAX_JOBS
-                .cmbClassReq.Items.Add(i & ": " & Job(i).Name)
+                .cmbJobReq.Items.Add(i & ": " & Job(i).Name)
             Next
 
             .cmbItemReq.Enabled = False
             .cmbQuestReq.Enabled = False
-            .cmbClassReq.Enabled = False
+            .cmbJobReq.Enabled = False
 
             Select Case Quest(QuestNum).Requirement(ReqNum)
                 Case 0
@@ -628,9 +628,9 @@ Friend Module C_Quest
                     .cmbQuestReq.Enabled = True
                     .cmbQuestReq.SelectedIndex = Quest(QuestNum).RequirementIndex(ReqNum)
                 Case 3
-                    .rdbClassReq.Checked = True
-                    .cmbClassReq.Enabled = True
-                    .cmbClassReq.SelectedIndex = Quest(QuestNum).RequirementIndex(ReqNum)
+                    .rdbJobReq.Checked = True
+                    .cmbJobReq.Enabled = True
+                    .cmbJobReq.SelectedIndex = Quest(QuestNum).RequirementIndex(ReqNum)
             End Select
 
         End With
@@ -856,9 +856,9 @@ Friend Module C_Quest
             .cmbEndItem.SelectedIndex = 0
             .cmbItemReward.SelectedIndex = 0
 
-            .cmbClassReq.Items.Clear()
+            .cmbJobReq.Items.Clear()
             For i = 0 To MAX_JOBS
-                .cmbClassReq.Items.Add(Trim(Job(i).Name))
+                .cmbJobReq.Items.Add(Trim(Job(i).Name))
             Next
 
             .cmbStartItem.SelectedIndex = Quest(Editorindex).QuestGiveItem

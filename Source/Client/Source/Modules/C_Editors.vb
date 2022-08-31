@@ -266,7 +266,7 @@ Module C_Editors
             .nudMp.Value = Skill(Editorindex).MpCost
             .nudLevel.Value = Skill(Editorindex).LevelReq
             .cmbAccessReq.SelectedIndex = Skill(Editorindex).AccessReq
-            .cmbClass.SelectedIndex = Skill(Editorindex).ClassReq
+            .cmbClass.SelectedIndex = Skill(Editorindex).JobReq
             .nudCast.Value = Skill(Editorindex).CastTime
             .nudCool.Value = Skill(Editorindex).CdTime
             .nudIcon.Value = Skill(Editorindex).Icon
@@ -627,13 +627,13 @@ Module C_Editors
             frmEditor_Item.nudIntReq.Value = .Stat_Req(StatType.Intelligence)
             frmEditor_Item.nudSprReq.Value = .Stat_Req(StatType.Spirit)
 
-            ' Build cmbClassReq
+            ' Build cmbJobReq
             frmEditor_Item.cmbJobReq.Items.Clear()
            For i = 0 To MAX_JOBS
                 frmEditor_Item.cmbJobReq.Items.Add(Job(i).Name)
             Next
 
-            frmEditor_Item.cmbJobReq.SelectedIndex = .ClassReq
+            frmEditor_Item.cmbJobReq.SelectedIndex = .JobReq
             ' Info
             frmEditor_Item.nudPrice.Value = .Price
             frmEditor_Item.cmbBind.SelectedIndex = .BindType

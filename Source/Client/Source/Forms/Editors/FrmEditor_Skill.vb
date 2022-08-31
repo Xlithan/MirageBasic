@@ -28,7 +28,7 @@ Friend Class frmEditor_Skill
     End Sub
 
     Private Sub CmbClass_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClass.SelectedIndexChanged
-        Skill(Editorindex).ClassReq = cmbClass.SelectedIndex
+        Skill(Editorindex).JobReq = cmbClass.SelectedIndex
     End Sub
 
     Private Sub NudCast_Scroll(sender As Object, e As EventArgs) Handles nudCast.ValueChanged

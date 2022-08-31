@@ -15,14 +15,14 @@ Module C_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Friend Sub SendAddChar(slot As Integer, name As String, sex As Integer, classNum As Integer, sprite As Integer)
+    Friend Sub SendAddChar(slot As Integer, name As String, sex As Integer, jobNum As Integer, sprite As Integer)
         Dim buffer As New ByteStream(4)
 
         buffer.WriteInt32(ClientPackets.CAddChar)
         buffer.WriteInt32(slot)
         buffer.WriteString((name))
         buffer.WriteInt32(sex)
-        buffer.WriteInt32(classNum)
+        buffer.WriteInt32(jobNum)
         buffer.WriteInt32(sprite)
         Socket.SendData(buffer.Data, buffer.Head)
 
@@ -516,7 +516,7 @@ Module C_NetworkSend
         buffer.WriteInt32(Skill(skillnum).CastAnim)
         buffer.WriteInt32(Skill(skillnum).CastTime)
         buffer.WriteInt32(Skill(skillnum).CdTime)
-        buffer.WriteInt32(Skill(skillnum).ClassReq)
+        buffer.WriteInt32(Skill(skillnum).JobReq)
         buffer.WriteInt32(Skill(skillnum).Dir)
         buffer.WriteInt32(Skill(skillnum).Duration)
         buffer.WriteInt32(Skill(skillnum).Icon)
@@ -687,7 +687,7 @@ Module C_NetworkSend
 
         buffer.WriteInt32(Item(itemNum).Animation)
         buffer.WriteInt32(Item(itemNum).BindType)
-        buffer.WriteInt32(Item(itemNum).ClassReq)
+        buffer.WriteInt32(Item(itemNum).JobReq)
         buffer.WriteInt32(Item(itemNum).Data1)
         buffer.WriteInt32(Item(itemNum).Data2)
         buffer.WriteInt32(Item(itemNum).Data3)
