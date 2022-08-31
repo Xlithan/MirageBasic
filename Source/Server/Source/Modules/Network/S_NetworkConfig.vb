@@ -3,12 +3,12 @@ Imports Asfw.Network
 Imports MirageBasic.Core
 
 Friend Module S_NetworkConfig
-    Friend WithEvents Socket As Server
+    Friend WithEvents Socket As Asfw.Network.Server
 
     Friend Sub InitNetwork()
         If Not Socket Is Nothing Then Return
         ' Establish some Rulez
-        Socket = New Server(Packets.ClientPackets.Count, 4096, MAX_PLAYERS) With {
+        Socket = New Asfw.Network.Server(Packets.ClientPackets.Count, 4096, MAX_PLAYERS) With {
             .BufferLimit = 2048000, ' <- this is 2mb max data storage
             .MinimumIndex = 1, ' <- this prevents the network from giving us 0 as an index
             .PacketAcceptLimit = 100, ' Dunno what is a reasonable cap right now so why not? :P
@@ -23,20 +23,8 @@ Friend Module S_NetworkConfig
         Socket.Dispose()
     End Sub
 
-    Friend Function GetIP() As String
-        Dim request = HttpWebRequest.Create(New Uri("http://ascensiongamedev.com/resources/myip.php"))
-        request.Method = WebRequestMethods.Http.Get
-
-        Try
-            Dim reader As New IO.StreamReader(request.GetResponse().GetResponseStream())
-            Return reader.ReadToEnd()
-        Catch e As Exception
-            Return "127.0.0.1"
-        End Try
-    End Function
-
     Function IsLoggedIn(index As Integer) As Boolean
-        Return Len(Trim$(Player(index).Login)) > 0
+        Return Player(index).Login.Trim.Length > 0
     End Function
 
     Function IsPlaying(index As Integer) As Boolean

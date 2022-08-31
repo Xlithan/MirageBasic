@@ -1,0 +1,52 @@
+﻿<Properties>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Source/Server/Source/Modules/S_General.vb">
+    <Files>
+      <File FileName="Source/Server/Server.vbproj" Line="32" Column="9" />
+      <File FileName="Source/Server/My Project/Settings.Designer.vb" Line="24" Column="53" />
+      <File FileName="Source/Server/System/Configuration/ApplicationSettingsBase.vb" Line="12" Column="41" />
+      <File FileName="Source/Server/My Project/GlobalSuppressions.vb" Line="6" Column="1" />
+      <File FileName="Source/Server/System/Diagnostics.vb" Line="1" Column="1" />
+      <File FileName="Source/Server/My/MySettings.vb" Line="20" Column="1" />
+      <File FileName="Source/Server/Source/Modules/Network/S_NetworkConfig.vb" Line="24" Column="12" />
+      <File FileName="Source/Server/Source/Modules/S_General.vb" Line="330" Column="56" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MirageBasic Game Engine" expanded="True">
+            <Node name="Asfw" expanded="True">
+              <Node name="IO" expanded="True" />
+              <Node name="Network" expanded="True" />
+            </Node>
+            <Node name="Server" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="ProjectDependencies" expanded="True" />
+              </Node>
+              <Node name="My" expanded="True" />
+              <Node name="My Project" expanded="True" />
+              <Node name="Source" expanded="True">
+                <Node name="Modules" expanded="True">
+                  <Node name="Events" expanded="True" />
+                  <Node name="Network" expanded="True" />
+                  <Node name="Objects" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="System" expanded="True">
+                <Node name="Configuration" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x64" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+</Properties>

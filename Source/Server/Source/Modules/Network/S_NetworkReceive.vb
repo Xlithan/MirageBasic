@@ -183,14 +183,14 @@ Module S_NetworkReceive
             username = EKeyPair.DecryptString(buffer.ReadString)
             password = EKeyPair.DecryptString(buffer.ReadString)
             ' Prevent hacking
-            If Len(username.Trim) < 3 OrElse Len(password.Trim) < 3 Then
+            If username.Trim.Length < 3 OrElse password.Trim.Length < 3 Then
                 AlertMsg(index, "Your username and password must be at least three characters in length")
                 Exit Sub
             End If
 
             ' Prevent hacking
             For i = 1 To Len(username)
-                n = AscW(Mid$(username, i, 1))
+                n = Microsoft.VisualBasic.Strings.AscW(Microsoft.VisualBasic.Strings.Mid$(username, i, 1))
 
                 If Not IsNameLegal(n) Then
                     AlertMsg(index, "Invalid username, only letters, numbers, spaces, and _ allowed in usernames.")
@@ -203,15 +203,15 @@ Module S_NetworkReceive
             ' Cut off last portion of ip
             IP = Socket.ClientIp(index)
 
-            For i = Len(IP) To 1 Step -1
+            For i = IP.Length To 1 Step -1
 
-                If Mid$(IP, i, 1) = "." Then
+                If Microsoft.VisualBasic.Strings.Mid(IP, i, 1) = "." Then
                     Exit For
                 End If
 
             Next
 
-            IP = Mid$(IP, 1, i)
+            IP = Microsoft.VisualBasic.Strings.Mid$(IP, 1, i)
             If IsBanned(IP) Then
                 AlertMsg(index, "Your Banned!")
             End If
@@ -227,7 +227,7 @@ Module S_NetworkReceive
                 LoadPlayer(index, username)
 
                 ' Check if character data has been created
-                If Len(Trim$(Player(index).Name)) > 0 Then
+                If Player(index).Name.Trim.Length > 0 Then
                     ' we have a char!
                     HandleUseChar(index)
                 Else
@@ -257,14 +257,14 @@ Module S_NetworkReceive
         ' Get the data
         Name = buffer.ReadString
 
-        If GetPlayerLogin(index) = Trim$(Name) Then
+        If GetPlayerLogin(index) = Name.Trim Then
             PlayerMsg(index, "You cannot delete your own account while online!", ColorType.BrightRed)
             Exit Sub
         End If
 
         For i = 0 To GetPlayersOnline()
             If IsPlaying(i) Then
-                If Trim$(Player(i).Login) = Trim$(Name) Then
+                If Player(i).Login.Trim = Name.Trim Then
                     AlertMsg(i, "Your account has been removed by an admin!")
                     ClearPlayer(i)
                 End If
@@ -303,13 +303,7 @@ Module S_NetworkReceive
                 Name = EKeyPair.DecryptString(buffer.ReadString())
                 Password = EKeyPair.DecryptString(buffer.ReadString())
 
-                ' Check versions
-                If EKeyPair.DecryptString(buffer.ReadString()) <> Application.ProductVersion Then
-                    AlertMsg(index, "Version outdated, please visit " & Settings.Website)
-                    Exit Sub
-                End If
-
-                If Len(Trim$(Name)) < 3 OrElse Len(Trim$(Password)) < 3 Then
+                If Name.Trim.Length < 3 OrElse Password.Trim.Length < 3 Then
                     AlertMsg(index, "Your name and password must be at least three characters in length")
                     Exit Sub
                 End If
@@ -339,7 +333,7 @@ Module S_NetworkReceive
                 Console.WriteLine(GetPlayerLogin(index) & " has logged in from " & Socket.ClientIp(index) & ".")
 
                 ' Check if character data has been created
-                If Len(Trim$(Player(index).Name)) > 0 Then
+                If Player(index).Name.Trim.Length > 0 Then
                     HandleUseChar(index)
                 Else
                     SendNewCharJob(index)
@@ -2365,13 +2359,7 @@ Module S_NetworkReceive
             Password = EKeyPair.DecryptString(buffer.ReadString)
             Version = EKeyPair.DecryptString(buffer.ReadString)
 
-            ' Check versions
-            If Version <> Application.ProductVersion Then
-                AlertMsg(index, "Version outdated, please visit " & Settings.Website)
-                Exit Sub
-            End If
-
-            If Len(Trim$(Name)) < 3 OrElse Len(Trim$(Password)) < 3 Then
+            If Name.Trim.Length < 3 OrElse Password.Trim.Length < 3 Then
                 AlertMsg(index, "Your name and password must be at least three characters in length")
                 Exit Sub
             End If

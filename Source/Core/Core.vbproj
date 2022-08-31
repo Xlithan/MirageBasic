@@ -3,6 +3,7 @@
   <PropertyGroup>
     <RootNamespace>MirageBasic.Core</RootNamespace>
     <TargetFramework>net6.0</TargetFramework>
+    <Configurations>Release;Debug</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">

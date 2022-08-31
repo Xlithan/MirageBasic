@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System
+Imports System.IO
 Imports Asfw
 Imports Asfw.IO
 Imports MirageBasic.Core
@@ -36,13 +37,13 @@ Module modDatabase
 
             n = Val(Ini.Read(cf, "CLASS" & i, "MaxMaleSprite"))
             ReDim Job(i).MaleSprite(n)
-            For X = 0 To n
+            For x = 0 To n
                 Job(i).MaleSprite(x) = Val(Ini.Read(cf, "CLASS" & i, "Sprite_Male" & x))
             Next
 
             n = Val(Ini.Read(cf, "CLASS" & i, "MaxFemaleSprite"))
             ReDim Job(i).FemaleSprite(n)
-            For X = 0 To n
+            For x = 0 To n
                 Job(i).FemaleSprite(x) = Val(Ini.Read(cf, "CLASS" & i, "Sprite_Female" & x))
             Next
 
@@ -76,13 +77,13 @@ Module modDatabase
 
             n = UBound(Job(i).MaleSprite)
             Ini.Write(cf, "CLASS" & i, "MaxMaleSprite", n)
-            For X = 0 To n
+            For x = 0 To n
                 Ini.Write(cf, "CLASS" & i, "Sprite_Male" & x, Job(i).MaleSprite(x))
             Next
 
             n = UBound(Job(i).FemaleSprite)
             Ini.Write(cf, "CLASS" & i, "MaxFemaleSprite", n)
-            For X = 0 To n
+            For x = 0 To n
                 Ini.Write(cf, "CLASS" & i, "Sprite_Female" & x, Job(i).FemaleSprite(x))
             Next
 
@@ -218,8 +219,8 @@ Module modDatabase
         writer.WriteByte(Map(mapNum).Panorama)
         writer.WriteByte(Map(mapNum).Parallax)
 
-        For X = 0 To Map(mapNum).MaxX
-            For Y = 0 To Map(mapNum).MaxY
+        For x = 0 To Map(mapNum).MaxX
+            For y = 0 To Map(mapNum).MaxY
                 writer.WriteInt32(Map(mapNum).Tile(x, y).Data1)
                 writer.WriteInt32(Map(mapNum).Tile(x, y).Data2)
                 writer.WriteInt32(Map(mapNum).Tile(x, y).Data3)
@@ -245,7 +246,7 @@ Module modDatabase
     Sub SaveMapEvent(mapNum As Integer)
         Dim filename = Paths.EventMap(mapNum)
         Dim writer As New ByteStream(100)
- 
+
         writer.WriteInt32(Map(mapNum).EventCount)
         For i = 0 To Map(mapNum).EventCount
             With Map(mapNum).Events(i)
@@ -543,8 +544,8 @@ Module modDatabase
         ' have to set the tile()
         ReDim Map(mapNum).Tile(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
-        For X = 0 To Map(mapNum).MaxX
-            For Y = 0 To Map(mapNum).MaxY
+        For x = 0 To Map(mapNum).MaxX
+            For y = 0 To Map(mapNum).MaxY
                 Map(mapNum).Tile(x, y).Data1 = reader.ReadInt32()
                 Map(mapNum).Tile(x, y).Data2 = reader.ReadInt32()
                 Map(mapNum).Tile(x, y).Data3 = reader.ReadInt32()
@@ -589,8 +590,8 @@ Module modDatabase
         TempTile(mapNum).DoorTimer = 0
         ReDim TempTile(mapNum).DoorOpen(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
-        For X = 0 To Map(mapNum).MaxX
-            For Y = 0 To Map(mapNum).MaxY
+        For x = 0 To Map(mapNum).MaxX
+            For y = 0 To Map(mapNum).MaxY
                 TempTile(mapNum).DoorOpen(x, y) = False
             Next
         Next
@@ -624,7 +625,6 @@ Module modDatabase
 
         For i = 0 To MAX_NPCS
             SaveNpc(i)
-            Application.DoEvents()
         Next
 
     End Sub
@@ -677,7 +677,6 @@ Module modDatabase
 
         For i = 0 To MAX_NPCS
             LoadNpc(i)
-            Application.DoEvents()
         Next
     End Sub
 
@@ -731,7 +730,6 @@ Module modDatabase
         For i = 0 To MAX_NPCS
             If Not File.Exists(Paths.Npc(i)) Then
                 SaveNpc(i)
-                Application.DoEvents()
             End If
 
         Next
@@ -748,7 +746,6 @@ Module modDatabase
 
         For i = 0 To MAX_CACHED_MAPS
             ClearMapNpcs(i)
-            Application.DoEvents()
         Next
 
     End Sub
@@ -794,7 +791,6 @@ Module modDatabase
 
         For i = 0 To MAX_SHOPS
             SaveShop(i)
-            Application.DoEvents()
         Next
 
     End Sub
@@ -829,7 +825,6 @@ Module modDatabase
 
         For i = 0 To MAX_SHOPS
             LoadShop(i)
-            Application.DoEvents()
         Next
 
     End Sub
@@ -897,7 +892,6 @@ Module modDatabase
 
         For i = 0 To MAX_SKILLS
             SaveSkill(i)
-            Application.DoEvents()
         Next
 
     End Sub
@@ -947,7 +941,6 @@ Module modDatabase
 
         For i = 0 To MAX_SKILLS
             LoadSkill(i)
-            Application.DoEvents()
         Next
 
     End Sub
@@ -997,7 +990,6 @@ Module modDatabase
 
             If Not File.Exists(Paths.Skill(i)) Then
                 SaveSkill(i)
-                Application.DoEvents()
             End If
 
         Next
@@ -1022,13 +1014,13 @@ Module modDatabase
 #Region "Accounts"
 
     Function AccountExist(Name As String) As Boolean
-        Return File.Exists(Paths.Database & "Accounts\" & Trim$(Name) & "\Data.bin")
+        Return File.Exists(Paths.Database & "Accounts\" & Name.Trim & "\Data.bin")
     End Function
 
     Function PasswordOK(Name As String, Password As String) As Boolean
         If Not AccountExist(Name) Then Return False
         Dim reader As New ByteStream()
-        ByteFile.Load(Paths.Database & "Accounts\" & Trim$(Name) & "\Data.bin", reader)
+        ByteFile.Load(Paths.Database & "Accounts\" & Name.Trim & "\Data.bin", reader)
         If reader.ReadString().Trim <> Name.Trim Then Return False
         Return reader.ReadString().Trim.ToUpper = Password.Trim.ToUpper
     End Function
@@ -1059,7 +1051,7 @@ Module modDatabase
     End Sub
 
     Sub SavePlayer(index As Integer)
-        Dim playername As String = Trim$(Player(index).Login)
+        Dim playername As String = Player(index).Login.Trim
         Dim filename As String = Paths.Database & "Accounts\" & playername
         CheckDir(filename) : filename += "\Data.bin"
 
@@ -1126,7 +1118,7 @@ Module modDatabase
             Bank(index).ItemRand(i).Speed = reader.ReadInt32()
 
             For X = 0 To StatType.Count - 1
-                Bank(index).ItemRand(i).Stat(x) = reader.ReadInt32()
+                Bank(index).ItemRand(i).Stat(X) = reader.ReadInt32()
             Next
         Next
     End Sub
@@ -1150,7 +1142,7 @@ Module modDatabase
             writer.WriteInt32(Bank(index).ItemRand(i).Speed)
 
             For X = 0 To StatType.Count - 1
-                writer.WriteInt32(Bank(index).ItemRand(i).Stat(x))
+                writer.WriteInt32(Bank(index).ItemRand(i).Stat(X))
             Next
 
             'writer.WriteInt32(Bank(Index).ItemRand(i).Stat(Stats.Strength))
@@ -1180,7 +1172,7 @@ Module modDatabase
 
             ReDim Bank(index).ItemRand(i).Stat(StatType.Count - 1)
             For X = 0 To StatType.Count - 1
-                Bank(index).ItemRand(i).Stat(x) = 0
+                Bank(index).ItemRand(i).Stat(X) = 0
             Next
         Next
     End Sub
@@ -1190,150 +1182,150 @@ Module modDatabase
 #Region "Characters"
 
     Sub ClearCharacter(index As Integer)
-       Player(Index).Job = 0
-       Player(Index).Dir = 0
+        Player(index).Job = 0
+        Player(index).Dir = 0
 
         ReDim Player(index).Equipment(EquipmentType.Count - 1)
         For i = 0 To EquipmentType.Count - 1
-           Player(Index).Equipment(i) = 0
+            Player(index).Equipment(i) = 0
         Next
 
         ReDim Player(index).Inv(MAX_INV)
         For i = 0 To MAX_INV
-           Player(Index).Inv(i).Num = 0
-           Player(Index).Inv(i).Value = 0
+            Player(index).Inv(i).Num = 0
+            Player(index).Inv(i).Value = 0
         Next
 
-       Player(Index).Exp = 0
-       Player(Index).Level = 0
-       Player(Index).Map = 0
-       Player(Index).Name = ""
-       Player(Index).Pk = 0
-       Player(Index).Points = 0
-       Player(Index).Sex = 0
+        Player(index).Exp = 0
+        Player(index).Level = 0
+        Player(index).Map = 0
+        Player(index).Name = ""
+        Player(index).Pk = 0
+        Player(index).Points = 0
+        Player(index).Sex = 0
 
         ReDim Player(index).Skill(MAX_PLAYER_SKILLS)
         For i = 0 To MAX_PLAYER_SKILLS
-           Player(Index).Skill(i) = 0
+            Player(index).Skill(i) = 0
         Next
 
-       Player(Index).Sprite = 0
+        Player(index).Sprite = 0
 
         ReDim Player(index).Stat(StatType.Count - 1)
         For i = 0 To StatType.Count - 1
-           Player(Index).Stat(i) = 0
+            Player(index).Stat(i) = 0
         Next
 
         ReDim Player(index).Vital(VitalType.Count - 1)
         For i = 0 To VitalType.Count - 1
-           Player(Index).Vital(i) = 0
+            Player(index).Vital(i) = 0
         Next
 
-       Player(Index).X = 0
-       Player(Index).Y = 0
+        Player(index).X = 0
+        Player(index).Y = 0
 
-        ReDim Player(Index).PlayerQuest(MAX_QUESTS)
+        ReDim Player(index).PlayerQuest(MAX_QUESTS)
         For i = 0 To MAX_QUESTS
-           Player(Index).PlayerQuest(i).Status = 0
-           Player(Index).PlayerQuest(i).ActualTask = 0
-           Player(Index).PlayerQuest(i).CurrentCount = 0
+            Player(index).PlayerQuest(i).Status = 0
+            Player(index).PlayerQuest(i).ActualTask = 0
+            Player(index).PlayerQuest(i).CurrentCount = 0
         Next
 
         ' Housing
-        Player(Index).House.Houseindex = 0
-        Player(Index).House.FurnitureCount = 0
-        ReDim Player(Index).House.Furniture(Player(index).House.FurnitureCount)
+        Player(index).House.Houseindex = 0
+        Player(index).House.FurnitureCount = 0
+        ReDim Player(index).House.Furniture(Player(index).House.FurnitureCount)
 
-        For i = 0 To Player(Index).House.FurnitureCount
-           Player(Index).House.Furniture(i).ItemNum = 0
-           Player(Index).House.Furniture(i).X = 0
-           Player(Index).House.Furniture(i).Y = 0
+        For i = 0 To Player(index).House.FurnitureCount
+            Player(index).House.Furniture(i).ItemNum = 0
+            Player(index).House.Furniture(i).X = 0
+            Player(index).House.Furniture(i).Y = 0
         Next
 
-       Player(Index).InHouse = 0
-       Player(Index).LastMap = 0
-       Player(Index).LastX = 0
-       Player(Index).LastY = 0
+        Player(index).InHouse = 0
+        Player(index).LastMap = 0
+        Player(index).LastX = 0
+        Player(index).LastY = 0
 
-        ReDim Player(Index).Hotbar(MAX_HOTBAR)
+        ReDim Player(index).Hotbar(MAX_HOTBAR)
         For i = 0 To MAX_HOTBAR
-           Player(Index).Hotbar(i).Slot = 0
-           Player(Index).Hotbar(i).SlotType = 0
+            Player(index).Hotbar(i).Slot = 0
+            Player(index).Hotbar(i).SlotType = 0
         Next
 
-        ReDim Player(Index).Switches(MAX_SWITCHES)
+        ReDim Player(index).Switches(MAX_SWITCHES)
         For i = 0 To MAX_SWITCHES
-           Player(Index).Switches(i) = 0
+            Player(index).Switches(i) = 0
         Next
-        ReDim Player(Index).Variables(NAX_VARIABLES)
+        ReDim Player(index).Variables(NAX_VARIABLES)
         For i = 0 To NAX_VARIABLES
-           Player(Index).Variables(i) = 0
+            Player(index).Variables(i) = 0
         Next
 
-        ReDim Player(Index).GatherSkills(ResourceSkills.Count - 1)
+        ReDim Player(index).GatherSkills(ResourceSkills.Count - 1)
         For i = 0 To ResourceSkills.Count - 1
-           Player(Index).GatherSkills(i).SkillLevel = 1
-           Player(Index).GatherSkills(i).SkillCurExp = 0
-           Player(Index).GatherSkills(i).SkillNextLvlExp = 100
+            Player(index).GatherSkills(i).SkillLevel = 1
+            Player(index).GatherSkills(i).SkillCurExp = 0
+            Player(index).GatherSkills(i).SkillNextLvlExp = 100
         Next
 
-        ReDim Player(Index).RecipeLearned(MAX_RECIPE)
+        ReDim Player(index).RecipeLearned(MAX_RECIPE)
         For i = 0 To MAX_RECIPE
-           Player(Index).RecipeLearned(i) = 0
+            Player(index).RecipeLearned(i) = 0
         Next
 
         'random items
-        ReDim Player(Index).RandInv(MAX_INV)
+        ReDim Player(index).RandInv(MAX_INV)
         For i = 0 To MAX_INV
-           Player(Index).RandInv(i).Prefix = ""
-           Player(Index).RandInv(i).Suffix = ""
-           Player(Index).RandInv(i).Rarity = 0
-           Player(Index).RandInv(i).Damage = 0
-           Player(Index).RandInv(i).Speed = 0
+            Player(index).RandInv(i).Prefix = ""
+            Player(index).RandInv(i).Suffix = ""
+            Player(index).RandInv(i).Rarity = 0
+            Player(index).RandInv(i).Damage = 0
+            Player(index).RandInv(i).Speed = 0
 
-            ReDim Player(Index).RandInv(i).Stat(StatType.Count - 1)
+            ReDim Player(index).RandInv(i).Stat(StatType.Count - 1)
             For X = 0 To StatType.Count - 1
-               Player(Index).RandInv(i).Stat(x) = 0
+                Player(index).RandInv(i).Stat(X) = 0
             Next
         Next
 
-        ReDim Player(Index).RandEquip(EquipmentType.Count - 1)
+        ReDim Player(index).RandEquip(EquipmentType.Count - 1)
         For i = 0 To EquipmentType.Count - 1
-           Player(Index).RandEquip(i).Prefix = ""
-           Player(Index).RandEquip(i).Suffix = ""
-           Player(Index).RandEquip(i).Rarity = 0
-           Player(Index).RandEquip(i).Damage = 0
-           Player(Index).RandEquip(i).Speed = 0
+            Player(index).RandEquip(i).Prefix = ""
+            Player(index).RandEquip(i).Suffix = ""
+            Player(index).RandEquip(i).Rarity = 0
+            Player(index).RandEquip(i).Damage = 0
+            Player(index).RandEquip(i).Speed = 0
 
-            ReDim Player(Index).RandEquip(i).Stat(StatType.Count - 1)
+            ReDim Player(index).RandEquip(i).Stat(StatType.Count - 1)
             For X = 0 To StatType.Count - 1
-               Player(Index).RandEquip(i).Stat(x) = 0
+                Player(index).RandEquip(i).Stat(X) = 0
             Next
         Next
 
-        Player(Index).Pet.Num = 0
-        Player(Index).Pet.Health = 0
-        Player(Index).Pet.Mana = 0
-        Player(Index).Pet.Level = 0
+        Player(index).Pet.Num = 0
+        Player(index).Pet.Health = 0
+        Player(index).Pet.Mana = 0
+        Player(index).Pet.Level = 0
 
-        ReDim Player(Index).Pet.Stat(StatType.Count - 1)
+        ReDim Player(index).Pet.Stat(StatType.Count - 1)
         For i = 0 To StatType.Count - 1
-           Player(Index).Pet.Stat(i) = 0
+            Player(index).Pet.Stat(i) = 0
         Next
 
-        ReDim Player(Index).Pet.Skill(4)
+        ReDim Player(index).Pet.Skill(4)
         For i = 0 To 4
-           Player(Index).Pet.Skill(i) = 0
+            Player(index).Pet.Skill(i) = 0
         Next
 
-       Player(Index).Pet.X = 0
-       Player(Index).Pet.Y = 0
-       Player(Index).Pet.Dir = 0
-       Player(Index).Pet.Alive = 0
-       Player(Index).Pet.AttackBehaviour = 0
-       Player(Index).Pet.AdoptiveStats = 0
-       Player(Index).Pet.Points = 0
-       Player(Index).Pet.Exp = 0
+        Player(index).Pet.X = 0
+        Player(index).Pet.Y = 0
+        Player(index).Pet.Dir = 0
+        Player(index).Pet.Alive = 0
+        Player(index).Pet.AttackBehaviour = 0
+        Player(index).Pet.AdoptiveStats = 0
+        Player(index).Pet.Points = 0
+        Player(index).Pet.Exp = 0
 
     End Sub
 
@@ -1345,145 +1337,145 @@ Module modDatabase
         Dim reader As New ByteStream()
         ByteFile.Load(filename, reader)
 
-       Player(Index).Job = reader.ReadByte()
-       Player(Index).Dir = reader.ReadByte()
+        Player(index).Job = reader.ReadByte()
+        Player(index).Dir = reader.ReadByte()
 
         For i = 0 To EquipmentType.Count - 1
-           Player(Index).Equipment(i) = reader.ReadByte()
+            Player(index).Equipment(i) = reader.ReadByte()
         Next
 
-       Player(Index).Exp = reader.ReadInt32()
+        Player(index).Exp = reader.ReadInt32()
 
         For i = 0 To MAX_INV
-           Player(Index).Inv(i).Num = reader.ReadByte()
-           Player(Index).Inv(i).Value = reader.ReadInt32()
+            Player(index).Inv(i).Num = reader.ReadByte()
+            Player(index).Inv(i).Value = reader.ReadInt32()
         Next
 
-       Player(Index).Level = reader.ReadByte()
-       Player(Index).Map = reader.ReadInt32()
-       Player(Index).Name = reader.ReadString()
-       Player(Index).Pk = reader.ReadByte()
-       Player(Index).Points = reader.ReadByte()
-       Player(Index).Sex = reader.ReadByte()
+        Player(index).Level = reader.ReadByte()
+        Player(index).Map = reader.ReadInt32()
+        Player(index).Name = reader.ReadString()
+        Player(index).Pk = reader.ReadByte()
+        Player(index).Points = reader.ReadByte()
+        Player(index).Sex = reader.ReadByte()
 
         For i = 0 To MAX_PLAYER_SKILLS
-           Player(Index).Skill(i) = reader.ReadByte()
+            Player(index).Skill(i) = reader.ReadByte()
         Next
 
-       Player(Index).Sprite = reader.ReadInt32()
+        Player(index).Sprite = reader.ReadInt32()
 
         For i = 0 To StatType.Count - 1
-           Player(Index).Stat(i) = reader.ReadByte()
+            Player(index).Stat(i) = reader.ReadByte()
         Next
 
         For i = 0 To VitalType.Count - 1
-           Player(Index).Vital(i) = reader.ReadInt32()
+            Player(index).Vital(i) = reader.ReadInt32()
         Next
 
-       Player(Index).X = reader.ReadByte()
-       Player(Index).Y = reader.ReadByte()
+        Player(index).X = reader.ReadByte()
+        Player(index).Y = reader.ReadByte()
 
         For i = 0 To MAX_QUESTS
-           Player(Index).PlayerQuest(i).Status = reader.ReadInt32()
-           Player(Index).PlayerQuest(i).ActualTask = reader.ReadInt32()
-           Player(Index).PlayerQuest(i).CurrentCount = reader.ReadInt32()
+            Player(index).PlayerQuest(i).Status = reader.ReadInt32()
+            Player(index).PlayerQuest(i).ActualTask = reader.ReadInt32()
+            Player(index).PlayerQuest(i).CurrentCount = reader.ReadInt32()
         Next
 
         'Housing
-       Player(Index).House.Houseindex = reader.ReadInt32()
-       Player(Index).House.FurnitureCount = reader.ReadInt32()
-        ReDim Player(Index).House.Furniture(Player(index).House.FurnitureCount)
-        For i = 0 To Player(Index).House.FurnitureCount
-           Player(Index).House.Furniture(i).ItemNum = reader.ReadInt32()
-           Player(Index).House.Furniture(i).X = reader.ReadInt32()
-           Player(Index).House.Furniture(i).Y = reader.ReadInt32()
+        Player(index).House.Houseindex = reader.ReadInt32()
+        Player(index).House.FurnitureCount = reader.ReadInt32()
+        ReDim Player(index).House.Furniture(Player(index).House.FurnitureCount)
+        For i = 0 To Player(index).House.FurnitureCount
+            Player(index).House.Furniture(i).ItemNum = reader.ReadInt32()
+            Player(index).House.Furniture(i).X = reader.ReadInt32()
+            Player(index).House.Furniture(i).Y = reader.ReadInt32()
         Next
-       Player(Index).InHouse = reader.ReadInt32()
-       Player(Index).LastMap = reader.ReadInt32()
-       Player(Index).LastX = reader.ReadInt32()
-       Player(Index).LastY = reader.ReadInt32()
+        Player(index).InHouse = reader.ReadInt32()
+        Player(index).LastMap = reader.ReadInt32()
+        Player(index).LastX = reader.ReadInt32()
+        Player(index).LastY = reader.ReadInt32()
 
         For i = 0 To MAX_HOTBAR
-           Player(Index).Hotbar(i).Slot = reader.ReadInt32()
-           Player(Index).Hotbar(i).SlotType = reader.ReadByte()
+            Player(index).Hotbar(i).Slot = reader.ReadInt32()
+            Player(index).Hotbar(i).SlotType = reader.ReadByte()
         Next
 
-        ReDim Player(Index).Switches(MAX_SWITCHES)
+        ReDim Player(index).Switches(MAX_SWITCHES)
         For i = 0 To MAX_SWITCHES
-           Player(Index).Switches(i) = reader.ReadByte()
+            Player(index).Switches(i) = reader.ReadByte()
         Next
-        ReDim Player(Index).Variables(NAX_VARIABLES)
+        ReDim Player(index).Variables(NAX_VARIABLES)
         For i = 0 To NAX_VARIABLES
-           Player(Index).Variables(i) = reader.ReadInt32()
+            Player(index).Variables(i) = reader.ReadInt32()
         Next
 
-        ReDim Player(Index).GatherSkills(ResourceSkills.Count - 1)
+        ReDim Player(index).GatherSkills(ResourceSkills.Count - 1)
         For i = 0 To ResourceSkills.Count - 1
-           Player(Index).GatherSkills(i).SkillLevel = reader.ReadInt32()
-           Player(Index).GatherSkills(i).SkillCurExp = reader.ReadInt32()
-           Player(Index).GatherSkills(i).SkillNextLvlExp = reader.ReadInt32()
-            If Player(Index).GatherSkills(i).SkillLevel = 0 Then Player(Index).GatherSkills(i).SkillLevel = 1
-            If Player(Index).GatherSkills(i).SkillNextLvlExp = 0 Then Player(Index).GatherSkills(i).SkillNextLvlExp = 100
+            Player(index).GatherSkills(i).SkillLevel = reader.ReadInt32()
+            Player(index).GatherSkills(i).SkillCurExp = reader.ReadInt32()
+            Player(index).GatherSkills(i).SkillNextLvlExp = reader.ReadInt32()
+            If Player(index).GatherSkills(i).SkillLevel = 0 Then Player(index).GatherSkills(i).SkillLevel = 1
+            If Player(index).GatherSkills(i).SkillNextLvlExp = 0 Then Player(index).GatherSkills(i).SkillNextLvlExp = 100
         Next
 
-        ReDim Player(Index).RecipeLearned(MAX_RECIPE)
+        ReDim Player(index).RecipeLearned(MAX_RECIPE)
         For i = 0 To MAX_RECIPE
-           Player(Index).RecipeLearned(i) = reader.ReadByte()
+            Player(index).RecipeLearned(i) = reader.ReadByte()
         Next
 
         'random items
-        ReDim Player(Index).RandInv(MAX_INV)
+        ReDim Player(index).RandInv(MAX_INV)
         For i = 0 To MAX_INV
-           Player(Index).RandInv(i).Prefix = reader.ReadString()
-           Player(Index).RandInv(i).Suffix = reader.ReadString()
-           Player(Index).RandInv(i).Rarity = reader.ReadInt32()
-           Player(Index).RandInv(i).Damage = reader.ReadInt32()
-           Player(Index).RandInv(i).Speed = reader.ReadInt32()
+            Player(index).RandInv(i).Prefix = reader.ReadString()
+            Player(index).RandInv(i).Suffix = reader.ReadString()
+            Player(index).RandInv(i).Rarity = reader.ReadInt32()
+            Player(index).RandInv(i).Damage = reader.ReadInt32()
+            Player(index).RandInv(i).Speed = reader.ReadInt32()
 
-            ReDim Player(Index).RandInv(i).Stat(StatType.Count - 1)
+            ReDim Player(index).RandInv(i).Stat(StatType.Count - 1)
             For X = 0 To StatType.Count - 1
-               Player(Index).RandInv(i).Stat(x) = reader.ReadInt32()
+                Player(index).RandInv(i).Stat(X) = reader.ReadInt32()
             Next
         Next
 
-        ReDim Player(Index).RandEquip(EquipmentType.Count - 1)
+        ReDim Player(index).RandEquip(EquipmentType.Count - 1)
         For i = 0 To EquipmentType.Count - 1
-           Player(Index).RandEquip(i).Prefix = reader.ReadString()
-           Player(Index).RandEquip(i).Suffix = reader.ReadString()
-           Player(Index).RandEquip(i).Rarity = reader.ReadInt32()
-           Player(Index).RandEquip(i).Damage = reader.ReadInt32()
-           Player(Index).RandEquip(i).Speed = reader.ReadInt32()
+            Player(index).RandEquip(i).Prefix = reader.ReadString()
+            Player(index).RandEquip(i).Suffix = reader.ReadString()
+            Player(index).RandEquip(i).Rarity = reader.ReadInt32()
+            Player(index).RandEquip(i).Damage = reader.ReadInt32()
+            Player(index).RandEquip(i).Speed = reader.ReadInt32()
 
-            ReDim Player(Index).RandEquip(i).Stat(StatType.Count - 1)
+            ReDim Player(index).RandEquip(i).Stat(StatType.Count - 1)
             For X = 0 To StatType.Count - 1
-               Player(Index).RandEquip(i).Stat(x) = reader.ReadInt32()
+                Player(index).RandEquip(i).Stat(X) = reader.ReadInt32()
             Next
         Next
 
         'pets
-       Player(Index).Pet.Num = reader.ReadInt32()
-       Player(Index).Pet.Health = reader.ReadInt32()
-       Player(Index).Pet.Mana = reader.ReadInt32()
-       Player(Index).Pet.Level = reader.ReadInt32()
+        Player(index).Pet.Num = reader.ReadInt32()
+        Player(index).Pet.Health = reader.ReadInt32()
+        Player(index).Pet.Mana = reader.ReadInt32()
+        Player(index).Pet.Level = reader.ReadInt32()
 
-        ReDim Player(Index).Pet.Stat(StatType.Count - 1)
+        ReDim Player(index).Pet.Stat(StatType.Count - 1)
         For i = 0 To StatType.Count - 1
-           Player(Index).Pet.Stat(i) = reader.ReadByte()
+            Player(index).Pet.Stat(i) = reader.ReadByte()
         Next
 
-        ReDim Player(Index).Pet.Skill(4)
+        ReDim Player(index).Pet.Skill(4)
         For i = 0 To 4
-           Player(Index).Pet.Skill(i) = reader.ReadInt32()
+            Player(index).Pet.Skill(i) = reader.ReadInt32()
         Next
 
-       Player(Index).Pet.X = reader.ReadInt32()
-       Player(Index).Pet.Y = reader.ReadInt32()
-       Player(Index).Pet.Dir = reader.ReadInt32()
-       Player(Index).Pet.Alive = reader.ReadByte()
-       Player(Index).Pet.AttackBehaviour = reader.ReadInt32()
-       Player(Index).Pet.AdoptiveStats = reader.ReadByte()
-       Player(Index).Pet.Points = reader.ReadInt32()
-       Player(Index).Pet.Exp = reader.ReadInt32()
+        Player(index).Pet.X = reader.ReadInt32()
+        Player(index).Pet.Y = reader.ReadInt32()
+        Player(index).Pet.Dir = reader.ReadInt32()
+        Player(index).Pet.Alive = reader.ReadByte()
+        Player(index).Pet.AttackBehaviour = reader.ReadInt32()
+        Player(index).Pet.AdoptiveStats = reader.ReadByte()
+        Player(index).Pet.Points = reader.ReadInt32()
+        Player(index).Pet.Exp = reader.ReadInt32()
 
     End Sub
 
@@ -1539,7 +1531,7 @@ Module modDatabase
         'Housing
         writer.WriteInt32(Player(index).House.Houseindex)
         writer.WriteInt32(Player(index).House.FurnitureCount)
-        For i = 0 To Player(Index).House.FurnitureCount
+        For i = 0 To Player(index).House.FurnitureCount
             writer.WriteInt32(Player(index).House.Furniture(i).ItemNum)
             writer.WriteInt32(Player(index).House.Furniture(i).X)
             writer.WriteInt32(Player(index).House.Furniture(i).Y)
@@ -1580,7 +1572,7 @@ Module modDatabase
             writer.WriteInt32(Player(index).RandInv(i).Damage)
             writer.WriteInt32(Player(index).RandInv(i).Speed)
             For X = 0 To StatType.Count - 1
-                writer.WriteInt32(Player(index).RandInv(i).Stat(x))
+                writer.WriteInt32(Player(index).RandInv(i).Stat(X))
             Next
         Next
 
@@ -1591,7 +1583,7 @@ Module modDatabase
             writer.WriteInt32(Player(index).RandEquip(i).Damage)
             writer.WriteInt32(Player(index).RandEquip(i).Speed)
             For X = 0 To StatType.Count - 1
-                writer.WriteInt32(Player(index).RandEquip(i).Stat(x))
+                writer.WriteInt32(Player(index).RandEquip(i).Stat(X))
             Next
         Next
 
@@ -1622,43 +1614,43 @@ Module modDatabase
     End Sub
 
     Function CharExist(index As Integer, CharNum As Integer) As Boolean
-        Return Player(Index).Name.Trim.Length > 0
+        Return Player(index).Name.Trim.Length > 0
     End Function
 
     Sub AddChar(index As Integer, CharNum As Integer, Name As String, Sex As Byte, ClassNum As Byte, Sprite As Integer)
         Dim n As Integer, i As Integer
 
         If Len(Trim$(Player(index).Name)) = 0 Then
-           Player(Index).Name = Name
-           Player(Index).Sex = Sex
-           Player(Index).Job = ClassNum
+            Player(index).Name = Name
+            Player(index).Sex = Sex
+            Player(index).Job = ClassNum
 
-            If Player(Index).Sex = SexType.Male Then
-               Player(Index).Sprite = Job(ClassNum).MaleSprite(Sprite)
+            If Player(index).Sex = SexType.Male Then
+                Player(index).Sprite = Job(ClassNum).MaleSprite(Sprite)
             Else
-               Player(Index).Sprite = Job(ClassNum).FemaleSprite(Sprite)
+                Player(index).Sprite = Job(ClassNum).FemaleSprite(Sprite)
             End If
 
-           Player(Index).Level = 1
+            Player(index).Level = 1
 
             For n = 0 To StatType.Count - 1
-               Player(Index).Stat(n) = Job(ClassNum).Stat(n)
+                Player(index).Stat(n) = Job(ClassNum).Stat(n)
             Next n
 
-           Player(Index).Dir = DirectionType.Down
-           Player(Index).Map = Job(ClassNum).StartMap
-           Player(Index).X = Job(ClassNum).StartX
-           Player(Index).Y = Job(ClassNum).StartY
-           Player(Index).Dir = DirectionType.Down
-           Player(Index).Vital(VitalType.HP) = GetPlayerMaxVital(index, VitalType.HP)
-           Player(Index).Vital(VitalType.MP) = GetPlayerMaxVital(index, VitalType.MP)
-           Player(Index).Vital(VitalType.SP) = GetPlayerMaxVital(index, VitalType.SP)
+            Player(index).Dir = DirectionType.Down
+            Player(index).Map = Job(ClassNum).StartMap
+            Player(index).X = Job(ClassNum).StartX
+            Player(index).Y = Job(ClassNum).StartY
+            Player(index).Dir = DirectionType.Down
+            Player(index).Vital(VitalType.HP) = GetPlayerMaxVital(index, VitalType.HP)
+            Player(index).Vital(VitalType.MP) = GetPlayerMaxVital(index, VitalType.MP)
+            Player(index).Vital(VitalType.SP) = GetPlayerMaxVital(index, VitalType.SP)
 
             ' set starter equipment
             For n = 0 To 5
                 If Job(ClassNum).StartItem(n) > 0 Then
-                   Player(Index).Inv(n).Num = Job(ClassNum).StartItem(n)
-                   Player(Index).Inv(n).Value = Job(ClassNum).StartValue(n)
+                    Player(index).Inv(n).Num = Job(ClassNum).StartItem(n)
+                    Player(index).Inv(n).Value = Job(ClassNum).StartValue(n)
 
                     If Item(Job(ClassNum).StartItem(n)).Randomize Then
                         Player(index).RandInv(n).Prefix = ""
@@ -1674,11 +1666,11 @@ Module modDatabase
             Next
 
             'set skills
-            ReDim Player(Index).GatherSkills(ResourceSkills.Count - 1)
+            ReDim Player(index).GatherSkills(ResourceSkills.Count - 1)
             For i = 0 To ResourceSkills.Count - 1
-               Player(Index).GatherSkills(i).SkillLevel = 1
-               Player(Index).GatherSkills(i).SkillCurExp = 0
-               Player(Index).GatherSkills(i).SkillNextLvlExp = 100
+                Player(index).GatherSkills(i).SkillLevel = 1
+                Player(index).GatherSkills(i).SkillCurExp = 0
+                Player(index).GatherSkills(i).SkillNextLvlExp = 100
             Next
 
             ' Append name to file

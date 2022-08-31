@@ -2,6 +2,7 @@
 Imports Asfw
 Imports Ini = Asfw.IO.TextFile
 Imports MirageBasic.Core
+Imports System.Drawing
 
 Friend Module S_Events
 
@@ -997,7 +998,6 @@ Friend Module S_Events
                                 End If
                             End If
                         End If
-                        Application.DoEvents()
                     Next i
                 Next j
 
@@ -1088,9 +1088,6 @@ Friend Module S_Events
 
                 path(tim).X = lastX
                 path(tim).Y = lastY
-
-                'Now we loop back and decrease tim, and look for the next square with lower value
-                Application.DoEvents()
             Loop
 
             'Ok we got a Paths. Now, lets look at the first step and see what direction we should take.

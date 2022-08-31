@@ -47,6 +47,7 @@
     <DebugType>None</DebugType>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <DefineConstants>CLIENT</DefineConstants>
+    <DefineDebug>false</DefineDebug>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Embedded\**" />
@@ -910,7 +911,9 @@
     <Content Include="Resources\ScreenShot.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.vbproj" />
+    <ProjectReference Include="..\Core\Core.vbproj">
+      <ReferenceSourceTarget></ReferenceSourceTarget>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Asfw-NoTCPDelay" Version="1.0.0" />

@@ -93,7 +93,6 @@ Friend Module S_Animations
 
             If Not File.Exists(Paths.Animation(i)) Then
                 SaveAnimation(i)
-                Application.DoEvents()
             End If
 
         Next
@@ -119,7 +118,7 @@ Friend Module S_Animations
         Dim buffer As New ByteStream(4)
 
        For i = 0 To MAX_ANIMATIONS
-            If Not Len(Trim$(Animation(i).Name)) > 0 Then Continue For
+            If Not Animation(i).Name.Trim.Length > 0 Then Continue For
             buffer.WriteBlock(AnimationData(i))
         Next
 
@@ -130,22 +129,22 @@ Friend Module S_Animations
         Dim buffer As New ByteStream(4)
 
         buffer.WriteInt32(AnimationNum)
-        For i = 0 To UBound(Animation(AnimationNum).Frames)
+        For i = 0 To Animation(AnimationNum).Frames.Length
             buffer.WriteInt32(Animation(AnimationNum).Frames(i))
         Next
 
-        For i = 0 To UBound(Animation(AnimationNum).LoopCount)
+        For i = 0 To Animation(AnimationNum).LoopCount.Length
             buffer.WriteInt32(Animation(AnimationNum).LoopCount(i))
         Next
 
-        For i = 0 To UBound(Animation(AnimationNum).LoopTime)
+        For i = 0 To Animation(AnimationNum).LoopTime.Length
             buffer.WriteInt32(Animation(AnimationNum).LoopTime(i))
         Next
 
         buffer.WriteString((Animation(AnimationNum).Name))
         buffer.WriteString((Animation(AnimationNum).Sound))
 
-        For i = 0 To UBound(Animation(AnimationNum).Sprite)
+        For i = 0 To Animation(AnimationNum).Sprite.Length
             buffer.WriteInt32(Animation(AnimationNum).Sprite(i))
         Next
 

@@ -17,7 +17,7 @@ Module modLoop
             tick = GetTimeMs()
 
             ' Don't process anything else if we're going down.
-            If ServerDestroyed Then End
+            If ServerDestroyed Then Stop
 
             ' Get all our online players.
             Dim onlinePlayers = TempPlayer.Where(Function(player) player.InGame).Select(Function(player, index) New With {Key .Index = index + 1, player}).ToArray()
@@ -125,7 +125,6 @@ Module modLoop
                 lastUpdateSavePlayers = GetTimeMs() + 600000
             End If
 
-            Application.DoEvents()
             'Thread.Yield()
             Thread.Sleep(1)
         Loop
@@ -147,7 +146,6 @@ Module modLoop
                     SavePlayer(i)
                     SaveBank(i)
                 End If
-                Application.DoEvents()
             Next
 
         End If
@@ -223,11 +221,11 @@ Module modLoop
             ' items appearing to everyone
             For i = 0 To MAX_MAP_ITEMS
                 If MapItem(mapNum, i).Num > 0 Then
-                    If MapItem(mapNum, i).PlayerName <> vbNullString Then
+                    If MapItem(mapNum, i).PlayerName <> "" Then
                         ' make item public?
                         If MapItem(mapNum, i).PlayerTimer < GetTimeMs() Then
                             ' make it public
-                            MapItem(mapNum, i).PlayerName = vbNullString
+                            MapItem(mapNum, i).PlayerName = ""
                             MapItem(mapNum, i).PlayerTimer = 0
                             ' send updates to everyone
                             SendMapItemsToAll(mapNum)
@@ -341,8 +339,8 @@ Module modLoop
                                                     ' Are they in range?  if so GET'M!
                                                     If distanceX <= n AndAlso distanceY <= n Then
                                                         If Npc(npcNum).Behaviour = NpcBehavior.AttackOnSight OrElse GetPlayerPK(i) = True Then
-                                                            If Len(Trim$(Npc(npcNum).AttackSay)) > 0 Then
-                                                                PlayerMsg(i, CheckGrammar(Trim$(Npc(npcNum).Name), 1) & " says, '" & Trim$(Npc(npcNum).AttackSay) & "' to you.", ColorType.Yellow)
+                                                            If Npc(npcNum).AttackSay.Trim.Length > 0 Then
+                                                                PlayerMsg(i, CheckGrammar(Npc(npcNum).Name.Trim, 1) & " says, '" & Npc(npcNum).AttackSay.Trim & "' to you.", ColorType.Yellow)
                                                             End If
                                                             MapNpc(mapNum).Npc(x).TargetType = TargetType.Player
                                                             MapNpc(mapNum).Npc(x).Target = i
@@ -449,9 +447,9 @@ Module modLoop
                                                     NpcMove(mapNum, x, i, MovementType.Walking)
                                                 End If
                                             Else 'No good path found. Move randomly
-                                                i = Int(Rnd() * 4)
+                                                i = Random(1, 4)
                                                 If i = 1 Then
-                                                    i = Int(Rnd() * 4)
+                                                    i = Random(1, 4)
 
                                                     If CanNpcMove(mapNum, x, i) Then
                                                         NpcMove(mapNum, x, i, MovementType.Walking)

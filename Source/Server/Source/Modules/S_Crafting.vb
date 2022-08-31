@@ -37,7 +37,6 @@ Friend Module modCrafting
         For i = 0 To MAX_RECIPE
             If Not File.Exists(Paths.Recipe(i)) Then
                 SaveRecipe(i)
-                Application.DoEvents()
             End If
         Next
 
@@ -48,7 +47,6 @@ Friend Module modCrafting
 
         For i = 0 To MAX_RECIPE
             SaveRecipe(i)
-            Application.DoEvents()
         Next
 
     End Sub
@@ -81,7 +79,6 @@ Friend Module modCrafting
 
         For i = 0 To MAX_RECIPE
             LoadRecipe(i)
-            Application.DoEvents()
         Next
 
     End Sub
@@ -116,7 +113,6 @@ Friend Module modCrafting
 
         For i = 0 To MAX_RECIPE
             ClearRecipe(i)
-            Application.DoEvents()
         Next
 
     End Sub

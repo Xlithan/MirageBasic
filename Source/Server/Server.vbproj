@@ -1,9 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <OutputType>Exe</OutputType>
-    <StartupObject>Engine.S_Console</StartupObject>
-    <RootNamespace>Engine</RootNamespace>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>MirageBasic.Server</RootNamespace>
     <AssemblyName>MirageBasic Server</AssemblyName>
     <MyType>Console</MyType>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -22,30 +20,15 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <UseWindowsForms>true</UseWindowsForms>
-    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <Configurations>Release;Debug</Configurations>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <OutputPath>..\..\Build\Server\</OutputPath>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DefineConstants>SERVER</DefineConstants>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DefineDebug>false</DefineDebug>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <OutputPath>..\..\Build\Server\</OutputPath>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
-    <DebugType>None</DebugType>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DefineConstants>SERVER</DefineConstants>
-  </PropertyGroup>
-  <ItemGroup>
-    <Import Include="System.Drawing" />
-    <Import Include="System.Windows.Forms" />
-  </ItemGroup>
   <ItemGroup>
     <None Update="Database\Job.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -59,11 +42,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Asfw-NoTCPDelay" Version="1.0.0" />
-    <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
-  </ItemGroup>
+  <PropertyGroup>
+  <MyType>Empty</MyType>
+  <OutputType>Exe</OutputType>
+</PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.vbproj" />
+     <ProjectReference Include="..\Network\Asfw.csproj" />
   </ItemGroup>
 </Project>

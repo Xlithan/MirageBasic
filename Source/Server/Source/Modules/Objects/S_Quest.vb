@@ -87,8 +87,7 @@ Friend Module S_Quest
     Sub SaveQuests()
         Dim i As Integer
         For i = 0 To MAX_QUESTS
-            SaveQuest(I)
-            Application.DoEvents()
+            SaveQuest(i)
         Next
     End Sub
 
@@ -149,8 +148,7 @@ Friend Module S_Quest
         CheckQuests()
 
         For i = 0 To MAX_QUESTS
-            LoadQuest(I)
-            Application.DoEvents()
+            LoadQuest(i)
         Next
     End Sub
 
@@ -214,8 +212,7 @@ Friend Module S_Quest
         Dim i As Integer
         For i = 0 To MAX_QUESTS
             If Not File.Exists(Paths.Quest(I)) Then
-                SaveQuest(I)
-                Application.DoEvents()
+                SaveQuest(i)
             End If
         Next
     End Sub
