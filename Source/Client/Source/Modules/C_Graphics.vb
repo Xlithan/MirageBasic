@@ -2953,30 +2953,6 @@ NextLoop:
                 Exit Sub
         End Select
 
-        For x = TileView.Left To TileView.Right + 1
-            For y = TileView.Top To TileView.Bottom + 1
-                If IsValidMapPoint(x, y) Then
-                    If Map.Tile(x, y).Type = TileType.Light Then
-                        Dim x1 = ConvertMapX(x * 32) + 16 - LightGfxInfo.Width / 2
-                        Dim y1 = ConvertMapY(y * 32) + 16 - LightGfxInfo.Height / 2
-
-                        'Create the light texture to multiply over the dark texture.
-                        LightSprite.Position = New Vector2f(x1, y1)
-                        LightSprite.Color = SFML.Graphics.Color.Red
-                        NightGfx.Draw(LightSprite, New RenderStates(BlendMode.Multiply))
-
-                        ''Create the light texture to multiply over the dark texture.
-                        'LightSprite.Position = New Vector2f(X1, Y1)
-                        'LightAreaSprite.Position = New Vector2f(X1, Y1)
-                        ''LightSprite.Color = New SFML.Graphics.Color(SFML.Graphics.Color.Red)
-                        ''LightAreaSprite.Color = New SFML.Graphics.Color(SFML.Graphics.Color.Red)
-                        'NightGfx.Draw(LightSprite, New RenderStates(BlendMode.Multiply))
-                        'NightGfx.Draw(LightAreaSprite, New RenderStates(BlendMode.Multiply))
-                    End If
-                End If
-            Next
-        Next
-
         NightSprite = New Sprite(NightGfx.Texture)
 
         NightGfx.Display()
