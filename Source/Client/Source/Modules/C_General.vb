@@ -12,19 +12,42 @@ Module C_General
     End Function
 
     Sub Startup()
+        SetStatus(Language.Load.Loading) 
+        FrmMenu.Text = Settings.GameName
+        FrmMenu.Visible = True
+        Application.DoEvents()
+
+        LoadGame()
+        GameLoop()
+    End Sub
+
+    Friend Function LoadGame()
         LoadSettings()
         LoadLanguage()
         LoadInputs()
 
-        FrmOptions.optMOn.Checked = Settings.Music
-        FrmOptions.optSOn.Checked = Settings.Sound
-        FrmOptions.lblVolume.Text = "Volume: " & Settings.Volume
-        FrmOptions.scrlVolume.Value = Settings.Volume
+        SetStatus(Language.Load.Graphics)
+        LoadGraphics()
+        Application.DoEvents()
 
-        SetStatus(Language.Load.Loading)
-        FrmMenu.Text = Settings.GameName
-        FrmMenu.Visible = True
+        SetStatus(Language.Load.Network)
+        Application.DoEvents()
+        InitNetwork()
+        Ping = -1
+    End Function
 
+    Friend Function LoadGraphics()
+        SetStatus(Language.Load.Starting)
+        Application.DoEvents()
+        Started = True
+        Frmmenuvisible = True
+        Pnlloadvisible = False
+
+        CheeckPaths()
+        InitGraphics()
+    End Function
+
+    Friend Function CheeckPaths()
         CacheMusic()
         CacheSound()
         If Settings.Music = 1 AndAlso Len(Trim$(Settings.MenuMusic)) > 0 Then
@@ -64,16 +87,6 @@ Module C_General
             Next
         Next
 
-        SetStatus(Language.Load.Graphics)
-        DirArrowX(DirectionType.Up) = 12
-        DirArrowY(DirectionType.Up) = 0
-        DirArrowX(DirectionType.Down) = 12
-        DirArrowY(DirectionType.Down) = 23
-        DirArrowX(DirectionType.Left) = 0
-        DirArrowY(DirectionType.Left) = 12
-        DirArrowX(DirectionType.Right) = 23
-        DirArrowY(DirectionType.Right) = 12
-
         CheckAnimations()
         CheckCharacters()
         CheckEmotes()
@@ -88,19 +101,7 @@ Module C_General
         CheckResources()
         CheckSkillIcons()
         CheckTilesets()
-        InitGraphics()
-
-        SetStatus(Language.Load.Network)
-        InitNetwork()
-        Ping = -1
-
-        SetStatus(Language.Load.Starting)
-        Started = True
-        Frmmenuvisible = True
-        Pnlloadvisible = False
-
-        GameLoop()
-    End Sub
+    End Function
 
     Friend Function IsLoginLegal(username As String, password As String) As Boolean
         Return Len(Trim$(username)) >= 3 AndAlso Len(Trim$(password)) >= 3

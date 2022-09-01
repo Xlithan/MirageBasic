@@ -18,6 +18,15 @@ Public Class frmEditor_Map
         optBlocked.Checked = True
         tabpages.SelectedIndex = 0
 
+        DirArrowX(DirectionType.Up) = 12
+        DirArrowY(DirectionType.Up) = 0
+        DirArrowX(DirectionType.Down) = 12
+        DirArrowY(DirectionType.Down) = 23
+        DirArrowX(DirectionType.Left) = 0
+        DirArrowY(DirectionType.Left) = 12
+        DirArrowX(DirectionType.Right) = 23
+        DirArrowY(DirectionType.Right) = 12
+
         scrlFog.Maximum = NumFogs
 
         Me.TopMost = True

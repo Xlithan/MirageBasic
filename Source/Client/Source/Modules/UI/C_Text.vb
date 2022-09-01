@@ -39,8 +39,6 @@ Module C_Text
         target.Draw(frontString)
     End Sub
 
-
-
     Friend Sub DrawNpcName(mapNpcNum As Integer)
         Dim textX As Integer
         Dim textY As Integer
