@@ -274,7 +274,7 @@ Module C_Graphics
     Friend NumParallax As Integer
 
     ' #Day/Night
-    Friend NightGfx As New RenderTexture(1152, 864)
+    Friend NightGfx As New RenderTexture(1920, 1080)
 
     Friend NightSprite As Sprite
     Friend NightGfxInfo As GraphicInfo
