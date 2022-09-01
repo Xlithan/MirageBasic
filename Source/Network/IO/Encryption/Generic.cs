@@ -13,14 +13,14 @@ namespace Asfw.IO.Encryption
       int length1 = value.Length;
       byte[] numArray1 = new byte[32];
       byte[] numArray2 = new byte[32];
-      using (RNGCryptoServiceProvider cryptoServiceProvider = new RNGCryptoServiceProvider())
+      using (var cryptoServiceProvider = RandomNumberGenerator.Create())
       {
         cryptoServiceProvider.GetBytes(numArray1);
         cryptoServiceProvider.GetBytes(numArray2);
       }
       using (Rfc2898DeriveBytes rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, numArray1, iterations))
       {
-        RijndaelManaged rijndaelManaged = new RijndaelManaged();
+        var rijndaelManaged = Aes.Create("AesManaged");
         rijndaelManaged.BlockSize = 128;
         rijndaelManaged.Mode = CipherMode.CBC;
         rijndaelManaged.Padding = PaddingMode.PKCS7;
@@ -54,7 +54,7 @@ namespace Asfw.IO.Encryption
       int length1 = value.Length;
       byte[] salt = new byte[32];
       byte[] rgbIv = new byte[32];
-      using (RNGCryptoServiceProvider cryptoServiceProvider = new RNGCryptoServiceProvider())
+      using (var cryptoServiceProvider = RandomNumberGenerator.Create())
       {
         cryptoServiceProvider.GetBytes(salt);
         cryptoServiceProvider.GetBytes(rgbIv);
@@ -62,7 +62,7 @@ namespace Asfw.IO.Encryption
       byte[] numArray;
       using (Rfc2898DeriveBytes bytes = new Rfc2898DeriveBytes(password, salt, iterations))
       {
-        RijndaelManaged rijndaelManaged = new RijndaelManaged();
+        var rijndaelManaged = Aes.Create("AesManaged");
         rijndaelManaged.BlockSize = 128;
         rijndaelManaged.Mode = CipherMode.CBC;
         rijndaelManaged.Padding = PaddingMode.PKCS7;
@@ -110,11 +110,11 @@ namespace Asfw.IO.Encryption
       Buffer.BlockCopy((Array) value, 0, (Array) numArray1, 0, 32);
       Buffer.BlockCopy((Array) value, 32, (Array) numArray2, 0, 32);
       Buffer.BlockCopy((Array) value, 64, (Array) numArray3, 0, count);
-      RijndaelManaged rijndaelManaged1 = new RijndaelManaged();
+      var rijndaelManaged1 = Aes.Create("AesManaged");
       rijndaelManaged1.BlockSize = 128;
       rijndaelManaged1.Mode = CipherMode.CBC;
       rijndaelManaged1.Padding = PaddingMode.PKCS7;
-      RijndaelManaged rijndaelManaged2 = rijndaelManaged1;
+      var rijndaelManaged2 = rijndaelManaged1;
       using (Rfc2898DeriveBytes rfc2898DeriveBytes = new Rfc2898DeriveBytes(password, numArray1, iterations))
       {
         using (ICryptoTransform decryptor = rijndaelManaged2.CreateDecryptor(rfc2898DeriveBytes.GetBytes(32), numArray2))
@@ -144,11 +144,11 @@ namespace Asfw.IO.Encryption
       Buffer.BlockCopy((Array) value, 0, (Array) numArray1, 0, 32);
       Buffer.BlockCopy((Array) value, 32, (Array) numArray2, 0, 32);
       Buffer.BlockCopy((Array) value, 64, (Array) numArray3, 0, count);
-      RijndaelManaged rijndaelManaged1 = new RijndaelManaged();
+      var rijndaelManaged1 = Aes.Create("AesManaged");
       rijndaelManaged1.BlockSize = 128;
       rijndaelManaged1.Mode = CipherMode.CBC;
       rijndaelManaged1.Padding = PaddingMode.PKCS7;
-      RijndaelManaged rijndaelManaged2 = rijndaelManaged1;
+      var rijndaelManaged2 = rijndaelManaged1;
       byte[] array;
       using (Rfc2898DeriveBytes bytes = new Rfc2898DeriveBytes(password, numArray1, iterations))
       {
