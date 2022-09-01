@@ -47,11 +47,11 @@ namespace Asfw.IO.Encryption
     {
       if (this._rsa == null)
         throw new CryptographicException("Key not set.");
-      RijndaelManaged rijndaelManaged1 = new RijndaelManaged();
+      var rijndaelManaged1 = Aes.Create("AesManaged");
       rijndaelManaged1.KeySize = 256;
       rijndaelManaged1.BlockSize = 128;
       rijndaelManaged1.Mode = CipherMode.CBC;
-      RijndaelManaged rijndaelManaged2 = rijndaelManaged1;
+      var rijndaelManaged2 = rijndaelManaged1;
       using (MemoryStream memoryStream = new MemoryStream())
       {
         memoryStream.Write(this._rsa.Encrypt(rijndaelManaged2.Key, false), 0, 256);
@@ -72,11 +72,11 @@ namespace Asfw.IO.Encryption
     {
       if (this._rsa == null)
         throw new CryptographicException("Key not set.");
-      RijndaelManaged rijndaelManaged = new RijndaelManaged();
+      var rijndaelManaged = Aes.Create("AesManaged");
       rijndaelManaged.KeySize = 256;
       rijndaelManaged.BlockSize = 128;
       rijndaelManaged.Mode = CipherMode.CBC;
-      RijndaelManaged rm = rijndaelManaged;
+      var rm = rijndaelManaged;
       byte[] array;
       using (MemoryStream ms = new MemoryStream())
       {
@@ -92,7 +92,7 @@ namespace Asfw.IO.Encryption
         }
         array = ms.ToArray();
       }
-      rm = (RijndaelManaged) null;
+      rm = null;
       return array;
     }
 
@@ -100,11 +100,11 @@ namespace Asfw.IO.Encryption
     {
       if (this._rsa == null)
         throw new CryptographicException("Key not set.");
-      RijndaelManaged rijndaelManaged1 = new RijndaelManaged();
+      var rijndaelManaged1 = Aes.Create("AesManaged");
       rijndaelManaged1.KeySize = 256;
       rijndaelManaged1.BlockSize = 128;
       rijndaelManaged1.Mode = CipherMode.CBC;
-      RijndaelManaged rijndaelManaged2 = rijndaelManaged1;
+      var rijndaelManaged2 = rijndaelManaged1;
       using (ICryptoTransform encryptor = rijndaelManaged2.CreateEncryptor())
       {
         using (MemoryStream memoryStream = new MemoryStream())
@@ -125,11 +125,11 @@ namespace Asfw.IO.Encryption
     {
       if (this._rsa == null)
         throw new CryptographicException("Key not set.");
-      RijndaelManaged rijndaelManaged = new RijndaelManaged();
+      var rijndaelManaged = Aes.Create("AesManaged");
       rijndaelManaged.KeySize = 256;
       rijndaelManaged.BlockSize = 128;
       rijndaelManaged.Mode = CipherMode.CBC;
-      RijndaelManaged rm = rijndaelManaged;
+      var rm = rijndaelManaged;
       byte[] array;
       using (ICryptoTransform es = rm.CreateEncryptor())
       {
@@ -145,7 +145,7 @@ namespace Asfw.IO.Encryption
           array = ms.ToArray();
         }
       }
-      rm = (RijndaelManaged) null;
+      rm = null;
       return array;
     }
 
@@ -187,7 +187,7 @@ namespace Asfw.IO.Encryption
         return (byte[]) null;
       if (value.Length < 272)
         return (byte[]) null;
-      RijndaelManaged rijndaelManaged = new RijndaelManaged();
+      var rijndaelManaged = Aes.Create("AesManaged");
       rijndaelManaged.KeySize = 256;
       rijndaelManaged.BlockSize = 128;
       rijndaelManaged.Mode = CipherMode.CBC;
@@ -218,11 +218,11 @@ namespace Asfw.IO.Encryption
         throw new CryptographicException("Key not set.");
       if (this._rsa.PublicOnly || value.Length < 272)
         return (byte[]) null;
-      RijndaelManaged rijndaelManaged1 = new RijndaelManaged();
+      var rijndaelManaged1 = Aes.Create("AesManaged");
       rijndaelManaged1.KeySize = 256;
       rijndaelManaged1.BlockSize = 128;
       rijndaelManaged1.Mode = CipherMode.CBC;
-      RijndaelManaged rijndaelManaged2 = rijndaelManaged1;
+      var rijndaelManaged2 = rijndaelManaged1;
       byte[] numArray1 = new byte[256];
       byte[] numArray2 = new byte[16];
       int count = value.Length - 272;
@@ -254,7 +254,7 @@ namespace Asfw.IO.Encryption
         return (byte[]) null;
       if (value.Length < offset + size)
         return (byte[]) null;
-      RijndaelManaged rijndaelManaged = new RijndaelManaged();
+      var rijndaelManaged = Aes.Create("AesManaged");
       rijndaelManaged.KeySize = 256;
       rijndaelManaged.BlockSize = 128;
       rijndaelManaged.Mode = CipherMode.CBC;
@@ -285,11 +285,11 @@ namespace Asfw.IO.Encryption
         throw new CryptographicException("Key not set.");
       if (this._rsa.PublicOnly || value.Length < 272 || value.Length < offset + size)
         return (byte[]) null;
-      RijndaelManaged rijndaelManaged1 = new RijndaelManaged();
+      var rijndaelManaged1 = Aes.Create("AesManaged");
       rijndaelManaged1.KeySize = 256;
       rijndaelManaged1.BlockSize = 128;
       rijndaelManaged1.Mode = CipherMode.CBC;
-      RijndaelManaged rijndaelManaged2 = rijndaelManaged1;
+      var rijndaelManaged2 = rijndaelManaged1;
       byte[] numArray1 = new byte[256];
       byte[] numArray2 = new byte[16];
       int count = size - 272;

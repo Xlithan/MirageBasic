@@ -116,14 +116,6 @@ Module C_Player
                 Player(Myindex).Moving = MovementType.Walking
             End If
 
-            If Map.Tile(GetPlayerX(Myindex), GetPlayerY(Myindex)).Type = TileType.Door Then
-                With TempTile(GetPlayerX(Myindex), GetPlayerY(Myindex))
-                    .DoorFrame = 1
-                    .DoorAnimate = 1 ' 0 = nothing| 1 = opening | 2 = closing
-                    .DoorTimer = GetTickCount()
-                End With
-            End If
-
             Select Case GetPlayerDir(Myindex)
                 Case DirectionType.Up
                     SendPlayerMove()
@@ -377,15 +369,6 @@ Module C_Player
         If Map.Tile(x, y).Type = TileType.Resource Then
             CheckDirection = True
             Exit Function
-        End If
-
-        ' Check to see if the key door is open or not
-        If Map.Tile(x, y).Type = TileType.Key Then
-            ' This actually checks if its open or not
-            If TempTile(x, y).DoorOpen = False Then
-                CheckDirection = True
-                Exit Function
-            End If
         End If
 
         If FurnitureHouse > 0 AndAlso FurnitureHouse = Player(Myindex).InHouse Then

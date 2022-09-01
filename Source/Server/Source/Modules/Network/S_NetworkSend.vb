@@ -832,35 +832,6 @@ Module S_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Sub SendDoorAnimation(mapNum As Integer, X As Integer, Y As Integer)
-        Dim buffer As New ByteStream(4)
-
-        buffer.WriteInt32(ServerPackets.SDoorAnimation)
-        buffer.WriteInt32(X)
-        buffer.WriteInt32(Y)
-
-        AddDebug("Sent SMSG: SDoorAnimation")
-
-        SendDataToMap(mapNum, buffer.Data, buffer.Head)
-
-        buffer.Dispose()
-    End Sub
-
-    Sub SendMapKey(index As Integer, X As Integer, Y As Integer, Value As Integer)
-        Dim buffer As New ByteStream(4)
-
-        buffer.WriteInt32(ServerPackets.SMapKey)
-        buffer.WriteInt32(X)
-        buffer.WriteInt32(Y)
-        buffer.WriteInt32(Value)
-
-        AddDebug("Sent SMSG: SMapKey")
-
-        Socket.SendDataTo(index, buffer.Data, buffer.Head)
-
-        buffer.Dispose()
-    End Sub
-
     Sub MapMsg(mapNum As Integer, Msg As String, Color As Byte)
         Dim buffer As New ByteStream(4)
 
@@ -916,20 +887,6 @@ Module S_NetworkSend
     Sub SendPlayerData(index As Integer)
         Dim data = PlayerData(index)
         SendDataToMap(GetPlayerMap(index), data, data.Length)
-    End Sub
-
-    Sub SendMapKeyToMap(mapNum As Integer, X As Integer, Y As Integer, Value As Integer)
-        Dim buffer As New ByteStream(4)
-
-        buffer.WriteInt32(ServerPackets.SMapKey)
-        buffer.WriteInt32(X)
-        buffer.WriteInt32(Y)
-        buffer.WriteInt32(Value)
-        SendDataToMap(mapNum, buffer.Data, buffer.Head)
-
-        AddDebug("Sent SMSG: SMapKey")
-
-        buffer.Dispose()
     End Sub
 
     Sub SendGameData(index As Integer)

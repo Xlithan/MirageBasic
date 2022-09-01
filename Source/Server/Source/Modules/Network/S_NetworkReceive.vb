@@ -413,7 +413,7 @@ Module S_NetworkReceive
             End If
 
             ' Check if name is already in use
-            If FindChar(Name) Then
+            If CharactersList.Find(Name) Then
                 AlertMsg(index, "Sorry, but that name is in use!")
                 Exit Sub
             End If
@@ -1062,8 +1062,6 @@ Module S_NetworkReceive
 
         ' Respawn
         SpawnMapItems(GetPlayerMap(index))
-
-        ClearTempTile(mapNum)
         CacheResources(mapNum)
 
         ' Refresh map for everyone online
@@ -2650,8 +2648,6 @@ Module S_NetworkReceive
 
         ' Respawn
         SpawnMapItems(mapNum)
-
-        ClearTempTile(mapNum)
         CacheResources(mapNum)
 
         ' Refresh map for everyone online

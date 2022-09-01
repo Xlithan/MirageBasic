@@ -797,22 +797,12 @@ newlist:
     Sub AddCommand(ByVal Index As Integer)
         Dim curlist As Integer, i As Integer, X As Integer, curslot As Integer, p As Integer
 
-        If TmpEvent.Pages(CurPageNum).CommandListCount = 0 Then
-            TmpEvent.Pages(CurPageNum).CommandListCount = 1
-        Else
-            TmpEvent.Pages(CurPageNum).CommandListCount = TmpEvent.Pages(CurPageNum).CommandListCount  + 1
-        End If
-
-        If FrmEditor_Events.lstCommands.SelectedIndex = 0 Then
-            curlist = 1
-        Else
-            curlist = FrmEditor_Events.lstCommands.SelectedIndex + 1
-        End If
-
-        ReDim Preserve TmpEvent.Pages(CurPageNum).CommandList(curlist)
+        TmpEvent.Pages(CurPageNum).CommandListCount = TmpEvent.Pages(CurPageNum).CommandListCount  + 1
+        curlist = 1
+        ReDim Preserve TmpEvent.Pages(CurPageNum).CommandList(TmpEvent.Pages(CurPageNum).CommandListCount)
         TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount + 1
-        ReDim Preserve TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount)
         curslot = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
+        ReDim Preserve TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount)
 
         Select Case Index
             Case EventType.EvAddText
@@ -2845,25 +2835,25 @@ nextevent:
 
                 If EventChoiceVisible(1) Then
                     'Response1
-                    temptext = EventChoices(1)
+                    temptext = EventChoices(0)
                     DrawText(EventChatX + 10, EventChatY + 124, Trim(temptext), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
                 End If
 
                 If EventChoiceVisible(2) Then
                     'Response2
-                    temptext = EventChoices(2)
+                    temptext = EventChoices(1)
                     DrawText(EventChatX + 10, EventChatY + 146, Trim(temptext), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
                 End If
 
                 If EventChoiceVisible(3) Then
                     'Response3
-                    temptext = EventChoices(3)
+                    temptext = EventChoices(2)
                     DrawText(EventChatX + 226, EventChatY + 124, Trim(temptext), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
                 End If
 
                 If EventChoiceVisible(4) Then
                     'Response4
-                    temptext = EventChoices(4)
+                    temptext = EventChoices(3)
                     DrawText(EventChatX + 226, EventChatY + 146, Trim(temptext), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 13)
                 End If
             Else

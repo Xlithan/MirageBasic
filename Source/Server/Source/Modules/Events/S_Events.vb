@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 Imports Asfw
-Imports Ini = Asfw.IO.TextFile
+Imports MirageBasic.Core.Serialization
 Imports MirageBasic.Core
 Imports System.Drawing
 
@@ -28,63 +28,51 @@ Friend Module S_Events
 #Region "Database"
 
     Sub CreateSwitches()
+        ReDim Switches(0 To MAX_SWITCHES)
+
         For i = 0 To MAX_SWITCHES
-            Switches(i) = ""
+            Switches(i) = String.Empty
         Next
 
         SaveSwitches()
     End Sub
 
     Sub CreateVariables()
+        ReDim Variables(0 To NAX_VARIABLES)
+
         For i = 0 To NAX_VARIABLES
-            Variables(i) = ""
+            Variables(i) = String.Empty
         Next
 
         SaveVariables()
     End Sub
 
     Sub SaveSwitches()
-        Dim cf = Paths.Database & "Switches.ini"
-        If Not File.Exists(cf) Then File.Create(cf).Dispose()
+        Dim json As New JsonSerializer(Of String())()
 
-        For i = 0 To MAX_SWITCHES
-            Ini.PutVar(cf, "Switches", i, Switches(i))
-        Next
+        json.Write(Paths.Database & "Switches.json", Switches)
     End Sub
 
     Sub SaveVariables()
-        Dim cf = Paths.Database & "Variables.ini"
-        If Not File.Exists(cf) Then File.Create(cf).Dispose()
+        Dim json As New JsonSerializer(Of String())()
 
-        For i = 0 To NAX_VARIABLES
-            Ini.PutVar(cf, "Variables", i, Variables(i))
-        Next
+        json.Write(Paths.Database & "Variables.json", Variables)
     End Sub
 
     Sub LoadSwitches()
-        Dim cf = Paths.Database & "Switches.ini"
+        Dim json As New JsonSerializer(Of String())()
 
-        If Not File.Exists(cf) Then
-            CreateSwitches()
-            Exit Sub
-        End If
+        Switches = json.Read(Paths.Database & "Switches.json")
 
-        For i = 0 To MAX_SWITCHES
-            Switches(i) = Ini.GetVar(cf, "Switches", i)
-        Next
+        If Switches Is Nothing Then CreateSwitches()
     End Sub
 
     Sub LoadVariables()
-        Dim cf = Paths.Database & "Variables.ini"
+        Dim json As New JsonSerializer(Of String())()
 
-        If Not File.Exists(cf) Then
-            CreateVariables()
-            Exit Sub
-        End If
+        Variables = json.Read(Paths.Database & "Variables.json")
 
-        For i = 0 To NAX_VARIABLES
-            Variables(i) = Ini.GetVar(cf, "Variables", i)
-        Next
+        If Variables Is Nothing Then CreateVariables()
     End Sub
 
 #End Region

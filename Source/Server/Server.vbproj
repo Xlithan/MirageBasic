@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>MirageBasic.Server</RootNamespace>
     <AssemblyName>MirageBasic Server</AssemblyName>
@@ -26,7 +27,13 @@
     <ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <OutputPath>..\..\Build\Server\</OutputPath>
+    <DefineConstants>SERVER</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>..\..\Build\Server\</OutputPath>
+    <DefineConstants>SERVER</DefineConstants>
     <DefineDebug>false</DefineDebug>
   </PropertyGroup>
   <ItemGroup>

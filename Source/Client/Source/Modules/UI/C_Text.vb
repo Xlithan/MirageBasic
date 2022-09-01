@@ -39,8 +39,6 @@ Module C_Text
         target.Draw(frontString)
     End Sub
 
-
-
     Friend Sub DrawNpcName(mapNpcNum As Integer)
         Dim textX As Integer
         Dim textY As Integer
@@ -157,14 +155,8 @@ Module C_Text
                                     DrawText(tX, tY, "I", (Color.White), (Color.Black), GameWindow)
                                 Case TileType.NpcAvoid
                                     DrawText(tX, tY, "N", (Color.White), (Color.Black), GameWindow)
-                                Case TileType.Key
-                                    DrawText(tX, tY, "K", (Color.White), (Color.Black), GameWindow)
-                                Case TileType.KeyOpen
-                                    DrawText(tX, tY, "KO", (Color.White), (Color.Black), GameWindow)
                                 Case TileType.Resource
                                     DrawText(tX, tY, "R", (Color.Green), (Color.Black), GameWindow)
-                                Case TileType.Door
-                                    DrawText(tX, tY, "D", (Color.Black), (Color.Red), GameWindow)
                                 Case TileType.NpcSpawn
                                     DrawText(tX, tY, "S", (Color.Yellow), (Color.Black), GameWindow)
                                 Case TileType.Shop

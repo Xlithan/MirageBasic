@@ -1268,14 +1268,10 @@ Module S_Players
                     ' Check to make sure that the tile is walkable
                     If Not IsDirBlocked(Map(GetPlayerMap(index)).Tile(GetPlayerX(index), GetPlayerY(index)).DirBlock, DirectionType.Up + 1) Then
                         If Map(GetPlayerMap(index)).Tile(GetPlayerX(index), GetPlayerY(index) - 1).Type <> TileType.Blocked Then
-                            If Map(GetPlayerMap(index)).Tile(GetPlayerX(index), GetPlayerY(index) - 1).Type <> TileType.Resource Then
-
-                                ' Check to see if the tile is a key and if it is check if its opened
-                                If Map(GetPlayerMap(index)).Tile(GetPlayerX(index), GetPlayerY(index) - 1).Type <> TileType.Key OrElse (Map(GetPlayerMap(index)).Tile(GetPlayerX(index), GetPlayerY(index) - 1).Type = TileType.Key AndAlso TempTile(GetPlayerMap(index)).DoorOpen(GetPlayerX(index), GetPlayerY(index) - 1) = True) Then
-                                    SetPlayerY(index, GetPlayerY(index) - 1)
-                                    SendPlayerMove(index, Movement)
-                                    Moved = True
-                                End If
+                            If Map(GetPlayerMap(index)).Tile(GetPlayerX(index), GetPlayerY(index) - 1).Type <> TileType.Resource Then                              
+                                SetPlayerY(index, GetPlayerY(index) - 1)
+                                SendPlayerMove(index, Movement)
+                                Moved = True
 
                                 'check for event
                                 For i = 1 To TempPlayer(index).EventMap.CurrentEvents
@@ -1322,13 +1318,9 @@ Module S_Players
                     If Not IsDirBlocked(Map(GetPlayerMap(index)).Tile(GetPlayerX(index), GetPlayerY(index)).DirBlock, DirectionType.Down + 1) Then
                         If Map(GetPlayerMap(index)).Tile(GetPlayerX(index), GetPlayerY(index) + 1).Type <> TileType.Blocked Then
                             If Map(GetPlayerMap(index)).Tile(GetPlayerX(index), GetPlayerY(index) + 1).Type <> TileType.Resource Then
-
-                                ' Check to see if the tile is a key and if it is check if its opened
-                                If Map(GetPlayerMap(index)).Tile(GetPlayerX(index), GetPlayerY(index) + 1).Type <> TileType.Key OrElse (Map(GetPlayerMap(index)).Tile(GetPlayerX(index), GetPlayerY(index) + 1).Type = TileType.Key AndAlso TempTile(GetPlayerMap(index)).DoorOpen(GetPlayerX(index), GetPlayerY(index) + 1) = True) Then
-                                    SetPlayerY(index, GetPlayerY(index) + 1)
-                                    SendPlayerMove(index, Movement)
-                                    Moved = True
-                                End If
+                                SetPlayerY(index, GetPlayerY(index) + 1)
+                                SendPlayerMove(index, Movement)
+                                Moved = true
 
                                 'check for event
                                 For i = 1 To TempPlayer(index).EventMap.CurrentEvents
@@ -1373,13 +1365,9 @@ Module S_Players
                     If Not IsDirBlocked(Map(GetPlayerMap(index)).Tile(GetPlayerX(index), GetPlayerY(index)).DirBlock, DirectionType.Left + 1) Then
                         If Map(GetPlayerMap(index)).Tile(GetPlayerX(index) - 1, GetPlayerY(index)).Type <> TileType.Blocked Then
                             If Map(GetPlayerMap(index)).Tile(GetPlayerX(index) - 1, GetPlayerY(index)).Type <> TileType.Resource Then
-
-                                ' Check to see if the tile is a key and if it is check if its opened
-                                If Map(GetPlayerMap(index)).Tile(GetPlayerX(index) - 1, GetPlayerY(index)).Type <> TileType.Key OrElse (Map(GetPlayerMap(index)).Tile(GetPlayerX(index) - 1, GetPlayerY(index)).Type = TileType.Key AndAlso TempTile(GetPlayerMap(index)).DoorOpen(GetPlayerX(index) - 1, GetPlayerY(index)) = True) Then
-                                    SetPlayerX(index, GetPlayerX(index) - 1)
-                                    SendPlayerMove(index, Movement)
-                                    Moved = True
-                                End If
+                                SetPlayerX(index, GetPlayerX(index) - 1)
+                                SendPlayerMove(index, Movement)
+                                Moved = true
 
                                 'check for event
                                 For i = 1 To TempPlayer(index).EventMap.CurrentEvents
@@ -1425,13 +1413,9 @@ Module S_Players
                     If Not IsDirBlocked(Map(GetPlayerMap(index)).Tile(GetPlayerX(index), GetPlayerY(index)).DirBlock, DirectionType.Right + 1) Then
                         If Map(GetPlayerMap(index)).Tile(GetPlayerX(index) + 1, GetPlayerY(index)).Type <> TileType.Blocked Then
                             If Map(GetPlayerMap(index)).Tile(GetPlayerX(index) + 1, GetPlayerY(index)).Type <> TileType.Resource Then
-
-                                ' Check to see if the tile is a key and if it is check if its opened
-                                If Map(GetPlayerMap(index)).Tile(GetPlayerX(index) + 1, GetPlayerY(index)).Type <> TileType.Key OrElse (Map(GetPlayerMap(index)).Tile(GetPlayerX(index) + 1, GetPlayerY(index)).Type = TileType.Key AndAlso TempTile(GetPlayerMap(index)).DoorOpen(GetPlayerX(index) + 1, GetPlayerY(index)) = True) Then
-                                    SetPlayerX(index, GetPlayerX(index) + 1)
-                                    SendPlayerMove(index, Movement)
-                                    Moved = True
-                                End If
+                                SetPlayerX(index, GetPlayerX(index) + 1)
+                                SendPlayerMove(index, Movement)
+                                Moved = true
 
                                 'check for event
                                 For i = 1 To TempPlayer(index).EventMap.CurrentEvents
@@ -1488,40 +1472,6 @@ Module S_Players
 
                 DidWarp = True
                 Moved = True
-            End If
-
-            ' Check to see if the tile is a door tile, and if so warp them
-            If .Type = TileType.Door Then
-                mapNum = .Data1
-                x = .Data2
-                y = .Data3
-                ' send the animation to the map
-                SendDoorAnimation(GetPlayerMap(index), GetPlayerX(index), GetPlayerY(index))
-
-                If Map(mapNum).Instanced = 1 Then
-                    If TempPlayer(index).InParty Then
-                        PartyWarp(index, mapNum, x, y)
-                    Else
-                        PlayerWarp(index, mapNum, x, y)
-                    End If
-                Else
-                    PlayerWarp(index, mapNum, x, y)
-                End If
-                DidWarp = True
-                Moved = True
-            End If
-
-            ' Check for key trigger open
-            If .Type = TileType.KeyOpen Then
-                x = .Data1
-                y = .Data2
-
-                If Map(GetPlayerMap(index)).Tile(x, y).Type = TileType.Key AndAlso TempTile(GetPlayerMap(index)).DoorOpen(x, y) = False Then
-                    TempTile(GetPlayerMap(index)).DoorOpen(x, y) = True
-                    TempTile(GetPlayerMap(index)).DoorTimer = GetTimeMs()
-                    SendMapKey(index, x, y, 1)
-                    MapMsg(GetPlayerMap(index), "A door has been unlocked.", ColorType.White)
-                End If
             End If
 
             ' Check for a shop, and if so open it
@@ -2568,26 +2518,6 @@ Module S_Players
                             End If
 
                     End Select
-
-                    ' Check if a key exists
-                    If Map(GetPlayerMap(index)).Tile(x, y).Type = TileType.Key Then
-
-                        ' Check if the key they are using matches the map key
-                        If InvItemNum = Map(GetPlayerMap(index)).Tile(x, y).Data1 Then
-                            TempTile(GetPlayerMap(index)).DoorOpen(x, y) = True
-                            TempTile(GetPlayerMap(index)).DoorTimer = GetTimeMs()
-                            SendMapKey(index, x, y, 1)
-                            MapMsg(GetPlayerMap(index), "A door has been unlocked.", ColorType.Yellow)
-
-                            SendAnimation(GetPlayerMap(index), Item(InvItemNum).Animation, x, y)
-
-                            ' Check if we are supposed to take away the item
-                            If Map(GetPlayerMap(index)).Tile(x, y).Data2 = 1 Then
-                                TakeInvItem(index, InvItemNum, 0)
-                                PlayerMsg(index, "The key is destroyed in the lock.", ColorType.Yellow)
-                            End If
-                        End If
-                    End If
 
                 Case ItemType.Skill
                     InvItemNum = GetPlayerInvItemNum(index, InvNum)

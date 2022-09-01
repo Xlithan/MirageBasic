@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports Asfw
 Imports MirageBasic.Core
-Imports Ini = Asfw.IO.TextFile
+Imports MirageBasic.Core.Serialization
 
 Friend Module S_Housing
 
@@ -36,19 +36,15 @@ Friend Module S_Housing
 
 #Region "Database"
     Sub LoadHouses()
-        Dim cf = Paths.Database & "houseconfig.ini"
-        If Not File.Exists(cf) Then
-            SaveHouses()
-            Exit Sub
-        End If
+        Dim json As New JsonSerializer(Of HouseRec)()
 
         For i = 0 To MAX_HOUSES
-            HouseConfig(i).BaseMap = Val(Ini.Read(cf, i, "BaseMap"))
-            HouseConfig(i).ConfigName = Trim$(Ini.Read(cf, i, "Name"))
-            HouseConfig(i).MaxFurniture = Val(Ini.Read(cf, i, "MaxFurniture"))
-            HouseConfig(i).Price = Val(Ini.Read(cf, i, "Price"))
-            HouseConfig(i).X = Val(Ini.Read(cf, i, "X"))
-            HouseConfig(i).Y = Val(Ini.Read(cf, i, "Y"))
+            If Not File.Exists(Paths.House(i)) Then
+                SaveHouse(i)
+                Continue For
+            End If
+
+            HouseConfig(i) = json.Read(Paths.House(i))
         Next
 
         For i = 0 To GetPlayersOnline()
@@ -61,13 +57,9 @@ Friend Module S_Housing
     Sub SaveHouse(index As Integer)
         If Not (index > 0 AndAlso index <= MAX_HOUSES) Then Return
 
-        Dim cf = Paths.Database & "houseconfig.ini"
-        Ini.Write(cf, index, "BaseMap", HouseConfig(index).BaseMap)
-        Ini.Write(cf, index, "Name", HouseConfig(index).ConfigName)
-        Ini.Write(cf, index, "MaxFurniture", HouseConfig(index).MaxFurniture)
-        Ini.Write(cf, index, "Price", HouseConfig(index).Price)
-        Ini.Write(cf, index, "X", HouseConfig(index).X)
-        Ini.Write(cf, index, "Y", HouseConfig(index).Y)
+        Dim json As New JsonSerializer(Of HouseRec)()
+
+        json.Write(Paths.House(index), HouseConfig(index))
     End Sub
 
     Sub SaveHouses()

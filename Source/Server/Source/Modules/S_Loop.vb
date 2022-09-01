@@ -243,20 +243,6 @@ Module modLoop
                 End If
             Next
 
-            '  Close the doors
-            If tickCount > TempTile(mapNum).DoorTimer + 5000 Then
-
-                For x1 = 0 To Map(mapNum).MaxX
-                    For y1 = 0 To Map(mapNum).MaxY
-                        If Map(mapNum).Tile(x1, y1).Type = TileType.Key AndAlso TempTile(mapNum).DoorOpen(x1, y1) = True Then
-                            TempTile(mapNum).DoorOpen(x1, y1) = False
-                            SendMapKeyToMap(mapNum, x1, y1, 0)
-                        End If
-                    Next
-                Next
-
-            End If
-
             ' Respawning Resources
             If MapResource(mapNum).ResourceCount > 0 Then
                 For i = 0 To MapResource(mapNum).ResourceCount

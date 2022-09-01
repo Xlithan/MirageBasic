@@ -15,7 +15,7 @@ Module C_GameLogic
         Dim tmpfps As Integer, tmplps As Integer, walkTimer As Integer, frameTime As Integer
         Dim tmr10000 As Integer, tmr1000 As Integer, tmrweather As Integer
         Dim tmr100 As Integer, tmr500 As Integer, tmrconnect As Integer
-        Dim rendercount As Integer, fadetmr As Integer
+        Dim fadetmr As Integer
 
         starttime = GetTickCount()
         FrmMenu.lblNextChar.Left = Lblnextcharleft
@@ -30,7 +30,7 @@ Module C_GameLogic
 
             If Frmmenuvisible = True Then
                 If tmrconnect < GetTickCount() Then
-                    If Socket.IsConnected() = True Then
+                    If Socket?.IsConnected() = True Then
                         FrmMenu.lblServerStatus.ForeColor = Color.LightGreen
                         FrmMenu.lblServerStatus.Text = Language.MainMenu.ServerOnline
                     Else
@@ -67,8 +67,6 @@ Module C_GameLogic
                     tmplps = 0
                     starttime = tick + 1000
                 End If
-                tmplps = tmplps + 1
-                tmpfps = tmpfps + 1
 
                 ' Update inv animation
                 If NumItems > 0 Then
@@ -298,12 +296,8 @@ Module C_GameLogic
                 fadetmr = tick + 30
             End If
 
-            If rendercount < tick Then
-                'Actual Game Loop Stuff :/
-                Render_Graphics()
-                tmplps = tmplps + 1
-                rendercount = tick + 16
-            End If
+            Render_Graphics()
+            tmpfps = tmpfps + 1
 
             Application.DoEvents()
 
@@ -314,19 +308,6 @@ Module C_GameLogic
             End If
 
         Loop
-    End Sub
-
-    Sub ClearTempTile()
-        Dim x As Integer
-        Dim y As Integer
-        ReDim TempTile(Map.MaxX, Map.MaxY)
-
-        For X = 0 To Map.MaxX
-            For Y = 0 To Map.MaxY
-                TempTile(x, y).DoorOpen = 0
-            Next
-        Next
-
     End Sub
 
     Sub ProcessNpcMovement(mapNpcNum As Integer)

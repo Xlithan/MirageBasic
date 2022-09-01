@@ -77,6 +77,13 @@ Friend Class FrmOptions
         Me.Visible = False
     End Sub
 
+    Private Sub FrmOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        optMOn.Checked = Settings.Music
+        optSOn.Checked = Settings.Sound
+        lblVolume.Text = "Volume: " & Settings.Volume
+        scrlVolume.Value = Settings.Volume
+    End Sub
+
 #End Region
 
 End Class

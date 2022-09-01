@@ -274,7 +274,7 @@ Module C_Graphics
     Friend NumParallax As Integer
 
     ' #Day/Night
-    Friend NightGfx As New RenderTexture(1920, 1080)
+    Friend NightGfx As New RenderTexture("3860", "2160")
 
     Friend NightSprite As Sprite
     Friend NightGfxInfo As GraphicInfo
@@ -1349,7 +1349,7 @@ Module C_Graphics
             startX = GetPlayerX(Myindex) - ScreenMapx
             startY = GetPlayerY(Myindex) - ScreenMapy
         Else
-            StartX =Math.Floor( GetPlayerX(MyIndex) - ((ScreenMapx + 1) \ 2) - 1)
+            StartX = Math.Floor(GetPlayerX(MyIndex) - ((ScreenMapx + 1) \ 2) - 1)
             StartY = Math.Floor(GetPlayerY(MyIndex) - ((ScreenMapy + 1) \ 2) - 1)
         End If
 
@@ -1684,17 +1684,6 @@ Module C_Graphics
 
         'Draw sum d00rs.
         If GettingMap Then Exit Sub
-
-        For x = TileView.Left To TileView.Right
-            For y = TileView.Top To TileView.Bottom
-                If IsValidMapPoint(x, y) Then
-                    If Map.Tile Is Nothing Then Exit Sub
-                    If Map.Tile(x, y).Type = TileType.Door Then
-                        DrawDoor(x, y)
-                    End If
-                End If
-            Next
-        Next
 
         ' draw animations
         If NumAnimations > 0 Then
@@ -2091,52 +2080,6 @@ Module C_Graphics
     Sub DrawMapName()
         DrawText(DrawMapNameX, DrawMapNameY, Language.Game.MapName & Map.Name, DrawMapNameColor, SFML.Graphics.Color.Black, GameWindow)
     End Sub
-
-    Friend Sub DrawDoor(x As Integer, y As Integer)
-        Dim rec As Rectangle
-
-        Dim x2 As Integer, y2 As Integer
-
-        ' sort out animation
-        With TempTile(x, y)
-            If .DoorAnimate = 1 Then ' opening
-                If .DoorTimer + 100 < GetTickCount() Then
-                    If .DoorFrame < 4 Then
-                        .DoorFrame = .DoorFrame + 1
-                    Else
-                        .DoorAnimate = 2 ' set to closing
-                    End If
-                    .DoorTimer = GetTickCount()
-                End If
-            ElseIf .DoorAnimate = 2 Then ' closing
-                If .DoorTimer + 100 < GetTickCount() Then
-                    If .DoorFrame > 1 Then
-                        .DoorFrame = .DoorFrame - 1
-                    Else
-                        .DoorAnimate = 0 ' end animation
-                    End If
-                    .DoorTimer = GetTickCount()
-                End If
-            End If
-
-            If .DoorFrame = 0 Then .DoorFrame = 1
-        End With
-
-        With rec
-            .Y = 0
-            .Height = DoorGfxInfo.Height
-            .X = ((TempTile(x, y).DoorFrame - 1) * DoorGfxInfo.Width / 4)
-            .Width = DoorGfxInfo.Width / 4
-        End With
-
-        x2 = (x * PicX)
-        y2 = (y * PicY) - (DoorGfxInfo.Height / 2) + 4
-
-        RenderSprite(DoorSprite, GameWindow, ConvertMapX(x * PicX), ConvertMapY((y * PicY) - PicY), rec.X, rec.Y, rec.Width, rec.Height)
-
-    End Sub
-
-
 
     Friend Sub DrawFurnitureOutline()
         Dim rec As Rectangle
@@ -3009,30 +2952,6 @@ NextLoop:
             Case Else
                 Exit Sub
         End Select
-
-        For x = TileView.Left To TileView.Right + 1
-            For y = TileView.Top To TileView.Bottom + 1
-                If IsValidMapPoint(x, y) Then
-                    If Map.Tile(x, y).Type = TileType.Light Then
-                        Dim x1 = ConvertMapX(x * 32) + 16 - LightGfxInfo.Width / 2
-                        Dim y1 = ConvertMapY(y * 32) + 16 - LightGfxInfo.Height / 2
-
-                        'Create the light texture to multiply over the dark texture.
-                        LightSprite.Position = New Vector2f(x1, y1)
-                        LightSprite.Color = SFML.Graphics.Color.Red
-                        NightGfx.Draw(LightSprite, New RenderStates(BlendMode.Multiply))
-
-                        ''Create the light texture to multiply over the dark texture.
-                        'LightSprite.Position = New Vector2f(X1, Y1)
-                        'LightAreaSprite.Position = New Vector2f(X1, Y1)
-                        ''LightSprite.Color = New SFML.Graphics.Color(SFML.Graphics.Color.Red)
-                        ''LightAreaSprite.Color = New SFML.Graphics.Color(SFML.Graphics.Color.Red)
-                        'NightGfx.Draw(LightSprite, New RenderStates(BlendMode.Multiply))
-                        'NightGfx.Draw(LightAreaSprite, New RenderStates(BlendMode.Multiply))
-                    End If
-                End If
-            Next
-        Next
 
         NightSprite = New Sprite(NightGfx.Texture)
 

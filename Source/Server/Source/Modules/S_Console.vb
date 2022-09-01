@@ -30,7 +30,7 @@ Module S_Console
 
                     Console.WriteLine("/help, Shows this message.")
                     Console.WriteLine("/exit, Closes down the server.")
-                    Console.WriteLine("/setadmin, Sets player access level, use with '/setadmin playername powerlvl' powerlevel goes from 0 for player, to 4 to creator.")
+                    Console.WriteLine("/access, Sets player access level, use with '/setadmin playername powerlvl' powerlevel goes from 0 for player, to 4 to creator.")
                     Console.WriteLine("/kick, Kicks user from server, use with '/kick playername'")
                     Console.WriteLine("/ban, Bans user from server, use with '/ban playername'")
 
@@ -44,7 +44,7 @@ Module S_Console
 
 #End Region
 
-                Case "/setadmin"
+                Case "/access"
                     If parts.Length < 3 Then Continue While
 
 #Region " Body "

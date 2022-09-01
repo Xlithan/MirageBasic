@@ -1,4 +1,6 @@
-﻿Public Module modTypes
+﻿Imports MirageBasic.Core.Database
+
+Public Module modTypes
     ' Common data structure arrays
     Public Job(MAX_JOBS) As JobStruct
     Public Item(MAX_ITEMS) As ItemStruct
@@ -8,7 +10,6 @@
     Public Resource(MAX_RESOURCES) As ResourceStruct
     Public Animation(MAX_ANIMATIONS) As AnimationStruct
     Public Map(MAX_CACHED_MAPS) As MapStruct
-    Public TempTile(MAX_CACHED_MAPS) As TempTileStruct
     Public PlayersOnMap(MAX_CACHED_MAPS) As Integer
     Public MapItem(MAX_CACHED_MAPS, MAX_MAP_ITEMS) As MapItemStruct
     Public MapNpc(MAX_MAP_NPCS) As MapDataStruct
@@ -28,6 +29,7 @@
     Public TradeTheirOffer(MAX_INV) As PlayerInvStruct
     Public Party As PartyStruct
     Public MapResource() As MapResourceStruct
+    Public CharactersList As CharacterList
 
     ' Common data structures
     Public Structure RandInvStruct
@@ -304,7 +306,7 @@
         Dim Steps As Byte
         Dim Damage As Integer
     End Structure
-    
+
     Public Structure PlayerStruct
         ' Account
         Dim Login As String
@@ -391,7 +393,7 @@
         Dim Emote As Integer
         Dim EmoteTimer As Integer
         Dim EventTimer As Integer
-       
+
     End Structure
 
     Public Structure TempPlayerStruct
@@ -577,12 +579,6 @@
         Dim StopRegen As Byte
         Dim StopRegenTimer As Integer
     End Structure
-
-    Public Structure TempTileStruct
-        Dim DoorOpen(,) As Byte
-        Dim DoorTimer As Integer
-    End Structure
-
     Public Structure MapDataStruct
         Dim Npc() As MapNpcStruct
     End Structure
@@ -611,11 +607,11 @@
 
     End Structure
 
-   Public Structure InstancedMap
+    Public Structure InstancedMap
         Dim OriginalMap As Integer
     End Structure
 
-      Public Structure MoveRouteStruct
+    Public Structure MoveRouteStruct
         Dim Index As Integer
         Dim Data1 As Integer
         Dim Data2 As Integer
@@ -625,7 +621,7 @@
         Dim Data6 As Integer
     End Structure
 
-   Public Structure GlobalEventStruct
+    Public Structure GlobalEventStruct
         Dim X As Integer
         Dim Y As Integer
         Dim Dir As Integer
@@ -662,7 +658,7 @@
         Dim MoveRouteComplete As Integer
     End Structure
 
-   Public Structure GlobalEventsStruct
+    Public Structure GlobalEventsStruct
         Dim EventCount As Integer
         Dim Events() As GlobalEventStruct
     End Structure
@@ -676,7 +672,7 @@
         Dim ElseCommandList As Integer
     End Structure
 
-   Public Structure EventCommandStruct
+    Public Structure EventCommandStruct
         Dim Index As Byte
         Dim Text1 As String
         Dim Text2 As String
@@ -694,13 +690,13 @@
         Dim MoveRoute() As MoveRouteStruct
     End Structure
 
-   Public Structure CommandListStruct
+    Public Structure CommandListStruct
         Dim CommandCount As Integer
         Dim ParentList As Integer
         Dim Commands() As EventCommandStruct
     End Structure
 
-   Public Structure EventPageStruct
+    Public Structure EventPageStruct
 
         'These are condition variables that decide if the event even appears to the player.
         Dim ChkVariable As Integer
@@ -764,7 +760,7 @@
         Dim Y As Integer
     End Structure
 
-   Public Structure EventStruct
+    Public Structure EventStruct
         Dim Name As String
         Dim Globals As Byte
         Dim PageCount As Integer
@@ -784,7 +780,7 @@
         Dim Y As Integer
     End Structure
 
-   Public Structure MapEventStruct
+    Public Structure MapEventStruct
         Dim Name As String
         Dim Steps As Integer
         Dim Dir As Integer
@@ -832,12 +828,12 @@
         Dim DirFix As Integer
     End Structure
 
-   Public Structure EventMapStruct
+    Public Structure EventMapStruct
         Dim CurrentEvents As Integer
         Dim EventPages() As MapEventStruct
     End Structure
 
-   Public Structure EventProcessingStruct
+    Public Structure EventProcessingStruct
         Dim Active As Integer
         Dim CurList As Integer
         Dim CurSlot As Integer
@@ -858,7 +854,7 @@
         Dim Level As Integer
     End Structure
 
-   Public Structure HouseStruct
+    Public Structure HouseStruct
         Dim ConfigName As String
         Dim BaseMap As Integer
         Dim Price As Integer
@@ -867,19 +863,19 @@
         Dim Y As Integer
     End Structure
 
-   Public Structure FurnitureStruct
+    Public Structure FurnitureStruct
         Dim ItemNum As Integer
         Dim X As Integer
         Dim Y As Integer
     End Structure
 
-   Public Structure PlayerHouseStruct
+    Public Structure PlayerHouseStruct
         Dim Houseindex As Integer
         Dim FurnitureCount As Integer
         Dim Furniture() As FurnitureStruct
     End Structure
 
-        Public Structure PlayerQuestStruct
+    Public Structure PlayerQuestStruct
         Dim Status As Integer '0=not started, 1=started, 2=completed, 3=completed but repeatable
         Dim ActualTask As Integer
         Dim CurrentCount As Integer 'Used to handle the Amount property
@@ -958,7 +954,7 @@
 
     Public Structure MapResourceStruct
         Dim ResourceCount As Integer
-        Dim ResourceData() as MapResourceCacheStruct
+        Dim ResourceData() As MapResourceCacheStruct
     End Structure
 
     Public Structure MapResourceCacheStruct

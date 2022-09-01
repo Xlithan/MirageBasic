@@ -190,9 +190,6 @@ Module modDatabase
         Map(mapNum).Music = ""
         Map(mapNum).MaxX = MAX_MAPX
         Map(mapNum).MaxY = MAX_MAPY
-
-        ClearTempTile(mapNum)
-
     End Sub
 
     Sub SaveMaps()
@@ -588,36 +585,12 @@ Module modDatabase
             MapNpc(mapNum).Npc(x).Num = Map(mapNum).Npc(x)
         Next
 
-        ClearTempTile(mapNum)
         CacheResources(mapNum)
 
         If Map(mapNum).Name Is Nothing Then Map(mapNum).Name = ""
         If Map(mapNum).Music Is Nothing Then Map(mapNum).Music = ""
 
         LoadMapEvent(mapNum)
-    End Sub
-
-    Sub ClearTempTiles()
-        ReDim TempTile(MAX_CACHED_MAPS)
-
-        For i = 0 To MAX_CACHED_MAPS
-            ClearTempTile(i)
-        Next
-
-    End Sub
-
-    Sub ClearTempTile(mapNum As Integer)
-        Dim y As Integer
-        Dim x As Integer
-        TempTile(mapNum).DoorTimer = 0
-        ReDim TempTile(mapNum).DoorOpen(Map(mapNum).MaxX, Map(mapNum).MaxY)
-
-        For x = 0 To Map(mapNum).MaxX
-            For y = 0 To Map(mapNum).MaxY
-                TempTile(mapNum).DoorOpen(x, y) = False
-            Next
-        Next
-
     End Sub
 
     Sub ClearMapItem(index As Integer, mapNum As Integer)
@@ -1054,10 +1027,6 @@ Module modDatabase
         Player(index).Password = Password
 
         SavePlayer(index)
-    End Sub
-
-    Sub DeleteName(Name As String)
-        TextFile.RemoveString(Paths.Database & "Accounts\charlist.txt", Name.Trim.ToLower)
     End Sub
 
 #End Region
@@ -1695,34 +1664,14 @@ Module modDatabase
                 Player(index).GatherSkills(i).SkillNextLvlExp = 100
             Next
 
-            ' Append name to file
-            AddTextToFile(Name, "Accounts\charlist.txt")
+            ' Add name to character list.
+            CharactersList.Add(Name).Save()
 
             SavePlayer(index)
             Exit Sub
         End If
 
     End Sub
-
-    Function FindChar(Name As String) As Boolean
-        FindChar = False
-        Dim characters() As String
-        Dim fullpath As String
-        Dim Contents As String
-
-        fullpath = Paths.Accounts & "charlist.txt"
-
-        Contents = GetFileContents(fullpath)
-        characters = Split(Contents, vbNewLine)
-
-        For i = 0 To UBound(characters)
-            If Trim$(LCase(characters(i)) = Trim$(LCase(Name))) Then
-                FindChar = True
-            End If
-        Next
-
-        Return FindChar
-    End Function
 
 #End Region
 
