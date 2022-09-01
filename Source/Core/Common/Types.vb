@@ -10,7 +10,6 @@ Public Module modTypes
     Public Resource(MAX_RESOURCES) As ResourceStruct
     Public Animation(MAX_ANIMATIONS) As AnimationStruct
     Public Map(MAX_CACHED_MAPS) As MapStruct
-    Public TempTile(MAX_CACHED_MAPS) As TempTileStruct
     Public PlayersOnMap(MAX_CACHED_MAPS) As Integer
     Public MapItem(MAX_CACHED_MAPS, MAX_MAP_ITEMS) As MapItemStruct
     Public MapNpc(MAX_MAP_NPCS) As MapDataStruct
@@ -580,12 +579,6 @@ Public Module modTypes
         Dim StopRegen As Byte
         Dim StopRegenTimer As Integer
     End Structure
-
-    Public Structure TempTileStruct
-        Dim DoorOpen(,) As Byte
-        Dim DoorTimer As Integer
-    End Structure
-
     Public Structure MapDataStruct
         Dim Npc() As MapNpcStruct
     End Structure

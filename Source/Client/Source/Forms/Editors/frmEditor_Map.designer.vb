@@ -30,10 +30,7 @@ Partial Class frmEditor_Map
         Me.optBank = New System.Windows.Forms.RadioButton()
         Me.optShop = New System.Windows.Forms.RadioButton()
         Me.optNPCSpawn = New System.Windows.Forms.RadioButton()
-        Me.optDoor = New System.Windows.Forms.RadioButton()
         Me.optResource = New System.Windows.Forms.RadioButton()
-        Me.optKeyOpen = New System.Windows.Forms.RadioButton()
-        Me.optKey = New System.Windows.Forms.RadioButton()
         Me.optNPCAvoid = New System.Windows.Forms.RadioButton()
         Me.optItem = New System.Windows.Forms.RadioButton()
         Me.optWarp = New System.Windows.Forms.RadioButton()
@@ -225,7 +222,7 @@ Partial Class frmEditor_Map
         'optHouse
         '
         Me.optHouse.AutoSize = true
-        Me.optHouse.Location = New System.Drawing.Point(373, 57)
+        Me.optHouse.Location = New System.Drawing.Point(118, 58)
         Me.optHouse.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optHouse.Name = "optHouse"
         Me.optHouse.Size = New System.Drawing.Size(82, 19)
@@ -247,7 +244,7 @@ Partial Class frmEditor_Map
         'optTrap
         '
         Me.optTrap.AutoSize = true
-        Me.optTrap.Location = New System.Drawing.Point(118, 98)
+        Me.optTrap.Location = New System.Drawing.Point(477, 58)
         Me.optTrap.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optTrap.Name = "optTrap"
         Me.optTrap.Size = New System.Drawing.Size(47, 19)
@@ -259,7 +256,7 @@ Partial Class frmEditor_Map
         'optHeal
         '
         Me.optHeal.AutoSize = true
-        Me.optHeal.Location = New System.Drawing.Point(12, 98)
+        Me.optHeal.Location = New System.Drawing.Point(373, 58)
         Me.optHeal.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optHeal.Name = "optHeal"
         Me.optHeal.Size = New System.Drawing.Size(49, 19)
@@ -271,7 +268,7 @@ Partial Class frmEditor_Map
         'optBank
         '
         Me.optBank.AutoSize = true
-        Me.optBank.Location = New System.Drawing.Point(477, 57)
+        Me.optBank.Location = New System.Drawing.Point(202, 58)
         Me.optBank.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optBank.Name = "optBank"
         Me.optBank.Size = New System.Drawing.Size(51, 19)
@@ -304,18 +301,6 @@ Partial Class frmEditor_Map
         Me.optNPCSpawn.Text = "NPC Spawn"
         Me.optNPCSpawn.UseVisualStyleBackColor = true
         '
-        'optDoor
-        '
-        Me.optDoor.AutoSize = true
-        Me.optDoor.Location = New System.Drawing.Point(118, 58)
-        Me.optDoor.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.optDoor.Name = "optDoor"
-        Me.optDoor.Size = New System.Drawing.Size(51, 19)
-        Me.optDoor.TabIndex = 7
-        Me.optDoor.TabStop = true
-        Me.optDoor.Text = "Door"
-        Me.optDoor.UseVisualStyleBackColor = true
-        '
         'optResource
         '
         Me.optResource.AutoSize = true
@@ -327,30 +312,6 @@ Partial Class frmEditor_Map
         Me.optResource.TabStop = true
         Me.optResource.Text = "Resource"
         Me.optResource.UseVisualStyleBackColor = true
-        '
-        'optKeyOpen
-        '
-        Me.optKeyOpen.AutoSize = true
-        Me.optKeyOpen.Location = New System.Drawing.Point(276, 58)
-        Me.optKeyOpen.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.optKeyOpen.Name = "optKeyOpen"
-        Me.optKeyOpen.Size = New System.Drawing.Size(76, 19)
-        Me.optKeyOpen.TabIndex = 5
-        Me.optKeyOpen.TabStop = true
-        Me.optKeyOpen.Text = "Key Open"
-        Me.optKeyOpen.UseVisualStyleBackColor = true
-        '
-        'optKey
-        '
-        Me.optKey.AutoSize = true
-        Me.optKey.Location = New System.Drawing.Point(202, 58)
-        Me.optKey.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.optKey.Name = "optKey"
-        Me.optKey.Size = New System.Drawing.Size(44, 19)
-        Me.optKey.TabIndex = 4
-        Me.optKey.TabStop = true
-        Me.optKey.Text = "Key"
-        Me.optKey.UseVisualStyleBackColor = true
         '
         'optNPCAvoid
         '
@@ -1149,9 +1110,6 @@ Partial Class frmEditor_Map
         Me.tpAttributes.Controls.Add(Me.optShop)
         Me.tpAttributes.Controls.Add(Me.optNPCAvoid)
         Me.tpAttributes.Controls.Add(Me.optNPCSpawn)
-        Me.tpAttributes.Controls.Add(Me.optKey)
-        Me.tpAttributes.Controls.Add(Me.optDoor)
-        Me.tpAttributes.Controls.Add(Me.optKeyOpen)
         Me.tpAttributes.Controls.Add(Me.optResource)
         Me.tpAttributes.Location = New System.Drawing.Point(4, 24)
         Me.tpAttributes.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -1165,7 +1123,7 @@ Partial Class frmEditor_Map
         'optLight
         '
         Me.optLight.AutoSize = true
-        Me.optLight.Location = New System.Drawing.Point(276, 98)
+        Me.optLight.Location = New System.Drawing.Point(276, 58)
         Me.optLight.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optLight.Name = "optLight"
         Me.optLight.Size = New System.Drawing.Size(52, 19)
@@ -1177,7 +1135,7 @@ Partial Class frmEditor_Map
         'optCraft
         '
         Me.optCraft.AutoSize = true
-        Me.optCraft.Location = New System.Drawing.Point(202, 98)
+        Me.optCraft.Location = New System.Drawing.Point(12, 95)
         Me.optCraft.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optCraft.Name = "optCraft"
         Me.optCraft.Size = New System.Drawing.Size(51, 19)
@@ -2076,10 +2034,7 @@ End Sub
     Friend WithEvents optBank As System.Windows.Forms.RadioButton
     Friend WithEvents optShop As System.Windows.Forms.RadioButton
     Friend WithEvents optNPCSpawn As System.Windows.Forms.RadioButton
-    Friend WithEvents optDoor As System.Windows.Forms.RadioButton
     Friend WithEvents optResource As System.Windows.Forms.RadioButton
-    Friend WithEvents optKeyOpen As System.Windows.Forms.RadioButton
-    Friend WithEvents optKey As System.Windows.Forms.RadioButton
     Friend WithEvents optNPCAvoid As System.Windows.Forms.RadioButton
     Friend WithEvents optItem As System.Windows.Forms.RadioButton
     Friend WithEvents optWarp As System.Windows.Forms.RadioButton

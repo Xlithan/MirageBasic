@@ -22,7 +22,7 @@ Friend Class frmEditor_NPC
         cmbQuest.Items.Clear()
         For i = 0 To MAX_QUESTS
             cmbQuest.Items.Add(i & ": " & Quest(i).Name)
-        Next
+        Next    
 
         cmbItem.Items.Clear()
         For i = 0 To MAX_ITEMS

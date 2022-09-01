@@ -332,18 +332,6 @@ Friend Module C_AutoTiles
                 Autotile(x, y).Layer(layerNum).RenderState = RenderStateNone
                 Exit Sub
             End If
-            ' check if it's a key - hide mask if key is closed
-            If layerNum = LayerType.Mask Then
-                If .Type = TileType.Key Then
-                    If TempTile(x, y).DoorOpen = False Then
-                        Autotile(x, y).Layer(layerNum).RenderState = RenderStateNone
-                        Exit Sub
-                    Else
-                        Autotile(x, y).Layer(layerNum).RenderState = RenderStateNormal
-                        Exit Sub
-                    End If
-                End If
-            End If
             ' check if it needs to be rendered as an autotile
             If .Layer(layerNum).AutoTile = AutotileNone OrElse .Layer(layerNum).AutoTile = AutotileFake Then
                 'ReDim Autotile(X, Y).Layer(MapLayer.Count - 1)

@@ -4,7 +4,6 @@ Imports System.Windows.Forms
 Imports MirageBasic.Core
 
 Module C_Database
-
     Friend Function GetFileContents(fullPath As String, Optional ByRef errInfo As String = "") As String
         Dim strContents As String
         Dim objReader As StreamReader

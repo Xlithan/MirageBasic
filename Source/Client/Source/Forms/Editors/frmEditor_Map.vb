@@ -162,60 +162,6 @@ Public Class frmEditor_Map
         EditorMap_DrawMapItem()
     End Sub
 
-    Private Sub ScrlMapKey_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlMapKey.ValueChanged
-        lblMapKey.Text = "Item: " & Trim$(Item(scrlMapKey.Value).Name)
-        EditorMap_DrawKey()
-    End Sub
-
-    Private Sub BtnMapKey_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMapKey.Click
-        KeyEditorNum = scrlMapKey.Value
-        KeyEditorTake = chkMapKey.Checked
-        pnlAttributes.Visible = False
-        fraMapKey.Visible = False
-    End Sub
-
-    Private Sub OptKey_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optKey.CheckedChanged
-        If optKey.Checked = False Then Exit Sub
-
-        ClearAttributeDialogue()
-        pnlAttributes.Visible = True
-        fraMapKey.Visible = True
-
-        scrlMapKey.Maximum = MAX_ITEMS
-        scrlMapKey.Value = 1
-        chkMapKey.Checked = True
-        EditorMap_DrawKey()
-        lblMapKey.Text = "Item: " & Trim$(Item(scrlMapKey.Value).Name)
-    End Sub
-
-    Private Sub ScrlKeyX_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlKeyX.ValueChanged
-        lblKeyX.Text = "X: " & scrlKeyX.Value
-    End Sub
-
-    Private Sub ScrlKeyY_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles scrlKeyY.ValueChanged
-        lblKeyY.Text = "X: " & scrlKeyY.Value
-    End Sub
-
-    Private Sub BtnMapKeyOpen_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnMapKeyOpen.Click
-        KeyOpenEditorX = scrlKeyX.Value
-        KeyOpenEditorY = scrlKeyY.Value
-        pnlAttributes.Visible = False
-        fraKeyOpen.Visible = False
-    End Sub
-
-    Private Sub OptKeyOpen_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles optKeyOpen.CheckedChanged
-        If optKeyOpen.Checked = False Then Exit Sub
-
-        ClearAttributeDialogue()
-        fraKeyOpen.Visible = True
-        pnlAttributes.Visible = True
-
-        scrlKeyX.Maximum = Map.MaxX
-        scrlKeyY.Maximum = Map.MaxY
-        scrlKeyX.Value = 0
-        scrlKeyY.Value = 0
-    End Sub
-
     Private Sub BtnResourceOk_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnResourceOk.Click
         ResourceEditorNum = scrlResource.Value
         pnlAttributes.Visible = False
@@ -363,21 +309,6 @@ Public Class frmEditor_Map
         End If
     End Sub
 
-    Private Sub OptDoor_CheckedChanged(sender As Object, e As EventArgs) Handles optDoor.CheckedChanged
-        If optDoor.Checked = False Then Exit Sub
-
-        ClearAttributeDialogue()
-        pnlAttributes.Visible = True
-        fraMapWarp.Visible = True
-
-        scrlMapWarpMap.Maximum = MAX_MAPS
-        scrlMapWarpMap.Value = 1
-        scrlMapWarpX.Maximum = Byte.MaxValue
-        scrlMapWarpY.Maximum = Byte.MaxValue
-        scrlMapWarpX.Value = 0
-        scrlMapWarpY.Value = 0
-    End Sub
-
 #End Region
 
 #Region "Npc's"
@@ -450,14 +381,13 @@ Public Class frmEditor_Map
                 Next
             Next
 
-            ClearTempTile()
             MapEditorSend()
         End With
     End Sub
 
     Private Sub BtnPreview_Click(sender As Object, e As EventArgs) Handles btnPreview.Click
         If PreviewPlayer Is Nothing Then
-            If lstMusic.SelectedIndex >= 0 Then
+            If lstMusic.SelectedIndex > 0 Then
                 StopMusic()
                 PlayPreview(lstMusic.Items(lstMusic.SelectedIndex).ToString)
             End If
@@ -679,7 +609,6 @@ Public Class frmEditor_Map
         InitMapProperties = True
 
         If MapData = True Then GettingMap = False
-
     End Sub
 
     Public Sub MapEditorChooseTile(ByVal Button As Integer, ByVal X As Single, ByVal Y As Single)
@@ -794,33 +723,12 @@ Public Class frmEditor_Map
                         .Data2 = 0
                         .Data3 = 0
                     End If
-                    ' key
-                    If optKey.Checked = True Then
-                        .Type = TileType.Key
-                        .Data1 = KeyEditorNum
-                        .Data2 = KeyEditorTake
-                        .Data3 = 0
-                    End If
-                    ' key open
-                    If optKeyOpen.Checked = True Then
-                        .Type = TileType.KeyOpen
-                        .Data1 = KeyOpenEditorX
-                        .Data2 = KeyOpenEditorY
-                        .Data3 = 0
-                    End If
                     ' resource
                     If optResource.Checked = True Then
                         .Type = TileType.Resource
                         .Data1 = ResourceEditorNum
                         .Data2 = 0
                         .Data3 = 0
-                    End If
-                    ' door
-                    If optDoor.Checked = True Then
-                        .Type = TileType.Door
-                        .Data1 = EditorWarpMap
-                        .Data2 = EditorWarpX
-                        .Data3 = EditorWarpY
                     End If
                     ' npc spawn
                     If optNPCSpawn.Checked = True Then

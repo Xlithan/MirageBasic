@@ -1062,8 +1062,6 @@ Module S_NetworkReceive
 
         ' Respawn
         SpawnMapItems(GetPlayerMap(index))
-
-        ClearTempTile(mapNum)
         CacheResources(mapNum)
 
         ' Refresh map for everyone online
@@ -2650,8 +2648,6 @@ Module S_NetworkReceive
 
         ' Respawn
         SpawnMapItems(mapNum)
-
-        ClearTempTile(mapNum)
         CacheResources(mapNum)
 
         ' Refresh map for everyone online

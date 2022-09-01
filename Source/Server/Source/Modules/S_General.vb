@@ -252,7 +252,6 @@ Module S_General
 
     Friend Sub ClearGameData()
         Console.WriteLine("Clearing Jobs...") : ClearJobs()
-        Console.WriteLine("Clearing Temp Tiles...") : ClearTempTiles()
         Console.WriteLine("Clearing Maps...") : ClearMaps()
         Console.WriteLine("Clearing Map Items...") : ClearMapItems()
         Console.WriteLine("Clearing Map Npc's...") : ClearAllMapNpcs()

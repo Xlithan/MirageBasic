@@ -56,10 +56,7 @@
         Warp
         Item
         NpcAvoid
-        Key
-        KeyOpen
         Resource
-        Door
         NpcSpawn
         Shop
         Bank

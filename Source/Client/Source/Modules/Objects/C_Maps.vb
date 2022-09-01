@@ -13,7 +13,6 @@ Module C_Maps
     Friend MapLock As New Object()
     Friend MapItem(MAX_MAP_ITEMS) As MapItemStruct
     Friend MapNpc(MAX_MAP_NPCS) As MapNpcStruct
-    Friend TempTile(,) As TempTileStruct
 
 #End Region
 
@@ -94,13 +93,6 @@ Module C_Maps
         Dim Attacking As Byte
         Dim AttackTimer As Integer
         Dim Steps As Integer
-    End Structure
-
-    Public Structure TempTileStruct
-        Dim DoorOpen As Byte
-        Dim DoorFrame As Byte
-        Dim DoorTimer As Integer
-        Dim DoorAnimate As Byte ' 0 = nothing| 1 = opening | 2 = closing
     End Structure
 #End Region
 
@@ -228,7 +220,6 @@ Module C_Maps
         Next
 
         ' Erase all temporary tile values
-        ClearTempTile()
         ClearMapNpcs()
         ClearMapItems()
         ClearBlood()
@@ -469,8 +460,6 @@ Module C_Maps
                 End If
             End If
 
-            ClearTempTile()
-
             buffer.Dispose()
 
         End SyncLock
@@ -645,8 +634,8 @@ Module C_Maps
             Next
         Next
 
-        'Event Data
         buffer.WriteInt32(Map.EventCount)
+
         If Map.EventCount > 0 Then
            For i = 0 To Map.EventCount
                 With Map.Events(i)    

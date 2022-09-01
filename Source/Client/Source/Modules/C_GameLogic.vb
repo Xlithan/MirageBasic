@@ -316,19 +316,6 @@ Module C_GameLogic
         Loop
     End Sub
 
-    Sub ClearTempTile()
-        Dim x As Integer
-        Dim y As Integer
-        ReDim TempTile(Map.MaxX, Map.MaxY)
-
-        For X = 0 To Map.MaxX
-            For Y = 0 To Map.MaxY
-                TempTile(x, y).DoorOpen = 0
-            Next
-        Next
-
-    End Sub
-
     Sub ProcessNpcMovement(mapNpcNum As Integer)
 
         ' Check if NPC is walking, and if so process moving them over
