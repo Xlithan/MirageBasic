@@ -649,7 +649,8 @@ Module C_Maps
         buffer.WriteInt32(Map.EventCount)
         If Map.EventCount > 0 Then
            For i = 0 To Map.EventCount
-                With Map.Events(i)
+                With Map.Events(i)    
+                    If .Name Is Nothing then .Name = ""
                     buffer.WriteString((.Name.Trim))
                     buffer.WriteByte(.Globals)
                     buffer.WriteInt32(.X)
@@ -780,6 +781,7 @@ Module C_Maps
         For i = 1 To MAX_EVENTS
             Map.MapEvents(i).Name = ""
         Next
+
     End Sub
 
 #End Region

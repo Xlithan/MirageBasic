@@ -230,6 +230,7 @@ Public Class FrmEditor_Events
 
          ' Load page 1 to start off with
         CurPageNum = 1
+        If TmpEvent.Name = Nothing Then TmpEvent.Name = ""
         txtName.Text = TmpEvent.Name
 
         EventEditorLoadPage(CurPageNum) 

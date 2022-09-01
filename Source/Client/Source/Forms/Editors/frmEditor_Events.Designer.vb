@@ -1462,7 +1462,7 @@ Partial Class FrmEditor_Events
         Me.chkSelfSwitch.Name = "chkSelfSwitch"
         Me.chkSelfSwitch.Size = New System.Drawing.Size(88, 19)
         Me.chkSelfSwitch.TabIndex = 11
-        Me.chkSelfSwitch.Text = "Self Switch*"
+        Me.chkSelfSwitch.Text = "Self Switch"
         '
         'cmbHasItem
         '
@@ -1482,7 +1482,7 @@ Partial Class FrmEditor_Events
         Me.chkHasItem.Name = "chkHasItem"
         Me.chkHasItem.Size = New System.Drawing.Size(106, 19)
         Me.chkHasItem.TabIndex = 9
-        Me.chkHasItem.Text = "Player has Item"
+        Me.chkHasItem.Text = "Player Has Item"
         '
         'cmbPlayerSwitchCompare
         '
