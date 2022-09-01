@@ -709,6 +709,12 @@ Module C_UpdateUI
                 FrmOptions.chkNpcBars.Checked = False
             End If
 
+            if Settings.Fullscreen = 1 Then
+                FrmOptions.chkFullscreen.Checked = True
+            Else
+                FrmOptions.chkFullscreen.Checked = False
+            End If
+
             FrmOptions.Visible = True
             OptionsVisible = False
         End If
