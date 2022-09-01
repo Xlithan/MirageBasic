@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <RootNamespace>MirageBasic.Core</RootNamespace>
     <TargetFramework>net6.0</TargetFramework>
     <Configurations>Release;Debug</Configurations>
