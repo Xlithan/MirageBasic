@@ -1685,17 +1685,6 @@ Module C_Graphics
         'Draw sum d00rs.
         If GettingMap Then Exit Sub
 
-        For x = TileView.Left To TileView.Right
-            For y = TileView.Top To TileView.Bottom
-                If IsValidMapPoint(x, y) Then
-                    If Map.Tile Is Nothing Then Exit Sub
-                    If Map.Tile(x, y).Type = TileType.Door Then
-                        DrawDoor(x, y)
-                    End If
-                End If
-            Next
-        Next
-
         ' draw animations
         If NumAnimations > 0 Then
            For i = 0 To MAX_ANIMATIONS
@@ -2091,52 +2080,6 @@ Module C_Graphics
     Sub DrawMapName()
         DrawText(DrawMapNameX, DrawMapNameY, Language.Game.MapName & Map.Name, DrawMapNameColor, SFML.Graphics.Color.Black, GameWindow)
     End Sub
-
-    Friend Sub DrawDoor(x As Integer, y As Integer)
-        Dim rec As Rectangle
-
-        Dim x2 As Integer, y2 As Integer
-
-        ' sort out animation
-        With TempTile(x, y)
-            If .DoorAnimate = 1 Then ' opening
-                If .DoorTimer + 100 < GetTickCount() Then
-                    If .DoorFrame < 4 Then
-                        .DoorFrame = .DoorFrame + 1
-                    Else
-                        .DoorAnimate = 2 ' set to closing
-                    End If
-                    .DoorTimer = GetTickCount()
-                End If
-            ElseIf .DoorAnimate = 2 Then ' closing
-                If .DoorTimer + 100 < GetTickCount() Then
-                    If .DoorFrame > 1 Then
-                        .DoorFrame = .DoorFrame - 1
-                    Else
-                        .DoorAnimate = 0 ' end animation
-                    End If
-                    .DoorTimer = GetTickCount()
-                End If
-            End If
-
-            If .DoorFrame = 0 Then .DoorFrame = 1
-        End With
-
-        With rec
-            .Y = 0
-            .Height = DoorGfxInfo.Height
-            .X = ((TempTile(x, y).DoorFrame - 1) * DoorGfxInfo.Width / 4)
-            .Width = DoorGfxInfo.Width / 4
-        End With
-
-        x2 = (x * PicX)
-        y2 = (y * PicY) - (DoorGfxInfo.Height / 2) + 4
-
-        RenderSprite(DoorSprite, GameWindow, ConvertMapX(x * PicX), ConvertMapY((y * PicY) - PicY), rec.X, rec.Y, rec.Width, rec.Height)
-
-    End Sub
-
-
 
     Friend Sub DrawFurnitureOutline()
         Dim rec As Rectangle

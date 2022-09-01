@@ -190,9 +190,6 @@ Module modDatabase
         Map(mapNum).Music = ""
         Map(mapNum).MaxX = MAX_MAPX
         Map(mapNum).MaxY = MAX_MAPY
-
-        ClearTempTile(mapNum)
-
     End Sub
 
     Sub SaveMaps()
@@ -588,36 +585,12 @@ Module modDatabase
             MapNpc(mapNum).Npc(x).Num = Map(mapNum).Npc(x)
         Next
 
-        ClearTempTile(mapNum)
         CacheResources(mapNum)
 
         If Map(mapNum).Name Is Nothing Then Map(mapNum).Name = ""
         If Map(mapNum).Music Is Nothing Then Map(mapNum).Music = ""
 
         LoadMapEvent(mapNum)
-    End Sub
-
-    Sub ClearTempTiles()
-        ReDim TempTile(MAX_CACHED_MAPS)
-
-        For i = 0 To MAX_CACHED_MAPS
-            ClearTempTile(i)
-        Next
-
-    End Sub
-
-    Sub ClearTempTile(mapNum As Integer)
-        Dim y As Integer
-        Dim x As Integer
-        TempTile(mapNum).DoorTimer = 0
-        ReDim TempTile(mapNum).DoorOpen(Map(mapNum).MaxX, Map(mapNum).MaxY)
-
-        For x = 0 To Map(mapNum).MaxX
-            For y = 0 To Map(mapNum).MaxY
-                TempTile(mapNum).DoorOpen(x, y) = False
-            Next
-        Next
-
     End Sub
 
     Sub ClearMapItem(index As Integer, mapNum As Integer)

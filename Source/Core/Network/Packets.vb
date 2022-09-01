@@ -232,7 +232,6 @@
         SNpcDead
         SNpcEditor
         SUpdateNpc
-        SMapKey
         SEditMap
         SShopEditor
         SUpdateShop
@@ -244,7 +243,6 @@
         SResourceEditor
         SUpdateResource
         SSendPing
-        SDoorAnimation
         SActionMsg
         SPlayerEXP
         SBlood

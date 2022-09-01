@@ -40,7 +40,6 @@ Module C_NetworkReceive
         Socket.PacketId(ServerPackets.SSpawnNpc) = AddressOf Packet_SpawnNPC
         Socket.PacketId(ServerPackets.SNpcDead) = AddressOf Packet_NpcDead
         Socket.PacketId(ServerPackets.SUpdateNpc) = AddressOf Packet_UpdateNPC
-        Socket.PacketId(ServerPackets.SMapKey) = AddressOf Packet_MapKey
         Socket.PacketId(ServerPackets.SEditMap) = AddressOf Packet_EditMap
         Socket.PacketId(ServerPackets.SUpdateShop) = AddressOf Packet_UpdateShop
         Socket.PacketId(ServerPackets.SUpdateSkill) = AddressOf Packet_UpdateSkill
@@ -49,7 +48,6 @@ Module C_NetworkReceive
         Socket.PacketId(ServerPackets.SMapResource) = AddressOf Packet_MapResource
         Socket.PacketId(ServerPackets.SUpdateResource) = AddressOf Packet_UpdateResource
         Socket.PacketId(ServerPackets.SSendPing) = AddressOf Packet_Ping
-        Socket.PacketId(ServerPackets.SDoorAnimation) = AddressOf Packet_DoorAnimation
         Socket.PacketId(ServerPackets.SActionMsg) = AddressOf Packet_ActionMessage
         Socket.PacketId(ServerPackets.SPlayerEXP) = AddressOf Packet_PlayerExp
         Socket.PacketId(ServerPackets.SBlood) = AddressOf Packet_Blood
@@ -570,17 +568,6 @@ Module C_NetworkReceive
         buffer.Dispose()
     End Sub
 
-    Private Sub Packet_MapKey(ByRef data() As Byte)
-        Dim n As Integer, x As Integer, y As Integer
-        Dim buffer As New ByteStream(data)
-        x = buffer.ReadInt32
-        y = buffer.ReadInt32
-        n = buffer.ReadInt32
-        TempTile(x, y).DoorOpen = n
-
-        buffer.Dispose()
-    End Sub
-
     Private Sub Packet_UpdateSkill(ByRef data() As Byte)
         Dim skillnum As Integer
         Dim buffer As New ByteStream(data)
@@ -643,22 +630,6 @@ Module C_NetworkReceive
     Private Sub Packet_Ping(ByRef data() As Byte)
         PingEnd = GetTickCount()
         Ping = PingEnd - PingStart
-    End Sub
-
-    Private Sub Packet_DoorAnimation(ByRef data() As Byte)
-        Dim x As Integer, y As Integer
-        Dim buffer As New ByteStream(data)
-
-        x = buffer.ReadInt32
-        y = buffer.ReadInt32
-
-        With TempTile(x, y)
-            .DoorFrame = 1
-            .DoorAnimate = 1 ' 0 = nothing| 1 = opening | 2 = closing
-            .DoorTimer = GetTickCount()
-        End With
-
-        buffer.Dispose()
     End Sub
 
     Private Sub Packet_ActionMessage(ByRef data() As Byte)
