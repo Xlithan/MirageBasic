@@ -64,7 +64,7 @@ Partial Class FrmOptions
         'cmbScreenSize
         '
         Me.cmbScreenSize.FormattingEnabled = true
-        Me.cmbScreenSize.Items.AddRange(New Object() {"800x600", "1024x768", "1152x864", "1280x720", "1336x768", "1600x900", "1920x1080"})
+        Me.cmbScreenSize.Items.AddRange(New Object() {"800x600", "1024x768", "1152x864", "1280x720", "1336x768", "1600x900", "1920x1080", "2560x1440", "3840x2160"})
         Me.cmbScreenSize.Location = New System.Drawing.Point(13, 134)
         Me.cmbScreenSize.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbScreenSize.Name = "cmbScreenSize"

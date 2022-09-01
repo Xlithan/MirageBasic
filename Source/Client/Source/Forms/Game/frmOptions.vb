@@ -54,16 +54,22 @@ Friend Class FrmOptions
         End If
 
         If chkFullscreen.Checked Then
-            If Settings.Fullscreen = 0 Then MsgBox("Please restart the client for the changes to take effect.", vbOKOnly, Settings.GameName)
+            If Settings.Fullscreen = 0 Then
+                MsgBox("Please restart the client for the changes to take effect.", vbOKOnly, Settings.GameName)
+            End If
             Settings.Fullscreen = 1
         Else
+            If Settings.Fullscreen = 1 Then
+                cmbScreenSize.Enabled = False
+            Else              
+                resolution = cmbScreenSize.SelectedItem.ToString.ToLower.Split("x")
+                width = resolution(0)
+                height = resolution(1)
+
+                RePositionGui(Width, Height)
+            End If
+
             Settings.Fullscreen = 0
-
-            resolution = cmbScreenSize.SelectedItem.ToString.ToLower.Split("x")
-            width = resolution(0)
-            height = resolution(1)
-
-            RePositionGui(Width, Height)
         End If
 
         ' save to config.ini
