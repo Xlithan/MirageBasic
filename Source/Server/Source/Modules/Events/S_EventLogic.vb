@@ -8,12 +8,11 @@ Friend Module S_EventLogic
         Dim i As Integer, mapNum As Integer, x As Integer, id As Integer, page As Integer, compare As Integer
 
         For i = 0 To GetPlayersOnline()
-            If TempPlayer(i).EventMap.CurrentEvents > 0 Then
+            If TempPlayer(i).EventMap.CurrentEvents > 0 And TempPlayer(i).GettingMap = False Then
                 mapNum = GetPlayerMap(i)
                 For x = 1 To TempPlayer(i).EventMap.CurrentEvents
                     id = TempPlayer(i).EventMap.EventPages(x).EventId
                     page = TempPlayer(i).EventMap.EventPages(x).PageId
-                    If id > x Then Exit For
 
                     If Map(mapNum).Events(id).PageCount >= page Then
                         'See if there is any reason to delete this event....
