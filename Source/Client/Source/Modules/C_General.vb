@@ -21,8 +21,6 @@ Module C_General
         FrmOptions.lblVolume.Text = "Volume: " & Settings.Volume
         FrmOptions.scrlVolume.Value = Settings.Volume
 
-        FrmOptions.cmbScreenSize.SelectedIndex = Settings.ScreenSize
-
         SetStatus(Language.Load.Loading)
         FrmMenu.Text = Settings.GameName
         FrmMenu.Visible = True
@@ -221,19 +219,9 @@ Module C_General
 
     End Function
 
-    Friend Sub RePositionGui()
-
-        'first change the tiles
-        If Settings.ScreenSize = 0 Then ' 800x600
-            ScreenMapx = 25
-            ScreenMapy = 19
-        ElseIf Settings.ScreenSize = 1 Then '1024x768
-            ScreenMapx = 31
-            ScreenMapy = 24
-        ElseIf Settings.ScreenSize = 2 Then
-            ScreenMapx = 35
-            ScreenMapy = 26
-        End If
+    Friend Sub RePositionGui(width As Integer, height As Integer)        
+        ScreenMapx = width / 32
+        ScreenMapy = height / 32
 
         'then the window
         FrmGame.ClientSize = New Drawing.Size((ScreenMapx) * PicX + PicX, (ScreenMapy) * PicY + PicY)

@@ -695,18 +695,24 @@ Module C_UpdateUI
             FrmOptions.lblVolume.Text = "Volume: " & Settings.Volume
             FrmOptions.scrlVolume.Value = Settings.Volume
 
-            FrmOptions.cmbScreenSize.SelectedIndex = Settings.ScreenSize
+            FrmOptions.cmbScreenSize.SelectedItem = Settings.ScreenSize
 
-            If Settings.HighEnd = 1 Then
-                FrmOptions.chkHighEnd.Checked = True
+            If Settings.Vsync = 1 Then
+                FrmOptions.chkVsync.Checked = True
             Else
-                FrmOptions.chkHighEnd.Checked = False
+                FrmOptions.chkVsync.Checked = False
             End If
 
             If Settings.ShowNpcBar = 1 Then
                 FrmOptions.chkNpcBars.Checked = True
             Else
                 FrmOptions.chkNpcBars.Checked = False
+            End If
+
+            if Settings.Fullscreen = 1 Then
+                FrmOptions.chkFullscreen.Checked = True
+            Else
+                FrmOptions.chkFullscreen.Checked = False
             End If
 
             FrmOptions.Visible = True

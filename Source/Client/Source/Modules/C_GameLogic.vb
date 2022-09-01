@@ -101,11 +101,7 @@ Module C_GameLogic
                 End If
 
                 If tmr10000 < tick Then
-                    If Settings.HighEnd = 0 Then
-                        'clear any unused gfx
-                        ClearGfx()
-                    End If
-
+                    ClearGfx()
                     GetPing()
                     DrawPing()
 
@@ -311,7 +307,7 @@ Module C_GameLogic
 
             Application.DoEvents()
 
-            If Settings.HighEnd = 1 Then
+            If Settings.Vsync = 0 Then
                 Thread.Yield()
             Else
                 Thread.Sleep(1)
@@ -665,7 +661,7 @@ Module C_GameLogic
                     End If
 
                 ' Admin Help
-                Case "/admin"
+                Case "/access"
 
                     If GetPlayerAccess(Myindex) < AdminType.Monitor Then
                         AddText(Language.Chat.AccessAlert, QColorType.AlertColor)

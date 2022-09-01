@@ -33,8 +33,9 @@ Partial Class FrmOptions
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.optMOff = New System.Windows.Forms.RadioButton()
         Me.optMOn = New System.Windows.Forms.RadioButton()
-        Me.chkHighEnd = New System.Windows.Forms.CheckBox()
+        Me.chkVsync = New System.Windows.Forms.CheckBox()
         Me.chkNpcBars = New System.Windows.Forms.CheckBox()
+        Me.chkFullscreen = New System.Windows.Forms.CheckBox()
         Me.GroupBox2.SuspendLayout
         Me.GroupBox1.SuspendLayout
         Me.SuspendLayout
@@ -63,7 +64,7 @@ Partial Class FrmOptions
         'cmbScreenSize
         '
         Me.cmbScreenSize.FormattingEnabled = true
-        Me.cmbScreenSize.Items.AddRange(New Object() {"800X600", "1024X768", "1152X864"})
+        Me.cmbScreenSize.Items.AddRange(New Object() {"800x600", "1024x768", "1152x864", "1280x720", "1336x768", "1600x900", "1920x1080"})
         Me.cmbScreenSize.Location = New System.Drawing.Point(13, 134)
         Me.cmbScreenSize.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbScreenSize.Name = "cmbScreenSize"
@@ -167,16 +168,16 @@ Partial Class FrmOptions
         Me.optMOn.Text = "On"
         Me.optMOn.UseVisualStyleBackColor = true
         '
-        'chkHighEnd
+        'chkVsync
         '
-        Me.chkHighEnd.AutoSize = true
-        Me.chkHighEnd.Location = New System.Drawing.Point(14, 165)
-        Me.chkHighEnd.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.chkHighEnd.Name = "chkHighEnd"
-        Me.chkHighEnd.Size = New System.Drawing.Size(95, 19)
-        Me.chkHighEnd.TabIndex = 15
-        Me.chkHighEnd.Text = "HighEnd PC?"
-        Me.chkHighEnd.UseVisualStyleBackColor = true
+        Me.chkVsync.AutoSize = true
+        Me.chkVsync.Location = New System.Drawing.Point(14, 165)
+        Me.chkVsync.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.chkVsync.Name = "chkVsync"
+        Me.chkVsync.Size = New System.Drawing.Size(62, 19)
+        Me.chkVsync.TabIndex = 15
+        Me.chkVsync.Text = "Vsync?"
+        Me.chkVsync.UseVisualStyleBackColor = true
         '
         'chkNpcBars
         '
@@ -189,14 +190,26 @@ Partial Class FrmOptions
         Me.chkNpcBars.Text = "Show Npc Bars?"
         Me.chkNpcBars.UseVisualStyleBackColor = true
         '
+        'chkFullscreen
+        '
+        Me.chkFullscreen.AutoSize = true
+        Me.chkFullscreen.Location = New System.Drawing.Point(168, 165)
+        Me.chkFullscreen.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.chkFullscreen.Name = "chkFullscreen"
+        Me.chkFullscreen.Size = New System.Drawing.Size(90, 19)
+        Me.chkFullscreen.TabIndex = 17
+        Me.chkFullscreen.Text = "Fullscreeen?"
+        Me.chkFullscreen.UseVisualStyleBackColor = true
+        '
         'FrmOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = true
         Me.ClientSize = New System.Drawing.Size(271, 272)
+        Me.Controls.Add(Me.chkFullscreen)
         Me.Controls.Add(Me.chkNpcBars)
-        Me.Controls.Add(Me.chkHighEnd)
+        Me.Controls.Add(Me.chkVsync)
         Me.Controls.Add(Me.btnSaveSettings)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.GroupBox1)
@@ -230,6 +243,7 @@ End Sub
     Friend WithEvents GroupBox1 As Windows.Forms.GroupBox
     Friend WithEvents optMOff As Windows.Forms.RadioButton
     Friend WithEvents optMOn As Windows.Forms.RadioButton
-    Friend WithEvents chkHighEnd As Windows.Forms.CheckBox
+    Friend WithEvents chkVsync As Windows.Forms.CheckBox
     Friend WithEvents chkNpcBars As Windows.Forms.CheckBox
+    Friend WithEvents chkFullscreen As CheckBox
 End Class

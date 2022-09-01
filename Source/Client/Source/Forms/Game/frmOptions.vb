@@ -16,6 +16,8 @@ Friend Class FrmOptions
     End Sub
 
     Private Sub btnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
+        Dim resolution As String(), width As String, height As String
+
         'music
         If optMOn.Checked = True Then
             Settings.Music = True
@@ -37,12 +39,12 @@ Friend Class FrmOptions
         End If
 
         'screensize
-        Settings.ScreenSize = cmbScreenSize.SelectedIndex
+        Settings.ScreenSize = cmbScreenSize.SelectedItem
 
-        If chkHighEnd.Checked Then
-            Settings.HighEnd = 1
+        If chkVsync.Checked Then
+            Settings.Vsync = 1
         Else
-            Settings.HighEnd = 0
+            Settings.Vsync = 0
         End If
 
         If chkNpcBars.Checked Then
@@ -51,11 +53,27 @@ Friend Class FrmOptions
             Settings.ShowNpcBar = 0
         End If
 
+        If chkFullscreen.Checked Then
+            If Settings.Fullscreen = 0 Then
+                MsgBox("Please restart the client for the changes to take effect.", vbOKOnly, Settings.GameName)
+            End If
+            Settings.Fullscreen = 1
+        Else
+            If Settings.Fullscreen = 1 Then
+                cmbScreenSize.Enabled = False
+            Else              
+                resolution = cmbScreenSize.SelectedItem.ToString.ToLower.Split("x")
+                width = resolution(0)
+                height = resolution(1)
+
+                RePositionGui(Width, Height)
+            End If
+
+            Settings.Fullscreen = 0
+        End If
+
         ' save to config.ini
         SaveSettings()
-
-        RePositionGui()
-
         Me.Visible = False
     End Sub
 
