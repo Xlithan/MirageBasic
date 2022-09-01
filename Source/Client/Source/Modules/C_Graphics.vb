@@ -1349,7 +1349,7 @@ Module C_Graphics
             startX = GetPlayerX(Myindex) - ScreenMapx
             startY = GetPlayerY(Myindex) - ScreenMapy
         Else
-            StartX =Math.Floor( GetPlayerX(MyIndex) - ((ScreenMapx + 1) \ 2) - 1)
+            StartX = Math.Floor(GetPlayerX(MyIndex) - ((ScreenMapx + 1) \ 2) - 1)
             StartY = Math.Floor(GetPlayerY(MyIndex) - ((ScreenMapy + 1) \ 2) - 1)
         End If
 

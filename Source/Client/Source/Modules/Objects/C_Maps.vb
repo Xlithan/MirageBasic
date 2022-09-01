@@ -37,7 +37,7 @@ Module C_Maps
         Dim MaxX As Byte
         Dim MaxY As Byte
 
-        Dim Tile(,) As modTypes.TileStruct
+        Dim Tile(,) As TileStruct
         Dim Npc() As Integer
         Dim EventCount As Integer
         Dim Events() As EventStruct

@@ -1271,6 +1271,7 @@ Module S_Players
                             If Map(GetPlayerMap(index)).Tile(GetPlayerX(index), GetPlayerY(index) - 1).Type <> TileType.Resource Then                              
                                 SetPlayerY(index, GetPlayerY(index) - 1)
                                 SendPlayerMove(index, Movement)
+                                Moved = True
 
                                 'check for event
                                 For i = 1 To TempPlayer(index).EventMap.CurrentEvents
@@ -1319,6 +1320,7 @@ Module S_Players
                             If Map(GetPlayerMap(index)).Tile(GetPlayerX(index), GetPlayerY(index) + 1).Type <> TileType.Resource Then
                                 SetPlayerY(index, GetPlayerY(index) + 1)
                                 SendPlayerMove(index, Movement)
+                                Moved = true
 
                                 'check for event
                                 For i = 1 To TempPlayer(index).EventMap.CurrentEvents
@@ -1365,6 +1367,7 @@ Module S_Players
                             If Map(GetPlayerMap(index)).Tile(GetPlayerX(index) - 1, GetPlayerY(index)).Type <> TileType.Resource Then
                                 SetPlayerX(index, GetPlayerX(index) - 1)
                                 SendPlayerMove(index, Movement)
+                                Moved = true
 
                                 'check for event
                                 For i = 1 To TempPlayer(index).EventMap.CurrentEvents
@@ -1412,6 +1415,7 @@ Module S_Players
                             If Map(GetPlayerMap(index)).Tile(GetPlayerX(index) + 1, GetPlayerY(index)).Type <> TileType.Resource Then
                                 SetPlayerX(index, GetPlayerX(index) + 1)
                                 SendPlayerMove(index, Movement)
+                                Moved = true
 
                                 'check for event
                                 For i = 1 To TempPlayer(index).EventMap.CurrentEvents
