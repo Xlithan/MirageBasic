@@ -571,6 +571,7 @@ Public Class frmEditor_Map
         ' find the music we have set
 
         lstMusic.Items.Clear()
+        lstMusic.Items.Add("None")
 
         CacheMusic
         For i = 0 To UBound(MusicCache)
