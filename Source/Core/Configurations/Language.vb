@@ -117,7 +117,7 @@ Public Class LanguageDef
         Public AdminGblMsg As String = "''msghere = Global Admin Message"
         Public AdminPvtMsg As String = "= msghere = Private Admin Message"
         Public Admin1 As String = "Social Commands:"
-        Public Admin2 As String = "Available Commands: /admin, /loc, 
+        Public Admin2 As String = "Available Commands: /access, /loc, 
                                    /warpmeto, /warptome, /warpto, 
                                    /sprite, /mapreport, /kick, 
                                    /ban, /respawn, /welcome, /questreset"
