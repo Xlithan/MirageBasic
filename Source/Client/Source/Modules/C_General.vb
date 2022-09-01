@@ -27,8 +27,8 @@ Module C_General
         LoadInputs()
 
         SetStatus(Language.Load.Graphics)
-        LoadGraphics()
         Application.DoEvents()
+        LoadGraphics()
 
         SetStatus(Language.Load.Network)
         Application.DoEvents()
@@ -206,7 +206,7 @@ Module C_General
         ' Wait until connected or a few seconds have passed and report the server being down
         Do While (Not Socket.IsConnected()) AndAlso (GetTickCount() <= until)
             Application.DoEvents()
-            Thread.Sleep(10)
+            Thread.Sleep(5)
         Loop
 
         ' return value
@@ -284,7 +284,6 @@ Module C_General
     End Sub
 
     Friend Sub DestroyGame()
-        'SendLeaveGame()
         ' break out of GameLoop
         InGame = False
 

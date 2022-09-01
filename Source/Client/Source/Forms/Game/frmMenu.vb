@@ -286,7 +286,7 @@ Friend Class FrmMenu
                     lblScrollingCredits.Top = 177
                 End If
                 Application.DoEvents()
-                Threading.Thread.Sleep(100)
+                Threading.Thread.Sleep(1)
             Loop
         End If
     End Sub
