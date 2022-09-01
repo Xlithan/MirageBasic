@@ -3,6 +3,7 @@ Imports System.Diagnostics
 Imports System.IO
 Imports System.Net
 Imports MirageBasic.Core
+Imports MirageBasic.Core.Database
 
 Module S_General
     'Friend Declare Function GetQueueStatus Lib "user32" (fuFlags As Integer) As Integer
@@ -26,7 +27,7 @@ Module S_General
 
         time1 = GetTimeMs()
 
-         ' Check if the directory is there, if its not make it
+        ' Check if the directory is there, if its not make it
         CheckDir(Paths.Database)
         CheckDir(Paths.Jobs)
         CheckDir(Paths.Items)
@@ -43,6 +44,7 @@ Module S_General
         CheckDir(Paths.Pets)
         CheckDir(Paths.Projectiles)
         CheckDir(Paths.Quests)
+        CheckDir(Paths.Housing)
 
         ' LOAD ENCRYPTION
         Dim fi = Paths.Database & "\AsyncKeys.xml"
@@ -284,6 +286,7 @@ Module S_General
         Console.WriteLine("Loading Projectiles...") : LoadProjectiles()
         Console.WriteLine("Loading Recipes...") : LoadRecipes()
         Console.WriteLine("Loading Pets...") : LoadPets()
+        Console.WriteLine("Loading character list...") : CharactersList = New CharacterList().Load()
     End Sub
 
     ' Used for checking validity of names

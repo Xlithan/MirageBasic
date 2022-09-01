@@ -1056,10 +1056,6 @@ Module modDatabase
         SavePlayer(index)
     End Sub
 
-    Sub DeleteName(Name As String)
-        TextFile.RemoveString(Paths.Database & "Accounts\charlist.txt", Name.Trim.ToLower)
-    End Sub
-
 #End Region
 
 #Region "Players"
@@ -1695,34 +1691,14 @@ Module modDatabase
                 Player(index).GatherSkills(i).SkillNextLvlExp = 100
             Next
 
-            ' Append name to file
-            AddTextToFile(Name, "Accounts\charlist.txt")
+            ' Add name to character list.
+            CharactersList.Add(Name).Save()
 
             SavePlayer(index)
             Exit Sub
         End If
 
     End Sub
-
-    Function FindChar(Name As String) As Boolean
-        FindChar = False
-        Dim characters() As String
-        Dim fullpath As String
-        Dim Contents As String
-
-        fullpath = Paths.Accounts & "charlist.txt"
-
-        Contents = GetFileContents(fullpath)
-        characters = Split(Contents, vbNewLine)
-
-        For i = 0 To UBound(characters)
-            If Trim$(LCase(characters(i)) = Trim$(LCase(Name))) Then
-                FindChar = True
-            End If
-        Next
-
-        Return FindChar
-    End Function
 
 #End Region
 

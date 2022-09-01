@@ -413,7 +413,7 @@ Module S_NetworkReceive
             End If
 
             ' Check if name is already in use
-            If FindChar(Name) Then
+            If CharactersList.Find(Name) Then
                 AlertMsg(index, "Sorry, but that name is in use!")
                 Exit Sub
             End If
