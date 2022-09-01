@@ -220,8 +220,8 @@ Module C_General
     End Function
 
     Friend Sub RePositionGui(width As Integer, height As Integer)        
-        ScreenMapx = width / 32
-        ScreenMapy = height / 32
+        ScreenMapx = (width / 32) - 1
+        ScreenMapy = (height / 32) - 1
 
         'then the window
         FrmGame.ClientSize = New Drawing.Size((ScreenMapx) * PicX + PicX, (ScreenMapy) * PicY + PicY)
