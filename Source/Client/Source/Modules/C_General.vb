@@ -25,6 +25,7 @@ Module C_General
         LoadSettings()
         LoadLanguage()
         LoadInputs()
+        ClearGameData()
 
         SetStatus(Language.Load.Graphics)
         Application.DoEvents()
@@ -46,6 +47,22 @@ Module C_General
         CheeckPaths()
         InitGraphics()
     End Function
+
+    Friend function ClearGameData()
+        ClearMap()
+        ClearMapNpcs()
+        ClearMapItems()
+        ClearNpcs()
+        ClearResources()
+        ClearItems()
+        ClearShops()
+        ClearSkills()
+        ClearAnimations()
+        ClearQuests()
+        ClearProjectiles()
+        ClearRecipes()
+        ClearPets()
+    End function
 
     Friend Function CheeckPaths()
         CacheMusic()
