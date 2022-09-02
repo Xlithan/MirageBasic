@@ -2,7 +2,6 @@
 Imports Asfw
 Imports Asfw.IO
 Imports MirageBasic.Core
-Imports Ini = Asfw.IO.TextFile
 
 Friend Module S_Resources
 
@@ -160,58 +159,12 @@ Friend Module S_Resources
 #End Region
 
 #Region "Gather Skills"
-
-    Function GetPlayerGatherSkillLvl(index As Integer, SkillSlot As Integer) As Integer
-
-        GetPlayerGatherSkillLvl = 0
-
-        If index > MAX_PLAYERS Then Exit Function
-
-        GetPlayerGatherSkillLvl = Player(index).GatherSkills(SkillSlot).SkillLevel
-    End Function
-
-    Function GetPlayerGatherSkillExp(index As Integer, SkillSlot As Integer) As Integer
-
-        GetPlayerGatherSkillExp = 0
-
-        If index > MAX_PLAYERS Then Exit Function
-
-        GetPlayerGatherSkillExp = Player(index).GatherSkills(SkillSlot).SkillCurExp
-    End Function
-
-    Function GetPlayerGatherSkillMaxExp(index As Integer, SkillSlot As Integer) As Integer
-
-        GetPlayerGatherSkillMaxExp = 0
-
-        If index > MAX_PLAYERS Then Exit Function
-
-        GetPlayerGatherSkillMaxExp = Player(index).GatherSkills(SkillSlot).SkillNextLvlExp
-    End Function
-
-    Sub SetPlayerGatherSkillLvl(index As Integer, SkillSlot As Integer, lvl As Integer)
-        If index > MAX_PLAYERS Then Exit Sub
-
-        Player(index).GatherSkills(SkillSlot).SkillLevel = lvl
-    End Sub
-
-    Sub SetPlayerGatherSkillExp(index As Integer, SkillSlot As Integer, Exp As Integer)
-        If index > MAX_PLAYERS Then Exit Sub
-
-        Player(index).GatherSkills(SkillSlot).SkillCurExp = Exp
-    End Sub
-
-    Sub SetPlayerGatherSkillMaxExp(index As Integer, SkillSlot As Integer, MaxExp As Integer)
-        If index > MAX_PLAYERS Then Exit Sub
-
-        Player(index).GatherSkills(SkillSlot).SkillNextLvlExp = MaxExp
-    End Sub
-
     Sub CheckResourceLevelUp(index As Integer, SkillSlot As Integer)
         Dim expRollover As Integer, level_count As Integer
 
         level_count = 0
 
-        If GetPlayerGatherSkillLvl(index, SkillSlot) = 100 Then Exit Sub
+        If GetPlayerGatherSkillLvl(index, SkillSlot) = MAX_LEVEL Then Exit Sub
 
         Do While GetPlayerGatherSkillExp(index, SkillSlot) >= GetPlayerGatherSkillMaxExp(index, SkillSlot)
             expRollover = GetPlayerGatherSkillExp(index, SkillSlot) - GetPlayerGatherSkillMaxExp(index, SkillSlot)
@@ -234,28 +187,6 @@ Friend Module S_Resources
             SendPlayerData(index)
         End If
     End Sub
-
-    Private Function GetResourceSkillName(ResSkill As ResourceSkills) As String
-        Select Case ResSkill
-            Case ResourceSkills.Herbalist
-                GetResourceSkillName = "herbalism"
-            Case ResourceSkills.WoodCutter
-                GetResourceSkillName = "woodcutting"
-            Case ResourceSkills.Miner
-                GetResourceSkillName = "mining"
-            Case ResourceSkills.Fisherman
-                GetResourceSkillName = "fishing"
-            Case Else
-                Throw New NotImplementedException()
-        End Select
-    End Function
-
-    Function GetSkillNextLevel(index As Integer, SkillSlot As Integer) As Integer
-        GetSkillNextLevel = 0
-        If index < 0 OrElse index > MAX_PLAYERS Then Exit Function
-
-        GetSkillNextLevel = (50 / 3) * ((GetPlayerGatherSkillLvl(index, SkillSlot) + 1) ^ 3 - (6 * (GetPlayerGatherSkillLvl(index, SkillSlot) + 1) ^ 2) + 17 * (GetPlayerGatherSkillLvl(index, SkillSlot) + 1) - 12)
-    End Function
 
 #End Region
 

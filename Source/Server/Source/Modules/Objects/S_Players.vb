@@ -1037,7 +1037,7 @@ Module S_Players
 
     Sub SetPlayerLevel(index As Integer, Level As Integer)
 
-        If Level > MAX_LEVELS Then Exit Sub
+        If Level > MAX_LEVEL Then Exit Sub
         Player(index).Level = Level
     End Sub
 

@@ -198,10 +198,10 @@
 
     ''' <Summary> Resource Skills </Summary>
     Public Enum ResourceSkills As Byte
-        Herbalist
-        WoodCutter
-        Miner
-        Fisherman
+        Herbing
+        Woodcutting
+        Mining
+        Fishing
 
         Count
     End Enum

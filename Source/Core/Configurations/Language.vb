@@ -235,10 +235,10 @@ Public Class LanguageDef
     Public Character As New CharacterDef
     Public Class CharacterDef
 
-        Public PName As String = "Name : "
-        Public ClassType As String = "Class : "
-        Public Level As String = "Lv : "
-        Public Exp As String = "Exp : "
+        Public PName As String = "Name: "
+        Public ClassType As String = "Class: "
+        Public Level As String = "Lv: "
+        Public Exp As String = "Exp: "
 
         Public StatsLabel As String = "Stats:"
         Public Strength As String = "Strength: "
@@ -249,11 +249,7 @@ Public Class LanguageDef
         Public Spirit As String = "Spirit: "
         Public Points As String = "Points Available: "
 
-        Public SkillLabel As String = "Skill Levels"
-        Public Herbalist As String = "Herbalist: "
-        Public Woodcutter As String = "Woodcutter: "
-        Public Miner As String = "Miner: "
-        Public Fisherman As String = "Fisherman: "
+        Public SkillLabel As String = "Skills:"
 
     End Class
 End Class

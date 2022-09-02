@@ -1129,13 +1129,13 @@ Module C_Player
         'Header
         DrawText(CharWindowX + 250, CharWindowY + 145, Language.Character.SkillLabel, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'herbalist skill
-        DrawText(CharWindowX + 210, CharWindowY + 164, String.Format(Language.Character.Herbalist & GetPlayerGatherSkillLvl(Myindex, ResourceSkills.Herbalist)) & Language.Character.Exp & GetPlayerGatherSkillExp(Myindex, ResourceSkills.Herbalist) & "/" & GetPlayerGatherSkillMaxExp(Myindex, ResourceSkills.Herbalist), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 164, String.Format(GetResourceSkillName(0) & ": " & GetPlayerGatherSkillLvl(Myindex, ResourceSkills.Herbing)) & " " & Language.Character.Exp & GetPlayerGatherSkillExp(Myindex, ResourceSkills.Herbing) & "/" & GetPlayerGatherSkillMaxExp(Myindex, ResourceSkills.Herbing), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'woodcutter
-        DrawText(CharWindowX + 210, CharWindowY + 184, String.Format(Language.Character.Woodcutter & GetPlayerGatherSkillLvl(Myindex, ResourceSkills.WoodCutter)) & Language.Character.Exp & GetPlayerGatherSkillExp(Myindex, ResourceSkills.WoodCutter) & "/" & GetPlayerGatherSkillMaxExp(Myindex, ResourceSkills.WoodCutter), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 184, String.Format(GetResourceSkillName(1) & ": " & GetPlayerGatherSkillLvl(Myindex, ResourceSkills.Woodcutting)) & " " & Language.Character.Exp & GetPlayerGatherSkillExp(Myindex, ResourceSkills.Woodcutting) & "/" & GetPlayerGatherSkillMaxExp(Myindex, ResourceSkills.Woodcutting), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'miner
-        DrawText(CharWindowX + 210, CharWindowY + 204, String.Format(Language.Character.Miner & GetPlayerGatherSkillLvl(Myindex, ResourceSkills.Miner)) & Language.Character.Exp & GetPlayerGatherSkillExp(Myindex, ResourceSkills.Miner) & "/" & GetPlayerGatherSkillMaxExp(Myindex, ResourceSkills.Miner), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 204, String.Format(GetResourceSkillName(2) & ": " & GetPlayerGatherSkillLvl(Myindex, ResourceSkills.Mining)) & " " & Language.Character.Exp & GetPlayerGatherSkillExp(Myindex, ResourceSkills.Mining) & "/" & GetPlayerGatherSkillMaxExp(Myindex, ResourceSkills.Mining), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
         'fisherman
-        DrawText(CharWindowX + 210, CharWindowY + 224, String.Format(Language.Character.Fisherman & GetPlayerGatherSkillLvl(Myindex, ResourceSkills.Fisherman)) & Language.Character.Exp & GetPlayerGatherSkillExp(Myindex, ResourceSkills.Fisherman) & "/" & GetPlayerGatherSkillMaxExp(Myindex, ResourceSkills.Fisherman), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
+        DrawText(CharWindowX + 210, CharWindowY + 224, String.Format(GetResourceSkillName(3) & ": " & GetPlayerGatherSkillLvl(Myindex, ResourceSkills.Fishing)) & " " & Language.Character.Exp & GetPlayerGatherSkillExp(Myindex, ResourceSkills.Fishing) & "/" & GetPlayerGatherSkillMaxExp(Myindex, ResourceSkills.Fishing), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 11)
     End Sub
 #End Region
 

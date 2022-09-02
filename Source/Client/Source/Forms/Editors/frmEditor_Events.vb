@@ -105,7 +105,7 @@ Public Class FrmEditor_Events
         Next
         cmbChangeItemIndex.SelectedIndex = 0
         nudChangeLevel.Minimum = 1
-        nudChangeLevel.Maximum = MAX_LEVELS
+        nudChangeLevel.Maximum = MAX_LEVEL
         nudChangeLevel.Value = 1
         cmbChangeSkills.Items.Clear()
 

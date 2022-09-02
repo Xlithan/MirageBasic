@@ -6,7 +6,7 @@
     Public Const MAX_INGREDIENT As Byte = 5
     Public Const MAX_INV As Byte = 35
     Public Const MAX_ITEMS As Integer = 500
-    Public Const MAX_LEVELS As Byte = 100
+    Public Const MAX_LEVEL As Byte = 100
     Public Const MAX_MAPS As Integer = 100
     Public Const MAX_MAP_ITEMS As Byte = 255
     Public Const MAX_MAP_NPCS As Byte = 30
