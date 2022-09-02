@@ -166,29 +166,29 @@ Module S_RandomItems
                 Player(index).RandInv(invslot).Rarity = Rarity
                 Player(index).RandInv(invslot).Damage = Item(itemnum).Data2
                 Player(index).RandInv(invslot).Speed = Item(itemnum).Speed
-                Player(index).RandInv(invslot).Stat(ResourceSkills.Fisherman) = ItemLevel + StatAmount
+                Player(index).RandInv(invslot).Stat(ResourceSkills.Fishing) = ItemLevel + StatAmount
             Case RandomBonusType.RANDOM_PERFECTIONIST
                 Player(index).RandInv(invslot).Prefix = Prefix
                 Player(index).RandInv(invslot).Suffix = " of Perfection"
                 Player(index).RandInv(invslot).Rarity = Rarity
                 Player(index).RandInv(invslot).Damage = Item(itemnum).Data2
                 Player(index).RandInv(invslot).Speed = Item(itemnum).Speed
-                Player(index).RandInv(invslot).Stat(ResourceSkills.Miner) = ItemLevel + StatAmount
+                Player(index).RandInv(invslot).Stat(ResourceSkills.Mining) = ItemLevel + StatAmount
             Case RandomBonusType.RANDOM_COALMEN
                 Player(index).RandInv(invslot).Prefix = Prefix
                 Player(index).RandInv(invslot).Suffix = " of Coalmen"
                 Player(index).RandInv(invslot).Rarity = Rarity
                 Player(index).RandInv(invslot).Damage = Item(itemnum).Data2
                 Player(index).RandInv(invslot).Speed = Item(itemnum).Speed
-                Player(index).RandInv(invslot).Stat(ResourceSkills.Miner) = ItemLevel + StatAmount
-                Player(index).RandInv(invslot).Stat(ResourceSkills.WoodCutter) = ItemLevel + StatAmount
+                Player(index).RandInv(invslot).Stat(ResourceSkills.Mining) = ItemLevel + StatAmount
+                Player(index).RandInv(invslot).Stat(ResourceSkills.Woodcutting) = ItemLevel + StatAmount
             Case RandomBonusType.RANDOM_BOWYER
                 Player(index).RandInv(invslot).Prefix = Prefix
                 Player(index).RandInv(invslot).Suffix = " of Bowyer"
                 Player(index).RandInv(invslot).Rarity = Rarity
                 Player(index).RandInv(invslot).Damage = Item(itemnum).Data2
                 Player(index).RandInv(invslot).Speed = Item(itemnum).Speed
-                Player(index).RandInv(invslot).Stat(ResourceSkills.WoodCutter) = ItemLevel + StatAmount
+                Player(index).RandInv(invslot).Stat(ResourceSkills.Woodcutting) = ItemLevel + StatAmount
             Case RandomBonusType.RANDOM_BROKEN
                 Player(index).RandInv(invslot).Prefix = "Broken "
                 Player(index).RandInv(invslot).Suffix = ""

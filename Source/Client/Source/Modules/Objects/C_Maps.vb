@@ -765,9 +765,9 @@ Module C_Maps
     End Sub
 
     Friend Sub ClearMapEvents()
-        ReDim Map.MapEvents(MAX_EVENTS)
+        ReDim Map.MapEvents(Map.EventCount)
 
-        For i = 1 To MAX_EVENTS
+        For i = 1 To Map.EventCount
             Map.MapEvents(i).Name = ""
         Next
 

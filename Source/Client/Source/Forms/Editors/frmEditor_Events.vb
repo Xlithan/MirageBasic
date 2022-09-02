@@ -105,7 +105,7 @@ Public Class FrmEditor_Events
         Next
         cmbChangeItemIndex.SelectedIndex = 0
         nudChangeLevel.Minimum = 1
-        nudChangeLevel.Maximum = MAX_LEVELS
+        nudChangeLevel.Maximum = MAX_LEVEL
         nudChangeLevel.Value = 1
         cmbChangeSkills.Items.Clear()
 
@@ -353,7 +353,7 @@ Public Class FrmEditor_Events
                 fraCommands.Visible = False
             'Exit Event Process
             Case "Stop Event Processing"
-                AddCommand(EventType.EvExitProcess)
+                AddCommand(EventType.ExitProcess)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Label
@@ -378,19 +378,19 @@ Public Class FrmEditor_Events
                 fraDialogue.Visible = True
                 fraChangeItems.Visible = True
                 fraCommands.Visible = False
-            'Restore Hp
+            'Restore HP
             Case "Restore HP"
-                AddCommand(EventType.EvRestoreHp)
+                AddCommand(EventType.RestoreHP)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
-            'Restore Mp
-            Case "Restore Mp"
-                AddCommand(EventType.EvRestoreMp)
+            'Restore MP
+            Case "Restore MP"
+                AddCommand(EventType.RestoreMP)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Level Up
             Case "Level Up"
-                AddCommand(EventType.EvLevelUp)
+                AddCommand(EventType.LevelUp)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Change Level
@@ -511,12 +511,12 @@ Public Class FrmEditor_Events
                 fraCommands.Visible = False
             'Hold Player
             Case "Hold Player"
-                AddCommand(EventType.EvHoldPlayer)
+                AddCommand(EventType.HoldPlayer)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Release Player
             Case "Release Player"
-                AddCommand(EventType.EvReleasePlayer)
+                AddCommand(EventType.ReleasePlayer)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
         'Animation
@@ -600,7 +600,7 @@ Public Class FrmEditor_Events
                 fraCommands.Visible = False
             'Stop BGM
             Case "Stop BGM"
-                AddCommand(EventType.EvFadeoutBgm)
+                AddCommand(EventType.FadeoutBgm)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Play Sound
@@ -611,7 +611,7 @@ Public Class FrmEditor_Events
                 fraCommands.Visible = False
             'Stop Sounds
             Case "Stop Sounds"
-                AddCommand(EventType.EvStopSound)
+                AddCommand(EventType.StopSound)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
         'Etc...
@@ -639,7 +639,7 @@ Public Class FrmEditor_Events
 
             'Open bank
             Case "Open bank"
-                AddCommand(EventType.EvOpenBank)
+                AddCommand(EventType.OpenBank)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Open shop
@@ -650,24 +650,24 @@ Public Class FrmEditor_Events
                 fraCommands.Visible = False
             'Open Mail
             Case 45
-                AddCommand(EventType.EvOpenMail)
+                AddCommand(EventType.OpenMail)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
         'cutscene options
 
             'Fade in
             Case "Fade In"
-                AddCommand(EventType.EvFadeIn)
+                AddCommand(EventType.FadeIn)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Fade out
             Case "Fade Out"
-                AddCommand(EventType.EvFadeOut)
+                AddCommand(EventType.FadeOut)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Flash white
             Case 48
-                AddCommand(EventType.EvFlashWhite)
+                AddCommand(EventType.FlashWhite)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Show pic
@@ -1553,7 +1553,7 @@ Public Class FrmEditor_Events
     Private Sub BtnMoveRouteOk_Click(sender As Object, e As EventArgs) Handles btnMoveRouteOk.Click
         If IsMoveRouteCommand = True Then
             If Not IsEdit Then
-                AddCommand(EventType.EvSetMoveRoute)
+                AddCommand(EventType.SetMoveRoute)
             Else
                 EditCommand()
             End If
@@ -1593,7 +1593,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnShowTextOk_Click(sender As Object, e As EventArgs) Handles btnShowTextOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvShowText)
+            AddCommand(EventType.ShowText)
         Else
             EditCommand()
         End If
@@ -1616,7 +1616,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnAddTextOk_Click(sender As Object, e As EventArgs) Handles btnAddTextOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvAddText)
+            AddCommand(EventType.AddText)
         Else
             EditCommand()
         End If
@@ -1649,7 +1649,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnShowChoicesOk_Click(sender As Object, e As EventArgs) Handles btnShowChoicesOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvShowChoices)
+            AddCommand(EventType.ShowChoices)
         Else
             EditCommand()
         End If
@@ -1698,7 +1698,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnShowChatBubbleOK_Click(sender As Object, e As EventArgs) Handles btnShowChatBubbleOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvShowChatBubble)
+            AddCommand(EventType.ShowChatBubble)
         Else
             EditCommand()
         End If
@@ -1780,7 +1780,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnPlayerVarOk_Click(sender As Object, e As EventArgs) Handles btnPlayerVarOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvPlayerVar)
+            AddCommand(EventType.PlayerVar)
         Else
             EditCommand()
         End If
@@ -1802,7 +1802,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnSetPlayerSwitchOk_Click(sender As Object, e As EventArgs) Handles btnSetPlayerSwitchOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvPlayerSwitch)
+            AddCommand(EventType.PlayerSwitch)
         Else
             EditCommand()
         End If
@@ -1824,7 +1824,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnSelfswitchOk_Click(sender As Object, e As EventArgs) Handles btnSelfswitchOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvSelfSwitch)
+            AddCommand(EventType.SelfSwitch)
         Else
             EditCommand()
         End If
@@ -1931,7 +1931,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnConditionalBranchOk_Click(sender As Object, e As EventArgs) Handles btnConditionalBranchOk.Click
         If IsEdit = False Then
-            AddCommand(EventType.EvCondition)
+            AddCommand(EventType.Condition)
         Else
             EditCommand()
         End If
@@ -1953,7 +1953,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnCreatelabelOk_Click(sender As Object, e As EventArgs) Handles btnCreatelabelOk.Click
         If IsEdit = False Then
-            AddCommand(EventType.EvLabel)
+            AddCommand(EventType.Label)
         Else
             EditCommand()
         End If
@@ -1975,7 +1975,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnGoToLabelOk_Click(sender As Object, e As EventArgs) Handles btnGoToLabelOk.Click
         If IsEdit = False Then
-            AddCommand(EventType.EvGotoLabel)
+            AddCommand(EventType.GotoLabel)
         Else
             EditCommand()
         End If
@@ -1997,7 +1997,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnChangeItemsOk_Click(sender As Object, e As EventArgs) Handles btnChangeItemsOk.Click
         If IsEdit = False Then
-            AddCommand(EventType.EvChangeItems)
+            AddCommand(EventType.ChangeItems)
         Else
             EditCommand()
         End If
@@ -2023,7 +2023,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnChangeLevelOK_Click(sender As Object, e As EventArgs) Handles btnChangeLevelOk.Click
         If IsEdit = False Then
-            AddCommand(EventType.EvChangeLevel)
+            AddCommand(EventType.ChangeLevel)
         Else
             EditCommand()
         End If
@@ -2045,7 +2045,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnChangeSkillsOK_Click(sender As Object, e As EventArgs) Handles btnChangeSkillsOk.Click
         If IsEdit = False Then
-            AddCommand(EventType.EvChangeSkills)
+            AddCommand(EventType.ChangeSkills)
         Else
             EditCommand()
         End If
@@ -2067,7 +2067,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnChangeJobOK_Click(sender As Object, e As EventArgs) Handles btnChangeJobOk.Click
         If IsEdit = False Then
-            AddCommand(EventType.EvChangeJob)
+            AddCommand(EventType.ChangeJob)
         Else
             EditCommand()
         End If
@@ -2089,7 +2089,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnChangeSpriteOK_Click(sender As Object, e As EventArgs) Handles btnChangeSpriteOk.Click
         If IsEdit = False Then
-            AddCommand(EventType.EvChangeSprite)
+            AddCommand(EventType.ChangeSprite)
         Else
             EditCommand()
         End If
@@ -2111,7 +2111,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnChangeGenderOK_Click(sender As Object, e As EventArgs) Handles btnChangeGenderOk.Click
         If IsEdit = False Then
-            AddCommand(EventType.EvChangeSex)
+            AddCommand(EventType.ChangeSex)
         Else
             EditCommand()
         End If
@@ -2133,7 +2133,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnChangePkOK_Click(sender As Object, e As EventArgs) Handles btnChangePkOk.Click
         If IsEdit = False Then
-            AddCommand(EventType.EvChangePk)
+            AddCommand(EventType.ChangePk)
         Else
             EditCommand()
         End If
@@ -2155,7 +2155,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnGiveExpOK_Click(sender As Object, e As EventArgs) Handles btnGiveExpOk.Click
         If IsEdit = False Then
-            AddCommand(EventType.EvGiveExp)
+            AddCommand(EventType.GiveExp)
         Else
             EditCommand()
         End If
@@ -2177,7 +2177,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnPlayerWarpOK_Click(sender As Object, e As EventArgs) Handles btnPlayerWarpOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvWarpPlayer)
+            AddCommand(EventType.WarpPlayer)
         Else
             EditCommand()
         End If
@@ -2199,7 +2199,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnMoveWaitOK_Click(sender As Object, e As EventArgs) Handles btnMoveWaitOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvWaitMovement)
+            AddCommand(EventType.WaitMovement)
         Else
             EditCommand()
         End If
@@ -2221,7 +2221,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnSpawnNpcOK_Click(sender As Object, e As EventArgs) Handles btnSpawnNpcOk.Click
         If IsEdit = False Then
-            AddCommand(EventType.EvSpawnNpc)
+            AddCommand(EventType.SpawnNpc)
         Else
             EditCommand()
         End If
@@ -2267,7 +2267,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnPlayAnimationOK_Click(sender As Object, e As EventArgs) Handles btnPlayAnimationOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvPlayAnimation)
+            AddCommand(EventType.PlayAnimation)
         Else
             EditCommand()
         End If
@@ -2289,7 +2289,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnBeginQuestOK_Click(sender As Object, e As EventArgs) Handles btnBeginQuestOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvBeginQuest)
+            AddCommand(EventType.BeginQuest)
         Else
             EditCommand()
         End If
@@ -2311,7 +2311,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnCompleteQuestTaskOK_Click(sender As Object, e As EventArgs) Handles btnCompleteQuestTaskOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvQuestTask)
+            AddCommand(EventType.QuestTask)
         Else
             EditCommand()
         End If
@@ -2333,7 +2333,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnEndQuestOK_Click(sender As Object, e As EventArgs) Handles btnEndQuestOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvEndQuest)
+            AddCommand(EventType.EndQuest)
         Else
             EditCommand()
         End If
@@ -2355,7 +2355,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnSetFogOK_Click(sender As Object, e As EventArgs) Handles btnSetFogOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvSetFog)
+            AddCommand(EventType.SetFog)
         Else
             EditCommand()
         End If
@@ -2377,7 +2377,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnSetWeatherOK_Click(sender As Object, e As EventArgs) Handles btnSetWeatherOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvSetWeather)
+            AddCommand(EventType.SetWeather)
         Else
             EditCommand()
         End If
@@ -2399,7 +2399,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnMapTintOK_Click(sender As Object, e As EventArgs) Handles btnMapTintOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvSetTint)
+            AddCommand(EventType.SetTint)
         Else
             EditCommand()
         End If
@@ -2421,7 +2421,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnPlayBgmOK_Click(sender As Object, e As EventArgs) Handles btnPlayBgmOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvPlayBgm)
+            AddCommand(EventType.PlayBgm)
         Else
             EditCommand()
         End If
@@ -2443,7 +2443,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnPlaySoundOK_Click(sender As Object, e As EventArgs) Handles btnPlaySoundOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvPlaySound)
+            AddCommand(EventType.PlaySound)
         Else
             EditCommand()
         End If
@@ -2465,7 +2465,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnSetWaitOK_Click(sender As Object, e As EventArgs) Handles btnSetWaitOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvWait)
+            AddCommand(EventType.Wait)
         Else
             EditCommand()
         End If
@@ -2487,7 +2487,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnSetAccessOK_Click(sender As Object, e As EventArgs) Handles btnSetAccessOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvSetAccess)
+            AddCommand(EventType.SetAccess)
         Else
             EditCommand()
         End If
@@ -2509,7 +2509,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnCustomScriptOK_Click(sender As Object, e As EventArgs) Handles btnCustomScriptOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvCustomScript)
+            AddCommand(EventType.CustomScript)
         Else
             EditCommand()
         End If
@@ -2531,7 +2531,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnShowPicOK_Click(sender As Object, e As EventArgs) Handles btnShowPicOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvShowPicture)
+            AddCommand(EventType.ShowPicture)
         Else
             EditCommand()
         End If
@@ -2553,7 +2553,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnHidePicOK_Click(sender As Object, e As EventArgs) Handles btnHidePicOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvHidePicture)
+            AddCommand(EventType.HidePicture)
         Else
             EditCommand()
         End If
@@ -2575,7 +2575,7 @@ Public Class FrmEditor_Events
 
     Private Sub BtnOpenShopOK_Click(sender As Object, e As EventArgs) Handles btnOpenShopOk.Click
         If Not IsEdit Then
-            AddCommand(EventType.EvOpenShop)
+            AddCommand(EventType.OpenShop)
         Else
             EditCommand()
         End If

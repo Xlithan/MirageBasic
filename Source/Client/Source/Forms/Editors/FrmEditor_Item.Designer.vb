@@ -25,6 +25,11 @@ Partial Class frmEditor_Item
         Me.DarkGroupBox1 = New DarkUI.Controls.DarkGroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
         Me.fraBasics = New DarkUI.Controls.DarkGroupBox()
+        Me.fraEvents = New DarkUI.Controls.DarkGroupBox()
+        Me.nudEventValue = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel39 = New DarkUI.Controls.DarkLabel()
+        Me.nudEvent = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel38 = New DarkUI.Controls.DarkLabel()
         Me.fraPet = New DarkUI.Controls.DarkGroupBox()
         Me.cmbPet = New DarkUI.Controls.DarkComboBox()
         Me.DarkLabel13 = New DarkUI.Controls.DarkLabel()
@@ -50,15 +55,15 @@ Partial Class frmEditor_Item
         Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
         Me.txtName = New DarkUI.Controls.DarkTextBox()
         Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
-        Me.fraSkill = New DarkUI.Controls.DarkGroupBox()
-        Me.cmbSkills = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel12 = New DarkUI.Controls.DarkLabel()
         Me.fraRecipe = New DarkUI.Controls.DarkGroupBox()
         Me.cmbRecipe = New DarkUI.Controls.DarkComboBox()
         Me.DarkLabel35 = New DarkUI.Controls.DarkLabel()
         Me.fraVitals = New DarkUI.Controls.DarkGroupBox()
         Me.nudVitalMod = New DarkUI.Controls.DarkNumericUpDown()
         Me.DarkLabel11 = New DarkUI.Controls.DarkLabel()
+        Me.fraSkill = New DarkUI.Controls.DarkGroupBox()
+        Me.cmbSkills = New DarkUI.Controls.DarkComboBox()
+        Me.DarkLabel12 = New DarkUI.Controls.DarkLabel()
         Me.fraEquipment = New DarkUI.Controls.DarkGroupBox()
         Me.DarkGroupBox3 = New DarkUI.Controls.DarkGroupBox()
         Me.cmbAmmo = New DarkUI.Controls.DarkComboBox()
@@ -128,16 +133,19 @@ Partial Class frmEditor_Item
         Me.picFurniture = New System.Windows.Forms.PictureBox()
         Me.DarkGroupBox1.SuspendLayout
         Me.fraBasics.SuspendLayout
+        Me.fraEvents.SuspendLayout
+        CType(Me.nudEventValue,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.nudEvent,System.ComponentModel.ISupportInitialize).BeginInit
         Me.fraPet.SuspendLayout
         CType(Me.nudItemLvl,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.nudPrice,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.picItem,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.nudRarity,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.nudPic,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.fraSkill.SuspendLayout
         Me.fraRecipe.SuspendLayout
         Me.fraVitals.SuspendLayout
         CType(Me.nudVitalMod,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.fraSkill.SuspendLayout
         Me.fraEquipment.SuspendLayout
         Me.DarkGroupBox3.SuspendLayout
         CType(Me.nudPaperdoll,System.ComponentModel.ISupportInitialize).BeginInit
@@ -197,6 +205,7 @@ Partial Class frmEditor_Item
         '
         Me.fraBasics.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
         Me.fraBasics.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.fraBasics.Controls.Add(Me.fraEvents)
         Me.fraBasics.Controls.Add(Me.fraPet)
         Me.fraBasics.Controls.Add(Me.txtDescription)
         Me.fraBasics.Controls.Add(Me.DarkLabel10)
@@ -220,9 +229,9 @@ Partial Class frmEditor_Item
         Me.fraBasics.Controls.Add(Me.DarkLabel2)
         Me.fraBasics.Controls.Add(Me.txtName)
         Me.fraBasics.Controls.Add(Me.DarkLabel1)
-        Me.fraBasics.Controls.Add(Me.fraSkill)
         Me.fraBasics.Controls.Add(Me.fraRecipe)
         Me.fraBasics.Controls.Add(Me.fraVitals)
+        Me.fraBasics.Controls.Add(Me.fraSkill)
         Me.fraBasics.ForeColor = System.Drawing.Color.Gainsboro
         Me.fraBasics.Location = New System.Drawing.Point(253, 43)
         Me.fraBasics.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -232,6 +241,62 @@ Partial Class frmEditor_Item
         Me.fraBasics.TabIndex = 1
         Me.fraBasics.TabStop = false
         Me.fraBasics.Text = "Basics"
+        '
+        'fraEvents
+        '
+        Me.fraEvents.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraEvents.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.fraEvents.Controls.Add(Me.nudEventValue)
+        Me.fraEvents.Controls.Add(Me.DarkLabel39)
+        Me.fraEvents.Controls.Add(Me.nudEvent)
+        Me.fraEvents.Controls.Add(Me.DarkLabel38)
+        Me.fraEvents.ForeColor = System.Drawing.Color.Gainsboro
+        Me.fraEvents.Location = New System.Drawing.Point(292, 137)
+        Me.fraEvents.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraEvents.Name = "fraEvents"
+        Me.fraEvents.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraEvents.Size = New System.Drawing.Size(233, 96)
+        Me.fraEvents.TabIndex = 27
+        Me.fraEvents.TabStop = false
+        Me.fraEvents.Text = "Events"
+        '
+        'nudEventValue
+        '
+        Me.nudEventValue.Location = New System.Drawing.Point(78, 57)
+        Me.nudEventValue.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudEventValue.Name = "nudEventValue"
+        Me.nudEventValue.Size = New System.Drawing.Size(148, 23)
+        Me.nudEventValue.TabIndex = 5
+        '
+        'DarkLabel39
+        '
+        Me.DarkLabel39.AutoSize = true
+        Me.DarkLabel39.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel39.Location = New System.Drawing.Point(9, 61)
+        Me.DarkLabel39.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel39.Name = "DarkLabel39"
+        Me.DarkLabel39.Size = New System.Drawing.Size(38, 15)
+        Me.DarkLabel39.TabIndex = 4
+        Me.DarkLabel39.Text = "Value:"
+        '
+        'nudEvent
+        '
+        Me.nudEvent.Location = New System.Drawing.Point(78, 16)
+        Me.nudEvent.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudEvent.Name = "nudEvent"
+        Me.nudEvent.Size = New System.Drawing.Size(148, 23)
+        Me.nudEvent.TabIndex = 1
+        '
+        'DarkLabel38
+        '
+        Me.DarkLabel38.AutoSize = true
+        Me.DarkLabel38.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel38.Location = New System.Drawing.Point(9, 20)
+        Me.DarkLabel38.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel38.Name = "DarkLabel38"
+        Me.DarkLabel38.Size = New System.Drawing.Size(21, 15)
+        Me.DarkLabel38.TabIndex = 0
+        Me.DarkLabel38.Text = "ID:"
         '
         'fraPet
         '
@@ -373,9 +438,9 @@ Partial Class frmEditor_Item
         Me.DarkLabel6.Location = New System.Drawing.Point(261, 81)
         Me.DarkLabel6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel6.Name = "DarkLabel6"
-        Me.DarkLabel6.Size = New System.Drawing.Size(58, 15)
+        Me.DarkLabel6.Size = New System.Drawing.Size(61, 15)
         Me.DarkLabel6.TabIndex = 13
-        Me.DarkLabel6.Text = "BindType:"
+        Me.DarkLabel6.Text = "Bind Type:"
         '
         'chkStackable
         '
@@ -391,7 +456,7 @@ Partial Class frmEditor_Item
         '
         Me.cmbSubType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbSubType.FormattingEnabled = true
-        Me.cmbSubType.Items.AddRange(New Object() {"None", "Weapon", "Armor", "Helmet", "Shield", "Shoes", "Gloves", "Potion Add HP", "Potion Add MP", "Potion Add SP", "Potion Sub HP", "Potion Sub MP", "Potion Sub SP", "Key", "Currency", "Skill", "Furniture", "Recipe"})
+        Me.cmbSubType.Items.AddRange(New Object() {"None", "Weapon", "Armor", "Helmet", "Shield", "Shoes", "Gloves", "Potion Add HP", "Potion Add MP", "Potion Add SP", "Potion Sub HP", "Potion Sub MP", "Potion Sub SP", "Event", "Currency", "Skill", "Furniture", "Recipe"})
         Me.cmbSubType.Location = New System.Drawing.Point(85, 77)
         Me.cmbSubType.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbSubType.Name = "cmbSubType"
@@ -413,7 +478,7 @@ Partial Class frmEditor_Item
         '
         Me.cmbType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbType.FormattingEnabled = true
-        Me.cmbType.Items.AddRange(New Object() {"None", "Equipment", "Consumables", "Key", "Currency", "Skill", "Furniture", "Recipe", "Pet"})
+        Me.cmbType.Items.AddRange(New Object() {"None", "Equipment", "Consumables", "Event", "Currency", "Skill", "Furniture", "Recipe", "Pet"})
         Me.cmbType.Location = New System.Drawing.Point(85, 46)
         Me.cmbType.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbType.Name = "cmbType"
@@ -502,43 +567,6 @@ Partial Class frmEditor_Item
         Me.DarkLabel1.TabIndex = 0
         Me.DarkLabel1.Text = "Name:"
         '
-        'fraSkill
-        '
-        Me.fraSkill.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
-        Me.fraSkill.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
-        Me.fraSkill.Controls.Add(Me.cmbSkills)
-        Me.fraSkill.Controls.Add(Me.DarkLabel12)
-        Me.fraSkill.ForeColor = System.Drawing.Color.Gainsboro
-        Me.fraSkill.Location = New System.Drawing.Point(284, 138)
-        Me.fraSkill.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraSkill.Name = "fraSkill"
-        Me.fraSkill.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraSkill.Size = New System.Drawing.Size(233, 46)
-        Me.fraSkill.TabIndex = 24
-        Me.fraSkill.TabStop = false
-        Me.fraSkill.Text = "Skills"
-        '
-        'cmbSkills
-        '
-        Me.cmbSkills.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbSkills.FormattingEnabled = true
-        Me.cmbSkills.Location = New System.Drawing.Point(48, 16)
-        Me.cmbSkills.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbSkills.Name = "cmbSkills"
-        Me.cmbSkills.Size = New System.Drawing.Size(178, 24)
-        Me.cmbSkills.TabIndex = 1
-        '
-        'DarkLabel12
-        '
-        Me.DarkLabel12.AutoSize = true
-        Me.DarkLabel12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel12.Location = New System.Drawing.Point(7, 20)
-        Me.DarkLabel12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel12.Name = "DarkLabel12"
-        Me.DarkLabel12.Size = New System.Drawing.Size(31, 15)
-        Me.DarkLabel12.TabIndex = 0
-        Me.DarkLabel12.Text = "Skill:"
-        '
         'fraRecipe
         '
         Me.fraRecipe.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
@@ -610,6 +638,43 @@ Partial Class frmEditor_Item
         Me.DarkLabel11.Size = New System.Drawing.Size(66, 15)
         Me.DarkLabel11.TabIndex = 0
         Me.DarkLabel11.Text = "Vitals Mod:"
+        '
+        'fraSkill
+        '
+        Me.fraSkill.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraSkill.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.fraSkill.Controls.Add(Me.cmbSkills)
+        Me.fraSkill.Controls.Add(Me.DarkLabel12)
+        Me.fraSkill.ForeColor = System.Drawing.Color.Gainsboro
+        Me.fraSkill.Location = New System.Drawing.Point(284, 138)
+        Me.fraSkill.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraSkill.Name = "fraSkill"
+        Me.fraSkill.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraSkill.Size = New System.Drawing.Size(233, 46)
+        Me.fraSkill.TabIndex = 24
+        Me.fraSkill.TabStop = false
+        Me.fraSkill.Text = "Skills"
+        '
+        'cmbSkills
+        '
+        Me.cmbSkills.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbSkills.FormattingEnabled = true
+        Me.cmbSkills.Location = New System.Drawing.Point(48, 16)
+        Me.cmbSkills.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbSkills.Name = "cmbSkills"
+        Me.cmbSkills.Size = New System.Drawing.Size(178, 24)
+        Me.cmbSkills.TabIndex = 1
+        '
+        'DarkLabel12
+        '
+        Me.DarkLabel12.AutoSize = true
+        Me.DarkLabel12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel12.Location = New System.Drawing.Point(7, 20)
+        Me.DarkLabel12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel12.Name = "DarkLabel12"
+        Me.DarkLabel12.Size = New System.Drawing.Size(31, 15)
+        Me.DarkLabel12.TabIndex = 0
+        Me.DarkLabel12.Text = "Skill:"
         '
         'fraEquipment
         '
@@ -1388,10 +1453,10 @@ Partial Class frmEditor_Item
         Me.Controls.Add(Me.btnRequirements)
         Me.Controls.Add(Me.btnBasics)
         Me.Controls.Add(Me.DarkGroupBox1)
-        Me.Controls.Add(Me.fraEquipment)
-        Me.Controls.Add(Me.fraFurniture)
         Me.Controls.Add(Me.fraBasics)
         Me.Controls.Add(Me.fraRequirements)
+        Me.Controls.Add(Me.fraEquipment)
+        Me.Controls.Add(Me.fraFurniture)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.Name = "frmEditor_Item"
@@ -1399,6 +1464,10 @@ Partial Class frmEditor_Item
         Me.DarkGroupBox1.ResumeLayout(false)
         Me.fraBasics.ResumeLayout(false)
         Me.fraBasics.PerformLayout
+        Me.fraEvents.ResumeLayout(false)
+        Me.fraEvents.PerformLayout
+        CType(Me.nudEventValue,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.nudEvent,System.ComponentModel.ISupportInitialize).EndInit
         Me.fraPet.ResumeLayout(false)
         Me.fraPet.PerformLayout
         CType(Me.nudItemLvl,System.ComponentModel.ISupportInitialize).EndInit
@@ -1406,13 +1475,13 @@ Partial Class frmEditor_Item
         CType(Me.picItem,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.nudRarity,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.nudPic,System.ComponentModel.ISupportInitialize).EndInit
-        Me.fraSkill.ResumeLayout(false)
-        Me.fraSkill.PerformLayout
         Me.fraRecipe.ResumeLayout(false)
         Me.fraRecipe.PerformLayout
         Me.fraVitals.ResumeLayout(false)
         Me.fraVitals.PerformLayout
         CType(Me.nudVitalMod,System.ComponentModel.ISupportInitialize).EndInit
+        Me.fraSkill.ResumeLayout(false)
+        Me.fraSkill.PerformLayout
         Me.fraEquipment.ResumeLayout(false)
         Me.fraEquipment.PerformLayout
         Me.DarkGroupBox3.ResumeLayout(false)
@@ -1552,4 +1621,9 @@ End Sub
     Friend WithEvents lblSetOption As DarkUI.Controls.DarkLabel
     Friend WithEvents nudFurniture As DarkUI.Controls.DarkNumericUpDown
     Friend WithEvents DarkLabel37 As DarkUI.Controls.DarkLabel
+    Friend WithEvents fraEvents As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents nudEventValue As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel39 As DarkUI.Controls.DarkLabel
+    Friend WithEvents nudEvent As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel38 As DarkUI.Controls.DarkLabel
 End Class

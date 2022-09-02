@@ -70,7 +70,7 @@ Public Class LanguageDef
         Public SendLogin As String = "Connected, sending login information..."
         Public SendNewCharacter As String = "Connected, sending character data..."
         Public SendRegister As String = "Connected, sending registration information..."
-        Public ConnectToServer As String = "Connecting To server...( {0} )"
+        Public ConnectToServer As String = "Connecting to Server...( {0} )"
     End Class
 
     Public Game As New GameDef
@@ -148,7 +148,7 @@ Public Class LanguageDef
         Public Seconds As String = "Seconds"
 
         Public Currency As String = "Currency"
-        Public Key As String = "Key"
+        Public CommonEvent As String = "Event"
         Public Furniture As String = "Furniture"
         Public Potion As String = "Potion"
         Public Skill As String = "Skill"
@@ -177,11 +177,11 @@ Public Class LanguageDef
         Public SelfCast As String = "Self-Cast"
 
         Public Gain As String = "Regen : "
-        Public GainHp As String = "Regen Hp"
-        Public GainMp As String = "Regen Mp"
+        Public GainHp As String = "Regen HP"
+        Public GainMp As String = "Regen MP"
         Public Lose As String = "Syphon : "
-        Public LoseHp As String = "Syphon Hp"
-        Public LoseMp As String = "Syphon Mp"
+        Public LoseHp As String = "Syphon HP"
+        Public LoseMp As String = "Syphon MP"
 
     End Class
 
@@ -235,10 +235,10 @@ Public Class LanguageDef
     Public Character As New CharacterDef
     Public Class CharacterDef
 
-        Public PName As String = "Name : "
-        Public ClassType As String = "Class : "
-        Public Level As String = "Lv : "
-        Public Exp As String = "Exp : "
+        Public PName As String = "Name: "
+        Public ClassType As String = "Class: "
+        Public Level As String = "Lv: "
+        Public Exp As String = "Exp: "
 
         Public StatsLabel As String = "Stats:"
         Public Strength As String = "Strength: "
@@ -249,11 +249,7 @@ Public Class LanguageDef
         Public Spirit As String = "Spirit: "
         Public Points As String = "Points Available: "
 
-        Public SkillLabel As String = "Skill Levels"
-        Public Herbalist As String = "Herbalist: "
-        Public Woodcutter As String = "Woodcutter: "
-        Public Miner As String = "Miner: "
-        Public Fisherman As String = "Fisherman: "
+        Public SkillLabel As String = "Skills:"
 
     End Class
 End Class

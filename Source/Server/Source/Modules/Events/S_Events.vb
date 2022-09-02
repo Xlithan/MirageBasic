@@ -158,7 +158,7 @@ Friend Module S_Events
                         Next
                     Else
                         If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-                            For z = 1 To TempPlayer(index).EventMap.CurrentEvents
+                            For z = 0 To TempPlayer(index).EventMap.CurrentEvents
                                 If (TempPlayer(index).EventMap.EventPages(z).EventId <> eventId) AndAlso (eventId > 0) AndAlso (TempPlayer(index).EventMap.EventPages(z).X = TempPlayer(index).EventMap.EventPages(eventId).X) AndAlso (TempPlayer(index).EventMap.EventPages(z).Y = TempPlayer(index).EventMap.EventPages(eventId).Y - 1) AndAlso (TempPlayer(index).EventMap.EventPages(z).WalkThrough = 0) Then
                                     CanEventMove = False
                                     Exit Function
@@ -244,7 +244,7 @@ Friend Module S_Events
                         Next
                     Else
                         If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-                            For z = 1 To TempPlayer(index).EventMap.CurrentEvents
+                            For z = 0 To TempPlayer(index).EventMap.CurrentEvents
                                 If (TempPlayer(index).EventMap.EventPages(z).EventId <> eventId) AndAlso (eventId > 0) AndAlso (TempPlayer(index).EventMap.EventPages(z).X = TempPlayer(index).EventMap.EventPages(eventId).X) AndAlso (TempPlayer(index).EventMap.EventPages(z).Y = TempPlayer(index).EventMap.EventPages(eventId).Y + 1) AndAlso (TempPlayer(index).EventMap.EventPages(z).WalkThrough = 0) Then
                                     CanEventMove = False
                                     Exit Function
@@ -330,7 +330,7 @@ Friend Module S_Events
                         Next
                     Else
                         If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-                            For z = 1 To TempPlayer(index).EventMap.CurrentEvents
+                            For z = 0 To TempPlayer(index).EventMap.CurrentEvents
                                 If (TempPlayer(index).EventMap.EventPages(z).EventId <> eventId) AndAlso (eventId > 0) AndAlso (TempPlayer(index).EventMap.EventPages(z).X = TempPlayer(index).EventMap.EventPages(eventId).X - 1) AndAlso (TempPlayer(index).EventMap.EventPages(z).Y = TempPlayer(index).EventMap.EventPages(eventId).Y) AndAlso (TempPlayer(index).EventMap.EventPages(z).WalkThrough = 0) Then
                                     CanEventMove = False
                                     Exit Function
@@ -416,7 +416,7 @@ Friend Module S_Events
                         Next
                     Else
                         If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-                            For z = 1 To TempPlayer(index).EventMap.CurrentEvents
+                            For z = 0 To TempPlayer(index).EventMap.CurrentEvents
                                 If (TempPlayer(index).EventMap.EventPages(z).EventId <> eventId) AndAlso (eventId > 0) AndAlso (TempPlayer(index).EventMap.EventPages(z).X = TempPlayer(index).EventMap.EventPages(eventId).X + 1) AndAlso (TempPlayer(index).EventMap.EventPages(z).Y = TempPlayer(index).EventMap.EventPages(eventId).Y) AndAlso (TempPlayer(index).EventMap.EventPages(z).WalkThrough = 0) Then
                                     CanEventMove = False
                                     Exit Function
@@ -449,7 +449,7 @@ Friend Module S_Events
 
         If globalevent = False Then
             If TempPlayer(playerindex).EventMap.CurrentEvents > 0 Then
-                For i = 1 To TempPlayer(playerindex).EventMap.CurrentEvents
+                For i = 0 To TempPlayer(playerindex).EventMap.CurrentEvents
                     If eventId = i Then
                         eventindex = eventId
                         eventId = TempPlayer(playerindex).EventMap.EventPages(i).EventId
@@ -494,11 +494,13 @@ Friend Module S_Events
 
         If globalevent = False Then
             If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-                For i = 1 To TempPlayer(index).EventMap.CurrentEvents
-                    If eventId = i Then
-                        eventindex = eventId
-                        eventId = TempPlayer(index).EventMap.EventPages(i).EventId
-                        Exit For
+                For i = 0 To TempPlayer(index).EventMap.CurrentEvents
+                    If TempPlayer(index).EventMap.EventPages(i).EventId > 0 Then
+                        If eventId = i Then
+                            eventindex = eventId
+                            eventId = TempPlayer(index).EventMap.EventPages(i).EventId
+                            Exit For
+                        End If
                     End If
                 Next
             End If
@@ -919,7 +921,7 @@ Friend Module S_Events
 
             ReDim pos(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
-            For i = 1 To TempPlayer(playerId).EventMap.CurrentEvents
+            For i = 0 To TempPlayer(playerId).EventMap.CurrentEvents
                 If TempPlayer(playerId).EventMap.EventPages(i).Visible Then
                     If TempPlayer(playerId).EventMap.EventPages(i).WalkThrough = 1 Then
                         pos(TempPlayer(playerId).EventMap.EventPages(i).X, TempPlayer(playerId).EventMap.EventPages(i).Y) = 9
@@ -1374,11 +1376,11 @@ Friend Module S_Events
                 If TempPlayer(index).EventProcessing(i).EventId = eventId AndAlso TempPlayer(index).EventProcessing(i).PageId = pageId Then
                     If TempPlayer(index).EventProcessing(i).WaitingForResponse = 1 Then
                         If reply = 0 Then
-                            If Map(GetPlayerMap(index)).Events(eventId).Pages(pageId).CommandList(TempPlayer(index).EventProcessing(i).CurList).Commands(TempPlayer(index).EventProcessing(i).CurSlot - 1).Index = EventType.EvShowText Then
+                            If Map(GetPlayerMap(index)).Events(eventId).Pages(pageId).CommandList(TempPlayer(index).EventProcessing(i).CurList).Commands(TempPlayer(index).EventProcessing(i).CurSlot - 1).Index = EventType.ShowText Then
                                 TempPlayer(index).EventProcessing(i).WaitingForResponse = 0
                             End If
                         ElseIf reply > 0 Then
-                            If Map(GetPlayerMap(index)).Events(eventId).Pages(pageId).CommandList(TempPlayer(index).EventProcessing(i).CurList).Commands(TempPlayer(index).EventProcessing(i).CurSlot - 1).Index = EventType.EvShowChoices Then
+                            If Map(GetPlayerMap(index)).Events(eventId).Pages(pageId).CommandList(TempPlayer(index).EventProcessing(i).CurList).Commands(TempPlayer(index).EventProcessing(i).CurSlot - 1).Index = EventType.ShowChoices Then
                                 Select Case reply
                                     Case 1
                                         TempPlayer(index).EventProcessing(i).ListLeftOff(TempPlayer(index).EventProcessing(i).CurList) = TempPlayer(index).EventProcessing(i).CurSlot - 1
@@ -1419,58 +1421,7 @@ Friend Module S_Events
         i = buffer.ReadInt32
         buffer.Dispose()
 
-        Select Case GetPlayerDir(index)
-            Case DirectionType.Up
-
-                If GetPlayerY(index) = 0 Then Exit Sub
-                x = GetPlayerX(index)
-                y = GetPlayerY(index) - 1
-            Case DirectionType.Down
-
-                If GetPlayerY(index) = Map(GetPlayerMap(index)).MaxY Then Exit Sub
-                x = GetPlayerX(index)
-                y = GetPlayerY(index) + 1
-            Case DirectionType.Left
-
-                If GetPlayerX(index) = 0 Then Exit Sub
-                x = GetPlayerX(index) - 1
-                y = GetPlayerY(index)
-            Case DirectionType.Right
-
-                If GetPlayerX(index) = Map(GetPlayerMap(index)).MaxX Then Exit Sub
-                x = GetPlayerX(index) + 1
-                y = GetPlayerY(index)
-        End Select
-
-        If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-            For z = 1 To TempPlayer(index).EventMap.CurrentEvents
-                If TempPlayer(index).EventMap.EventPages(z).EventId = i Then
-                    i = z
-                    begineventprocessing = True
-                    Exit For
-                End If
-            Next
-        End If
-
-        If begineventprocessing = True Then
-            If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).CommandListCount > 0 Then
-                'Process this event, it is action button and everything checks out.
-                If (TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).Active = 0) Then
-                    TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).Active = 1
-                    With TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId)
-                        .ActionTimer = GetTimeMs()
-                        .CurList = 1
-                        .CurSlot = 1
-                        .EventId = TempPlayer(index).EventMap.EventPages(i).EventId
-                        .PageId = TempPlayer(index).EventMap.EventPages(i).PageId
-                        .WaitingForResponse = 0
-                        ReDim .ListLeftOff(Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).CommandListCount)
-                    End With
-                End If
-            End If
-            begineventprocessing = False
-        End If
-
+        TriggerEvent(index, i, 0, GetPlayerX(index), GetPlayerY(index))
     End Sub
 
     Sub Packet_RequestSwitchesAndVariables(index As Integer, ByRef data() As Byte)

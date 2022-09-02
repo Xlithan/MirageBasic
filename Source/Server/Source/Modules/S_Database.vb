@@ -649,7 +649,7 @@ Module modDatabase
         Next
 
         writer.WriteByte(Npc(NpcNum).Faction)
-        writer.WriteInt32(Npc(NpcNum).Hp)
+        writer.WriteInt32(Npc(NpcNum).HP)
         writer.WriteInt32(Npc(NpcNum).Exp)
         writer.WriteInt32(Npc(NpcNum).Animation)
 
@@ -702,7 +702,7 @@ Module modDatabase
         Next
 
         Npc(NpcNum).Faction = reader.ReadByte()
-        Npc(NpcNum).Hp = reader.ReadInt32()
+        Npc(NpcNum).HP = reader.ReadInt32()
         Npc(NpcNum).Exp = reader.ReadInt32()
         Npc(NpcNum).Animation = reader.ReadInt32()
 
@@ -1893,7 +1893,7 @@ Module modDatabase
         Next
         buffer.WriteInt32(Npc(NpcNum).Exp)
         buffer.WriteInt32(Npc(NpcNum).Faction)
-        buffer.WriteInt32(Npc(NpcNum).Hp)
+        buffer.WriteInt32(Npc(NpcNum).HP)
         buffer.WriteString((Npc(NpcNum).Name))
         buffer.WriteInt32(Npc(NpcNum).Range)
         buffer.WriteInt32(Npc(NpcNum).SpawnTime)

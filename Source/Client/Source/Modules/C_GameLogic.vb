@@ -938,7 +938,7 @@ Continue1:
 
             Case ItemType.Consumable
                 Select Case Item(itemnum).SubType
-                    Case ConsumableType.Hp, ConsumableType.Mp, ConsumableType.Sp
+                    Case ConsumableType.HP, ConsumableType.MP, ConsumableType.Sp
                         ItemDescInfo = Language.ItemDescription.Restore & Item(itemnum).Data2
                         ItemDescType = Language.ItemDescription.Potion
                     Case ConsumableType.Exp
@@ -946,9 +946,9 @@ Continue1:
                         ItemDescType = Language.ItemDescription.Potion
                 End Select
 
-            Case ItemType.Key
+            Case ItemType.CommonEvent
                 ItemDescInfo = Language.ItemDescription.NotAvailable
-                ItemDescType = Language.ItemDescription.Key
+                ItemDescType = Language.ItemDescription.CommonEvent
             Case ItemType.Currency
                 ItemDescInfo = Language.ItemDescription.NotAvailable
                 ItemDescType = Language.ItemDescription.Currency
@@ -965,10 +965,14 @@ Continue1:
         ' If currency, exit out before all the other shit
         If Item(itemnum).Type = ItemType.Currency OrElse Item(itemnum).Type = ItemType.None Then
             ' Clear other labels
-            ItemDescLevel = ItemDescSpeed =
-            ItemDescStr = ItemDescEnd = ItemDescInt =
-            ItemDescSpr = ItemDescVit = ItemDescLuck =
-                    Language.ItemDescription.NotAvailable
+            ItemDescLevel = Language.ItemDescription.NotAvailable
+            ItemDescSpeed = Language.ItemDescription.NotAvailable
+            ItemDescStr = Language.ItemDescription.NotAvailable
+            ItemDescEnd = Language.ItemDescription.NotAvailable
+            ItemDescInt = Language.ItemDescription.NotAvailable
+            ItemDescSpr = Language.ItemDescription.NotAvailable
+            ItemDescVit = Language.ItemDescription.NotAvailable
+            ItemDescLuck = Language.ItemDescription.NotAvailable
             Exit Sub
         End If
 
@@ -978,10 +982,13 @@ Continue1:
         ' Exit out for everything else except equipment
         If Item(itemnum).Type <> ItemType.Equipment Then
             ' Clear other labels
-            ItemDescSpeed =
-            ItemDescStr = ItemDescEnd = ItemDescInt =
-            ItemDescSpr = ItemDescVit = ItemDescLuck =
-                    Language.ItemDescription.NotAvailable
+            ItemDescSpeed = Language.ItemDescription.NotAvailable
+            ItemDescStr = Language.ItemDescription.NotAvailable
+            ItemDescEnd = Language.ItemDescription.NotAvailable
+            ItemDescInt = Language.ItemDescription.NotAvailable
+            ItemDescSpr = Language.ItemDescription.NotAvailable
+            ItemDescVit = Language.ItemDescription.NotAvailable
+            ItemDescLuck = Language.ItemDescription.NotAvailable
             Exit Sub
         End If
 

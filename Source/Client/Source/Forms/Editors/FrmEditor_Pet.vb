@@ -8,8 +8,8 @@ Friend Class frmEditor_Pet
     Private Sub FrmEditor_Pet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         nudSprite.Maximum = NumCharacters
         nudRange.Maximum = 50
-        nudLevel.Maximum = MAX_LEVELS
-        nudMaxLevel.Maximum = MAX_LEVELS
+        nudLevel.Maximum = MAX_LEVEL
+        nudMaxLevel.Maximum = MAX_LEVEL
 
         lstIndex.Items.Clear()
 

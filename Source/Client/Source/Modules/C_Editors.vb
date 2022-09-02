@@ -97,7 +97,7 @@ Module C_Editors
 
             .nudAmount.Value = Npc(Editorindex).DropItemValue(frmEditor_NPC.cmbDropSlot.SelectedIndex)
 
-            .nudHp.Value = Npc(Editorindex).Hp
+            .nudHp.Value = Npc(Editorindex).HP
             .nudExp.Value = Npc(Editorindex).Exp
             .nudLevel.Value = Npc(Editorindex).Level
             .nudDamage.Value = Npc(Editorindex).Damage
@@ -493,37 +493,6 @@ Module C_Editors
         Editorindex = frmEditor_Item.lstIndex.SelectedIndex
 
         With Item(Editorindex)
-            'populate combo boxes
-            frmEditor_Item.cmbAnimation.Items.Clear()
-           For i = 0 To MAX_ANIMATIONS
-                frmEditor_Item.cmbAnimation.Items.Add(i & ": " & Animation(i).Name)
-            Next
-
-            frmEditor_Item.cmbAmmo.Items.Clear()
-           For i = 0 To MAX_ITEMS
-                frmEditor_Item.cmbAmmo.Items.Add(i & ": " & Item(i).Name)
-            Next
-
-            frmEditor_Item.cmbProjectile.Items.Clear()
-           For i = 0 To MAX_PROJECTILES
-                frmEditor_Item.cmbProjectile.Items.Add(i & ": " & Projectiles(i).Name)
-            Next
-
-            frmEditor_Item.cmbSkills.Items.Clear()
-           For i = 0 To MAX_SKILLS
-                frmEditor_Item.cmbSkills.Items.Add(i & ": " & Skill(i).Name)
-            Next
-
-            frmEditor_Item.cmbPet.Items.Clear()
-           For i = 0 To MAX_PETS
-                frmEditor_Item.cmbPet.Items.Add(i & ": " & Pet(i).Name)
-            Next
-
-            frmEditor_Item.cmbRecipe.Items.Clear()
-           For i = 0 To MAX_RECIPE
-                frmEditor_Item.cmbRecipe.Items.Add(i & ": " & Recipe(i).Name)
-            Next
-
             frmEditor_Item.txtName.Text = Trim$(.Name)
             frmEditor_Item.txtDescription.Text = Trim$(.Description)
 
@@ -595,6 +564,14 @@ Module C_Editors
                 frmEditor_Item.cmbSkills.SelectedIndex = .Data1
             Else
                 frmEditor_Item.fraSkill.Visible = False
+            End If
+
+            If frmEditor_Item.cmbType.SelectedIndex = ItemType.CommonEvent Then
+                frmEditor_Item.fraEvents.Visible = True
+                frmEditor_Item.nudEvent.Value = .Data1
+                frmEditor_Item.nudEventValue.Value = .Data2
+            Else
+                frmEditor_Item.fraEvents.Visible = False
             End If
 
             If frmEditor_Item.cmbType.SelectedIndex = ItemType.Furniture Then

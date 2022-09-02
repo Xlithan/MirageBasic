@@ -2013,7 +2013,7 @@ Module C_Graphics
                         tmpY = MapNpc(i).Y * PicY + MapNpc(i).YOffset + 35
                         If MapNpc(i).Vital(VitalType.HP) > 0 Then
                             ' calculate the width to fill
-                            barWidth = ((MapNpc(i).Vital(VitalType.HP) / (Npc(MapNpc(i).Num).Hp) * 32))
+                            barWidth = ((MapNpc(i).Vital(VitalType.HP) / (Npc(MapNpc(i).Num).HP) * 32))
                             ' draw bars
                             rec(1) = New Rectangle(ConvertMapX(tmpX), ConvertMapY(tmpY), barWidth, 4)
                             Dim rectShape As New RectangleShape(New Vector2f(barWidth, 4)) With {
@@ -2282,7 +2282,7 @@ Module C_Graphics
             RenderSprite(FacesSprite(Player(Myindex).Sprite), GameWindow, HudFaceX, HudFaceY, rec.X, rec.Y, rec.Width, rec.Height)
         End If
 
-        'Hp Bar etc
+        'HP Bar etc
         DrawStatBars()
 
         DrawText(FrmGame.Width - 120, 10, Language.Game.Fps & Fps, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
@@ -2797,7 +2797,7 @@ NextLoop:
 
         'requirements
         DrawText(SkillWindowX - DescriptionGfxInfo.Width + 10, SkillWindowY + 128, "=Requirements=", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
-        'Mp
+        'MP
         DrawText(SkillWindowX - DescriptionGfxInfo.Width + 10, SkillWindowY + 144, "MP: " & SkillDescReqMp, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
         'level
         DrawText(SkillWindowX - DescriptionGfxInfo.Width + 10, SkillWindowY + 160, "Level: " & SkillDescReqLvl, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)

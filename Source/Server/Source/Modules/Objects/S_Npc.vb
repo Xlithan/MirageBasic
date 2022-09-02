@@ -1087,7 +1087,7 @@ Module S_Npc
 
         Npc(NpcNum).Exp = buffer.ReadInt32()
         Npc(NpcNum).Faction = buffer.ReadInt32()
-        Npc(NpcNum).Hp = buffer.ReadInt32()
+        Npc(NpcNum).HP = buffer.ReadInt32()
         Npc(NpcNum).Name = buffer.ReadString()
         Npc(NpcNum).Range = buffer.ReadInt32()
         Npc(NpcNum).SpawnTime = buffer.ReadInt32()
@@ -1146,7 +1146,7 @@ Module S_Npc
 
         buffer.WriteInt32(Npc(NpcNum).Exp)
         buffer.WriteInt32(Npc(NpcNum).Faction)
-        buffer.WriteInt32(Npc(NpcNum).Hp)
+        buffer.WriteInt32(Npc(NpcNum).HP)
         buffer.WriteString((Npc(NpcNum).Name))
         buffer.WriteInt32(Npc(NpcNum).Range)
         buffer.WriteInt32(Npc(NpcNum).SpawnTime)
@@ -1190,7 +1190,7 @@ Module S_Npc
 
         buffer.WriteInt32(Npc(NpcNum).Exp)
         buffer.WriteInt32(Npc(NpcNum).Faction)
-        buffer.WriteInt32(Npc(NpcNum).Hp)
+        buffer.WriteInt32(Npc(NpcNum).HP)
         buffer.WriteString((Npc(NpcNum).Name))
         buffer.WriteInt32(Npc(NpcNum).Range)
         buffer.WriteInt32(Npc(NpcNum).SpawnTime)

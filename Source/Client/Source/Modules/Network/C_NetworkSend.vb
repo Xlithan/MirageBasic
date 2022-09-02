@@ -473,7 +473,7 @@ Module C_NetworkSend
 
         buffer.WriteInt32(Npc(NpcNum).Exp)
         buffer.WriteInt32(Npc(NpcNum).Faction)
-        buffer.WriteInt32(Npc(NpcNum).Hp)
+        buffer.WriteInt32(Npc(NpcNum).HP)
         buffer.WriteString((Npc(NpcNum).Name))
         buffer.WriteInt32(Npc(NpcNum).Range)
         buffer.WriteInt32(Npc(NpcNum).SpawnTime)
