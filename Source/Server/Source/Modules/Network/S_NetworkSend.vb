@@ -712,13 +712,12 @@ Module S_NetworkSend
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).Vital(VitalType.MP))
         Next
 
-        'send Resource cache
         If MapResource(GetPlayerMap(index)).ResourceCount > 0 Then
             buffer.WriteInt32(1)
             buffer.WriteInt32(MapResource(GetPlayerMap(index)).ResourceCount)
 
             For i = 0 To MapResource(GetPlayerMap(index)).ResourceCount
-                buffer.WriteInt32(MapResource(GetPlayerMap(index)).ResourceData(i).State)
+                buffer.WriteByte(MapResource(GetPlayerMap(index)).ResourceData(i).State)
                 buffer.WriteInt32(MapResource(GetPlayerMap(index)).ResourceData(i).X)
                 buffer.WriteInt32(MapResource(GetPlayerMap(index)).ResourceData(i).Y)
             Next

@@ -60,7 +60,7 @@ Module C_Resources
             ReDim Preserve MapResource(ResourceIndex)
 
             For i = 0 To ResourceIndex
-                MapResource(i).State = buffer.ReadInt32
+                MapResource(i).State = buffer.ReadByte
                 MapResource(i).X = buffer.ReadInt32
                 MapResource(i).Y = buffer.ReadInt32
             Next

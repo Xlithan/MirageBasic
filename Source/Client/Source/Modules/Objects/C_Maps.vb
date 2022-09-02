@@ -449,10 +449,11 @@ Module C_Maps
             If buffer.ReadInt32 = 1 Then
                 ResourceIndex = buffer.ReadInt32
                 ResourcesInit = False
+                ReDim MapResource(ResourceIndex)
 
                 If ResourceIndex > 0 Then
                     For i = 0 To ResourceIndex
-                        MapResource(i).State = buffer.ReadInt32
+                        MapResource(i).State = buffer.ReadByte
                         MapResource(i).X = buffer.ReadInt32
                         MapResource(i).Y = buffer.ReadInt32
                     Next
