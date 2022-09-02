@@ -9,7 +9,7 @@ Module C_Resources
 #Region "Globals & Types"
 
     ' Cache the Resources in an array
-    Friend MapResource() As MapResourceRec
+    Friend MapResource() As MapResourceStruct
 
     Friend ResourceIndex As Integer
     Friend ResourcesInit As Boolean

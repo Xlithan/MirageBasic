@@ -261,10 +261,10 @@ Module C_Text
     End Sub
 
     Friend Sub AddChatRec(msg As String, color As Integer)
-        Dim struct As ChatRec
-        struct.Text = msg
-        struct.Color = color
-        Chat.Add(struct)
+        Dim chatMsg As ChatStruct
+        chatMsg.Text = msg
+        chatMsg.Color = color
+        Chat.Add(chatMsg)
     End Sub
 
     Friend Function GetSfmlColor(color As Byte) As Color

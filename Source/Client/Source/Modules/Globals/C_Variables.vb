@@ -27,7 +27,7 @@ Module C_Variables
     Friend MyTargetType As Integer
 
     ' chat bubble
-    Friend ChatBubble(Byte.MaxValue) As ChatBubbleRec
+    Friend ChatBubble(Byte.MaxValue) As ChatBubbleStruct
     Friend ChatBubbleindex As Integer
 
     ' skill drag + drop
