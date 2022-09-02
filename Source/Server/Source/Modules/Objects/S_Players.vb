@@ -1657,20 +1657,6 @@ Module S_Players
 
     End Function
 
-    Function GetPlayerInvItemNum(index As Integer, InvSlot As Integer) As Integer
-        GetPlayerInvItemNum = 0
-        If index > MAX_PLAYERS Then Exit Function
-        If InvSlot = 0 Then Exit Function
-
-        GetPlayerInvItemNum = Player(index).Inv(InvSlot).Num
-    End Function
-
-    Function GetPlayerInvItemValue(index As Integer, InvSlot As Integer) As Integer
-        GetPlayerInvItemValue = 0
-        If index > MAX_PLAYERS Then Exit Function
-        GetPlayerInvItemValue = Player(index).Inv(InvSlot).Value
-    End Function
-
     Sub PlayerMapGetItem(index As Integer)
         Dim i As Integer, itemnum As Integer
         Dim n As Integer
@@ -1746,26 +1732,18 @@ Module S_Players
     End Sub
 
     Function CanPlayerPickupItem(index As Integer, mapItemNum As Integer) As Boolean
-        Dim mapnum As Integer
+        Dim mapNum As Integer
 
-        mapnum = GetPlayerMap(index)
+        mapNum = GetPlayerMap(index)
 
         ' no lock or locked to player?
-        If MapItem(mapnum, mapItemNum).PlayerName = vbNullString Or MapItem(mapnum, mapItemNum).PlayerName = GetPlayerName(index).Trim Then
+        If MapItem(mapNum, mapItemNum).PlayerName = vbNullString Or MapItem(mapnum, mapItemNum).PlayerName = GetPlayerName(index).Trim Then
             CanPlayerPickupItem = True
             Exit Function
         End If
 
         CanPlayerPickupItem = False
     End Function
-
-    Sub SetPlayerInvItemValue(index As Integer, InvSlot As Integer, ItemValue As Integer)
-        Player(index).Inv(InvSlot).Value = ItemValue
-    End Sub
-
-    Sub SetPlayerInvItemNum(index As Integer, invSlot As Integer, itemNum As Integer)
-        Player(index).Inv(invSlot).Num = itemNum
-    End Sub
 
     Function FindOpenInvSlot(index As Integer, ItemNum As Integer) As Integer
         Dim i As Integer
@@ -1950,649 +1928,550 @@ Module S_Players
 
     End Function
 
+    Function CanPlayerUseItem(Index As Integer, itemNum As Integer)
+        Dim i As Integer
+
+        For i = 0 To StatType.Count - 1
+            If GetPlayerStat(index, i) < Item(itemNum).Stat_Req(i) Then
+                PlayerMsg(index, "You do not meet the stat requirements to use this item.", ColorType.BrightRed)
+                Exit Function
+            End If
+        Next
+
+        If Item(itemNum).LevelReq > GetPlayerLevel(index) Then
+            PlayerMsg(index, "You do not meet the level requirements to use this item.", ColorType.BrightRed)
+            Exit Function
+        End If
+
+        ' Make sure they are the right job
+        If Not Item(itemNum).JobReq = GetPlayerJob(index) AndAlso Not Item(itemNum).JobReq = 0 Then
+            PlayerMsg(index, "You do not meet the class requirements to use this item.", ColorType.BrightRed)
+            Exit Function
+        End If
+
+         ' access requirement
+        If Not GetPlayerAccess(index) >= Item(itemNum).AccessReq Then
+            PlayerMsg(index, "You do not meet the access requirement to equip this item.", ColorType.BrightRed)
+            Exit Function
+        End If
+
+        CanPlayerUseItem = True
+    End Function
+
     Friend Sub UseItem(index As Integer, InvNum As Integer)
         Dim InvItemNum As Integer, i As Integer, n As Integer, x As Integer, y As Integer, tempitem As Integer
         Dim m As Integer, tempdata(StatType.Count + 3) As Integer, tempstr(2) As String
 
         ' Prevent hacking
-        If InvNum < 1 OrElse InvNum > MAX_ITEMS Then Exit Sub
+        If InvNum < 1 OrElse InvNum > MAX_INV Then Exit Sub
 
-        If (GetPlayerInvItemNum(index, InvNum) > 0) AndAlso (GetPlayerInvItemNum(index, InvNum) <= MAX_ITEMS) Then
-            InvItemNum = GetPlayerInvItemNum(index, InvNum)
+        InvItemNum = GetPlayerInvItemNum(index, InvNum)
 
-            n = Item(InvItemNum).Data2
+        ' Find out what kind of item it is
+        Select Case Item(InvItemNum).Type
+            Case ItemType.Equipment
+                If CanPlayerUseItem(index, InvItemNum) = False Then Exit Sub
 
-            ' Find out what kind of item it is
-            Select Case Item(InvItemNum).Type
-                Case ItemType.Equipment
-                    For i = 0 To StatType.Count - 1
-                        If GetPlayerStat(index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(index, "You do not meet the stat requirements to equip this item.", ColorType.BrightRed)
-                            Exit Sub
-                        End If
-                    Next
+                Select Case Item(InvItemNum).SubType
+                    Case EquipmentType.Weapon
 
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(index) Then
-                        PlayerMsg(index, "You do not meet the level requirements to equip this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).JobReq = GetPlayerJob(index) AndAlso Not Item(InvItemNum).JobReq = 0 Then
-                        PlayerMsg(index, "You do not meet the class requirements to equip this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
-
-                    ' access requirement
-                    If Not GetPlayerAccess(index) >= Item(InvItemNum).AccessReq Then
-                        PlayerMsg(index, "You do not meet the access requirement to equip this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
-
-                    'if that went fine, we progress the subtype
-
-                    Select Case Item(InvItemNum).SubType
-                        Case EquipmentType.Weapon
-
-                            If Item(InvItemNum).TwoHanded > 0 Then
-                                If GetPlayerEquipment(index, EquipmentType.Shield) > 0 Then
-                                    PlayerMsg(index, "This is a 2Handed weapon! Please unequip shield first.", ColorType.BrightRed)
-                                    Exit Sub
-                                End If
-                            End If
-
-                            If GetPlayerEquipment(index, EquipmentType.Weapon) > 0 Then
-                                tempitem = GetPlayerEquipment(index, EquipmentType.Weapon)
-                                tempstr(1) = Player(index).RandEquip(EquipmentType.Weapon).Prefix
-                                tempstr(2) = Player(index).RandEquip(EquipmentType.Weapon).Suffix
-                                tempdata(1) = Player(index).RandEquip(EquipmentType.Weapon).Damage
-                                tempdata(2) = Player(index).RandEquip(EquipmentType.Weapon).Speed
-                                tempdata(3) = Player(index).RandEquip(EquipmentType.Weapon).Rarity
-                                For i = 0 To StatType.Count - 1
-                                    tempdata(i + 3) = Player(index).RandEquip(EquipmentType.Weapon).Stat(i)
-                                Next
-                            End If
-
-                            SetPlayerEquipment(index, InvItemNum, EquipmentType.Weapon)
-
-                            ' Transfer the Inventory data to the Equipment data
-                            Player(index).RandEquip(EquipmentType.Weapon).Prefix = Player(index).RandInv(InvNum).Prefix
-                            Player(index).RandEquip(EquipmentType.Weapon).Suffix = Player(index).RandInv(InvNum).Suffix
-                            Player(index).RandEquip(EquipmentType.Weapon).Damage = Player(index).RandInv(InvNum).Damage
-                            Player(index).RandEquip(EquipmentType.Weapon).Speed = Player(index).RandInv(InvNum).Speed
-                            Player(index).RandEquip(EquipmentType.Weapon).Rarity = Player(index).RandInv(InvNum).Rarity
-
-                            For i = 0 To StatType.Count - 1
-                                Player(index).RandEquip(EquipmentType.Weapon).Stat(i) = Player(index).RandInv(InvNum).Stat(i)
-                            Next
-
-                            If Item(InvItemNum).Randomize <> 0 Then
-                                PlayerMsg(index, "You equip " & tempstr(1) & " " & CheckGrammar(Item(InvItemNum).Name) & " " & tempstr(2), ColorType.BrightGreen)
-                            Else
-                                PlayerMsg(index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
-                            End If
-
-                            SetPlayerInvItemNum(index, InvNum, 0)
-                            SetPlayerInvItemValue(index, InvNum, 0)
-                            ClearRandInv(index, InvNum)
-
-                            If tempitem > 0 Then ' give back the stored item
-                                m = FindOpenInvSlot(index, tempitem)
-                                SetPlayerInvItemNum(index, m, tempitem)
-                                SetPlayerInvItemValue(index, m, 0)
-
-                                Player(index).RandInv(m).Prefix = tempstr(1)
-                                Player(index).RandInv(m).Suffix = tempstr(2)
-
-                                Player(index).RandInv(m).Damage = tempdata(1)
-                                Player(index).RandInv(m).Speed = tempdata(2)
-                                Player(index).RandInv(m).Rarity = tempdata(3)
-
-                                For i = 0 To StatType.Count - 1
-                                    Player(index).RandInv(m).Stat(i) = tempdata(i + 3)
-                                Next
-
-                                tempitem = 0
-                            End If
-
-                            SendWornEquipment(index)
-                            SendMapEquipment(index)
-                            SendInventory(index)
-                            SendInventoryUpdate(index, InvNum)
-                            SendStats(index)
-
-                            ' send vitals
-                            SendVitals(index)
-
-                            ' send vitals to party if in one
-                            If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
-
-                        Case EquipmentType.Armor
-
-                            If GetPlayerEquipment(index, EquipmentType.Armor) > 0 Then
-                                tempitem = GetPlayerEquipment(index, EquipmentType.Armor)
-                                tempstr(1) = Player(index).RandEquip(EquipmentType.Armor).Prefix
-                                tempstr(2) = Player(index).RandEquip(EquipmentType.Armor).Suffix
-                                tempdata(1) = Player(index).RandEquip(EquipmentType.Armor).Damage
-                                tempdata(2) = Player(index).RandEquip(EquipmentType.Armor).Speed
-                                tempdata(3) = Player(index).RandEquip(EquipmentType.Armor).Rarity
-                                For i = 0 To StatType.Count - 1
-                                    tempdata(i + 3) = Player(index).RandEquip(EquipmentType.Armor).Stat(i)
-                                Next
-                            End If
-
-                            SetPlayerEquipment(index, InvItemNum, EquipmentType.Armor)
-
-                            ' Transfer the Inventory data to the Equipment data
-                            Player(index).RandEquip(EquipmentType.Armor).Prefix = Player(index).RandInv(InvNum).Prefix
-                            Player(index).RandEquip(EquipmentType.Armor).Suffix = Player(index).RandInv(InvNum).Suffix
-                            Player(index).RandEquip(EquipmentType.Armor).Damage = Player(index).RandInv(InvNum).Damage
-                            Player(index).RandEquip(EquipmentType.Armor).Speed = Player(index).RandInv(InvNum).Speed
-                            Player(index).RandEquip(EquipmentType.Armor).Rarity = Player(index).RandInv(InvNum).Rarity
-
-                            For i = 0 To StatType.Count - 1
-                                Player(index).RandEquip(EquipmentType.Armor).Stat(i) = Player(index).RandInv(InvNum).Stat(i)
-                            Next
-
-                            PlayerMsg(index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
-                            TakeInvItem(index, InvItemNum, 0)
-                            ClearRandInv(index, InvNum)
-
-                            If tempitem > 0 Then ' Return their old equipment to their inventory.
-                                m = FindOpenInvSlot(index, tempitem)
-                                SetPlayerInvItemNum(index, m, tempitem)
-                                SetPlayerInvItemValue(index, m, 0)
-
-                                Player(index).RandInv(m).Prefix = tempstr(1)
-                                Player(index).RandInv(m).Suffix = tempstr(2)
-
-                                Player(index).RandInv(m).Damage = tempdata(1)
-                                Player(index).RandInv(m).Speed = tempdata(2)
-                                Player(index).RandInv(m).Rarity = tempdata(3)
-
-                                For i = 0 To StatType.Count - 1
-                                    Player(index).RandInv(m).Stat(i) = tempdata(i + 3)
-                                Next i
-
-                                tempitem = 0
-                            End If
-
-                            SendWornEquipment(index)
-                            SendMapEquipment(index)
-
-                            SendInventory(index)
-                            SendStats(index)
-
-                            ' send vitals
-                            SendVitals(index)
-
-                            ' send vitals to party if in one
-                            If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
-
-                        Case EquipmentType.Helmet
-
-                            If GetPlayerEquipment(index, EquipmentType.Helmet) > 0 Then
-                                tempitem = GetPlayerEquipment(index, EquipmentType.Helmet)
-                                tempstr(1) = Player(index).RandEquip(EquipmentType.Helmet).Prefix
-                                tempstr(2) = Player(index).RandEquip(EquipmentType.Helmet).Suffix
-                                tempdata(1) = Player(index).RandEquip(EquipmentType.Helmet).Damage
-                                tempdata(2) = Player(index).RandEquip(EquipmentType.Helmet).Speed
-                                tempdata(3) = Player(index).RandEquip(EquipmentType.Helmet).Rarity
-                                For i = 0 To StatType.Count - 1
-                                    tempdata(i + 3) = Player(index).RandEquip(EquipmentType.Helmet).Stat(i)
-                                Next i
-                            End If
-
-                            SetPlayerEquipment(index, InvItemNum, EquipmentType.Helmet)
-
-                            ' Transfer the Inventory data to the Equipment data
-                            Player(index).RandEquip(EquipmentType.Helmet).Prefix = Player(index).RandInv(InvNum).Prefix
-                            Player(index).RandEquip(EquipmentType.Helmet).Suffix = Player(index).RandInv(InvNum).Suffix
-                            Player(index).RandEquip(EquipmentType.Helmet).Damage = Player(index).RandInv(InvNum).Damage
-                            Player(index).RandEquip(EquipmentType.Helmet).Speed = Player(index).RandInv(InvNum).Speed
-                            Player(index).RandEquip(EquipmentType.Helmet).Rarity = Player(index).RandInv(InvNum).Rarity
-
-                            For i = 0 To StatType.Count - 1
-                                Player(index).RandEquip(EquipmentType.Helmet).Stat(i) = Player(index).RandInv(InvNum).Stat(i)
-                            Next
-
-                            PlayerMsg(index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
-                            TakeInvItem(index, InvItemNum, 1)
-                            ClearRandInv(index, InvNum)
-
-                            If tempitem > 0 Then ' give back the stored item
-                                m = FindOpenInvSlot(index, tempitem)
-                                SetPlayerInvItemNum(index, m, tempitem)
-                                SetPlayerInvItemValue(index, m, 0)
-
-                                Player(index).RandInv(m).Prefix = tempstr(1)
-                                Player(index).RandInv(m).Suffix = tempstr(2)
-
-                                Player(index).RandInv(m).Damage = tempdata(1)
-                                Player(index).RandInv(m).Speed = tempdata(2)
-                                Player(index).RandInv(m).Rarity = tempdata(3)
-
-                                For i = 0 To StatType.Count - 1
-                                    Player(index).RandInv(m).Stat(i) = tempdata(i + 3)
-                                Next
-
-                                tempitem = 0
-                            End If
-
-                            SendWornEquipment(index)
-                            SendMapEquipment(index)
-                            SendInventory(index)
-                            SendStats(index)
-
-                            ' send vitals
-                            SendVitals(index)
-
-                            ' send vitals to party if in one
-                            If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
-
-                        Case EquipmentType.Shield
-                            If Item(GetPlayerEquipment(index, EquipmentType.Weapon)).TwoHanded > 0 Then
-                                PlayerMsg(index, "Please unequip your 2handed weapon first.", ColorType.BrightRed)
-                                Exit Sub
-                            End If
-
+                        If Item(InvItemNum).TwoHanded > 0 Then
                             If GetPlayerEquipment(index, EquipmentType.Shield) > 0 Then
-                                tempitem = GetPlayerEquipment(index, EquipmentType.Shield)
-                                tempstr(1) = Player(index).RandEquip(EquipmentType.Shield).Prefix
-                                tempstr(2) = Player(index).RandEquip(EquipmentType.Shield).Suffix
-                                tempdata(1) = Player(index).RandEquip(EquipmentType.Shield).Damage
-                                tempdata(2) = Player(index).RandEquip(EquipmentType.Shield).Speed
-                                tempdata(3) = Player(index).RandEquip(EquipmentType.Shield).Rarity
-                                For i = 0 To StatType.Count - 1
-                                    tempdata(i + 3) = Player(index).RandEquip(EquipmentType.Shield).Stat(i)
-                                Next i
+                                PlayerMsg(index, "This is a 2Handed weapon! Please unequip shield first.", ColorType.BrightRed)
+                                Exit Sub
                             End If
+                        End If
 
-                            SetPlayerEquipment(index, InvItemNum, EquipmentType.Shield)
+                        If GetPlayerEquipment(index, EquipmentType.Weapon) > 0 Then
+                            tempitem = GetPlayerEquipment(index, EquipmentType.Weapon)
+                            tempstr(1) = Player(index).RandEquip(EquipmentType.Weapon).Prefix
+                            tempstr(2) = Player(index).RandEquip(EquipmentType.Weapon).Suffix
+                            tempdata(1) = Player(index).RandEquip(EquipmentType.Weapon).Damage
+                            tempdata(2) = Player(index).RandEquip(EquipmentType.Weapon).Speed
+                            tempdata(3) = Player(index).RandEquip(EquipmentType.Weapon).Rarity
+                            For i = 0 To StatType.Count - 1
+                                tempdata(i + 3) = Player(index).RandEquip(EquipmentType.Weapon).Stat(i)
+                            Next
+                        End If
 
-                            ' Transfer the Inventory data to the Equipment data
-                            Player(index).RandEquip(EquipmentType.Shield).Prefix = Player(index).RandInv(InvNum).Prefix
-                            Player(index).RandEquip(EquipmentType.Shield).Suffix = Player(index).RandInv(InvNum).Suffix
-                            Player(index).RandEquip(EquipmentType.Shield).Damage = Player(index).RandInv(InvNum).Damage
-                            Player(index).RandEquip(EquipmentType.Shield).Speed = Player(index).RandInv(InvNum).Speed
-                            Player(index).RandEquip(EquipmentType.Shield).Rarity = Player(index).RandInv(InvNum).Rarity
+                        SetPlayerEquipment(index, InvItemNum, EquipmentType.Weapon)
+
+                        ' Transfer the Inventory data to the Equipment data
+                        Player(index).RandEquip(EquipmentType.Weapon).Prefix = Player(index).RandInv(InvNum).Prefix
+                        Player(index).RandEquip(EquipmentType.Weapon).Suffix = Player(index).RandInv(InvNum).Suffix
+                        Player(index).RandEquip(EquipmentType.Weapon).Damage = Player(index).RandInv(InvNum).Damage
+                        Player(index).RandEquip(EquipmentType.Weapon).Speed = Player(index).RandInv(InvNum).Speed
+                        Player(index).RandEquip(EquipmentType.Weapon).Rarity = Player(index).RandInv(InvNum).Rarity
+
+                        For i = 0 To StatType.Count - 1
+                            Player(index).RandEquip(EquipmentType.Weapon).Stat(i) = Player(index).RandInv(InvNum).Stat(i)
+                        Next
+
+                        If Item(InvItemNum).Randomize <> 0 Then
+                            PlayerMsg(index, "You equip " & tempstr(1) & " " & CheckGrammar(Item(InvItemNum).Name) & " " & tempstr(2), ColorType.BrightGreen)
+                        Else
+                            PlayerMsg(index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
+                        End If
+
+                        SetPlayerInvItemNum(index, InvNum, 0)
+                        SetPlayerInvItemValue(index, InvNum, 0)
+                        ClearRandInv(index, InvNum)
+
+                        If tempitem > 0 Then ' give back the stored item
+                            m = FindOpenInvSlot(index, tempitem)
+                            SetPlayerInvItemNum(index, m, tempitem)
+                            SetPlayerInvItemValue(index, m, 0)
+
+                            Player(index).RandInv(m).Prefix = tempstr(1)
+                            Player(index).RandInv(m).Suffix = tempstr(2)
+
+                            Player(index).RandInv(m).Damage = tempdata(1)
+                            Player(index).RandInv(m).Speed = tempdata(2)
+                            Player(index).RandInv(m).Rarity = tempdata(3)
 
                             For i = 0 To StatType.Count - 1
-                                Player(index).RandEquip(EquipmentType.Shield).Stat(i) = Player(index).RandInv(InvNum).Stat(i)
+                                Player(index).RandInv(m).Stat(i) = tempdata(i + 3)
                             Next
 
-                            PlayerMsg(index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
-                            TakeInvItem(index, InvItemNum, 1)
-                            ClearRandInv(index, InvNum)
+                            tempitem = 0
+                        End If
 
-                            If tempitem > 0 Then ' give back the stored item
-                                m = FindOpenInvSlot(index, tempitem)
-                                SetPlayerInvItemNum(index, m, tempitem)
-                                SetPlayerInvItemValue(index, m, 0)
+                        SendWornEquipment(index)
+                        SendMapEquipment(index)
+                        SendInventory(index)
+                        SendInventoryUpdate(index, InvNum)
+                        SendStats(index)
 
-                                Player(index).RandInv(m).Prefix = tempstr(1)
-                                Player(index).RandInv(m).Suffix = tempstr(2)
+                        ' send vitals
+                        SendVitals(index)
 
-                                Player(index).RandInv(m).Damage = tempdata(1)
-                                Player(index).RandInv(m).Speed = tempdata(2)
-                                Player(index).RandInv(m).Rarity = tempdata(3)
+                        ' send vitals to party if in one
+                        If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
 
-                                For i = 0 To StatType.Count - 1
-                                    Player(index).RandInv(m).Stat(i) = tempdata(i + 3)
-                                Next
+                    Case EquipmentType.Armor
 
-                                tempitem = 0
-                            End If
+                        If GetPlayerEquipment(index, EquipmentType.Armor) > 0 Then
+                            tempitem = GetPlayerEquipment(index, EquipmentType.Armor)
+                            tempstr(1) = Player(index).RandEquip(EquipmentType.Armor).Prefix
+                            tempstr(2) = Player(index).RandEquip(EquipmentType.Armor).Suffix
+                            tempdata(1) = Player(index).RandEquip(EquipmentType.Armor).Damage
+                            tempdata(2) = Player(index).RandEquip(EquipmentType.Armor).Speed
+                            tempdata(3) = Player(index).RandEquip(EquipmentType.Armor).Rarity
+                            For i = 0 To StatType.Count - 1
+                                tempdata(i + 3) = Player(index).RandEquip(EquipmentType.Armor).Stat(i)
+                            Next
+                        End If
 
-                            SendWornEquipment(index)
-                            SendMapEquipment(index)
-                            SendInventory(index)
-                            SendStats(index)
+                        SetPlayerEquipment(index, InvItemNum, EquipmentType.Armor)
 
-                            ' send vitals
-                            SendVitals(index)
+                        ' Transfer the Inventory data to the Equipment data
+                        Player(index).RandEquip(EquipmentType.Armor).Prefix = Player(index).RandInv(InvNum).Prefix
+                        Player(index).RandEquip(EquipmentType.Armor).Suffix = Player(index).RandInv(InvNum).Suffix
+                        Player(index).RandEquip(EquipmentType.Armor).Damage = Player(index).RandInv(InvNum).Damage
+                        Player(index).RandEquip(EquipmentType.Armor).Speed = Player(index).RandInv(InvNum).Speed
+                        Player(index).RandEquip(EquipmentType.Armor).Rarity = Player(index).RandInv(InvNum).Rarity
 
-                            ' send vitals to party if in one
-                            If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
+                        For i = 0 To StatType.Count - 1
+                            Player(index).RandEquip(EquipmentType.Armor).Stat(i) = Player(index).RandInv(InvNum).Stat(i)
+                        Next
 
-                        Case EquipmentType.Shoes
-                            If GetPlayerEquipment(index, EquipmentType.Shoes) > 0 Then
-                                tempitem = GetPlayerEquipment(index, EquipmentType.Shoes)
-                                tempstr(1) = Player(index).RandEquip(EquipmentType.Shoes).Prefix
-                                tempstr(2) = Player(index).RandEquip(EquipmentType.Shoes).Suffix
-                                tempdata(1) = Player(index).RandEquip(EquipmentType.Shoes).Damage
-                                tempdata(2) = Player(index).RandEquip(EquipmentType.Shoes).Speed
-                                tempdata(3) = Player(index).RandEquip(EquipmentType.Shoes).Rarity
-                                For i = 0 To StatType.Count - 1
-                                    tempdata(i + 3) = Player(index).RandEquip(EquipmentType.Shoes).Stat(i)
-                                Next i
-                            End If
+                        PlayerMsg(index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
+                        TakeInvItem(index, InvItemNum, 0)
+                        ClearRandInv(index, InvNum)
 
-                            SetPlayerEquipment(index, InvItemNum, EquipmentType.Shoes)
+                        If tempitem > 0 Then ' Return their old equipment to their inventory.
+                            m = FindOpenInvSlot(index, tempitem)
+                            SetPlayerInvItemNum(index, m, tempitem)
+                            SetPlayerInvItemValue(index, m, 0)
 
-                            ' Transfer the Inventory data to the Equipment data
-                            Player(index).RandEquip(EquipmentType.Shoes).Prefix = Player(index).RandInv(InvNum).Prefix
-                            Player(index).RandEquip(EquipmentType.Shoes).Suffix = Player(index).RandInv(InvNum).Suffix
-                            Player(index).RandEquip(EquipmentType.Shoes).Damage = Player(index).RandInv(InvNum).Damage
-                            Player(index).RandEquip(EquipmentType.Shoes).Speed = Player(index).RandInv(InvNum).Speed
-                            Player(index).RandEquip(EquipmentType.Shoes).Rarity = Player(index).RandInv(InvNum).Rarity
+                            Player(index).RandInv(m).Prefix = tempstr(1)
+                            Player(index).RandInv(m).Suffix = tempstr(2)
+
+                            Player(index).RandInv(m).Damage = tempdata(1)
+                            Player(index).RandInv(m).Speed = tempdata(2)
+                            Player(index).RandInv(m).Rarity = tempdata(3)
 
                             For i = 0 To StatType.Count - 1
-                                Player(index).RandEquip(EquipmentType.Shoes).Stat(i) = Player(index).RandInv(InvNum).Stat(i)
-                            Next
+                                Player(index).RandInv(m).Stat(i) = tempdata(i + 3)
+                            Next i
 
-                            PlayerMsg(index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
-                            TakeInvItem(index, InvItemNum, 1)
-                            ClearRandInv(index, InvNum)
+                            tempitem = 0
+                        End If
 
-                            If tempitem > 0 Then ' give back the stored item
-                                m = FindOpenInvSlot(index, tempitem)
-                                SetPlayerInvItemNum(index, m, tempitem)
-                                SetPlayerInvItemValue(index, m, 0)
+                        SendWornEquipment(index)
+                        SendMapEquipment(index)
 
-                                Player(index).RandInv(m).Prefix = tempstr(1)
-                                Player(index).RandInv(m).Suffix = tempstr(2)
+                        SendInventory(index)
+                        SendStats(index)
 
-                                Player(index).RandInv(m).Damage = tempdata(1)
-                                Player(index).RandInv(m).Speed = tempdata(2)
-                                Player(index).RandInv(m).Rarity = tempdata(3)
+                        ' send vitals
+                        SendVitals(index)
 
-                                For i = 0 To StatType.Count - 1
-                                    Player(index).RandInv(m).Stat(i) = tempdata(i + 3)
-                                Next
+                        ' send vitals to party if in one
+                        If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
 
-                                tempitem = 0
-                            End If
+                    Case EquipmentType.Helmet
 
-                            SendWornEquipment(index)
-                            SendMapEquipment(index)
-                            SendInventory(index)
-                            SendStats(index)
+                        If GetPlayerEquipment(index, EquipmentType.Helmet) > 0 Then
+                            tempitem = GetPlayerEquipment(index, EquipmentType.Helmet)
+                            tempstr(1) = Player(index).RandEquip(EquipmentType.Helmet).Prefix
+                            tempstr(2) = Player(index).RandEquip(EquipmentType.Helmet).Suffix
+                            tempdata(1) = Player(index).RandEquip(EquipmentType.Helmet).Damage
+                            tempdata(2) = Player(index).RandEquip(EquipmentType.Helmet).Speed
+                            tempdata(3) = Player(index).RandEquip(EquipmentType.Helmet).Rarity
+                            For i = 0 To StatType.Count - 1
+                                tempdata(i + 3) = Player(index).RandEquip(EquipmentType.Helmet).Stat(i)
+                            Next i
+                        End If
 
-                            ' send vitals
-                            SendVitals(index)
+                        SetPlayerEquipment(index, InvItemNum, EquipmentType.Helmet)
 
-                            ' send vitals to party if in one
-                            If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
+                        ' Transfer the Inventory data to the Equipment data
+                        Player(index).RandEquip(EquipmentType.Helmet).Prefix = Player(index).RandInv(InvNum).Prefix
+                        Player(index).RandEquip(EquipmentType.Helmet).Suffix = Player(index).RandInv(InvNum).Suffix
+                        Player(index).RandEquip(EquipmentType.Helmet).Damage = Player(index).RandInv(InvNum).Damage
+                        Player(index).RandEquip(EquipmentType.Helmet).Speed = Player(index).RandInv(InvNum).Speed
+                        Player(index).RandEquip(EquipmentType.Helmet).Rarity = Player(index).RandInv(InvNum).Rarity
 
-                        Case EquipmentType.Gloves
-                            If GetPlayerEquipment(index, EquipmentType.Gloves) > 0 Then
-                                tempitem = GetPlayerEquipment(index, EquipmentType.Gloves)
-                                tempstr(1) = Player(index).RandEquip(EquipmentType.Gloves).Prefix
-                                tempstr(2) = Player(index).RandEquip(EquipmentType.Gloves).Suffix
-                                tempdata(1) = Player(index).RandEquip(EquipmentType.Gloves).Damage
-                                tempdata(2) = Player(index).RandEquip(EquipmentType.Gloves).Speed
-                                tempdata(3) = Player(index).RandEquip(EquipmentType.Gloves).Rarity
-                                For i = 0 To StatType.Count - 1
-                                    tempdata(i + 3) = Player(index).RandEquip(EquipmentType.Gloves).Stat(i)
-                                Next i
-                            End If
+                        For i = 0 To StatType.Count - 1
+                            Player(index).RandEquip(EquipmentType.Helmet).Stat(i) = Player(index).RandInv(InvNum).Stat(i)
+                        Next
 
-                            SetPlayerEquipment(index, InvItemNum, EquipmentType.Gloves)
+                        PlayerMsg(index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
+                        TakeInvItem(index, InvItemNum, 1)
+                        ClearRandInv(index, InvNum)
 
-                            ' Transfer the Inventory data to the Equipment data
-                            Player(index).RandEquip(EquipmentType.Gloves).Prefix = Player(index).RandInv(InvNum).Prefix
-                            Player(index).RandEquip(EquipmentType.Gloves).Suffix = Player(index).RandInv(InvNum).Suffix
-                            Player(index).RandEquip(EquipmentType.Gloves).Damage = Player(index).RandInv(InvNum).Damage
-                            Player(index).RandEquip(EquipmentType.Gloves).Speed = Player(index).RandInv(InvNum).Speed
-                            Player(index).RandEquip(EquipmentType.Gloves).Rarity = Player(index).RandInv(InvNum).Rarity
+                        If tempitem > 0 Then ' give back the stored item
+                            m = FindOpenInvSlot(index, tempitem)
+                            SetPlayerInvItemNum(index, m, tempitem)
+                            SetPlayerInvItemValue(index, m, 0)
+
+                            Player(index).RandInv(m).Prefix = tempstr(1)
+                            Player(index).RandInv(m).Suffix = tempstr(2)
+
+                            Player(index).RandInv(m).Damage = tempdata(1)
+                            Player(index).RandInv(m).Speed = tempdata(2)
+                            Player(index).RandInv(m).Rarity = tempdata(3)
 
                             For i = 0 To StatType.Count - 1
-                                Player(index).RandEquip(EquipmentType.Gloves).Stat(i) = Player(index).RandInv(InvNum).Stat(i)
+                                Player(index).RandInv(m).Stat(i) = tempdata(i + 3)
                             Next
 
-                            PlayerMsg(index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
+                            tempitem = 0
+                        End If
+
+                        SendWornEquipment(index)
+                        SendMapEquipment(index)
+                        SendInventory(index)
+                        SendStats(index)
+
+                        ' send vitals
+                        SendVitals(index)
+
+                        ' send vitals to party if in one
+                        If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
+
+                    Case EquipmentType.Shield
+                        If Item(GetPlayerEquipment(index, EquipmentType.Weapon)).TwoHanded > 0 Then
+                            PlayerMsg(index, "Please unequip your 2handed weapon first.", ColorType.BrightRed)
+                            Exit Sub
+                        End If
+
+                        If GetPlayerEquipment(index, EquipmentType.Shield) > 0 Then
+                            tempitem = GetPlayerEquipment(index, EquipmentType.Shield)
+                            tempstr(1) = Player(index).RandEquip(EquipmentType.Shield).Prefix
+                            tempstr(2) = Player(index).RandEquip(EquipmentType.Shield).Suffix
+                            tempdata(1) = Player(index).RandEquip(EquipmentType.Shield).Damage
+                            tempdata(2) = Player(index).RandEquip(EquipmentType.Shield).Speed
+                            tempdata(3) = Player(index).RandEquip(EquipmentType.Shield).Rarity
+                            For i = 0 To StatType.Count - 1
+                                tempdata(i + 3) = Player(index).RandEquip(EquipmentType.Shield).Stat(i)
+                            Next i
+                        End If
+
+                        SetPlayerEquipment(index, InvItemNum, EquipmentType.Shield)
+
+                        ' Transfer the Inventory data to the Equipment data
+                        Player(index).RandEquip(EquipmentType.Shield).Prefix = Player(index).RandInv(InvNum).Prefix
+                        Player(index).RandEquip(EquipmentType.Shield).Suffix = Player(index).RandInv(InvNum).Suffix
+                        Player(index).RandEquip(EquipmentType.Shield).Damage = Player(index).RandInv(InvNum).Damage
+                        Player(index).RandEquip(EquipmentType.Shield).Speed = Player(index).RandInv(InvNum).Speed
+                        Player(index).RandEquip(EquipmentType.Shield).Rarity = Player(index).RandInv(InvNum).Rarity
+
+                        For i = 0 To StatType.Count - 1
+                            Player(index).RandEquip(EquipmentType.Shield).Stat(i) = Player(index).RandInv(InvNum).Stat(i)
+                        Next
+
+                        PlayerMsg(index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
+                        TakeInvItem(index, InvItemNum, 1)
+                        ClearRandInv(index, InvNum)
+
+                        If tempitem > 0 Then ' give back the stored item
+                            m = FindOpenInvSlot(index, tempitem)
+                            SetPlayerInvItemNum(index, m, tempitem)
+                            SetPlayerInvItemValue(index, m, 0)
+
+                            Player(index).RandInv(m).Prefix = tempstr(1)
+                            Player(index).RandInv(m).Suffix = tempstr(2)
+
+                            Player(index).RandInv(m).Damage = tempdata(1)
+                            Player(index).RandInv(m).Speed = tempdata(2)
+                            Player(index).RandInv(m).Rarity = tempdata(3)
+
+                            For i = 0 To StatType.Count - 1
+                                Player(index).RandInv(m).Stat(i) = tempdata(i + 3)
+                            Next
+
+                            tempitem = 0
+                        End If
+
+                        SendWornEquipment(index)
+                        SendMapEquipment(index)
+                        SendInventory(index)
+                        SendStats(index)
+
+                        ' send vitals
+                        SendVitals(index)
+
+                        ' send vitals to party if in one
+                        If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
+
+                    Case EquipmentType.Shoes
+                        If GetPlayerEquipment(index, EquipmentType.Shoes) > 0 Then
+                            tempitem = GetPlayerEquipment(index, EquipmentType.Shoes)
+                            tempstr(1) = Player(index).RandEquip(EquipmentType.Shoes).Prefix
+                            tempstr(2) = Player(index).RandEquip(EquipmentType.Shoes).Suffix
+                            tempdata(1) = Player(index).RandEquip(EquipmentType.Shoes).Damage
+                            tempdata(2) = Player(index).RandEquip(EquipmentType.Shoes).Speed
+                            tempdata(3) = Player(index).RandEquip(EquipmentType.Shoes).Rarity
+                            For i = 0 To StatType.Count - 1
+                                tempdata(i + 3) = Player(index).RandEquip(EquipmentType.Shoes).Stat(i)
+                            Next i
+                        End If
+
+                        SetPlayerEquipment(index, InvItemNum, EquipmentType.Shoes)
+
+                        ' Transfer the Inventory data to the Equipment data
+                        Player(index).RandEquip(EquipmentType.Shoes).Prefix = Player(index).RandInv(InvNum).Prefix
+                        Player(index).RandEquip(EquipmentType.Shoes).Suffix = Player(index).RandInv(InvNum).Suffix
+                        Player(index).RandEquip(EquipmentType.Shoes).Damage = Player(index).RandInv(InvNum).Damage
+                        Player(index).RandEquip(EquipmentType.Shoes).Speed = Player(index).RandInv(InvNum).Speed
+                        Player(index).RandEquip(EquipmentType.Shoes).Rarity = Player(index).RandInv(InvNum).Rarity
+
+                        For i = 0 To StatType.Count - 1
+                            Player(index).RandEquip(EquipmentType.Shoes).Stat(i) = Player(index).RandInv(InvNum).Stat(i)
+                        Next
+
+                        PlayerMsg(index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
+                        TakeInvItem(index, InvItemNum, 1)
+                        ClearRandInv(index, InvNum)
+
+                        If tempitem > 0 Then ' give back the stored item
+                            m = FindOpenInvSlot(index, tempitem)
+                            SetPlayerInvItemNum(index, m, tempitem)
+                            SetPlayerInvItemValue(index, m, 0)
+
+                            Player(index).RandInv(m).Prefix = tempstr(1)
+                            Player(index).RandInv(m).Suffix = tempstr(2)
+
+                            Player(index).RandInv(m).Damage = tempdata(1)
+                            Player(index).RandInv(m).Speed = tempdata(2)
+                            Player(index).RandInv(m).Rarity = tempdata(3)
+
+                            For i = 0 To StatType.Count - 1
+                                Player(index).RandInv(m).Stat(i) = tempdata(i + 3)
+                            Next
+
+                            tempitem = 0
+                        End If
+
+                        SendWornEquipment(index)
+                        SendMapEquipment(index)
+                        SendInventory(index)
+                        SendStats(index)
+
+                        ' send vitals
+                        SendVitals(index)
+
+                        ' send vitals to party if in one
+                        If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
+
+                    Case EquipmentType.Gloves
+                        If GetPlayerEquipment(index, EquipmentType.Gloves) > 0 Then
+                            tempitem = GetPlayerEquipment(index, EquipmentType.Gloves)
+                            tempstr(1) = Player(index).RandEquip(EquipmentType.Gloves).Prefix
+                            tempstr(2) = Player(index).RandEquip(EquipmentType.Gloves).Suffix
+                            tempdata(1) = Player(index).RandEquip(EquipmentType.Gloves).Damage
+                            tempdata(2) = Player(index).RandEquip(EquipmentType.Gloves).Speed
+                            tempdata(3) = Player(index).RandEquip(EquipmentType.Gloves).Rarity
+                            For i = 0 To StatType.Count - 1
+                                tempdata(i + 3) = Player(index).RandEquip(EquipmentType.Gloves).Stat(i)
+                            Next i
+                        End If
+
+                        SetPlayerEquipment(index, InvItemNum, EquipmentType.Gloves)
+
+                        ' Transfer the Inventory data to the Equipment data
+                        Player(index).RandEquip(EquipmentType.Gloves).Prefix = Player(index).RandInv(InvNum).Prefix
+                        Player(index).RandEquip(EquipmentType.Gloves).Suffix = Player(index).RandInv(InvNum).Suffix
+                        Player(index).RandEquip(EquipmentType.Gloves).Damage = Player(index).RandInv(InvNum).Damage
+                        Player(index).RandEquip(EquipmentType.Gloves).Speed = Player(index).RandInv(InvNum).Speed
+                        Player(index).RandEquip(EquipmentType.Gloves).Rarity = Player(index).RandInv(InvNum).Rarity
+
+                        For i = 0 To StatType.Count - 1
+                            Player(index).RandEquip(EquipmentType.Gloves).Stat(i) = Player(index).RandInv(InvNum).Stat(i)
+                        Next
+
+                        PlayerMsg(index, "You equip " & CheckGrammar(Item(InvItemNum).Name), ColorType.BrightGreen)
+                        TakeInvItem(index, InvItemNum, 1)
+                        ClearRandInv(index, InvNum)
+
+                        If tempitem > 0 Then ' give back the stored item
+                            m = FindOpenInvSlot(index, tempitem)
+                            SetPlayerInvItemNum(index, m, tempitem)
+                            SetPlayerInvItemValue(index, m, 0)
+
+                            Player(index).RandInv(m).Prefix = tempstr(1)
+                            Player(index).RandInv(m).Suffix = tempstr(2)
+
+                            Player(index).RandInv(m).Damage = tempdata(1)
+                            Player(index).RandInv(m).Speed = tempdata(2)
+                            Player(index).RandInv(m).Rarity = tempdata(3)
+
+                            For i = 0 To StatType.Count - 1
+                                Player(index).RandInv(m).Stat(i) = tempdata(i + 3)
+                            Next
+
+                            tempitem = 0
+                        End If
+
+                        SendWornEquipment(index)
+                        SendMapEquipment(index)
+                        SendInventory(index)
+                        SendStats(index)
+
+                        ' send vitals
+                        SendVitals(index)
+
+                        ' send vitals to party if in one
+                        If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
+                End Select
+
+            Case ItemType.Consumable
+                If CanPlayerUseItem(index, InvItemNum) = False Then Exit Sub
+
+                Select Case Item(InvItemNum).SubType
+                    Case ConsumableType.Hp
+                        SendActionMsg(GetPlayerMap(index), "+" & Item(InvItemNum).Data1, ColorType.BrightGreen, ActionMsgType.Scroll, GetPlayerX(index) * 32, GetPlayerY(index) * 32)
+                        SendAnimation(GetPlayerMap(index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, index)
+                        SetPlayerVital(index, VitalType.HP, GetPlayerVital(index, VitalType.HP) + Item(InvItemNum).Data1)
+                        If Item(InvItemNum).Stackable = 1 Then
                             TakeInvItem(index, InvItemNum, 1)
-                            ClearRandInv(index, InvNum)
-
-                            If tempitem > 0 Then ' give back the stored item
-                                m = FindOpenInvSlot(index, tempitem)
-                                SetPlayerInvItemNum(index, m, tempitem)
-                                SetPlayerInvItemValue(index, m, 0)
-
-                                Player(index).RandInv(m).Prefix = tempstr(1)
-                                Player(index).RandInv(m).Suffix = tempstr(2)
-
-                                Player(index).RandInv(m).Damage = tempdata(1)
-                                Player(index).RandInv(m).Speed = tempdata(2)
-                                Player(index).RandInv(m).Rarity = tempdata(3)
-
-                                For i = 0 To StatType.Count - 1
-                                    Player(index).RandInv(m).Stat(i) = tempdata(i + 3)
-                                Next
-
-                                tempitem = 0
-                            End If
-
-                            SendWornEquipment(index)
-                            SendMapEquipment(index)
-                            SendInventory(index)
-                            SendStats(index)
-
-                            ' send vitals
-                            SendVitals(index)
-
-                            ' send vitals to party if in one
-                            If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
-                    End Select
-
-                Case ItemType.Consumable
-
-                    For i = 0 To StatType.Count - 1
-                        If GetPlayerStat(index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(index, "You do not meet the stat requirements to use this item.", ColorType.BrightRed)
-                            Exit Sub
+                        Else
+                            TakeInvItem(index, InvItemNum, 0)
                         End If
-                    Next
+                        SendVital(index, VitalType.HP)
 
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
+                        ' send vitals to party if in one
+                        If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
 
-                    If i > GetPlayerLevel(index) Then
-                        PlayerMsg(index, "You do not meet the level requirements to use this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
+                    Case ConsumableType.Mp
+                        SendActionMsg(GetPlayerMap(index), "+" & Item(InvItemNum).Data1, ColorType.BrightBlue, ActionMsgType.Scroll, GetPlayerX(index) * 32, GetPlayerY(index) * 32)
+                        SendAnimation(GetPlayerMap(index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, index)
+                        SetPlayerVital(index, VitalType.MP, GetPlayerVital(index, VitalType.MP) + Item(InvItemNum).Data1)
+                        If Item(InvItemNum).Stackable = 1 Then
+                            TakeInvItem(index, InvItemNum, 1)
+                        Else
+                            TakeInvItem(index, InvItemNum, 0)
+                        End If
+                        SendVital(index, VitalType.MP)
+
+                        ' send vitals to party if in one
+                        If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
+
+                    Case ConsumableType.Mp
+                        SendAnimation(GetPlayerMap(index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, index)
+                        SetPlayerVital(index, VitalType.SP, GetPlayerVital(index, VitalType.SP) + Item(InvItemNum).Data1)
+                        If Item(InvItemNum).Stackable = 1 Then
+                            TakeInvItem(index, InvItemNum, 1)
+                        Else
+                            TakeInvItem(index, InvItemNum, 0)
+                        End If
+                        SendVital(index, VitalType.SP)
+
+                        ' send vitals to party if in one
+                        If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
+
+                    Case ConsumableType.Exp
+
+                End Select
+
+            Case ItemType.CommonEvent
+                If CanPlayerUseItem(index, InvItemNum) = False Then Exit Sub
+
+                ' Not yet implemented
+
+            Case ItemType.Skill
+                If CanPlayerUseItem(index, InvItemNum) = False Then Exit Sub
+
+                ' Get the skill num
+                n = Item(InvItemNum).Data1
+
+                If n > 0 Then
 
                     ' Make sure they are the right class
-                    If Not Item(InvItemNum).JobReq = GetPlayerJob(index) AndAlso Not Item(InvItemNum).JobReq = 0 Then
-                        PlayerMsg(index, "You do not meet the class requirements to use this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
+                    If Skill(n).JobReq = GetPlayerJob(index) OrElse Skill(n).JobReq = 0 Then
+                        ' Make sure they are the right level
+                        i = Skill(n).LevelReq
 
-                    ' access requirement
-                    If Not GetPlayerAccess(index) >= Item(InvItemNum).AccessReq Then
-                        PlayerMsg(index, "You do not meet the access requirement to use this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
+                        If i <= GetPlayerLevel(index) Then
+                            i = FindOpenSkillSlot(index)
 
-                    'if that went fine, we progress the subtype
+                            ' Make sure they have an open skill slot
+                            If i > 0 Then
 
-                    Select Case Item(InvItemNum).SubType
-                        Case ConsumableType.Hp
-                            SendActionMsg(GetPlayerMap(index), "+" & Item(InvItemNum).Data1, ColorType.BrightGreen, ActionMsgType.Scroll, GetPlayerX(index) * 32, GetPlayerY(index) * 32)
-                            SendAnimation(GetPlayerMap(index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, index)
-                            SetPlayerVital(index, VitalType.HP, GetPlayerVital(index, VitalType.HP) + Item(InvItemNum).Data1)
-                            If Item(InvItemNum).Stackable = 1 Then
-                                TakeInvItem(index, InvItemNum, 1)
-                            Else
-                                TakeInvItem(index, InvItemNum, 0)
-                            End If
-                            SendVital(index, VitalType.HP)
-
-                            ' send vitals to party if in one
-                            If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
-
-                        Case ConsumableType.Mp
-                            SendActionMsg(GetPlayerMap(index), "+" & Item(InvItemNum).Data1, ColorType.BrightBlue, ActionMsgType.Scroll, GetPlayerX(index) * 32, GetPlayerY(index) * 32)
-                            SendAnimation(GetPlayerMap(index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, index)
-                            SetPlayerVital(index, VitalType.MP, GetPlayerVital(index, VitalType.MP) + Item(InvItemNum).Data1)
-                            If Item(InvItemNum).Stackable = 1 Then
-                                TakeInvItem(index, InvItemNum, 1)
-                            Else
-                                TakeInvItem(index, InvItemNum, 0)
-                            End If
-                            SendVital(index, VitalType.MP)
-
-                            ' send vitals to party if in one
-                            If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
-
-                        Case ConsumableType.Mp
-                            SendAnimation(GetPlayerMap(index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, index)
-                            SetPlayerVital(index, VitalType.SP, GetPlayerVital(index, VitalType.SP) + Item(InvItemNum).Data1)
-                            If Item(InvItemNum).Stackable = 1 Then
-                                TakeInvItem(index, InvItemNum, 1)
-                            Else
-                                TakeInvItem(index, InvItemNum, 0)
-                            End If
-                            SendVital(index, VitalType.SP)
-
-                            ' send vitals to party if in one
-                            If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
-
-                        Case ConsumableType.Exp
-
-                    End Select
-
-                Case ItemType.Key
-                    InvItemNum = GetPlayerInvItemNum(index, InvNum)
-
-                    For i = 0 To StatType.Count - 1
-                        If GetPlayerStat(index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(index, "You do not meet the stat requirements to use this item.", ColorType.BrightRed)
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right level
-                    i = Item(InvItemNum).LevelReq
-
-                    If i > GetPlayerLevel(index) Then
-                        PlayerMsg(index, "You do not meet the level requirements to use this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).JobReq = GetPlayerJob(index) AndAlso Not Item(InvItemNum).JobReq = 0 Then
-                        PlayerMsg(index, "You do not meet the class requirements to use this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
-
-                    Select Case GetPlayerDir(index)
-                        Case DirectionType.Up
-
-                            If GetPlayerY(index) > 0 Then
-                                x = GetPlayerX(index)
-                                y = GetPlayerY(index) - 1
-                            Else
-                                Exit Sub
-                            End If
-
-                        Case DirectionType.Down
-
-                            If GetPlayerY(index) < Map(GetPlayerMap(index)).MaxY Then
-                                x = GetPlayerX(index)
-                                y = GetPlayerY(index) + 1
-                            Else
-                                Exit Sub
-                            End If
-
-                        Case DirectionType.Left
-
-                            If GetPlayerX(index) > 0 Then
-                                x = GetPlayerX(index) - 1
-                                y = GetPlayerY(index)
-                            Else
-                                Exit Sub
-                            End If
-
-                        Case DirectionType.Right
-
-                            If GetPlayerX(index) < Map(GetPlayerMap(index)).MaxX Then
-                                x = GetPlayerX(index) + 1
-                                y = GetPlayerY(index)
-                            Else
-                                Exit Sub
-                            End If
-
-                    End Select
-
-                Case ItemType.Skill
-                    InvItemNum = GetPlayerInvItemNum(index, InvNum)
-
-                    For i = 0 To StatType.Count - 1
-                        If GetPlayerStat(index, i) < Item(InvItemNum).Stat_Req(i) Then
-                            PlayerMsg(index, "You do not meet the stat requirements to use this item.", ColorType.BrightRed)
-                            Exit Sub
-                        End If
-                    Next
-
-                    ' Make sure they are the right class
-                    If Not Item(InvItemNum).JobReq = GetPlayerJob(index) AndAlso Not Item(InvItemNum).JobReq = 0 Then
-                        PlayerMsg(index, "You do not meet the class requirements to use this item.", ColorType.BrightRed)
-                        Exit Sub
-                    End If
-
-                    ' Get the skill num
-                    n = Item(InvItemNum).Data1
-
-                    If n > 0 Then
-
-                        ' Make sure they are the right class
-                        If Skill(n).JobReq = GetPlayerJob(index) OrElse Skill(n).JobReq = 0 Then
-                            ' Make sure they are the right level
-                            i = Skill(n).LevelReq
-
-                            If i <= GetPlayerLevel(index) Then
-                                i = FindOpenSkillSlot(index)
-
-                                ' Make sure they have an open skill slot
-                                If i > 0 Then
-
-                                    ' Make sure they dont already have the skill
-                                    If Not HasSkill(index, n) Then
-                                        SetPlayerSkill(index, i, n)
-                                        SendAnimation(GetPlayerMap(index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, index)
-                                        TakeInvItem(index, InvItemNum, 0)
-                                        PlayerMsg(index, "You study the skill carefully.", ColorType.Yellow)
-                                        PlayerMsg(index, "You have learned a new skill!", ColorType.BrightGreen)
-                                    Else
-                                        PlayerMsg(index, "You have already learned this skill!", ColorType.BrightRed)
-                                    End If
+                                ' Make sure they dont already have the skill
+                                If Not HasSkill(index, n) Then
+                                    SetPlayerSkill(index, i, n)
+                                    SendAnimation(GetPlayerMap(index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, index)
+                                    TakeInvItem(index, InvItemNum, 0)
+                                    PlayerMsg(index, "You study the skill carefully.", ColorType.Yellow)
+                                    PlayerMsg(index, "You have learned a new skill!", ColorType.BrightGreen)
                                 Else
-                                    PlayerMsg(index, "You have learned all that you can learn!", ColorType.BrightRed)
+                                    PlayerMsg(index, "You have already learned this skill!", ColorType.BrightRed)
                                 End If
                             Else
-                                PlayerMsg(index, "You must be level " & i & " to learn this skill.", ColorType.Yellow)
+                                PlayerMsg(index, "You have learned all that you can learn!", ColorType.BrightRed)
                             End If
                         Else
-                            PlayerMsg(index, "This skill can only be learned by " & CheckGrammar(GetJobName(Skill(n).JobReq)) & ".", ColorType.Yellow)
+                            PlayerMsg(index, "You must be level " & i & " to learn this skill.", ColorType.Yellow)
                         End If
                     Else
-                        PlayerMsg(index, "This scroll is not connected to a skill, please inform an admin!", ColorType.BrightRed)
+                        PlayerMsg(index, "This skill can only be learned by " & CheckGrammar(GetJobName(Skill(n).JobReq)) & ".", ColorType.Yellow)
                     End If
-                Case ItemType.Furniture
-                    PlayerMsg(index, "To place furniture, simply click on it in your inventory, then click in your house where you want it.", ColorType.Yellow)
+                Else
+                    PlayerMsg(index, "This scroll is not connected to a skill, please inform an admin!", ColorType.BrightRed)
+                End If
+            Case ItemType.Furniture
+                PlayerMsg(index, "To place furniture, simply click on it in your inventory, then click in your house where you want it.", ColorType.Yellow)
 
-                Case ItemType.Recipe
+            Case ItemType.Recipe
+                If CanPlayerUseItem(index, InvItemNum) = False Then Exit Sub
 
-                    PlayerMsg(index, "Lets learn this recipe :)", ColorType.BrightGreen)
-                    ' Get the recipe num
-                    n = Item(InvItemNum).Data1
-                    LearnRecipe(index, n, InvNum)
-                Case ItemType.Pet
-                    If Item(InvItemNum).Stackable = 1 Then
-                        TakeInvItem(index, InvItemNum, 1)
-                    Else
-                        TakeInvItem(index, InvItemNum, 0)
-                    End If
-                    n = Item(InvItemNum).Data1
-                    AdoptPet(index, n)
-            End Select
+                ' Get the recipe num
+                n = Item(InvItemNum).Data1
+                LearnRecipe(index, n, InvNum)
+            Case ItemType.Pet
+                If CanPlayerUseItem(index, InvItemNum) = False Then Exit Sub
 
-        End If
+                If Item(InvItemNum).Stackable = 1 Then
+                    TakeInvItem(index, InvItemNum, 1)
+                Else
+                    TakeInvItem(index, InvItemNum, 0)
+                End If
+                n = Item(InvItemNum).Data1
+                AdoptPet(index, n)
+        End Select
     End Sub
 
     Sub PlayerSwitchInvSlots(index As Integer, OldSlot As Integer, NewSlot As Integer)

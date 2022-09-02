@@ -41,4 +41,20 @@
     Public Function GetPlayerGatherSkillMaxExp(index As Integer, SkillSlot As Integer) As Integer
         GetPlayerGatherSkillMaxExp = Player(index).GatherSkills(SkillSlot).SkillNextLvlExp
     End Function
+
+    Public Function GetPlayerInvItemNum(index As Integer, InvSlot As Integer) As Integer
+        GetPlayerInvItemNum = Player(index).Inv(InvSlot).Num
+    End Function
+
+    Public Function GetPlayerInvItemValue(index As Integer, InvSlot As Integer) As Integer
+        GetPlayerInvItemValue = Player(index).Inv(InvSlot).Value
+    End Function
+
+    Public Sub SetPlayerInvItemValue(index As Integer, InvSlot As Integer, ItemValue As Integer)
+        Player(index).Inv(InvSlot).Value = ItemValue
+    End Sub
+
+    Public Sub SetPlayerInvItemNum(index As Integer, invSlot As Integer, itemNum As Integer)
+        Player(index).Inv(invSlot).Num = itemNum
+    End Sub
 End Module

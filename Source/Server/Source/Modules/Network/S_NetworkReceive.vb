@@ -580,15 +580,15 @@ Module S_NetworkReceive
     End Sub
 
     Sub Packet_UseItem(index As Integer, ByRef data() As Byte)
-        Dim invnum As Integer
+        Dim invNum As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CUseItem")
 
-        invnum = buffer.ReadInt32
+        invNum = buffer.ReadInt32
         buffer.Dispose()
 
-        UseItem(index, invnum)
+        UseItem(index, invNum)
     End Sub
 
     Sub Packet_Attack(index As Integer, ByRef data() As Byte)

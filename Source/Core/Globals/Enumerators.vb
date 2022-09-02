@@ -74,7 +74,7 @@
         None
         Equipment
         Consumable
-        Key
+        CommonEvent
         Currency
         Skill
         Furniture

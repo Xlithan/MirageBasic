@@ -946,9 +946,9 @@ Continue1:
                         ItemDescType = Language.ItemDescription.Potion
                 End Select
 
-            Case ItemType.Key
+            Case ItemType.CommonEvent
                 ItemDescInfo = Language.ItemDescription.NotAvailable
-                ItemDescType = Language.ItemDescription.Key
+                ItemDescType = Language.ItemDescription.CommonEvent
             Case ItemType.Currency
                 ItemDescInfo = Language.ItemDescription.NotAvailable
                 ItemDescType = Language.ItemDescription.Currency

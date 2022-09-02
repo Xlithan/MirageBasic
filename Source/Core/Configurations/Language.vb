@@ -148,7 +148,7 @@ Public Class LanguageDef
         Public Seconds As String = "Seconds"
 
         Public Currency As String = "Currency"
-        Public Key As String = "Key"
+        Public CommonEvent As String = "Event"
         Public Furniture As String = "Furniture"
         Public Potion As String = "Potion"
         Public Skill As String = "Skill"

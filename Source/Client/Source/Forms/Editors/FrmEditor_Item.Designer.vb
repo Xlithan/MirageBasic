@@ -413,7 +413,7 @@ Partial Class frmEditor_Item
         '
         Me.cmbType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbType.FormattingEnabled = true
-        Me.cmbType.Items.AddRange(New Object() {"None", "Equipment", "Consumables", "Key", "Currency", "Skill", "Furniture", "Recipe", "Pet"})
+        Me.cmbType.Items.AddRange(New Object() {"None", "Equipment", "Consumables", "Event", "Currency", "Skill", "Furniture", "Recipe", "Pet"})
         Me.cmbType.Location = New System.Drawing.Point(85, 46)
         Me.cmbType.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbType.Name = "cmbType"
