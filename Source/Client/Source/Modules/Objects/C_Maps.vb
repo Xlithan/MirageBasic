@@ -177,6 +177,7 @@ Module C_Maps
         MapNpc(index).Steps = 0
         MapNpc(index).Target = 0
         MapNpc(index).TargetType = 0
+        ReDim MapNpc(index).Vital(VitalType.Count - 1)
         MapNpc(index).Vital(VitalType.HP) = 0
         MapNpc(index).Vital(VitalType.MP) = 0
         MapNpc(index).Vital(VitalType.SP) = 0
