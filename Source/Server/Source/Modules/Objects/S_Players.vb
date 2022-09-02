@@ -851,204 +851,6 @@ Module S_Players
 
 #Region "Data"
 
-    Function GetPlayerLogin(index As Integer) As String
-        GetPlayerLogin = Trim$(Player(index).Login)
-    End Function
-
-    Function GetPlayerName(index As Integer) As String
-        GetPlayerName = ""
-        If index > MAX_PLAYERS Then Exit Function
-        GetPlayerName = Player(index).Name.Trim()
-    End Function
-
-    Sub SetPlayerAccess(index As Integer, Access As Integer)
-        Player(index).Access = Access
-    End Sub
-
-    Sub SetPlayerSprite(index As Integer, Sprite As Integer)
-        Player(index).Sprite = Sprite
-    End Sub
-
-    Function GetPlayerMaxVital(index As Integer, Vital As VitalType) As Integer
-
-        GetPlayerMaxVital = 0
-
-        If index > MAX_PLAYERS Then Exit Function
-
-        Select Case Vital
-            Case VitalType.HP
-                GetPlayerMaxVital = (Player(index).Level + (GetPlayerStat(index, StatType.Vitality) \ 2) + Job(Player(index).Job).Stat(StatType.Vitality)) * 2
-            Case VitalType.MP
-                GetPlayerMaxVital = (Player(index).Level + (GetPlayerStat(index, StatType.Intelligence) \ 2) + Job(Player(index).Job).Stat(StatType.Intelligence)) * 2
-            Case VitalType.SP
-                GetPlayerMaxVital = (Player(index).Level + (GetPlayerStat(index, StatType.Spirit) \ 2) + Job(Player(index).Job).Stat(StatType.Spirit)) * 2
-        End Select
-
-    End Function
-
-    Friend Function GetPlayerStat(index As Integer, Stat As StatType) As Integer
-        Dim x As Integer, i As Integer
-
-        GetPlayerStat = 0
-
-        If index > MAX_PLAYERS Then Exit Function
-
-        x = Player(index).Stat(Stat)
-
-        For i = 0 To EquipmentType.Count - 1
-            If Player(index).Equipment(i) > 0 Then
-                If Item(Player(index).Equipment(i)).Add_Stat(Stat) > 0 Then
-                    x += Item(Player(index).Equipment(i)).Add_Stat(Stat)
-                End If
-            End If
-        Next
-
-        GetPlayerStat = x
-    End Function
-
-    Function GetPlayerAccess(index As Integer) As Integer
-        GetPlayerAccess = 0
-        If index > MAX_PLAYERS Then Exit Function
-        GetPlayerAccess = Player(index).Access
-    End Function
-
-    Function GetPlayerMap(index As Integer) As Integer
-        GetPlayerMap = 0
-        If index > MAX_PLAYERS Then Exit Function
-        GetPlayerMap = Player(index).Map
-    End Function
-
-    Function GetPlayerX(index As Integer) As Integer
-        GetPlayerX = 0
-        If index > MAX_PLAYERS Then Exit Function
-        GetPlayerX = Player(index).X
-    End Function
-
-    Function GetPlayerY(index As Integer) As Integer
-        GetPlayerY = 0
-        If index > MAX_PLAYERS Then Exit Function
-        GetPlayerY = Player(index).Y
-    End Function
-
-    Function GetPlayerDir(index As Integer) As Integer
-        GetPlayerDir = 0
-        If index > MAX_PLAYERS Then Exit Function
-        GetPlayerDir = Player(index).Dir
-    End Function
-
-    Function GetPlayerSprite(index As Integer) As Integer
-        GetPlayerSprite = 0
-        If index > MAX_PLAYERS Then Exit Function
-        GetPlayerSprite = Player(index).Sprite
-    End Function
-
-    Function GetPlayerPK(index As Integer) As Integer
-        GetPlayerPK = 0
-        If index > MAX_PLAYERS Then Exit Function
-        GetPlayerPK = Player(index).Pk
-    End Function
-
-    Function GetPlayerEquipment(index As Integer, EquipmentSlot As EquipmentType) As Integer
-        GetPlayerEquipment = 0
-        If index > MAX_PLAYERS Then Exit Function
-        If EquipmentSlot = 0 Then Exit Function
-        GetPlayerEquipment = Player(index).Equipment(EquipmentSlot)
-    End Function
-
-    Sub SetPlayerEquipment(index As Integer, InvNum As Integer, EquipmentSlot As EquipmentType)
-        Player(index).Equipment(EquipmentSlot) = InvNum
-    End Sub
-
-    Sub SetPlayerDir(index As Integer, Dir As Integer)
-        Player(index).Dir = Dir
-    End Sub
-
-    Sub SetPlayerVital(index As Integer, Vital As VitalType, Value As Integer)
-        Player(index).Vital(Vital) = Value
-
-        If GetPlayerVital(index, Vital) > GetPlayerMaxVital(index, Vital) Then
-            Player(index).Vital(Vital) = GetPlayerMaxVital(index, Vital)
-        End If
-
-        If GetPlayerVital(index, Vital) < 0 Then
-            Player(index).Vital(Vital) = 0
-        End If
-
-    End Sub
-
-    Friend Function IsDirBlocked(ByRef Blockvar As Byte, ByRef Dir As Byte) As Boolean
-        Return Not (Not Blockvar AndAlso (2 ^ Dir))
-    End Function
-
-    Function GetPlayerVital(index As Integer, Vital As VitalType) As Integer
-        GetPlayerVital = 0
-        If index > MAX_PLAYERS Then Exit Function
-        GetPlayerVital = Player(index).Vital(Vital)
-    End Function
-
-    Function GetPlayerLevel(index As Integer) As Integer
-        GetPlayerLevel = 0
-        If index > MAX_PLAYERS Then Exit Function
-        GetPlayerLevel = Player(index).Level
-    End Function
-
-    Function GetPlayerPOINTS(index As Integer) As Integer
-        GetPlayerPOINTS = 0
-        If index > MAX_PLAYERS Then Exit Function
-        GetPlayerPOINTS = Player(index).Points
-    End Function
-
-    Function GetPlayerNextLevel(index As Integer) As Integer
-        GetPlayerNextLevel = (50 / 3) * ((GetPlayerLevel(index) + 1) ^ 3 - (6 * (GetPlayerLevel(index) + 1) ^ 2) + 17 * (GetPlayerLevel(index) + 1) - 12)
-    End Function
-
-    Function GetPlayerExp(index As Integer) As Integer
-        GetPlayerExp = Player(index).Exp
-    End Function
-
-    Sub SetPlayerMap(index As Integer, mapNum As Integer)
-        If mapNum > 0 AndAlso mapNum <= MAX_CACHED_MAPS Then
-            Player(index).Map = mapNum
-        End If
-    End Sub
-
-    Sub SetPlayerX(index As Integer, X As Integer)
-        Player(index).X = X
-    End Sub
-
-    Sub SetPlayerY(index As Integer, Y As Integer)
-        Player(index).Y = Y
-    End Sub
-
-    Sub SetPlayerExp(index As Integer, Exp As Integer)
-        Player(index).Exp = Exp
-    End Sub
-
-    Friend Function GetPlayerRawStat(index As Integer, Stat As StatType) As Integer
-        GetPlayerRawStat = 0
-        If index > MAX_PLAYERS Then Exit Function
-
-        GetPlayerRawStat = Player(index).Stat(Stat)
-    End Function
-
-    Friend Sub SetPlayerStat(index As Integer, Stat As StatType, Value As Integer)
-        Player(index).Stat(Stat) = Value
-    End Sub
-
-    Sub SetPlayerLevel(index As Integer, Level As Integer)
-
-        If Level > MAX_LEVEL Then Exit Sub
-        Player(index).Level = Level
-    End Sub
-
-    Sub SetPlayerPOINTS(index As Integer, Points As Integer)
-        If Player(index).Points + Points > 255 Then
-            Player(index).Points = 255
-        Else
-            Player(index).Points = Points
-        End If
-    End Sub
-
     Sub CheckPlayerLevelUp(index As Integer)
         Dim expRollover As Integer
         Dim level_count As Integer
@@ -1248,10 +1050,8 @@ Module S_Players
         Dim NewMapX As Byte, NewMapY As Byte
         Dim VitalType As Integer, Colour As Integer, amount As Integer
 
-        'Debug.Print("Server-PlayerMove")
-
         ' Check for subscript out of range
-        If IsPlaying(index) = False OrElse Dir < DirectionType.Up OrElse Dir > DirectionType.Right OrElse Movement < 1 OrElse Movement > 2 Then
+        If Dir < DirectionType.Up OrElse Dir > DirectionType.Right OrElse Movement < 1 OrElse Movement > 2 Then
             Exit Sub
         End If
 
@@ -1274,27 +1074,9 @@ Module S_Players
                                 Moved = True
 
                                 'check for event
-                                For i = 1 To TempPlayer(index).EventMap.CurrentEvents
-                                    If TempPlayer(index).EventMap.EventPages(i).X = GetPlayerX(index) AndAlso TempPlayer(index).EventMap.EventPages(i).Y = GetPlayerY(index) - 1 Then
-                                        If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).Trigger = 1 Then
-                                            'PlayerMsg(Index, "OnTouch event", ColorType.Red)
-                                            'Process this event, it is on-touch and everything checks out.
-                                            If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).CommandListCount > 0 Then
-
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).CurList = 1
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).CurSlot = 1
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).EventId = TempPlayer(index).EventMap.EventPages(i).EventId
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).PageId = TempPlayer(index).EventMap.EventPages(i).PageId
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).WaitingForResponse = 0
-                                                ReDim TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).ListLeftOff(Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).CommandListCount)
-
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).Active = 1
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).ActionTimer = GetTimeMs()
-                                            End If
-                                        End If
-                                    End If
+                                For i = 0 To TempPlayer(index).EventMap.CurrentEvents
+                                    TriggerEvent(index, i, 1, GetPlayerX(index), GetPlayerY(index))
                                 Next
-
                             End If
                         End If
                     End If
@@ -1323,25 +1105,8 @@ Module S_Players
                                 Moved = true
 
                                 'check for event
-                                For i = 1 To TempPlayer(index).EventMap.CurrentEvents
-                                    If TempPlayer(index).EventMap.EventPages(i).X = GetPlayerX(index) AndAlso TempPlayer(index).EventMap.EventPages(i).Y = GetPlayerY(index) + 1 Then
-                                        If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).Trigger = 1 Then
-                                            'PlayerMsg(Index, "OnTouch event", ColorType.Red)
-                                            'Process this event, it is on-touch and everything checks out.
-                                            If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).CommandListCount > 0 Then
-
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).CurList = 1
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).CurSlot = 1
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).EventId = TempPlayer(index).EventMap.EventPages(i).EventId
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).PageId = TempPlayer(index).EventMap.EventPages(i).PageId
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).WaitingForResponse = 0
-                                                ReDim TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).ListLeftOff(Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).CommandListCount)
-
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).Active = 1
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).ActionTimer = GetTimeMs()
-                                            End If
-                                        End If
-                                    End If
+                                For i = 0 To TempPlayer(index).EventMap.CurrentEvents
+                                    TriggerEvent(index, i, 1, GetPlayerX(index), GetPlayerY(index))
                                 Next
                             End If
                         End If
@@ -1370,25 +1135,8 @@ Module S_Players
                                 Moved = true
 
                                 'check for event
-                                For i = 1 To TempPlayer(index).EventMap.CurrentEvents
-                                    If TempPlayer(index).EventMap.EventPages(i).X = GetPlayerX(index) - 1 AndAlso TempPlayer(index).EventMap.EventPages(i).Y = GetPlayerY(index) Then
-                                        If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).Trigger = 1 Then
-                                            'PlayerMsg(Index, "OnTouch event", ColorType.Red)
-                                            'Process this event, it is on-touch and everything checks out.
-                                            If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).CommandListCount > 0 Then
-
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).CurList = 1
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).CurSlot = 1
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).EventId = TempPlayer(index).EventMap.EventPages(i).EventId
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).PageId = TempPlayer(index).EventMap.EventPages(i).PageId
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).WaitingForResponse = 0
-                                                ReDim TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).ListLeftOff(Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).CommandListCount)
-
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).Active = 1
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).ActionTimer = GetTimeMs()
-                                            End If
-                                        End If
-                                    End If
+                                For i = 0 To TempPlayer(index).EventMap.CurrentEvents
+                                    TriggerEvent(index, i, 1, GetPlayerX(index), GetPlayerY(index))
                                 Next
                             End If
                         End If
@@ -1418,31 +1166,13 @@ Module S_Players
                                 Moved = true
 
                                 'check for event
-                                For i = 1 To TempPlayer(index).EventMap.CurrentEvents
-                                    If TempPlayer(index).EventMap.EventPages(i).X = GetPlayerX(index) AndAlso TempPlayer(index).EventMap.EventPages(i).Y = GetPlayerY(index) Then
-                                        If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).Trigger = 1 Then
-                                            'PlayerMsg(Index, "OnTouch event", ColorType.Red)
-                                            'Process this event, it is on-touch and everything checks out.
-                                            If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).CommandListCount > 0 Then
-
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).CurList = 1
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).CurSlot = 1
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).EventId = TempPlayer(index).EventMap.EventPages(i).EventId
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).PageId = TempPlayer(index).EventMap.EventPages(i).PageId
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).WaitingForResponse = 0
-                                                ReDim TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).ListLeftOff(Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).CommandListCount)
-
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).Active = 1
-                                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).ActionTimer = GetTimeMs()
-                                            End If
-                                        End If
-                                    End If
+                                For i = 0 To TempPlayer(index).EventMap.CurrentEvents
+                                    TriggerEvent(index, i, 1, GetPlayerX(index), GetPlayerY(index))
                                 Next
                             End If
                         End If
                     End If
                 Else
-
                     ' Check to see if we can move them to the another map
                     If Map(GetPlayerMap(index)).Right > 0 Then
                         PlayerWarp(index, Map(GetPlayerMap(index)).Right, 0, GetPlayerY(index))
@@ -1584,26 +1314,28 @@ Module S_Players
 
         If Moved = True Then
             If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-                For i = 1 To TempPlayer(index).EventMap.CurrentEvents
-                    If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Globals = 1 Then
-                        If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).X = x AndAlso Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Y = y AndAlso Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).Trigger = 1 AndAlso TempPlayer(index).EventMap.EventPages(i).Visible = 1 Then begineventprocessing = True
-                    Else
-                        If TempPlayer(index).EventMap.EventPages(i).X = x AndAlso TempPlayer(index).EventMap.EventPages(i).Y = y AndAlso Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).Trigger = 1 AndAlso TempPlayer(index).EventMap.EventPages(i).Visible = 1 Then begineventprocessing = True
-                    End If
-                    begineventprocessing = False
-                    If begineventprocessing = True Then
-                        'Process this event, it is on-touch and everything checks out.
-                        If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).CommandListCount > 0 Then
-                            TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).Active = 1
-                            TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).ActionTimer = GetTimeMs()
-                            TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).CurList = 1
-                            TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).CurSlot = 1
-                            TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).EventId = TempPlayer(index).EventMap.EventPages(i).EventId
-                            TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).PageId = TempPlayer(index).EventMap.EventPages(i).PageId
-                            TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).WaitingForResponse = 0
-                            ReDim TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).ListLeftOff(Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).CommandListCount)
+                For i = 0 To TempPlayer(index).EventMap.CurrentEvents
+                    If TempPlayer(index).EventMap.EventPages(i).EventId > 0 Then
+                        If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Globals = 1 Then
+                            If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).X = x AndAlso Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Y = y AndAlso Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).Trigger = 1 AndAlso TempPlayer(index).EventMap.EventPages(i).Visible = 1 Then begineventprocessing = True
+                        Else
+                            If TempPlayer(index).EventMap.EventPages(i).X = x AndAlso TempPlayer(index).EventMap.EventPages(i).Y = y AndAlso Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).Trigger = 1 AndAlso TempPlayer(index).EventMap.EventPages(i).Visible = 1 Then begineventprocessing = True
                         End If
                         begineventprocessing = False
+                        If begineventprocessing = True Then
+                            'Process this event, it is on-touch and everything checks out.
+                            If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).CommandListCount > 0 Then
+                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).Active = 1
+                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).ActionTimer = GetTimeMs()
+                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).CurList = 1
+                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).CurSlot = 1
+                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).EventId = TempPlayer(index).EventMap.EventPages(i).EventId
+                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).PageId = TempPlayer(index).EventMap.EventPages(i).PageId
+                                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).WaitingForResponse = 0
+                                ReDim TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).ListLeftOff(Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).CommandListCount)
+                            End If
+                            begineventprocessing = False
+                        End If
                     End If
                 Next
             End If
@@ -1966,6 +1698,7 @@ Module S_Players
         If InvNum < 1 OrElse InvNum > MAX_INV Then Exit Sub
 
         InvItemNum = GetPlayerInvItemNum(index, InvNum)
+        n = Item(InvItemNum).Data2
 
         ' Find out what kind of item it is
         Select Case Item(InvItemNum).Type
@@ -2121,7 +1854,7 @@ Module S_Players
                             tempdata(3) = Player(index).RandEquip(EquipmentType.Helmet).Rarity
                             For i = 0 To StatType.Count - 1
                                 tempdata(i + 3) = Player(index).RandEquip(EquipmentType.Helmet).Stat(i)
-                            Next i
+                            Next
                         End If
 
                         SetPlayerEquipment(index, InvItemNum, EquipmentType.Helmet)
@@ -2361,7 +2094,7 @@ Module S_Players
                 If CanPlayerUseItem(index, InvItemNum) = False Then Exit Sub
 
                 Select Case Item(InvItemNum).SubType
-                    Case ConsumableType.Hp
+                    Case ConsumableType.HP
                         SendActionMsg(GetPlayerMap(index), "+" & Item(InvItemNum).Data1, ColorType.BrightGreen, ActionMsgType.Scroll, GetPlayerX(index) * 32, GetPlayerY(index) * 32)
                         SendAnimation(GetPlayerMap(index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, index)
                         SetPlayerVital(index, VitalType.HP, GetPlayerVital(index, VitalType.HP) + Item(InvItemNum).Data1)
@@ -2375,7 +2108,7 @@ Module S_Players
                         ' send vitals to party if in one
                         If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
 
-                    Case ConsumableType.Mp
+                    Case ConsumableType.MP
                         SendActionMsg(GetPlayerMap(index), "+" & Item(InvItemNum).Data1, ColorType.BrightBlue, ActionMsgType.Scroll, GetPlayerX(index) * 32, GetPlayerY(index) * 32)
                         SendAnimation(GetPlayerMap(index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, index)
                         SetPlayerVital(index, VitalType.MP, GetPlayerVital(index, VitalType.MP) + Item(InvItemNum).Data1)
@@ -2389,7 +2122,7 @@ Module S_Players
                         ' send vitals to party if in one
                         If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
 
-                    Case ConsumableType.Mp
+                    Case ConsumableType.MP
                         SendAnimation(GetPlayerMap(index), Item(InvItemNum).Animation, 0, 0, TargetType.Player, index)
                         SetPlayerVital(index, VitalType.SP, GetPlayerVital(index, VitalType.SP) + Item(InvItemNum).Data1)
                         If Item(InvItemNum).Stackable = 1 Then
@@ -2409,7 +2142,18 @@ Module S_Players
             Case ItemType.CommonEvent
                 If CanPlayerUseItem(index, InvItemNum) = False Then Exit Sub
 
-                ' Not yet implemented
+                n  = Item(InvItemNum).Data1
+
+                Select Case Item(InvItemNum).SubType
+                    Case CommonEventType.Variable
+                        Player(index).Variables(n) = Item(InvItemNum).Data2
+                    Case CommonEventType.Switch
+                        Player(index).Switches(n) = Item(InvItemNum).Data2
+                    Case CommonEventType.Key
+                        TriggerEvent(index, 1, 0, GetPlayerX(index), GetPlayerY(index))
+                    Case CommonEventType.CustomScript
+                        CustomScript(index, Item(InvItemNum).Data2, GetPlayerMap(index), n)
+                End Select
 
             Case ItemType.Skill
                 If CanPlayerUseItem(index, InvItemNum) = False Then Exit Sub

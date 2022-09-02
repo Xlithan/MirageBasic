@@ -218,7 +218,7 @@ Public Module modTypes
         Dim DropItemValue() As Integer
         Dim Stat() As Byte
         Dim Faction As Byte
-        Dim Hp As Integer
+        Dim HP As Integer
         Dim Exp As Integer
         Dim Animation As Integer
         Dim QuestNum As Integer

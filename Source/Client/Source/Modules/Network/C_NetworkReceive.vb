@@ -542,7 +542,7 @@ Module C_NetworkReceive
 
         Npc(i).Exp = buffer.ReadInt32()
         Npc(i).Faction = buffer.ReadInt32()
-        Npc(i).Hp = buffer.ReadInt32()
+        Npc(i).HP = buffer.ReadInt32()
         Npc(i).Name = Trim(buffer.ReadString())
         Npc(i).Range = buffer.ReadInt32()
         Npc(i).SpawnTime = buffer.ReadInt32()
@@ -925,7 +925,7 @@ Module C_NetworkReceive
 
             Npc(n).Exp = buffer.ReadInt32()
             Npc(n).Faction = buffer.ReadInt32()
-            Npc(n).Hp = buffer.ReadInt32()
+            Npc(n).HP = buffer.ReadInt32()
             Npc(n).Name = Trim(buffer.ReadString())
             Npc(n).Range = buffer.ReadInt32()
             Npc(n).SpawnTime = buffer.ReadInt32()

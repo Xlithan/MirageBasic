@@ -123,7 +123,7 @@ Friend Class frmEditor_NPC
     End Sub
 
     Private Sub NudHp_ValueChanged(sender As Object, e As EventArgs) Handles nudHp.ValueChanged
-        Npc(Editorindex).Hp = nudHp.Value
+        Npc(Editorindex).HP = nudHp.Value
     End Sub
 
     Private Sub NudExp_ValueChanged(sender As Object, e As EventArgs) Handles nudExp.ValueChanged

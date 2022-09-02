@@ -6,7 +6,7 @@
     Public Const MAX_INGREDIENT As Byte = 5
     Public Const MAX_INV As Byte = 35
     Public Const MAX_ITEMS As Integer = 500
-    Public Const MAX_LEVEL As Byte = 100
+    Public Const MAX_LEVEL As Byte = 99
     Public Const MAX_MAPS As Integer = 100
     Public Const MAX_MAP_ITEMS As Byte = 255
     Public Const MAX_MAP_NPCS As Byte = 30
@@ -33,7 +33,7 @@
     Public Const MAX_MAPY As Byte = 50
     Public Const MAX_PROJECTILES As Integer = 255
     Public const MAX_DROP_ITEMS As Byte = 5
-    Public const MAX_EVENTS As Byte = 100
     Public Const MAX_SWITCHES As Integer = 100
     Public Const NAX_VARIABLES As Integer = 100
+    Public const MAX_POINTS As Byte = 255
 End Module

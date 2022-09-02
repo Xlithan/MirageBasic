@@ -86,8 +86,8 @@
 
     ''' <Summary> Consumable Constant </Summary>
     Enum ConsumableType As Byte
-        Hp
-        Mp
+        HP
+        MP
         Sp
         Exp
     End Enum
@@ -310,85 +310,91 @@
 
     ' Event Types
     Public Enum EventType
-
         ' Message
-        EvAddText
+        AddText
 
-        EvShowText
-        EvShowChoices
+        ShowText
+        ShowChoices
 
         ' Game Progression
-        EvPlayerVar
+        PlayerVar
 
-        EvPlayerSwitch
-        EvSelfSwitch
+        PlayerSwitch
+        SelfSwitch
 
         ' Flow Control
-        EvCondition
+        Condition
 
-        EvExitProcess
+        ExitProcess
 
         ' Player
-        EvChangeItems
+        ChangeItems
 
-        EvRestoreHp
-        EvRestoreMp
-        EvLevelUp
-        EvChangeLevel
-        EvChangeSkills
-        EvChangeJob
-        EvChangeSprite
-        EvChangeSex
-        EvChangePk
+        RestoreHP
+        RestoreMP
+        LevelUp
+        ChangeLevel
+        ChangeSkills
+        ChangeJob
+        ChangeSprite
+        ChangeSex
+        ChangePk
 
         ' Movement
-        EvWarpPlayer
+        WarpPlayer
 
-        EvSetMoveRoute
+        SetMoveRoute
 
         ' Character
-        EvPlayAnimation
+        PlayAnimation
 
         ' Music and Sounds
-        EvPlayBgm
+        PlayBgm
 
-        EvFadeoutBgm
-        EvPlaySound
-        EvStopSound
+        FadeoutBgm
+        PlaySound
+        StopSound
 
         'Etc...
-        EvCustomScript
+        CustomScript
 
-        EvSetAccess
+        SetAccess
 
         'Shop/Bank
-        EvOpenBank
+        OpenBank
 
-        EvOpenShop
+        OpenShop
 
         'New
-        EvGiveExp
+        GiveExp
 
-        EvShowChatBubble
-        EvLabel
-        EvGotoLabel
-        EvSpawnNpc
-        EvFadeIn
-        EvFadeOut
-        EvFlashWhite
-        EvSetFog
-        EvSetWeather
-        EvSetTint
-        EvWait
-        EvOpenMail
-        EvBeginQuest
-        EvEndQuest
-        EvQuestTask
-        EvShowPicture
-        EvHidePicture
-        EvWaitMovement
-        EvHoldPlayer
-        EvReleasePlayer
+        ShowChatBubble
+        Label
+        GotoLabel
+        SpawnNpc
+        FadeIn
+        FadeOut
+        FlashWhite
+        SetFog
+        SetWeather
+        SetTint
+        Wait
+        OpenMail
+        BeginQuest
+        EndQuest
+        QuestTask
+        ShowPicture
+        HidePicture
+        WaitMovement
+        HoldPlayer
+        ReleasePlayer
+    End Enum
+
+    Public Enum CommonEventType
+        Switch
+        Variable
+        Key
+        CustomScript
     End Enum
 
 End Module

@@ -70,7 +70,7 @@ Public Class LanguageDef
         Public SendLogin As String = "Connected, sending login information..."
         Public SendNewCharacter As String = "Connected, sending character data..."
         Public SendRegister As String = "Connected, sending registration information..."
-        Public ConnectToServer As String = "Connecting To server...( {0} )"
+        Public ConnectToServer As String = "Connecting to Server...( {0} )"
     End Class
 
     Public Game As New GameDef
@@ -177,11 +177,11 @@ Public Class LanguageDef
         Public SelfCast As String = "Self-Cast"
 
         Public Gain As String = "Regen : "
-        Public GainHp As String = "Regen Hp"
-        Public GainMp As String = "Regen Mp"
+        Public GainHp As String = "Regen HP"
+        Public GainMp As String = "Regen MP"
         Public Lose As String = "Syphon : "
-        Public LoseHp As String = "Syphon Hp"
-        Public LoseMp As String = "Syphon Mp"
+        Public LoseHp As String = "Syphon HP"
+        Public LoseMp As String = "Syphon MP"
 
     End Class
 

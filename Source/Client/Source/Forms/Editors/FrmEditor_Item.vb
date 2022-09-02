@@ -1,4 +1,5 @@
-﻿Imports MirageBasic.Core
+﻿Imports System.DirectoryServices.ActiveDirectory
+Imports MirageBasic.Core
 
 Friend Class frmEditor_Item
 
@@ -48,6 +49,37 @@ Friend Class frmEditor_Item
         nudPaperdoll.Maximum = NumPaperdolls
         nudFurniture.Maximum = NumFurniture
         cmbFurnitureType.SelectedIndex = 0
+
+        'populate combo boxes
+        cmbAnimation.Items.Clear()
+        For i = 0 To MAX_ANIMATIONS
+            cmbAnimation.Items.Add(i & ": " & Animation(i).Name)
+        Next
+
+        cmbAmmo.Items.Clear()
+        For i = 0 To MAX_ITEMS
+            cmbAmmo.Items.Add(i & ": " & Item(i).Name)
+        Next
+
+        cmbProjectile.Items.Clear()
+        For i = 0 To MAX_PROJECTILES
+            cmbProjectile.Items.Add(i & ": " & Projectiles(i).Name)
+        Next
+
+        cmbSkills.Items.Clear()
+        For i = 0 To MAX_SKILLS
+            cmbSkills.Items.Add(i & ": " & Skill(i).Name)
+        Next
+
+        cmbPet.Items.Clear()
+        For i = 0 To MAX_PETS
+            cmbPet.Items.Add(i & ": " & Pet(i).Name)
+        Next
+
+        cmbRecipe.Items.Clear()
+        For i = 0 To MAX_RECIPE
+            cmbRecipe.Items.Add(i & ": " & Recipe(i).Name)
+        Next
 
         lstIndex.Items.Clear()
 
@@ -121,9 +153,9 @@ Friend Class frmEditor_Item
             ' Build subtype cmb
             cmbSubType.Items.Clear()
 
-            cmbSubType.Items.Add("Hp")
-            cmbSubType.Items.Add("Mp")
-            cmbSubType.Items.Add("Sp")
+            cmbSubType.Items.Add("HP")
+            cmbSubType.Items.Add("MP")
+            cmbSubType.Items.Add("SP")
             cmbSubType.Items.Add("Exp")
 
             cmbSubType.Enabled = True
@@ -154,6 +186,23 @@ Friend Class frmEditor_Item
             fraPet.Visible = True
         Else
             fraPet.Visible = False
+        End If
+
+        If cmbType.SelectedIndex = Itemtype.CommonEvent Then
+            fraEvents.Visible = True
+
+            ' Build subtype cmb
+            cmbSubType.Items.Clear()
+
+            cmbSubType.Items.Add("Switches")
+            cmbSubType.Items.Add("Variables")
+            cmbSubType.Items.Add("Custom Script")
+            cmbSubType.Items.Add("Key")
+
+            cmbSubType.Enabled = True
+            cmbSubType.SelectedIndex = Item(Editorindex).SubType
+        Else
+            fraEvents.Visible = false
         End If
 
         Item(Editorindex).Type = cmbType.SelectedIndex
@@ -207,6 +256,14 @@ Friend Class frmEditor_Item
 
     Private Sub CmbPet_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPet.SelectedIndexChanged
         Item(Editorindex).Data1 = cmbPet.SelectedIndex
+    End Sub
+
+     Private Sub nudEvents_ValueChanged(sender As Object, e As EventArgs) Handles nudEvent.ValueChanged
+         Item(Editorindex).Data1 = nudVitalMod.Value
+    End Sub
+
+    Private Sub nudEventValue_ValueChanged(sender As Object, e As EventArgs) 
+         Item(Editorindex).Data2 = nudEventValue.Value
     End Sub
 
 #End Region

@@ -10,7 +10,7 @@ Friend Module S_EventLogic
         For i = 0 To GetPlayersOnline()
             If TempPlayer(i).EventMap.CurrentEvents > 0 And TempPlayer(i).GettingMap = False Then
                 mapNum = GetPlayerMap(i)
-                For x = 1 To TempPlayer(i).EventMap.CurrentEvents
+                For x = 0 To TempPlayer(i).EventMap.CurrentEvents
                     id = TempPlayer(i).EventMap.EventPages(x).EventId
                     page = TempPlayer(i).EventMap.EventPages(x).PageId
 
@@ -84,7 +84,7 @@ Friend Module S_EventLogic
 
                             If Map(mapNum).Events(id).Globals = 1 AndAlso TempPlayer(i).EventMap.EventPages(x).Visible = 0 Then TempEventMap(mapNum).Events(id).Active = 0
 
-                            If TempPlayer(i).EventMap.EventPages(x).Visible = 0 Then
+                            If TempPlayer(i).EventMap.EventPages(x).Visible = 0 And id > 0 Then
                                 Dim Buffer As New ByteStream(4)
                                 Buffer.WriteInt32(Packets.ServerPackets.SSpawnEvent)
                                 Buffer.WriteInt32(id)
@@ -127,210 +127,210 @@ Friend Module S_EventLogic
         Dim pageID As Integer, id As Integer, compare As Integer, i As Integer, mapNum As Integer
         Dim n As Integer, x As Integer, z As Integer, spawnevent As Boolean, p As Integer
 
-        'That was only removing events... now we gotta worry about spawning them again, luckily, it is almost the same exact thing, but backwards!
-
         For i = 0 To GetPlayersOnline()
             If TempPlayer(i).EventMap.CurrentEvents > 0 Then
                 mapNum = GetPlayerMap(i)
-                For x = 1 To TempPlayer(i).EventMap.CurrentEvents
+                For x = 0 To TempPlayer(i).EventMap.CurrentEvents
                     id = TempPlayer(i).EventMap.EventPages(x).EventId
-                    pageID = TempPlayer(i).EventMap.EventPages(x).PageId
+                    If id > 0 And id <= TempPlayer(i).EventMap.CurrentEvents Then
+                        pageID = TempPlayer(i).EventMap.EventPages(x).PageId
 
-                    If TempPlayer(i).EventMap.EventPages(x).Visible = 0 Then pageID = 0
+                        If TempPlayer(i).EventMap.EventPages(x).Visible = 0 Then pageID = 0
 
-                    'If (Map(MapNum).Events Is Nothing) Then Continue For
-                    For z = Map(mapNum).Events(id).PageCount To 0 Step -1
+                        'If (Map(MapNum).Events Is Nothing) Then Continue For
+                        For z = Map(mapNum).Events(id).PageCount To 0 Step -1
 
-                        spawnevent = True
+                            spawnevent = True
 
-                        If Map(mapNum).Events(id).Pages(z).ChkHasItem = 1 Then
-                            If HasItem(i, Map(mapNum).Events(id).Pages(z).HasItemindex) = 0 Then
-                                spawnevent = False
-                            End If
-                        End If
-
-                        If Map(mapNum).Events(id).Pages(z).ChkSelfSwitch = 1 Then
-                            If Map(mapNum).Events(id).Pages(z).SelfSwitchCompare = 0 Then
-                                compare = 1
-                            Else
-                                compare = 0
-                            End If
-                            If Map(mapNum).Events(id).Globals = 1 Then
-                                If Map(mapNum).Events(id).SelfSwitches(Map(mapNum).Events(id).Pages(z).SelfSwitchindex) <> compare Then
-                                    spawnevent = False
-                                End If
-                            Else
-                                If TempPlayer(i).EventMap.EventPages(id).SelfSwitches(Map(mapNum).Events(id).Pages(z).SelfSwitchindex) <> compare Then
+                            If Map(mapNum).Events(id).Pages(z).ChkHasItem = 1 Then
+                                If HasItem(i, Map(mapNum).Events(id).Pages(z).HasItemindex) = 0 Then
                                     spawnevent = False
                                 End If
                             End If
-                        End If
 
-                        If Map(mapNum).Events(id).Pages(z).ChkVariable = 1 Then
-                            Select Case Map(mapNum).Events(id).Pages(z).VariableCompare
-                                Case 0
-                                    If Player(i).Variables(Map(mapNum).Events(id).Pages(z).Variableindex) <> Map(mapNum).Events(id).Pages(z).VariableCondition Then
-                                        spawnevent = False
-                                    End If
-                                Case 1
-                                    If Player(i).Variables(Map(mapNum).Events(id).Pages(z).Variableindex) < Map(mapNum).Events(id).Pages(z).VariableCondition Then
-                                        spawnevent = False
-                                    End If
-                                Case 2
-                                    If Player(i).Variables(Map(mapNum).Events(id).Pages(z).Variableindex) > Map(mapNum).Events(id).Pages(z).VariableCondition Then
-                                        spawnevent = False
-                                    End If
-                                Case 3
-                                    If Player(i).Variables(Map(mapNum).Events(id).Pages(z).Variableindex) <= Map(mapNum).Events(id).Pages(z).VariableCondition Then
-                                        spawnevent = False
-                                    End If
-                                Case 4
-                                    If Player(i).Variables(Map(mapNum).Events(id).Pages(z).Variableindex) >= Map(mapNum).Events(id).Pages(z).VariableCondition Then
-                                        spawnevent = False
-                                    End If
-                                Case 5
-                                    If Player(i).Variables(Map(mapNum).Events(id).Pages(z).Variableindex) = Map(mapNum).Events(id).Pages(z).VariableCondition Then
-                                        spawnevent = False
-                                    End If
-                            End Select
-                        End If
-
-                        If Map(mapNum).Events(id).Pages(z).ChkSwitch = 1 Then
-                            If Map(mapNum).Events(id).Pages(z).SwitchCompare = 0 Then 'we want false
-                                If Player(i).Switches(Map(mapNum).Events(id).Pages(z).Switchindex) = 1 Then 'and switch is true
-                                    spawnevent = False 'do not spawn
-                                End If
-                            Else
-                                If Player(i).Switches(Map(mapNum).Events(id).Pages(z).Switchindex) = 0 Then ' else we want true and the switch is false
-                                    spawnevent = False
-                                End If
-                            End If
-                        End If
-
-                        If spawnevent = True Then
-                            If TempPlayer(i).EventMap.EventPages(x).Visible = 1 Then
-                                If z <= pageID Then
-                                    spawnevent = False
-                                End If
-                            End If
-                        End If
-
-                        If spawnevent = True Then
-
-                            If TempPlayer(i).EventProcessingCount > 0 Then
-                                For n = 0 To UBound(TempPlayer(i).EventProcessing)
-                                    If TempPlayer(i).EventProcessing(n).EventId = id Then
-                                        TempPlayer(i).EventProcessing(n).Active = 0
-                                    End If
-                                Next
-                            End If
-
-                            With TempPlayer(i).EventMap.EventPages(id)
-                                If Map(mapNum).Events(id).Pages(z).GraphicType = 1 Then
-                                    Select Case Map(mapNum).Events(id).Pages(z).GraphicY
-                                        Case 0
-                                            .Dir = DirectionType.Down
-                                        Case 1
-                                            .Dir = DirectionType.Left
-                                        Case 2
-                                            .Dir = DirectionType.Right
-                                        Case 3
-                                            .Dir = DirectionType.Up
-                                    End Select
+                            If Map(mapNum).Events(id).Pages(z).ChkSelfSwitch = 1 Then
+                                If Map(mapNum).Events(id).Pages(z).SelfSwitchCompare = 0 Then
+                                    compare = 1
                                 Else
-                                    .Dir = 0
+                                    compare = 0
                                 End If
-                                .Graphic = Map(mapNum).Events(id).Pages(z).Graphic
-                                .GraphicType = Map(mapNum).Events(id).Pages(z).GraphicType
-                                .GraphicX = Map(mapNum).Events(id).Pages(z).GraphicX
-                                .GraphicY = Map(mapNum).Events(id).Pages(z).GraphicY
-                                .GraphicX2 = Map(mapNum).Events(id).Pages(z).GraphicX2
-                                .GraphicY2 = Map(mapNum).Events(id).Pages(z).GraphicY2
-                                .QuestNum = Map(mapNum).Events(id).Pages(z).QuestNum
-                                Select Case Map(mapNum).Events(id).Pages(z).MoveSpeed
-                                    Case 0
-                                        .MovementSpeed = 2
-                                    Case 1
-                                        .MovementSpeed = 3
-                                    Case 2
-                                        .MovementSpeed = 4
-                                    Case 3
-                                        .MovementSpeed = 6
-                                    Case 4
-                                        .MovementSpeed = 12
-                                    Case 5
-                                        .MovementSpeed = 24
-                                End Select
-                                .Position = Map(mapNum).Events(id).Pages(z).Position
-                                .EventId = id
-                                .PageId = z
-                                .Visible = 1
+                                If Map(mapNum).Events(id).Globals = 1 Then
+                                    If Map(mapNum).Events(id).SelfSwitches(Map(mapNum).Events(id).Pages(z).SelfSwitchindex) <> compare Then
+                                        spawnevent = False
+                                    End If
+                                Else
+                                    If TempPlayer(i).EventMap.EventPages(id).SelfSwitches(Map(mapNum).Events(id).Pages(z).SelfSwitchindex) <> compare Then
+                                        spawnevent = False
+                                    End If
+                                End If
+                            End If
 
-                                .MoveType = Map(mapNum).Events(id).Pages(z).MoveType
-                                If .MoveType = 2 Then
-                                    .MoveRouteCount = Map(mapNum).Events(id).Pages(z).MoveRouteCount
-                                    If .MoveRouteCount > 0 Then
-                                        ReDim .MoveRoute(Map(mapNum).Events(id).Pages(z).MoveRouteCount)
-                                        For p = 0 To Map(mapNum).Events(id).Pages(z).MoveRouteCount
-                                            .MoveRoute(p) = Map(mapNum).Events(id).Pages(z).MoveRoute(p)
-                                        Next
-                                        .MoveRouteComplete = 0
+                            If Map(mapNum).Events(id).Pages(z).ChkVariable = 1 Then
+                                Select Case Map(mapNum).Events(id).Pages(z).VariableCompare
+                                    Case 0
+                                        If Player(i).Variables(Map(mapNum).Events(id).Pages(z).Variableindex) <> Map(mapNum).Events(id).Pages(z).VariableCondition Then
+                                            spawnevent = False
+                                        End If
+                                    Case 1
+                                        If Player(i).Variables(Map(mapNum).Events(id).Pages(z).Variableindex) < Map(mapNum).Events(id).Pages(z).VariableCondition Then
+                                            spawnevent = False
+                                        End If
+                                    Case 2
+                                        If Player(i).Variables(Map(mapNum).Events(id).Pages(z).Variableindex) > Map(mapNum).Events(id).Pages(z).VariableCondition Then
+                                            spawnevent = False
+                                        End If
+                                    Case 3
+                                        If Player(i).Variables(Map(mapNum).Events(id).Pages(z).Variableindex) <= Map(mapNum).Events(id).Pages(z).VariableCondition Then
+                                            spawnevent = False
+                                        End If
+                                    Case 4
+                                        If Player(i).Variables(Map(mapNum).Events(id).Pages(z).Variableindex) >= Map(mapNum).Events(id).Pages(z).VariableCondition Then
+                                            spawnevent = False
+                                        End If
+                                    Case 5
+                                        If Player(i).Variables(Map(mapNum).Events(id).Pages(z).Variableindex) = Map(mapNum).Events(id).Pages(z).VariableCondition Then
+                                            spawnevent = False
+                                        End If
+                                End Select
+                            End If
+
+                            If Map(mapNum).Events(id).Pages(z).ChkSwitch = 1 Then
+                                If Map(mapNum).Events(id).Pages(z).SwitchCompare = 0 Then 'we want false
+                                    If Player(i).Switches(Map(mapNum).Events(id).Pages(z).Switchindex) = 1 Then 'and switch is true
+                                        spawnevent = False 'do not spawn
+                                    End If
+                                Else
+                                    If Player(i).Switches(Map(mapNum).Events(id).Pages(z).Switchindex) = 0 Then ' else we want true and the switch is false
+                                        spawnevent = False
+                                    End If
+                                End If
+                            End If
+
+                            If spawnevent = True Then
+                                If TempPlayer(i).EventMap.EventPages(x).Visible = 1 Then
+                                    If z <= pageID Then
+                                        spawnevent = False
+                                    End If
+                                End If
+                            End If
+
+                            If spawnevent = True Then
+
+                                If TempPlayer(i).EventProcessingCount > 0 Then
+                                    For n = 0 To UBound(TempPlayer(i).EventProcessing)
+                                        If TempPlayer(i).EventProcessing(n).EventId = id Then
+                                            TempPlayer(i).EventProcessing(n).Active = 0
+                                        End If
+                                    Next
+                                End If
+
+                                With TempPlayer(i).EventMap.EventPages(id)
+                                    If Map(mapNum).Events(id).Pages(z).GraphicType = 1 Then
+                                        Select Case Map(mapNum).Events(id).Pages(z).GraphicY
+                                            Case 0
+                                                .Dir = DirectionType.Down
+                                            Case 1
+                                                .Dir = DirectionType.Left
+                                            Case 2
+                                                .Dir = DirectionType.Right
+                                            Case 3
+                                                .Dir = DirectionType.Up
+                                        End Select
+                                    Else
+                                        .Dir = 0
+                                    End If
+                                    .Graphic = Map(mapNum).Events(id).Pages(z).Graphic
+                                    .GraphicType = Map(mapNum).Events(id).Pages(z).GraphicType
+                                    .GraphicX = Map(mapNum).Events(id).Pages(z).GraphicX
+                                    .GraphicY = Map(mapNum).Events(id).Pages(z).GraphicY
+                                    .GraphicX2 = Map(mapNum).Events(id).Pages(z).GraphicX2
+                                    .GraphicY2 = Map(mapNum).Events(id).Pages(z).GraphicY2
+                                    .QuestNum = Map(mapNum).Events(id).Pages(z).QuestNum
+                                    Select Case Map(mapNum).Events(id).Pages(z).MoveSpeed
+                                        Case 0
+                                            .MovementSpeed = 2
+                                        Case 1
+                                            .MovementSpeed = 3
+                                        Case 2
+                                            .MovementSpeed = 4
+                                        Case 3
+                                            .MovementSpeed = 6
+                                        Case 4
+                                            .MovementSpeed = 12
+                                        Case 5
+                                            .MovementSpeed = 24
+                                    End Select
+                                    .Position = Map(mapNum).Events(id).Pages(z).Position
+                                    .EventId = id
+                                    .PageId = z
+                                    .Visible = 1
+
+                                    .MoveType = Map(mapNum).Events(id).Pages(z).MoveType
+                                    If .MoveType = 2 Then
+                                        .MoveRouteCount = Map(mapNum).Events(id).Pages(z).MoveRouteCount
+                                        If .MoveRouteCount > 0 Then
+                                            ReDim .MoveRoute(Map(mapNum).Events(id).Pages(z).MoveRouteCount)
+                                            For p = 0 To Map(mapNum).Events(id).Pages(z).MoveRouteCount
+                                                .MoveRoute(p) = Map(mapNum).Events(id).Pages(z).MoveRoute(p)
+                                            Next
+                                            .MoveRouteComplete = 0
+                                        Else
+                                            .MoveRouteComplete = 1
+                                        End If
                                     Else
                                         .MoveRouteComplete = 1
                                     End If
-                                Else
-                                    .MoveRouteComplete = 1
+
+                                    .RepeatMoveRoute = Map(mapNum).Events(id).Pages(z).RepeatMoveRoute
+                                    .IgnoreIfCannotMove = Map(mapNum).Events(id).Pages(z).IgnoreMoveRoute
+
+                                    .MoveFreq = Map(mapNum).Events(id).Pages(z).MoveFreq
+                                    .MoveSpeed = Map(mapNum).Events(id).Pages(z).MoveSpeed
+
+                                    .WalkThrough = Map(mapNum).Events(id).Pages(z).WalkThrough
+                                    .ShowName = Map(mapNum).Events(id).Pages(z).ShowName
+                                    .WalkingAnim = Map(mapNum).Events(id).Pages(z).WalkAnim
+                                    .FixedDir = Map(mapNum).Events(id).Pages(z).DirFix
+
+                                End With
+
+                                If Map(mapNum).Events(id).Globals = 1 Then
+                                    If spawnevent Then TempEventMap(mapNum).Events(id).Active = z : TempEventMap(mapNum).Events(id).Position = Map(mapNum).Events(id).Pages(z).Position
                                 End If
 
-                                .RepeatMoveRoute = Map(mapNum).Events(id).Pages(z).RepeatMoveRoute
-                                .IgnoreIfCannotMove = Map(mapNum).Events(id).Pages(z).IgnoreMoveRoute
+                                Dim Buffer = New ByteStream(4)
+                                Buffer.WriteInt32(ServerPackets.SSpawnEvent)
+                                Buffer.WriteInt32(id)
+                                With TempPlayer(i).EventMap.EventPages(x)
+                                    Buffer.WriteString((Trim(Map(GetPlayerMap(i)).Events(.EventId).Name)))
+                                    Buffer.WriteInt32(.Dir)
+                                    Buffer.WriteByte(.GraphicType)
+                                    Buffer.WriteInt32(.Graphic)
+                                    Buffer.WriteInt32(.GraphicX)
+                                    Buffer.WriteInt32(.GraphicX2)
+                                    Buffer.WriteInt32(.GraphicY)
+                                    Buffer.WriteInt32(.GraphicY2)
+                                    Buffer.WriteInt32(.MovementSpeed)
+                                    Buffer.WriteInt32(.X)
+                                    Buffer.WriteInt32(.Y)
+                                    Buffer.WriteByte(.Position)
+                                    Buffer.WriteInt32(.Visible)
+                                    Buffer.WriteInt32(Map(mapNum).Events(id).Pages(z).WalkAnim)
+                                    Buffer.WriteInt32(Map(mapNum).Events(id).Pages(z).DirFix)
+                                    Buffer.WriteInt32(Map(mapNum).Events(id).Pages(z).WalkThrough)
+                                    Buffer.WriteInt32(Map(mapNum).Events(id).Pages(z).ShowName)
+                                    Buffer.WriteInt32(Map(mapNum).Events(id).Pages(z).QuestNum)
+                                    Buffer.WriteInt32(.QuestNum)
+                                End With
+                                Socket.SendDataTo(i, Buffer.Data, Buffer.Head)
 
-                                .MoveFreq = Map(mapNum).Events(id).Pages(z).MoveFreq
-                                .MoveSpeed = Map(mapNum).Events(id).Pages(z).MoveSpeed
+                                AddDebug("Sent SMSG: SSpawnEvent Spawn New Events")
 
-                                .WalkThrough = Map(mapNum).Events(id).Pages(z).WalkThrough
-                                .ShowName = Map(mapNum).Events(id).Pages(z).ShowName
-                                .WalkingAnim = Map(mapNum).Events(id).Pages(z).WalkAnim
-                                .FixedDir = Map(mapNum).Events(id).Pages(z).DirFix
-
-                            End With
-
-                            If Map(mapNum).Events(id).Globals = 1 Then
-                                If spawnevent Then TempEventMap(mapNum).Events(id).Active = z : TempEventMap(mapNum).Events(id).Position = Map(mapNum).Events(id).Pages(z).Position
+                                Buffer.Dispose()
+                                z = 1
                             End If
-
-                            Dim Buffer = New ByteStream(4)
-                            Buffer.WriteInt32(ServerPackets.SSpawnEvent)
-                            Buffer.WriteInt32(id)
-                            With TempPlayer(i).EventMap.EventPages(x)
-                                Buffer.WriteString((Trim(Map(GetPlayerMap(i)).Events(.EventId).Name)))
-                                Buffer.WriteInt32(.Dir)
-                                Buffer.WriteByte(.GraphicType)
-                                Buffer.WriteInt32(.Graphic)
-                                Buffer.WriteInt32(.GraphicX)
-                                Buffer.WriteInt32(.GraphicX2)
-                                Buffer.WriteInt32(.GraphicY)
-                                Buffer.WriteInt32(.GraphicY2)
-                                Buffer.WriteInt32(.MovementSpeed)
-                                Buffer.WriteInt32(.X)
-                                Buffer.WriteInt32(.Y)
-                                Buffer.WriteByte(.Position)
-                                Buffer.WriteInt32(.Visible)
-                                Buffer.WriteInt32(Map(mapNum).Events(id).Pages(z).WalkAnim)
-                                Buffer.WriteInt32(Map(mapNum).Events(id).Pages(z).DirFix)
-                                Buffer.WriteInt32(Map(mapNum).Events(id).Pages(z).WalkThrough)
-                                Buffer.WriteInt32(Map(mapNum).Events(id).Pages(z).ShowName)
-                                Buffer.WriteInt32(Map(mapNum).Events(id).Pages(z).QuestNum)
-                                Buffer.WriteInt32(.QuestNum)
-                            End With
-                            Socket.SendDataTo(i, Buffer.Data, Buffer.Head)
-
-                            AddDebug("Sent SMSG: SSpawnEvent Spawn New Events")
-
-                            Buffer.Dispose()
-                            z = 1
-                        End If
-                    Next
+                        Next
+                    End If
                 Next
             End If
         Next
@@ -726,7 +726,7 @@ Friend Module S_EventLogic
             If IsPlaying(i) Then
                 playerID = i
                 If TempPlayer(i).EventMap.CurrentEvents > 0 Then
-                    For x = 1 To TempPlayer(i).EventMap.CurrentEvents
+                    For x = 0 To TempPlayer(i).EventMap.CurrentEvents
                         If Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Globals = 0 Then
                             If TempPlayer(i).EventMap.EventPages(x).Visible = 1 Then
                                 If TempPlayer(i).EventMap.EventPages(x).MoveTimer <= GetTimeMs() Then
@@ -1053,7 +1053,7 @@ Friend Module S_EventLogic
                                                                 sendupdate = True
                                                         End Select
 
-                                                        If sendupdate Then
+                                                        If sendupdate And TempPlayer(playerID).EventMap.EventPages(eventID).EventId > 0 Then
                                                             Buffer = New ByteStream(4)
                                                             Buffer.WriteInt32(ServerPackets.SSpawnEvent)
                                                             Buffer.WriteInt32(TempPlayer(playerID).EventMap.EventPages(eventID).EventId)
@@ -1116,7 +1116,7 @@ Friend Module S_EventLogic
         For i = 0 To GetPlayersOnline()
             If IsPlaying(i) Then
                 If TempPlayer(i).EventMap.CurrentEvents > 0 Then
-                    For x = 1 To TempPlayer(i).EventMap.CurrentEvents
+                    For x = 0 To TempPlayer(i).EventMap.CurrentEvents
                         If TempPlayer(i).EventProcessingCount > 0 Then
                             If TempPlayer(i).EventMap.EventPages(x).Visible Then
                                 If Map(Player(i).Map).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Pages(TempPlayer(i).EventMap.EventPages(x).PageId).Trigger = 2 Then 'Parallel Process baby!
@@ -1209,7 +1209,7 @@ Friend Module S_EventLogic
                                                     'If we are still here, then we are good to process shit :D
                                                     'Debug.WriteLine(.CurSlot)
                                                     Select Case Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Index
-                                                        Case EventType.EvAddText
+                                                        Case EventType.AddText
                                                             Select Case Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2
                                                                 Case 0
                                                                     PlayerMsg(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Text1, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1)
@@ -1218,7 +1218,7 @@ Friend Module S_EventLogic
                                                                 Case 2
                                                                     GlobalMsg(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Text1) ' Map(GetPlayerMap(i)).Events(.EventID).Pages(.PageID).CommandList(.CurList).Commands(.CurSlot).Data1)
                                                             End Select
-                                                        Case EventType.EvShowText
+                                                        Case EventType.ShowText
                                                             buffer = New ByteStream(4)
                                                             buffer.WriteInt32(ServerPackets.SEventChat)
                                                             buffer.WriteInt32(.EventId)
@@ -1230,9 +1230,9 @@ Friend Module S_EventLogic
                                                             AddDebug("Sent SMSG: SEventChat evShowText")
 
                                                             If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).CommandCount > .CurSlot Then
-                                                                If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot + 1).Index = EventType.EvShowText OrElse Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot + 1).Index = EventType.EvShowChoices Then
+                                                                If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot + 1).Index = EventType.ShowText OrElse Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot + 1).Index = EventType.ShowChoices Then
                                                                     buffer.WriteInt32(1)
-                                                                ElseIf Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot + 1).Index = EventType.EvCondition Then
+                                                                ElseIf Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot + 1).Index = EventType.Condition Then
                                                                     buffer.WriteInt32(2)
                                                                 Else
                                                                     buffer.WriteInt32(0)
@@ -1243,7 +1243,7 @@ Friend Module S_EventLogic
                                                             Socket.SendDataTo(i, buffer.Data, buffer.Head)
                                                             buffer.Dispose()
                                                             .WaitingForResponse = 1
-                                                        Case EventType.EvShowChoices
+                                                        Case EventType.ShowChoices
                                                             buffer = New ByteStream(4)
                                                             buffer.WriteInt32(ServerPackets.SEventChat)
                                                             buffer.WriteInt32(.EventId)
@@ -1279,9 +1279,9 @@ Friend Module S_EventLogic
                                                                 End Select
                                                             Next
                                                             If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).CommandCount > .CurSlot Then
-                                                                If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot + 1).Index = EventType.EvShowText OrElse Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot + 1).Index = EventType.EvShowChoices Then
+                                                                If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot + 1).Index = EventType.ShowText OrElse Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot + 1).Index = EventType.ShowChoices Then
                                                                     buffer.WriteInt32(1)
-                                                                ElseIf Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot + 1).Index = EventType.EvCondition Then
+                                                                ElseIf Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot + 1).Index = EventType.Condition Then
                                                                     buffer.WriteInt32(2)
                                                                 Else
                                                                     buffer.WriteInt32(0)
@@ -1292,7 +1292,7 @@ Friend Module S_EventLogic
                                                             Socket.SendDataTo(i, buffer.Data, buffer.Head)
                                                             buffer.Dispose()
                                                             .WaitingForResponse = 1
-                                                        Case EventType.EvPlayerVar
+                                                        Case EventType.PlayerVar
                                                             Select Case Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2
                                                                 Case 0
                                                                     Player(i).Variables(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1) = Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data3
@@ -1303,13 +1303,13 @@ Friend Module S_EventLogic
                                                                 Case 3
                                                                     Player(i).Variables(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1) = Random(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data3, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data4)
                                                             End Select
-                                                        Case EventType.EvPlayerSwitch
+                                                        Case EventType.PlayerSwitch
                                                             If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2 = 0 Then
                                                                 Player(i).Switches(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1) = 1
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2 = 1 Then
                                                                 Player(i).Switches(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1) = 0
                                                             End If
-                                                        Case EventType.EvSelfSwitch
+                                                        Case EventType.SelfSwitch
                                                             If Map(GetPlayerMap(i)).Events(.EventId).Globals = 1 Then
                                                                 If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2 = 0 Then
                                                                     Map(GetPlayerMap(i)).Events(.EventId).SelfSwitches(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1 + 1) = 1
@@ -1323,7 +1323,7 @@ Friend Module S_EventLogic
                                                                     TempPlayer(i).EventMap.EventPages(.EventId).SelfSwitches(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1 + 1) = 0
                                                                 End If
                                                             End If
-                                                        Case EventType.EvCondition
+                                                        Case EventType.Condition
                                                             Select Case Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Condition
                                                                 Case 0
                                                                     Select Case Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).ConditionalBranch.Data2
@@ -1641,10 +1641,10 @@ Friend Module S_EventLogic
                                                                     End If
                                                             End Select
                                                             endprocess = True
-                                                        Case EventType.EvExitProcess
+                                                        Case EventType.ExitProcess
                                                             removeEventProcess = True
                                                             endprocess = True
-                                                        Case EventType.EvChangeItems
+                                                        Case EventType.ChangeItems
                                                             If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2 = 0 Then
                                                                 If HasItem(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1) > 0 Then
                                                                     SetPlayerInvItemValue(i, FindItemSlot(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1), Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data3)
@@ -1666,23 +1666,23 @@ Friend Module S_EventLogic
                                                                 End If
                                                             End If
                                                             SendInventory(i)
-                                                        Case EventType.EvRestoreHp
+                                                        Case EventType.RestoreHP
                                                             SetPlayerVital(i, VitalType.HP, GetPlayerMaxVital(i, VitalType.HP))
                                                             SendVital(i, VitalType.HP)
-                                                        Case EventType.EvRestoreMp
+                                                        Case EventType.RestoreMP
                                                             SetPlayerVital(i, VitalType.MP, GetPlayerMaxVital(i, VitalType.MP))
                                                             SendVital(i, VitalType.MP)
-                                                        Case EventType.EvLevelUp
+                                                        Case EventType.LevelUp
                                                             SetPlayerExp(i, GetPlayerNextLevel(i))
                                                             CheckPlayerLevelUp(i)
                                                             SendExp(i)
                                                             SendPlayerData(i)
-                                                        Case EventType.EvChangeLevel
+                                                        Case EventType.ChangeLevel
                                                             SetPlayerLevel(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1)
                                                             SetPlayerExp(i, 0)
                                                             SendExp(i)
                                                             SendPlayerData(i)
-                                                        Case EventType.EvChangeSkills
+                                                        Case EventType.ChangeSkills
                                                             If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2 = 0 Then
                                                                 If FindOpenSkillSlot(i) > 0 Then
                                                                     If HasSkill(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1) = False Then
@@ -1703,27 +1703,27 @@ Friend Module S_EventLogic
                                                                 End If
                                                             End If
                                                             SendPlayerSkills(i)
-                                                        Case EventType.EvChangeJob
+                                                        Case EventType.ChangeJob
                                                             Player(i).Job = Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1
                                                             SendPlayerData(i)
-                                                        Case EventType.EvChangeSprite
+                                                        Case EventType.ChangeSprite
                                                             SetPlayerSprite(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1)
                                                             SendPlayerData(i)
-                                                        Case EventType.EvChangeSex
+                                                        Case EventType.ChangeSex
                                                             If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1 = 0 Then
                                                                 Player(i).Sex = SexType.Male
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1 = 1 Then
                                                                 Player(i).Sex = SexType.Female
                                                             End If
                                                             SendPlayerData(i)
-                                                        Case EventType.EvChangePk
+                                                        Case EventType.ChangePk
                                                             If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1 = 0 Then
                                                                 Player(i).Pk = False
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1 = 1 Then
                                                                 Player(i).Pk = True
                                                             End If
                                                             SendPlayerData(i)
-                                                        Case EventType.EvWarpPlayer
+                                                        Case EventType.WarpPlayer
                                                             If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data4 = 0 Then
                                                                 PlayerWarp(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data3)
                                                             Else
@@ -1731,7 +1731,7 @@ Friend Module S_EventLogic
                                                                 PlayerWarp(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data3)
                                                             End If
 
-                                                        Case EventType.EvSetMoveRoute
+                                                        Case EventType.SetMoveRoute
                                                             If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1 <= Map(GetPlayerMap(i)).EventCount Then
                                                                 If Map(GetPlayerMap(i)).Events(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1).Globals = 1 Then
                                                                     TempEventMap(GetPlayerMap(i)).Events(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1).MoveType = 2
@@ -1751,7 +1751,7 @@ Friend Module S_EventLogic
                                                                     TempPlayer(i).EventMap.EventPages(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1).MoveRouteComplete = 0
                                                                 End If
                                                             End If
-                                                        Case EventType.EvPlayAnimation
+                                                        Case EventType.PlayAnimation
                                                             If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2 = 0 Then
                                                                 SendAnimation(GetPlayerMap(i), Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1, GetPlayerX(i), GetPlayerY(i), TargetType.Player, i)
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2 = 1 Then
@@ -1763,10 +1763,10 @@ Friend Module S_EventLogic
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2 = 2 Then
                                                                 SendAnimation(GetPlayerMap(i), Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data3, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data4, 0, 0)
                                                             End If
-                                                        Case EventType.EvCustomScript
+                                                        Case EventType.CustomScript
                                                             'Runs Through Cases for a script
                                                             CustomScript(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1, GetPlayerMap(i), .EventId)
-                                                        Case EventType.EvPlayBgm
+                                                        Case EventType.PlayBgm
                                                             buffer = New ByteStream(4)
                                                             buffer.WriteInt32(ServerPackets.SPlayBGM)
                                                             buffer.WriteString((Trim(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Text1)))
@@ -1776,7 +1776,7 @@ Friend Module S_EventLogic
                                                             Console.WriteLine("Sent SMSG: SPlayBGM")
 
                                                             buffer.Dispose()
-                                                        Case EventType.EvFadeoutBgm
+                                                        Case EventType.FadeoutBgm
                                                             buffer = New ByteStream(4)
                                                             buffer.WriteInt32(ServerPackets.SFadeoutBGM)
                                                             Socket.SendDataTo(i, buffer.Data, buffer.Head)
@@ -1785,7 +1785,7 @@ Friend Module S_EventLogic
                                                             Console.WriteLine("Sent SMSG: SFadeoutBGM")
 
                                                             buffer.Dispose()
-                                                        Case EventType.EvPlaySound
+                                                        Case EventType.PlaySound
                                                             buffer = New ByteStream(4)
                                                             buffer.WriteInt32(ServerPackets.SPlaySound)
                                                             buffer.WriteString((Trim(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Text1)))
@@ -1795,7 +1795,7 @@ Friend Module S_EventLogic
                                                             Console.WriteLine("Sent SMSG: SPlaySound")
 
                                                             buffer.Dispose()
-                                                        Case EventType.EvStopSound
+                                                        Case EventType.StopSound
                                                             buffer = New ByteStream(4)
                                                             buffer.WriteInt32(ServerPackets.SStopSound)
                                                             Socket.SendDataTo(i, buffer.Data, buffer.Head)
@@ -1804,10 +1804,10 @@ Friend Module S_EventLogic
                                                             Console.WriteLine("Sent SMSG: SStopSound")
 
                                                             buffer.Dispose()
-                                                        Case EventType.EvSetAccess
+                                                        Case EventType.SetAccess
                                                             Player(i).Access = Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1
                                                             SendPlayerData(i)
-                                                        Case EventType.EvOpenShop
+                                                        Case EventType.OpenShop
                                                             If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1 > 0 Then ' shop exists?
                                                                 If Len(Trim$(Shop(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1).Name)) > 0 Then ' name exists?
                                                                     SendOpenShop(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1)
@@ -1815,13 +1815,13 @@ Friend Module S_EventLogic
                                                                     .WaitingForResponse = 2
                                                                 End If
                                                             End If
-                                                        Case EventType.EvOpenBank
+                                                        Case EventType.OpenBank
                                                             SendBank(i)
                                                             TempPlayer(i).InBank = True
                                                             .WaitingForResponse = 3
-                                                        Case EventType.EvGiveExp
+                                                        Case EventType.GiveExp
                                                             GivePlayerExp(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1)
-                                                        Case EventType.EvShowChatBubble
+                                                        Case EventType.ShowChatBubble
                                                             Select Case Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1
                                                                 Case TargetType.Player
                                                                     SendChatBubble(GetPlayerMap(i), i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Text1, ColorType.Brown)
@@ -1830,40 +1830,40 @@ Friend Module S_EventLogic
                                                                 Case TargetType.Event
                                                                     SendChatBubble(GetPlayerMap(i), Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Text1, ColorType.Brown)
                                                             End Select
-                                                        Case EventType.EvLabel
+                                                        Case EventType.Label
                                                             'Do nothing, just a label
-                                                        Case EventType.EvGotoLabel
+                                                        Case EventType.GotoLabel
                                                             'Find the label's list of commands and slot
                                                             FindEventLabel(Trim$(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Text1), GetPlayerMap(i), .EventId, .PageId, .CurSlot, .CurList, .ListLeftOff)
-                                                        Case EventType.EvSpawnNpc
+                                                        Case EventType.SpawnNpc
                                                             If Map(GetPlayerMap(i)).Npc(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1) > 0 Then
                                                                 SpawnNpc(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1, GetPlayerMap(i))
                                                             End If
-                                                        Case EventType.EvFadeIn
+                                                        Case EventType.FadeIn
                                                             SendSpecialEffect(i, EffectTypeFadein)
-                                                        Case EventType.EvFadeOut
+                                                        Case EventType.FadeOut
                                                             SendSpecialEffect(i, EffectTypeFadeout)
-                                                        Case EventType.EvFlashWhite
+                                                        Case EventType.FlashWhite
                                                             SendSpecialEffect(i, EffectTypeFlash)
-                                                        Case EventType.EvSetFog
+                                                        Case EventType.SetFog
                                                             SendSpecialEffect(i, EffectTypeFog, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data3)
-                                                        Case EventType.EvSetWeather
+                                                        Case EventType.SetWeather
                                                             SendSpecialEffect(i, EffectTypeWeather, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2)
-                                                        Case EventType.EvSetTint
+                                                        Case EventType.SetTint
                                                             SendSpecialEffect(i, EffectTypeTint, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data3, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data4)
-                                                        Case EventType.EvWait
+                                                        Case EventType.Wait
                                                             .ActionTimer = GetTimeMs() + Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1
-                                                        Case EventType.EvOpenMail
+                                                        Case EventType.OpenMail
                                                             'SendMailBox(i)
-                                                        Case EventType.EvBeginQuest
+                                                        Case EventType.BeginQuest
                                                             If CanStartQuest(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1) Then
                                                                 QuestMessage(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1, Quest(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1).Chat(1), Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1)
                                                             End If
-                                                        Case EventType.EvEndQuest
+                                                        Case EventType.EndQuest
                                                             If CanEndQuest(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1) Then
                                                                 EndQuest(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1)
                                                             End If
-                                                        Case EventType.EvQuestTask
+                                                        Case EventType.QuestTask
                                                             If QuestInProgress(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1) Then
                                                                 If Player(i).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1).ActualTask = Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2 Then
                                                                     If Quest(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1).Task(Player(i).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1).ActualTask).TaskType = QuestType.TalkEvent OrElse Quest(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1).Task(Player(i).PlayerQuest(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1).ActualTask).TaskType = QuestType.Fetch Then
@@ -1871,7 +1871,7 @@ Friend Module S_EventLogic
                                                                     End If
                                                                 End If
                                                             End If
-                                                        Case EventType.EvShowPicture
+                                                        Case EventType.ShowPicture
                                                             buffer = New ByteStream(4)
                                                             buffer.WriteInt32(ServerPackets.SPic)
                                                             buffer.WriteInt32(0)
@@ -1886,7 +1886,7 @@ Friend Module S_EventLogic
                                                             Console.WriteLine("Sent SMSG: SPic evShowPicture")
 
                                                             buffer.Dispose()
-                                                        Case EventType.EvHidePicture
+                                                        Case EventType.HidePicture
                                                             buffer = New ByteStream(4)
                                                             buffer.WriteInt32(ServerPackets.SPic)
                                                             buffer.WriteInt32(1)
@@ -1897,7 +1897,7 @@ Friend Module S_EventLogic
                                                             Console.WriteLine("Sent SMSG: SPic evHidePicture")
 
                                                             buffer.Dispose()
-                                                        Case EventType.EvWaitMovement
+                                                        Case EventType.WaitMovement
                                                             If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1 <= Map(GetPlayerMap(i)).EventCount Then
                                                                 If Map(GetPlayerMap(i)).Events(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1).Globals = 1 Then
                                                                     .WaitingForResponse = 4
@@ -1909,7 +1909,7 @@ Friend Module S_EventLogic
                                                                     .EventMovingType = 0
                                                                 End If
                                                             End If
-                                                        Case EventType.EvHoldPlayer
+                                                        Case EventType.HoldPlayer
                                                             buffer = New ByteStream(4)
                                                             buffer.WriteInt32(ServerPackets.SHoldPlayer)
                                                             buffer.WriteInt32(0)
@@ -1919,7 +1919,7 @@ Friend Module S_EventLogic
                                                             Console.WriteLine("Sent SMSG: SHoldPlayer")
 
                                                             buffer.Dispose()
-                                                        Case EventType.EvReleasePlayer
+                                                        Case EventType.ReleasePlayer
                                                             buffer = New ByteStream(4)
                                                             buffer.WriteInt32(ServerPackets.SHoldPlayer)
                                                             buffer.WriteInt32(1)
@@ -2025,7 +2025,7 @@ Friend Module S_EventLogic
                 If removeEventProcess = False Then
                     'If we are still here, then we are good to process shit :D
                     Select Case Map(mapNum).Events(eventID).Pages(pageID).CommandList(CurList).Commands(CurSlot).Index
-                        Case EventType.EvShowChoices
+                        Case EventType.ShowChoices
                             If Len(Trim$(Map(mapNum).Events(eventID).Pages(pageID).CommandList(CurList).Commands(CurSlot).Text2)) > 0 Then
                                 w = 1
                                 If Len(Trim$(Map(mapNum).Events(eventID).Pages(pageID).CommandList(CurList).Commands(CurSlot).Text3)) > 0 Then
@@ -2060,7 +2060,7 @@ Friend Module S_EventLogic
                                 End If
                             End If
                             w = 0
-                        Case EventType.EvCondition
+                        Case EventType.Condition
                             If CurrentListOption(CurList) = 0 Then
                                 CurrentListOption(CurList) = 1
                                 ListLeftOff(CurList) = CurSlot
@@ -2074,7 +2074,7 @@ Friend Module S_EventLogic
                             ElseIf CurrentListOption(CurList) = 2 Then
                                 CurrentListOption(CurList) = 0
                             End If
-                        Case EventType.EvLabel
+                        Case EventType.Label
                             'Do nothing, just a label
                             If Trim$(Map(mapNum).Events(eventID).Pages(pageID).CommandList(CurList).Commands(CurSlot).Text1) = Trim$(Label) Then
                                 Exit Sub
@@ -2524,38 +2524,102 @@ Friend Module S_EventLogic
 
         Dim buffer As ByteStream
         If TempPlayer(index).EventMap.CurrentEvents > 0 Then
-            For i = 1 To TempPlayer(index).EventMap.CurrentEvents
-                buffer = New ByteStream(4)
-                buffer.WriteInt32(ServerPackets.SSpawnEvent)
-                buffer.WriteInt32(TempPlayer(index).EventMap.EventPages(i).EventId)
-                With TempPlayer(index).EventMap.EventPages(i)
-                    buffer.WriteString((Trim$(Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Name)))
-                    buffer.WriteInt32(.Dir)
-                    buffer.WriteByte(.GraphicType)
-                    buffer.WriteInt32(.Graphic)
-                    buffer.WriteInt32(.GraphicX)
-                    buffer.WriteInt32(.GraphicX2)
-                    buffer.WriteInt32(.GraphicY)
-                    buffer.WriteInt32(.GraphicY2)
-                    buffer.WriteInt32(.MovementSpeed)
-                    buffer.WriteInt32(.X)
-                    buffer.WriteInt32(.Y)
-                    buffer.WriteByte(.Position)
-                    buffer.WriteInt32(.Visible)
-                    buffer.WriteInt32(Map(mapNum).Events(.EventId).Pages(.PageId).WalkAnim)
-                    buffer.WriteInt32(Map(mapNum).Events(.EventId).Pages(.PageId).DirFix)
-                    buffer.WriteInt32(Map(mapNum).Events(.EventId).Pages(.PageId).WalkThrough)
-                    buffer.WriteInt32(Map(mapNum).Events(.EventId).Pages(.PageId).ShowName)
-                    buffer.WriteInt32(Map(mapNum).Events(.EventId).Pages(.PageId).QuestNum)
-                End With
-                Socket.SendDataTo(index, buffer.Data, buffer.Head)
+            For i = 0 To TempPlayer(index).EventMap.CurrentEvents
+                If TempPlayer(index).EventMap.EventPages(i).EventId > 0 Then
+                    buffer = New ByteStream(4)
+                    buffer.WriteInt32(ServerPackets.SSpawnEvent)
+                    buffer.WriteInt32(TempPlayer(index).EventMap.EventPages(i).EventId)
+                    With TempPlayer(index).EventMap.EventPages(i)
+                        buffer.WriteString((Trim$(Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Name)))
+                        buffer.WriteInt32(.Dir)
+                        buffer.WriteByte(.GraphicType)
+                        buffer.WriteInt32(.Graphic)
+                        buffer.WriteInt32(.GraphicX)
+                        buffer.WriteInt32(.GraphicX2)
+                        buffer.WriteInt32(.GraphicY)
+                        buffer.WriteInt32(.GraphicY2)
+                        buffer.WriteInt32(.MovementSpeed)
+                        buffer.WriteInt32(.X)
+                        buffer.WriteInt32(.Y)
+                        buffer.WriteByte(.Position)
+                        buffer.WriteInt32(.Visible)
+                        buffer.WriteInt32(Map(mapNum).Events(.EventId).Pages(.PageId).WalkAnim)
+                        buffer.WriteInt32(Map(mapNum).Events(.EventId).Pages(.PageId).DirFix)
+                        buffer.WriteInt32(Map(mapNum).Events(.EventId).Pages(.PageId).WalkThrough)
+                        buffer.WriteInt32(Map(mapNum).Events(.EventId).Pages(.PageId).ShowName)
+                        buffer.WriteInt32(Map(mapNum).Events(.EventId).Pages(.PageId).QuestNum)
+                    End With
+                    Socket.SendDataTo(index, buffer.Data, buffer.Head)
 
-                AddDebug("Sent SMSG: SSpawnEvent For Player")
+                    AddDebug("Sent SMSG: SSpawnEvent For Player")
 
-                buffer.Dispose()
+                    buffer.Dispose()
+                End  If
             Next
         End If
 
     End Sub
+
+    Function TriggerEvent(Index As Integer, i As Integer, triggerType As Byte, x As Integer, y As Integer)
+        If TempPlayer(index).EventMap.CurrentEvents > 0 Then
+            For z = 0 To TempPlayer(index).EventMap.CurrentEvents
+                If TempPlayer(index).EventMap.EventPages(z).EventId = i Then
+                    i = z
+                    Exit For
+                End If
+            Next
+        End If
+
+        If TempPlayer(index).EventMap.EventPages(i).EventId = 0 Then
+            Exit Function
+        End If
+
+        If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).Trigger <> triggerType Then
+            Exit Function
+        End If
+
+        Select Case GetPlayerDir(index)
+            Case DirectionType.Up
+
+                If GetPlayerY(index) = 0 Then Exit Function
+                x = GetPlayerX(index)
+                y = GetPlayerY(index) - 1
+            Case DirectionType.Down
+
+                If GetPlayerY(index) = Map(GetPlayerMap(index)).MaxY Then Exit Function
+                x = GetPlayerX(index)
+                y = GetPlayerY(index) + 1
+            Case DirectionType.Left
+
+                If GetPlayerX(index) = 0 Then Exit Function
+                x = GetPlayerX(index) - 1
+                y = GetPlayerY(index)
+            Case DirectionType.Right
+
+                If GetPlayerX(index) = Map(GetPlayerMap(index)).MaxX Then Exit Function
+                x = GetPlayerX(index) + 1
+                y = GetPlayerY(index)
+        End Select
+
+        If x <> TempPlayer(index).EventMap.EventPages(i).X Or y <> TempPlayer(index).EventMap.EventPages(i).Y Then Exit Function
+
+        If Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).CommandListCount > 0 Then
+            If (TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).Active = 0) Then
+                TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId).Active = 1
+                With TempPlayer(index).EventProcessing(TempPlayer(index).EventMap.EventPages(i).EventId)
+                    .ActionTimer = GetTimeMs()
+                    .CurList = 1
+                    .CurSlot = 1
+                    .EventId = TempPlayer(index).EventMap.EventPages(i).EventId
+                    .PageId = TempPlayer(index).EventMap.EventPages(i).PageId
+                    .WaitingForResponse = 0
+                    ReDim .ListLeftOff(Map(GetPlayerMap(index)).Events(TempPlayer(index).EventMap.EventPages(i).EventId).Pages(TempPlayer(index).EventMap.EventPages(i).PageId).CommandListCount)
+                End With
+                Exit Function
+            End If
+        End If
+
+        TriggerEvent = True
+    End Function
 
 End Module
