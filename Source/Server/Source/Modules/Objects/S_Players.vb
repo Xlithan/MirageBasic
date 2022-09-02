@@ -2424,11 +2424,6 @@ Module S_Players
         SendTimeTo(index)
         SendGameClockTo(index)
         SendResources(index)
-
-        For i = 0 To MapResource(GetPlayerMap(index)).ResourceCount
-            SendMapResourceTo(index, i)
-        Next
-
         SendTotalOnlineToAll()
 
         ' Warp the player to his saved location
