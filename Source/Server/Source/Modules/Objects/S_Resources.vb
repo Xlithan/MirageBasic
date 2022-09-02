@@ -270,7 +270,7 @@ Friend Module S_Resources
         If MapResource(mapnum).ResourceCount > 0 Then
 
             For i = 0 To MapResource(mapnum).ResourceCount
-                buffer.WriteInt32(MapResource(mapnum).ResourceData(i).State)
+                buffer.WriteByte(MapResource(mapnum).ResourceData(i).State)
                 buffer.WriteInt32(MapResource(mapnum).ResourceData(i).X)
                 buffer.WriteInt32(MapResource(mapnum).ResourceData(i).Y)
             Next
@@ -293,7 +293,7 @@ Friend Module S_Resources
         If MapResource(mapNum).ResourceCount > 0 Then
 
             For i = 0 To MapResource(mapNum).ResourceCount
-                buffer.WriteInt32(MapResource(mapNum).ResourceData(i).State)
+                buffer.WriteByte(MapResource(mapNum).ResourceData(i).State)
                 buffer.WriteInt32(MapResource(mapNum).ResourceData(i).X)
                 buffer.WriteInt32(MapResource(mapNum).ResourceData(i).Y)
             Next
