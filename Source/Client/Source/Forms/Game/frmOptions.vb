@@ -55,7 +55,7 @@ Friend Class FrmOptions
 
         If chkFullscreen.Checked Then
             If Settings.Fullscreen = 0 Then
-                MsgBox("Please restart the client for the changes to take effect.", vbOKOnly, Settings.GameName)
+                MsgBox(Language.Game.Fullscreen, vbOKOnly, Settings.GameName)
             End If
             Settings.Fullscreen = 1
         Else

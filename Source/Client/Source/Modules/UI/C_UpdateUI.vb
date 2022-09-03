@@ -46,6 +46,7 @@ Module C_UpdateUI
     Friend VbKeyShift As Boolean
     Friend VbKeyControl As Boolean
     Friend VbKeyAlt As Boolean
+    Friend VbKeyEnter As Boolean
 
     Friend PicHpWidth As Integer
     Friend PicManaWidth As Integer

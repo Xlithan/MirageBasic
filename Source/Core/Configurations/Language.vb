@@ -91,6 +91,7 @@ Public Class LanguageDef
         Public MapCurLoc As String = "Loc() x: {0} y: {1}"
         Public MapLoc As String = "Cur Loc x: {0} y: {1}"
 
+        Public Fullscreen As String = "Please restart the client for the changes to take effect."
     End Class
 
     Public Chat As New ChatDef

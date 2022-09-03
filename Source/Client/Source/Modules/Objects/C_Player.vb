@@ -111,9 +111,9 @@ Module C_Player
         If IsTryingToMove() AndAlso CanMove() Then
             ' Check if player has the shift key down for running
             If VbKeyShift Then
-                Player(Myindex).Moving = MovementType.Running
-            Else
                 Player(Myindex).Moving = MovementType.Walking
+            Else
+                Player(Myindex).Moving = MovementType.Running               
             End If
 
             Select Case GetPlayerDir(Myindex)
