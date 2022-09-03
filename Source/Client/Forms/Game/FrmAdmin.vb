@@ -13,6 +13,7 @@ Friend Class FrmAdmin
         Next
 
         SendRequestMapreport()
+        SendRequestItems()
     End Sub
 
 #Region "Moderation"
@@ -295,6 +296,10 @@ Friend Class FrmAdmin
         End If
 
         SendMapRespawn()
+    End Sub
+
+    Private Sub btnRefreshItems_Click(sender As Object, e As EventArgs) Handles btnRefreshItems.Click
+        SendRequestItems
     End Sub
 
 #End Region

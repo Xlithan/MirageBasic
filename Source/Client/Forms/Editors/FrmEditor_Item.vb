@@ -455,6 +455,10 @@ Friend Class frmEditor_Item
         EditorItem_DrawFurniture()
     End Sub
 
+    Private Sub btnSpawn_Click(sender As Object, e As EventArgs) Handles btnSpawn.Click
+        SendSpawnItem(Editorindex, nudSpanwValue.Value)
+    End Sub
+
 #End Region
 
 End Class
