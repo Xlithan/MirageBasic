@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Net.Mime.MediaTypeNames
 Imports Asfw
 Imports Asfw.IO
 Imports MirageBasic.Core
@@ -182,6 +183,13 @@ Module S_NetworkReceive
             'Get the Data
             username = EKeyPair.DecryptString(buffer.ReadString)
             password = EKeyPair.DecryptString(buffer.ReadString)
+
+            ' Check versions
+            If EKeyPair.DecryptString(buffer.ReadString) <> Settings.Version Then
+                AlertMsg(index, "Version outdated, please visit " & Settings.Website)
+                Exit Sub
+            End If
+
             ' Prevent hacking
             If username.Trim.Length < 3 OrElse password.Trim.Length < 3 Then
                 AlertMsg(index, "Your username and password must be at least three characters in length")
@@ -213,7 +221,7 @@ Module S_NetworkReceive
 
             IP = Microsoft.VisualBasic.Strings.Mid$(IP, 1, i)
             If IsBanned(IP) Then
-                AlertMsg(index, "Your Banned!")
+                AlertMsg(index, "You are Banned!")
             End If
 
             ' Check to see if account already exists
@@ -296,12 +304,18 @@ Module S_NetworkReceive
 
                 IP = Mid$(IP, 1, i)
                 If IsBanned(IP) Then
-                    AlertMsg(index, "Your Banned!")
+                    AlertMsg(index, "You are Banned!")
                 End If
 
                 ' Get the data
                 Name = EKeyPair.DecryptString(buffer.ReadString())
                 Password = EKeyPair.DecryptString(buffer.ReadString())
+
+                ' Check versions
+                If EKeyPair.DecryptString(buffer.ReadString) <> Settings.Version Then
+                    AlertMsg(index, "Version outdated, please visit " & Settings.Website)
+                    Exit Sub
+                End If
 
                 If Name.Trim.Length < 3 OrElse Password.Trim.Length < 3 Then
                     AlertMsg(index, "Your name and password must be at least three characters in length")

@@ -10,6 +10,7 @@ Module C_NetworkSend
         buffer.WriteInt32(Packets.ClientPackets.CNewAccount)
         buffer.WriteString((EKeyPair.EncryptString(name)))
         buffer.WriteString((EKeyPair.EncryptString(password)))
+        buffer.WriteString((EKeyPair.EncryptString(Settings.Version)))
         Socket.SendData(buffer.Data, buffer.Head)
 
         buffer.Dispose()
@@ -35,7 +36,7 @@ Module C_NetworkSend
         buffer.WriteInt32(ClientPackets.CLogin)
         buffer.WriteString((EKeyPair.EncryptString(name)))
         buffer.WriteString((EKeyPair.EncryptString(password)))
-        buffer.WriteString((EKeyPair.EncryptString(Application.ProductVersion)))
+        buffer.WriteString((EKeyPair.EncryptString(Settings.Version)))
         Socket.SendData(buffer.Data, buffer.Head)
 
         buffer.Dispose()
