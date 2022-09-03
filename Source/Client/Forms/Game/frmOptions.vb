@@ -82,6 +82,7 @@ Friend Class FrmOptions
         optSOn.Checked = Settings.Sound
         lblVolume.Text = "Volume: " & Settings.Volume
         scrlVolume.Value = Settings.Volume
+        TopMost = True
     End Sub
 
 #End Region
