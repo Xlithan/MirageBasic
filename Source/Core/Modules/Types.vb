@@ -17,7 +17,6 @@ Public Module modTypes
     Public TempPlayer(MAX_PLAYERS) As TempPlayerStruct
     Public Player(MAX_PLAYERS) As PlayerStruct
     Public InstancedMaps(MAX_INSTANCED_MAPS) As InstancedMap
-    Public PlayerInv(MAX_INV) As PlayerInvStruct
     Public CharSelection() As CharSelStruct
     Public House() As HouseStruct
     Public HouseConfig() As HouseStruct
@@ -391,7 +390,6 @@ Public Module modTypes
     End Structure
 
     Public Structure TempPlayerStruct
-
         ' Non saved local vars
         Dim InGame As Boolean
 

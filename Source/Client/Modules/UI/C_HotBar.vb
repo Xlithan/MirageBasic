@@ -133,7 +133,7 @@ Friend Module C_HotBar
                 End If
 
             ElseIf Player(Myindex).Hotbar(i).SlotType = 2 Then
-                num = PlayerInv(Player(Myindex).Hotbar(i).Slot).Num
+                num = Player(Myindex).Inv(Player(Myindex).Hotbar(i).Slot).Num
 
                 If num > 0 Then
                     pic = Item(num).Pic

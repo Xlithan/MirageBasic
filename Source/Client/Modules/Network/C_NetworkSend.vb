@@ -299,9 +299,9 @@ Module C_NetworkSend
 
         ' do basic checks
         If invNum <= 0 OrElse invNum > MAX_INV Then Exit Sub
-        If PlayerInv(invNum).Num < 0 OrElse PlayerInv(invNum).Num > MAX_ITEMS Then Exit Sub
+        If player(Myindex).Inv(invNum).Num < 0 OrElse Player(Myindex).Inv(invNum).Num > MAX_ITEMS Then Exit Sub
         If Item(GetPlayerInvItemNum(Myindex, invNum)).Type = ItemType.Currency OrElse Item(GetPlayerInvItemNum(Myindex, invNum)).Stackable = 1 Then
-            If amount <= 0 OrElse amount > PlayerInv(invNum).Value Then Exit Sub
+            If amount <= 0 OrElse amount > Player(Myindex).Inv(invNum).Value Then Exit Sub
         End If
 
         buffer.WriteInt32(ClientPackets.CMapDropItem)

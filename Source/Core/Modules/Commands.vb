@@ -138,7 +138,7 @@
     End Sub
 
     Public Function GetPlayerInvItemNum(index As Integer, invslot As Integer) As Integer
-        GetPlayerInvItemNum = PlayerInv(invslot).Num
+        GetPlayerInvItemNum = Player(index).Inv(invslot).Num
     End Function
 
     Public Sub SetPlayerName(index As Integer, name As String)
@@ -159,15 +159,15 @@
     End Sub
 
     Public Sub SetPlayerInvItemNum(index As Integer, invslot As Integer, itemnum As Integer)
-        PlayerInv(invslot).Num = itemnum
+        Player(index).Inv(invslot).Num = itemnum
     End Sub
 
     Public Function GetPlayerInvItemValue(index As Integer, invslot As Integer) As Integer
-        GetPlayerInvItemValue = PlayerInv(invslot).Value
+        GetPlayerInvItemValue = Player(index).Inv(invslot).Value
     End Function
 
     Public Sub SetPlayerInvItemValue(index As Integer, invslot As Integer, itemValue As Integer)
-        PlayerInv(invslot).Value = itemValue
+        Player(index).Inv(invslot).Value = itemValue
     End Sub
 
     Public Function GetPlayerPoints(index As Integer) As Integer

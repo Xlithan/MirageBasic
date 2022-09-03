@@ -883,7 +883,7 @@ Friend Module C_Gui
             Else
                 If FurnitureSelected > 0 Then
                     If Player(Myindex).InHouse = Myindex Then
-                        If Item(PlayerInv(FurnitureSelected).Num).Type = ItemType.Furniture Then
+                        If Item(Player(Myindex).Inv(FurnitureSelected).Num).Type = ItemType.Furniture Then
                             buffer = New ByteStream(4)
                             buffer.WriteInt32(ClientPackets.CPlaceFurniture)
                             i = CurX
