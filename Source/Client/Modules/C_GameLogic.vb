@@ -158,7 +158,7 @@ Module C_GameLogic
 
                 ' check if we need to end the CD icon
                 If NumSkillIcons > 0 Then
-                   For i = 0 To MAX_PLAYER_SKILLS
+                   For i = 1 To MAX_PLAYER_SKILLS
                         If PlayerSkills(i) > 0 Then
                             If SkillCd(i) > 0 Then
                                 If SkillCd(i) + (Skill(PlayerSkills(i)).CdTime * 1000) < tick Then

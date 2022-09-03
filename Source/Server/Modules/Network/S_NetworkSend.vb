@@ -184,7 +184,7 @@ Module S_NetworkSend
 
         AddDebug("Sent SMSG: SPlayerInv")
 
-        For i = 0 To MAX_INV
+        For i = 1 to MAX_INV
             buffer.WriteInt32(GetPlayerInvItemNum(index, i))
             buffer.WriteInt32(GetPlayerInvItemValue(index, i))
             buffer.WriteString((Player(index).RandInv(i).Prefix.Trim))
@@ -1050,7 +1050,7 @@ Module S_NetworkSend
 
         AddDebug("Sent SMSG: SBank")
 
-        For i = 0 To MAX_BANK
+        For i = 1 To MAX_BANK
             buffer.WriteInt32(Bank(index).Item(i).Num)
             buffer.WriteInt32(Bank(index).Item(i).Value)
 
@@ -1136,7 +1136,7 @@ Module S_NetworkSend
 
         If DataType = 0 Then ' own inventory
 
-            For i = 0 To MAX_INV
+            For i = 1 to MAX_INV
                 buffer.WriteInt32(TempPlayer(index).TradeOffer(i).Num)
                 buffer.WriteInt32(TempPlayer(index).TradeOffer(i).Value)
 
@@ -1153,7 +1153,7 @@ Module S_NetworkSend
             Next
         ElseIf DataType = 1 Then ' other inventory
 
-            For i = 0 To MAX_INV
+            For i = 1 to MAX_INV
                 buffer.WriteInt32(GetPlayerInvItemNum(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num))
                 buffer.WriteInt32(TempPlayer(tradeTarget).TradeOffer(i).Value)
 
@@ -1225,7 +1225,7 @@ Module S_NetworkSend
 
         AddDebug("Sent SMSG: SSkills")
 
-        For i = 0 To MAX_PLAYER_SKILLS
+        For i = 1 To MAX_PLAYER_SKILLS
             buffer.WriteInt32(GetPlayerSkill(index, i))
         Next
 

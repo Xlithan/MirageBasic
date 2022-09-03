@@ -26,7 +26,7 @@ Module C_Banks
     Sub ClearBank()
         ReDim Bank.Item(MAX_BANK)
         ReDim Bank.ItemRand(MAX_BANK)
-        For x = 0 To MAX_BANK
+        For x = 1 To MAX_BANK
             ReDim Bank.ItemRand(x).Stat(StatType.Count - 1)
         Next
     End Sub
@@ -38,7 +38,7 @@ Module C_Banks
     Friend Sub Packet_OpenBank(ByRef data() As Byte)
         Dim i As Integer, x As Integer
         Dim buffer As New ByteStream(data)
-       For i = 0 To MAX_BANK
+       For i = 1 To MAX_BANK
             Bank.Item(i).Num = buffer.ReadInt32
             Bank.Item(i).Value = buffer.ReadInt32
 
@@ -126,7 +126,7 @@ Module C_Banks
         'close
         DrawText(BankWindowX + 140, BankWindowY + BankPanelGfxInfo.Height - 20, "Close Bank", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow, 15)
 
-       For i = 0 To MAX_BANK
+       For i = 1 To MAX_BANK
             itemnum = GetBankItemNum(i)
             If itemnum > 0 AndAlso itemnum <= MAX_ITEMS Then
 

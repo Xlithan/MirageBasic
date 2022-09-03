@@ -1986,7 +1986,7 @@ Module S_NetworkReceive
             ' clear out their trade offers
             ReDim TempPlayer(index).TradeOffer(MAX_INV)
             ReDim TempPlayer(tradetarget).TradeOffer(MAX_INV)
-            For i = 0 To MAX_INV
+            For i = 1 to MAX_INV
                 TempPlayer(index).TradeOffer(i).Num = 0
                 TempPlayer(index).TradeOffer(i).Value = 0
                 TempPlayer(tradetarget).TradeOffer(i).Num = 0
@@ -2025,7 +2025,7 @@ Module S_NetworkReceive
         End If
 
         ' take their items
-        For i = 0 To MAX_INV
+        For i = 1 to MAX_INV
             ' player
             If TempPlayer(index).TradeOffer(i).Num > 0 Then
                 itemNum = Player(index).Inv(TempPlayer(index).TradeOffer(i).Num).Num
@@ -2051,7 +2051,7 @@ Module S_NetworkReceive
         Next
 
         ' taken all items. now they can't not get items because of no inventory space.
-        For i = 0 To MAX_INV
+        For i = 1 to MAX_INV
             ' player
             If tmpTradeItem2(i).Num > 0 Then
                 ' give away!
@@ -2068,7 +2068,7 @@ Module S_NetworkReceive
         SendInventory(tradeTarget)
 
         ' they now have all the items. Clear out values + let them out of the trade.
-        For i = 0 To MAX_INV
+        For i = 1 to MAX_INV
             TempPlayer(index).TradeOffer(i).Num = 0
             TempPlayer(index).TradeOffer(i).Value = 0
             TempPlayer(tradeTarget).TradeOffer(i).Num = 0
@@ -2092,7 +2092,7 @@ Module S_NetworkReceive
 
         tradeTarget = TempPlayer(index).InTrade
 
-        For i = 0 To MAX_INV
+        For i = 1 to MAX_INV
             TempPlayer(index).TradeOffer(i).Num = 0
             TempPlayer(index).TradeOffer(i).Value = 0
             TempPlayer(tradeTarget).TradeOffer(i).Num = 0
@@ -2133,7 +2133,7 @@ Module S_NetworkReceive
         If Item(itemnum).Type = ItemType.Currency OrElse Item(itemnum).Stackable = 1 Then
 
             ' check if already offering same currency item
-            For i = 0 To MAX_INV
+            For i = 1 to MAX_INV
 
                 If TempPlayer(index).TradeOffer(i).Num = invslot Then
                     ' add amount
@@ -2159,7 +2159,7 @@ Module S_NetworkReceive
             Next
         Else
             ' make sure they're not already offering it
-            For i = 0 To MAX_INV
+            For i = 1 to MAX_INV
                 If TempPlayer(index).TradeOffer(i).Num = invslot Then
                     PlayerMsg(index, "You've already offered this item.", ColorType.BrightRed)
                     Exit Sub
@@ -2168,7 +2168,7 @@ Module S_NetworkReceive
         End If
 
         ' not already offering - find earliest empty slot
-        For i = 0 To MAX_INV
+        For i = 1 to MAX_INV
             If TempPlayer(index).TradeOffer(i).Num = 0 Then
                 emptyslot = i
                 Exit For

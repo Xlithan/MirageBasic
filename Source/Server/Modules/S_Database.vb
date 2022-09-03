@@ -1098,7 +1098,7 @@ Module modDatabase
         Dim reader As New ByteStream()
         ByteFile.Load(filename, reader)
 
-        For i = 0 To MAX_BANK
+        For i = 1 To MAX_BANK
             Bank(index).Item(i).Num = reader.ReadByte()
             Bank(index).Item(i).Value = reader.ReadInt32()
 
@@ -1119,7 +1119,7 @@ Module modDatabase
 
         Dim writer As New ByteStream(100)
 
-        For i = 0 To MAX_BANK
+        For i = 1 To MAX_BANK
             writer.WriteByte(Bank(index).Item(i).Num)
             writer.WriteInt32(Bank(index).Item(i).Value)
 
@@ -1151,7 +1151,7 @@ Module modDatabase
         ReDim Bank(index).Item(MAX_BANK)
         ReDim Bank(index).ItemRand(MAX_BANK)
 
-        For i = 0 To MAX_BANK
+        For i = 1 To MAX_BANK
 
             Bank(index).Item(i).Num = 0
             Bank(index).Item(i).Value = 0
@@ -1182,7 +1182,7 @@ Module modDatabase
         Next
 
         ReDim Player(index).Inv(MAX_INV)
-        For i = 0 To MAX_INV
+        For i = 1 to MAX_INV
             Player(index).Inv(i).Num = 0
             Player(index).Inv(i).Value = 0
         Next
@@ -1196,7 +1196,7 @@ Module modDatabase
         Player(index).Sex = 0
 
         ReDim Player(index).Skill(MAX_PLAYER_SKILLS)
-        For i = 0 To MAX_PLAYER_SKILLS
+        For i = 1 To MAX_PLAYER_SKILLS
             Player(index).Skill(i) = 0
         Next
 
@@ -1267,7 +1267,7 @@ Module modDatabase
 
         'random items
         ReDim Player(index).RandInv(MAX_INV)
-        For i = 0 To MAX_INV
+        For i = 1 to MAX_INV
             Player(index).RandInv(i).Prefix = ""
             Player(index).RandInv(i).Suffix = ""
             Player(index).RandInv(i).Rarity = 0
@@ -1337,7 +1337,7 @@ Module modDatabase
 
         Player(index).Exp = reader.ReadInt32()
 
-        For i = 0 To MAX_INV
+        For i = 1 to MAX_INV
             Player(index).Inv(i).Num = reader.ReadByte()
             Player(index).Inv(i).Value = reader.ReadInt32()
         Next
@@ -1349,7 +1349,7 @@ Module modDatabase
         Player(index).Points = reader.ReadByte()
         Player(index).Sex = reader.ReadByte()
 
-        For i = 0 To MAX_PLAYER_SKILLS
+        For i = 1 To MAX_PLAYER_SKILLS
             Player(index).Skill(i) = reader.ReadByte()
         Next
 
@@ -1416,7 +1416,7 @@ Module modDatabase
 
         'random items
         ReDim Player(index).RandInv(MAX_INV)
-        For i = 0 To MAX_INV
+        For i = 1 to MAX_INV
             Player(index).RandInv(i).Prefix = reader.ReadString()
             Player(index).RandInv(i).Suffix = reader.ReadString()
             Player(index).RandInv(i).Rarity = reader.ReadInt32()
@@ -1484,7 +1484,7 @@ Module modDatabase
 
         writer.WriteInt32(Player(index).Exp)
 
-        For i = 0 To MAX_INV
+        For i = 1 to MAX_INV
             writer.WriteByte(Player(index).Inv(i).Num)
             writer.WriteInt32(Player(index).Inv(i).Value)
         Next
@@ -1496,7 +1496,7 @@ Module modDatabase
         writer.WriteByte(Player(index).Points)
         writer.WriteByte(Player(index).Sex)
 
-        For i = 0 To MAX_PLAYER_SKILLS
+        For i = 1 To MAX_PLAYER_SKILLS
             writer.WriteByte(Player(index).Skill(i))
         Next
 
@@ -1556,7 +1556,7 @@ Module modDatabase
         Next
 
         'random items
-        For i = 0 To MAX_INV
+        For i = 1 to MAX_INV
             writer.WriteString(Player(index).RandInv(i).Prefix)
             writer.WriteString(Player(index).RandInv(i).Suffix)
             writer.WriteInt32(Player(index).RandInv(i).Rarity)

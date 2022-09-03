@@ -795,7 +795,7 @@ Module S_Players
 
         If GetPlayerLevel(Victim) >= 10 Then
 
-            For z = 0 To MAX_INV
+            For z = 1 To MAX_INV
                 If GetPlayerInvItemNum(Victim, z) > 0 Then
                     invcount += 1
                 End If
@@ -829,7 +829,7 @@ Module S_Players
                 Next
             Else
 
-                For x = 0 To MAX_INV
+                For x = 1 To MAX_INV
                     If GetPlayerInvItemNum(Victim, x) > 0 Then
                         j += 1
 
@@ -1355,7 +1355,7 @@ Module S_Players
             Exit Function
         End If
 
-        For i = 0 To MAX_INV
+        For i = 1 to MAX_INV
             ' Check to see if the player has the item
             If GetPlayerInvItemNum(index, i) = ItemNum Then
                 If Item(ItemNum).Type = ItemType.Currency OrElse Item(ItemNum).Stackable = 1 Then
@@ -1379,7 +1379,7 @@ Module S_Players
             Exit Function
         End If
 
-        For i = 0 To MAX_INV
+        For i = 1 to MAX_INV
             ' Check to see if the player has the item
             If GetPlayerInvItemNum(index, i) = ItemNum Then
                 FindItemSlot = i
@@ -1489,7 +1489,7 @@ Module S_Players
 
         If Item(ItemNum).Type = ItemType.Currency OrElse Item(ItemNum).Stackable = 1 Then
             ' If currency then check to see if they already have an instance of the item and add it to that
-            For i = 0 To MAX_INV
+            For i = 1 to MAX_INV
                 If GetPlayerInvItemNum(index, i) = ItemNum Then
                     FindOpenInvSlot = i
                     Exit Function
@@ -1497,7 +1497,7 @@ Module S_Players
             Next
         End If
 
-        For i = 0 To MAX_INV
+        For i = 1 to MAX_INV
             ' Try to find an open free slot
             If GetPlayerInvItemNum(index, i) = 0 Then
                 FindOpenInvSlot = i
@@ -1517,7 +1517,7 @@ Module S_Players
             Exit Function
         End If
 
-        For i = 0 To MAX_INV
+        For i = 1 to MAX_INV
 
             ' Check to see if the player has the item
             If GetPlayerInvItemNum(index, i) = ItemNum Then
@@ -2467,7 +2467,7 @@ Module S_Players
                 tradeTarget = TempPlayer(index).InTrade
                 PlayerMsg(tradeTarget, String.Format("{0} has declined the trade.", GetPlayerName(index)), ColorType.BrightRed)
                 ' clear out trade
-                For i = 0 To MAX_INV
+                For i = 1 to MAX_INV
                     TempPlayer(tradeTarget).TradeOffer(i).Num = 0
                     TempPlayer(tradeTarget).TradeOffer(i).Value = 0
                 Next
@@ -2626,7 +2626,7 @@ Module S_Players
     Function FindOpenSkillSlot(index As Integer) As Integer
         Dim i As Integer
 
-        For i = 0 To MAX_PLAYER_SKILLS
+        For i = 1 To MAX_PLAYER_SKILLS
 
             If GetPlayerSkill(index, i) = 0 Then
                 FindOpenSkillSlot = i
@@ -2656,7 +2656,7 @@ Module S_Players
     Function HasSkill(index As Integer, Skillnum As Integer) As Boolean
         Dim i As Integer
 
-        For i = 0 To MAX_PLAYER_SKILLS
+        For i = 1 To MAX_PLAYER_SKILLS
 
             If GetPlayerSkill(index, i) = Skillnum Then
                 HasSkill = True
@@ -2890,7 +2890,7 @@ Module S_Players
         If ItemNum < 0 OrElse ItemNum > MAX_ITEMS Then Exit Function
 
         If Item(ItemNum).Type = ItemType.Currency OrElse Item(ItemNum).Stackable = 1 Then
-            For i = 0 To MAX_BANK
+            For i = 1 To MAX_BANK
                 If GetPlayerBankItemNum(index, i) = ItemNum Then
                     FindOpenBankSlot = i
                     Exit Function
@@ -2898,7 +2898,7 @@ Module S_Players
             Next
         End If
 
-        For i = 0 To MAX_BANK
+        For i = 1 To MAX_BANK
             If GetPlayerBankItemNum(index, i) = 0 Then
                 FindOpenBankSlot = i
                 Exit Function

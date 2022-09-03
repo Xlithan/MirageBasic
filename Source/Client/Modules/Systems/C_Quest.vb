@@ -378,7 +378,7 @@ Friend Module C_Quest
             Exit Function
         End If
 
-        For i = 0 To MAX_INV
+        For i = 1 to MAX_INV
 
             ' Check to see if the player has the item
             If GetPlayerInvItemNum(index, i) = itemNum Then
