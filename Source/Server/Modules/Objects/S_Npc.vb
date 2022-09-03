@@ -1055,6 +1055,17 @@ Module S_Npc
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
 
+        Dim user As String
+
+        user = IsEditorLocked(index, EditorType.NPC)
+
+        If user <> "" Then 
+            PlayerMsg(index, "The game editor is locked and being used by " + user + ".", ColorType.BrightRed)
+            Exit Sub
+        End If
+
+        TempPlayer(index).Editor = EditorType.NPC
+
         Dim Buffer = New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SNpcEditor)
         Socket.SendDataTo(index, Buffer.Data, Buffer.Head)

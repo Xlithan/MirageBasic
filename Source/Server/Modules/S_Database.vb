@@ -1317,7 +1317,7 @@ Module modDatabase
         Player(index).Pet.AdoptiveStats = 0
         Player(index).Pet.Points = 0
         Player(index).Pet.Exp = 0
-
+        TempPlayer(index).Editor = -1
     End Sub
 
     Sub LoadCharacter(index As Integer)

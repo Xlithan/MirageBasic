@@ -382,6 +382,17 @@ Friend Module S_Housing
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
 
+        Dim user As String
+
+        user = IsEditorLocked(index, EditorType.House)
+
+        If user <> "" Then 
+            PlayerMsg(index, "The game editor is locked and being used by " + user + ".", ColorType.BrightRed)
+            Exit Sub
+        End If
+
+        TempPlayer(index).Editor = EditorType.House
+
         buffer = New ByteStream(4)
         buffer.WriteInt32(ServerPackets.SHouseEdit)
         For i = 0 To MAX_HOUSES

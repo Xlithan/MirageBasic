@@ -13,8 +13,6 @@ Friend Class frmEditor_Job
             lstIndex.Items.Add(i & ": " & Trim(Job(i).Name))
         Next
 
-        Editor = EDITOR_Job
-
         nudMaleSprite.Maximum = NumCharacters
         nudFemaleSprite.Maximum = NumCharacters
 

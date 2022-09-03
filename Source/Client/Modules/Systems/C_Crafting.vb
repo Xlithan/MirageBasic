@@ -276,7 +276,7 @@ Friend Module C_Crafting
     End Sub
 
     Friend Sub RecipeEditorCancel()
-        Editor = 0
+        Editor = -1
         frmEditor_Recipe.Visible = False
         ClearChanged_Recipe()
         ClearRecipes()
@@ -293,7 +293,7 @@ Friend Module C_Crafting
         Next
 
         frmEditor_Recipe.Visible = False
-        Editor = 0
+        Editor = -1
         ClearChanged_Recipe()
     End Sub
 

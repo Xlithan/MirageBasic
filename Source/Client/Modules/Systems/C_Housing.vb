@@ -42,7 +42,7 @@ Friend Module C_Housing
     End Sub
 
     Friend Sub HouseEditorCancel()
-        Editor = 0
+        Editor = -1
         frmEditor_House.Dispose()
 
         ClearChanged_House()
@@ -77,7 +77,7 @@ Friend Module C_Housing
         Socket.SendData(Buffer.Data, Buffer.Head)
         Buffer.Dispose()
         frmEditor_House.Dispose()
-        Editor = 0
+        Editor = -1
 
         ClearChanged_House()
 

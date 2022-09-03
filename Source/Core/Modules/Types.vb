@@ -388,7 +388,6 @@ Public Module modTypes
         Dim Emote As Integer
         Dim EmoteTimer As Integer
         Dim EventTimer As Integer
-
     End Structure
 
     Public Structure TempPlayerStruct
@@ -475,6 +474,8 @@ Public Module modTypes
         Dim PetstopRegen As Boolean
 
         Dim PetstopRegenTimer As Integer
+
+        Dim Editor As Integer
 
     End Structure
 

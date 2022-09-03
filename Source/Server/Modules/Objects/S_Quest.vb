@@ -286,6 +286,17 @@ Friend Module S_Quest
         ' Prevent hacking
         If GetPlayerAccess(index) < modEnumerators.AdminType.Developer Then Exit Sub
 
+        Dim user As String
+
+        user = IsEditorLocked(index, EditorType.Quest)
+
+        If user <> "" Then 
+            PlayerMsg(index, "The game editor is locked and being used by " + user + ".", ColorType.BrightRed)
+            Exit Sub
+        End If
+
+        TempPlayer(index).Editor = EditorType.Quest
+
         Dim Buffer = New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SQuestEditor)
         Socket.SendDataTo(index, Buffer.Data, Buffer.Head)
@@ -359,6 +370,8 @@ Friend Module S_Quest
     End Sub
 
     Sub Packet_RequestQuests(index As Integer, ByRef data() As Byte)
+        TempPlayer(index).Editor = -1
+
         SendQuests(index)
     End Sub
 

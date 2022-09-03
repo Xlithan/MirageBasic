@@ -133,12 +133,25 @@ Friend Module modCrafting
     Sub Packet_RequestRecipes(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestRecipes")
 
+        TempPlayer(index).Editor = -1
+
         SendRecipes(index)
     End Sub
 
     Sub Packet_RequestEditRecipes(index As Integer, ByRef data() As Byte)
         ' Prevent hacking
         If GetPlayerAccess(index) < modEnumerators.AdminType.Developer Then Exit Sub
+
+        Dim user As String
+
+        user = IsEditorLocked(index, EditorType.Recipe)
+
+        If user <> "" Then 
+            PlayerMsg(index, "The game editor is locked and being used by " + user + ".", ColorType.BrightRed)
+            Exit Sub
+        End If
+
+        TempPlayer(index).Editor = EditorType.Recipe
 
         Dim Buffer = New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SRecipeEditor)

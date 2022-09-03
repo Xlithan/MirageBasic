@@ -233,4 +233,17 @@
     Public Sub SetPlayerEquipment(index As Integer, invNum As Integer, equipmentSlot As EquipmentType)
         Player(index).Equipment(equipmentSlot) = invNum
     End Sub
+
+    public Function IsEditorLocked(index As Integer, id As Integer) As String
+        For i = 0 To MAX_PLAYERS
+            If i <> index Then
+                if TempPlayer(i).Editor = id then
+                    IsEditorLocked = GetPlayerName(i)
+                    Exit Function
+                End if
+            End If
+        Next
+
+        IsEditorLocked = ""
+    End Function
 End Module

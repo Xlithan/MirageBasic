@@ -783,12 +783,12 @@ Module C_Pets
 
         frmEditor_Pet.Dispose()
 
-        Editor = 0
+        Editor = -1
         ClearChanged_Pet()
     End Sub
 
     Friend Sub PetEditorCancel()
-        Editor = 0
+        Editor = -1
 
         frmEditor_Pet.Dispose()
 

@@ -200,6 +200,17 @@ Friend Module S_Resources
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
 
+        Dim user As String
+
+        user = IsEditorLocked(index, EditorType.Resource)
+
+        If user <> "" Then 
+            PlayerMsg(index, "The game editor is locked and being used by " + user + ".", ColorType.BrightRed)
+            Exit Sub
+        End If
+
+        TempPlayer(index).Editor = EditorType.Resource
+
         Buffer.WriteInt32(ServerPackets.SResourceEditor)
         Socket.SendDataTo(index, Buffer.Data, Buffer.Head)
 
@@ -248,6 +259,8 @@ Friend Module S_Resources
 
     Sub Packet_RequestResources(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestResources")
+
+        TempPlayer(index).Editor = -1
 
         SendResources(index)
     End Sub

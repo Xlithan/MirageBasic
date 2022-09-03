@@ -913,13 +913,13 @@ Friend Module C_Quest
         Next
 
         frmEditor_Quest.Dispose()
-        Editor = 0
+        Editor = -1
         ClearChanged_Quest()
 
     End Sub
 
     Friend Sub QuestEditorCancel()
-        Editor = 0
+        Editor = -1
         frmEditor_Quest.Dispose()
         ClearChanged_Quest()
         ClearQuests()

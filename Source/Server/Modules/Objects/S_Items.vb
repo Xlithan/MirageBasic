@@ -412,6 +412,8 @@ Friend Module S_Items
     Sub Packet_RequestItems(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestItems")
 
+        TempPlayer(index).Editor = -1
+
         SendItems(index)
     End Sub
 
@@ -420,6 +422,17 @@ Friend Module S_Items
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
+
+        Dim user As String
+
+        user = IsEditorLocked(index, EditorType.Item)
+
+        If user <> "" Then 
+            PlayerMsg(index, "The game editor is locked and being used by " + user + ".", ColorType.BrightRed)
+            Exit Sub
+        End If
+
+        TempPlayer(index).Editor = EditorType.Item
 
         Dim Buffer = New ByteStream(4)
 

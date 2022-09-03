@@ -2475,10 +2475,7 @@ Module S_Players
                 SendCloseTrade(tradeTarget)
             End If
 
-            'pet
-            'ReleasePet(Index)
             ReCallPet(index)
-
             SavePlayer(index)
             SaveBank(index)
 

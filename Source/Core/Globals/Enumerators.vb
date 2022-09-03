@@ -397,4 +397,20 @@
         CustomScript
     End Enum
 
+    Public Enum EditorType
+        Item
+        Map
+        NPC
+        Skill
+        Shop
+        Resource
+        Animation
+        Pet
+        Quest
+        House
+        Recipe
+        Job
+        Projectile
+    End Enum
+
 End Module

@@ -121,9 +121,6 @@ Module S_General
         For i = 0 To MAX_PLAYERS
             ReDim TempPlayer(i).SkillCd(MAX_PLAYER_SKILLS)
             ReDim TempPlayer(i).PetSkillCd(4)
-        Next
-
-        For i = 0 To MAX_PLAYERS
             ReDim TempPlayer(i).TradeOffer(MAX_INV)
         Next
 

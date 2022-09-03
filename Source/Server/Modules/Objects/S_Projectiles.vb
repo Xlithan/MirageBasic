@@ -150,6 +150,17 @@ Friend Module S_Projectiles
         ' Prevent hacking
         If GetPlayerAccess(index) < modEnumerators.AdminType.Developer Then Exit Sub
 
+        Dim user As String
+
+        user = IsEditorLocked(index, EditorType.Projectile)
+
+        If user <> "" Then 
+            PlayerMsg(index, "The game editor is locked and being used by " + user + ".", ColorType.BrightRed)
+            Exit Sub
+        End If
+
+        TempPlayer(index).Editor = EditorType.Projectile
+
         buffer.WriteInt32(ServerPackets.SProjectileEditor)
 
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
@@ -184,9 +195,9 @@ Friend Module S_Projectiles
     End Sub
 
     Sub HandleRequestProjectiles(index As Integer, ByRef data() As Byte)
+        TempPlayer(index).Editor = -1
 
         SendProjectiles(index)
-
     End Sub
 
     Sub HandleClearProjectile(index As Integer, ByRef data() As Byte)

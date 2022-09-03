@@ -352,6 +352,17 @@ Module S_Pets
 
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
 
+        Dim user As String
+
+        user = IsEditorLocked(index, EditorType.Pet)
+
+        If user <> "" Then 
+            PlayerMsg(index, "The game editor is locked and being used by " + user + ".", ColorType.BrightRed)
+            Exit Sub
+        End If
+
+        TempPlayer(index).Editor = EditorType.Pet
+
         buffer.WriteInt32(ServerPackets.SPetEditor)
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
 
@@ -404,9 +415,9 @@ Module S_Pets
     End Sub
 
     Sub Packet_RequestPets(index As Integer, ByRef data() As Byte)
+        TempPlayer(index).Editor = -1
 
         SendPets(index)
-
     End Sub
 
     Sub Packet_SummonPet(index As Integer, ByRef data() As Byte)

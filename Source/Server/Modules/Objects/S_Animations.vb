@@ -161,6 +161,17 @@ Friend Module S_Animations
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
 
+        Dim user As String
+
+        user = IsEditorLocked(index, EditorType.Animation)
+
+        If user <> "" Then 
+            PlayerMsg(index, "The game editor is locked and being used by " + user + ".", ColorType.BrightRed)
+            Exit Sub
+        End If
+
+        TempPlayer(index).Editor = EditorType.Animation
+
         Dim Buffer = New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SAnimationEditor)
         Socket.SendDataTo(index, Buffer.Data, Buffer.Head)
@@ -209,6 +220,8 @@ Friend Module S_Animations
 
     Sub Packet_RequestAnimations(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestAnimations")
+
+        TempPlayer(index).Editor = -1
 
         SendAnimations(index)
     End Sub

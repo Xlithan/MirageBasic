@@ -837,6 +837,8 @@ Module S_NetworkReceive
         ' Prevent hacking
         If dir < DirectionType.Up OrElse dir > DirectionType.Right Then Exit Sub
 
+        TempPlayer(index).Editor = -1
+
         PlayerMove(index, dir, 1, True)
     End Sub
 
@@ -1219,17 +1221,29 @@ Module S_NetworkReceive
         AddDebug("Recieved CMSG: CRequestEditMap")
 
         ' Prevent hacking
-        If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
+        If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub 
 
         If GetPlayerMap(index) > MAX_MAPS Then
             PlayerMsg(index, "Cant edit instanced maps!", ColorType.BrightRed)
             Exit Sub
         End If
 
+        Dim user As String
+
+        user = IsEditorLocked(index, EditorType.Map)
+
+        If user <> "" Then 
+            PlayerMsg(index, "The game editor is locked and being used by " + user + ".", ColorType.BrightRed)
+            Exit Sub
+        End If
+
+        TempPlayer(index).Editor = EditorType.Map
+
         SendMapEventData(index)
 
         Dim Buffer As New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SEditMap)
+
         Socket.SendDataTo(index, Buffer.Data, Buffer.Head)
         Buffer.Dispose()
     End Sub
@@ -1239,6 +1253,17 @@ Module S_NetworkReceive
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
+
+        Dim user As String
+
+        user = IsEditorLocked(index, EditorType.Shop)
+
+        If user <> "" Then 
+            PlayerMsg(index, "The game editor is locked and being used by " + user + ".", ColorType.BrightRed)
+            Exit Sub
+        End If
+
+        TempPlayer(index).Editor = EditorType.Shop
 
         Dim Buffer = New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SShopEditor)
@@ -1289,6 +1314,17 @@ Module S_NetworkReceive
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
+
+        Dim user As String
+
+        user = IsEditorLocked(index, EditorType.Skill)
+
+        If user <> "" Then 
+            PlayerMsg(index, "The game editor is locked and being used by " + user + ".", ColorType.BrightRed)
+            Exit Sub
+        End If
+
+        TempPlayer(index).Editor = EditorType.Skill
 
         Dim Buffer = New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SSkillEditor)
@@ -1627,6 +1663,8 @@ Module S_NetworkReceive
     Sub Packet_RequestNpcs(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestNPCS")
 
+        TempPlayer(index).Editor = -1
+
         SendNpcs(index)
     End Sub
 
@@ -1673,11 +1711,15 @@ Module S_NetworkReceive
     Sub Packet_RequestSkills(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestSkills")
 
+        TempPlayer(index).Editor = -1
+
         SendSkills(index)
     End Sub
 
     Sub Packet_RequestShops(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestShops")
+
+        TempPlayer(index).Editor = -1
 
         SendShops(index)
     End Sub
@@ -2259,6 +2301,8 @@ Module S_NetworkReceive
     Sub Packet_RequestJob(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestJob")
 
+        TempPlayer(index).Editor = -1
+
         SendJob(index)
     End Sub
 
@@ -2267,6 +2311,17 @@ Module S_NetworkReceive
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
+
+        Dim user As String
+
+        user = IsEditorLocked(index, EditorType.Job)
+
+        If user <> "" Then 
+            PlayerMsg(index, "The game editor is locked and being used by " + user + ".", ColorType.BrightRed)
+            Exit Sub
+        End If
+
+        TempPlayer(index).Editor = EditorType.Job
 
         SendJob(index)
 
@@ -2410,6 +2465,7 @@ Module S_NetworkReceive
         buffer.Dispose()
 
         If GetPlayerAccess(index) > AdminType.Player Then
+
             SendMapData(index, mapNum, True)
             SendMapNames(index)
 

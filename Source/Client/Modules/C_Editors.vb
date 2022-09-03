@@ -56,12 +56,12 @@ Module C_Editors
         Next
 
         FrmEditor_Animation.Visible = False
-        Editor = 0
+        Editor = -1
         ClearChanged_Animation()
     End Sub
 
     Friend Sub AnimationEditorCancel()
-        Editor = 0
+        Editor = -1
         FrmEditor_Animation.Visible = False
         ClearChanged_Animation()
         ClearAnimations()
@@ -134,12 +134,12 @@ Module C_Editors
         Next
 
         frmEditor_NPC.Visible = False
-        Editor = 0
+        Editor = -1
         ClearChanged_NPC()
     End Sub
 
     Friend Sub NpcEditorCancel()
-        Editor = 0
+        Editor = -1
         frmEditor_NPC.Visible = False
         ClearChanged_NPC()
         ClearNpcs()
@@ -214,12 +214,12 @@ Module C_Editors
         Next
 
         frmEditor_Resource.Visible = False
-        Editor = 0
+        Editor = -1
         ClearChanged_Resource()
     End Sub
 
     Friend Sub ResourceEditorCancel()
-        Editor = 0
+        Editor = -1
         frmEditor_Resource.Visible = False
         ClearChanged_Resource()
         ClearResources()
@@ -315,12 +315,12 @@ Module C_Editors
         Next
 
         frmEditor_Skill.Visible = False
-        Editor = 0
+        Editor = -1
         ClearChanged_Skill()
     End Sub
 
     Friend Sub SkillEditorCancel()
-        Editor = 0
+        Editor = -1
         frmEditor_Skill.Visible = False
         ClearChanged_Skill()
         ClearSkills()
@@ -390,12 +390,12 @@ Module C_Editors
         Next
 
         frmEditor_Shop.Visible = False
-        Editor = 0
+        Editor = -1
         ClearChanged_Shop()
     End Sub
 
     Friend Sub ShopEditorCancel()
-        Editor = 0
+        Editor = -1
         frmEditor_Shop.Visible = False
         ClearChanged_Shop()
         ClearShops()
@@ -414,11 +414,11 @@ Module C_Editors
     Friend Sub JobEditorOk()
         SendSaveJob()
         frmEditor_Job.Visible = False
-        Editor = 0
+        Editor = -1
     End Sub
 
     Friend Sub JobEditorCancel()
-        Editor = 0
+        Editor = -1
         frmEditor_Job.Visible = False
         SendRequestJobs()
     End Sub
@@ -612,7 +612,7 @@ Module C_Editors
     End Sub
 
     Friend Sub ItemEditorCancel()
-        Editor = 0
+        Editor = -1
         frmEditor_Item.Visible = False
         ClearChangedItem()
         ClearItems()
@@ -629,7 +629,7 @@ Module C_Editors
         Next
 
         frmEditor_Item.Visible = False
-        Editor = 0
+        Editor = -1
         ClearChangedItem()
     End Sub
 

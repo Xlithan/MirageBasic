@@ -3000,7 +3000,7 @@ NextLoop:
         Dim sRECT As Rectangle
         Dim dRECT As Rectangle
 
-        If Not InitEditor = EDITOR_ITEM Then Exit Sub
+        If Editor <> EditorType.House Then Exit sub
 
         Furniturenum = frmEditor_Item.nudFurniture.Value
 

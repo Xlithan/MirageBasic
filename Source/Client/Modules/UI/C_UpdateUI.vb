@@ -368,7 +368,7 @@ Module C_UpdateUI
 
         If InitPetEditor = True Then
             With frmEditor_Pet
-                Editor = EDITOR_PET
+                Editor = EditorType.Pet
                 .Show()
                 .lstIndex.SelectedIndex = 0
                 PetEditorInit()
@@ -378,7 +378,7 @@ Module C_UpdateUI
 
         If InitQuestEditor = True Then
             With frmEditor_Quest
-                Editor = EDITOR_QUEST
+                Editor = EditorType.Quest
                 .Show()
                 .lstIndex.SelectedIndex = 0
                 QuestEditorInit()
@@ -388,7 +388,7 @@ Module C_UpdateUI
 
         If InitAnimationEditor = True Then
             With FrmEditor_Animation
-                Editor = EDITOR_ANIMATION
+                Editor = EditorType.Animation
                 .Show()
                 .lstIndex.SelectedIndex = 0
                 AnimationEditorInit()
@@ -398,7 +398,7 @@ Module C_UpdateUI
 
         If InitItemEditor = True Then
             With frmEditor_Item
-                Editor = EDITOR_ITEM
+                Editor = EditorType.Item
                 .Show()
                 .lstIndex.SelectedIndex = 0
                 ItemEditorInit()
@@ -408,7 +408,7 @@ Module C_UpdateUI
 
         If InitRecipeEditor = True Then
             With frmEditor_Recipe
-                Editor = EDITOR_RECIPE
+                Editor = EditorType.Recipe
                 .Show()
                 .lstIndex.SelectedIndex = 0
                 RecipeEditorInit()
@@ -418,6 +418,7 @@ Module C_UpdateUI
 
         If InitJobEditor = True Then
             With frmEditor_Job
+                Editor = EditorType.Job
                 .Show()
                 .lstIndex.SelectedIndex = 0
                 JobEditorInit()
@@ -429,7 +430,7 @@ Module C_UpdateUI
             Dim i As Integer
 
             With frmEditor_Resource
-                Editor = EDITOR_RESOURCE
+                Editor = EditorType.Resource
                 .Show()
                 .lstIndex.SelectedIndex = 0
                 ResourceEditorInit()
@@ -439,7 +440,7 @@ Module C_UpdateUI
 
         If InitNPCEditor = True Then
             With frmEditor_NPC
-                Editor = EDITOR_NPC
+                Editor = EditorType.NPC
                 .Show()
                 .lstIndex.SelectedIndex = 0
                 NpcEditorInit()
@@ -449,7 +450,7 @@ Module C_UpdateUI
 
         If InitSkillEditor = True Then
             With frmEditor_Skill
-                Editor = EDITOR_SKILL
+                Editor = EditorType.Skill
                 .Show()
                 .lstIndex.SelectedIndex = 0
                 SkillEditorInit()
@@ -459,7 +460,7 @@ Module C_UpdateUI
 
         If InitShopEditor = True Then
             With frmEditor_Shop
-                Editor = EDITOR_SHOP
+                Editor = EditorType.Shop
                 .Show()
                 .lstIndex.SelectedIndex = 0
                 ShopEditorInit()
@@ -469,7 +470,7 @@ Module C_UpdateUI
 
         If HouseEdit = True Then
             With frmEditor_House
-                Editor = EDITOR_HOUSE
+                Editor = EditorType.House
                 .Show()
                 .lstIndex.SelectedIndex = 0
                 HouseEditorInit()
@@ -479,7 +480,7 @@ Module C_UpdateUI
 
         If InitProjectileEditor = True Then
             With frmEditor_Projectile
-                Editor = EditorProjectile
+                Editor = EditorType.Projectile
                 .Show()
                 .lstIndex.SelectedIndex = 0
                 ProjectileEditorInit()
