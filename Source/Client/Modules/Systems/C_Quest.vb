@@ -378,7 +378,7 @@ Friend Module C_Quest
             Exit Function
         End If
 
-        For i = 1 to MAX_INV
+        For i = 1 To MAX_INV
 
             ' Check to see if the player has the item
             If GetPlayerInvItemNum(index, i) = itemNum Then
@@ -565,8 +565,11 @@ Friend Module C_Quest
 
         'DrawText(QuestLogX + 285, QuestLogY + 288, Trim$(QuestRequirementsText), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
 
+        if QuestRewardsText Is Nothing Then Exit Sub
+
         y = 0
-        For i = 0 To QuestRewardsText.Length - 1
+
+        For i = 0 To QuestRewardsText.Length -1
             'description
             DrawText(QuestLogX + 255, QuestLogY + 292 + y, Trim$(QuestRewardsText(i)), SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
             y = y + 15
