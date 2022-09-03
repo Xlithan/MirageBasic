@@ -1411,7 +1411,7 @@ Module S_Players
                             n = FindOpenInvSlot(index, MapItem(mapNum, i).Num)
 
                             ' Open slot available?
-                            If n <> 0 Then
+                            If n <> -1 Then
                                 ' Set item in players inventor
                                 itemnum = MapItem(mapNum, i).Num
 
@@ -1559,7 +1559,7 @@ Module S_Players
         i = FindOpenInvSlot(index, ItemNum)
 
         ' Check to see if inventory is full
-        If i <> 0 Then
+        If i <> -1 Then
             SetPlayerInvItemNum(index, i, ItemNum)
             SetPlayerInvItemValue(index, i, GetPlayerInvItemValue(index, i) + ItemVal)
             If SendUpdate Then SendInventoryUpdate(index, i)
@@ -2331,7 +2331,7 @@ Module S_Players
 
         If EqSlot < 0 OrElse EqSlot > EquipmentType.Count - 1 Then Exit Sub ' exit out early if error'd
 
-        If FindOpenInvSlot(index, GetPlayerEquipment(index, EqSlot)) > 0 Then
+        If FindOpenInvSlot(index, GetPlayerEquipment(index, EqSlot)) >= 0 Then
             itemnum = GetPlayerEquipment(index, EqSlot)
 
             m = FindOpenInvSlot(index, Player(index).Equipment(EqSlot))
