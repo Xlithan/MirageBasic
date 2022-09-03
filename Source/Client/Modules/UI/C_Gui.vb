@@ -3,7 +3,7 @@ Imports System.Windows.Forms
 Imports Asfw
 Imports MirageBasic.Core
 
-Friend Module C_GuiFunctions
+Friend Module C_Gui
 
     Friend Sub CheckGuiMove(x As Integer, y As Integer)
         Dim eqNum As Integer, invNum As Integer, skillslot As Integer
