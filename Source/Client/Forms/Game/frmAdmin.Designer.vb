@@ -52,6 +52,7 @@ Partial Class FrmAdmin
         Me.cmbAccess = New System.Windows.Forms.ComboBox()
         Me.tabMapList = New System.Windows.Forms.TabPage()
         Me.tabMapTools = New System.Windows.Forms.TabPage()
+        Me.btnRefreshItems = New System.Windows.Forms.Button()
         Me.nudSpawnItemAmount = New System.Windows.Forms.NumericUpDown()
         Me.cmbSpawnItem = New System.Windows.Forms.ComboBox()
         Me.tabEditors = New System.Windows.Forms.TabPage()
@@ -372,6 +373,7 @@ Partial Class FrmAdmin
         '
         'tabMapTools
         '
+        Me.tabMapTools.Controls.Add(Me.btnRefreshItems)
         Me.tabMapTools.Controls.Add(Me.nudSpawnItemAmount)
         Me.tabMapTools.Controls.Add(Me.cmbSpawnItem)
         Me.tabMapTools.Controls.Add(Me.btnRespawn)
@@ -387,6 +389,16 @@ Partial Class FrmAdmin
         Me.tabMapTools.TabIndex = 3
         Me.tabMapTools.Text = "Map Tools"
         Me.tabMapTools.UseVisualStyleBackColor = true
+        '
+        'btnRefreshItems
+        '
+        Me.btnRefreshItems.Location = New System.Drawing.Point(16, 198)
+        Me.btnRefreshItems.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.btnRefreshItems.Name = "btnRefreshItems"
+        Me.btnRefreshItems.Size = New System.Drawing.Size(266, 25)
+        Me.btnRefreshItems.TabIndex = 38
+        Me.btnRefreshItems.Text = "Refresh Items"
+        Me.btnRefreshItems.UseVisualStyleBackColor = true
         '
         'nudSpawnItemAmount
         '
@@ -633,4 +645,5 @@ End Sub
     Friend WithEvents btnSkillEditor As Windows.Forms.Button
     Friend WithEvents btnShopEditor As Windows.Forms.Button
     Friend WithEvents btnAnimationEditor As Windows.Forms.Button
+    Friend WithEvents btnRefreshItems As Button
 End Class

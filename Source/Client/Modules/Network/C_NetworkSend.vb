@@ -384,7 +384,7 @@ Module C_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Friend Sub SendRequestMapreport()
+    Friend Sub SendRequestMapReport()
         Dim buffer As New ByteStream(4)
 
         buffer.WriteInt32(ClientPackets.CMapReport)

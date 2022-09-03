@@ -129,7 +129,6 @@ Module C_Items
         FrmGame.txtCurrency.Text = ""
         TmpCurrencyItem = 0
         CurrencyMenu = 0 ' clear
-
     End Sub
 
 #End Region

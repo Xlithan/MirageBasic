@@ -749,7 +749,7 @@ Module C_GameLogic
                         GoTo Continue1
                     End If
 
-                    SendRequestMapreport()
+                    SendRequestMapReport()
                 ' Respawn request
                 Case "/respawn"
 

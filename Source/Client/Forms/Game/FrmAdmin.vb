@@ -4,15 +4,15 @@ Imports MirageBasic.Core
 Friend Class FrmAdmin
 
     Private Sub FrmAdmin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' set values for admin panel
+        SendRequestMapreport()
+        SendRequestItems()
+
         cmbSpawnItem.Items.Clear()
 
         ' Add the names
-       For i = 0 To MAX_ITEMS
+        For i = 0 To MAX_ITEMS
             cmbSpawnItem.Items.Add(i & ": " & Trim$(Item(i).Name))
         Next
-
-        SendRequestMapreport()
     End Sub
 
 #Region "Moderation"
@@ -235,7 +235,7 @@ Friend Class FrmAdmin
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
-        SendRequestMapreport()
+        SendRequestMapReport()
     End Sub
 
     Private Sub LstMaps_DoubleClick(sender As Object, e As EventArgs) Handles lstMaps.DoubleClick
@@ -295,6 +295,10 @@ Friend Class FrmAdmin
         End If
 
         SendMapRespawn()
+    End Sub
+
+    Private Sub btnRefreshItems_Click(sender As Object, e As EventArgs) Handles btnRefreshItems.Click
+        SendRequestItems
     End Sub
 
 #End Region
