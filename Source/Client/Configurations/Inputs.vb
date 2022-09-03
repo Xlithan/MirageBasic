@@ -14,7 +14,7 @@ Public Class InputsDef
         Public MoveRight As Keys = Keys.D
 
         Public Attack As Keys = Keys.Z
-        Public Run As Keys = Keys.LShiftKey
+        Public Run As Keys = Keys.Shift
         Public Loot As Keys = Keys.Space
 
         Public HotBar1 As Keys = Keys.NumPad0

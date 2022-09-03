@@ -27,12 +27,9 @@ Public Class SettingsDef
     <XmlIgnore()> Public GameName As String = "MirageBasic"
     <XmlIgnore()> Public Website As String = "https://miragebasic.net/"
 
+    <XmlIgnore()> Public Version As String = "1.3.0"
+
     Public Welcome As String = "Welcome to MirageBasic, enjoy your stay!"
-
-    Public StartMap As Integer = 1
-    Public StartX As Integer = 13
-    Public StartY As Integer = 7
-
 End Class
 
 Public Module modSettings

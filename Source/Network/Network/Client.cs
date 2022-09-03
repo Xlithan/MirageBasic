@@ -228,35 +228,39 @@ namespace Asfw.Network
                   break;
               }
               else
-                goto label_14;
+                goto IndexOutOfRange;
             }
             else
-              goto label_20;
+              goto EmptyPacket;
           }
           else
-            goto label_17;
+            goto BrokenPacket;
         }
         else
-          goto label_20;
+          goto EmptyPacket;
       }
       Client.CrashReportArgs crashReport1 = this.CrashReport;
+
       if (crashReport1 != null)
         crashReport1("NullReferenceException");
       this.Disconnect();
       return;
-label_14:
+
+    IndexOutOfRange:
       Client.CrashReportArgs crashReport2 = this.CrashReport;
       if (crashReport2 != null)
         crashReport2("IndexOutOfRangeException");
       this.Disconnect();
       return;
-label_17:
+
+    BrokenPacket:
       Client.CrashReportArgs crashReport3 = this.CrashReport;
       if (crashReport3 != null)
         crashReport3("BrokenPacketException");
       this.Disconnect();
       return;
-label_20:
+
+    EmptyPacket:
       if (count == 0)
       {
         this._packetRing = (byte[]) null;

@@ -17,7 +17,6 @@ Public Module modTypes
     Public TempPlayer(MAX_PLAYERS) As TempPlayerStruct
     Public Player(MAX_PLAYERS) As PlayerStruct
     Public InstancedMaps(MAX_INSTANCED_MAPS) As InstancedMap
-    Public PlayerInv(MAX_INV) As PlayerInvStruct
     Public CharSelection() As CharSelStruct
     Public House() As HouseStruct
     Public HouseConfig() As HouseStruct
@@ -377,11 +376,6 @@ Public Module modTypes
 
         Dim Pet As PlayerPetStruct
 
-        ' Client use only
-        Dim MaxHp As Integer
-
-        Dim MaxMp As Integer
-        Dim MaxSp As Integer
         Dim XOffset As Integer
         Dim YOffset As Integer
         Dim Moving As Byte
@@ -393,11 +387,9 @@ Public Module modTypes
         Dim Emote As Integer
         Dim EmoteTimer As Integer
         Dim EventTimer As Integer
-
     End Structure
 
     Public Structure TempPlayerStruct
-
         ' Non saved local vars
         Dim InGame As Boolean
 
@@ -481,6 +473,8 @@ Public Module modTypes
 
         Dim PetstopRegenTimer As Integer
 
+        Dim Editor As Integer
+
     End Structure
 
     Public Structure MapStruct
@@ -526,20 +520,6 @@ Public Module modTypes
 
         Dim Panorama As Byte
         Dim Parallax As Byte
-    End Structure
-
-    Public Structure ClassStruct
-        Dim Name As String
-        Dim Desc As String
-        Dim Stat() As Byte
-        Dim MaleSprite() As Integer
-        Dim FemaleSprite() As Integer
-        Dim StartItem() As Integer
-        Dim StartValue() As Integer
-        Dim StartMap As Integer
-        Dim StartX As Byte
-        Dim StartY As Byte
-        Dim BaseExp As Integer
     End Structure
 
     Public Structure MapItemStruct

@@ -202,9 +202,9 @@
         SPlayerInv
         SPlayerInvUpdate
         SPlayerWornEq
-        SPlayerHp
-        SPlayerMp
-        SPlayerSp
+        SPlayerHP
+        SPlayerMP
+        SPlayerSP
         SPlayerStats
         SPlayerData
         SPlayerMove
