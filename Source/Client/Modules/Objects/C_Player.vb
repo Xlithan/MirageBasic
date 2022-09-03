@@ -737,7 +737,7 @@ Module C_Player
 
         name = Trim$(Player(MyIndex).Name)
         ' calc pos
-        textX = ConvertMapX(GetPlayerX(index) * PicX) + Player(MyIndex).XOffset + (PicX \ 2) - 4
+        textX = ConvertMapX(GetPlayerX(index) * PicX) + Player(MyIndex).XOffset + (PicX \ 2) - 2
         textX = textX - (GetTextWidth((Trim$(name))) / 2)
         If GetPlayerSprite(index) < 0 OrElse GetPlayerSprite(index) > NumCharacters Then
             textY = ConvertMapY(GetPlayerY(index) * PicY) + Player(MyIndex).YOffset - 16

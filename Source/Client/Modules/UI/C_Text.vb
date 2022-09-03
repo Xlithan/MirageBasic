@@ -59,7 +59,7 @@ Module C_Text
                 backcolor = Color.Black
         End Select
 
-        textX = ConvertMapX(MapNpc(mapNpcNum).X * PicX) + MapNpc(mapNpcNum).XOffset + (PicX \ 2) - GetTextWidth((Trim$(Npc(npcNum).Name))) / 2 - 4
+        textX = ConvertMapX(MapNpc(mapNpcNum).X * PicX) + MapNpc(mapNpcNum).XOffset + (PicX \ 2) - (GetTextWidth((Trim$(Npc(npcNum).Name))) / 2) - 2
         If Npc(npcNum).Sprite < 1 OrElse Npc(npcNum).Sprite > NumCharacters Then
             textY = ConvertMapY(MapNpc(mapNpcNum).Y * PicY) + MapNpc(mapNpcNum).YOffset - 16
         Else
@@ -82,7 +82,7 @@ Module C_Text
         Name = Trim$(Map.MapEvents(index).Name)
 
         ' calc pos
-        textX = ConvertMapX(Map.MapEvents(index).X * PicX) + Map.MapEvents(index).XOffset + (PicX \ 2) - GetTextWidth(Trim$(name)) \ 2 - 4
+        textX = ConvertMapX(Map.MapEvents(index).X * PicX) + Map.MapEvents(index).XOffset + (PicX \ 2) - (GetTextWidth(Trim$(name)) \ 2) - 2
         If Map.MapEvents(index).GraphicType = 0 Then
             textY = ConvertMapY(Map.MapEvents(index).Y * PicY) + Map.MapEvents(index).YOffset - 16
         ElseIf Map.MapEvents(index).GraphicType = 1 Then
