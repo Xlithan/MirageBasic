@@ -2751,9 +2751,9 @@ NextLoop:
             'speed
             DrawText(xoffset - DescriptionGfxInfo.Width + 10, yoffset + 74, "Speed: " & ItemDescSpeed, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
             'level
-            DrawText(xoffset - DescriptionGfxInfo.Width + 10, yoffset + 90, "Level required: " & ItemDescLevel, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            DrawText(xoffset - DescriptionGfxInfo.Width + 10, yoffset + 90, "Level Required: " & ItemDescLevel, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
             'bonuses
-            DrawText(xoffset - DescriptionGfxInfo.Width + 10, yoffset + 118, "=Bonuses=", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
+            DrawText(xoffset - DescriptionGfxInfo.Width + 10, yoffset + 118, "Bonuses", SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
             'strength
             DrawText(xoffset - DescriptionGfxInfo.Width + 10, yoffset + 134, "Strenght: " & ItemDescStr, SFML.Graphics.Color.White, SFML.Graphics.Color.Black, GameWindow)
             'vitality
