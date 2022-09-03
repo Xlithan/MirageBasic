@@ -17,7 +17,7 @@ Friend Module C_NetworkConfig
     Friend Sub DestroyNetwork()
         ' Calling a disconnect is not necessary when using destroy network as
         ' Dispose already calls it and cleans up the memory internally.
-        Socket.Dispose()
+        Socket?.Dispose()
     End Sub
 
 #Region " Events "
