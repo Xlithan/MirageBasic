@@ -213,19 +213,17 @@ Friend Class FrmGame
                 End If
                 FurnitureSelected = 0
             End If
-        Else
-            CheckGuiMouseDown(e.X, e.Y, e)
         End If
+
+        CheckGuiMouseDown(e.X, e.Y, e)
 
         If Not FrmAdmin.Visible OrElse Not FrmOptions.Visible Then Focus()
 
     End Sub
 
     Private Sub Picscreen_DoubleClick(sender As Object, e As MouseEventArgs) Handles picscreen.DoubleClick
-        If Not CheckGuiClick(e.X, e.Y, e) Then
+        If Not CheckGuiDoubleClick(e.X, e.Y, e) And IsDescWindowActive(e.X, e.y) = False Then
             If GetPlayerAccess(Myindex) >= 2 Then AdminWarp(CurX, CurY)
-        Else
-            CheckGuiDoubleClick(e.X, e.Y, e)
         End If
     End Sub
 

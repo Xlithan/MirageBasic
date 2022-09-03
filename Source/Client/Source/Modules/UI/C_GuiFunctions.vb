@@ -1148,7 +1148,6 @@ Friend Module C_GuiFunctions
     Function IsInvItem(x As Single, y As Single) As Integer
         Dim tempRec As Rect
         Dim i As Integer
-        IsInvItem = 0
 
        For i = 0 To MAX_INV
 
@@ -1177,8 +1176,6 @@ Friend Module C_GuiFunctions
         Dim tempRec As Rect
         Dim i As Integer
 
-        IsPlayerSkill = 0
-
        For i = 0 To MAX_PLAYER_SKILLS
 
             If PlayerSkills(i) > 0 AndAlso PlayerSkills(i) <= MAX_PLAYER_SKILLS Then
@@ -1206,8 +1203,6 @@ Friend Module C_GuiFunctions
         Dim tempRec As Rect
         Dim i As Integer
 
-        IsBankItem = 0
-
        For i = 0 To MAX_BANK
             If GetBankItemNum(i) > 0 AndAlso GetBankItemNum(i) <= MAX_ITEMS Then
 
@@ -1232,7 +1227,6 @@ Friend Module C_GuiFunctions
     Function IsShopItem(x As Single, y As Single) As Integer
         Dim tempRec As Rectangle
         Dim i As Integer
-        IsShopItem = 0
 
        For i = 0 To MAX_TRADES
 
@@ -1258,8 +1252,6 @@ Friend Module C_GuiFunctions
         Dim tempRec As Rect
         Dim i As Integer
         Dim itemnum As Integer
-
-        IsTradeItem = 0
 
        For i = 0 To MAX_INV
 
@@ -1296,6 +1288,12 @@ Friend Module C_GuiFunctions
 
         Next
 
+    End Function
+
+    Function IsDescWindowActive(x As Integer, y As Integer) As Boolean
+        If IsInvItem(x, y) > 0 Or IsShopItem(x, y) > 0 Or IsBankItem(x,y) Or IsPlayerSkill(x,y) > 0 Or IsEqItem(x,y) > 0 Or IsTradeItem(x,y,false) > 0 Or IsTradeItem(x,y,true) > 0 Then
+            Return True
+        End If
     End Function
 
     Function AboveActionPanel(x As Single, y As Single) As Boolean
