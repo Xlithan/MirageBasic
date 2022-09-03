@@ -2396,64 +2396,6 @@ Module S_NetworkReceive
         SendJobToAll()
     End Sub
 
-    Private Sub Packet_EditorLogin(index As Integer, ByRef data() As Byte)
-        Dim Name As String, Password As String, Version As String
-        Dim buffer As New ByteStream(data)
-
-        AddDebug("Recieved EMSG: EditorLogin")
-
-        If Not IsLoggedIn(index) Then
-
-            ' Get the data
-            Name = EKeyPair.DecryptString(buffer.ReadString)
-            Password = EKeyPair.DecryptString(buffer.ReadString)
-            Version = EKeyPair.DecryptString(buffer.ReadString)
-
-            If Name.Trim.Length < 3 OrElse Password.Trim.Length < 3 Then
-                AlertMsg(index, "Your name and password must be at least three characters in length")
-                Exit Sub
-            End If
-
-            If Not AccountExist(Name) Then
-                AlertMsg(index, "That account name does not exist.")
-                Exit Sub
-            End If
-
-            If Not PasswordOK(Name, Password) Then
-                AlertMsg(index, "Incorrect password.")
-                Exit Sub
-            End If
-
-            If IsMultiAccounts(index, Name) Then
-                AlertMsg(index, "Multiple account logins is not authorized.")
-                Exit Sub
-            End If
-
-            ' Load the player
-            LoadPlayer(index, Name)
-
-            If GetPlayerAccess(index) > AdminType.Player Then
-                SendEditorLoadOk(index)
-                SendGameData(index)
-                SendMapNames(index)
-                SendProjectiles(index)
-                SendQuests(index)
-                SendRecipes(index)
-                SendHouseConfigs(index)
-                SendPets(index)
-            Else
-                AlertMsg(index, "Not authorized.")
-                Exit Sub
-            End If
-
-            ' Show the player up on the socket status
-            Addlog(GetPlayerLogin(index) & " has logged in from " & Socket.ClientIp(index) & ".", PLAYER_LOG)
-            Console.WriteLine(GetPlayerLogin(index) & " has logged in from " & Socket.ClientIp(index) & ".")
-        End If
-
-        buffer.Dispose()
-    End Sub
-
     Private Sub Packet_EditorRequestMap(index As Integer, ByRef data() As Byte)
         Dim mapNum As Integer
         Dim buffer As New ByteStream(data)
