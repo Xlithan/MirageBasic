@@ -2164,7 +2164,7 @@ Module S_Players
                         i = Skill(n).LevelReq
 
                         If i <= GetPlayerLevel(index) Then
-                            i = FindOpenSkillSlot(index)
+                            i = FindOpenSkill(index)
 
                             ' Make sure they have an open skill slot
                             If i > 0 Then
@@ -2622,55 +2622,6 @@ Module S_Players
 #End Region
 
 #Region "Skills"
-
-    Function FindOpenSkillSlot(index As Integer) As Integer
-        Dim i As Integer
-
-        For i = 1 To MAX_PLAYER_SKILLS
-
-            If GetPlayerSkill(index, i) = 0 Then
-                FindOpenSkillSlot = i
-                Exit Function
-            End If
-
-        Next
-
-    End Function
-
-    Function GetPlayerSkill(index As Integer, Skillslot As Integer) As Integer
-        GetPlayerSkill = 0
-        If index > MAX_PLAYERS Then Exit Function
-
-        GetPlayerSkill = Player(index).Skill(Skillslot)
-    End Function
-
-    Friend Function GetPlayerSkillSlot(index As Integer, SkillId As Integer) As Integer
-        GetPlayerSkillSlot = -1
-        If index < 0 OrElse index > MAX_PLAYERS Then Exit Function
-        Dim data = Player(index).Skill.Where(Function(x) x = SkillId).ToArray()
-        If data.Length > 0 Then
-            GetPlayerSkillSlot = data.Single()
-        End If
-    End Function
-
-    Function HasSkill(index As Integer, Skillnum As Integer) As Boolean
-        Dim i As Integer
-
-        For i = 1 To MAX_PLAYER_SKILLS
-
-            If GetPlayerSkill(index, i) = Skillnum Then
-                HasSkill = True
-                Exit Function
-            End If
-
-        Next
-
-    End Function
-
-    Sub SetPlayerSkill(index As Integer, Skillslot As Integer, Skillnum As Integer)
-        Player(index).Skill(Skillslot) = Skillnum
-    End Sub
-
     Friend Sub BufferSkill(index As Integer, Skillslot As Integer)
         Dim skillnum As Integer
         Dim MPCost As Integer

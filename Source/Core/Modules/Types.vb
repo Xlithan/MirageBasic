@@ -123,6 +123,11 @@ Public Module modTypes
         Dim Value As Integer
     End Structure
 
+    Public Structure PlayerSkillStruct
+        Dim Num As Integer
+        Dim CD As Integer
+    End Structure
+
     Public Structure BankStruct
         Dim Item() As PlayerInvStruct
         Dim ItemRand() As RandInvStruct
@@ -337,7 +342,7 @@ Public Module modTypes
         ' Inventory
         Dim Inv() As PlayerInvStruct
 
-        Dim Skill() As Integer
+        Dim Skill() As PlayerSKillStruct
 
         ' Position
         Dim Map As Integer

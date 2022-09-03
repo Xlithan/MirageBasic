@@ -613,7 +613,7 @@ Module C_NetworkReceive
         Dim buffer As New ByteStream(data)
 
         For i = 1 To MAX_PLAYER_SKILLS
-            PlayerSkills(i) = buffer.ReadInt32
+            Player(Myindex).Skill(i).Num = buffer.ReadInt32
         Next
 
         buffer.Dispose()
@@ -686,7 +686,7 @@ Module C_NetworkReceive
         Dim buffer As New ByteStream(data)
 
         slot = buffer.ReadInt32
-        SkillCd(slot) = GetTickCount()
+        Player(Myindex).Skill(slot).CD = GetTickCount()
 
         buffer.Dispose()
     End Sub

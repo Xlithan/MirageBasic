@@ -1783,7 +1783,7 @@ Module S_NetworkReceive
             Exit Sub
         End If
 
-        Player(index).Skill(skillslot) = 0
+        Player(index).Skill(skillslot).Num = 0
         SendPlayerSkills(index)
 
         buffer.Dispose()

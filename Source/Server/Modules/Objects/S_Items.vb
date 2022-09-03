@@ -327,7 +327,7 @@ Friend Module S_Items
         i = MapItemSlot
 
         If i <> -1 Then
-            If itemNum >= 0 AndAlso itemNum <= MAX_ITEMS Then
+            If itemNum > 0 AndAlso itemNum <= MAX_ITEMS Then
                 MapItem(mapNum, i).Num = itemNum
                 MapItem(mapNum, i).Value = ItemVal
                 MapItem(mapNum, i).X = x

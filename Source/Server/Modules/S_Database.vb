@@ -1197,7 +1197,8 @@ Module modDatabase
 
         ReDim Player(index).Skill(MAX_PLAYER_SKILLS)
         For i = 1 To MAX_PLAYER_SKILLS
-            Player(index).Skill(i) = 0
+            Player(index).Skill(i).Num = 0
+            Player(index).Skill(i).CD = 0
         Next
 
         Player(index).Sprite = 0
@@ -1350,7 +1351,7 @@ Module modDatabase
         Player(index).Sex = reader.ReadByte()
 
         For i = 1 To MAX_PLAYER_SKILLS
-            Player(index).Skill(i) = reader.ReadByte()
+            Player(index).Skill(i).Num = reader.ReadByte()
         Next
 
         Player(index).Sprite = reader.ReadInt32()
@@ -1497,7 +1498,7 @@ Module modDatabase
         writer.WriteByte(Player(index).Sex)
 
         For i = 1 To MAX_PLAYER_SKILLS
-            writer.WriteByte(Player(index).Skill(i))
+            writer.WriteByte(Player(index).Skill(i).Num)
         Next
 
         writer.WriteInt32(Player(index).Sprite)

@@ -699,7 +699,7 @@ Module modLoop
         End If
 
         ' Do everything we need to do at the end of the cast.
-        FinalizeCast(index, GetPlayerSkillSlot(index, skillId), Skill(skillId).MpCost)
+        FinalizeCast(index, GetPlayerSkill(index, skillId), Skill(skillId).MpCost)
     End Sub
 
     Private Sub HandleSelfCastAoESkill(index As Integer, skillId As Integer)

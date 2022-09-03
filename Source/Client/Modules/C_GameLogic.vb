@@ -159,10 +159,10 @@ Module C_GameLogic
                 ' check if we need to end the CD icon
                 If NumSkillIcons > 0 Then
                    For i = 1 To MAX_PLAYER_SKILLS
-                        If PlayerSkills(i) > 0 Then
-                            If SkillCd(i) > 0 Then
-                                If SkillCd(i) + (Skill(PlayerSkills(i)).CdTime * 1000) < tick Then
-                                    SkillCd(i) = 0
+                        If Player(Myindex).Skill(i).Num > 0 Then
+                            If Player(Myindex).Skill(i).CD > 0 Then
+                                If  Player(Myindex).Skill(i).CD + (Skill(Player(Myindex).Skill(i).Num).CdTime * 1000) < tick Then
+                                    Player(Myindex).Skill(i).CD = 0
                                     DrawPlayerSkills()
                                 End If
                             End If
@@ -172,7 +172,7 @@ Module C_GameLogic
 
                 ' check if we need to unlock the player's skill casting restriction
                 If SkillBuffer > 0 Then
-                    If SkillBufferTimer + (Skill(PlayerSkills(SkillBuffer)).CastTime * 1000) < tick Then
+                    If SkillBufferTimer + (Skill(Player(Myindex).Skill(SkillBuffer).Num).CastTime * 1000) < tick Then
                         SkillBuffer = 0
                         SkillBufferTimer = 0
                     End If

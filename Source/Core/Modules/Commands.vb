@@ -234,7 +234,7 @@
         Player(index).Equipment(equipmentSlot) = invNum
     End Sub
 
-    public Function IsEditorLocked(index As Integer, id As Integer) As String
+    Public Function IsEditorLocked(index As Integer, id As Integer) As String
         For i = 0 To MAX_PLAYERS
             If i <> index Then
                 if TempPlayer(i).Editor = id then
@@ -246,4 +246,40 @@
 
         IsEditorLocked = ""
     End Function
+
+    Public Function FindOpenSkill(index As Integer) As Integer
+        Dim i As Integer
+
+        For i = 1 To MAX_PLAYER_SKILLS
+
+            If GetPlayerSkill(index, i) = 0 Then
+                FindOpenSkill = i
+                Exit Function
+            End If
+
+        Next
+
+    End Function
+
+    Public Function GetPlayerSkill(index As Integer, Skillslot As Integer) As Integer
+        GetPlayerSkill = Player(index).Skill(Skillslot).Num
+    End Function
+
+    Public Function HasSkill(index As Integer, Skillnum As Integer) As Boolean
+        Dim i As Integer
+
+        For i = 1 To MAX_PLAYER_SKILLS
+
+            If GetPlayerSkill(index, i) = Skillnum Then
+                HasSkill = True
+                Exit Function
+            End If
+
+        Next
+
+    End Function
+
+   Public Sub SetPlayerSkill(index As Integer, Skillslot As Integer, Skillnum As Integer)
+        Player(index).Skill(Skillslot).Num = Skillnum
+    End Sub
 End Module
