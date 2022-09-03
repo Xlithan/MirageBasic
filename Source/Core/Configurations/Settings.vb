@@ -28,11 +28,6 @@ Public Class SettingsDef
     <XmlIgnore()> Public Website As String = "https://miragebasic.net/"
 
     Public Welcome As String = "Welcome to MirageBasic, enjoy your stay!"
-
-    Public StartMap As Integer = 1
-    Public StartX As Integer = 13
-    Public StartY As Integer = 7
-
 End Class
 
 Public Module modSettings

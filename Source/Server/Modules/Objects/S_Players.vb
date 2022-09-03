@@ -2530,7 +2530,7 @@ Module S_Players
             If .BootMap > 0 Then
                 PlayerWarp(index, .BootMap, .BootX, .BootY)
             Else
-                PlayerWarp(index, Settings.StartMap, Settings.StartX, Settings.StartY)
+                PlayerWarp(index, Job(GetPlayerJob(index)).StartMap, Job(GetPlayerJob(index)).StartX, Job(GetPlayerJob(index)).StartY)
             End If
         End With
 

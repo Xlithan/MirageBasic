@@ -524,20 +524,6 @@ Public Module modTypes
         Dim Parallax As Byte
     End Structure
 
-    Public Structure ClassStruct
-        Dim Name As String
-        Dim Desc As String
-        Dim Stat() As Byte
-        Dim MaleSprite() As Integer
-        Dim FemaleSprite() As Integer
-        Dim StartItem() As Integer
-        Dim StartValue() As Integer
-        Dim StartMap As Integer
-        Dim StartX As Byte
-        Dim StartY As Byte
-        Dim BaseExp As Integer
-    End Structure
-
     Public Structure MapItemStruct
         Dim Num As Integer
         Dim Value As Integer
