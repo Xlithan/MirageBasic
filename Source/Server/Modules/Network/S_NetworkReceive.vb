@@ -7,7 +7,7 @@ Imports MirageBasic.Core
 Module S_NetworkReceive
 
     Friend Sub PacketRouter()
-        Socket.PacketId(Packets.ClientPackets.CCheckPing) = AddressOf Packet_Ping
+        Socket.PacketId(ClientPackets.CCheckPing) = AddressOf Packet_Ping
         Socket.PacketId(ClientPackets.CNewAccount) = AddressOf Packet_NewAccount
         Socket.PacketId(ClientPackets.CDelAccount) = AddressOf Packet_DeleteAccount
         Socket.PacketId(ClientPackets.CLogin) = AddressOf Packet_Login
@@ -191,9 +191,13 @@ Module S_NetworkReceive
             End If
 
             ' Prevent hacking
-            If username.Trim.Length < 3 OrElse password.Trim.Length < 3 Then
+            If username.Trim.Length < MIN_STRING_LENGTH OrElse password.Trim.Length < MIN_STRING_LENGTH Then
                 AlertMsg(index, "Your username and password must be at least three characters in length")
                 Exit Sub
+            End If
+
+            If username.Trim.Length > MAX_STRING_LENGTH OrElse password.Trim.Length > MAX_STRING_LENGTH Then
+                AlertMsg(index, "Your name and password must be 21 characters or less!")
             End If
 
             ' Prevent hacking
@@ -317,9 +321,13 @@ Module S_NetworkReceive
                     Exit Sub
                 End If
 
-                If Name.Trim.Length < 3 OrElse Password.Trim.Length < 3 Then
+                If Name.Trim.Length < MIN_STRING_LENGTH OrElse Password.Trim.Length < MIN_STRING_LENGTH Then
                     AlertMsg(index, "Your name and password must be at least three characters in length")
                     Exit Sub
+                End If
+
+                If Name.Trim.Length > MAX_STRING_LENGTH OrElse Password.Trim.Length > MAX_STRING_LENGTH Then
+                    AlertMsg(index, "Your name and password must be 21 characters or less!")
                 End If
 
                 If Not AccountExist(Name) Then
@@ -401,9 +409,13 @@ Module S_NetworkReceive
             Sprite = buffer.ReadInt32
 
             ' Prevent hacking
-            If Len(Name.Trim) < 3 Then
+            If Len(Name.Trim) < MIN_STRING_LENGTH Then
                 AlertMsg(index, "Character name must be at least three characters in length.")
                 Exit Sub
+            End If
+
+            If Name.Trim.Length > MAX_STRING_LENGTH Then
+                AlertMsg(index, "Your name and password must be 21 characters or less!")
             End If
 
             For i = 1 To Len(Name)

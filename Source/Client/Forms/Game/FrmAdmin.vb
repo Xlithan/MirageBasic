@@ -4,7 +4,7 @@ Imports MirageBasic.Core
 Friend Class FrmAdmin
 
     Private Sub FrmAdmin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        SendRequestMapreport()
+        SendRequestMapReport()
         SendRequestItems()
 
         cmbSpawnItem.Items.Clear()
@@ -298,7 +298,7 @@ Friend Class FrmAdmin
     End Sub
 
     Private Sub btnRefreshItems_Click(sender As Object, e As EventArgs) Handles btnRefreshItems.Click
-        SendRequestItems
+        SendRequestItems()
     End Sub
 
 #End Region
