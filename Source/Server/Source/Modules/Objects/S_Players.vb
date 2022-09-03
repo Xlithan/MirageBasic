@@ -1700,10 +1700,11 @@ Module S_Players
         InvItemNum = GetPlayerInvItemNum(index, InvNum)
         n = Item(InvItemNum).Data2
 
+        If CanPlayerUseItem(index, InvItemNum) = False Then Exit Sub
+
         ' Find out what kind of item it is
         Select Case Item(InvItemNum).Type
             Case ItemType.Equipment
-                If CanPlayerUseItem(index, InvItemNum) = False Then Exit Sub
 
                 Select Case Item(InvItemNum).SubType
                     Case EquipmentType.Weapon
@@ -2091,8 +2092,6 @@ Module S_Players
                 End Select
 
             Case ItemType.Consumable
-                If CanPlayerUseItem(index, InvItemNum) = False Then Exit Sub
-
                 Select Case Item(InvItemNum).SubType
                     Case ConsumableType.HP
                         SendActionMsg(GetPlayerMap(index), "+" & Item(InvItemNum).Data1, ColorType.BrightGreen, ActionMsgType.Scroll, GetPlayerX(index) * 32, GetPlayerY(index) * 32)
@@ -2140,8 +2139,6 @@ Module S_Players
                 End Select
 
             Case ItemType.CommonEvent
-                If CanPlayerUseItem(index, InvItemNum) = False Then Exit Sub
-
                 n  = Item(InvItemNum).Data1
 
                 Select Case Item(InvItemNum).SubType
@@ -2156,8 +2153,6 @@ Module S_Players
                 End Select
 
             Case ItemType.Skill
-                If CanPlayerUseItem(index, InvItemNum) = False Then Exit Sub
-
                 ' Get the skill num
                 n = Item(InvItemNum).Data1
 
@@ -2200,14 +2195,10 @@ Module S_Players
                 PlayerMsg(index, "To place furniture, simply click on it in your inventory, then click in your house where you want it.", ColorType.Yellow)
 
             Case ItemType.Recipe
-                If CanPlayerUseItem(index, InvItemNum) = False Then Exit Sub
-
                 ' Get the recipe num
                 n = Item(InvItemNum).Data1
                 LearnRecipe(index, n, InvNum)
             Case ItemType.Pet
-                If CanPlayerUseItem(index, InvItemNum) = False Then Exit Sub
-
                 If Item(InvItemNum).Stackable = 1 Then
                     TakeInvItem(index, InvItemNum, 1)
                 Else
