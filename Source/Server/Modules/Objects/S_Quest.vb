@@ -776,7 +776,7 @@ Friend Module S_Quest
 
             Case QuestType.Give 'Give X amount of X item to X npc.
                 If Targetindex = Quest(QuestNum).Task(ActualTask).NPC Then
-                    For i = 0 To MAX_INV
+                    For i = 1 To MAX_INV
                         If GetPlayerInvItemNum(index, I) = Quest(QuestNum).Task(ActualTask).Item Then
                             If GetPlayerInvItemValue(index, I) >= Quest(QuestNum).Task(ActualTask).Amount Then
                                 TakeInvItem(index, GetPlayerInvItemNum(index, I), Quest(QuestNum).Task(ActualTask).Amount)

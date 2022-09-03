@@ -2412,7 +2412,7 @@ Module C_Graphics
         'first render panel
         RenderSprite(InvPanelSprite, GameWindow, InvWindowX, InvWindowY, 0, 0, InvPanelGfxInfo.Width, InvPanelGfxInfo.Height)
 
-       For i = 0 To MAX_INV
+       For i = 1 To MAX_INV
             itemnum = GetPlayerInvItemNum(Myindex, i)
 
             If itemnum > 0 AndAlso itemnum <= MAX_ITEMS Then
@@ -2430,7 +2430,7 @@ Module C_Graphics
 
                 ' exit out if we're offering item in a trade.
                 If InTrade > 0 Then
-                    For x = 0 To MAX_INV
+                    For x = 1 To MAX_INV
                         If TradeYourOffer(x).Num = i Then
                             GoTo NextLoop
                         End If
@@ -2518,7 +2518,7 @@ NextLoop:
             Next
         End If
 
-       For i = 0 To MAX_INV
+       For i = 1 To MAX_INV
             itemnum = GetPlayerInvItemNum(Myindex, i)
 
             If itemnum > 0 AndAlso itemnum <= MAX_ITEMS Then
@@ -2617,7 +2617,7 @@ NextLoop:
         'first render panel
         RenderSprite(SkillPanelSprite, GameWindow, SkillWindowX, SkillWindowY, 0, 0, SkillPanelGfxInfo.Width, SkillPanelGfxInfo.Height)
 
-       For i = 0 To MAX_PLAYER_SKILLS
+       For i = 1 To MAX_PLAYER_SKILLS
             skillnum = PlayerSkills(i)
 
             If skillnum > 0 AndAlso skillnum <= MAX_SKILLS Then

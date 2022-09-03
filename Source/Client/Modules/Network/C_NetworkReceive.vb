@@ -281,7 +281,7 @@ Module C_NetworkReceive
         Dim i As Integer, invNum As Integer, amount As Integer
         Dim buffer As New ByteStream(data)
 
-       For i = 0 To MAX_INV
+       For i = 1 To MAX_INV
             invNum = buffer.ReadInt32
             amount = buffer.ReadInt32
             SetPlayerInvItemNum(Myindex, i, invNum)
@@ -612,7 +612,7 @@ Module C_NetworkReceive
         Dim i As Integer
         Dim buffer As New ByteStream(data)
 
-        For i = 0 To MAX_PLAYER_SKILLS
+        For i = 1 To MAX_PLAYER_SKILLS
             PlayerSkills(i) = buffer.ReadInt32
         Next
 

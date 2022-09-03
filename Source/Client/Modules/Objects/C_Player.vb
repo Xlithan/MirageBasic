@@ -63,7 +63,7 @@ Module C_Player
         Next
 
         ReDim Player(i).RandInv(MAX_INV)
-        For y = 0 To MAX_INV
+        For y = 1 To MAX_INV
             ReDim Player(i).RandInv(y).Stat(StatType.Count - 1)
             For x = 0 To StatType.Count - 1
                 Player(i).RandInv(y).Stat(x) = 0

@@ -128,7 +128,7 @@ Module C_General
         Dim i As Integer
 
         ' Prevent high ascii chars
-       For i = 0 To Len(sInput)
+       For i = 1 To Len(sInput)
 
             If (Asc(Mid$(sInput, i, 1))) < 32 OrElse Asc(Mid$(sInput, i, 1)) > 126 Then
                 MsgBox(Language.MainMenu.StringLegal, vbOKOnly, Settings.GameName)

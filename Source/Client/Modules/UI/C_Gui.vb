@@ -45,7 +45,7 @@ Friend Module C_Gui
 
                     If invNum <> 0 Then
                         ' exit out if we're offering that item
-                       For i = 0 To MAX_INV
+                       For i = 1 To MAX_INV
                             If TradeYourOffer(i).Num = invNum Then
                                 Exit Sub
                             End If
@@ -756,7 +756,7 @@ Friend Module C_Gui
                     ' in trade?
                     If InTrade = True Then
                         ' exit out if we're offering that item
-                       For i = 0 To MAX_INV
+                       For i = 1 To MAX_INV
                             If TradeYourOffer(i).Num = invNum Then
                                 Exit Function
                             End If
@@ -848,7 +848,7 @@ Friend Module C_Gui
 
                 If DragInvSlotNum > 0 Then
 
-                   For i = 0 To MAX_INV
+                   For i = 1 To MAX_INV
 
                         With recPos
                             .Y = InvWindowY + InvTop + ((InvOffsetY + 32) * ((i - 1) \ InvColumns))
@@ -909,7 +909,7 @@ Friend Module C_Gui
 
                 If DragSkillSlotNum > 0 Then
 
-                   For i = 0 To MAX_PLAYER_SKILLS
+                   For i = 1 To MAX_PLAYER_SKILLS
 
                         With recPos
                             .Y = SkillWindowY + SkillTop + ((SkillOffsetY + 32) * ((i - 1) \ SkillColumns))
@@ -949,7 +949,7 @@ Friend Module C_Gui
             If AboveBankpanel(x, y) Then
                 ' TODO : Add sub to change bankslots client side first so there's no delay in switching
                 If DragBankSlotNum > 0 Then
-                   For i = 0 To MAX_BANK
+                   For i = 1 To MAX_BANK
                         With recPos
                             .Y = BankWindowY + BankTop + ((BankOffsetY + 32) * ((i - 1) \ BankColumns))
                             .Height = PicY
@@ -1149,7 +1149,7 @@ Friend Module C_Gui
         Dim tempRec As Rect
         Dim i As Integer
 
-       For i = 0 To MAX_INV
+       For i = 1 To MAX_INV
 
             If GetPlayerInvItemNum(Myindex, i) > 0 AndAlso GetPlayerInvItemNum(Myindex, i) <= MAX_ITEMS Then
 
@@ -1176,7 +1176,7 @@ Friend Module C_Gui
         Dim tempRec As Rect
         Dim i As Integer
 
-       For i = 0 To MAX_PLAYER_SKILLS
+       For i = 1 To MAX_PLAYER_SKILLS
 
             If PlayerSkills(i) > 0 AndAlso PlayerSkills(i) <= MAX_PLAYER_SKILLS Then
 
@@ -1203,7 +1203,7 @@ Friend Module C_Gui
         Dim tempRec As Rect
         Dim i As Integer
 
-       For i = 0 To MAX_BANK
+       For i = 1 To MAX_BANK
             If GetBankItemNum(i) > 0 AndAlso GetBankItemNum(i) <= MAX_ITEMS Then
 
                 With tempRec
@@ -1253,7 +1253,7 @@ Friend Module C_Gui
         Dim i As Integer
         Dim itemnum As Integer
 
-       For i = 0 To MAX_INV
+       For i = 1 To MAX_INV
 
             If yours Then
                 itemnum = GetPlayerInvItemNum(Myindex, TradeYourOffer(i).Num)

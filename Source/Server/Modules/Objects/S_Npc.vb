@@ -630,7 +630,7 @@ Module S_Npc
 
             If GetPlayerLevel(Victim) >= 10 Then
 
-                For z = 0 To MAX_INV
+                For z = 1 To MAX_INV
                     If GetPlayerInvItemNum(Victim, z) > 0 Then
                         InvCount = InvCount + 1
                     End If
@@ -664,7 +664,7 @@ Module S_Npc
                         End If
                     Next
                 Else
-                    For x = 0 To MAX_INV
+                    For x = 1 To MAX_INV
                         If GetPlayerInvItemNum(Victim, x) > 0 Then
                             j = j + 1
 

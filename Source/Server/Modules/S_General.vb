@@ -90,7 +90,7 @@ Module S_General
         For i = 0 To MAX_PLAYERS
             ReDim Bank(i).Item(MAX_BANK)
             ReDim Bank(i).ItemRand(MAX_BANK)
-            For x = 0 To MAX_BANK
+            For x = 1 To MAX_BANK
                 ReDim Bank(i).ItemRand(x).Stat(StatType.Count - 1)
             Next
         Next
@@ -113,7 +113,7 @@ Module S_General
             For y = 0 To EquipmentType.Count - 1
                 ReDim Player(i).RandEquip(y).Stat(StatType.Count - 1)
             Next
-            For y = 0 To MAX_INV
+            For y = 1 To MAX_INV
                 ReDim Player(i).RandInv(y).Stat(StatType.Count - 1)
             Next
         Next

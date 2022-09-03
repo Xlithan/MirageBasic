@@ -539,7 +539,7 @@ Friend Module S_Items
         If TempPlayer(index).InBank OrElse TempPlayer(index).InShop Then Exit Sub
 
         ' Prevent hacking
-        If InvNum < 0 OrElse InvNum > MAX_INV Then Exit Sub
+        If invNum <= 0 OrElse InvNum > MAX_INV Then Exit Sub
         If GetPlayerInvItemNum(index, InvNum) < 0 OrElse GetPlayerInvItemNum(index, InvNum) > MAX_ITEMS Then Exit Sub
         If Item(GetPlayerInvItemNum(index, InvNum)).Type = ItemType.Currency OrElse Item(GetPlayerInvItemNum(index, InvNum)).Stackable = 1 Then
             If Amount < 0 OrElse Amount > GetPlayerInvItemValue(index, InvNum) Then Exit Sub

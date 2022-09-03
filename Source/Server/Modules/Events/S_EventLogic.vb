@@ -1695,7 +1695,7 @@ Friend Module S_EventLogic
                                                                 End If
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2 = 1 Then
                                                                 If HasSkill(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1) = True Then
-                                                                    For p = 0 To MAX_PLAYER_SKILLS
+                                                                    For p = 1 To MAX_PLAYER_SKILLS
                                                                         If Player(i).Skill(p) = Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1 Then
                                                                             SetPlayerSkill(i, p, 0)
                                                                         End If

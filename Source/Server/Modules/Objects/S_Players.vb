@@ -795,7 +795,7 @@ Module S_Players
 
         If GetPlayerLevel(Victim) >= 10 Then
 
-            For z = 0 To MAX_INV
+            For z = 1 To MAX_INV
                 If GetPlayerInvItemNum(Victim, z) > 0 Then
                     invcount += 1
                 End If
@@ -829,7 +829,7 @@ Module S_Players
                 Next
             Else
 
-                For x = 0 To MAX_INV
+                For x = 1 To MAX_INV
                     If GetPlayerInvItemNum(Victim, x) > 0 Then
                         j += 1
 
@@ -1355,7 +1355,7 @@ Module S_Players
             Exit Function
         End If
 
-        For i = 0 To MAX_INV
+        For i = 1 To MAX_INV
             ' Check to see if the player has the item
             If GetPlayerInvItemNum(index, i) = ItemNum Then
                 If Item(ItemNum).Type = ItemType.Currency OrElse Item(ItemNum).Stackable = 1 Then
@@ -1379,7 +1379,7 @@ Module S_Players
             Exit Function
         End If
 
-        For i = 0 To MAX_INV
+        For i = 1 To MAX_INV
             ' Check to see if the player has the item
             If GetPlayerInvItemNum(index, i) = ItemNum Then
                 FindItemSlot = i
@@ -1480,8 +1480,6 @@ Module S_Players
     Function FindOpenInvSlot(index As Integer, ItemNum As Integer) As Integer
         Dim i As Integer
 
-        FindOpenInvSlot = -1
-
         ' Check for subscript out of range
         If IsPlaying(index) = False OrElse ItemNum < 0 OrElse ItemNum > MAX_ITEMS Then
             Exit Function
@@ -1489,7 +1487,7 @@ Module S_Players
 
         If Item(ItemNum).Type = ItemType.Currency OrElse Item(ItemNum).Stackable = 1 Then
             ' If currency then check to see if they already have an instance of the item and add it to that
-            For i = 0 To MAX_INV
+            For i = 1 To MAX_INV
                 If GetPlayerInvItemNum(index, i) = ItemNum Then
                     FindOpenInvSlot = i
                     Exit Function
@@ -1497,7 +1495,7 @@ Module S_Players
             Next
         End If
 
-        For i = 0 To MAX_INV
+        For i = 1 To MAX_INV
             ' Try to find an open free slot
             If GetPlayerInvItemNum(index, i) = 0 Then
                 FindOpenInvSlot = i
@@ -1505,6 +1503,7 @@ Module S_Players
             End If
         Next
 
+        FindOpenInvSlot = 0
     End Function
 
     Function TakeInvItem(index As Integer, ItemNum As Integer, ItemVal As Integer) As Boolean
@@ -1517,7 +1516,7 @@ Module S_Players
             Exit Function
         End If
 
-        For i = 0 To MAX_INV
+        For i = 1 To MAX_INV
 
             ' Check to see if the player has the item
             If GetPlayerInvItemNum(index, i) = ItemNum Then
@@ -1575,7 +1574,7 @@ Module S_Players
         Dim i As Integer
 
         ' Check for subscript out of range
-        If IsPlaying(index) = False OrElse InvNum < 0 OrElse InvNum > MAX_INV Then
+        If IsPlaying(index) = False OrElse invNum <= 0 OrElse InvNum > MAX_INV Then
             Exit Sub
         End If
 
@@ -1695,10 +1694,11 @@ Module S_Players
         Dim m As Integer, tempdata(StatType.Count + 3) As Integer, tempstr(2) As String
 
         ' Prevent hacking
-        If InvNum < 0 OrElse InvNum > MAX_INV Then Exit Sub
+        If invNum <= 0 OrElse InvNum > MAX_INV Then Exit Sub
 
         InvItemNum = GetPlayerInvItemNum(index, InvNum)
-        n = Item(InvItemNum).Data2
+
+        If InvItemNum < 0 Or InvItemNum > MAX_ITEMS Then Exit Sub
 
         If CanPlayerUseItem(index, InvItemNum) = False Then Exit Sub
 
@@ -2329,9 +2329,9 @@ Module S_Players
     Sub PlayerUnequipItem(index As Integer, EqSlot As Integer)
         Dim i As Integer, m As Integer, itemnum As Integer
 
-        If EqSlot < 0 OrElse EqSlot > EquipmentType.Count - 1 Then Exit Sub ' exit out early if error'd
+        If EqSlot < 1 OrElse EqSlot > EquipmentType.Count - 1 Then Exit Sub ' exit out early if error'd
 
-        If FindOpenInvSlot(index, GetPlayerEquipment(index, EqSlot)) >= 0 Then
+        If FindOpenInvSlot(index, GetPlayerEquipment(index, EqSlot)) > 0 Then
             itemnum = GetPlayerEquipment(index, EqSlot)
 
             m = FindOpenInvSlot(index, Player(index).Equipment(EqSlot))
@@ -2467,7 +2467,7 @@ Module S_Players
                 tradeTarget = TempPlayer(index).InTrade
                 PlayerMsg(tradeTarget, String.Format("{0} has declined the trade.", GetPlayerName(index)), ColorType.BrightRed)
                 ' clear out trade
-                For i = 0 To MAX_INV
+                For i = 1 To MAX_INV
                     TempPlayer(tradeTarget).TradeOffer(i).Num = 0
                     TempPlayer(tradeTarget).TradeOffer(i).Value = 0
                 Next
@@ -2626,7 +2626,7 @@ Module S_Players
     Function FindOpenSkillSlot(index As Integer) As Integer
         Dim i As Integer
 
-        For i = 0 To MAX_PLAYER_SKILLS
+        For i = 1 To MAX_PLAYER_SKILLS
 
             If GetPlayerSkill(index, i) = 0 Then
                 FindOpenSkillSlot = i
@@ -2656,7 +2656,7 @@ Module S_Players
     Function HasSkill(index As Integer, Skillnum As Integer) As Boolean
         Dim i As Integer
 
-        For i = 0 To MAX_PLAYER_SKILLS
+        For i = 1 To MAX_PLAYER_SKILLS
 
             If GetPlayerSkill(index, i) = Skillnum Then
                 HasSkill = True
@@ -2890,7 +2890,7 @@ Module S_Players
         If ItemNum < 0 OrElse ItemNum > MAX_ITEMS Then Exit Function
 
         If Item(ItemNum).Type = ItemType.Currency OrElse Item(ItemNum).Stackable = 1 Then
-            For i = 0 To MAX_BANK
+            For i = 1 To MAX_BANK
                 If GetPlayerBankItemNum(index, i) = ItemNum Then
                     FindOpenBankSlot = i
                     Exit Function
@@ -2898,7 +2898,7 @@ Module S_Players
             Next
         End If
 
-        For i = 0 To MAX_BANK
+        For i = 1 To MAX_BANK
             If GetPlayerBankItemNum(index, i) = 0 Then
                 FindOpenBankSlot = i
                 Exit Function
@@ -2910,9 +2910,9 @@ Module S_Players
     Sub TakeBankItem(index As Integer, BankSlot As Integer, Amount As Integer)
         Dim invSlot
 
-        If BankSlot < 0 OrElse BankSlot > MAX_BANK Then Exit Sub
+        If BankSlot <= 0 OrElse BankSlot > MAX_BANK Then Exit Sub
 
-        If GetPlayerBankItemValue(index, BankSlot) < 0 Then Exit Sub
+        If GetPlayerBankItemValue(index, BankSlot) <= 0 Then Exit Sub
 
         If GetPlayerBankItemValue(index, BankSlot) < Amount Then Exit Sub
 
