@@ -324,42 +324,42 @@ Friend Module C_Gui
                     If x > CharWindowX + StrengthUpgradeX AndAlso x < CharWindowX + StrengthUpgradeX + 10 AndAlso y > CharWindowY + StrengthUpgradeY AndAlso y < CharWindowY + StrengthUpgradeY + 10 Then
                         If Not GetPlayerPoints(Myindex) = 0 Then
                             PlaySound("Click.ogg")
-                            SendTrainStat(1)
+                            SendTrainStat(0)
                         End If
                     End If
                     'Endurance
                     If x > CharWindowX + EnduranceUpgradeX AndAlso x < CharWindowX + EnduranceUpgradeX + 10 AndAlso y > CharWindowY + EnduranceUpgradeY AndAlso y < CharWindowY + EnduranceUpgradeY + 10 Then
                         If Not GetPlayerPoints(Myindex) = 0 Then
                             PlaySound("Click.ogg")
-                            SendTrainStat(2)
+                            SendTrainStat(1)
                         End If
                     End If
                     'Vitality
                     If x > CharWindowX + VitalityUpgradeX AndAlso x < CharWindowX + VitalityUpgradeX + 10 AndAlso y > CharWindowY + VitalityUpgradeY AndAlso y < CharWindowY + VitalityUpgradeY + 10 Then
                         If Not GetPlayerPoints(Myindex) = 0 Then
                             PlaySound("Click.ogg")
-                            SendTrainStat(3)
+                            SendTrainStat(2)
                         End If
                     End If
                     'WillPower
                     If x > CharWindowX + LuckUpgradeX AndAlso x < CharWindowX + LuckUpgradeX + 10 AndAlso y > CharWindowY + LuckUpgradeY AndAlso y < CharWindowY + LuckUpgradeY + 10 Then
                         If Not GetPlayerPoints(Myindex) = 0 Then
                             PlaySound("Click.ogg")
-                            SendTrainStat(4)
+                            SendTrainStat(3)
                         End If
                     End If
                     'Intellect
                     If x > CharWindowX + IntellectUpgradeX AndAlso x < CharWindowX + IntellectUpgradeX + 10 AndAlso y > CharWindowY + IntellectUpgradeY AndAlso y < CharWindowY + IntellectUpgradeY + 10 Then
                         If Not GetPlayerPoints(Myindex) = 0 Then
                             PlaySound("Click.ogg")
-                            SendTrainStat(5)
+                            SendTrainStat(4)
                         End If
                     End If
                     'Spirit
                     If x > CharWindowX + SpiritUpgradeX AndAlso x < CharWindowX + SpiritUpgradeX + 10 AndAlso y > CharWindowY + SpiritUpgradeY AndAlso y < CharWindowY + SpiritUpgradeY + 10 Then
                         If Not GetPlayerPoints(Myindex) = 0 Then
                             PlaySound("Click.ogg")
-                            SendTrainStat(6)
+                            SendTrainStat(5)
                         End If
                     End If
                     CheckGuiClick = True
