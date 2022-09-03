@@ -84,7 +84,7 @@ Friend Module S_Events
         Dim n As Integer, z As Integer, begineventprocessing As Boolean
 
         ' Check for subscript out of range
-        If mapNum <= 0 OrElse mapNum > MAX_MAPS OrElse dir < DirectionType.Up OrElse dir > DirectionType.Right Then Exit Function
+        If mapNum < 0 OrElse mapNum > MAX_MAPS OrElse dir < DirectionType.Up OrElse dir > DirectionType.Right Then Exit Function
 
         CanEventMove = True
 
@@ -443,7 +443,7 @@ Friend Module S_Events
         Dim eventindex As Integer, i As Integer
 
         ' Check for subscript out of range
-        If mapNum <= 0 OrElse mapNum > MAX_MAPS OrElse dir < DirectionType.Up OrElse dir > DirectionType.Right Then
+        If mapNum < 0 OrElse mapNum > MAX_MAPS OrElse dir < DirectionType.Up OrElse dir > DirectionType.Right Then
             Exit Sub
         End If
 
@@ -490,7 +490,7 @@ Friend Module S_Events
         Dim eventindex As Integer, i As Integer
 
         ' Check for subscript out of range
-        If mapNum <= 0 OrElse mapNum > MAX_MAPS OrElse dir < DirectionType.Up OrElse dir > DirectionType.Right Then Exit Sub
+        If mapNum < 0 OrElse mapNum > MAX_MAPS OrElse dir < DirectionType.Up OrElse dir > DirectionType.Right Then Exit Sub
 
         If globalevent = False Then
             If TempPlayer(index).EventMap.CurrentEvents > 0 Then
@@ -745,9 +745,9 @@ Friend Module S_Events
         'This Event returns a direction, 4 is not a valid direction so we assume fail unless otherwise told.
         CanEventMoveTowardsPlayer = 4
 
-        If playerId <= 0 OrElse playerId > MAX_PLAYERS Then Exit Function
-        If mapNum <= 0 OrElse mapNum > MAX_MAPS Then Exit Function
-        If eventId <= 0 OrElse eventId > TempPlayer(playerId).EventMap.CurrentEvents Then Exit Function
+        If playerId < 0 OrElse playerId > MAX_PLAYERS Then Exit Function
+        If mapNum < 0 OrElse mapNum > MAX_MAPS Then Exit Function
+        If eventId < 0 OrElse eventId > TempPlayer(playerId).EventMap.CurrentEvents Then Exit Function
 
         x = GetPlayerX(playerId)
         y = GetPlayerY(playerId)
@@ -1102,9 +1102,9 @@ Friend Module S_Events
         'This Event returns a direction, 5 is not a valid direction so we assume fail unless otherwise told.
         CanEventMoveAwayFromPlayer = 5
 
-        If playerId <= 0 OrElse playerId > MAX_PLAYERS Then Exit Function
-        If mapNum <= 0 OrElse mapNum > MAX_MAPS Then Exit Function
-        If eventId <= 0 OrElse eventId > TempPlayer(playerId).EventMap.CurrentEvents Then Exit Function
+        If playerId < 0 OrElse playerId > MAX_PLAYERS Then Exit Function
+        If mapNum < 0 OrElse mapNum > MAX_MAPS Then Exit Function
+        If eventId < 0 OrElse eventId > TempPlayer(playerId).EventMap.CurrentEvents Then Exit Function
 
         x = GetPlayerX(playerId)
         y = GetPlayerY(playerId)
@@ -1275,9 +1275,9 @@ Friend Module S_Events
         Dim i As Integer, x As Integer, y As Integer, x1 As Integer, y1 As Integer, distance As Integer
         'This does not work for global events so this MUST be a player one....
 
-        If playerId <= 0 OrElse playerId > MAX_PLAYERS Then Exit Function
-        If mapNum <= 0 OrElse mapNum > MAX_MAPS Then Exit Function
-        If eventId <= 0 OrElse eventId > TempPlayer(playerId).EventMap.CurrentEvents Then Exit Function
+        If playerId < 0 OrElse playerId > MAX_PLAYERS Then Exit Function
+        If mapNum < 0 OrElse mapNum > MAX_MAPS Then Exit Function
+        If eventId < 0 OrElse eventId > TempPlayer(playerId).EventMap.CurrentEvents Then Exit Function
 
         x = GetPlayerX(playerId)
         y = GetPlayerY(playerId)
@@ -1318,9 +1318,9 @@ Friend Module S_Events
         Dim i As Integer, x As Integer, y As Integer, x1 As Integer, y1 As Integer, distance As Integer
         'This does not work for global events so this MUST be a player one....
 
-        If playerId <= 0 OrElse playerId > MAX_PLAYERS Then Exit Function
-        If mapNum <= 0 OrElse mapNum > MAX_MAPS Then Exit Function
-        If eventId <= 0 OrElse eventId > TempPlayer(playerId).EventMap.CurrentEvents Then Exit Function
+        If playerId < 0 OrElse playerId > MAX_PLAYERS Then Exit Function
+        If mapNum < 0 OrElse mapNum > MAX_MAPS Then Exit Function
+        If eventId < 0 OrElse eventId > TempPlayer(playerId).EventMap.CurrentEvents Then Exit Function
 
         x = GetPlayerX(playerId)
         y = GetPlayerY(playerId)

@@ -209,7 +209,7 @@ Friend Module S_Housing
         ItemNum = Player(index).Inv(invslot).Num
 
         ' Prevent hacking
-        If ItemNum < 1 OrElse ItemNum > MAX_ITEMS Then Exit Sub
+        If ItemNum < 0 OrElse ItemNum > MAX_ITEMS Then Exit Sub
 
         If Player(index).InHouse = index Then
             If Item(ItemNum).Type = ItemType.Furniture Then

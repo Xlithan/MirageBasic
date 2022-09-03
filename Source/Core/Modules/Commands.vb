@@ -3,26 +3,14 @@
         GetPlayerLogin = Trim$(Player(index).Login)
     End Function
 
-    Public Function GetPlayerName(index As Integer) As String
-        GetPlayerName = Player(index).Name.Trim()
-    End Function
-
-    Public Sub SetPlayerAccess(index As Integer, Access As Integer)
-        Player(index).Access = Access
-    End Sub
-
-    Public Sub SetPlayerSprite(index As Integer, Sprite As Integer)
-        Player(index).Sprite = Sprite
-    End Sub
-
     Public Function GetPlayerMaxVital(index As Integer, Vital As VitalType) As Integer
         Select Case Vital
             Case VitalType.HP
-                GetPlayerMaxVital = (Player(index).Level + (GetPlayerStat(index, StatType.Vitality) \ 2) + Job(Player(index).Job).Stat(StatType.Vitality)) * 2
+                GetPlayerMaxVital = 100 + (Player(index).Level + (GetPlayerStat(index, StatType.Vitality) \ 2) + Job(Player(index).Job).Stat(StatType.Vitality)) * 2
             Case VitalType.MP
-                GetPlayerMaxVital = (Player(index).Level + (GetPlayerStat(index, StatType.Intelligence) \ 2) + Job(Player(index).Job).Stat(StatType.Intelligence)) * 2
+                GetPlayerMaxVital = 100 + (Player(index).Level + (GetPlayerStat(index, StatType.Intelligence) \ 2) + Job(Player(index).Job).Stat(StatType.Intelligence)) * 2
             Case VitalType.SP
-                GetPlayerMaxVital = (Player(index).Level + (GetPlayerStat(index, StatType.Spirit) \ 2) + Job(Player(index).Job).Stat(StatType.Spirit)) * 2
+                GetPlayerMaxVital = 100 + (Player(index).Level + (GetPlayerStat(index, StatType.Spirit) \ 2) + Job(Player(index).Job).Stat(StatType.Spirit)) * 2
         End Select
 
     End Function
@@ -47,10 +35,6 @@
         GetPlayerAccess = Player(index).Access
     End Function
 
-    Public Function GetPlayerMap(index As Integer) As Integer
-        GetPlayerMap = Player(index).Map
-    End Function
-
     Public Function GetPlayerX(index As Integer) As Integer
         GetPlayerX = Player(index).X
     End Function
@@ -63,25 +47,9 @@
         GetPlayerDir = Player(index).Dir
     End Function
 
-    Public Function GetPlayerSprite(index As Integer) As Integer
-        GetPlayerSprite = Player(index).Sprite
-    End Function
-
     Public Function GetPlayerPK(index As Integer) As Integer
         GetPlayerPK = Player(index).Pk
     End Function
-
-    Public Function GetPlayerEquipment(index As Integer, EquipmentSlot As EquipmentType) As Integer
-        GetPlayerEquipment = Player(index).Equipment(EquipmentSlot)
-    End Function
-
-    Public Sub SetPlayerEquipment(index As Integer, InvNum As Integer, EquipmentSlot As EquipmentType)
-        Player(index).Equipment(EquipmentSlot) = InvNum
-    End Sub
-
-    Public Sub SetPlayerDir(index As Integer, Dir As Integer)
-        Player(index).Dir = Dir
-    End Sub
 
     Public Sub SetPlayerVital(index As Integer, Vital As VitalType, Value As Integer)
         Player(index).Vital(Vital) = Value
@@ -99,20 +67,6 @@
         Return Not (Not Blockvar AndAlso (2 ^ Dir))
     End Function
 
-    Public Function GetPlayerVital(index As Integer, Vital As VitalType) As Integer
-        GetPlayerVital = Player(index).Vital(Vital)
-    End Function
-
-    Public Function GetPlayerLevel(index As Integer) As Integer
-        GetPlayerLevel = Player(index).Level
-    End Function
-
-    Public Function GetPlayerPOINTS(index As Integer) As Integer
-        GetPlayerPOINTS = 0
-        If index > MAX_PLAYERS Then Exit Function
-        GetPlayerPOINTS = Player(index).Points
-    End Function
-
     Public Function GetPlayerNextLevel(index As Integer) As Integer
         GetPlayerNextLevel = (50 / 3) * ((GetPlayerLevel(index) + 1) ^ 3 - (6 * (GetPlayerLevel(index) + 1) ^ 2) + 17 * (GetPlayerLevel(index) + 1) - 12)
     End Function
@@ -121,44 +75,9 @@
         GetPlayerExp = Player(index).Exp
     End Function
 
-    Public Sub SetPlayerMap(index As Integer, mapNum As Integer)
-        If mapNum > 0 AndAlso mapNum <= MAX_CACHED_MAPS Then
-            Player(index).Map = mapNum
-        End If
-    End Sub
-
-    Sub SetPlayerX(index As Integer, X As Integer)
-        Player(index).X = X
-    End Sub
-
-    Public Sub SetPlayerY(index As Integer, Y As Integer)
-        Player(index).Y = Y
-    End Sub
-
-    Public Sub SetPlayerExp(index As Integer, Exp As Integer)
-        Player(index).Exp = Exp
-    End Sub
-
     Public Function GetPlayerRawStat(index As Integer, Stat As StatType) As Integer
         GetPlayerRawStat = Player(index).Stat(Stat)
     End Function
-
-    Public Sub SetPlayerStat(index As Integer, Stat As StatType, Value As Integer)
-        Player(index).Stat(Stat) = Value
-    End Sub
-
-    Sub SetPlayerLevel(index As Integer, Level As Integer)
-        If Level > MAX_LEVEL Then Exit Sub
-        Player(index).Level = Level
-    End Sub
-
-    Public Sub SetPlayerPOINTS(index As Integer, Points As Integer)
-        If Player(index).Points + Points > MAX_POINTS Then
-            Player(index).Points = MAX_POINTS
-        Else
-            Player(index).Points = Points
-        End If
-    End Sub
 
     Public Sub SetPlayerGatherSkillLvl(index As Integer, SkillSlot As Integer, lvl As Integer)
         Player(index).GatherSkills(SkillSlot).SkillLevel = lvl
@@ -191,31 +110,127 @@
         GetSkillNextLevel = (50 / 3) * ((GetPlayerGatherSkillLvl(index, SkillSlot) + 1) ^ 3 - (6 * (GetPlayerGatherSkillLvl(index, SkillSlot) + 1) ^ 2) + 17 * (GetPlayerGatherSkillLvl(index, SkillSlot) + 1) - 12)
     End Function
 
-    Public Function GetPlayerGatherSkillLvl(Index As Integer, SkillSlot As Integer) As Integer
-        GetPlayerGatherSkillLvl = Player(Index).GatherSkills(SkillSlot).SkillLevel
+    Public Function IsPlaying(index As Integer) As Boolean
+        ' if the player doesn't exist, the name will equal 0
+        If Len(GetPlayerName(index)) > 0 Then
+            IsPlaying = True
+        End If
     End Function
 
-    Public Function GetPlayerGatherSkillExp(Index As Integer, SkillSlot As Integer) As Integer
-        GetPlayerGatherSkillExp = Player(Index).GatherSkills(SkillSlot).SkillCurExp
+    Public Function GetPlayerName(index As Integer) As String
+        GetPlayerName = Trim$(Player(index).Name)
     End Function
 
-    Public Function GetPlayerGatherSkillMaxExp(index As Integer, SkillSlot As Integer) As Integer
-        GetPlayerGatherSkillMaxExp = Player(index).GatherSkills(SkillSlot).SkillNextLvlExp
+    Public Function GetPlayerGatherSkillLvl(index As Integer, skillSlot As Integer) As Integer
+        GetPlayerGatherSkillLvl = Player(index).GatherSkills(skillSlot).SkillLevel
     End Function
 
-    Public Function GetPlayerInvItemNum(index As Integer, InvSlot As Integer) As Integer
-        GetPlayerInvItemNum = Player(index).Inv(InvSlot).Num
+    Public Function GetPlayerGatherSkillExp(index As Integer, skillSlot As Integer) As Integer
+        GetPlayerGatherSkillExp = Player(index).GatherSkills(skillSlot).SkillCurExp
     End Function
 
-    Public Function GetPlayerInvItemValue(index As Integer, InvSlot As Integer) As Integer
-        GetPlayerInvItemValue = Player(index).Inv(InvSlot).Value
+    Public Function GetPlayerGatherSkillMaxExp(index As Integer, skillSlot As Integer) As Integer
+        GetPlayerGatherSkillMaxExp = Player(index).GatherSkills(skillSlot).SkillNextLvlExp
     End Function
 
-    Public Sub SetPlayerInvItemValue(index As Integer, InvSlot As Integer, ItemValue As Integer)
-        Player(index).Inv(InvSlot).Value = ItemValue
+    Public Sub SetPlayerMap(index As Integer, mapNum As Integer)
+        Player(index).Map = mapNum
     End Sub
 
-    Public Sub SetPlayerInvItemNum(index As Integer, invSlot As Integer, itemNum As Integer)
-        Player(index).Inv(invSlot).Num = itemNum
+    Public Function GetPlayerInvItemNum(index As Integer, invslot As Integer) As Integer
+        GetPlayerInvItemNum = PlayerInv(invslot).Num
+    End Function
+
+    Public Sub SetPlayerName(index As Integer, name As String)
+        Player(index).Name = name
+    End Sub
+
+    Public Sub SetPlayerJob(index As Integer, jobNum As Integer)
+        Player(index).Job = jobNum
+    End Sub
+
+    Public Sub SetPlayerPoints(index As Integer, points As Integer)
+        Player(index).Points = points
+    End Sub
+
+    Public Sub SetPlayerStat(index As Integer, stat As StatType, value As Integer)
+        If value > MAX_POINTS Then value = MAX_POINTS
+        Player(index).Stat(stat) = value
+    End Sub
+
+    Public Sub SetPlayerInvItemNum(index As Integer, invslot As Integer, itemnum As Integer)
+        PlayerInv(invslot).Num = itemnum
+    End Sub
+
+    Public Function GetPlayerInvItemValue(index As Integer, invslot As Integer) As Integer
+        GetPlayerInvItemValue = PlayerInv(invslot).Value
+    End Function
+
+    Public Sub SetPlayerInvItemValue(index As Integer, invslot As Integer, itemValue As Integer)
+        PlayerInv(invslot).Value = itemValue
+    End Sub
+
+    Public Function GetPlayerPoints(index As Integer) As Integer
+        GetPlayerPoints = Player(index).Points
+    End Function
+
+    Public Sub SetPlayerAccess(index As Integer, access As Integer)
+        Player(index).Access = access
+    End Sub
+
+    Public Sub SetPlayerPk(index As Integer, pk As Integer)
+        Player(index).Pk = pk
+    End Sub
+
+    Public Sub SetPlayerX(index As Integer, x As Integer)
+        Player(index).X = x
+    End Sub
+
+    Public Sub SetPlayerY(index As Integer, y As Integer)
+        Player(index).Y = y
+    End Sub
+
+    Public Sub SetPlayerSprite(index As Integer, sprite As Integer)
+        Player(index).Sprite = sprite
+    End Sub
+
+    Public Sub SetPlayerExp(index As Integer, exp As Integer)
+        Player(index).Exp = exp
+    End Sub
+
+    Public Sub SetPlayerLevel(index As Integer, level As Integer)
+        Player(index).Level = level
+    End Sub
+
+    Public Sub SetPlayerDir(index As Integer, dir As Integer)
+        Player(index).Dir = dir
+    End Sub
+
+    Public Function GetPlayerVital(index As Integer, vital As VitalType) As Integer
+        GetPlayerVital = Player(index).Vital(vital)
+    End Function
+
+    Function GetPlayerSprite(index As Integer) As Integer
+        GetPlayerSprite = Player(index).Sprite
+    End Function
+
+    Public Function GetPlayerJob(index As Integer) As Integer
+        GetPlayerJob = Player(index).Job
+    End Function
+
+    Public Function GetPlayerMap(index As Integer) As Integer
+        GetPlayerMap = Player(index).Map
+    End Function
+
+    Function GetPlayerLevel(index As Integer) As Integer
+        GetPlayerLevel = Player(index).Level
+    End Function
+
+    Public  Function GetPlayerEquipment(index As Integer, equipmentSlot As EquipmentType) As Byte
+        GetPlayerEquipment = Player(index).Equipment(equipmentSlot)
+    End Function
+
+    Public Sub SetPlayerEquipment(index As Integer, invNum As Integer, equipmentSlot As EquipmentType)
+        Player(index).Equipment(equipmentSlot) = invNum
     End Sub
 End Module

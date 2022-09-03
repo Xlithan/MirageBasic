@@ -1021,7 +1021,7 @@ Module S_Pets
     Sub PetMove(index As Integer, mapNum As Integer, dir As Integer, movement As Integer)
         Dim buffer As New ByteStream(4)
 
-        If mapNum < 1 OrElse mapNum > MAX_MAPS OrElse index <= 0 OrElse index > MAX_PLAYERS OrElse dir < DirectionType.Up OrElse dir > DirectionType.Right OrElse movement < 1 OrElse movement > 2 Then
+        If mapNum < 0 OrElse mapNum > MAX_MAPS OrElse index < 0 OrElse index > MAX_PLAYERS OrElse dir < DirectionType.Up OrElse dir > DirectionType.Right OrElse movement < 0 OrElse movement > 2 Then
             Exit Sub
         End If
 
@@ -1056,11 +1056,11 @@ Module S_Pets
         Dim i As Integer, n As Integer
         Dim x As Integer, y As Integer
 
-        If mapNum < 1 OrElse mapNum > MAX_MAPS OrElse index <= 0 OrElse index > MAX_PLAYERS OrElse dir < DirectionType.Up OrElse dir > DirectionType.Right Then
+        If mapNum < 0 OrElse mapNum > MAX_MAPS OrElse index < 0 OrElse index > MAX_PLAYERS OrElse dir < DirectionType.Up OrElse dir > DirectionType.Right Then
             Exit Function
         End If
 
-        If index <= 0 OrElse index > MAX_PLAYERS Then Exit Function
+        If index < 0 OrElse index > MAX_PLAYERS Then Exit Function
 
         x = GetPetX(index)
         y = GetPetY(index)
@@ -1248,7 +1248,7 @@ Module S_Pets
     Sub PetDir(index As Integer, dir As Integer)
         Dim buffer As New ByteStream(4)
 
-        If index <= 0 OrElse index > MAX_PLAYERS OrElse dir < DirectionType.Up OrElse dir > DirectionType.Right Then Exit Sub
+        If index < 0 OrElse index > MAX_PLAYERS OrElse dir < DirectionType.Up OrElse dir > DirectionType.Right Then Exit Sub
 
         If TempPlayer(index).PetskillBuffer.Skill > 0 Then Exit Sub
 
@@ -1718,7 +1718,7 @@ Module S_Pets
         GetPetDamage = 0
 
         ' Check for subscript out of range
-        If IsPlaying(index) = False OrElse index <= 0 OrElse index > MAX_PLAYERS OrElse Not PetAlive(index) Then
+        If IsPlaying(index) = False OrElse index < 0 OrElse index > MAX_PLAYERS OrElse Not PetAlive(index) Then
             Exit Function
         End If
 
@@ -1744,7 +1744,7 @@ Module S_Pets
     Function IsPetByPlayer(index As Integer) As Boolean
         Dim x As Integer, y As Integer, x1 As Integer, y1 As Integer
 
-        If index <= 0 OrElse index > MAX_PLAYERS OrElse Not PetAlive(index) Then Exit Function
+        If index < 0 OrElse index > MAX_PLAYERS OrElse Not PetAlive(index) Then Exit Function
 
         IsPetByPlayer = False
 
@@ -1768,7 +1768,7 @@ Module S_Pets
     Function GetPetVitalRegen(index As Integer, vital As VitalType) As Integer
         Dim i As Integer
 
-        If index <= 0 OrElse index > MAX_PLAYERS OrElse Not PetAlive(index) Then
+        If index < 0 OrElse index > MAX_PLAYERS OrElse Not PetAlive(index) Then
             GetPetVitalRegen = 0
             Exit Function
         End If
@@ -1837,7 +1837,7 @@ Module S_Pets
         'Check for no projectile, if so just overwrite the first slot
         If projectileSlot = 0 Then projectileSlot = 1
 
-        If spellnum < 1 OrElse spellnum > MAX_SKILLS Then Exit Sub
+        If spellnum < 0 OrElse spellnum > MAX_SKILLS Then Exit Sub
 
         projectileNum = Skill(spellnum).Projectile
 
@@ -1918,12 +1918,12 @@ Module S_Pets
         Dim npcY As Integer
         Dim attackspeed As Integer
 
-        If IsPlaying(attacker) = False OrElse mapnpcnum <= 0 OrElse mapnpcnum > MAX_MAP_NPCS OrElse Not PetAlive(attacker) Then
+        If IsPlaying(attacker) = False OrElse mapnpcnum < 0 OrElse mapnpcnum > MAX_MAP_NPCS OrElse Not PetAlive(attacker) Then
             Exit Function
         End If
 
         ' Check for subscript out of range
-        If MapNpc(GetPlayerMap(attacker)).Npc(mapnpcnum).Num <= 0 Then Exit Function
+        If MapNpc(GetPlayerMap(attacker)).Npc(mapnpcnum).Num < 0 Then Exit Function
 
         mapNum = GetPlayerMap(attacker)
         npcnum = MapNpc(mapNum).Npc(mapnpcnum).Num
@@ -1986,7 +1986,7 @@ Module S_Pets
         Dim i As Integer, mapNum As Integer, npcnum As Integer
 
         ' Check for subscript out of range
-        If IsPlaying(attacker) = False OrElse mapnpcnum <= 0 OrElse mapnpcnum > MAX_MAP_NPCS OrElse damage < 0 OrElse Not PetAlive(attacker) Then
+        If IsPlaying(attacker) = False OrElse mapnpcnum < 0 OrElse mapnpcnum > MAX_MAP_NPCS OrElse damage < 0 OrElse Not PetAlive(attacker) Then
             Exit Sub
         End If
 
@@ -2178,12 +2178,12 @@ Module S_Pets
 
         CanNpcAttackPet = False
 
-        If mapNpcNum <= 0 OrElse mapNpcNum > MAX_MAP_NPCS OrElse Not IsPlaying(index) OrElse Not PetAlive(index) Then
+        If mapNpcNum < 0 OrElse mapNpcNum > MAX_MAP_NPCS OrElse Not IsPlaying(index) OrElse Not PetAlive(index) Then
             Exit Function
         End If
 
         ' Check for subscript out of range
-        If MapNpc(GetPlayerMap(index)).Npc(mapNpcNum).Num <= 0 Then Exit Function
+        If MapNpc(GetPlayerMap(index)).Npc(mapNpcNum).Num < 0 Then Exit Function
 
         mapNum = GetPlayerMap(index)
         npcnum = MapNpc(mapNum).Npc(mapNpcNum).Num
@@ -2231,12 +2231,12 @@ Module S_Pets
         Dim name As String, mapNum As Integer
 
         ' Check for subscript out of range
-        If mapnpcnum <= 0 OrElse mapnpcnum > MAX_MAP_NPCS OrElse IsPlaying(victim) = False OrElse Not PetAlive(victim) Then
+        If mapnpcnum < 0 OrElse mapnpcnum > MAX_MAP_NPCS OrElse IsPlaying(victim) = False OrElse Not PetAlive(victim) Then
             Exit Sub
         End If
 
         ' Check for subscript out of range
-        If MapNpc(GetPlayerMap(victim)).Npc(mapnpcnum).Num <= 0 Then Exit Sub
+        If MapNpc(GetPlayerMap(victim)).Npc(mapnpcnum).Num < 0 Then Exit Sub
 
         mapNum = GetPlayerMap(victim)
         name = Trim$(Npc(MapNpc(mapNum).Npc(mapnpcnum).Num).Name)
@@ -2712,7 +2712,7 @@ Module S_Pets
             SendPetVital(victim, VitalType.HP)
 
             'Set pet to begin attacking the other pet if it isn't dead or dosent have another target
-            If TempPlayer(victim).PetTarget <= 0 AndAlso TempPlayer(victim).PetBehavior <> PetBehaviourGoto Then
+            If TempPlayer(victim).PetTarget < 0 AndAlso TempPlayer(victim).PetBehavior <> PetBehaviourGoto Then
                 TempPlayer(victim).PetTarget = attacker
                 TempPlayer(victim).PetTargetType = TargetType.Pet
             End If
@@ -2802,12 +2802,12 @@ Module S_Pets
 
         ' Prevent subscript out of range
 
-        If skillSlot <= 0 OrElse skillSlot > 4 Then Exit Sub
+        If skillSlot < 0 OrElse skillSlot > 4 Then Exit Sub
 
         skillnum = Player(index).Pet.Skill(skillSlot)
         mapNum = GetPlayerMap(index)
 
-        If skillnum <= 0 OrElse skillnum > MAX_SKILLS Then Exit Sub
+        If skillnum < 0 OrElse skillnum > MAX_SKILLS Then Exit Sub
 
         ' see if cooldown has finished
         If TempPlayer(index).PetSkillCd(skillSlot) > GetTimeMs() Then
@@ -2957,7 +2957,7 @@ Module S_Pets
         didCast = False
 
         ' Prevent subscript out of range
-        If skillslot <= 0 OrElse skillslot > 4 Then Exit Sub
+        If skillslot < 0 OrElse skillslot > 4 Then Exit Sub
 
         skillnum = Player(index).Pet.Skill(skillslot)
         mapNum = GetPlayerMap(index)
@@ -3610,7 +3610,7 @@ Module S_Pets
             SendPetVital(victim, VitalType.HP)
 
             'Set pet to begin attacking the other pet if it isn't dead or dosent have another target
-            If TempPlayer(victim).PetTarget <= 0 AndAlso TempPlayer(victim).PetBehavior <> PetBehaviourGoto Then
+            If TempPlayer(victim).PetTarget < 0 AndAlso TempPlayer(victim).PetBehavior <> PetBehaviourGoto Then
                 TempPlayer(victim).PetTarget = attacker
                 TempPlayer(victim).PetTargetType = TargetType.Player
             End If

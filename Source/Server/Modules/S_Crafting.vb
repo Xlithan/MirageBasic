@@ -201,7 +201,7 @@ Friend Module modCrafting
 
         If TempPlayer(index).IsCrafting = False Then Exit Sub
 
-        If recipeindex = 0 OrElse amount = 0 Then Exit Sub
+        If recipeindex <= 0 OrElse amount = 0 Then Exit Sub
 
         If Not CheckLearnedRecipe(index, recipeindex) Then Exit Sub
 

@@ -322,7 +322,7 @@ Module C_UpdateUI
         If Not cmbJob Is Nothing Then
             FrmMenu.cmbJob.Items.Clear()
 
-            For i = 1 To UBound(CmbJob)
+            For i = 0 To UBound(CmbJob)
                 FrmMenu.cmbJob.Items.Add(CmbJob(i))
             Next
 
@@ -370,8 +370,7 @@ Module C_UpdateUI
             With frmEditor_Pet
                 Editor = EDITOR_PET
                 .Show()
-                .lstIndex.SelectedIndex = 1
-                .cmbEvolve.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 0
                 PetEditorInit()
             End With
             InitPetEditor = False
@@ -381,7 +380,7 @@ Module C_UpdateUI
             With frmEditor_Quest
                 Editor = EDITOR_QUEST
                 .Show()
-                .lstIndex.SelectedIndex = 1
+                .lstIndex.SelectedIndex = 0
                 QuestEditorInit()
             End With
             InitQuestEditor = False
@@ -391,7 +390,7 @@ Module C_UpdateUI
             With FrmEditor_Animation
                 Editor = EDITOR_ANIMATION
                 .Show()
-                .lstIndex.SelectedIndex = 1
+                .lstIndex.SelectedIndex = 0
                 AnimationEditorInit()
             End With
             InitAnimationEditor = False
@@ -401,7 +400,7 @@ Module C_UpdateUI
             With frmEditor_Item
                 Editor = EDITOR_ITEM
                 .Show()
-                .lstIndex.SelectedIndex = 1
+                .lstIndex.SelectedIndex = 0
                 ItemEditorInit()
             End With
             InitItemEditor = False
@@ -411,7 +410,7 @@ Module C_UpdateUI
             With frmEditor_Recipe
                 Editor = EDITOR_RECIPE
                 .Show()
-                .lstIndex.SelectedIndex = 1
+                .lstIndex.SelectedIndex = 0
                 RecipeEditorInit()
             End With
             InitRecipeEditor = False
@@ -420,10 +419,9 @@ Module C_UpdateUI
         If InitJobEditor = True Then
             With frmEditor_Job
                 .Show()
-                .lstIndex.SelectedIndex = 1
+                .lstIndex.SelectedIndex = 0
                 JobEditorInit()
             End With
-
             InitJobEditor = False
         End If
 
@@ -432,18 +430,8 @@ Module C_UpdateUI
 
             With frmEditor_Resource
                 Editor = EDITOR_RESOURCE
-                .lstIndex.Items.Clear()
-
-                ' Add the names
-                For i = 0 To MAX_RESOURCES
-                    If Resource(i).Name Is Nothing Then Resource(i).Name = ""
-                    If Resource(i).SuccessMessage Is Nothing Then Resource(i).SuccessMessage = ""
-                    If Resource(i).EmptyMessage Is Nothing Then Resource(i).EmptyMessage = ""
-                    .lstIndex.Items.Add(i & ": " & Trim$(Resource(i).Name))
-                Next
-
                 .Show()
-                .lstIndex.SelectedIndex = 1
+                .lstIndex.SelectedIndex = 0
                 ResourceEditorInit()
             End With
             InitResourceEditor = False
@@ -453,7 +441,7 @@ Module C_UpdateUI
             With frmEditor_NPC
                 Editor = EDITOR_NPC
                 .Show()
-                .lstIndex.SelectedIndex = 1
+                .lstIndex.SelectedIndex = 0
                 NpcEditorInit()
             End With
             InitNPCEditor = False
@@ -462,15 +450,8 @@ Module C_UpdateUI
         If InitSkillEditor = True Then
             With frmEditor_Skill
                 Editor = EDITOR_SKILL
-                .lstIndex.Items.Clear()
-
-                ' Add the names
-                For i = 0 To MAX_SKILLS
-                    .lstIndex.Items.Add(i & ": " & Trim$(Skill(i).Name))
-                Next
-
                 .Show()
-                .lstIndex.SelectedIndex = 1
+                .lstIndex.SelectedIndex = 0
                 SkillEditorInit()
             End With
             InitSkillEditor = False
@@ -479,23 +460,8 @@ Module C_UpdateUI
         If InitShopEditor = True Then
             With frmEditor_Shop
                 Editor = EDITOR_SHOP
-                .lstIndex.Items.Clear()
-
-                ' Add the names
-                For i = 0 To MAX_SHOPS
-                    .lstIndex.Items.Add(i & ": " & Trim$(Shop(i).Name))
-                Next
-
-                .cmbItem.Items.Clear()
-                .cmbCostItem.Items.Clear()
-
-                For i = 0 To MAX_ITEMS
-                    .cmbItem.Items.Add(i & ": " & Trim$(Item(i).Name))
-                    .cmbCostItem.Items.Add(i & ": " & Trim$(Item(i).Name))
-                Next
-
                 .Show()
-                .lstIndex.SelectedIndex = 1
+                .lstIndex.SelectedIndex = 0
                 ShopEditorInit()
             End With
             InitShopEditor = False
@@ -504,34 +470,18 @@ Module C_UpdateUI
         If HouseEdit = True Then
             With frmEditor_House
                 Editor = EDITOR_HOUSE
-                .lstIndex.Items.Clear()
-
-                ' Add the names
-                For i = 0 To MAX_HOUSES
-                    .lstIndex.Items.Add(i & ": " & Trim$(House(i).ConfigName))
-                Next
-
                 .Show()
-                .lstIndex.SelectedIndex = 1
+                .lstIndex.SelectedIndex = 0
+                HouseEditorInit()
             End With
-
-            HouseEditorInit()
-
             HouseEdit = False
         End If
 
         If InitProjectileEditor = True Then
             With frmEditor_Projectile
                 Editor = EditorProjectile
-                .lstIndex.Items.Clear()
-
-                ' Add the names
-                For i = 0 To MAX_PROJECTILES
-                    .lstIndex.Items.Add(i & ": " & Trim$(Projectiles(i).Name))
-                Next
-
                 .Show()
-                .lstIndex.SelectedIndex = 1
+                .lstIndex.SelectedIndex = 0
                 ProjectileEditorInit()
             End With
 

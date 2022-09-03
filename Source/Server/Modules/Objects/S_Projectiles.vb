@@ -227,8 +227,6 @@ Friend Module S_Projectiles
                                         ' randomise for up to 10% lower than max hit
                                         Damage = Random(1, Damage)
 
-                                        If Damage < 1 Then Damage = 1
-
                                         AttackPlayer(index, Targetindex, Damage)
                                     End If
                                 End If
@@ -246,8 +244,6 @@ Friend Module S_Projectiles
 
                                 ' randomise from 1 to max hit
                                 Damage = Random(1, Damage)
-
-                                If Damage < 1 Then Damage = 1
 
                                 PlayerAttackNpc(index, Targetindex, Damage)
                             End If

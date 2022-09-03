@@ -504,7 +504,6 @@ Module modLoop
                                     'Can the npc attack the npc?
                                     If CanNpcAttackNpc(mapNum, x, target) Then
                                         damage = Npc(npcNum).Stat(StatType.Strength) - CLng(Npc(target).Stat(StatType.Endurance))
-                                        If damage < 1 Then damage = 1
                                         NpcAttackNpc(mapNum, x, target, damage)
                                     End If
                                 Else
@@ -552,7 +551,7 @@ Module modLoop
                     ' // This is used for checking if an NPC is dead or not //
                     ' ////////////////////////////////////////////////////////
                     ' Check if the npc is dead or not
-                    If MapNpc(mapNum).Npc(x).Num > 0 AndAlso MapNpc(mapNum).Npc(x).Vital(VitalType.HP) <= 0 AndAlso MapNpc(mapNum).Npc(x).SpawnWait > 0 Then
+                    If MapNpc(mapNum).Npc(x).Num > 0 AndAlso MapNpc(mapNum).Npc(x).Vital(VitalType.HP) < 0 AndAlso MapNpc(mapNum).Npc(x).SpawnWait > 0 Then
                         MapNpc(mapNum).Npc(x).Num = 0
                         MapNpc(mapNum).Npc(x).SpawnWait = GetTimeMs()
                         MapNpc(mapNum).Npc(x).Vital(VitalType.HP) = 0
@@ -586,7 +585,7 @@ Module modLoop
         Dim i As Integer
 
         'Prevent subscript out of range
-        If npcNum <= 0 OrElse npcNum > MAX_NPCS Then
+        If npcNum < 0 OrElse npcNum > MAX_NPCS Then
             GetNpcVitalRegen = 0
             Exit Function
         End If
@@ -595,12 +594,12 @@ Module modLoop
             Case VitalType.HP
                 i = Npc(npcNum).Stat(StatType.Vitality) \ 3
 
-                If i < 1 Then i = 1
+                If i < 0 Then i = 1
                 GetNpcVitalRegen = i
             Case VitalType.MP
                 i = Npc(npcNum).Stat(StatType.Intelligence) \ 3
 
-                If i < 1 Then i = 1
+                If i < 0 Then i = 1
                 GetNpcVitalRegen = i
         End Select
 
@@ -666,7 +665,7 @@ Module modLoop
         Dim skillId = GetPlayerSkill(index, skillSlot)
 
         ' Preventative checks
-        If Not IsPlaying(index) OrElse skillSlot <= 0 OrElse skillSlot > MAX_PLAYER_SKILLS OrElse Not HasSkill(index, skillId) Then Exit Sub
+        If Not IsPlaying(index) OrElse skillSlot < 0 OrElse skillSlot > MAX_PLAYER_SKILLS OrElse Not HasSkill(index, skillId) Then Exit Sub
 
         ' Check if the player is able to cast the spell.
         If GetPlayerVital(index, VitalType.MP) < Skill(skillId).MpCost Then
@@ -956,7 +955,7 @@ Module modLoop
         didCast = False
 
         ' Prevent subscript out of range
-        If skillslot <= 0 OrElse skillslot > MAX_NPC_SKILLS Then Exit Sub
+        If skillslot < 0 OrElse skillslot > MAX_NPC_SKILLS Then Exit Sub
 
         skillnum = GetNpcSkill(MapNpc(mapNum).Npc(npcNum).Num, skillslot)
 
@@ -1199,7 +1198,7 @@ Module modLoop
         Dim sSymbol As String
         Dim color As Integer
 
-        If index <= 0 OrElse index > MAX_MAP_NPCS OrElse damage < 0 OrElse MapNpc(mapNum).Npc(index).Vital(vital) <= 0 Then Exit Sub
+        If index < 0 OrElse index > MAX_MAP_NPCS OrElse damage < 0 OrElse MapNpc(mapNum).Npc(index).Vital(vital) < 0 Then Exit Sub
 
         If damage > 0 Then
             If increment Then

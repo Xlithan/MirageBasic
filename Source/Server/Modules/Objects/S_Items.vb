@@ -307,7 +307,7 @@ Friend Module S_Items
         Dim i As Integer
 
         ' Check for subscript out of range
-        If itemNum < 1 OrElse itemNum > MAX_ITEMS OrElse mapNum <= 0 OrElse mapNum > MAX_CACHED_MAPS Then Exit Sub
+        If itemNum < 0 OrElse itemNum > MAX_ITEMS OrElse mapNum < 0 OrElse mapNum > MAX_CACHED_MAPS Then Exit Sub
 
         ' Find open map item slot
         i = FindOpenMapItemSlot(mapNum)
@@ -322,7 +322,7 @@ Friend Module S_Items
         Dim buffer As New ByteStream(4)
 
         ' Check for subscript out of range
-        If MapItemSlot <= 0 OrElse MapItemSlot > MAX_MAP_ITEMS OrElse itemNum < 0 OrElse itemNum > MAX_ITEMS OrElse mapNum <= 0 OrElse mapNum > MAX_CACHED_MAPS Then Exit Sub
+        If MapItemSlot < 0 OrElse MapItemSlot > MAX_MAP_ITEMS OrElse itemNum < 0 OrElse itemNum > MAX_ITEMS OrElse mapNum < 0 OrElse mapNum > MAX_CACHED_MAPS Then Exit Sub
 
         i = MapItemSlot
 
@@ -356,9 +356,9 @@ Friend Module S_Items
         FindOpenMapItemSlot = -1
 
         ' Check for subscript out of range
-        If mapNum <= 0 OrElse mapNum > MAX_CACHED_MAPS Then Exit Function
+        If mapNum < 0 OrElse mapNum > MAX_CACHED_MAPS Then Exit Function
 
-       For i = 1 To MAX_MAP_ITEMS
+       For i = 0 To MAX_MAP_ITEMS
             If MapItem(mapNum, i).Num = 0 Then
                 FindOpenMapItemSlot = i
                 Exit Function
@@ -381,7 +381,7 @@ Friend Module S_Items
         Dim y As Integer
 
         ' Check for subscript out of range
-        If mapNum <= 0 OrElse mapNum > MAX_CACHED_MAPS Then Exit Sub
+        If mapNum < 0 OrElse mapNum > MAX_CACHED_MAPS Then Exit Sub
 
         ' Spawn what we have
         For X = 0 To Map(mapNum).MaxX
@@ -526,10 +526,10 @@ Friend Module S_Items
         If TempPlayer(index).InBank OrElse TempPlayer(index).InShop Then Exit Sub
 
         ' Prevent hacking
-        If InvNum < 1 OrElse InvNum > MAX_INV Then Exit Sub
-        If GetPlayerInvItemNum(index, InvNum) < 1 OrElse GetPlayerInvItemNum(index, InvNum) > MAX_ITEMS Then Exit Sub
+        If InvNum < 0 OrElse InvNum > MAX_INV Then Exit Sub
+        If GetPlayerInvItemNum(index, InvNum) < 0 OrElse GetPlayerInvItemNum(index, InvNum) > MAX_ITEMS Then Exit Sub
         If Item(GetPlayerInvItemNum(index, InvNum)).Type = ItemType.Currency OrElse Item(GetPlayerInvItemNum(index, InvNum)).Stackable = 1 Then
-            If Amount < 1 OrElse Amount > GetPlayerInvItemValue(index, InvNum) Then Exit Sub
+            If Amount < 0 OrElse Amount > GetPlayerInvItemValue(index, InvNum) Then Exit Sub
         End If
 
         ' everything worked out fine

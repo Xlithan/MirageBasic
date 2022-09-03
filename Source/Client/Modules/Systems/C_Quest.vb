@@ -374,7 +374,7 @@ Friend Module C_Quest
         Dim i As Integer
 
         ' Check for subscript out of range
-        If IsPlaying(index) = False OrElse itemNum <= 0 OrElse itemNum > MAX_ITEMS Then
+        If IsPlaying(index) = False OrElse itemNum < 0 OrElse itemNum > MAX_ITEMS Then
             Exit Function
         End If
 
@@ -538,7 +538,7 @@ Friend Module C_Quest
             End If
         Next
 
-        If SelectedQuest <= 0 Then Exit Sub
+        If SelectedQuest < 0 Then Exit Sub
 
         'quest log text
         y = 0

@@ -73,16 +73,11 @@ Module C_Parties
         Next
 
         ' exit out if wrong data
-        If partyindex <= 0 OrElse partyindex > MAX_PARTY_MEMBERS Then Exit Sub
+        If partyindex < 0 OrElse partyindex > MAX_PARTY_MEMBERS Then Exit Sub
 
         ' set vitals
-        Player(playerNum).MaxHp = buffer.ReadInt32
         Player(playerNum).Vital(modEnumerators.VitalType.HP) = buffer.ReadInt32
-
-        Player(playerNum).MaxMp = buffer.ReadInt32
         Player(playerNum).Vital(VitalType.MP) = buffer.ReadInt32
-
-        Player(playerNum).MaxSp = buffer.ReadInt32
         Player(playerNum).Vital(VitalType.SP) = buffer.ReadInt32
 
         buffer.Dispose()

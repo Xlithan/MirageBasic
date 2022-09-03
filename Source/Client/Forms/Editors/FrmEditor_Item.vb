@@ -27,7 +27,6 @@ Friend Class frmEditor_Item
     End Sub
 
     Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
-        If lstIndex.SelectedIndex = 0 Then lstIndex.SelectedIndex = 1
         ItemEditorInit()
         PicFurniture_MouseDown(sender, e)
     End Sub
@@ -87,10 +86,7 @@ Friend Class frmEditor_Item
         For i = 0 To MAX_ITEMS
             lstIndex.Items.Add(i & ": " & Trim$(Item(i).Name))
         Next
-
-        If NumPaperdolls > 0 Then
-            nudPaperdoll.Maximum = NumPaperdolls + 1
-        End If
+        nudPaperdoll.Maximum = NumPaperdolls
     End Sub
 
     Private Sub BtnBasics_Click(sender As Object, e As EventArgs) Handles btnBasics.Click

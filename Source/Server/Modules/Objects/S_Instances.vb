@@ -31,7 +31,7 @@ Module S_Instances
     Friend Function CreateInstance(mapNum As Integer) As Integer
         Dim i As Integer, slot As Integer
 
-        If mapNum <= 0 OrElse mapNum > MAX_MAPS Then
+        If mapNum < 0 OrElse mapNum > MAX_MAPS Then
             CreateInstance = -1
             Exit Function
         End If

@@ -49,8 +49,8 @@ Module S_RandomItems
         Dim Prefix As String = ""
 
         ' Check to see if we're out of range, or if the item isn't random.
-        If itemnum < 1 OrElse itemnum > MAX_ITEMS Then Exit Sub
-        If index < 1 OrElse index > MAX_PLAYERS Then Exit Sub
+        If itemnum < 0 OrElse itemnum > MAX_ITEMS Then Exit Sub
+        If index < 0 OrElse index > MAX_PLAYERS Then Exit Sub
         If Item(itemnum).Randomize = 0 Then Exit Sub
 
         ' See what rarity we get
@@ -103,7 +103,6 @@ Module S_RandomItems
                 Player(index).RandInv(invslot).Suffix = " of Damage"
                 Player(index).RandInv(invslot).Rarity = Rarity
                 Player(index).RandInv(invslot).Speed = Item(itemnum).Speed
-                If TempAmount < 1 Then TempAmount = 1
                 Player(index).RandInv(invslot).Damage = Item(itemnum).Data2 + (Item(itemnum).Data2 * TempAmount)
             Case RandomBonusType.RANDOM_WARRIOR
                 Player(index).RandInv(invslot).Prefix = Prefix

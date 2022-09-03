@@ -220,7 +220,7 @@ Friend Module S_Resources
         resourcenum = buffer.ReadInt32
 
         ' Prevent hacking
-        If resourcenum <= 0 OrElse resourcenum > MAX_RESOURCES Then Exit Sub
+        If resourcenum < 0 OrElse resourcenum > MAX_RESOURCES Then Exit Sub
 
         Resource(resourcenum).Animation = buffer.ReadInt32()
         Resource(resourcenum).EmptyMessage = buffer.ReadString()

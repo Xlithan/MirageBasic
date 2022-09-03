@@ -446,17 +446,16 @@ Module S_NetworkSend
         Select Case Vital
             Case VitalType.HP
                 buffer.WriteInt32(ServerPackets.SPlayerHp)
-                AddDebug("Sent SMSG: SPlayerHp")
+                AddDebug("Sent SMSG: SPlayerHP")
             Case VitalType.MP
                 buffer.WriteInt32(ServerPackets.SPlayerMp)
-                AddDebug("Sent SMSG: SPlayerMp")
+                AddDebug("Sent SMSG: SPlayerMP")
             Case VitalType.SP
                 buffer.WriteInt32(ServerPackets.SPlayerSp)
-                AddDebug("Sent SMSG: SPlayerSp")
+                AddDebug("Sent SMSG: SPlayerSP")
         End Select
 
         ' Set and send related data.
-        buffer.WriteInt32(GetPlayerMaxVital(index, Vital))
         buffer.WriteInt32(GetPlayerVital(index, Vital))
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
 

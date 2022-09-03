@@ -198,7 +198,7 @@ Friend Module C_Crafting
 
         recipeindex = GetRecipeIndex(recipeName)
 
-        If recipeindex <= 0 Then Exit Sub
+        If recipeindex < 0 Then Exit Sub
 
         'check,check, double check
 
@@ -353,7 +353,7 @@ Friend Module C_Crafting
 
         recipeindex = GetRecipeIndex(recipeName)
 
-        If recipeindex <= 0 Then Exit Sub
+        If recipeindex < 0 Then Exit Sub
 
         PicProductindex = Item(Recipe(recipeindex).MakeItemNum).Pic
         LblProductNameText = Item(Recipe(recipeindex).MakeItemNum).Name

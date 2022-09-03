@@ -96,7 +96,6 @@ Module S_Parties
         Console.WriteLine("Sent SMSG: SPartyVitals")
 
         For i = 0 To VitalType.Count - 1
-            buffer.WriteInt32(GetPlayerMaxVital(index, i))
             buffer.WriteInt32(Player(index).Vital(i))
         Next
 

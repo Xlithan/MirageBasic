@@ -297,10 +297,10 @@ Module C_NetworkSend
         If InBank OrElse InShop Then Exit Sub
 
         ' do basic checks
-        If invNum < 1 OrElse invNum > MAX_INV Then Exit Sub
-        If PlayerInv(invNum).Num < 1 OrElse PlayerInv(invNum).Num > MAX_ITEMS Then Exit Sub
+        If invNum < 0 OrElse invNum > MAX_INV Then Exit Sub
+        If PlayerInv(invNum).Num < 0 OrElse PlayerInv(invNum).Num > MAX_ITEMS Then Exit Sub
         If Item(GetPlayerInvItemNum(Myindex, invNum)).Type = ItemType.Currency OrElse Item(GetPlayerInvItemNum(Myindex, invNum)).Stackable = 1 Then
-            If amount < 1 OrElse amount > PlayerInv(invNum).Value Then Exit Sub
+            If amount <= 0 OrElse amount > PlayerInv(invNum).Value Then Exit Sub
         End If
 
         buffer.WriteInt32(ClientPackets.CMapDropItem)
@@ -359,7 +359,7 @@ Module C_NetworkSend
         Dim buffer As New ByteStream(4)
 
         ' Check for subscript out of range
-        If skillslot < 1 OrElse skillslot > MAX_PLAYER_SKILLS Then Exit Sub
+        If skillslot < 0 OrElse skillslot > MAX_PLAYER_SKILLS Then Exit Sub
 
         ' dont let them forget a skill which is in CD
         If SkillCd(skillslot) > 0 Then

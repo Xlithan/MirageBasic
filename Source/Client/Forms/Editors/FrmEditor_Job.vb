@@ -23,6 +23,18 @@ Friend Class frmEditor_Job
         For i = 0 To MAX_ITEMS
             cmbItems.Items.Add(Trim(Item(i).Name))
         Next
+
+        cmbMaleSprite.Items.Clear()
+
+        For i = 0 To UBound(Job(Editorindex).MaleSprite)
+            cmbMaleSprite.Items.Add("Sprite " & i + 1)
+        Next
+
+        cmbFemaleSprite.Items.Clear()
+
+        For i = 0 To UBound(Job(Editorindex).FemaleSprite)
+            cmbFemaleSprite.Items.Add("Sprite " & i + 1)
+        Next
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -193,7 +205,6 @@ Friend Class frmEditor_Job
     End Sub
 
     Private Sub lstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
-        If lstIndex.SelectedIndex = 0 Then lstIndex.SelectedIndex = 1
         JobEditorInit
     End Sub
 

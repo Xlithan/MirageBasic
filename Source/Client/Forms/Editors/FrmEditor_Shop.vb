@@ -3,7 +3,6 @@ Imports System.Windows.Forms
 Imports MirageBasic.Core
 
 Friend Class frmEditor_Shop
-
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         Dim tmpindex As Integer
 
@@ -45,7 +44,6 @@ Friend Class frmEditor_Shop
     End Sub
 
     Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
-        If lstIndex.SelectedIndex = 0 Then lstIndex.SelectedIndex = 1
         ShopEditorInit()
     End Sub
 
@@ -83,4 +81,20 @@ Friend Class frmEditor_Shop
         Shop(Editorindex).Face = nudFace.Value
     End Sub
 
+    Private Sub frmEditor_Shop_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lstIndex.Items.Clear()
+
+        ' Add the names
+        For i = 0 To MAX_SHOPS
+            lstIndex.Items.Add(i & ": " & Trim$(Shop(i).Name))
+        Next
+
+        cmbItem.Items.Clear()
+        cmbCostItem.Items.Clear()
+
+        For i = 0 To MAX_ITEMS
+            cmbItem.Items.Add(i & ": " & Trim$(Item(i).Name))
+            cmbCostItem.Items.Add(i & ": " & Trim$(Item(i).Name))
+        Next
+    End Sub
 End Class

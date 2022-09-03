@@ -3,11 +3,16 @@
 Friend Class frmEditor_Projectile
 
     Private Sub FrmEditor_Projectile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lstIndex.Items.Clear()
+
+        ' Add the names
+        For i = 0 To MAX_PROJECTILES
+            lstIndex.Items.Add(i & ": " & Trim$(Projectiles(i).Name))
+        Next
         nudPic.Maximum = NumProjectiles
     End Sub
 
     Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
-        If lstIndex.SelectedIndex = 0 Then lstIndex.SelectedIndex = 1
         ProjectileEditorInit()
     End Sub
 

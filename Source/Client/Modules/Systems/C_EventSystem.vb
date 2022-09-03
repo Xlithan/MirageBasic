@@ -295,7 +295,7 @@ Friend Module C_EventSystem
             X = 0
             ReDim Preserve EventList(X)
 newlist:
-            For i = 1 To TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
+            For i = 0 To TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
                 If listleftoff(curlist) > 0 Then
                     If (TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(listleftoff(curlist)).Index = EventType.Condition OrElse TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(listleftoff(curlist)).Index = EventType.ShowChoices) AndAlso conditionalstage(curlist) <> 0 Then
                         i = listleftoff(curlist)
@@ -788,7 +788,7 @@ newlist:
 
         Dim z As Integer
         X = 0
-        For i = 1 To FrmEditor_Events.lstCommands.Items.Count
+        For i = 0 To FrmEditor_Events.lstCommands.Items.Count
             If X > z Then z = X
         Next
 

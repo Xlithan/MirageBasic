@@ -598,7 +598,7 @@ Friend Module S_Quest
 
     Friend Function CanStartQuest(index As Integer, QuestNum As Integer) As Boolean
         CanStartQuest = False
-        If QuestNum < 1 OrElse QuestNum > MAX_QUESTS Then Exit Function
+        If QuestNum < 0 OrElse QuestNum > MAX_QUESTS Then Exit Function
         If QuestInProgress(index, QuestNum) Then Exit Function
 
         'Check if player has the quest 0 (not started) or 3 (completed but it can be started again)
@@ -647,7 +647,7 @@ Friend Module S_Quest
     'Tells if the quest is in progress or not
     Friend Function QuestInProgress(index As Integer, QuestNum As Integer) As Boolean
         QuestInProgress = False
-        If QuestNum < 1 OrElse QuestNum > MAX_QUESTS Then Exit Function
+        If QuestNum < 0 OrElse QuestNum > MAX_QUESTS Then Exit Function
 
         If Player(index).PlayerQuest(QuestNum).Status = QuestStatusType.Started Then 'Status=1 means started
             QuestInProgress = True
@@ -656,7 +656,7 @@ Friend Module S_Quest
 
     Friend Function QuestCompleted(index As Integer, QuestNum As Integer) As Boolean
         QuestCompleted = False
-        If QuestNum < 1 OrElse QuestNum > MAX_QUESTS Then Exit Function
+        If QuestNum < 0 OrElse QuestNum > MAX_QUESTS Then Exit Function
 
         If Player(index).PlayerQuest(QuestNum).Status = 2 OrElse Player(index).PlayerQuest(QuestNum).Status = 3 Then
             QuestCompleted = True

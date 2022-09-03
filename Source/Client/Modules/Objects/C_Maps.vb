@@ -769,7 +769,7 @@ Module C_Maps
     Friend Sub ClearMapEvents()
         ReDim Map.MapEvents(Map.EventCount)
 
-        For i = 1 To Map.EventCount
+        For i = 0 To Map.EventCount
             Map.MapEvents(i).Name = ""
         Next
 

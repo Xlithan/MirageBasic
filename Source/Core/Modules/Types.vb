@@ -377,11 +377,6 @@ Public Module modTypes
 
         Dim Pet As PlayerPetStruct
 
-        ' Client use only
-        Dim MaxHp As Integer
-
-        Dim MaxMp As Integer
-        Dim MaxSp As Integer
         Dim XOffset As Integer
         Dim YOffset As Integer
         Dim Moving As Byte

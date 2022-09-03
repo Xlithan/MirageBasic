@@ -404,7 +404,7 @@ Module S_NetworkReceive
 
             If (Sex < modEnumerators.SexType.Male) OrElse (Sex > modEnumerators.SexType.Female) Then Exit Sub
 
-            If Job < 1 OrElse Job > MAX_JOBS Then Exit Sub
+            If Job < 0 OrElse Job > MAX_JOBS Then Exit Sub
 
             ' Check if char already exists in slot
             If CharExist(index, slot) Then
@@ -507,7 +507,7 @@ Module S_NetworkReceive
         ' Prevent hacking
         If Dir < DirectionType.Up OrElse Dir > DirectionType.Right Then Exit Sub
 
-        If movement < 1 OrElse movement > 2 Then Exit Sub
+        If movement < 0 OrElse movement > 2 Then Exit Sub
 
         ' Prevent player from moving if they have casted a skill
         If TempPlayer(index).SkillBuffer > 0 Then
@@ -1701,7 +1701,7 @@ Module S_NetworkReceive
         skillslot = buffer.ReadInt32
 
         ' Check for subscript out of range
-        If skillslot < 1 OrElse skillslot > MAX_PLAYER_SKILLS Then Exit Sub
+        If skillslot < 0 OrElse skillslot > MAX_PLAYER_SKILLS Then Exit Sub
 
         ' dont let them forget a skill which is in CD
         If TempPlayer(index).SkillCd(skillslot) > 0 Then
@@ -1737,11 +1737,11 @@ Module S_NetworkReceive
 
         ' not in shop, exit out
         shopnum = TempPlayer(index).InShop
-        If shopnum < 1 OrElse shopnum > MAX_SHOPS Then Exit Sub
+        If shopnum < 0 OrElse shopnum > MAX_SHOPS Then Exit Sub
 
         With Shop(shopnum).TradeItem(shopslot)
             ' check trade exists
-            If .Item < 1 Then Exit Sub
+            If .Item < 0 Then Exit Sub
 
             ' check has the cost item
             itemamount = HasItem(index, .CostItem)
@@ -1775,10 +1775,10 @@ Module S_NetworkReceive
         invSlot = buffer.ReadInt32
 
         ' if invalid, exit out
-        If invSlot < 1 OrElse invSlot > MAX_INV Then Exit Sub
+        If invSlot < 0 OrElse invSlot > MAX_INV Then Exit Sub
 
         ' has item?
-        If GetPlayerInvItemNum(index, invSlot) < 1 OrElse GetPlayerInvItemNum(index, invSlot) > MAX_ITEMS Then Exit Sub
+        If GetPlayerInvItemNum(index, invSlot) < 0 OrElse GetPlayerInvItemNum(index, invSlot) > MAX_ITEMS Then Exit Sub
 
         ' seems to be valid
         itemNum = GetPlayerInvItemNum(index, invSlot)
@@ -1788,7 +1788,7 @@ Module S_NetworkReceive
         price = Item(itemNum).Price * multiplier
 
         ' item has cost?
-        If price <= 0 Then
+        If price < 0 Then
             PlayerMsg(index, "The shop doesn't want that item.", ColorType.Yellow)
             ResetShopAction(index)
             Exit Sub
@@ -1892,7 +1892,7 @@ Module S_NetworkReceive
         tradetarget = FindPlayer(Name)
 
         ' make sure we don't error
-        If tradetarget <= 0 OrElse tradetarget > MAX_PLAYERS Then Exit Sub
+        If tradetarget < 0 OrElse tradetarget > MAX_PLAYERS Then Exit Sub
 
         ' can't trade with yourself..
         If tradetarget = index Then
@@ -2079,11 +2079,11 @@ Module S_NetworkReceive
 
         buffer.Dispose()
 
-        If invslot <= 0 OrElse invslot > MAX_INV Then Exit Sub
+        If invslot < 0 OrElse invslot > MAX_INV Then Exit Sub
 
         itemnum = GetPlayerInvItemNum(index, invslot)
 
-        If itemnum <= 0 OrElse itemnum > MAX_ITEMS Then Exit Sub
+        If itemnum < 0 OrElse itemnum > MAX_ITEMS Then Exit Sub
 
         ' make sure they have the amount they offer
         If amount < 0 OrElse amount > GetPlayerInvItemValue(index, invslot) Then Exit Sub
@@ -2156,8 +2156,8 @@ Module S_NetworkReceive
 
         buffer.Dispose()
 
-        If tradeslot <= 0 OrElse tradeslot > MAX_INV Then Exit Sub
-        If TempPlayer(index).TradeOffer(tradeslot).Num <= 0 Then Exit Sub
+        If tradeslot < 0 OrElse tradeslot > MAX_INV Then Exit Sub
+        If TempPlayer(index).TradeOffer(tradeslot).Num < 0 Then Exit Sub
 
         TempPlayer(index).TradeOffer(tradeslot).Num = 0
         TempPlayer(index).TradeOffer(tradeslot).Value = 0

@@ -133,7 +133,7 @@ Module S_Players
         GetPlayerDamage = 0
 
         ' Check for subscript out of range
-        If IsPlaying(index) = False OrElse index <= 0 OrElse index > MAX_PLAYERS Then
+        If IsPlaying(index) = False OrElse index < 0 OrElse index > MAX_PLAYERS Then
             Exit Function
         End If
 
@@ -151,7 +151,7 @@ Module S_Players
         GetPlayerProtection = 0
 
         ' Check for subscript out of range
-        If IsPlaying(index) = False OrElse index <= 0 OrElse index > MAX_PLAYERS Then
+        If IsPlaying(index) = False OrElse index < 0 OrElse index > MAX_PLAYERS Then
             Exit Function
         End If
 
@@ -333,12 +333,12 @@ Module S_Players
         Dim attackspeed As Integer
 
         ' Check for subscript out of range
-        If IsPlaying(Attacker) = False OrElse MapNpcNum <= 0 OrElse MapNpcNum > MAX_MAP_NPCS Then
+        If IsPlaying(Attacker) = False OrElse MapNpcNum < 0 OrElse MapNpcNum > MAX_MAP_NPCS Then
             Exit Function
         End If
 
         ' Check for subscript out of range
-        If MapNpc(GetPlayerMap(Attacker)).Npc(MapNpcNum).Num <= 0 Then
+        If MapNpc(GetPlayerMap(Attacker)).Npc(MapNpcNum).Num < 0 Then
             Exit Function
         End If
 
@@ -437,7 +437,7 @@ Module S_Players
 
     Sub PlayerAttackNpc(Attacker As Integer, MapNpcNum As Integer, Damage As Integer)
         ' Check for subscript out of range
-        If IsPlaying(Attacker) = False OrElse MapNpcNum <= 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse Damage < 0 Then Exit Sub
+        If IsPlaying(Attacker) = False OrElse MapNpcNum < 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse Damage < 0 Then Exit Sub
 
         Dim MapNum = GetPlayerMap(Attacker)
         Dim NpcNum = MapNpc(MapNum).Npc(MapNpcNum).Num
@@ -620,7 +620,7 @@ Module S_Players
 
     Sub PlayerAttackPlayer(Attacker As Integer, Victim As Integer, Damage As Integer)
         ' Check for subscript out of range
-        If IsPlaying(Attacker) = False OrElse IsPlaying(Victim) = False OrElse Damage <= 0 Then
+        If IsPlaying(Attacker) = False OrElse IsPlaying(Victim) = False OrElse Damage < 0 Then
             Exit Sub
         End If
 
@@ -724,7 +724,7 @@ Module S_Players
     Friend Function IsPlayerDead(index As Integer)
         IsPlayerDead = False
         If index < 0 OrElse index > MAX_PLAYERS OrElse Not TempPlayer(index).InGame Then Exit Function
-        If GetPlayerVital(index, VitalType.HP) <= 0 Then IsPlayerDead = True
+        If GetPlayerVital(index, VitalType.HP) < 0 Then IsPlayerDead = True
     End Function
 
     Friend Sub HandlePlayerKillPlayer(Attacker As Integer, Victim As Integer)
@@ -944,7 +944,7 @@ Module S_Players
         End If
 
         ' Check for subscript out of range
-        If IsPlaying(index) = False OrElse MapNum <= 0 OrElse MapNum > MAX_CACHED_MAPS Then Exit Sub
+        If IsPlaying(index) = False OrElse MapNum < 0 OrElse MapNum > MAX_CACHED_MAPS Then Exit Sub
 
         ' Check if you are out of bounds
         If X > Map(MapNum).MaxX Then X = Map(MapNum).MaxX
@@ -1051,7 +1051,7 @@ Module S_Players
         Dim VitalType As Integer, Colour As Integer, amount As Integer
 
         ' Check for subscript out of range
-        If Dir < DirectionType.Up OrElse Dir > DirectionType.Right OrElse Movement < 1 OrElse Movement > 2 Then
+        If Dir < DirectionType.Up OrElse Dir > DirectionType.Right OrElse Movement < 0 OrElse Movement > 2 Then
             Exit Sub
         End If
 
@@ -1246,7 +1246,7 @@ Module S_Players
             If .Type = TileType.Trap Then
                 amount = .Data1
                 SendActionMsg(GetPlayerMap(index), "-" & amount, ColorType.BrightRed, ActionMsgType.Scroll, GetPlayerX(index) * 32, GetPlayerY(index) * 32, 1)
-                If GetPlayerVital(index, modEnumerators.VitalType.HP) - amount <= 0 Then
+                If GetPlayerVital(index, modEnumerators.VitalType.HP) - amount < 0 Then
                     KillPlayer(index)
                     PlayerMsg(index, "You've been killed by a trap.", ColorType.BrightRed)
                 Else
@@ -1351,7 +1351,7 @@ Module S_Players
         Dim i As Integer
 
         ' Check for subscript out of range
-        If IsPlaying(index) = False OrElse ItemNum <= 0 OrElse ItemNum > MAX_ITEMS Then
+        If IsPlaying(index) = False OrElse ItemNum < 0 OrElse ItemNum > MAX_ITEMS Then
             Exit Function
         End If
 
@@ -1375,7 +1375,7 @@ Module S_Players
         FindItemSlot = -1
 
         ' Check for subscript out of range
-        If IsPlaying(index) = False OrElse ItemNum <= 0 OrElse ItemNum > MAX_ITEMS Then
+        If IsPlaying(index) = False OrElse ItemNum < 0 OrElse ItemNum > MAX_ITEMS Then
             Exit Function
         End If
 
@@ -1483,13 +1483,13 @@ Module S_Players
         FindOpenInvSlot = -1
 
         ' Check for subscript out of range
-        If IsPlaying(index) = False OrElse ItemNum <= 0 OrElse ItemNum > MAX_ITEMS Then
+        If IsPlaying(index) = False OrElse ItemNum < 0 OrElse ItemNum > MAX_ITEMS Then
             Exit Function
         End If
 
         If Item(ItemNum).Type = ItemType.Currency OrElse Item(ItemNum).Stackable = 1 Then
             ' If currency then check to see if they already have an instance of the item and add it to that
-            For i = 1 To MAX_INV
+            For i = 0 To MAX_INV
                 If GetPlayerInvItemNum(index, i) = ItemNum Then
                     FindOpenInvSlot = i
                     Exit Function
@@ -1497,7 +1497,7 @@ Module S_Players
             Next
         End If
 
-        For i = 1 To MAX_INV
+        For i = 0 To MAX_INV
             ' Try to find an open free slot
             If GetPlayerInvItemNum(index, i) = 0 Then
                 FindOpenInvSlot = i
@@ -1513,7 +1513,7 @@ Module S_Players
         TakeInvItem = False
 
         ' Check for subscript out of range
-        If IsPlaying(index) = False OrElse ItemNum <= 0 OrElse ItemNum > MAX_ITEMS Then
+        If IsPlaying(index) = False OrElse ItemNum < 0 OrElse ItemNum > MAX_ITEMS Then
             Exit Function
         End If
 
@@ -1551,7 +1551,7 @@ Module S_Players
         Dim i As Integer
 
         ' Check for subscript out of range
-        If IsPlaying(index) = False OrElse ItemNum <= 0 OrElse ItemNum > MAX_ITEMS Then
+        If IsPlaying(index) = False OrElse ItemNum < 0 OrElse ItemNum > MAX_ITEMS Then
             GiveInvItem = False
             Exit Function
         End If
@@ -1575,7 +1575,7 @@ Module S_Players
         Dim i As Integer
 
         ' Check for subscript out of range
-        If IsPlaying(index) = False OrElse InvNum <= 0 OrElse InvNum > MAX_INV Then
+        If IsPlaying(index) = False OrElse InvNum < 0 OrElse InvNum > MAX_INV Then
             Exit Sub
         End If
 
@@ -1636,7 +1636,7 @@ Module S_Players
         TakeInvSlot = False
 
         ' Check for subscript out of range
-        If IsPlaying(index) = False OrElse InvSlot <= 0 OrElse InvSlot > MAX_ITEMS Then Exit Function
+        If IsPlaying(index) = False OrElse InvSlot < 0 OrElse InvSlot > MAX_ITEMS Then Exit Function
 
         itemNum = GetPlayerInvItemNum(index, InvSlot)
 
@@ -1695,7 +1695,7 @@ Module S_Players
         Dim m As Integer, tempdata(StatType.Count + 3) As Integer, tempstr(2) As String
 
         ' Prevent hacking
-        If InvNum < 1 OrElse InvNum > MAX_INV Then Exit Sub
+        If InvNum < 0 OrElse InvNum > MAX_INV Then Exit Sub
 
         InvItemNum = GetPlayerInvItemNum(index, InvNum)
         n = Item(InvItemNum).Data2
@@ -2329,7 +2329,7 @@ Module S_Players
     Sub PlayerUnequipItem(index As Integer, EqSlot As Integer)
         Dim i As Integer, m As Integer, itemnum As Integer
 
-        If EqSlot <= 0 OrElse EqSlot > EquipmentType.Count - 1 Then Exit Sub ' exit out early if error'd
+        If EqSlot < 0 OrElse EqSlot > EquipmentType.Count - 1 Then Exit Sub ' exit out early if error'd
 
         If FindOpenInvSlot(index, GetPlayerEquipment(index, EqSlot)) > 0 Then
             itemnum = GetPlayerEquipment(index, EqSlot)
@@ -2443,7 +2443,7 @@ Module S_Players
 
             ' Check if player was the only player on the map and stop npc processing if so
             If GetPlayerMap(index) > 0 Then
-                If GetTotalMapPlayers(GetPlayerMap(index)) < 1 Then
+                If GetTotalMapPlayers(GetPlayerMap(index)) < 0 Then
                     PlayersOnMap(GetPlayerMap(index)) = False
                     If IsInstancedMap(GetPlayerMap(index)) Then
                         DestroyInstancedMap(GetPlayerMap(index) - MAX_MAPS)
@@ -2563,7 +2563,7 @@ Module S_Players
         Dim i As Integer
 
         ' Prevent subscript out of range
-        If IsPlaying(index) = False OrElse index <= 0 OrElse index > MAX_PLAYERS Then
+        If IsPlaying(index) = False OrElse index < 0 OrElse index > MAX_PLAYERS Then
             GetPlayerVitalRegen = 0
             Exit Function
         End If
@@ -2584,7 +2584,7 @@ Module S_Players
     Friend Sub HandleNpcKillExperience(index As Integer, NpcNum As Integer)
         ' Get the experience we'll have to hand out. If it's negative, just ignore this method.
         Dim Experience = Npc(NpcNum).Exp
-        If Experience <= 0 Then Exit Sub
+        If Experience < 0 Then Exit Sub
 
         ' Is our player in a party? If so, hand out exp to everyone.
         If IsPlayerInParty(index) Then
@@ -2689,12 +2689,12 @@ Module S_Players
         Dim Target As Integer
 
         ' Prevent subscript out of range
-        If Skillslot <= 0 OrElse Skillslot > MAX_PLAYER_SKILLS Then Exit Sub
+        If Skillslot < 0 OrElse Skillslot > MAX_PLAYER_SKILLS Then Exit Sub
 
         skillnum = GetPlayerSkill(index, Skillslot)
         mapNum = GetPlayerMap(index)
 
-        If skillnum <= 0 OrElse skillnum > MAX_SKILLS Then Exit Sub
+        If skillnum < 0 OrElse skillnum > MAX_SKILLS Then Exit Sub
 
         ' Make sure player has the skill
         If Not HasSkill(index, skillnum) Then Exit Sub
@@ -2890,7 +2890,7 @@ Module S_Players
         Dim i As Integer
 
         If Not IsPlaying(index) Then Exit Function
-        If ItemNum <= 0 OrElse ItemNum > MAX_ITEMS Then Exit Function
+        If ItemNum < 0 OrElse ItemNum > MAX_ITEMS Then Exit Function
 
         If Item(ItemNum).Type = ItemType.Currency OrElse Item(ItemNum).Stackable = 1 Then
             For i = 0 To MAX_BANK
@@ -2925,7 +2925,7 @@ Module S_Players
             If Item(GetPlayerBankItemNum(index, BankSlot)).Type = ItemType.Currency OrElse Item(GetPlayerBankItemNum(index, BankSlot)).Stackable = 1 Then
                 GiveInvItem(index, GetPlayerBankItemNum(index, BankSlot), Amount)
                 SetPlayerBankItemValue(index, BankSlot, GetPlayerBankItemValue(index, BankSlot) - Amount)
-                If GetPlayerBankItemValue(index, BankSlot) <= 0 Then
+                If GetPlayerBankItemValue(index, BankSlot) < 0 Then
                     SetPlayerBankItemNum(index, BankSlot, 0)
                     SetPlayerBankItemValue(index, BankSlot, 0)
                 End If

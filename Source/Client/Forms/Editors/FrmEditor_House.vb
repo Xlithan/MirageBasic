@@ -3,7 +3,6 @@
 Friend Class frmEditor_House
 
     Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
-        If lstIndex.SelectedIndex = 0 Then lstIndex.SelectedIndex = 1
         HouseEditorInit()
     End Sub
 
@@ -72,5 +71,14 @@ Friend Class frmEditor_House
         lstIndex.SelectedIndex = tmpindex
         
         HouseEditorInit
+    End Sub
+
+    Private Sub frmEditor_House_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lstIndex.Items.Clear()
+
+        ' Add the names
+        For i = 0 To MAX_HOUSES
+            lstIndex.Items.Add(i & ": " & Trim$(House(i).ConfigName))
+        Next
     End Sub
 End Class

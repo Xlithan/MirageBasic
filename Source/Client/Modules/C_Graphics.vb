@@ -2935,6 +2935,7 @@ NextLoop:
         Dim x As Integer, y As Integer
 
         If Map.Moral = MapMoralType.Indoors Then Exit Sub
+        If NightGfx Is Nothing Then Exit Sub
 
         Select Case MirageBasic.Core.Time.Instance.TimeOfDay
             Case TimeOfDay.Dawn

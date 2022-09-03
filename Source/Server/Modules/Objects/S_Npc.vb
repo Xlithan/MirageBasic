@@ -32,7 +32,7 @@ Module S_Npc
         Dim spawned As Boolean
 
         ' Check for subscript out of range
-        If mapNpcNum <= 0 OrElse mapNpcNum > MAX_MAP_NPCS OrElse mapNum <= 0 OrElse mapNum > MAX_CACHED_MAPS Then Exit Sub
+        If mapNpcNum < 0 OrElse mapNpcNum > MAX_MAP_NPCS OrElse mapNum < 0 OrElse mapNum > MAX_CACHED_MAPS Then Exit Sub
 
         npcNum = Map(mapNum).Npc(mapNpcNum)
 
@@ -66,7 +66,7 @@ Module S_Npc
 
             If Not spawned Then
                 ' Well try 100 times to randomly place the sprite
-                While i < 100
+                While i < 000
                     x = Random(0, Map(mapNum).MaxX)
                     y = Random(0, Map(mapNum).MaxY)
 
@@ -158,7 +158,7 @@ Module S_Npc
         Dim y As Integer
 
         ' Check for subscript out of range
-        If mapNum <= 0 OrElse mapNum > MAX_CACHED_MAPS OrElse MapNpcNum <= 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse Dir < DirectionType.Up OrElse Dir > DirectionType.Right Then
+        If mapNum < 0 OrElse mapNum > MAX_CACHED_MAPS OrElse MapNpcNum < 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse Dir < DirectionType.Up OrElse Dir > DirectionType.Right Then
             Exit Function
         End If
 
@@ -309,7 +309,7 @@ Module S_Npc
         Dim buffer As New ByteStream(4)
 
         ' Check for subscript out of range
-        If mapNum <= 0 OrElse mapNum > MAX_CACHED_MAPS OrElse MapNpcNum <= 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse Dir < DirectionType.Up OrElse Dir > DirectionType.Right OrElse Movement < 1 OrElse Movement > 2 Then
+        If mapNum < 0 OrElse mapNum > MAX_CACHED_MAPS OrElse MapNpcNum < 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse Dir < DirectionType.Up OrElse Dir > DirectionType.Right OrElse Movement < 0 OrElse Movement > 2 Then
             Exit Sub
         End If
 
@@ -381,7 +381,7 @@ Module S_Npc
         Dim buffer As New ByteStream(4)
 
         ' Check for subscript out of range
-        If mapNum <= 0 OrElse mapNum > MAX_CACHED_MAPS OrElse MapNpcNum <= 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse Dir < DirectionType.Up OrElse Dir > DirectionType.Right Then
+        If mapNum < 0 OrElse mapNum > MAX_CACHED_MAPS OrElse MapNpcNum < 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse Dir < DirectionType.Up OrElse Dir > DirectionType.Right Then
             Exit Sub
         End If
 
@@ -461,12 +461,12 @@ Module S_Npc
         Dim NpcNum As Integer
 
         ' Check for subscript out of range
-        If MapNpcNum <= 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse Not IsPlaying(index) Then
+        If MapNpcNum < 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse Not IsPlaying(index) Then
             Exit Function
         End If
 
         ' Check for subscript out of range
-        If MapNpc(GetPlayerMap(index)).Npc(MapNpcNum).Num <= 0 Then
+        If MapNpc(GetPlayerMap(index)).Npc(MapNpcNum).Num < 0 Then
             Exit Function
         End If
 
@@ -525,37 +525,37 @@ Module S_Npc
         CanNpcAttackNpc = False
 
         ' Check for subscript out of range
-        If Attacker <= 0 OrElse Attacker > MAX_MAP_NPCS Then
+        If Attacker < 0 OrElse Attacker > MAX_MAP_NPCS Then
             Exit Function
         End If
 
-        If Victim <= 0 OrElse Victim > MAX_MAP_NPCS Then
-            Exit Function
-        End If
-
-        ' Check for subscript out of range
-        If MapNpc(mapNum).Npc(Attacker).Num <= 0 Then
+        If Victim < 0 OrElse Victim > MAX_MAP_NPCS Then
             Exit Function
         End If
 
         ' Check for subscript out of range
-        If MapNpc(mapNum).Npc(Victim).Num <= 0 Then
+        If MapNpc(mapNum).Npc(Attacker).Num < 0 Then
+            Exit Function
+        End If
+
+        ' Check for subscript out of range
+        If MapNpc(mapNum).Npc(Victim).Num < 0 Then
             Exit Function
         End If
 
         aNpcNum = MapNpc(mapNum).Npc(Attacker).Num
         vNpcNum = MapNpc(mapNum).Npc(Victim).Num
 
-        If aNpcNum <= 0 Then Exit Function
-        If vNpcNum <= 0 Then Exit Function
+        If aNpcNum < 0 Then Exit Function
+        If vNpcNum < 0 Then Exit Function
 
         ' Make sure the npcs arent already dead
-        If MapNpc(mapNum).Npc(Attacker).Vital(VitalType.HP) <= 0 Then
+        If MapNpc(mapNum).Npc(Attacker).Vital(VitalType.HP) < 0 Then
             Exit Function
         End If
 
         ' Make sure the npc isn't already dead
-        If MapNpc(mapNum).Npc(Victim).Vital(VitalType.HP) <= 0 Then
+        If MapNpc(mapNum).Npc(Victim).Vital(VitalType.HP) < 0 Then
             Exit Function
         End If
 
@@ -600,10 +600,10 @@ Module S_Npc
 
         ' Check for subscript out of range
 
-        If MapNpcNum <= 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse IsPlaying(Victim) = False Then Exit Sub
+        If MapNpcNum < 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse IsPlaying(Victim) = False Then Exit Sub
 
         ' Check for subscript out of range
-        If MapNpc(GetPlayerMap(Victim)).Npc(MapNpcNum).Num <= 0 Then Exit Sub
+        If MapNpc(GetPlayerMap(Victim)).Npc(MapNpcNum).Num < 0 Then Exit Sub
 
         mapNum = GetPlayerMap(Victim)
         Name = Trim$(Npc(MapNpc(mapNum).Npc(MapNpcNum).Num).Name)
@@ -716,16 +716,16 @@ Module S_Npc
         Dim vNpcNum As Integer
         Dim n As Integer
 
-        If Attacker <= 0 OrElse Attacker > MAX_MAP_NPCS Then Exit Sub
-        If Victim <= 0 OrElse Victim > MAX_MAP_NPCS Then Exit Sub
+        If Attacker < 0 OrElse Attacker > MAX_MAP_NPCS Then Exit Sub
+        If Victim < 0 OrElse Victim > MAX_MAP_NPCS Then Exit Sub
 
         If Damage <= 0 Then Exit Sub
 
         aNpcNum = MapNpc(mapNum).Npc(Attacker).Num
         vNpcNum = MapNpc(mapNum).Npc(Victim).Num
 
-        If aNpcNum <= 0 Then Exit Sub
-        If vNpcNum <= 0 Then Exit Sub
+        If aNpcNum < 0 Then Exit Sub
+        If vNpcNum < 0 Then Exit Sub
 
         ' Send this packet so they can see the person attacking
         buffer.WriteInt32(ServerPackets.SNpcAttack)
@@ -829,11 +829,11 @@ Module S_Npc
         Dim Target As Integer
 
         ' Prevent subscript out of range
-        If skillslot <= 0 OrElse skillslot > MAX_NPC_SKILLS Then Exit Sub
+        If skillslot < 0 OrElse skillslot > MAX_NPC_SKILLS Then Exit Sub
 
         skillnum = GetNpcSkill(MapNpc(mapNum).Npc(MapNpcNum).Num, skillslot)
 
-        If skillnum <= 0 OrElse skillnum > MAX_SKILLS Then Exit Sub
+        If skillnum < 0 OrElse skillnum > MAX_SKILLS Then Exit Sub
 
         ' see if cooldown has finished
         If MapNpc(mapNum).Npc(MapNpcNum).SkillCd(skillslot) > GetTimeMs() Then

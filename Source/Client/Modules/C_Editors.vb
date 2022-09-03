@@ -432,18 +432,6 @@ Module C_Editors
             .txtName.Text = Job(Editorindex).Name
             .txtDescription.Text = Job(Editorindex).Desc
 
-            .cmbMaleSprite.Items.Clear()
-
-            For i = 0 To UBound(Job(Editorindex).MaleSprite)
-                .cmbMaleSprite.Items.Add("Sprite " & i + 1)
-            Next
-
-            .cmbFemaleSprite.Items.Clear()
-
-            For i = 0 To UBound(Job(Editorindex).FemaleSprite)
-                .cmbFemaleSprite.Items.Add("Sprite " & i + 1)
-            Next
-
             .nudMaleSprite.Value = Job(Editorindex).MaleSprite(0)
             .nudFemaleSprite.Value = Job(Editorindex).FemaleSprite(0)
 
@@ -463,7 +451,7 @@ Module C_Editors
             .nudVitality.Value = Job(Editorindex).Stat(StatType.Vitality)
             .nudSpirit.Value = Job(Editorindex).Stat(StatType.Spirit)
 
-            If Job(Editorindex).BaseExp < 10 Then
+            If Job(Editorindex).BaseExp < 00 Then
                 .nudBaseExp.Value = 10
             Else
                 .nudBaseExp.Value = Job(Editorindex).BaseExp
@@ -514,7 +502,7 @@ Module C_Editors
 
                 frmEditor_Item.cmbSubType.SelectedIndex = .SubType
 
-                If .Speed < 100 Then .Speed = 100
+                If .Speed < 000 Then .Speed = 100
                 If .Speed > frmEditor_Item.nudSpeed.Maximum Then .Speed = frmEditor_Item.nudSpeed.Maximum
                 frmEditor_Item.nudSpeed.Value = .Speed
 
@@ -537,12 +525,6 @@ Module C_Editors
                 Else
                     frmEditor_Item.chkRandomize.Checked = False
                 End If
-
-                'If .RandomMin = 0 Then .RandomMin = 1
-                'frmEditor_Item.numMin.Value = .RandomMin
-
-                'If .RandomMax <= 1 Then .RandomMax = 2
-                'frmEditor_Item.numMax.Value = .RandomMax
 
                 frmEditor_Item.nudPaperdoll.Value = .Paperdoll
 

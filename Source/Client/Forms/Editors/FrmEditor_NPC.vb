@@ -50,10 +50,19 @@ Friend Class frmEditor_NPC
         For i = 0 To MAX_ITEMS
             cmbItem.Items.Add(i & ": " & Item(i).Name)
         Next
+
+        lstIndex.Items.Clear()
+
+        ' Add the names
+        For i = 0 To MAX_RESOURCES
+            If Resource(i).Name Is Nothing Then Resource(i).Name = ""
+            If Resource(i).SuccessMessage Is Nothing Then Resource(i).SuccessMessage = ""
+            If Resource(i).EmptyMessage Is Nothing Then Resource(i).EmptyMessage = ""
+            lstIndex.Items.Add(i & ": " & Trim$(Resource(i).Name))
+        Next
     End Sub
 
     Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
-        If lstIndex.SelectedIndex = 0 Then lstIndex.SelectedIndex = 1
         NpcEditorInit()
     End Sub
 

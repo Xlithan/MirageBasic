@@ -1677,7 +1677,7 @@ Public Class FrmEditor_Events
             cmbChatBubbleTarget.Items.Clear()
 
            For i = 0 To MAX_MAP_NPCS
-                If Map.Npc(i) <= 0 Then
+                If Map.Npc(i) < 0 Then
                     cmbChatBubbleTarget.Items.Add(i & ". ")
                 Else
                     cmbChatBubbleTarget.Items.Add(i & ". " & Trim$(Npc(Map.Npc(i)).Name))

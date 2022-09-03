@@ -1127,7 +1127,7 @@ Public Class frmEditor_Map
         Dim itemnum As Integer
         itemnum = Item(Me.scrlMapItem.Value).Pic
 
-        If itemnum < 1 OrElse itemnum > NumItems Then
+        If itemnum < 0 OrElse itemnum > NumItems Then
             Me.picMapItem.BackgroundImage = Nothing
             Exit Sub
         End If
@@ -1143,7 +1143,7 @@ Public Class frmEditor_Map
 
         itemnum = Item(Me.scrlMapKey.Value).Pic
 
-        If itemnum < 1 OrElse itemnum > NumItems Then
+        If itemnum < 0 OrElse itemnum > NumItems Then
             Me.picMapKey.BackgroundImage = Nothing
             Exit Sub
         End If
