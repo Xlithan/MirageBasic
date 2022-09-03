@@ -3,17 +3,6 @@
 Friend Class FrmGame
 
 #Region "Frm Code"
-
-    Private Const CpNocloseButton As Integer = &H200
-
-    Protected Overrides ReadOnly Property CreateParams() As CreateParams
-        Get
-            Dim myCp As CreateParams = MyBase.CreateParams
-            myCp.ClassStyle = myCp.ClassStyle Or CpNocloseButton
-            Return myCp
-        End Get
-    End Property
-
     Private Sub FrmMainGame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim screenWidth As String = Screen.PrimaryScreen.Bounds.Width.ToString()
         Dim screenHeight As String = Screen.PrimaryScreen.Bounds.Height.ToString()
