@@ -1149,7 +1149,7 @@ Module C_Graphics
         Dim srcrec As Rectangle
         Dim attackspeed As Integer
 
-        If MapNpc(mapNpcNum).Num = 0 Then Exit Sub ' no npc set
+        If MapNpc(mapNpcNum).Num = -1 Then Exit Sub ' no npc set
 
         If MapNpc(mapNpcNum).X < TileView.Left OrElse MapNpc(mapNpcNum).X > TileView.Right Then Exit Sub
         If MapNpc(mapNpcNum).Y < TileView.Top OrElse MapNpc(mapNpcNum).Y > TileView.Bottom Then Exit Sub
