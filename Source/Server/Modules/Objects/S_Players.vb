@@ -2138,6 +2138,20 @@ Module S_Players
 
                 End Select
 
+            Case ItemType.Projectile
+                If Item(InvItemNum).Ammo > 0 Then
+                    If HasItem(index, Item(InvItemNum).Ammo) Then
+                        TakeInvItem(index, Item(InvItemNum).Ammo, 1)
+                        PlayerFireProjectile(index)
+                    Else
+                        PlayerMsg(index, "No More " & Item(Item(GetPlayerEquipment(index, EquipmentType.Weapon)).Ammo).Name & " !", ColorType.BrightRed)
+                        Exit Sub
+                    End If
+                Else
+                    PlayerFireProjectile(index)
+                    Exit Sub
+                End If
+
             Case ItemType.CommonEvent
                 n  = Item(InvItemNum).Data1
 

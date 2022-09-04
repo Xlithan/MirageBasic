@@ -77,6 +77,7 @@
         CommonEvent
         Currency
         Skill
+        Projectile
         Furniture
         Recipe
         Pet

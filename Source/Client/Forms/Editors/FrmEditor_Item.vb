@@ -124,7 +124,7 @@ Friend Class frmEditor_Item
     Private Sub CmbType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbType.SelectedIndexChanged
         cmbSubType.Enabled = False
 
-        If (cmbType.SelectedIndex = modEnumerators.ItemType.Equipment) Then
+        If (cmbType.SelectedIndex = ItemType.Equipment) Then
             fraEquipment.Visible = True
 
             ' Build subtype cmb
@@ -139,6 +139,12 @@ Friend Class frmEditor_Item
 
             cmbSubType.Enabled = True
             cmbSubType.SelectedIndex = Item(Editorindex).SubType
+
+            If Item(Editorindex).SubType = EquipmentType.Weapon Then
+                fraProjectile.Visible = True
+            Else
+                fraProjectile.Visible = False
+            End If
         Else
             fraEquipment.Visible = False
         End If
@@ -166,6 +172,13 @@ Friend Class frmEditor_Item
             fraSkill.Visible = False
         End If
 
+        If (cmbType.SelectedIndex = ItemType.Projectile) Then
+            fraProjectile.Visible = True
+            fraEquipment.Visible = True
+        Elseif cmbType.SelectedIndex <> ItemType.Equipment Then
+            fraProjectile.Visible = False
+        End If
+
         If cmbType.SelectedIndex = ItemType.Furniture Then
             fraFurniture.Visible = True
         Else
@@ -180,6 +193,7 @@ Friend Class frmEditor_Item
 
         If cmbType.SelectedIndex = ItemType.Pet Then
             fraPet.Visible = True
+            fraEquipment.Visible = True
         Else
             fraPet.Visible = False
         End If
@@ -244,6 +258,12 @@ Friend Class frmEditor_Item
 
     Private Sub CmbSubType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSubType.SelectedIndexChanged
         Item(Editorindex).SubType = cmbSubType.SelectedIndex
+
+        If Item(Editorindex).SubType = EquipmentType.Weapon Then
+            fraProjectile.Visible = True
+        Else
+            fraProjectile.Visible = False
+        End If
     End Sub
 
     Private Sub NudItemLvl_ValueChanged(sender As Object, e As EventArgs) Handles nudItemLvl.Click
