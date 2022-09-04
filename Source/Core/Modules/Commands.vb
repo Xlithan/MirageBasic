@@ -226,7 +226,7 @@
         GetPlayerLevel = Player(index).Level
     End Function
 
-    Public  Function GetPlayerEquipment(index As Integer, equipmentSlot As EquipmentType) As Byte
+    Public  Function GetPlayerEquipment(index As Integer, equipmentSlot As EquipmentType) As Integer
         GetPlayerEquipment = Player(index).Equipment(equipmentSlot)
     End Function
 
