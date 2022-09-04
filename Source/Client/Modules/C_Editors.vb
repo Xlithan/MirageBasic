@@ -501,7 +501,7 @@ Module C_Editors
 
                 frmEditor_Item.cmbSubType.SelectedIndex = .SubType
 
-                If .Speed < 000 Then .Speed = 100
+                If .Speed < 1000 Then .Speed = 100
                 If .Speed > frmEditor_Item.nudSpeed.Maximum Then .Speed = frmEditor_Item.nudSpeed.Maximum
                 frmEditor_Item.nudSpeed.Value = .Speed
 

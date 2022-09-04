@@ -66,7 +66,7 @@ Module S_Npc
 
             If Not spawned Then
                 ' Well try 100 times to randomly place the sprite
-                While i < 000
+                While i < 1000
                     x = Random(0, Map(mapNum).MaxX)
                     y = Random(0, Map(mapNum).MaxY)
 
