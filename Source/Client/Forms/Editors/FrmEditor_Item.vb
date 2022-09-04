@@ -48,6 +48,7 @@ Friend Class frmEditor_Item
         nudPaperdoll.Maximum = NumPaperdolls
         nudFurniture.Maximum = NumFurniture
         cmbFurnitureType.SelectedIndex = 0
+        nudSpanwAmount.Minimum = 1
 
         'populate combo boxes
         cmbAnimation.Items.Clear()
@@ -476,7 +477,7 @@ Friend Class frmEditor_Item
     End Sub
 
     Private Sub btnSpawn_Click(sender As Object, e As EventArgs) Handles btnSpawn.Click
-        SendSpawnItem(Editorindex, nudSpanwValue.Value)
+        SendSpawnItem(Editorindex, nudSpanwAmount.Value)
     End Sub
 
 #End Region

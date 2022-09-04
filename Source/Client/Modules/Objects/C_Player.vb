@@ -39,13 +39,13 @@ Module C_Player
 
         ReDim Player(i).Inv(MAX_INV)
         For x = 1 To MAX_INV
-            Player(i).Inv(x).Num = 0
+            Player(i).Inv(x).Num = -1
             Player(i).Inv(x).Value = 0
         Next
 
         ReDim Player(i).Skill(MAX_SKILLS)
         For x = 1 To MAX_SKILLS
-            Player(i).Skill(x).Num = 0
+            Player(i).Skill(x).Num = -1
             Player(i).Skill(x).CD = 0
         Next
 
@@ -68,6 +68,7 @@ Module C_Player
 
         ReDim Player(i).RandEquip(EquipmentType.Count - 1)
         For y = 0 To EquipmentType.Count - 1
+            Player(i).Equipment(y) = -1
             ReDim Player(i).RandEquip(y).Stat(StatType.Count - 1)
             For x = 0 To StatType.Count - 1
                 Player(i).RandEquip(y).Stat(x) = 0

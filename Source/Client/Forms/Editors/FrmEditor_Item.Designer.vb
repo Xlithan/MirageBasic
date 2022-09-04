@@ -132,7 +132,7 @@ Partial Class frmEditor_Item
         Me.DarkLabel36 = New DarkUI.Controls.DarkLabel()
         Me.picFurniture = New System.Windows.Forms.PictureBox()
         Me.btnSpawn = New DarkUI.Controls.DarkButton()
-        Me.nudSpanwValue = New DarkUI.Controls.DarkNumericUpDown()
+        Me.nudSpanwAmount = New DarkUI.Controls.DarkNumericUpDown()
         Me.DarkGroupBox1.SuspendLayout
         Me.fraBasics.SuspendLayout
         Me.fraEvents.SuspendLayout
@@ -173,7 +173,7 @@ Partial Class frmEditor_Item
         Me.fraFurniture.SuspendLayout
         CType(Me.nudFurniture,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.picFurniture,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudSpanwValue,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.nudSpanwAmount,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'DarkGroupBox1
@@ -1453,13 +1453,13 @@ Partial Class frmEditor_Item
         Me.btnSpawn.TabIndex = 10
         Me.btnSpawn.Text = "Spawn"
         '
-        'nudSpanwValue
+        'nudSpanwAmount
         '
-        Me.nudSpanwValue.Location = New System.Drawing.Point(559, 12)
-        Me.nudSpanwValue.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudSpanwValue.Name = "nudSpanwValue"
-        Me.nudSpanwValue.Size = New System.Drawing.Size(148, 23)
-        Me.nudSpanwValue.TabIndex = 11
+        Me.nudSpanwAmount.Location = New System.Drawing.Point(559, 12)
+        Me.nudSpanwAmount.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudSpanwAmount.Name = "nudSpanwAmount"
+        Me.nudSpanwAmount.Size = New System.Drawing.Size(148, 23)
+        Me.nudSpanwAmount.TabIndex = 11
         '
         'frmEditor_Item
         '
@@ -1468,7 +1468,7 @@ Partial Class frmEditor_Item
         Me.AutoSize = true
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
         Me.ClientSize = New System.Drawing.Size(790, 575)
-        Me.Controls.Add(Me.nudSpanwValue)
+        Me.Controls.Add(Me.nudSpanwAmount)
         Me.Controls.Add(Me.btnSpawn)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnDelete)
@@ -1536,7 +1536,7 @@ Partial Class frmEditor_Item
         Me.fraFurniture.PerformLayout
         CType(Me.nudFurniture,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.picFurniture,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudSpanwValue,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.nudSpanwAmount,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
 
 End Sub
@@ -1646,7 +1646,7 @@ End Sub
     Friend WithEvents nudEvent As DarkUI.Controls.DarkNumericUpDown
     Friend WithEvents DarkLabel38 As DarkUI.Controls.DarkLabel
     Friend WithEvents btnSpawn As DarkUI.Controls.DarkButton
-    Friend WithEvents nudSpanwValue As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents nudSpanwAmount As DarkUI.Controls.DarkNumericUpDown
     Friend WithEvents fraProjectile As DarkUI.Controls.DarkGroupBox
     Friend WithEvents cmbAmmo As DarkUI.Controls.DarkComboBox
     Friend WithEvents DarkLabel25 As DarkUI.Controls.DarkLabel
