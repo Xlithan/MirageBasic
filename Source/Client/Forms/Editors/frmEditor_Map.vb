@@ -37,8 +37,9 @@ Public Class frmEditor_Map
 #Region "Toolbar"
 
     Private Sub TsbSave_Click(sender As Object, e As EventArgs) Handles tsbSave.Click
-        MapEditorSend()
+        MapEditorSend()      
         GettingMap = True
+        Dispose()
     End Sub
 
     Private Sub TsbFill_Click(sender As Object, e As EventArgs) Handles tsbFill.Click
@@ -51,6 +52,7 @@ Public Class frmEditor_Map
 
     Private Sub TsbDiscard_Click(sender As Object, e As EventArgs) Handles tsbDiscard.Click
         MapEditorCancel()
+        Dispose()
     End Sub
 
     Private Sub TsbMapGrid_Click(sender As Object, e As EventArgs) Handles tsbMapGrid.Click
@@ -1160,6 +1162,10 @@ Public Class frmEditor_Map
 
     Private Sub txtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
         Map.Name = txtName.Text
+    End Sub
+
+    Private Sub frmEditor_Map_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        MapEditorCancel
     End Sub
 
     Friend Sub DrawTileOutline()

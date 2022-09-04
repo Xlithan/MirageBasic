@@ -1956,7 +1956,7 @@ Partial Class frmEditor_Map
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = true
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(552, 650)
+        Me.ClientSize = New System.Drawing.Size(552, 658)
         Me.ControlBox = false
         Me.Controls.Add(Me.tabpages)
         Me.Controls.Add(Me.ToolStrip)

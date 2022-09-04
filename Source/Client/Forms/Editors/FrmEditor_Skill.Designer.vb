@@ -706,7 +706,7 @@ Partial Class frmEditor_Skill
         Me.DarkLabel6.Location = New System.Drawing.Point(7, 55)
         Me.DarkLabel6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel6.Name = "DarkLabel6"
-        Me.DarkLabel6.Size = New System.Drawing.Size(87, 15)
+        Me.DarkLabel6.Size = New System.Drawing.Size(78, 15)
         Me.DarkLabel6.TabIndex = 11
         Me.DarkLabel6.Text = "Job Required:"
         '

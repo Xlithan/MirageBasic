@@ -238,7 +238,7 @@ Public Class FrmEditor_Events
     End Sub
 
     Private Sub BtnOK_Click(sender As Object, e As EventArgs) Handles btnOk.Click
-        if fraGraphic.Visible = false Then
+        if fraGraphic.Visible = False Then
             EventEditorOK()
             TmpEvent = Nothing
         Else
@@ -249,7 +249,7 @@ Public Class FrmEditor_Events
                 AddMoveRouteCommand(42)
                 GraphicSelType = 0
             End If
-            fraGraphic.Visible = false
+            fraGraphic.Visible = False
         End If
     End Sub
 
@@ -2589,6 +2589,10 @@ Public Class FrmEditor_Events
         If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraOpenShop.Visible = False
+    End Sub
+
+    Private Sub FrmEditor_Events_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        TmpEvent = Nothing
     End Sub
 
 #End Region

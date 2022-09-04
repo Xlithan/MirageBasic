@@ -57,6 +57,7 @@ Friend Class frmEditor_Shop
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         ShopEditorCancel()
+        Dispose()
     End Sub
 
     Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -96,5 +97,9 @@ Friend Class frmEditor_Shop
             cmbItem.Items.Add(i & ": " & Trim$(Item(i).Name))
             cmbCostItem.Items.Add(i & ": " & Trim$(Item(i).Name))
         Next
+    End Sub
+
+    Private Sub frmEditor_Shop_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        ShopEditorCancel
     End Sub
 End Class

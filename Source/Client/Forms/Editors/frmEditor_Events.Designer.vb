@@ -220,47 +220,6 @@ Partial Class FrmEditor_Events
         Me.cmbEvent = New DarkUI.Controls.DarkComboBox()
         Me.pnlGraphicSel = New System.Windows.Forms.Panel()
         Me.fraDialogue = New DarkUI.Controls.DarkGroupBox()
-        Me.fraConditionalBranch = New DarkUI.Controls.DarkGroupBox()
-        Me.cmbCondition_Time = New DarkUI.Controls.DarkComboBox()
-        Me.optCondition9 = New DarkUI.Controls.DarkRadioButton()
-        Me.btnConditionalBranchOk = New DarkUI.Controls.DarkButton()
-        Me.btnConditionalBranchCancel = New DarkUI.Controls.DarkButton()
-        Me.cmbCondition_Gender = New DarkUI.Controls.DarkComboBox()
-        Me.optCondition8 = New DarkUI.Controls.DarkRadioButton()
-        Me.fraConditions_Quest = New DarkUI.Controls.DarkGroupBox()
-        Me.DarkLabel20 = New DarkUI.Controls.DarkLabel()
-        Me.nudCondition_QuestTask = New DarkUI.Controls.DarkNumericUpDown()
-        Me.cmbCondition_General = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel19 = New DarkUI.Controls.DarkLabel()
-        Me.optCondition_Quest1 = New DarkUI.Controls.DarkRadioButton()
-        Me.optCondition_Quest0 = New DarkUI.Controls.DarkRadioButton()
-        Me.nudCondition_Quest = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel18 = New DarkUI.Controls.DarkLabel()
-        Me.optCondition7 = New DarkUI.Controls.DarkRadioButton()
-        Me.cmbCondition_SelfSwitchCondition = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel17 = New DarkUI.Controls.DarkLabel()
-        Me.cmbCondition_SelfSwitch = New DarkUI.Controls.DarkComboBox()
-        Me.optCondition6 = New DarkUI.Controls.DarkRadioButton()
-        Me.nudCondition_LevelAmount = New DarkUI.Controls.DarkNumericUpDown()
-        Me.optCondition5 = New DarkUI.Controls.DarkRadioButton()
-        Me.cmbCondition_LevelCompare = New DarkUI.Controls.DarkComboBox()
-        Me.cmbCondition_LearntSkill = New DarkUI.Controls.DarkComboBox()
-        Me.optCondition4 = New DarkUI.Controls.DarkRadioButton()
-        Me.cmbCondition_JobIs = New DarkUI.Controls.DarkComboBox()
-        Me.optCondition3 = New DarkUI.Controls.DarkRadioButton()
-        Me.nudCondition_HasItem = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel16 = New DarkUI.Controls.DarkLabel()
-        Me.cmbCondition_HasItem = New DarkUI.Controls.DarkComboBox()
-        Me.optCondition2 = New DarkUI.Controls.DarkRadioButton()
-        Me.optCondition1 = New DarkUI.Controls.DarkRadioButton()
-        Me.DarkLabel15 = New DarkUI.Controls.DarkLabel()
-        Me.cmbCondtion_PlayerSwitchCondition = New DarkUI.Controls.DarkComboBox()
-        Me.cmbCondition_PlayerSwitch = New DarkUI.Controls.DarkComboBox()
-        Me.nudCondition_PlayerVarCondition = New DarkUI.Controls.DarkNumericUpDown()
-        Me.cmbCondition_PlayerVarCompare = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel14 = New DarkUI.Controls.DarkLabel()
-        Me.cmbCondition_PlayerVarIndex = New DarkUI.Controls.DarkComboBox()
-        Me.optCondition0 = New DarkUI.Controls.DarkRadioButton()
         Me.fraPlayAnimation = New DarkUI.Controls.DarkGroupBox()
         Me.btnPlayAnimationOk = New DarkUI.Controls.DarkButton()
         Me.btnPlayAnimationCancel = New DarkUI.Controls.DarkButton()
@@ -512,6 +471,47 @@ Partial Class FrmEditor_Events
         Me.btnPlayBgmOk = New DarkUI.Controls.DarkButton()
         Me.btnPlayBgmCancel = New DarkUI.Controls.DarkButton()
         Me.cmbPlayBGM = New DarkUI.Controls.DarkComboBox()
+        Me.fraConditionalBranch = New DarkUI.Controls.DarkGroupBox()
+        Me.cmbCondition_Time = New DarkUI.Controls.DarkComboBox()
+        Me.optCondition9 = New DarkUI.Controls.DarkRadioButton()
+        Me.btnConditionalBranchOk = New DarkUI.Controls.DarkButton()
+        Me.btnConditionalBranchCancel = New DarkUI.Controls.DarkButton()
+        Me.cmbCondition_Gender = New DarkUI.Controls.DarkComboBox()
+        Me.optCondition8 = New DarkUI.Controls.DarkRadioButton()
+        Me.fraConditions_Quest = New DarkUI.Controls.DarkGroupBox()
+        Me.DarkLabel20 = New DarkUI.Controls.DarkLabel()
+        Me.nudCondition_QuestTask = New DarkUI.Controls.DarkNumericUpDown()
+        Me.cmbCondition_General = New DarkUI.Controls.DarkComboBox()
+        Me.DarkLabel19 = New DarkUI.Controls.DarkLabel()
+        Me.optCondition_Quest1 = New DarkUI.Controls.DarkRadioButton()
+        Me.optCondition_Quest0 = New DarkUI.Controls.DarkRadioButton()
+        Me.nudCondition_Quest = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel18 = New DarkUI.Controls.DarkLabel()
+        Me.optCondition7 = New DarkUI.Controls.DarkRadioButton()
+        Me.cmbCondition_SelfSwitchCondition = New DarkUI.Controls.DarkComboBox()
+        Me.DarkLabel17 = New DarkUI.Controls.DarkLabel()
+        Me.cmbCondition_SelfSwitch = New DarkUI.Controls.DarkComboBox()
+        Me.optCondition6 = New DarkUI.Controls.DarkRadioButton()
+        Me.nudCondition_LevelAmount = New DarkUI.Controls.DarkNumericUpDown()
+        Me.optCondition5 = New DarkUI.Controls.DarkRadioButton()
+        Me.cmbCondition_LevelCompare = New DarkUI.Controls.DarkComboBox()
+        Me.cmbCondition_LearntSkill = New DarkUI.Controls.DarkComboBox()
+        Me.optCondition4 = New DarkUI.Controls.DarkRadioButton()
+        Me.cmbCondition_JobIs = New DarkUI.Controls.DarkComboBox()
+        Me.optCondition3 = New DarkUI.Controls.DarkRadioButton()
+        Me.nudCondition_HasItem = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel16 = New DarkUI.Controls.DarkLabel()
+        Me.cmbCondition_HasItem = New DarkUI.Controls.DarkComboBox()
+        Me.optCondition2 = New DarkUI.Controls.DarkRadioButton()
+        Me.optCondition1 = New DarkUI.Controls.DarkRadioButton()
+        Me.DarkLabel15 = New DarkUI.Controls.DarkLabel()
+        Me.cmbCondtion_PlayerSwitchCondition = New DarkUI.Controls.DarkComboBox()
+        Me.cmbCondition_PlayerSwitch = New DarkUI.Controls.DarkComboBox()
+        Me.nudCondition_PlayerVarCondition = New DarkUI.Controls.DarkNumericUpDown()
+        Me.cmbCondition_PlayerVarCompare = New DarkUI.Controls.DarkComboBox()
+        Me.DarkLabel14 = New DarkUI.Controls.DarkLabel()
+        Me.cmbCondition_PlayerVarIndex = New DarkUI.Controls.DarkComboBox()
+        Me.optCondition0 = New DarkUI.Controls.DarkRadioButton()
         Me.pnlVariableSwitches = New System.Windows.Forms.Panel()
         Me.FraRenaming = New System.Windows.Forms.GroupBox()
         Me.btnRename_Cancel = New System.Windows.Forms.Button()
@@ -548,13 +548,6 @@ Partial Class FrmEditor_Events
         Me.fraMoveRoute.SuspendLayout
         Me.DarkGroupBox10.SuspendLayout
         Me.fraDialogue.SuspendLayout
-        Me.fraConditionalBranch.SuspendLayout
-        Me.fraConditions_Quest.SuspendLayout
-        CType(Me.nudCondition_QuestTask,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudCondition_Quest,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudCondition_LevelAmount,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudCondition_HasItem,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudCondition_PlayerVarCondition,System.ComponentModel.ISupportInitialize).BeginInit
         Me.fraPlayAnimation.SuspendLayout
         CType(Me.nudPlayAnimTileY,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.nudPlayAnimTileX,System.ComponentModel.ISupportInitialize).BeginInit
@@ -625,6 +618,13 @@ Partial Class FrmEditor_Events
         Me.fraChangeItems.SuspendLayout
         CType(Me.nudChangeItemsAmount,System.ComponentModel.ISupportInitialize).BeginInit
         Me.fraPlayBGM.SuspendLayout
+        Me.fraConditionalBranch.SuspendLayout
+        Me.fraConditions_Quest.SuspendLayout
+        CType(Me.nudCondition_QuestTask,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.nudCondition_Quest,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.nudCondition_LevelAmount,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.nudCondition_HasItem,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.nudCondition_PlayerVarCondition,System.ComponentModel.ISupportInitialize).BeginInit
         Me.pnlVariableSwitches.SuspendLayout
         Me.FraRenaming.SuspendLayout
         Me.fraRandom10.SuspendLayout
@@ -1604,7 +1604,7 @@ Partial Class FrmEditor_Events
         Me.btnOk.Padding = New System.Windows.Forms.Padding(6)
         Me.btnOk.Size = New System.Drawing.Size(88, 27)
         Me.btnOk.TabIndex = 8
-        Me.btnOk.Text = "Ok"
+        Me.btnOk.Text = "Save"
         '
         'fraMoveRoute
         '
@@ -1859,481 +1859,6 @@ Partial Class FrmEditor_Events
         Me.fraDialogue.TabIndex = 10
         Me.fraDialogue.TabStop = false
         Me.fraDialogue.Visible = false
-        '
-        'fraConditionalBranch
-        '
-        Me.fraConditionalBranch.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
-        Me.fraConditionalBranch.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
-        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_Time)
-        Me.fraConditionalBranch.Controls.Add(Me.optCondition9)
-        Me.fraConditionalBranch.Controls.Add(Me.btnConditionalBranchOk)
-        Me.fraConditionalBranch.Controls.Add(Me.btnConditionalBranchCancel)
-        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_Gender)
-        Me.fraConditionalBranch.Controls.Add(Me.optCondition8)
-        Me.fraConditionalBranch.Controls.Add(Me.fraConditions_Quest)
-        Me.fraConditionalBranch.Controls.Add(Me.nudCondition_Quest)
-        Me.fraConditionalBranch.Controls.Add(Me.DarkLabel18)
-        Me.fraConditionalBranch.Controls.Add(Me.optCondition7)
-        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_SelfSwitchCondition)
-        Me.fraConditionalBranch.Controls.Add(Me.DarkLabel17)
-        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_SelfSwitch)
-        Me.fraConditionalBranch.Controls.Add(Me.optCondition6)
-        Me.fraConditionalBranch.Controls.Add(Me.nudCondition_LevelAmount)
-        Me.fraConditionalBranch.Controls.Add(Me.optCondition5)
-        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_LevelCompare)
-        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_LearntSkill)
-        Me.fraConditionalBranch.Controls.Add(Me.optCondition4)
-        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_JobIs)
-        Me.fraConditionalBranch.Controls.Add(Me.optCondition3)
-        Me.fraConditionalBranch.Controls.Add(Me.nudCondition_HasItem)
-        Me.fraConditionalBranch.Controls.Add(Me.DarkLabel16)
-        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_HasItem)
-        Me.fraConditionalBranch.Controls.Add(Me.optCondition2)
-        Me.fraConditionalBranch.Controls.Add(Me.optCondition1)
-        Me.fraConditionalBranch.Controls.Add(Me.DarkLabel15)
-        Me.fraConditionalBranch.Controls.Add(Me.cmbCondtion_PlayerSwitchCondition)
-        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_PlayerSwitch)
-        Me.fraConditionalBranch.Controls.Add(Me.nudCondition_PlayerVarCondition)
-        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_PlayerVarCompare)
-        Me.fraConditionalBranch.Controls.Add(Me.DarkLabel14)
-        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_PlayerVarIndex)
-        Me.fraConditionalBranch.Controls.Add(Me.optCondition0)
-        Me.fraConditionalBranch.ForeColor = System.Drawing.Color.Gainsboro
-        Me.fraConditionalBranch.Location = New System.Drawing.Point(7, 8)
-        Me.fraConditionalBranch.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraConditionalBranch.Name = "fraConditionalBranch"
-        Me.fraConditionalBranch.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraConditionalBranch.Size = New System.Drawing.Size(454, 516)
-        Me.fraConditionalBranch.TabIndex = 0
-        Me.fraConditionalBranch.TabStop = false
-        Me.fraConditionalBranch.Text = "Conditional Branch"
-        Me.fraConditionalBranch.Visible = false
-        '
-        'cmbCondition_Time
-        '
-        Me.cmbCondition_Time.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
-        Me.cmbCondition_Time.FormattingEnabled = true
-        Me.cmbCondition_Time.Items.AddRange(New Object() {"Day", "Night", "Dawn", "Dusk"})
-        Me.cmbCondition_Time.Location = New System.Drawing.Point(279, 398)
-        Me.cmbCondition_Time.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbCondition_Time.Name = "cmbCondition_Time"
-        Me.cmbCondition_Time.Size = New System.Drawing.Size(167, 24)
-        Me.cmbCondition_Time.TabIndex = 33
-        '
-        'optCondition9
-        '
-        Me.optCondition9.AutoSize = true
-        Me.optCondition9.Location = New System.Drawing.Point(7, 399)
-        Me.optCondition9.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.optCondition9.Name = "optCondition9"
-        Me.optCondition9.Size = New System.Drawing.Size(102, 19)
-        Me.optCondition9.TabIndex = 32
-        Me.optCondition9.TabStop = true
-        Me.optCondition9.Text = "Time of Day is:"
-        '
-        'btnConditionalBranchOk
-        '
-        Me.btnConditionalBranchOk.Location = New System.Drawing.Point(264, 480)
-        Me.btnConditionalBranchOk.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnConditionalBranchOk.Name = "btnConditionalBranchOk"
-        Me.btnConditionalBranchOk.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnConditionalBranchOk.Size = New System.Drawing.Size(88, 27)
-        Me.btnConditionalBranchOk.TabIndex = 31
-        Me.btnConditionalBranchOk.Text = "Ok"
-        '
-        'btnConditionalBranchCancel
-        '
-        Me.btnConditionalBranchCancel.Location = New System.Drawing.Point(358, 480)
-        Me.btnConditionalBranchCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnConditionalBranchCancel.Name = "btnConditionalBranchCancel"
-        Me.btnConditionalBranchCancel.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnConditionalBranchCancel.Size = New System.Drawing.Size(88, 27)
-        Me.btnConditionalBranchCancel.TabIndex = 30
-        Me.btnConditionalBranchCancel.Text = "Cancel"
-        '
-        'cmbCondition_Gender
-        '
-        Me.cmbCondition_Gender.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbCondition_Gender.FormattingEnabled = true
-        Me.cmbCondition_Gender.Items.AddRange(New Object() {"Male", "Female"})
-        Me.cmbCondition_Gender.Location = New System.Drawing.Point(279, 367)
-        Me.cmbCondition_Gender.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbCondition_Gender.Name = "cmbCondition_Gender"
-        Me.cmbCondition_Gender.Size = New System.Drawing.Size(167, 24)
-        Me.cmbCondition_Gender.TabIndex = 29
-        '
-        'optCondition8
-        '
-        Me.optCondition8.AutoSize = true
-        Me.optCondition8.Location = New System.Drawing.Point(7, 368)
-        Me.optCondition8.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.optCondition8.Name = "optCondition8"
-        Me.optCondition8.Size = New System.Drawing.Size(109, 19)
-        Me.optCondition8.TabIndex = 28
-        Me.optCondition8.TabStop = true
-        Me.optCondition8.Text = "Player Gender is"
-        '
-        'fraConditions_Quest
-        '
-        Me.fraConditions_Quest.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
-        Me.fraConditions_Quest.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
-        Me.fraConditions_Quest.Controls.Add(Me.DarkLabel20)
-        Me.fraConditions_Quest.Controls.Add(Me.nudCondition_QuestTask)
-        Me.fraConditions_Quest.Controls.Add(Me.cmbCondition_General)
-        Me.fraConditions_Quest.Controls.Add(Me.DarkLabel19)
-        Me.fraConditions_Quest.Controls.Add(Me.optCondition_Quest1)
-        Me.fraConditions_Quest.Controls.Add(Me.optCondition_Quest0)
-        Me.fraConditions_Quest.ForeColor = System.Drawing.Color.Gainsboro
-        Me.fraConditions_Quest.Location = New System.Drawing.Point(7, 272)
-        Me.fraConditions_Quest.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraConditions_Quest.Name = "fraConditions_Quest"
-        Me.fraConditions_Quest.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraConditions_Quest.Size = New System.Drawing.Size(439, 89)
-        Me.fraConditions_Quest.TabIndex = 27
-        Me.fraConditions_Quest.TabStop = false
-        Me.fraConditions_Quest.Text = "Quest Conditions"
-        '
-        'DarkLabel20
-        '
-        Me.DarkLabel20.AutoSize = true
-        Me.DarkLabel20.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel20.Location = New System.Drawing.Point(144, 54)
-        Me.DarkLabel20.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel20.Name = "DarkLabel20"
-        Me.DarkLabel20.Size = New System.Drawing.Size(100, 15)
-        Me.DarkLabel20.TabIndex = 5
-        Me.DarkLabel20.Text = "Player is on task..."
-        '
-        'nudCondition_QuestTask
-        '
-        Me.nudCondition_QuestTask.Location = New System.Drawing.Point(272, 52)
-        Me.nudCondition_QuestTask.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudCondition_QuestTask.Name = "nudCondition_QuestTask"
-        Me.nudCondition_QuestTask.Size = New System.Drawing.Size(160, 23)
-        Me.nudCondition_QuestTask.TabIndex = 4
-        '
-        'cmbCondition_General
-        '
-        Me.cmbCondition_General.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbCondition_General.FormattingEnabled = true
-        Me.cmbCondition_General.Items.AddRange(New Object() {"Not Started", "Started", "Completed", "Can Start", "Can End"})
-        Me.cmbCondition_General.Location = New System.Drawing.Point(272, 21)
-        Me.cmbCondition_General.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbCondition_General.Name = "cmbCondition_General"
-        Me.cmbCondition_General.Size = New System.Drawing.Size(159, 24)
-        Me.cmbCondition_General.TabIndex = 3
-        '
-        'DarkLabel19
-        '
-        Me.DarkLabel19.AutoSize = true
-        Me.DarkLabel19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel19.Location = New System.Drawing.Point(144, 24)
-        Me.DarkLabel19.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel19.Name = "DarkLabel19"
-        Me.DarkLabel19.Size = New System.Drawing.Size(112, 15)
-        Me.DarkLabel19.TabIndex = 2
-        Me.DarkLabel19.Text = "If selected quest is..."
-        '
-        'optCondition_Quest1
-        '
-        Me.optCondition_Quest1.AutoSize = true
-        Me.optCondition_Quest1.Location = New System.Drawing.Point(7, 52)
-        Me.optCondition_Quest1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.optCondition_Quest1.Name = "optCondition_Quest1"
-        Me.optCondition_Quest1.Size = New System.Drawing.Size(47, 19)
-        Me.optCondition_Quest1.TabIndex = 1
-        Me.optCondition_Quest1.TabStop = true
-        Me.optCondition_Quest1.Text = "Task"
-        '
-        'optCondition_Quest0
-        '
-        Me.optCondition_Quest0.AutoSize = true
-        Me.optCondition_Quest0.Location = New System.Drawing.Point(7, 22)
-        Me.optCondition_Quest0.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.optCondition_Quest0.Name = "optCondition_Quest0"
-        Me.optCondition_Quest0.Size = New System.Drawing.Size(65, 19)
-        Me.optCondition_Quest0.TabIndex = 0
-        Me.optCondition_Quest0.TabStop = true
-        Me.optCondition_Quest0.Text = "General"
-        '
-        'nudCondition_Quest
-        '
-        Me.nudCondition_Quest.Location = New System.Drawing.Point(306, 242)
-        Me.nudCondition_Quest.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudCondition_Quest.Name = "nudCondition_Quest"
-        Me.nudCondition_Quest.Size = New System.Drawing.Size(140, 23)
-        Me.nudCondition_Quest.TabIndex = 26
-        '
-        'DarkLabel18
-        '
-        Me.DarkLabel18.AutoSize = true
-        Me.DarkLabel18.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel18.Location = New System.Drawing.Point(254, 246)
-        Me.DarkLabel18.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel18.Name = "DarkLabel18"
-        Me.DarkLabel18.Size = New System.Drawing.Size(41, 15)
-        Me.DarkLabel18.TabIndex = 25
-        Me.DarkLabel18.Text = "Quest:"
-        '
-        'optCondition7
-        '
-        Me.optCondition7.AutoSize = true
-        Me.optCondition7.Location = New System.Drawing.Point(7, 242)
-        Me.optCondition7.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.optCondition7.Name = "optCondition7"
-        Me.optCondition7.Size = New System.Drawing.Size(91, 19)
-        Me.optCondition7.TabIndex = 24
-        Me.optCondition7.TabStop = true
-        Me.optCondition7.Text = "Quest Status"
-        '
-        'cmbCondition_SelfSwitchCondition
-        '
-        Me.cmbCondition_SelfSwitchCondition.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbCondition_SelfSwitchCondition.FormattingEnabled = true
-        Me.cmbCondition_SelfSwitchCondition.Items.AddRange(New Object() {"False", "True"})
-        Me.cmbCondition_SelfSwitchCondition.Location = New System.Drawing.Point(306, 211)
-        Me.cmbCondition_SelfSwitchCondition.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbCondition_SelfSwitchCondition.Name = "cmbCondition_SelfSwitchCondition"
-        Me.cmbCondition_SelfSwitchCondition.Size = New System.Drawing.Size(140, 24)
-        Me.cmbCondition_SelfSwitchCondition.TabIndex = 23
-        '
-        'DarkLabel17
-        '
-        Me.DarkLabel17.AutoSize = true
-        Me.DarkLabel17.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel17.Location = New System.Drawing.Point(273, 215)
-        Me.DarkLabel17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel17.Name = "DarkLabel17"
-        Me.DarkLabel17.Size = New System.Drawing.Size(15, 15)
-        Me.DarkLabel17.TabIndex = 22
-        Me.DarkLabel17.Text = "is"
-        '
-        'cmbCondition_SelfSwitch
-        '
-        Me.cmbCondition_SelfSwitch.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbCondition_SelfSwitch.FormattingEnabled = true
-        Me.cmbCondition_SelfSwitch.Location = New System.Drawing.Point(125, 211)
-        Me.cmbCondition_SelfSwitch.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbCondition_SelfSwitch.Name = "cmbCondition_SelfSwitch"
-        Me.cmbCondition_SelfSwitch.Size = New System.Drawing.Size(140, 24)
-        Me.cmbCondition_SelfSwitch.TabIndex = 21
-        '
-        'optCondition6
-        '
-        Me.optCondition6.AutoSize = true
-        Me.optCondition6.Location = New System.Drawing.Point(7, 212)
-        Me.optCondition6.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.optCondition6.Name = "optCondition6"
-        Me.optCondition6.Size = New System.Drawing.Size(82, 19)
-        Me.optCondition6.TabIndex = 20
-        Me.optCondition6.TabStop = true
-        Me.optCondition6.Text = "Self Switch"
-        '
-        'nudCondition_LevelAmount
-        '
-        Me.nudCondition_LevelAmount.Location = New System.Drawing.Point(314, 181)
-        Me.nudCondition_LevelAmount.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudCondition_LevelAmount.Name = "nudCondition_LevelAmount"
-        Me.nudCondition_LevelAmount.Size = New System.Drawing.Size(132, 23)
-        Me.nudCondition_LevelAmount.TabIndex = 19
-        '
-        'optCondition5
-        '
-        Me.optCondition5.AutoSize = true
-        Me.optCondition5.Location = New System.Drawing.Point(7, 181)
-        Me.optCondition5.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.optCondition5.Name = "optCondition5"
-        Me.optCondition5.Size = New System.Drawing.Size(63, 19)
-        Me.optCondition5.TabIndex = 18
-        Me.optCondition5.TabStop = true
-        Me.optCondition5.Text = "Level is"
-        '
-        'cmbCondition_LevelCompare
-        '
-        Me.cmbCondition_LevelCompare.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbCondition_LevelCompare.FormattingEnabled = true
-        Me.cmbCondition_LevelCompare.Items.AddRange(New Object() {"Equal To", "Great Than OrElse Equal To", "Less Than or Equal To", "Greater Than", "Less Than", "Does Not Equal"})
-        Me.cmbCondition_LevelCompare.Location = New System.Drawing.Point(125, 180)
-        Me.cmbCondition_LevelCompare.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbCondition_LevelCompare.Name = "cmbCondition_LevelCompare"
-        Me.cmbCondition_LevelCompare.Size = New System.Drawing.Size(181, 24)
-        Me.cmbCondition_LevelCompare.TabIndex = 17
-        '
-        'cmbCondition_LearntSkill
-        '
-        Me.cmbCondition_LearntSkill.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbCondition_LearntSkill.FormattingEnabled = true
-        Me.cmbCondition_LearntSkill.Location = New System.Drawing.Point(125, 149)
-        Me.cmbCondition_LearntSkill.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbCondition_LearntSkill.Name = "cmbCondition_LearntSkill"
-        Me.cmbCondition_LearntSkill.Size = New System.Drawing.Size(321, 24)
-        Me.cmbCondition_LearntSkill.TabIndex = 16
-        '
-        'optCondition4
-        '
-        Me.optCondition4.AutoSize = true
-        Me.optCondition4.Location = New System.Drawing.Point(7, 150)
-        Me.optCondition4.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.optCondition4.Name = "optCondition4"
-        Me.optCondition4.Size = New System.Drawing.Size(84, 19)
-        Me.optCondition4.TabIndex = 15
-        Me.optCondition4.TabStop = true
-        Me.optCondition4.Text = "Knows Skill"
-        '
-        'cmbCondition_JobIs
-        '
-        Me.cmbCondition_JobIs.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbCondition_JobIs.FormattingEnabled = true
-        Me.cmbCondition_JobIs.Location = New System.Drawing.Point(125, 118)
-        Me.cmbCondition_JobIs.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbCondition_JobIs.Name = "cmbCondition_JobIs"
-        Me.cmbCondition_JobIs.Size = New System.Drawing.Size(321, 24)
-        Me.cmbCondition_JobIs.TabIndex = 14
-        '
-        'optCondition3
-        '
-        Me.optCondition3.AutoSize = true
-        Me.optCondition3.Location = New System.Drawing.Point(7, 119)
-        Me.optCondition3.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.optCondition3.Name = "optCondition3"
-        Me.optCondition3.Size = New System.Drawing.Size(54, 19)
-        Me.optCondition3.TabIndex = 13
-        Me.optCondition3.TabStop = true
-        Me.optCondition3.Text = "Job Is"
-        '
-        'nudCondition_HasItem
-        '
-        Me.nudCondition_HasItem.Location = New System.Drawing.Point(306, 88)
-        Me.nudCondition_HasItem.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudCondition_HasItem.Name = "nudCondition_HasItem"
-        Me.nudCondition_HasItem.Size = New System.Drawing.Size(140, 23)
-        Me.nudCondition_HasItem.TabIndex = 12
-        '
-        'DarkLabel16
-        '
-        Me.DarkLabel16.AutoSize = true
-        Me.DarkLabel16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel16.Location = New System.Drawing.Point(273, 90)
-        Me.DarkLabel16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel16.Name = "DarkLabel16"
-        Me.DarkLabel16.Size = New System.Drawing.Size(14, 15)
-        Me.DarkLabel16.TabIndex = 11
-        Me.DarkLabel16.Text = "X"
-        '
-        'cmbCondition_HasItem
-        '
-        Me.cmbCondition_HasItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbCondition_HasItem.FormattingEnabled = true
-        Me.cmbCondition_HasItem.Location = New System.Drawing.Point(125, 87)
-        Me.cmbCondition_HasItem.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbCondition_HasItem.Name = "cmbCondition_HasItem"
-        Me.cmbCondition_HasItem.Size = New System.Drawing.Size(140, 24)
-        Me.cmbCondition_HasItem.TabIndex = 10
-        '
-        'optCondition2
-        '
-        Me.optCondition2.AutoSize = true
-        Me.optCondition2.Location = New System.Drawing.Point(7, 88)
-        Me.optCondition2.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.optCondition2.Name = "optCondition2"
-        Me.optCondition2.Size = New System.Drawing.Size(72, 19)
-        Me.optCondition2.TabIndex = 9
-        Me.optCondition2.TabStop = true
-        Me.optCondition2.Text = "Has Item"
-        '
-        'optCondition1
-        '
-        Me.optCondition1.AutoSize = true
-        Me.optCondition1.Location = New System.Drawing.Point(7, 57)
-        Me.optCondition1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.optCondition1.Name = "optCondition1"
-        Me.optCondition1.Size = New System.Drawing.Size(95, 19)
-        Me.optCondition1.TabIndex = 8
-        Me.optCondition1.TabStop = true
-        Me.optCondition1.Text = "Player Switch"
-        '
-        'DarkLabel15
-        '
-        Me.DarkLabel15.AutoSize = true
-        Me.DarkLabel15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel15.Location = New System.Drawing.Point(273, 59)
-        Me.DarkLabel15.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel15.Name = "DarkLabel15"
-        Me.DarkLabel15.Size = New System.Drawing.Size(15, 15)
-        Me.DarkLabel15.TabIndex = 7
-        Me.DarkLabel15.Text = "is"
-        '
-        'cmbCondtion_PlayerSwitchCondition
-        '
-        Me.cmbCondtion_PlayerSwitchCondition.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbCondtion_PlayerSwitchCondition.FormattingEnabled = true
-        Me.cmbCondtion_PlayerSwitchCondition.Items.AddRange(New Object() {"False", "True"})
-        Me.cmbCondtion_PlayerSwitchCondition.Location = New System.Drawing.Point(306, 55)
-        Me.cmbCondtion_PlayerSwitchCondition.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbCondtion_PlayerSwitchCondition.Name = "cmbCondtion_PlayerSwitchCondition"
-        Me.cmbCondtion_PlayerSwitchCondition.Size = New System.Drawing.Size(140, 24)
-        Me.cmbCondtion_PlayerSwitchCondition.TabIndex = 6
-        '
-        'cmbCondition_PlayerSwitch
-        '
-        Me.cmbCondition_PlayerSwitch.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbCondition_PlayerSwitch.FormattingEnabled = true
-        Me.cmbCondition_PlayerSwitch.Location = New System.Drawing.Point(125, 55)
-        Me.cmbCondition_PlayerSwitch.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbCondition_PlayerSwitch.Name = "cmbCondition_PlayerSwitch"
-        Me.cmbCondition_PlayerSwitch.Size = New System.Drawing.Size(140, 24)
-        Me.cmbCondition_PlayerSwitch.TabIndex = 5
-        '
-        'nudCondition_PlayerVarCondition
-        '
-        Me.nudCondition_PlayerVarCondition.Location = New System.Drawing.Point(391, 25)
-        Me.nudCondition_PlayerVarCondition.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudCondition_PlayerVarCondition.Name = "nudCondition_PlayerVarCondition"
-        Me.nudCondition_PlayerVarCondition.Size = New System.Drawing.Size(55, 23)
-        Me.nudCondition_PlayerVarCondition.TabIndex = 4
-        '
-        'cmbCondition_PlayerVarCompare
-        '
-        Me.cmbCondition_PlayerVarCompare.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbCondition_PlayerVarCompare.FormattingEnabled = true
-        Me.cmbCondition_PlayerVarCompare.Items.AddRange(New Object() {"Equal To", "Great Than OrElse Equal To", "Less Than or Equal To", "Greater Than", "Less Than", "Does Not Equal"})
-        Me.cmbCondition_PlayerVarCompare.Location = New System.Drawing.Point(275, 24)
-        Me.cmbCondition_PlayerVarCompare.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbCondition_PlayerVarCompare.Name = "cmbCondition_PlayerVarCompare"
-        Me.cmbCondition_PlayerVarCompare.Size = New System.Drawing.Size(102, 24)
-        Me.cmbCondition_PlayerVarCompare.TabIndex = 3
-        '
-        'DarkLabel14
-        '
-        Me.DarkLabel14.AutoSize = true
-        Me.DarkLabel14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel14.Location = New System.Drawing.Point(252, 28)
-        Me.DarkLabel14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel14.Name = "DarkLabel14"
-        Me.DarkLabel14.Size = New System.Drawing.Size(15, 15)
-        Me.DarkLabel14.TabIndex = 2
-        Me.DarkLabel14.Text = "is"
-        '
-        'cmbCondition_PlayerVarIndex
-        '
-        Me.cmbCondition_PlayerVarIndex.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbCondition_PlayerVarIndex.FormattingEnabled = true
-        Me.cmbCondition_PlayerVarIndex.Location = New System.Drawing.Point(125, 24)
-        Me.cmbCondition_PlayerVarIndex.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbCondition_PlayerVarIndex.Name = "cmbCondition_PlayerVarIndex"
-        Me.cmbCondition_PlayerVarIndex.Size = New System.Drawing.Size(119, 24)
-        Me.cmbCondition_PlayerVarIndex.TabIndex = 1
-        '
-        'optCondition0
-        '
-        Me.optCondition0.AutoSize = true
-        Me.optCondition0.Location = New System.Drawing.Point(7, 25)
-        Me.optCondition0.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.optCondition0.Name = "optCondition0"
-        Me.optCondition0.Size = New System.Drawing.Size(101, 19)
-        Me.optCondition0.TabIndex = 0
-        Me.optCondition0.TabStop = true
-        Me.optCondition0.Text = "Player Variable"
         '
         'fraPlayAnimation
         '
@@ -5283,6 +4808,481 @@ Partial Class FrmEditor_Events
         Me.cmbPlayBGM.Size = New System.Drawing.Size(271, 24)
         Me.cmbPlayBGM.TabIndex = 0
         '
+        'fraConditionalBranch
+        '
+        Me.fraConditionalBranch.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraConditionalBranch.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_Time)
+        Me.fraConditionalBranch.Controls.Add(Me.optCondition9)
+        Me.fraConditionalBranch.Controls.Add(Me.btnConditionalBranchOk)
+        Me.fraConditionalBranch.Controls.Add(Me.btnConditionalBranchCancel)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_Gender)
+        Me.fraConditionalBranch.Controls.Add(Me.optCondition8)
+        Me.fraConditionalBranch.Controls.Add(Me.fraConditions_Quest)
+        Me.fraConditionalBranch.Controls.Add(Me.nudCondition_Quest)
+        Me.fraConditionalBranch.Controls.Add(Me.DarkLabel18)
+        Me.fraConditionalBranch.Controls.Add(Me.optCondition7)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_SelfSwitchCondition)
+        Me.fraConditionalBranch.Controls.Add(Me.DarkLabel17)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_SelfSwitch)
+        Me.fraConditionalBranch.Controls.Add(Me.optCondition6)
+        Me.fraConditionalBranch.Controls.Add(Me.nudCondition_LevelAmount)
+        Me.fraConditionalBranch.Controls.Add(Me.optCondition5)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_LevelCompare)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_LearntSkill)
+        Me.fraConditionalBranch.Controls.Add(Me.optCondition4)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_JobIs)
+        Me.fraConditionalBranch.Controls.Add(Me.optCondition3)
+        Me.fraConditionalBranch.Controls.Add(Me.nudCondition_HasItem)
+        Me.fraConditionalBranch.Controls.Add(Me.DarkLabel16)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_HasItem)
+        Me.fraConditionalBranch.Controls.Add(Me.optCondition2)
+        Me.fraConditionalBranch.Controls.Add(Me.optCondition1)
+        Me.fraConditionalBranch.Controls.Add(Me.DarkLabel15)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondtion_PlayerSwitchCondition)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_PlayerSwitch)
+        Me.fraConditionalBranch.Controls.Add(Me.nudCondition_PlayerVarCondition)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_PlayerVarCompare)
+        Me.fraConditionalBranch.Controls.Add(Me.DarkLabel14)
+        Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_PlayerVarIndex)
+        Me.fraConditionalBranch.Controls.Add(Me.optCondition0)
+        Me.fraConditionalBranch.ForeColor = System.Drawing.Color.Gainsboro
+        Me.fraConditionalBranch.Location = New System.Drawing.Point(7, 8)
+        Me.fraConditionalBranch.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraConditionalBranch.Name = "fraConditionalBranch"
+        Me.fraConditionalBranch.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraConditionalBranch.Size = New System.Drawing.Size(454, 516)
+        Me.fraConditionalBranch.TabIndex = 0
+        Me.fraConditionalBranch.TabStop = false
+        Me.fraConditionalBranch.Text = "Conditional Branch"
+        Me.fraConditionalBranch.Visible = false
+        '
+        'cmbCondition_Time
+        '
+        Me.cmbCondition_Time.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
+        Me.cmbCondition_Time.FormattingEnabled = true
+        Me.cmbCondition_Time.Items.AddRange(New Object() {"Day", "Night", "Dawn", "Dusk"})
+        Me.cmbCondition_Time.Location = New System.Drawing.Point(279, 398)
+        Me.cmbCondition_Time.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbCondition_Time.Name = "cmbCondition_Time"
+        Me.cmbCondition_Time.Size = New System.Drawing.Size(167, 24)
+        Me.cmbCondition_Time.TabIndex = 33
+        '
+        'optCondition9
+        '
+        Me.optCondition9.AutoSize = true
+        Me.optCondition9.Location = New System.Drawing.Point(7, 399)
+        Me.optCondition9.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.optCondition9.Name = "optCondition9"
+        Me.optCondition9.Size = New System.Drawing.Size(102, 19)
+        Me.optCondition9.TabIndex = 32
+        Me.optCondition9.TabStop = true
+        Me.optCondition9.Text = "Time of Day is:"
+        '
+        'btnConditionalBranchOk
+        '
+        Me.btnConditionalBranchOk.Location = New System.Drawing.Point(264, 480)
+        Me.btnConditionalBranchOk.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.btnConditionalBranchOk.Name = "btnConditionalBranchOk"
+        Me.btnConditionalBranchOk.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnConditionalBranchOk.Size = New System.Drawing.Size(88, 27)
+        Me.btnConditionalBranchOk.TabIndex = 31
+        Me.btnConditionalBranchOk.Text = "Ok"
+        '
+        'btnConditionalBranchCancel
+        '
+        Me.btnConditionalBranchCancel.Location = New System.Drawing.Point(358, 480)
+        Me.btnConditionalBranchCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.btnConditionalBranchCancel.Name = "btnConditionalBranchCancel"
+        Me.btnConditionalBranchCancel.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnConditionalBranchCancel.Size = New System.Drawing.Size(88, 27)
+        Me.btnConditionalBranchCancel.TabIndex = 30
+        Me.btnConditionalBranchCancel.Text = "Cancel"
+        '
+        'cmbCondition_Gender
+        '
+        Me.cmbCondition_Gender.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbCondition_Gender.FormattingEnabled = true
+        Me.cmbCondition_Gender.Items.AddRange(New Object() {"Male", "Female"})
+        Me.cmbCondition_Gender.Location = New System.Drawing.Point(279, 367)
+        Me.cmbCondition_Gender.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbCondition_Gender.Name = "cmbCondition_Gender"
+        Me.cmbCondition_Gender.Size = New System.Drawing.Size(167, 24)
+        Me.cmbCondition_Gender.TabIndex = 29
+        '
+        'optCondition8
+        '
+        Me.optCondition8.AutoSize = true
+        Me.optCondition8.Location = New System.Drawing.Point(7, 368)
+        Me.optCondition8.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.optCondition8.Name = "optCondition8"
+        Me.optCondition8.Size = New System.Drawing.Size(109, 19)
+        Me.optCondition8.TabIndex = 28
+        Me.optCondition8.TabStop = true
+        Me.optCondition8.Text = "Player Gender is"
+        '
+        'fraConditions_Quest
+        '
+        Me.fraConditions_Quest.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraConditions_Quest.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.fraConditions_Quest.Controls.Add(Me.DarkLabel20)
+        Me.fraConditions_Quest.Controls.Add(Me.nudCondition_QuestTask)
+        Me.fraConditions_Quest.Controls.Add(Me.cmbCondition_General)
+        Me.fraConditions_Quest.Controls.Add(Me.DarkLabel19)
+        Me.fraConditions_Quest.Controls.Add(Me.optCondition_Quest1)
+        Me.fraConditions_Quest.Controls.Add(Me.optCondition_Quest0)
+        Me.fraConditions_Quest.ForeColor = System.Drawing.Color.Gainsboro
+        Me.fraConditions_Quest.Location = New System.Drawing.Point(7, 272)
+        Me.fraConditions_Quest.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraConditions_Quest.Name = "fraConditions_Quest"
+        Me.fraConditions_Quest.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraConditions_Quest.Size = New System.Drawing.Size(439, 89)
+        Me.fraConditions_Quest.TabIndex = 27
+        Me.fraConditions_Quest.TabStop = false
+        Me.fraConditions_Quest.Text = "Quest Conditions"
+        '
+        'DarkLabel20
+        '
+        Me.DarkLabel20.AutoSize = true
+        Me.DarkLabel20.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel20.Location = New System.Drawing.Point(144, 54)
+        Me.DarkLabel20.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel20.Name = "DarkLabel20"
+        Me.DarkLabel20.Size = New System.Drawing.Size(100, 15)
+        Me.DarkLabel20.TabIndex = 5
+        Me.DarkLabel20.Text = "Player is on task..."
+        '
+        'nudCondition_QuestTask
+        '
+        Me.nudCondition_QuestTask.Location = New System.Drawing.Point(272, 52)
+        Me.nudCondition_QuestTask.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudCondition_QuestTask.Name = "nudCondition_QuestTask"
+        Me.nudCondition_QuestTask.Size = New System.Drawing.Size(160, 23)
+        Me.nudCondition_QuestTask.TabIndex = 4
+        '
+        'cmbCondition_General
+        '
+        Me.cmbCondition_General.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbCondition_General.FormattingEnabled = true
+        Me.cmbCondition_General.Items.AddRange(New Object() {"Not Started", "Started", "Completed", "Can Start", "Can End"})
+        Me.cmbCondition_General.Location = New System.Drawing.Point(272, 21)
+        Me.cmbCondition_General.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbCondition_General.Name = "cmbCondition_General"
+        Me.cmbCondition_General.Size = New System.Drawing.Size(159, 24)
+        Me.cmbCondition_General.TabIndex = 3
+        '
+        'DarkLabel19
+        '
+        Me.DarkLabel19.AutoSize = true
+        Me.DarkLabel19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel19.Location = New System.Drawing.Point(144, 24)
+        Me.DarkLabel19.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel19.Name = "DarkLabel19"
+        Me.DarkLabel19.Size = New System.Drawing.Size(112, 15)
+        Me.DarkLabel19.TabIndex = 2
+        Me.DarkLabel19.Text = "If selected quest is..."
+        '
+        'optCondition_Quest1
+        '
+        Me.optCondition_Quest1.AutoSize = true
+        Me.optCondition_Quest1.Location = New System.Drawing.Point(7, 52)
+        Me.optCondition_Quest1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.optCondition_Quest1.Name = "optCondition_Quest1"
+        Me.optCondition_Quest1.Size = New System.Drawing.Size(47, 19)
+        Me.optCondition_Quest1.TabIndex = 1
+        Me.optCondition_Quest1.TabStop = true
+        Me.optCondition_Quest1.Text = "Task"
+        '
+        'optCondition_Quest0
+        '
+        Me.optCondition_Quest0.AutoSize = true
+        Me.optCondition_Quest0.Location = New System.Drawing.Point(7, 22)
+        Me.optCondition_Quest0.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.optCondition_Quest0.Name = "optCondition_Quest0"
+        Me.optCondition_Quest0.Size = New System.Drawing.Size(65, 19)
+        Me.optCondition_Quest0.TabIndex = 0
+        Me.optCondition_Quest0.TabStop = true
+        Me.optCondition_Quest0.Text = "General"
+        '
+        'nudCondition_Quest
+        '
+        Me.nudCondition_Quest.Location = New System.Drawing.Point(306, 242)
+        Me.nudCondition_Quest.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudCondition_Quest.Name = "nudCondition_Quest"
+        Me.nudCondition_Quest.Size = New System.Drawing.Size(140, 23)
+        Me.nudCondition_Quest.TabIndex = 26
+        '
+        'DarkLabel18
+        '
+        Me.DarkLabel18.AutoSize = true
+        Me.DarkLabel18.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel18.Location = New System.Drawing.Point(254, 246)
+        Me.DarkLabel18.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel18.Name = "DarkLabel18"
+        Me.DarkLabel18.Size = New System.Drawing.Size(41, 15)
+        Me.DarkLabel18.TabIndex = 25
+        Me.DarkLabel18.Text = "Quest:"
+        '
+        'optCondition7
+        '
+        Me.optCondition7.AutoSize = true
+        Me.optCondition7.Location = New System.Drawing.Point(7, 242)
+        Me.optCondition7.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.optCondition7.Name = "optCondition7"
+        Me.optCondition7.Size = New System.Drawing.Size(91, 19)
+        Me.optCondition7.TabIndex = 24
+        Me.optCondition7.TabStop = true
+        Me.optCondition7.Text = "Quest Status"
+        '
+        'cmbCondition_SelfSwitchCondition
+        '
+        Me.cmbCondition_SelfSwitchCondition.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbCondition_SelfSwitchCondition.FormattingEnabled = true
+        Me.cmbCondition_SelfSwitchCondition.Items.AddRange(New Object() {"False", "True"})
+        Me.cmbCondition_SelfSwitchCondition.Location = New System.Drawing.Point(306, 211)
+        Me.cmbCondition_SelfSwitchCondition.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbCondition_SelfSwitchCondition.Name = "cmbCondition_SelfSwitchCondition"
+        Me.cmbCondition_SelfSwitchCondition.Size = New System.Drawing.Size(140, 24)
+        Me.cmbCondition_SelfSwitchCondition.TabIndex = 23
+        '
+        'DarkLabel17
+        '
+        Me.DarkLabel17.AutoSize = true
+        Me.DarkLabel17.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel17.Location = New System.Drawing.Point(273, 215)
+        Me.DarkLabel17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel17.Name = "DarkLabel17"
+        Me.DarkLabel17.Size = New System.Drawing.Size(15, 15)
+        Me.DarkLabel17.TabIndex = 22
+        Me.DarkLabel17.Text = "is"
+        '
+        'cmbCondition_SelfSwitch
+        '
+        Me.cmbCondition_SelfSwitch.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbCondition_SelfSwitch.FormattingEnabled = true
+        Me.cmbCondition_SelfSwitch.Location = New System.Drawing.Point(125, 211)
+        Me.cmbCondition_SelfSwitch.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbCondition_SelfSwitch.Name = "cmbCondition_SelfSwitch"
+        Me.cmbCondition_SelfSwitch.Size = New System.Drawing.Size(140, 24)
+        Me.cmbCondition_SelfSwitch.TabIndex = 21
+        '
+        'optCondition6
+        '
+        Me.optCondition6.AutoSize = true
+        Me.optCondition6.Location = New System.Drawing.Point(7, 212)
+        Me.optCondition6.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.optCondition6.Name = "optCondition6"
+        Me.optCondition6.Size = New System.Drawing.Size(82, 19)
+        Me.optCondition6.TabIndex = 20
+        Me.optCondition6.TabStop = true
+        Me.optCondition6.Text = "Self Switch"
+        '
+        'nudCondition_LevelAmount
+        '
+        Me.nudCondition_LevelAmount.Location = New System.Drawing.Point(314, 181)
+        Me.nudCondition_LevelAmount.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudCondition_LevelAmount.Name = "nudCondition_LevelAmount"
+        Me.nudCondition_LevelAmount.Size = New System.Drawing.Size(132, 23)
+        Me.nudCondition_LevelAmount.TabIndex = 19
+        '
+        'optCondition5
+        '
+        Me.optCondition5.AutoSize = true
+        Me.optCondition5.Location = New System.Drawing.Point(7, 181)
+        Me.optCondition5.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.optCondition5.Name = "optCondition5"
+        Me.optCondition5.Size = New System.Drawing.Size(63, 19)
+        Me.optCondition5.TabIndex = 18
+        Me.optCondition5.TabStop = true
+        Me.optCondition5.Text = "Level is"
+        '
+        'cmbCondition_LevelCompare
+        '
+        Me.cmbCondition_LevelCompare.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbCondition_LevelCompare.FormattingEnabled = true
+        Me.cmbCondition_LevelCompare.Items.AddRange(New Object() {"Equal To", "Great Than OrElse Equal To", "Less Than or Equal To", "Greater Than", "Less Than", "Does Not Equal"})
+        Me.cmbCondition_LevelCompare.Location = New System.Drawing.Point(125, 180)
+        Me.cmbCondition_LevelCompare.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbCondition_LevelCompare.Name = "cmbCondition_LevelCompare"
+        Me.cmbCondition_LevelCompare.Size = New System.Drawing.Size(181, 24)
+        Me.cmbCondition_LevelCompare.TabIndex = 17
+        '
+        'cmbCondition_LearntSkill
+        '
+        Me.cmbCondition_LearntSkill.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbCondition_LearntSkill.FormattingEnabled = true
+        Me.cmbCondition_LearntSkill.Location = New System.Drawing.Point(125, 149)
+        Me.cmbCondition_LearntSkill.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbCondition_LearntSkill.Name = "cmbCondition_LearntSkill"
+        Me.cmbCondition_LearntSkill.Size = New System.Drawing.Size(321, 24)
+        Me.cmbCondition_LearntSkill.TabIndex = 16
+        '
+        'optCondition4
+        '
+        Me.optCondition4.AutoSize = true
+        Me.optCondition4.Location = New System.Drawing.Point(7, 150)
+        Me.optCondition4.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.optCondition4.Name = "optCondition4"
+        Me.optCondition4.Size = New System.Drawing.Size(84, 19)
+        Me.optCondition4.TabIndex = 15
+        Me.optCondition4.TabStop = true
+        Me.optCondition4.Text = "Knows Skill"
+        '
+        'cmbCondition_JobIs
+        '
+        Me.cmbCondition_JobIs.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbCondition_JobIs.FormattingEnabled = true
+        Me.cmbCondition_JobIs.Location = New System.Drawing.Point(125, 118)
+        Me.cmbCondition_JobIs.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbCondition_JobIs.Name = "cmbCondition_JobIs"
+        Me.cmbCondition_JobIs.Size = New System.Drawing.Size(321, 24)
+        Me.cmbCondition_JobIs.TabIndex = 14
+        '
+        'optCondition3
+        '
+        Me.optCondition3.AutoSize = true
+        Me.optCondition3.Location = New System.Drawing.Point(7, 119)
+        Me.optCondition3.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.optCondition3.Name = "optCondition3"
+        Me.optCondition3.Size = New System.Drawing.Size(54, 19)
+        Me.optCondition3.TabIndex = 13
+        Me.optCondition3.TabStop = true
+        Me.optCondition3.Text = "Job Is"
+        '
+        'nudCondition_HasItem
+        '
+        Me.nudCondition_HasItem.Location = New System.Drawing.Point(306, 88)
+        Me.nudCondition_HasItem.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudCondition_HasItem.Name = "nudCondition_HasItem"
+        Me.nudCondition_HasItem.Size = New System.Drawing.Size(140, 23)
+        Me.nudCondition_HasItem.TabIndex = 12
+        '
+        'DarkLabel16
+        '
+        Me.DarkLabel16.AutoSize = true
+        Me.DarkLabel16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel16.Location = New System.Drawing.Point(273, 90)
+        Me.DarkLabel16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel16.Name = "DarkLabel16"
+        Me.DarkLabel16.Size = New System.Drawing.Size(14, 15)
+        Me.DarkLabel16.TabIndex = 11
+        Me.DarkLabel16.Text = "X"
+        '
+        'cmbCondition_HasItem
+        '
+        Me.cmbCondition_HasItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbCondition_HasItem.FormattingEnabled = true
+        Me.cmbCondition_HasItem.Location = New System.Drawing.Point(125, 87)
+        Me.cmbCondition_HasItem.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbCondition_HasItem.Name = "cmbCondition_HasItem"
+        Me.cmbCondition_HasItem.Size = New System.Drawing.Size(140, 24)
+        Me.cmbCondition_HasItem.TabIndex = 10
+        '
+        'optCondition2
+        '
+        Me.optCondition2.AutoSize = true
+        Me.optCondition2.Location = New System.Drawing.Point(7, 88)
+        Me.optCondition2.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.optCondition2.Name = "optCondition2"
+        Me.optCondition2.Size = New System.Drawing.Size(72, 19)
+        Me.optCondition2.TabIndex = 9
+        Me.optCondition2.TabStop = true
+        Me.optCondition2.Text = "Has Item"
+        '
+        'optCondition1
+        '
+        Me.optCondition1.AutoSize = true
+        Me.optCondition1.Location = New System.Drawing.Point(7, 57)
+        Me.optCondition1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.optCondition1.Name = "optCondition1"
+        Me.optCondition1.Size = New System.Drawing.Size(95, 19)
+        Me.optCondition1.TabIndex = 8
+        Me.optCondition1.TabStop = true
+        Me.optCondition1.Text = "Player Switch"
+        '
+        'DarkLabel15
+        '
+        Me.DarkLabel15.AutoSize = true
+        Me.DarkLabel15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel15.Location = New System.Drawing.Point(273, 59)
+        Me.DarkLabel15.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel15.Name = "DarkLabel15"
+        Me.DarkLabel15.Size = New System.Drawing.Size(15, 15)
+        Me.DarkLabel15.TabIndex = 7
+        Me.DarkLabel15.Text = "is"
+        '
+        'cmbCondtion_PlayerSwitchCondition
+        '
+        Me.cmbCondtion_PlayerSwitchCondition.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbCondtion_PlayerSwitchCondition.FormattingEnabled = true
+        Me.cmbCondtion_PlayerSwitchCondition.Items.AddRange(New Object() {"False", "True"})
+        Me.cmbCondtion_PlayerSwitchCondition.Location = New System.Drawing.Point(306, 55)
+        Me.cmbCondtion_PlayerSwitchCondition.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbCondtion_PlayerSwitchCondition.Name = "cmbCondtion_PlayerSwitchCondition"
+        Me.cmbCondtion_PlayerSwitchCondition.Size = New System.Drawing.Size(140, 24)
+        Me.cmbCondtion_PlayerSwitchCondition.TabIndex = 6
+        '
+        'cmbCondition_PlayerSwitch
+        '
+        Me.cmbCondition_PlayerSwitch.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbCondition_PlayerSwitch.FormattingEnabled = true
+        Me.cmbCondition_PlayerSwitch.Location = New System.Drawing.Point(125, 55)
+        Me.cmbCondition_PlayerSwitch.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbCondition_PlayerSwitch.Name = "cmbCondition_PlayerSwitch"
+        Me.cmbCondition_PlayerSwitch.Size = New System.Drawing.Size(140, 24)
+        Me.cmbCondition_PlayerSwitch.TabIndex = 5
+        '
+        'nudCondition_PlayerVarCondition
+        '
+        Me.nudCondition_PlayerVarCondition.Location = New System.Drawing.Point(391, 25)
+        Me.nudCondition_PlayerVarCondition.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudCondition_PlayerVarCondition.Name = "nudCondition_PlayerVarCondition"
+        Me.nudCondition_PlayerVarCondition.Size = New System.Drawing.Size(55, 23)
+        Me.nudCondition_PlayerVarCondition.TabIndex = 4
+        '
+        'cmbCondition_PlayerVarCompare
+        '
+        Me.cmbCondition_PlayerVarCompare.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbCondition_PlayerVarCompare.FormattingEnabled = true
+        Me.cmbCondition_PlayerVarCompare.Items.AddRange(New Object() {"Equal To", "Great Than OrElse Equal To", "Less Than or Equal To", "Greater Than", "Less Than", "Does Not Equal"})
+        Me.cmbCondition_PlayerVarCompare.Location = New System.Drawing.Point(275, 24)
+        Me.cmbCondition_PlayerVarCompare.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbCondition_PlayerVarCompare.Name = "cmbCondition_PlayerVarCompare"
+        Me.cmbCondition_PlayerVarCompare.Size = New System.Drawing.Size(102, 24)
+        Me.cmbCondition_PlayerVarCompare.TabIndex = 3
+        '
+        'DarkLabel14
+        '
+        Me.DarkLabel14.AutoSize = true
+        Me.DarkLabel14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel14.Location = New System.Drawing.Point(252, 28)
+        Me.DarkLabel14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel14.Name = "DarkLabel14"
+        Me.DarkLabel14.Size = New System.Drawing.Size(15, 15)
+        Me.DarkLabel14.TabIndex = 2
+        Me.DarkLabel14.Text = "is"
+        '
+        'cmbCondition_PlayerVarIndex
+        '
+        Me.cmbCondition_PlayerVarIndex.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbCondition_PlayerVarIndex.FormattingEnabled = true
+        Me.cmbCondition_PlayerVarIndex.Location = New System.Drawing.Point(125, 24)
+        Me.cmbCondition_PlayerVarIndex.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbCondition_PlayerVarIndex.Name = "cmbCondition_PlayerVarIndex"
+        Me.cmbCondition_PlayerVarIndex.Size = New System.Drawing.Size(119, 24)
+        Me.cmbCondition_PlayerVarIndex.TabIndex = 1
+        '
+        'optCondition0
+        '
+        Me.optCondition0.AutoSize = true
+        Me.optCondition0.Location = New System.Drawing.Point(7, 25)
+        Me.optCondition0.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.optCondition0.Name = "optCondition0"
+        Me.optCondition0.Size = New System.Drawing.Size(101, 19)
+        Me.optCondition0.TabIndex = 0
+        Me.optCondition0.TabStop = true
+        Me.optCondition0.Text = "Player Variable"
+        '
         'pnlVariableSwitches
         '
         Me.pnlVariableSwitches.Controls.Add(Me.FraRenaming)
@@ -5523,15 +5523,6 @@ Partial Class FrmEditor_Events
         Me.fraMoveRoute.PerformLayout
         Me.DarkGroupBox10.ResumeLayout(false)
         Me.fraDialogue.ResumeLayout(false)
-        Me.fraConditionalBranch.ResumeLayout(false)
-        Me.fraConditionalBranch.PerformLayout
-        Me.fraConditions_Quest.ResumeLayout(false)
-        Me.fraConditions_Quest.PerformLayout
-        CType(Me.nudCondition_QuestTask,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudCondition_Quest,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudCondition_LevelAmount,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudCondition_HasItem,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudCondition_PlayerVarCondition,System.ComponentModel.ISupportInitialize).EndInit
         Me.fraPlayAnimation.ResumeLayout(false)
         Me.fraPlayAnimation.PerformLayout
         CType(Me.nudPlayAnimTileY,System.ComponentModel.ISupportInitialize).EndInit
@@ -5630,6 +5621,15 @@ Partial Class FrmEditor_Events
         Me.fraChangeItems.PerformLayout
         CType(Me.nudChangeItemsAmount,System.ComponentModel.ISupportInitialize).EndInit
         Me.fraPlayBGM.ResumeLayout(false)
+        Me.fraConditionalBranch.ResumeLayout(false)
+        Me.fraConditionalBranch.PerformLayout
+        Me.fraConditions_Quest.ResumeLayout(false)
+        Me.fraConditions_Quest.PerformLayout
+        CType(Me.nudCondition_QuestTask,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.nudCondition_Quest,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.nudCondition_LevelAmount,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.nudCondition_HasItem,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.nudCondition_PlayerVarCondition,System.ComponentModel.ISupportInitialize).EndInit
         Me.pnlVariableSwitches.ResumeLayout(false)
         Me.FraRenaming.ResumeLayout(false)
         Me.fraRandom10.ResumeLayout(false)

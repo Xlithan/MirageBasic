@@ -7,10 +7,12 @@ Friend Class frmEditor_Item
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         ItemEditorOk()
+        Dispose()
     End Sub
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         ItemEditorCancel()
+        Dispose()
     End Sub
 
     Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -478,6 +480,10 @@ Friend Class frmEditor_Item
 
     Private Sub btnSpawn_Click(sender As Object, e As EventArgs) Handles btnSpawn.Click
         SendSpawnItem(Editorindex, nudSpanwAmount.Value)
+    End Sub
+
+    Private Sub frmEditor_Item_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        ItemEditorCancel
     End Sub
 
 #End Region

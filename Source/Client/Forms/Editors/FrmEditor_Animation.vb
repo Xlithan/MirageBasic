@@ -35,6 +35,7 @@ Friend Class FrmEditor_Animation
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         AnimationEditorOk()
+        Dispose()
     End Sub
 
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
@@ -65,6 +66,7 @@ Friend Class FrmEditor_Animation
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         AnimationEditorCancel()
+        Dispose()
     End Sub
 
     Private Sub FrmEditor_Animation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -83,4 +85,7 @@ Friend Class FrmEditor_Animation
         Animation(Editorindex).Sound = cmbSound.SelectedItem.ToString
     End Sub
 
+    Private Sub FrmEditor_Animation_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        AnimationEditorCancel
+    End Sub
 End Class

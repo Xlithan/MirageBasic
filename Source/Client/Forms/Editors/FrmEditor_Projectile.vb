@@ -18,10 +18,12 @@ Friend Class frmEditor_Projectile
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         ProjectileEditorOk()
+        Dispose()
     End Sub
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         ProjectileEditorCancel()
+        Dispose()
     End Sub
 
     Private Sub TxtName_TextChanged(sender As System.Object, e As EventArgs) Handles txtName.TextChanged
@@ -61,5 +63,9 @@ Friend Class frmEditor_Projectile
         lstIndex.SelectedIndex = tmpindex
 
         ProjectileEditorInit()
+    End Sub
+
+    Private Sub frmEditor_Projectile_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        ProjectileEditorCancel
     End Sub
 End Class
