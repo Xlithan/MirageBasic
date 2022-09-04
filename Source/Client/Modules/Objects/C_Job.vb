@@ -4,6 +4,11 @@ Imports MirageBasic.Core
 Module C_Job
 
 #Region "Incoming Traffic"
+    Sub ClearJobs()
+        For i = 0 To MAX_JOBS
+            ReDim Job(i).Stat(StatType.Count - 1)
+        Next
+    End Sub
 
     Sub Packet_NewCharJob(ByRef data() As Byte)
         Dim i As Integer, z As Integer, x As Integer

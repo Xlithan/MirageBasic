@@ -62,6 +62,7 @@ Module C_General
         ClearProjectile()
         ClearRecipes()
         ClearPets()
+        ClearJobs()
     End function
 
     Friend Function CheeckPaths()

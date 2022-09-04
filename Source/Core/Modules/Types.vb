@@ -242,7 +242,7 @@ Public Module modTypes
     Public Structure JobStruct
         Dim Name As String
         Dim Desc As String
-        Dim Stat() As Byte
+        Dim Stat() As Integer
         Dim MaleSprite() As Integer
         Dim FemaleSprite() As Integer
         Dim StartItem() As Integer

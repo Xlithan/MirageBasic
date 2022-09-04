@@ -162,7 +162,6 @@ Module S_NetworkReceive
         Socket.PacketId(ClientPackets.CRequestEditJob) = AddressOf Packet_RequestEditJob
         Socket.PacketId(ClientPackets.CSaveJob) = AddressOf Packet_SaveJob
 
-        'pet
         Socket.PacketId(ClientPackets.CRequestEditPet) = AddressOf Packet_RequestEditPet
         Socket.PacketId(ClientPackets.CSavePet) = AddressOf Packet_SavePet
 

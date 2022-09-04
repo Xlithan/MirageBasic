@@ -1186,7 +1186,6 @@ Continue1:
         Dim i As Integer, index As Integer
 
         ' set the global index
-
         ChatBubbleindex = ChatBubbleindex + 1
         If ChatBubbleindex < 1 OrElse ChatBubbleindex > Byte.MaxValue Then ChatBubbleindex = 1
         ' default to new bubble
@@ -1214,5 +1213,4 @@ Continue1:
         End With
 
     End Sub
-
 End Module
