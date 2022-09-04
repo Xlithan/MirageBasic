@@ -156,7 +156,7 @@ Namespace Paths
         End Property
 
         ''' <summary> Returns projectile file <\summary>
-        Public Function Projectile(index As Integer) As String
+        Public Function Projectile (index As Integer) As String
             Return Projectiles() & index & ".dat"
         End Function
 

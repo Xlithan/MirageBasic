@@ -38,15 +38,13 @@ Friend Class frmEditor_Quest
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        If Len(Trim$(txtName.Text)) = 0 Then
-            MsgBox("Name required.")
-        Else
-            QuestEditorOk()
-        End If
+        QuestEditorOk()
+        Dispose()
     End Sub
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         QuestEditorCancel()
+        Dispose()
     End Sub
 
     Private Sub TxtStartText_TextChanged(sender As Object, e As EventArgs) Handles txtStartText.TextChanged
@@ -463,6 +461,10 @@ Friend Class frmEditor_Quest
 
     Private Sub RdbJobReq_CheckedChanged(sender As Object, e As EventArgs) Handles rdbJobReq.CheckedChanged
         cmbJobReq.Enabled = True
+    End Sub
+
+    Private Sub frmEditor_Quest_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        QuestEditorCancel
     End Sub
 
 #End Region

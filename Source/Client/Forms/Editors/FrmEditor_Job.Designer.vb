@@ -704,7 +704,7 @@ Partial Class frmEditor_Job
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(9, 520)
+        Me.btnCancel.Location = New System.Drawing.Point(8, 513)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Padding = New System.Windows.Forms.Padding(6)
@@ -714,7 +714,7 @@ Partial Class frmEditor_Job
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(9, 487)
+        Me.btnSave.Location = New System.Drawing.Point(8, 480)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Padding = New System.Windows.Forms.Padding(6)

@@ -38,21 +38,13 @@ Friend Class frmEditor_House
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        If Len(Trim$(txtName.Text)) = 0 Then
-            MsgBox("Name required.")
-            Exit Sub
-        End If
-
-        If nudBaseMap.Value = 0 Then
-            MsgBox("Base map required.")
-            Exit Sub
-        End If
-
         HouseEditorOk()
+        Dispose()
     End Sub
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         HouseEditorCancel()
+        Dispose()
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -80,5 +72,9 @@ Friend Class frmEditor_House
         For i = 0 To MAX_HOUSES
             lstIndex.Items.Add(i & ": " & Trim$(House(i).ConfigName))
         Next
+    End Sub
+
+    Private Sub frmEditor_House_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        HouseEditorCancel
     End Sub
 End Class

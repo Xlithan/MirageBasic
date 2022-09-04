@@ -8,8 +8,8 @@ Friend Module S_Projectiles
 #Region "Defines"
 
     Friend Const MAX_PROJECTILES As Integer = 255
-    Friend Projectiles(MAX_PROJECTILES) As ProjectileRec
-    Friend MapProjectiles(,) As MapProjectileRec
+    Friend Projectile(MAX_PROJECTILES) As ProjectileRec
+    Friend MapProjectile(,) As MapProjectileRec
 
 #End Region
 
@@ -37,7 +37,7 @@ Friend Module S_Projectiles
 
 #Region "Database"
 
-    Sub SaveProjectiles()
+    Sub SaveProjectile()
         Dim i As Integer
 
         For i = 0 To MAX_PROJECTILES
@@ -53,17 +53,17 @@ Friend Module S_Projectiles
 
         Dim writer As New ByteStream(100)
 
-        writer.WriteString(Projectiles(ProjectileNum).Name)
-        writer.WriteInt32(Projectiles(ProjectileNum).Sprite)
-        writer.WriteByte(Projectiles(ProjectileNum).Range)
-        writer.WriteInt32(Projectiles(ProjectileNum).Speed)
-        writer.WriteInt32(Projectiles(ProjectileNum).Damage)
+        writer.WriteString(Projectile(ProjectileNum).Name)
+        writer.WriteInt32(Projectile(ProjectileNum).Sprite)
+        writer.WriteByte(Projectile(ProjectileNum).Range)
+        writer.WriteInt32(Projectile(ProjectileNum).Speed)
+        writer.WriteInt32(Projectile(ProjectileNum).Damage)
 
         ByteFile.Save(filename, writer)
 
     End Sub
 
-    Sub LoadProjectiles()
+    Sub LoadProjectile()
         Dim filename As String
         Dim i As Integer
 
@@ -74,11 +74,11 @@ Friend Module S_Projectiles
             Dim reader As New ByteStream()
             ByteFile.Load(filename, reader)
 
-            Projectiles(i).Name = reader.ReadString()
-            Projectiles(i).Sprite = reader.ReadInt32()
-            Projectiles(i).Range = reader.ReadByte()
-            Projectiles(i).Speed = reader.ReadInt32()
-            Projectiles(i).Damage = reader.ReadInt32()
+            Projectile(i).Name = reader.ReadString()
+            Projectile(i).Sprite = reader.ReadInt32()
+            Projectile(i).Range = reader.ReadByte()
+            Projectile(i).Speed = reader.ReadInt32()
+            Projectile(i).Damage = reader.ReadInt32()
         Next
 
     End Sub
@@ -94,11 +94,11 @@ Friend Module S_Projectiles
 
     End Sub
 
-    Sub ClearMapProjectiles()
+    Sub ClearMapProjectile()
         Dim x As Integer
         Dim y As Integer
 
-        ReDim MapProjectiles(MAX_MAPS, MAX_PROJECTILES)
+        ReDim MapProjectile(MAX_MAPS, MAX_PROJECTILES)
         For x = 0 To MAX_MAPS
             For y = 0 To MAX_PROJECTILES
                 ClearMapProjectile(x, y)
@@ -109,30 +109,30 @@ Friend Module S_Projectiles
 
     Sub ClearMapProjectile(mapNum As Integer, index As Integer)
 
-        MapProjectiles(mapNum, index).ProjectileNum = 0
-        MapProjectiles(mapNum, index).Owner = 0
-        MapProjectiles(mapNum, index).OwnerType = 0
-        MapProjectiles(mapNum, index).X = 0
-        MapProjectiles(mapNum, index).Y = 0
-        MapProjectiles(mapNum, index).Dir = 0
-        MapProjectiles(mapNum, index).Timer = 0
+        MapProjectile(mapNum, index).ProjectileNum = 0
+        MapProjectile(mapNum, index).Owner = 0
+        MapProjectile(mapNum, index).OwnerType = 0
+        MapProjectile(mapNum, index).X = 0
+        MapProjectile(mapNum, index).Y = 0
+        MapProjectile(mapNum, index).Dir = 0
+        MapProjectile(mapNum, index).Timer = 0
 
     End Sub
 
     Sub ClearProjectile(index As Integer)
 
-        Projectiles(index).Name = ""
-        Projectiles(index).Sprite = 0
-        Projectiles(index).Range = 0
-        Projectiles(index).Speed = 0
-        Projectiles(index).Damage = 0
+        Projectile(index).Name = ""
+        Projectile(index).Sprite = 0
+        Projectile(index).Range = 0
+        Projectile(index).Speed = 0
+        Projectile(index).Damage = 0
 
     End Sub
 
-    Sub ClearProjectiles()
+    Sub ClearProjectile()
         Dim i As Integer
 
-        ReDim Projectiles(MAX_PROJECTILES)
+        ReDim Projectile(MAX_PROJECTILES)
 
         For i = 0 To MAX_PROJECTILES
             ClearProjectile(i)
@@ -144,7 +144,7 @@ Friend Module S_Projectiles
 
 #Region "Incoming"
 
-    Sub HandleRequestEditProjectiles(index As Integer, ByRef data() As Byte)
+    Sub HandleRequestEditProjectile(index As Integer, ByRef data() As Byte)
         Dim buffer As New ByteStream(4)
 
         ' Prevent hacking
@@ -180,11 +180,11 @@ Friend Module S_Projectiles
             Exit Sub
         End If
 
-        Projectiles(ProjectileNum).Name = buffer.ReadString
-        Projectiles(ProjectileNum).Sprite = buffer.ReadInt32
-        Projectiles(ProjectileNum).Range = buffer.ReadInt32
-        Projectiles(ProjectileNum).Speed = buffer.ReadInt32
-        Projectiles(ProjectileNum).Damage = buffer.ReadInt32
+        Projectile(ProjectileNum).Name = buffer.ReadString
+        Projectile(ProjectileNum).Sprite = buffer.ReadInt32
+        Projectile(ProjectileNum).Range = buffer.ReadInt32
+        Projectile(ProjectileNum).Speed = buffer.ReadInt32
+        Projectile(ProjectileNum).Damage = buffer.ReadInt32
 
         ' Save it
         SendUpdateProjectileToAll(ProjectileNum)
@@ -194,10 +194,10 @@ Friend Module S_Projectiles
 
     End Sub
 
-    Sub HandleRequestProjectiles(index As Integer, ByRef data() As Byte)
+    Sub HandleRequestProjectile(index As Integer, ByRef data() As Byte)
         TempPlayer(index).Editor = -1
 
-        SendProjectiles(index)
+        SendProjectile(index)
     End Sub
 
     Sub HandleClearProjectile(index As Integer, ByRef data() As Byte)
@@ -218,9 +218,9 @@ Friend Module S_Projectiles
 
         mapNum = GetPlayerMap(index)
 
-        Select Case MapProjectiles(mapNum, ProjectileNum).OwnerType
+        Select Case MapProjectile(mapNum, ProjectileNum).OwnerType
             Case TargetType.Player
-                If MapProjectiles(mapNum, ProjectileNum).Owner = index Then
+                If MapProjectile(mapNum, ProjectileNum).Owner = index Then
                     Select Case TargetType
                         Case TargetType.Player
 
@@ -229,7 +229,7 @@ Friend Module S_Projectiles
                                     If CanPlayerAttackPlayer(index, Targetindex, True) = True Then
 
                                         ' Get the damage we can do
-                                        Damage = GetPlayerDamage(index) + Projectiles(MapProjectiles(mapNum, ProjectileNum).ProjectileNum).Damage
+                                        Damage = GetPlayerDamage(index) + Projectile(MapProjectile(mapNum, ProjectileNum).ProjectileNum).Damage
 
                                         ' if the npc blocks, take away the block amount
                                         armor = CanPlayerBlockHit(Targetindex)
@@ -247,7 +247,7 @@ Friend Module S_Projectiles
                             npcnum = MapNpc(mapNum).Npc(Targetindex).Num
                             If CanPlayerAttackNpc(index, Targetindex, True) = True Then
                                 ' Get the damage we can do
-                                Damage = GetPlayerDamage(index) + Projectiles(MapProjectiles(mapNum, ProjectileNum).ProjectileNum).Damage
+                                Damage = GetPlayerDamage(index) + Projectile(MapProjectile(mapNum, ProjectileNum).ProjectileNum).Damage
 
                                 ' if the npc blocks, take away the block amount
                                 armor = 0
@@ -278,11 +278,11 @@ Friend Module S_Projectiles
 
         buffer.WriteInt32(ServerPackets.SUpdateProjectile)
         buffer.WriteInt32(ProjectileNum)
-        buffer.WriteString((Trim(Projectiles(ProjectileNum).Name)))
-        buffer.WriteInt32(Projectiles(ProjectileNum).Sprite)
-        buffer.WriteInt32(Projectiles(ProjectileNum).Range)
-        buffer.WriteInt32(Projectiles(ProjectileNum).Speed)
-        buffer.WriteInt32(Projectiles(ProjectileNum).Damage)
+        buffer.WriteString((Trim(Projectile(ProjectileNum).Name)))
+        buffer.WriteInt32(Projectile(ProjectileNum).Sprite)
+        buffer.WriteInt32(Projectile(ProjectileNum).Range)
+        buffer.WriteInt32(Projectile(ProjectileNum).Speed)
+        buffer.WriteInt32(Projectile(ProjectileNum).Damage)
 
         SendDataToAll(buffer.Data, buffer.Head)
         buffer.Dispose()
@@ -296,22 +296,22 @@ Friend Module S_Projectiles
 
         buffer.WriteInt32(ServerPackets.SUpdateProjectile)
         buffer.WriteInt32(ProjectileNum)
-        buffer.WriteString((Trim(Projectiles(ProjectileNum).Name)))
-        buffer.WriteInt32(Projectiles(ProjectileNum).Sprite)
-        buffer.WriteInt32(Projectiles(ProjectileNum).Range)
-        buffer.WriteInt32(Projectiles(ProjectileNum).Speed)
-        buffer.WriteInt32(Projectiles(ProjectileNum).Damage)
+        buffer.WriteString((Trim(Projectile(ProjectileNum).Name)))
+        buffer.WriteInt32(Projectile(ProjectileNum).Sprite)
+        buffer.WriteInt32(Projectile(ProjectileNum).Range)
+        buffer.WriteInt32(Projectile(ProjectileNum).Speed)
+        buffer.WriteInt32(Projectile(ProjectileNum).Damage)
 
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
         buffer.Dispose()
 
     End Sub
 
-    Sub SendProjectiles(index As Integer)
+    Sub SendProjectile(index As Integer)
         Dim i As Integer
 
         For i = 0 To MAX_PROJECTILES
-            If Len(Trim$(Projectiles(i).Name)) > 0 Then
+            If Len(Trim$(Projectile(i).Name)) > 0 Then
                 Call SendUpdateProjectileTo(index, i)
             End If
         Next
@@ -324,7 +324,7 @@ Friend Module S_Projectiles
         buffer = New ByteStream(4)
         buffer.WriteInt32(ServerPackets.SMapProjectile)
 
-        With MapProjectiles(mapNum, ProjectileNum)
+        With MapProjectile(mapNum, ProjectileNum)
             buffer.WriteInt32(ProjectileNum)
             buffer.WriteInt32(.ProjectileNum)
             buffer.WriteInt32(.Owner)
@@ -353,7 +353,7 @@ Friend Module S_Projectiles
 
         'Find a free projectile
         For i = 0 To MAX_PROJECTILES
-            If MapProjectiles(mapNum, i).ProjectileNum = 0 Then ' Free Projectile
+            If MapProjectile(mapNum, i).ProjectileNum = 0 Then ' Free Projectile
                 ProjectileSlot = i
                 Exit For
             End If
@@ -371,7 +371,7 @@ Friend Module S_Projectiles
 
         If ProjectileNum = 0 Then Exit Sub
 
-        With MapProjectiles(mapNum, ProjectileSlot)
+        With MapProjectile(mapNum, ProjectileSlot)
             .ProjectileNum = ProjectileNum
             .Owner = index
             .OwnerType = TargetType.Player

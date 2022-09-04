@@ -172,8 +172,8 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        SendRequestProjectiles()
-        SendRequestEditProjectiles()
+        SendRequestProjectile()
+        SendRequestEditProjectile()
     End Sub
 
     Private Sub btnQuest_Click(sender As Object, e As EventArgs) Handles btnQuest.Click

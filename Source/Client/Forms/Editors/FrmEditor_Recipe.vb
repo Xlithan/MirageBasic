@@ -4,10 +4,12 @@ Friend Class frmEditor_Recipe
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         RecipeEditorOk()
+        Dispose()
     End Sub
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         RecipeEditorCancel()
+        Dispose()
     End Sub
 
     Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -78,5 +80,9 @@ Friend Class frmEditor_Recipe
             cmbMakeItem.Items.Add(Trim$(Item(i).Name))
             cmbIngredient.Items.Add(Trim$(Item(i).Name))
         Next
+    End Sub
+
+    Private Sub frmEditor_Recipe_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        RecipeEditorCancel
     End Sub
 End Class

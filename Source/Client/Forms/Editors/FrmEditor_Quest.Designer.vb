@@ -1069,7 +1069,7 @@ Partial Class frmEditor_Quest
         Me.DarkLabel20.Location = New System.Drawing.Point(93, 150)
         Me.DarkLabel20.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel20.Name = "DarkLabel20"
-        Me.DarkLabel20.Size = New System.Drawing.Size(108, 15)
+        Me.DarkLabel20.Size = New System.Drawing.Size(99, 15)
         Me.DarkLabel20.TabIndex = 8
         Me.DarkLabel20.Text = "Job Requirement:"
         '
@@ -1079,7 +1079,7 @@ Partial Class frmEditor_Quest
         Me.rdbJobReq.Location = New System.Drawing.Point(12, 148)
         Me.rdbJobReq.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.rdbJobReq.Name = "rdbJobReq"
-        Me.rdbJobReq.Size = New System.Drawing.Size(52, 19)
+        Me.rdbJobReq.Size = New System.Drawing.Size(43, 19)
         Me.rdbJobReq.TabIndex = 7
         Me.rdbJobReq.TabStop = true
         Me.rdbJobReq.Text = "Job"

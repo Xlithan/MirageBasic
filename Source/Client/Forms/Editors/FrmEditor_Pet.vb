@@ -69,10 +69,12 @@ Friend Class frmEditor_Pet
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         PetEditorOk()
+        Dispose()
     End Sub
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         PetEditorCancel()
+        Dispose()
     End Sub
 
 #End Region
@@ -208,6 +210,10 @@ Friend Class frmEditor_Pet
         lstIndex.SelectedIndex = tmpindex
 
         PetEditorInit()
+    End Sub
+
+    Private Sub frmEditor_Pet_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        PetEditorCancel
     End Sub
 
 #End Region

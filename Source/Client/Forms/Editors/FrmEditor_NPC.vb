@@ -68,6 +68,7 @@ Friend Class frmEditor_NPC
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         NpcEditorOk()
+        Dispose()
     End Sub
 
     Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -85,6 +86,7 @@ Friend Class frmEditor_NPC
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         NpcEditorCancel()
+        Dispose()
     End Sub
 
 #End Region
@@ -233,6 +235,10 @@ Friend Class frmEditor_NPC
 
     Private Sub CmbSkill6_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSkill6.SelectedIndexChanged
         Npc(Editorindex).Skill(6) = cmbSkill6.SelectedIndex
+    End Sub
+
+    Private Sub frmEditor_NPC_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        NpcEditorCancel
     End Sub
 
 #End Region

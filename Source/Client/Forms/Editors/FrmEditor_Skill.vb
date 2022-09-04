@@ -106,6 +106,7 @@ Friend Class frmEditor_Skill
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         SkillEditorOk()
+        Dispose()
     End Sub
 
     Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -123,6 +124,7 @@ Friend Class frmEditor_Skill
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         SkillEditorCancel()
+        Dispose()
     End Sub
 
     Private Sub FrmEditor_Skill_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -163,4 +165,7 @@ Friend Class frmEditor_Skill
         Skill(Editorindex).KnockBackTiles = cmbKnockBackTiles.SelectedIndex
     End Sub
 
+    Private Sub frmEditor_Skill_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        SkillEditorCancel
+    End Sub
 End Class

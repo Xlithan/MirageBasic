@@ -37,10 +37,12 @@ Friend Class frmEditor_Job
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         JobEditorOk()
+        Dispose()
     End Sub
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         JobEditorCancel()
+        Dispose()
     End Sub
 
     Private Sub TxtDescription_TextChanged(sender As Object, e As EventArgs) Handles txtDescription.TextChanged
@@ -204,6 +206,10 @@ Friend Class frmEditor_Job
 
     Private Sub lstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
         JobEditorInit
+    End Sub
+
+    Private Sub frmEditor_Job_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        JobEditorCancel
     End Sub
 
 #End Region

@@ -1785,7 +1785,7 @@ Module C_Graphics
         'projectiles
         If NumProjectiles > 0 Then
            For i = 0 To MAX_PROJECTILES
-                If MapProjectiles(I).ProjectileNum > 0 Then
+                If MapProjectile(I).ProjectileNum > 0 Then
                     DrawProjectile(I)
                 End If
             Next

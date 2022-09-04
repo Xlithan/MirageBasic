@@ -1839,7 +1839,7 @@ Module S_Pets
 
         'Find a free projectile
         For i = 0 To MAX_PROJECTILES
-            If MapProjectiles(mapNum, i).ProjectileNum = 0 Then ' Free Projectile
+            If MapProjectile(mapNum, i).ProjectileNum = 0 Then ' Free Projectile
                 projectileSlot = i
                 Exit For
             End If
@@ -1852,7 +1852,7 @@ Module S_Pets
 
         projectileNum = Skill(spellnum).Projectile
 
-        With MapProjectiles(mapNum, projectileSlot)
+        With MapProjectile(mapNum, projectileSlot)
             .ProjectileNum = projectileNum
             .Owner = index
             .OwnerType = TargetType.Pet

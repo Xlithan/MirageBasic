@@ -50,6 +50,7 @@ Friend Class frmEditor_Resource
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         ResourceEditorOk()
+        Dispose()
     End Sub
 
     Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -67,6 +68,7 @@ Friend Class frmEditor_Resource
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         ResourceEditorCancel()
+        Dispose()
     End Sub
 
     Private Sub FrmEditor_Resource_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -91,4 +93,7 @@ Friend Class frmEditor_Resource
         Resource(Editorindex).EmptyMessage = Trim$(txtMessage2.Text)
     End Sub
 
+    Private Sub frmEditor_Resource_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        ResourceEditorCancel
+    End Sub
 End Class
