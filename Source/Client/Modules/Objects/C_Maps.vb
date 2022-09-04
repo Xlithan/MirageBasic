@@ -144,6 +144,10 @@ Module C_Maps
                 Next
             Next
 
+            For i = 0 To MAX_MAP_NPCS
+                Map.Npc(i) = -1
+            Next
+
             ClearMapEvents
 
         End SyncLock
@@ -173,7 +177,7 @@ Module C_Maps
         MapNpc(index).Dir = 0
         MapNpc(index).Map = 0
         MapNpc(index).Moving = 0
-        MapNpc(index).Num = 0
+        MapNpc(index).Num = -1
         MapNpc(index).Steps = 0
         MapNpc(index).Target = 0
         MapNpc(index).TargetType = 0

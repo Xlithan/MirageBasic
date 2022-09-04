@@ -78,8 +78,8 @@ Friend Module C_Gui
                     skillslot = IsPlayerSkill(x, y)
 
                     If skillslot <> 0 Then
-                        UpdateSkillWindow(PlayerSkills(skillslot))
-                        LastSkillDesc = PlayerSkills(skillslot)
+                        UpdateSkillWindow(Player(Myindex).Skill(skillslot).Num)
+                        LastSkillDesc = Player(Myindex).Skill(skillslot).Num
                         ShowSkillDesc = True
                         Exit Sub
                     Else
@@ -1178,7 +1178,7 @@ Friend Module C_Gui
 
        For i = 1 To MAX_PLAYER_SKILLS
 
-            If PlayerSkills(i) > 0 AndAlso PlayerSkills(i) <= MAX_PLAYER_SKILLS Then
+            If Player(Myindex).Skill(i).Num > 0 AndAlso Player(Myindex).Skill(i).Num <= MAX_PLAYER_SKILLS Then
 
                 With tempRec
                     .Top = SkillWindowY + SkillTop + ((SkillOffsetY + 32) * ((i - 1) \ SkillColumns))

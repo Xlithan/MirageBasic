@@ -1990,9 +1990,9 @@ Module C_Graphics
             ' lock to player
             tmpX = GetPlayerX(Myindex) * PicX + Player(Myindex).XOffset
             tmpY = GetPlayerY(Myindex) * PicY + Player(Myindex).YOffset + 35
-            If Skill(PlayerSkills(SkillBuffer)).CastTime = 0 Then Skill(PlayerSkills(SkillBuffer)).CastTime = 1
+            If Skill(Player(Myindex).Skill(SkillBuffer).Num).CastTime = 0 Then Skill(Player(Myindex).Skill(SkillBuffer).Num).CastTime = 1
             ' calculate the width to fill
-            barWidth = ((GetTickCount() - SkillBufferTimer) / ((GetTickCount() - SkillBufferTimer) + (Skill(PlayerSkills(SkillBuffer)).CastTime * 1000)) * 64)
+            barWidth = ((GetTickCount() - SkillBufferTimer) / ((GetTickCount() - SkillBufferTimer) + (Skill(Player(Myindex).Skill(SkillBuffer).Num).CastTime * 1000)) * 64)
             ' draw bars
             rec(1) = New Rectangle(ConvertMapX(tmpX), ConvertMapY(tmpY), barWidth, 4)
             Dim rectShape As New RectangleShape(New Vector2f(barWidth, 4)) With {
@@ -2618,9 +2618,9 @@ NextLoop:
         RenderSprite(SkillPanelSprite, GameWindow, SkillWindowX, SkillWindowY, 0, 0, SkillPanelGfxInfo.Width, SkillPanelGfxInfo.Height)
 
        For i = 1 To MAX_PLAYER_SKILLS
-            skillnum = PlayerSkills(i)
+            skillnum = Player(Myindex).Skill(i).Num
 
-            If skillnum > 0 AndAlso skillnum <= MAX_SKILLS Then
+            If skillNum > 0 AndAlso skillnum <= MAX_SKILLS Then
                 skillicon = Skill(skillnum).Icon
 
                 If skillicon > 0 AndAlso skillicon <= NumSkillIcons Then
@@ -2641,7 +2641,7 @@ NextLoop:
                         .Width = 32
                     End With
 
-                    If Not SkillCd(i) = 0 Then
+                    If Not Player(Myindex).Skill(i).CD = 0 Then
                         rec.X = 32
                         rec.Width = 32
                     End If

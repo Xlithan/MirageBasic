@@ -96,9 +96,9 @@ Friend Module C_HotBar
 
         For i = 0 To MaxHotbar
             If Player(Myindex).Hotbar(i).SlotType = 1 Then
-                num = PlayerSkills(Player(Myindex).Hotbar(i).Slot)
+                num = Player(Myindex).Skill(Player(Myindex).Hotbar(i).Slot).Num
 
-                If num > 0 Then
+                If Num > 0 Then
                     pic = Skill(num).Icon
 
                     If SkillIconsGfxInfo(pic).IsLoaded = False Then
@@ -117,7 +117,7 @@ Friend Module C_HotBar
                         .Width = 32
                     End With
 
-                    If Not SkillCd(i) = 0 Then
+                    If Not Player(Myindex).Skill(i).CD = 0 Then
                         rec.X = 32
                         rec.Width = 32
                     End If

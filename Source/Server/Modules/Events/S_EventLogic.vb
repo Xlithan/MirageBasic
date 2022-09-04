@@ -1684,9 +1684,9 @@ Friend Module S_EventLogic
                                                             SendPlayerData(i)
                                                         Case EventType.ChangeSkills
                                                             If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2 = 0 Then
-                                                                If FindOpenSkillSlot(i) > 0 Then
+                                                                If FindOpenSkill(i) > 0 Then
                                                                     If HasSkill(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1) = False Then
-                                                                        SetPlayerSkill(i, FindOpenSkillSlot(i), Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1)
+                                                                        SetPlayerSkill(i, FindOpenSkill(i), Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1)
                                                                     Else
                                                                         'Error, already knows skill
                                                                     End If
@@ -1696,7 +1696,7 @@ Friend Module S_EventLogic
                                                             ElseIf Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2 = 1 Then
                                                                 If HasSkill(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1) = True Then
                                                                     For p = 1 To MAX_PLAYER_SKILLS
-                                                                        If Player(i).Skill(p) = Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1 Then
+                                                                        If Player(i).Skill(p).Num = Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1 Then
                                                                             SetPlayerSkill(i, p, 0)
                                                                         End If
                                                                     Next

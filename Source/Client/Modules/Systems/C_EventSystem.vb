@@ -229,7 +229,7 @@ Friend Module C_EventSystem
             FrmEditor_Events.nudPlayerVariable.Value = .VariableCondition
             FrmEditor_Events.nudGraphic.Value = .Graphic
             If FrmEditor_Events.cmbEventQuest.Items.Count > 0 Then
-                If .Questnum >= 0 AndAlso .Questnum <= FrmEditor_Events.cmbEventQuest.Items.Count Then
+                If .QuestNum > 0 AndAlso .Questnum <= FrmEditor_Events.cmbEventQuest.Items.Count Then
                     FrmEditor_Events.cmbEventQuest.SelectedIndex = .Questnum
                 End If
             End If

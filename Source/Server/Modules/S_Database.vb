@@ -180,6 +180,10 @@ Module modDatabase
             Next
         Next
 
+        For i = 0 To MAX_MAP_NPCS
+            Map(mapnum).Npc(i) = -1
+        Next
+
         Map(mapNum).EventCount = 0
         ReDim Map(mapNum).Events(0)
 
@@ -1178,12 +1182,12 @@ Module modDatabase
 
         ReDim Player(index).Equipment(EquipmentType.Count - 1)
         For i = 0 To EquipmentType.Count - 1
-            Player(index).Equipment(i) = 0
+            Player(index).Equipment(i) = -1
         Next
 
         ReDim Player(index).Inv(MAX_INV)
         For i = 1 To MAX_INV
-            Player(index).Inv(i).Num = 0
+            Player(index).Inv(i).Num = -1
             Player(index).Inv(i).Value = 0
         Next
 
@@ -1197,7 +1201,8 @@ Module modDatabase
 
         ReDim Player(index).Skill(MAX_PLAYER_SKILLS)
         For i = 1 To MAX_PLAYER_SKILLS
-            Player(index).Skill(i) = 0
+            Player(index).Skill(i).Num = -1
+            Player(index).Skill(i).CD = 0
         Next
 
         Player(index).Sprite = 0
@@ -1225,8 +1230,8 @@ Module modDatabase
         ' Housing
         Player(index).House.Houseindex = 0
         Player(index).House.FurnitureCount = 0
-        ReDim Player(index).House.Furniture(Player(index).House.FurnitureCount)
 
+        ReDim Player(index).House.Furniture(Player(index).House.FurnitureCount)
         For i = 0 To Player(index).House.FurnitureCount
             Player(index).House.Furniture(i).ItemNum = 0
             Player(index).House.Furniture(i).X = 0
@@ -1282,6 +1287,7 @@ Module modDatabase
 
         ReDim Player(index).RandEquip(EquipmentType.Count - 1)
         For i = 0 To EquipmentType.Count - 1
+            Player(index).Equipment(i) = -1
             Player(index).RandEquip(i).Prefix = ""
             Player(index).RandEquip(i).Suffix = ""
             Player(index).RandEquip(i).Rarity = 0
@@ -1332,13 +1338,13 @@ Module modDatabase
         Player(index).Dir = reader.ReadByte()
 
         For i = 0 To EquipmentType.Count - 1
-            Player(index).Equipment(i) = reader.ReadByte()
+            Player(index).Equipment(i) = reader.ReadInt32()
         Next
 
         Player(index).Exp = reader.ReadInt32()
 
         For i = 1 To MAX_INV
-            Player(index).Inv(i).Num = reader.ReadByte()
+            Player(index).Inv(i).Num = reader.ReadInt32()
             Player(index).Inv(i).Value = reader.ReadInt32()
         Next
 
@@ -1350,7 +1356,7 @@ Module modDatabase
         Player(index).Sex = reader.ReadByte()
 
         For i = 1 To MAX_PLAYER_SKILLS
-            Player(index).Skill(i) = reader.ReadByte()
+            Player(index).Skill(i).Num = reader.ReadByte()
         Next
 
         Player(index).Sprite = reader.ReadInt32()
@@ -1479,13 +1485,13 @@ Module modDatabase
         writer.WriteByte(Player(index).Dir)
 
         For i = 0 To EquipmentType.Count - 1
-            writer.WriteByte(Player(index).Equipment(i))
+            writer.WriteInt32(Player(index).Equipment(i))
         Next
 
         writer.WriteInt32(Player(index).Exp)
 
         For i = 1 To MAX_INV
-            writer.WriteByte(Player(index).Inv(i).Num)
+            writer.WriteInt32(Player(index).Inv(i).Num)
             writer.WriteInt32(Player(index).Inv(i).Value)
         Next
 
@@ -1497,7 +1503,7 @@ Module modDatabase
         writer.WriteByte(Player(index).Sex)
 
         For i = 1 To MAX_PLAYER_SKILLS
-            writer.WriteByte(Player(index).Skill(i))
+            writer.WriteInt32(Player(index).Skill(i).Num)
         Next
 
         writer.WriteInt32(Player(index).Sprite)

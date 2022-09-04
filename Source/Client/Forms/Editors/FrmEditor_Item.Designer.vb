@@ -65,7 +65,7 @@ Partial Class frmEditor_Item
         Me.cmbSkills = New DarkUI.Controls.DarkComboBox()
         Me.DarkLabel12 = New DarkUI.Controls.DarkLabel()
         Me.fraEquipment = New DarkUI.Controls.DarkGroupBox()
-        Me.DarkGroupBox3 = New DarkUI.Controls.DarkGroupBox()
+        Me.fraProjectile = New DarkUI.Controls.DarkGroupBox()
         Me.cmbAmmo = New DarkUI.Controls.DarkComboBox()
         Me.DarkLabel25 = New DarkUI.Controls.DarkLabel()
         Me.cmbProjectile = New DarkUI.Controls.DarkComboBox()
@@ -132,7 +132,7 @@ Partial Class frmEditor_Item
         Me.DarkLabel36 = New DarkUI.Controls.DarkLabel()
         Me.picFurniture = New System.Windows.Forms.PictureBox()
         Me.btnSpawn = New DarkUI.Controls.DarkButton()
-        Me.nudSpanwValue = New DarkUI.Controls.DarkNumericUpDown()
+        Me.nudSpanwAmount = New DarkUI.Controls.DarkNumericUpDown()
         Me.DarkGroupBox1.SuspendLayout
         Me.fraBasics.SuspendLayout
         Me.fraEvents.SuspendLayout
@@ -149,7 +149,7 @@ Partial Class frmEditor_Item
         CType(Me.nudVitalMod,System.ComponentModel.ISupportInitialize).BeginInit
         Me.fraSkill.SuspendLayout
         Me.fraEquipment.SuspendLayout
-        Me.DarkGroupBox3.SuspendLayout
+        Me.fraProjectile.SuspendLayout
         CType(Me.nudPaperdoll,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.picPaperdoll,System.ComponentModel.ISupportInitialize).BeginInit
         Me.DarkGroupBox2.SuspendLayout
@@ -173,7 +173,7 @@ Partial Class frmEditor_Item
         Me.fraFurniture.SuspendLayout
         CType(Me.nudFurniture,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.picFurniture,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudSpanwValue,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.nudSpanwAmount,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'DarkGroupBox1
@@ -481,7 +481,7 @@ Partial Class frmEditor_Item
         '
         Me.cmbType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbType.FormattingEnabled = true
-        Me.cmbType.Items.AddRange(New Object() {"None", "Equipment", "Consumables", "Event", "Currency", "Skill", "Furniture", "Recipe", "Pet"})
+        Me.cmbType.Items.AddRange(New Object() {"None", "Equipment", "Consumables", "Event", "Currency", "Skill", "Projectile", "Furniture", "Recipe", "Pet"})
         Me.cmbType.Location = New System.Drawing.Point(85, 46)
         Me.cmbType.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbType.Name = "cmbType"
@@ -683,7 +683,7 @@ Partial Class frmEditor_Item
         '
         Me.fraEquipment.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
         Me.fraEquipment.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
-        Me.fraEquipment.Controls.Add(Me.DarkGroupBox3)
+        Me.fraEquipment.Controls.Add(Me.fraProjectile)
         Me.fraEquipment.Controls.Add(Me.nudPaperdoll)
         Me.fraEquipment.Controls.Add(Me.DarkLabel23)
         Me.fraEquipment.Controls.Add(Me.picPaperdoll)
@@ -707,23 +707,23 @@ Partial Class frmEditor_Item
         Me.fraEquipment.TabStop = false
         Me.fraEquipment.Text = "Equipment Settings"
         '
-        'DarkGroupBox3
+        'fraProjectile
         '
-        Me.DarkGroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
-        Me.DarkGroupBox3.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
-        Me.DarkGroupBox3.Controls.Add(Me.cmbAmmo)
-        Me.DarkGroupBox3.Controls.Add(Me.DarkLabel25)
-        Me.DarkGroupBox3.Controls.Add(Me.cmbProjectile)
-        Me.DarkGroupBox3.Controls.Add(Me.DarkLabel24)
-        Me.DarkGroupBox3.ForeColor = System.Drawing.Color.Gainsboro
-        Me.DarkGroupBox3.Location = New System.Drawing.Point(137, 192)
-        Me.DarkGroupBox3.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox3.Name = "DarkGroupBox3"
-        Me.DarkGroupBox3.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox3.Size = New System.Drawing.Size(379, 80)
-        Me.DarkGroupBox3.TabIndex = 60
-        Me.DarkGroupBox3.TabStop = false
-        Me.DarkGroupBox3.Text = "Projectile Settings"
+        Me.fraProjectile.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraProjectile.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.fraProjectile.Controls.Add(Me.cmbAmmo)
+        Me.fraProjectile.Controls.Add(Me.DarkLabel25)
+        Me.fraProjectile.Controls.Add(Me.cmbProjectile)
+        Me.fraProjectile.Controls.Add(Me.DarkLabel24)
+        Me.fraProjectile.ForeColor = System.Drawing.Color.Gainsboro
+        Me.fraProjectile.Location = New System.Drawing.Point(140, 192)
+        Me.fraProjectile.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraProjectile.Name = "fraProjectile"
+        Me.fraProjectile.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraProjectile.Size = New System.Drawing.Size(379, 80)
+        Me.fraProjectile.TabIndex = 63
+        Me.fraProjectile.TabStop = false
+        Me.fraProjectile.Text = "Projectile Settings"
         '
         'cmbAmmo
         '
@@ -739,7 +739,7 @@ Partial Class frmEditor_Item
         '
         Me.DarkLabel25.AutoSize = true
         Me.DarkLabel25.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel25.Location = New System.Drawing.Point(19, 50)
+        Me.DarkLabel25.Location = New System.Drawing.Point(22, 50)
         Me.DarkLabel25.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel25.Name = "DarkLabel25"
         Me.DarkLabel25.Size = New System.Drawing.Size(47, 15)
@@ -760,7 +760,7 @@ Partial Class frmEditor_Item
         '
         Me.DarkLabel24.AutoSize = true
         Me.DarkLabel24.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel24.Location = New System.Drawing.Point(6, 18)
+        Me.DarkLabel24.Location = New System.Drawing.Point(9, 18)
         Me.DarkLabel24.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel24.Name = "DarkLabel24"
         Me.DarkLabel24.Size = New System.Drawing.Size(59, 15)
@@ -1453,13 +1453,13 @@ Partial Class frmEditor_Item
         Me.btnSpawn.TabIndex = 10
         Me.btnSpawn.Text = "Spawn"
         '
-        'nudSpanwValue
+        'nudSpanwAmount
         '
-        Me.nudSpanwValue.Location = New System.Drawing.Point(559, 12)
-        Me.nudSpanwValue.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudSpanwValue.Name = "nudSpanwValue"
-        Me.nudSpanwValue.Size = New System.Drawing.Size(148, 23)
-        Me.nudSpanwValue.TabIndex = 11
+        Me.nudSpanwAmount.Location = New System.Drawing.Point(559, 12)
+        Me.nudSpanwAmount.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudSpanwAmount.Name = "nudSpanwAmount"
+        Me.nudSpanwAmount.Size = New System.Drawing.Size(148, 23)
+        Me.nudSpanwAmount.TabIndex = 11
         '
         'frmEditor_Item
         '
@@ -1468,7 +1468,7 @@ Partial Class frmEditor_Item
         Me.AutoSize = true
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
         Me.ClientSize = New System.Drawing.Size(790, 575)
-        Me.Controls.Add(Me.nudSpanwValue)
+        Me.Controls.Add(Me.nudSpanwAmount)
         Me.Controls.Add(Me.btnSpawn)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnDelete)
@@ -1507,8 +1507,8 @@ Partial Class frmEditor_Item
         Me.fraSkill.PerformLayout
         Me.fraEquipment.ResumeLayout(false)
         Me.fraEquipment.PerformLayout
-        Me.DarkGroupBox3.ResumeLayout(false)
-        Me.DarkGroupBox3.PerformLayout
+        Me.fraProjectile.ResumeLayout(false)
+        Me.fraProjectile.PerformLayout
         CType(Me.nudPaperdoll,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.picPaperdoll,System.ComponentModel.ISupportInitialize).EndInit
         Me.DarkGroupBox2.ResumeLayout(false)
@@ -1536,7 +1536,7 @@ Partial Class frmEditor_Item
         Me.fraFurniture.PerformLayout
         CType(Me.nudFurniture,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.picFurniture,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudSpanwValue,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.nudSpanwAmount,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
 
 End Sub
@@ -1602,11 +1602,6 @@ End Sub
     Friend WithEvents nudPaperdoll As DarkUI.Controls.DarkNumericUpDown
     Friend WithEvents DarkLabel23 As DarkUI.Controls.DarkLabel
     Friend WithEvents picPaperdoll As Windows.Forms.PictureBox
-    Friend WithEvents DarkGroupBox3 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbAmmo As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel25 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbProjectile As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel24 As DarkUI.Controls.DarkLabel
     Friend WithEvents btnBasics As DarkUI.Controls.DarkButton
     Friend WithEvents btnRequirements As DarkUI.Controls.DarkButton
     Friend WithEvents fraRequirements As DarkUI.Controls.DarkGroupBox
@@ -1651,5 +1646,10 @@ End Sub
     Friend WithEvents nudEvent As DarkUI.Controls.DarkNumericUpDown
     Friend WithEvents DarkLabel38 As DarkUI.Controls.DarkLabel
     Friend WithEvents btnSpawn As DarkUI.Controls.DarkButton
-    Friend WithEvents nudSpanwValue As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents nudSpanwAmount As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents fraProjectile As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents cmbAmmo As DarkUI.Controls.DarkComboBox
+    Friend WithEvents DarkLabel25 As DarkUI.Controls.DarkLabel
+    Friend WithEvents cmbProjectile As DarkUI.Controls.DarkComboBox
+    Friend WithEvents DarkLabel24 As DarkUI.Controls.DarkLabel
 End Class

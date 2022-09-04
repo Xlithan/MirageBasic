@@ -363,7 +363,7 @@ Module C_NetworkSend
         If skillslot < 0 OrElse skillslot > MAX_PLAYER_SKILLS Then Exit Sub
 
         ' dont let them forget a skill which is in CD
-        If SkillCd(skillslot) > 0 Then
+        If Player(Myindex).Skill(skillslot).CD > 0 Then
             AddText("Cannot forget a skill which is cooling down!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -374,7 +374,7 @@ Module C_NetworkSend
             Exit Sub
         End If
 
-        If PlayerSkills(skillslot) > 0 Then
+        If Player(Myindex).Skill(skillslot).Num > 0 Then
             buffer.WriteInt32(ClientPackets.CForgetSkill)
             buffer.WriteInt32(skillslot)
             Socket.SendData(buffer.Data, buffer.Head)

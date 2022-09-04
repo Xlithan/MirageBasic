@@ -496,13 +496,12 @@ Module C_Editors
             ' Type specific settings
             If (frmEditor_Item.cmbType.SelectedIndex = ItemType.Equipment) Then
                 frmEditor_Item.fraEquipment.Visible = True
-                frmEditor_Item.cmbProjectile.SelectedIndex = .Data1
                 frmEditor_Item.nudDamage.Value = .Data2
                 frmEditor_Item.cmbTool.SelectedIndex = .Data3
 
                 frmEditor_Item.cmbSubType.SelectedIndex = .SubType
 
-                If .Speed < 000 Then .Speed = 100
+                If .Speed < 1000 Then .Speed = 100
                 If .Speed > frmEditor_Item.nudSpeed.Maximum Then .Speed = frmEditor_Item.nudSpeed.Maximum
                 frmEditor_Item.nudSpeed.Value = .Speed
 
@@ -528,8 +527,11 @@ Module C_Editors
 
                 frmEditor_Item.nudPaperdoll.Value = .Paperdoll
 
-                frmEditor_Item.cmbProjectile.SelectedIndex = .Projectile
-                frmEditor_Item.cmbAmmo.SelectedIndex = .Ammo
+                If .SubType = EquipmentType.Weapon Then
+                    frmEditor_Item.fraProjectile.Visible = True
+                Else
+                     frmEditor_Item.fraProjectile.Visible = False
+                End If
             Else
                 frmEditor_Item.fraEquipment.Visible = False
             End If
@@ -546,6 +548,13 @@ Module C_Editors
                 frmEditor_Item.cmbSkills.SelectedIndex = .Data1
             Else
                 frmEditor_Item.fraSkill.Visible = False
+            End If
+
+            if (frmEditor_Item.cmbType.SelectedIndex = ItemType.Projectile) Then
+                frmEditor_Item.fraProjectile.Visible = True
+                frmEditor_Item.fraEquipment.Visible = True
+            Elseif .Type <> ItemType.Equipment Then
+                frmEditor_Item.fraProjectile.Visible = False
             End If
 
             If frmEditor_Item.cmbType.SelectedIndex = ItemType.CommonEvent Then
@@ -574,6 +583,10 @@ Module C_Editors
             Else
                 frmEditor_Item.fraPet.Visible = False
             End If
+
+            ' Projectile
+            frmEditor_Item.cmbProjectile.SelectedIndex = .Projectile
+            frmEditor_Item.cmbAmmo.SelectedIndex = .Ammo
 
             ' Basic requirements
             frmEditor_Item.cmbAccessReq.SelectedIndex = .AccessReq

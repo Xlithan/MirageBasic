@@ -37,6 +37,18 @@ Module C_Player
         Player(i).Points = 0
         Player(i).Sprite = 0
 
+        ReDim Player(i).Inv(MAX_INV)
+        For x = 1 To MAX_INV
+            Player(i).Inv(x).Num = -1
+            Player(i).Inv(x).Value = 0
+        Next
+
+        ReDim Player(i).Skill(MAX_SKILLS)
+        For x = 1 To MAX_SKILLS
+            Player(i).Skill(x).Num = -1
+            Player(i).Skill(x).CD = 0
+        Next
+
         ReDim Player(i).Stat(StatType.Count - 1)
         For x = 0 To StatType.Count - 1
             Player(i).Stat(x) = 0
@@ -56,6 +68,7 @@ Module C_Player
 
         ReDim Player(i).RandEquip(EquipmentType.Count - 1)
         For y = 0 To EquipmentType.Count - 1
+            Player(i).Equipment(y) = -1
             ReDim Player(i).RandEquip(y).Stat(StatType.Count - 1)
             For x = 0 To StatType.Count - 1
                 Player(i).RandEquip(y).Stat(x) = 0
@@ -551,18 +564,18 @@ Module C_Player
         ' Check for subscript out of range
         If skillslot < 0 OrElse skillslot > MAX_PLAYER_SKILLS Then Exit Sub
 
-        If SkillCd(skillslot) > 0 Then
+        If Player(Myindex).Skill(skillslot).CD > 0 Then
             AddText("Skill has not cooled down yet!", QColorType.AlertColor)
             Exit Sub
         End If
 
         ' Check if player has enough MP
-        If GetPlayerVital(Myindex, VitalType.MP) < Skill(PlayerSkills(skillslot)).MpCost Then
-            AddText("Not enough MP to cast " & Trim$(Skill(PlayerSkills(skillslot)).Name) & ".", QColorType.AlertColor)
+        If GetPlayerVital(Myindex, VitalType.MP) < Skill(Player(Myindex).Skill(skillslot).Num).MpCost Then
+            AddText("Not enough MP to cast " & Trim$(Skill(Player(Myindex).Skill(skillslot).Num).Name) & ".", QColorType.AlertColor)
             Exit Sub
         End If
 
-        If PlayerSkills(skillslot) > 0 Then
+        If Player(Myindex).Skill(skillslot).Num > 0 Then
             If GetTickCount() > Player(Myindex).AttackTimer + 1000 Then
                 If Player(Myindex).Moving = 0 Then
                     buffer.WriteInt32(ClientPackets.CCast)
