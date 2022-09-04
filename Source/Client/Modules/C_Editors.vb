@@ -246,7 +246,7 @@ Module C_Editors
             .cmbProjectile.Items.Clear()
 
            For i = 0 To MAX_PROJECTILES
-                .cmbProjectile.Items.Add(Trim$(Projectiles(i).Name))
+                .cmbProjectile.Items.Add(Trim$(Projectile(i).Name))
             Next
             .cmbProjectile.SelectedIndex = 0
 

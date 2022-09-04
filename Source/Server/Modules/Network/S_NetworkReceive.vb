@@ -108,7 +108,7 @@ Module S_NetworkReceive
 
         'projectiles
 
-        Socket.PacketId(ClientPackets.CRequestProjectiles) = AddressOf HandleRequestProjectiles
+        Socket.PacketId(ClientPackets.CRequestProjectiles) = AddressOf HandleRequestProjectile
         Socket.PacketId(ClientPackets.CClearProjectile) = AddressOf HandleClearProjectile
 
         'craft
@@ -155,7 +155,7 @@ Module S_NetworkReceive
         Socket.PacketId(ClientPackets.CSaveQuest) = AddressOf Packet_SaveQuest
         Socket.PacketId(ClientPackets.CRequestEditHouse) = AddressOf Packet_RequestEditHouse
         Socket.PacketId(ClientPackets.CSaveHouses) = AddressOf Packet_SaveHouses
-        Socket.PacketId(ClientPackets.CRequestEditProjectiles) = AddressOf HandleRequestEditProjectiles
+        Socket.PacketId(ClientPackets.CRequestEditProjectiles) = AddressOf HandleRequestEditProjectile
         Socket.PacketId(ClientPackets.CSaveProjectile) = AddressOf HandleSaveProjectile
         Socket.PacketId(ClientPackets.CRequestEditRecipes) = AddressOf Packet_RequestEditRecipes
         Socket.PacketId(ClientPackets.CSaveRecipe) = AddressOf Packet_SaveRecipe

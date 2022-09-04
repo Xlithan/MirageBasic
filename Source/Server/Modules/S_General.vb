@@ -146,8 +146,8 @@ Module S_General
         ReDim Animation(MAX_ANIMATIONS).LoopCount(1)
         ReDim Animation(MAX_ANIMATIONS).LoopTime(1)
 
-        ReDim MapProjectiles(MAX_CACHED_MAPS, MAX_PROJECTILES)
-        ReDim Projectiles(MAX_PROJECTILES)
+        ReDim MapProjectile(MAX_CACHED_MAPS, MAX_PROJECTILES)
+        ReDim Projectile(MAX_PROJECTILES)
 
         'parties
         ClearParties()
@@ -259,8 +259,8 @@ Module S_General
         Console.WriteLine("Clearing Skills...") : ClearSkills()
         Console.WriteLine("Clearing Animations...") : ClearAnimations()
         Console.WriteLine("Clearing Quests...") : ClearQuests()
-        Console.WriteLine("Clearing Map Projectiles...") : ClearMapProjectiles()
-        Console.WriteLine("Clearing Projectiles...") : ClearProjectiles()
+        Console.WriteLine("Clearing Map Projectiles...") : ClearMapProjectile()
+        Console.WriteLine("Clearing Projectiles...") : ClearProjectile()
         Console.WriteLine("Clearing Recipes...") : ClearRecipes()
         Console.WriteLine("Clearing Pets...") : ClearPets()
     End Sub
@@ -279,7 +279,7 @@ Module S_General
         Console.WriteLine("Loading Switches...") : LoadSwitches()
         Console.WriteLine("Loading Variables...") : LoadVariables()
         Console.WriteLine("Spawning Global Events...") : SpawnAllMapGlobalEvents()
-        Console.WriteLine("Loading Projectiles...") : LoadProjectiles()
+        Console.WriteLine("Loading Projectiles...") : LoadProjectile()
         Console.WriteLine("Loading Recipes...") : LoadRecipes()
         Console.WriteLine("Loading Pets...") : LoadPets()
         Console.WriteLine("Loading character list...") : CharactersList = New CharacterList().Load()

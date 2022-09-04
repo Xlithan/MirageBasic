@@ -22,8 +22,8 @@ Public Module modTypes
     Public HouseConfig() As HouseStruct
     Public Furniture() As FurnitureStruct
     Public Quest(MAX_QUESTS) As QuestStruct
-    Public Projectiles(MAX_PROJECTILES) As ProjectileStruct
-    Public MapProjectiles(MAX_PROJECTILES) As MapProjectileStruct
+    Public Projectile(MAX_PROJECTILES) As ProjectileStruct
+    Public MapProjectile(MAX_PROJECTILES) As MapProjectileStruct
     Public TradeYourOffer(MAX_INV) As PlayerInvStruct
     Public TradeTheirOffer(MAX_INV) As PlayerInvStruct
     Public Party As PartyStruct

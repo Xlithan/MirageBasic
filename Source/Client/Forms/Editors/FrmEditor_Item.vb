@@ -63,7 +63,7 @@ Friend Class frmEditor_Item
 
         cmbProjectile.Items.Clear()
         For i = 0 To MAX_PROJECTILES
-            cmbProjectile.Items.Add(i & ": " & Projectiles(i).Name)
+            cmbProjectile.Items.Add(i & ": " & Projectile(i).Name)
         Next
 
         cmbSkills.Items.Clear()

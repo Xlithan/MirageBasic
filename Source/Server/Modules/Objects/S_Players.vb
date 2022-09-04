@@ -2412,7 +2412,7 @@ Module S_Players
         SendInventory(index)
         SendWornEquipment(index)
         SendMapEquipment(index)
-        SendProjectiles(index)
+        SendProjectile(index)
         SendVitals(index)
         SendExp(index)
         SendQuests(index)
