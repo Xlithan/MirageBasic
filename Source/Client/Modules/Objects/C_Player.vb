@@ -25,7 +25,7 @@ Module C_Player
 
         ReDim Player(i).Equipment(EquipmentType.Count - 1)
         For y = 0 To EquipmentType.Count - 1
-            Player(i).Equipment(y) = 0
+            Player(i).Equipment(y) = -1
         Next
 
         Player(i).Exp = 0
@@ -68,7 +68,6 @@ Module C_Player
 
         ReDim Player(i).RandEquip(EquipmentType.Count - 1)
         For y = 0 To EquipmentType.Count - 1
-            Player(i).Equipment(y) = -1
             ReDim Player(i).RandEquip(y).Stat(StatType.Count - 1)
             For x = 0 To StatType.Count - 1
                 Player(i).RandEquip(y).Stat(x) = 0

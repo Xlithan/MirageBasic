@@ -1632,7 +1632,7 @@ Module modDatabase
 
             For n = 0 To StatType.Count - 1
                 Player(index).Stat(n) = Job(jobNum).Stat(n)
-            Next n
+            Next
 
             Player(index).Dir = DirectionType.Down
             Player(index).Map = Job(jobNum).StartMap
