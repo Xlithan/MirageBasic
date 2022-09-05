@@ -149,7 +149,6 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        ClearSkills()
         SendRequestSkills() 
         SendRequestNpcs()
         SendRequestEditNpc()
