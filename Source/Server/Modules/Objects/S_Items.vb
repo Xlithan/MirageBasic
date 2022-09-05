@@ -332,24 +332,21 @@ Friend Module S_Items
         i = MapItemSlot
 
         If i <> -1 Then
-            If itemnum > 0 AndAlso itemNum <= MAX_ITEMS Then
-                MapItem(mapNum, i).Num = itemNum
-                MapItem(mapNum, i).Value = ItemVal
-                MapItem(mapNum, i).X = x
-                MapItem(mapNum, i).Y = y
+            MapItem(mapNum, i).Num = itemNum
+            MapItem(mapNum, i).Value = ItemVal
+            MapItem(mapNum, i).X = x
+            MapItem(mapNum, i).Y = y
 
-                buffer.WriteInt32(ServerPackets.SSpawnItem)
-                buffer.WriteInt32(i)
-                buffer.WriteInt32(itemNum)
-                buffer.WriteInt32(ItemVal)
-                buffer.WriteInt32(x)
-                buffer.WriteInt32(y)
+            buffer.WriteInt32(ServerPackets.SSpawnItem)
+            buffer.WriteInt32(i)
+            buffer.WriteInt32(itemNum)
+            buffer.WriteInt32(ItemVal)
+            buffer.WriteInt32(x)
+            buffer.WriteInt32(y)
 
-                AddDebug("Sent SMSG: SSpawnItem MapItemSlot")
+            AddDebug("Sent SMSG: SSpawnItem MapItemSlot")
 
-                SendDataToMap(mapNum, buffer.Data, buffer.Head)
-            End If
-
+            SendDataToMap(mapNum, buffer.Data, buffer.Head)
         End If
 
         buffer.Dispose()
@@ -358,7 +355,7 @@ Friend Module S_Items
     Function FindOpenMapItemSlot(mapNum As Integer) As Integer
         Dim i As Integer
 
-        FindOpenMapItemSlot = -1
+        FindOpenMapItemSlot = 0
 
         ' Check for subscript out of range
         If mapNum < 0 OrElse mapNum > MAX_CACHED_MAPS Then Exit Function
