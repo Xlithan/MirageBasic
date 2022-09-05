@@ -169,6 +169,7 @@ Friend Module C_Housing
     Sub Packet_EditHouses(ByRef data() As Byte)
         Dim buffer As New ByteStream(data)
         Dim i As Integer
+
         For i = 0 To MAX_HOUSES
             With House(i)
                 .ConfigName = Trim$(buffer.ReadString)

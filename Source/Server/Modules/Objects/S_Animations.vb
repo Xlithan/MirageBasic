@@ -171,6 +171,8 @@ Friend Module S_Animations
 
         TempPlayer(index).Editor = EditorType.Animation
 
+        SendAnimations(index)
+
         Dim Buffer = New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SAnimationEditor)
         Socket.SendDataTo(index, Buffer.Data, Buffer.Head)

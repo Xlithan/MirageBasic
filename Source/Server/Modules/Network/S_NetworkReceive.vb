@@ -1290,6 +1290,8 @@ Module S_NetworkReceive
 
         TempPlayer(index).Editor = EditorType.Shop
 
+        SendShops(index)
+
         Dim Buffer = New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SShopEditor)
         Socket.SendDataTo(index, Buffer.Data, Buffer.Head)

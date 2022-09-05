@@ -210,6 +210,8 @@ Friend Module S_Resources
 
         TempPlayer(index).Editor = EditorType.Resource
 
+        SendResources(index)
+
         Buffer.WriteInt32(ServerPackets.SResourceEditor)
         Socket.SendDataTo(index, Buffer.Data, Buffer.Head)
 

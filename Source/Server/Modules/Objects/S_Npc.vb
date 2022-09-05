@@ -1066,6 +1066,8 @@ Module S_Npc
 
         TempPlayer(index).Editor = EditorType.NPC
 
+        SendNpcs(index)
+
         Dim Buffer = New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SNpcEditor)
         Socket.SendDataTo(index, Buffer.Data, Buffer.Head)
