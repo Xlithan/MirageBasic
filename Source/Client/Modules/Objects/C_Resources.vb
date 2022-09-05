@@ -27,14 +27,10 @@ Module C_Resources
             i = i + 1
         End While
 
-        If NumResources = 0 Then Exit Sub
     End Sub
 
     Sub ClearResource(index As Integer)
-        Resource(index) = Nothing
-        Resource(index) = New ResourceStruct With {
-            .Name = ""
-        }
+        Resource(index).Name = ""
     End Sub
 
     Sub ClearResources()

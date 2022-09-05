@@ -68,7 +68,7 @@ Friend Module C_AutoTiles
 
         For X = 0 To Map.MaxX
             For Y = 0 To Map.MaxY
-                ReDim Autotile(x, y).Layer(modEnumerators.LayerType.Count - 1)
+                ReDim Autotile(x, y).Layer(LayerType.Count - 1)
                 For i = 0 To LayerType.Count - 1
                     ReDim Autotile(x, y).Layer(i).SrcX(4)
                     ReDim Autotile(x, y).Layer(i).SrcY(4)

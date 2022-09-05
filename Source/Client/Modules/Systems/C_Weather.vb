@@ -65,7 +65,7 @@ Friend Module C_Weather
 
         For i = 0 To MaxWeatherParticles
             If WeatherParticle(i).InUse Then
-                If WeatherParticle(i).Type = modEnumerators.WeatherType.Storm Then
+                If WeatherParticle(i).Type = WeatherType.Storm Then
                     spriteLeft = 0
                 Else
                     spriteLeft = WeatherParticle(i).Type - 1

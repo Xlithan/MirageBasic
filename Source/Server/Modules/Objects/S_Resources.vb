@@ -92,7 +92,6 @@ Friend Module S_Resources
     End Sub
 
     Sub ClearResource(index As Integer)
-        Resource(index) = Nothing
         Resource(index).Name = ""
         Resource(index).EmptyMessage = ""
         Resource(index).SuccessMessage = ""
@@ -210,6 +209,8 @@ Friend Module S_Resources
         End If
 
         TempPlayer(index).Editor = EditorType.Resource
+
+        SendResources(index)
 
         Buffer.WriteInt32(ServerPackets.SResourceEditor)
         Socket.SendDataTo(index, Buffer.Data, Buffer.Head)

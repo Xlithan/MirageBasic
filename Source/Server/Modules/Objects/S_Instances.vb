@@ -50,7 +50,7 @@ Module S_Instances
 
         'Copy Map Item Data
 
-        For i = 0 To MAX_MAP_ITEMS
+        For i = 1 To MAX_MAP_ITEMS
             MapItem(slot + MAX_MAPS, i) = MapItem(mapNum, i)
         Next
 
@@ -70,11 +70,11 @@ Module S_Instances
 
         ClearMap(Slot + MAX_MAPS)
 
-        For x = 0 To MAX_MAP_NPCS
+        For x = 1 To MAX_MAP_NPCS
             ClearMapNpc(x, Slot + MAX_MAPS)
         Next
 
-        For x = 0 To MAX_MAP_ITEMS
+        For x = 1 To MAX_MAP_ITEMS
             ClearMapItem(x, Slot + MAX_MAPS)
         Next
         InstancedMaps(Slot).OriginalMap = 0

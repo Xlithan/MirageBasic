@@ -284,7 +284,7 @@ Friend Module S_Quest
 
     Sub Packet_RequestEditQuest(index As Integer, ByRef data() As Byte)
         ' Prevent hacking
-        If GetPlayerAccess(index) < modEnumerators.AdminType.Developer Then Exit Sub
+        If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
 
         Dim user As String
 

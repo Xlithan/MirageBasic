@@ -18,6 +18,7 @@ Module C_General
         Application.DoEvents()
 
         LoadGame()
+        ClearGameData()
         GameLoop()
     End Sub
 
@@ -25,7 +26,6 @@ Module C_General
         LoadSettings()
         LoadLanguage()
         LoadInputs()
-        ClearGameData()
 
         SetStatus(Language.Load.Graphics)
         Application.DoEvents()
@@ -44,7 +44,7 @@ Module C_General
         Frmmenuvisible = True
         Pnlloadvisible = False
 
-        CheeckPaths()
+        CheckPaths()
         InitGraphics()
     End Function
 
@@ -62,47 +62,27 @@ Module C_General
         ClearProjectile()
         ClearRecipes()
         ClearPets()
+        ClearJobs()
+        ClearBank()
+        ClearParty()
+
+        For i = 1 To MAX_PLAYERS
+            ClearPlayer(i)
+        Next
+
+        ReDim CharSelection(3)
+
+        ClearAnimInstances()
+        ClearAutotiles()
     End function
 
-    Friend Function CheeckPaths()
+    Friend Function CheckPaths()
         CacheMusic()
         CacheSound()
         If Settings.Music = 1 AndAlso Len(Trim$(Settings.MenuMusic)) > 0 Then
             PlayMusic(Trim$(Settings.MenuMusic))
             MusicPlayer.Volume() = Settings.Volume
         End If
-
-        ReDim CharSelection(3)
-        ReDim Job(MAX_JOBS)
-        ReDim House(MAX_HOUSES)
-        ReDim HouseConfig(MAX_HOUSES)
-        ReDim Map.Npc(MAX_MAP_NPCS)
-        ReDim MapNpc(MAX_MAP_NPCS)
-        ReDim MapProjectile(MAX_PROJECTILES)
-        ReDim Player(MAX_PLAYERS)
-        ReDim Projectile(MAX_PROJECTILES)
-
-        ClearAnimations()
-        ClearAnimInstances()
-        ClearAutotiles()
-        ClearBank()
-        ClearItems()
-        ClearNpcs()
-        ClearParty()
-        ClearPets()
-        ClearQuests()
-        ClearRecipes()
-        ClearShops()
-
-        For i = 0 To MAX_PLAYERS
-            ClearPlayer(i)
-        Next
-
-        For i = 0 To MAX_MAP_NPCS
-            For x = 0 To VitalType.Count - 1
-                ReDim MapNpc(i).Vital(x)
-            Next
-        Next
 
         CheckAnimations()
         CheckCharacters()

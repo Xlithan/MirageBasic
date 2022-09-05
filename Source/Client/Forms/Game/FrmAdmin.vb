@@ -5,20 +5,13 @@ Friend Class FrmAdmin
 
     Private Sub FrmAdmin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SendRequestMapReport()
-
-        cmbSpawnItem.Items.Clear()
-
-        ' Add the names
-        For i = 0 To MAX_ITEMS
-            cmbSpawnItem.Items.Add(i & ": " & Trim$(Item(i).Name))
-        Next
     End Sub
 
 #Region "Moderation"
 
     Private Sub BtnAdminWarpTo_Click(sender As Object, e As EventArgs) Handles btnAdminWarpTo.Click
 
-        If GetPlayerAccess(Myindex) < modEnumerators.AdminType.Mapper Then
+        If GetPlayerAccess(Myindex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
         End If
@@ -100,7 +93,6 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        SendRequestAnimations()
         SendRequestEditAnimation()
     End Sub
 
@@ -110,7 +102,6 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        SendRequestJobs()
         SendRequestEditJob()
     End Sub
 
@@ -129,7 +120,6 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        SendRequestItems()
         SendRequestEditItem()
     End Sub
 
@@ -139,7 +129,6 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        SendRequestNpcs()
         SendRequestEditMap()
     End Sub
 
@@ -149,9 +138,6 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        ClearSkills()
-        SendRequestSkills() 
-        SendRequestNpcs()
         SendRequestEditNpc()
     End Sub
 
@@ -161,7 +147,6 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        SendRequestPets()
         SendRequestEditPet()
     End Sub
 
@@ -171,7 +156,6 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        SendRequestProjectile()
         SendRequestEditProjectile()
     End Sub
 
@@ -181,7 +165,6 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        SendRequestQuests()
         SendRequestEditQuest()
     End Sub
 
@@ -191,7 +174,6 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        SendRequestRecipes()
         SendRequestEditRecipes()
     End Sub
 
@@ -201,7 +183,6 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        SendRequestResources()
         SendRequestEditResource()
     End Sub
 
@@ -211,7 +192,6 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        SendRequestShops()
         SendRequestEditShop()
     End Sub
 
@@ -221,7 +201,6 @@ Friend Class FrmAdmin
             Exit Sub
         End If
 
-        SendRequestSkills()
         SendRequestEditSkill()
     End Sub
 
@@ -250,24 +229,6 @@ Friend Class FrmAdmin
 #End Region
 
 #Region "Misc"
-
-    Private Sub CmbSpawnItem_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSpawnItem.SelectedIndexChanged
-        If Item(cmbSpawnItem.SelectedIndex).Type = ItemType.Currency OrElse Item(cmbSpawnItem.SelectedIndex).Stackable = 1 Then
-            nudSpawnItemAmount.Enabled = True
-            Exit Sub
-        End If
-        nudSpawnItemAmount.Enabled = False
-    End Sub
-
-    Private Sub BtnSpawnItem_Click(sender As Object, e As EventArgs) Handles btnSpawnItem.Click
-        If GetPlayerAccess(Myindex) < AdminType.Creator Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
-            Exit Sub
-        End If
-
-        SendSpawnItem(cmbSpawnItem.SelectedIndex, nudSpawnItemAmount.Value)
-    End Sub
-
     Private Sub BtnLevelUp_Click(sender As Object, e As EventArgs) Handles btnLevelUp.Click
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
@@ -275,7 +236,6 @@ Friend Class FrmAdmin
         End If
 
         SendRequestLevelUp()
-
     End Sub
 
     Private Sub BtnALoc_Click(sender As Object, e As EventArgs) Handles btnALoc.Click
@@ -294,15 +254,6 @@ Friend Class FrmAdmin
         End If
 
         SendMapRespawn()
-    End Sub
-
-    Private Sub btnRefreshItems_Click(sender As Object, e As EventArgs) Handles btnRefreshItems.Click
-        cmbSpawnItem.Items.Clear()
-
-        ' Add the names
-        For i = 0 To MAX_ITEMS
-            cmbSpawnItem.Items.Add(i & ": " & Trim$(Item(i).Name))
-        Next
     End Sub
 
 #End Region

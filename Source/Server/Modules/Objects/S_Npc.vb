@@ -17,7 +17,7 @@ Module S_Npc
     Sub SpawnMapNpcs(mapNum As Integer)
         Dim i As Integer
 
-        For i = 0 To MAX_MAP_NPCS
+        For i = 1 To MAX_MAP_NPCS
             SpawnNpc(i, mapNum)
         Next
 
@@ -43,7 +43,7 @@ Module S_Npc
             MapNpc(mapNum).Npc(mapNpcNum).Target = 0
             MapNpc(mapNum).Npc(mapNpcNum).TargetType = 0 ' clear
 
-            MapNpc(mapNum).Npc(mapNpcNum).Vital(modEnumerators.VitalType.HP) = GetNpcMaxVital(npcNum, VitalType.HP)
+            MapNpc(mapNum).Npc(mapNpcNum).Vital(VitalType.HP) = GetNpcMaxVital(npcNum, VitalType.HP)
             MapNpc(mapNum).Npc(mapNpcNum).Vital(VitalType.MP) = GetNpcMaxVital(npcNum, VitalType.MP)
             MapNpc(mapNum).Npc(mapNpcNum).Vital(VitalType.SP) = GetNpcMaxVital(npcNum, VitalType.SP)
 
@@ -138,7 +138,7 @@ Module S_Npc
             Next
         End If
 
-        For LoopI = 0 To MAX_MAP_NPCS
+        For LoopI = 1 To MAX_MAP_NPCS
             If MapNpc(mapNum).Npc(LoopI).Num > 0 AndAlso MapNpc(mapNum).Npc(LoopI).X = x AndAlso MapNpc(mapNum).Npc(LoopI).Y = y Then
                 NpcTileIsOpen = False
                 Exit Function
@@ -190,7 +190,7 @@ Module S_Npc
                     Next
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 0 To MAX_MAP_NPCS
+                    For i = 1 To MAX_MAP_NPCS
                         If (i <> MapNpcNum) AndAlso (MapNpc(mapNum).Npc(i).Num > 0) AndAlso (MapNpc(mapNum).Npc(i).X = MapNpc(mapNum).Npc(MapNpcNum).X) AndAlso (MapNpc(mapNum).Npc(i).Y = MapNpc(mapNum).Npc(MapNpcNum).Y - 1) Then
                             CanNpcMove = False
                             Exit Function
@@ -223,7 +223,7 @@ Module S_Npc
                     Next
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 0 To MAX_MAP_NPCS
+                    For i = 1 To MAX_MAP_NPCS
                         If (i <> MapNpcNum) AndAlso (MapNpc(mapNum).Npc(i).Num > 0) AndAlso (MapNpc(mapNum).Npc(i).X = MapNpc(mapNum).Npc(MapNpcNum).X) AndAlso (MapNpc(mapNum).Npc(i).Y = MapNpc(mapNum).Npc(MapNpcNum).Y + 1) Then
                             CanNpcMove = False
                             Exit Function
@@ -256,7 +256,7 @@ Module S_Npc
                     Next
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 0 To MAX_MAP_NPCS
+                    For i = 1 To MAX_MAP_NPCS
                         If (i <> MapNpcNum) AndAlso (MapNpc(mapNum).Npc(i).Num > 0) AndAlso (MapNpc(mapNum).Npc(i).X = MapNpc(mapNum).Npc(MapNpcNum).X - 1) AndAlso (MapNpc(mapNum).Npc(i).Y = MapNpc(mapNum).Npc(MapNpcNum).Y) Then
                             CanNpcMove = False
                             Exit Function
@@ -289,7 +289,7 @@ Module S_Npc
                     Next
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 0 To MAX_MAP_NPCS
+                    For i = 1 To MAX_MAP_NPCS
                         If (i <> MapNpcNum) AndAlso (MapNpc(mapNum).Npc(i).Num > 0) AndAlso (MapNpc(mapNum).Npc(i).X = MapNpc(mapNum).Npc(MapNpcNum).X + 1) AndAlso (MapNpc(mapNum).Npc(i).Y = MapNpc(mapNum).Npc(MapNpcNum).Y) Then
                             CanNpcMove = False
                             Exit Function
@@ -875,14 +875,14 @@ Module S_Npc
                 If Not Target > 0 Then
                     Exit Sub
                 End If
-                If TargetType = modEnumerators.TargetType.Player Then
+                If TargetType = Core.TargetType.Player Then
                     ' if have target, check in range
                     If Not IsInRange(range, MapNpc(mapNum).Npc(MapNpcNum).X, MapNpc(mapNum).Npc(MapNpcNum).Y, GetPlayerX(Target), GetPlayerY(Target)) Then
                         Exit Sub
                     Else
                         HasBuffered = True
                     End If
-                ElseIf TargetType = modEnumerators.TargetType.Npc Then
+                ElseIf TargetType = Core.TargetType.Npc Then
                     '' if have target, check in range
                     'If Not isInRange(range, GetPlayerX(Index), GetPlayerY(Index), MapNpc(MapNum).Npc(Target).x, MapNpc(MapNum).Npc(Target).y) Then
                     '    PlayerMsg(Index, "Target not in range.")
@@ -901,7 +901,7 @@ Module S_Npc
         End Select
 
         If HasBuffered Then
-            SendAnimation(mapNum, Skill(skillnum).CastAnim, 0, 0, modEnumerators.TargetType.Player, Target)
+            SendAnimation(mapNum, Skill(skillnum).CastAnim, 0, 0, Core.TargetType.Player, Target)
             MapNpc(mapNum).Npc(MapNpcNum).SkillBuffer = skillslot
             MapNpc(mapNum).Npc(MapNpcNum).SkillBufferTimer = GetTimeMs()
             Exit Sub
@@ -1031,7 +1031,7 @@ Module S_Npc
 
         AddDebug("Sent SMSG: SMapNpcData")
 
-        For i = 0 To MAX_MAP_NPCS
+        For i = 1 To MAX_MAP_NPCS
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).Num)
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).X)
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).Y)
@@ -1065,6 +1065,8 @@ Module S_Npc
         End If
 
         TempPlayer(index).Editor = EditorType.NPC
+
+        SendNpcs(index)
 
         Dim Buffer = New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SNpcEditor)
@@ -1234,7 +1236,7 @@ Module S_Npc
 
         AddDebug("Sent SMSG: SMapNpcData")
 
-        For i = 0 To MAX_MAP_NPCS
+        For i = 1 To MAX_MAP_NPCS
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).Num)
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).X)
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).Y)

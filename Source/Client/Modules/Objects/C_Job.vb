@@ -4,6 +4,13 @@ Imports MirageBasic.Core
 Module C_Job
 
 #Region "Incoming Traffic"
+    Sub ClearJobs()
+        For i = 0 To MAX_JOBS
+            ReDim Job(i).Stat(StatType.Count - 1)
+            Job(i).Name = ""
+            Job(i).Desc = ""
+        Next
+    End Sub
 
     Sub Packet_NewCharJob(ByRef data() As Byte)
         Dim i As Integer, z As Integer, x As Integer
@@ -13,12 +20,6 @@ Module C_Job
             With Job(i)
                 .Name = Trim(buffer.ReadString)
                 .Desc = Trim(buffer.ReadString)
-
-                ReDim .Vital(VitalType.Count - 1)
-
-                .Vital(VitalType.HP) = buffer.ReadInt32
-                .Vital(VitalType.MP) = buffer.ReadInt32
-                .Vital(VitalType.SP) = buffer.ReadInt32
 
                 ' get array size
                 z = buffer.ReadInt32
@@ -95,12 +96,6 @@ Module C_Job
             With Job(i)
                 .Name = Trim(buffer.ReadString)
                 .Desc = Trim(buffer.ReadString)
-
-                ReDim .Vital(VitalType.Count - 1)
-
-                .Vital(VitalType.HP) = buffer.ReadInt32
-                .Vital(VitalType.MP) = buffer.ReadInt32
-                .Vital(VitalType.SP) = buffer.ReadInt32
 
                 ' get array size
                 z = buffer.ReadInt32

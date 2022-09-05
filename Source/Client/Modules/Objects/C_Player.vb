@@ -10,7 +10,7 @@ Module C_Player
 
         ReDim Player(MAX_PLAYERS)
 
-        For i = 0 To MAX_PLAYERS
+        For i = 1 To MAX_PLAYERS
             ClearPlayer(i)
         Next
     End Sub
@@ -25,7 +25,7 @@ Module C_Player
 
         ReDim Player(i).Equipment(EquipmentType.Count - 1)
         For y = 0 To EquipmentType.Count - 1
-            Player(i).Equipment(y) = 0
+            Player(i).Equipment(y) = -1
         Next
 
         Player(i).Exp = 0
@@ -39,13 +39,13 @@ Module C_Player
 
         ReDim Player(i).Inv(MAX_INV)
         For x = 1 To MAX_INV
-            Player(i).Inv(x).Num = -1
+            Player(i).Inv(x).Num = 0
             Player(i).Inv(x).Value = 0
         Next
 
         ReDim Player(i).Skill(MAX_SKILLS)
         For x = 1 To MAX_SKILLS
-            Player(i).Skill(x).Num = -1
+            Player(i).Skill(x).Num = 0
             Player(i).Skill(x).CD = 0
         Next
 
@@ -68,7 +68,6 @@ Module C_Player
 
         ReDim Player(i).RandEquip(EquipmentType.Count - 1)
         For y = 0 To EquipmentType.Count - 1
-            Player(i).Equipment(y) = -1
             ReDim Player(i).RandEquip(y).Stat(StatType.Count - 1)
             For x = 0 To StatType.Count - 1
                 Player(i).RandEquip(y).Stat(x) = 0
@@ -76,7 +75,9 @@ Module C_Player
         Next
 
         ReDim Player(i).RandInv(MAX_INV)
-        For y = 1 To MAX_INV
+        For y = 0 To MAX_INV
+            Player(i).RandInv(y).Prefix = ""
+            Player(i).RandInv(y).Suffix = ""
             ReDim Player(i).RandInv(y).Stat(StatType.Count - 1)
             For x = 0 To StatType.Count - 1
                 Player(i).RandInv(y).Stat(x) = 0
@@ -355,16 +356,16 @@ Module C_Player
         End If
 
         Select Case direction
-            Case modEnumerators.DirectionType.Up
+            Case DirectionType.Up
                 x = GetPlayerX(Myindex)
                 y = GetPlayerY(Myindex) - 1
-            Case modEnumerators.DirectionType.Down
+            Case DirectionType.Down
                 x = GetPlayerX(Myindex)
                 y = GetPlayerY(Myindex) + 1
-            Case modEnumerators.DirectionType.Left
+            Case DirectionType.Left
                 x = GetPlayerX(Myindex) - 1
                 y = GetPlayerY(Myindex)
-            Case modEnumerators.DirectionType.Right
+            Case DirectionType.Right
                 x = GetPlayerX(Myindex) + 1
                 y = GetPlayerY(Myindex)
         End Select
@@ -397,7 +398,7 @@ Module C_Player
         End If
 
         ' Check to see if a player is already on that tile
-       For i = 0 To MAX_PLAYERS
+       For i = 1 To MAX_PLAYERS
             If IsPlaying(i) AndAlso GetPlayerMap(i) = GetPlayerMap(Myindex) Then
                 If Player(i).InHouse = Player(Myindex).InHouse Then
                     If GetPlayerX(i) = x Then
@@ -419,7 +420,7 @@ Module C_Player
         Next
 
         ' Check to see if a npc is already on that tile
-       For i = 0 To MAX_MAP_NPCS
+       For i = 1 To MAX_MAP_NPCS
             If MapNpc(i).Num > 0 AndAlso MapNpc(i).X = x AndAlso MapNpc(i).Y = y Then
                 CheckDirection = True
                 Exit Function
@@ -790,6 +791,7 @@ Module C_Player
             itemnum = GetPlayerEquipment(Myindex, i)
 
             If itemnum > 0 Then
+                StreamItem(itemnum)
 
                 itempic = Item(itemnum).Pic
 
@@ -816,9 +818,11 @@ Module C_Player
                     .Width = PicX
                 End With
 
-                ItemsSprite(itempic).TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
-                ItemsSprite(itempic).Position = New Vector2f(recPos.X, recPos.Y)
-                GameWindow.Draw(ItemsSprite(itempic))
+                If itempic > 0 Then
+                    ItemsSprite(itempic).TextureRect = New IntRect(rec.X, rec.Y, rec.Width, rec.Height)
+                    ItemsSprite(itempic).Position = New Vector2f(recPos.X, recPos.Y)
+                    GameWindow.Draw(ItemsSprite(itempic))
+                End If
 
                 ' set the name
                 If Item(itemnum).Randomize <> 0 Then

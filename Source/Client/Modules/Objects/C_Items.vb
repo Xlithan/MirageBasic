@@ -28,13 +28,9 @@ Module C_Items
             NumItems = NumItems + 1
             i = i + 1
         End While
-
-        If NumItems = 0 Then Exit Sub
     End Sub
 
     Friend Sub ClearItem(index As Integer)
-        Item(index) = Nothing
-        Item(index) = New modTypes.ItemStruct
         For X = 0 To StatType.Count - 1
             ReDim Item(index).Add_Stat(x)
         Next
@@ -46,6 +42,7 @@ Module C_Items
         ReDim Item(index).FurnitureFringe(3, 3)
 
         Item(index).Name = ""
+        Item(index).Description = ""
     End Sub
 
     Sub ClearItems()
@@ -57,6 +54,13 @@ Module C_Items
             ClearItem(i)
         Next
 
+    End Sub
+
+    Sub StreamItem(itemNum As Integer)
+        If itemnum > 0 and Item(itemNum).Name = "" And Item_Loaded(itemNum) = False Then
+            Item_Loaded(itemNum) = True
+            SendRequestItem(itemNum)
+        End If
     End Sub
 
 #End Region
@@ -135,10 +139,11 @@ Module C_Items
 
 #Region "Outgoing Packets"
 
-    Sub SendRequestItems()
+    Sub SendRequestItem(itemNum As Integer)
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CRequestItems)
+        buffer.WriteInt32(ClientPackets.CRequestItem)
+        buffer.WriteInt32(itemNum)
 
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()

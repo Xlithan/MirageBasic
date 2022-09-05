@@ -42,14 +42,14 @@
         CCheckPing
         CUnequip
         CRequestPlayerData
-        CRequestItems
+        CRequestItem
         CRequestNPCS
         CRequestResources
         CSpawnItem
         CTrainStat
 
         CRequestAnimations
-        CRequestSkills
+        CRequestSkill
         CRequestShops
         CRequestLevelUp
         CForgetSkill

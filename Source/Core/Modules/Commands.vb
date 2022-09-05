@@ -6,11 +6,11 @@
     Public Function GetPlayerMaxVital(index As Integer, Vital As VitalType) As Integer
         Select Case Vital
             Case VitalType.HP
-                GetPlayerMaxVital = 100 + (Player(index).Level + (GetPlayerStat(index, StatType.Vitality) \ 2) + Job(Player(index).Job).Stat(StatType.Vitality)) * 2
+                GetPlayerMaxVital = 100 + (Player(index).Level + (GetPlayerStat(index, StatType.Vitality) \ 2)) * 2
             Case VitalType.MP
-                GetPlayerMaxVital = 100 + (Player(index).Level + (GetPlayerStat(index, StatType.Intelligence) \ 2) + Job(Player(index).Job).Stat(StatType.Intelligence)) * 2
+                GetPlayerMaxVital = 100 + (Player(index).Level + (GetPlayerStat(index, StatType.Intelligence) \ 2)) * 2
             Case VitalType.SP
-                GetPlayerMaxVital = 100 + (Player(index).Level + (GetPlayerStat(index, StatType.Spirit) \ 2) + Job(Player(index).Job).Stat(StatType.Spirit)) * 2
+                GetPlayerMaxVital = 100 + (Player(index).Level + (GetPlayerStat(index, StatType.Spirit) \ 2)) * 2
         End Select
 
     End Function
@@ -235,7 +235,7 @@
     End Sub
 
     Public Function IsEditorLocked(index As Integer, id As Integer) As String
-        For i = 0 To MAX_PLAYERS
+        For i = 1 To MAX_PLAYERS
             If i <> index Then
                 if TempPlayer(i).Editor = id then
                     IsEditorLocked = GetPlayerName(i)

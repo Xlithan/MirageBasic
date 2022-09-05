@@ -46,12 +46,6 @@ Friend Module S_Housing
 
             HouseConfig(i) = json.Read(Paths.House(i))
         Next
-
-        For i = 0 To GetPlayersOnline()
-            If IsPlaying(i) Then
-                SendHouseConfigs(i)
-            End If
-        Next
     End Sub
 
     Sub SaveHouse(index As Integer)
@@ -87,7 +81,7 @@ Friend Module S_Housing
                 If HasItem(index, 1) >= price Then
                     TakeInvItem(index, 1, price)
                     Player(index).House.Houseindex = TempPlayer(index).BuyHouseindex
-                    PlayerMsg(index, "You just bought the " & Trim$(HouseConfig(TempPlayer(index).BuyHouseindex).ConfigName) & " house!", modEnumerators.ColorType.BrightGreen)
+                    PlayerMsg(index, "You just bought the " & Trim$(HouseConfig(TempPlayer(index).BuyHouseindex).ConfigName) & " house!", ColorType.BrightGreen)
                     Player(index).LastMap = GetPlayerMap(index)
                     Player(index).LastX = GetPlayerX(index)
                     Player(index).LastY = GetPlayerY(index)

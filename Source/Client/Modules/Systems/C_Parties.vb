@@ -76,7 +76,7 @@ Module C_Parties
         If partyindex < 0 OrElse partyindex > MAX_PARTY_MEMBERS Then Exit Sub
 
         ' set vitals
-        Player(playerNum).Vital(modEnumerators.VitalType.HP) = buffer.ReadInt32
+        Player(playerNum).Vital(VitalType.HP) = buffer.ReadInt32
         Player(playerNum).Vital(VitalType.MP) = buffer.ReadInt32
         Player(playerNum).Vital(VitalType.SP) = buffer.ReadInt32
 

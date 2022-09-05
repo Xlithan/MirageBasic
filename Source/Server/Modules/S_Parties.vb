@@ -145,7 +145,7 @@ Module S_Parties
         Party_PlayerLeave(index)
     End Sub
 
-    Friend Sub Packet_PartyChatMsg(index As Integer, ByRef data() As Byte)
+    Friend Sub Packet_PartyChatMsg(index As Integer, ByRef data() As Byte)  
         Dim buffer As New ByteStream(data)
         Addlog("Recieved CMSG: CPartyChatMsg", PACKET_LOG)
         Console.WriteLine("Recieved CMSG: CPartyChatMsg")
@@ -167,7 +167,6 @@ Module S_Parties
     End Sub
 
     Sub ClearParty(partyNum As Integer)
-        Party(partyNum) = Nothing
         Party(partyNum).Leader = 0
         Party(partyNum).MemberCount = 0
         ReDim Party(partyNum).Member(MAX_PARTY_MEMBERS)

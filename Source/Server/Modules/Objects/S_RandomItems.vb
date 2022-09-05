@@ -11,7 +11,7 @@ Module S_RandomItems
         Bank(index).ItemRand(BankNum).Speed = 0
         Bank(index).ItemRand(BankNum).Rarity = 0
 
-        For i = 0 To modEnumerators.StatType.Count - 1
+        For i = 0 To StatType.Count - 1
             Bank(index).ItemRand(BankNum).Stat(i) = 0
         Next i
     End Sub

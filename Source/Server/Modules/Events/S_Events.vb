@@ -142,7 +142,7 @@ Friend Module S_Events
 
                     If CanEventMove = False Then Exit Function
                     ' Check to make sure that there is not another npc in the way
-                    For i = 0 To MAX_MAP_NPCS
+                    For i = 1 To MAX_MAP_NPCS
                         If (MapNpc(mapNum).Npc(i).X = x) AndAlso (MapNpc(mapNum).Npc(i).Y = y - 1) Then
                             CanEventMove = False
                             Exit Function
@@ -228,7 +228,7 @@ Friend Module S_Events
                     If CanEventMove = False Then Exit Function
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 0 To MAX_MAP_NPCS
+                    For i = 1 To MAX_MAP_NPCS
                         If (MapNpc(mapNum).Npc(i).X = x) AndAlso (MapNpc(mapNum).Npc(i).Y = y + 1) Then
                             CanEventMove = False
                             Exit Function
@@ -314,7 +314,7 @@ Friend Module S_Events
                     If CanEventMove = False Then Exit Function
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 0 To MAX_MAP_NPCS
+                    For i = 1 To MAX_MAP_NPCS
                         If (MapNpc(mapNum).Npc(i).X = x - 1) AndAlso (MapNpc(mapNum).Npc(i).Y = y) Then
                             CanEventMove = False
                             Exit Function
@@ -400,7 +400,7 @@ Friend Module S_Events
                     If CanEventMove = False Then Exit Function
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 0 To MAX_MAP_NPCS
+                    For i = 1 To MAX_MAP_NPCS
                         If (MapNpc(mapNum).Npc(i).X = x + 1) AndAlso (MapNpc(mapNum).Npc(i).Y = y) Then
                             CanEventMove = False
                             Exit Function

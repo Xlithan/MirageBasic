@@ -1,6 +1,7 @@
-﻿Imports MirageBasic.Core.Database
+﻿
+Imports MirageBasic.Core.Database
 
-Public Module modTypes
+Public Module Types
     ' Common data structure arrays
     Public Job(MAX_JOBS) As JobStruct
     Public Item(MAX_ITEMS) As ItemStruct
@@ -242,7 +243,7 @@ Public Module modTypes
     Public Structure JobStruct
         Dim Name As String
         Dim Desc As String
-        Dim Stat() As Byte
+        Dim Stat() As Integer
         Dim MaleSprite() As Integer
         Dim FemaleSprite() As Integer
         Dim StartItem() As Integer
@@ -251,9 +252,6 @@ Public Module modTypes
         Dim StartX As Byte
         Dim StartY As Byte
         Dim BaseExp As Integer
-
-        ' For client use
-        Dim Vital() As Integer
     End Structure
 
     Public Structure PetStruct
@@ -342,7 +340,7 @@ Public Module modTypes
         ' Inventory
         Dim Inv() As PlayerInvStruct
 
-        Dim Skill() As PlayerSKillStruct
+        Dim Skill() As PlayerSkillStruct
 
         ' Position
         Dim Map As Integer

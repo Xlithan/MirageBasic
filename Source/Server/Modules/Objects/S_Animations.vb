@@ -99,7 +99,6 @@ Friend Module S_Animations
     End Sub
 
     Sub ClearAnimation(index As Integer)
-        Animation(index) = Nothing
         Animation(index).Name = ""
         Animation(index).Sound = ""
         ReDim Animation(index).Sprite(1)
@@ -171,6 +170,8 @@ Friend Module S_Animations
         End If
 
         TempPlayer(index).Editor = EditorType.Animation
+
+        SendAnimations(index)
 
         Dim Buffer = New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SAnimationEditor)

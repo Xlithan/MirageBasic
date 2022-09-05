@@ -151,7 +151,7 @@ Public Class FrmEditor_Events
         cmbOpenShop.SelectedIndex = 0
         cmbSpawnNpc.Items.Clear()
 
-       For i = 0 To MAX_MAP_NPCS
+       For i = 1 To MAX_MAP_NPCS
             If Map.Npc(i) > 0 Then
                 cmbSpawnNpc.Items.Add(i & ". " & Trim$(Npc(Map.Npc(i)).Name))
             Else
@@ -1676,7 +1676,7 @@ Public Class FrmEditor_Events
             cmbChatBubbleTarget.Visible = True
             cmbChatBubbleTarget.Items.Clear()
 
-           For i = 0 To MAX_MAP_NPCS
+           For i = 1 To MAX_MAP_NPCS
                 If Map.Npc(i) < 0 Then
                     cmbChatBubbleTarget.Items.Add(i & ". ")
                 Else

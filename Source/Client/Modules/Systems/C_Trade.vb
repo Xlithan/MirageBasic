@@ -189,6 +189,8 @@ Module C_Trade
             itemnum = GetPlayerInvItemNum(Myindex, TradeYourOffer(i).Num)
 
             If itemnum > 0 AndAlso itemnum <= MAX_ITEMS Then
+                StreamItem(itemnum)
+   
                 itempic = Item(itemnum).Pic
 
                 If itempic > 0 AndAlso itempic <= NumItems Then

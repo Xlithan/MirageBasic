@@ -24,6 +24,11 @@ Module modDatabase
         Dim i As Integer
 
         ReDim Job(MAX_JOBS)
+        For i = 0 To MAX_JOBS
+            ReDim Job(i).Stat(StatType.Count - 1)
+            ReDim Job(i).StartItem(5)
+            ReDim Job(i).StartValue(5)
+        Next
 
         For i = 0 To MAX_JOBS
             ClearJob(i)
@@ -39,7 +44,6 @@ Module modDatabase
         ReDim Job(jobNum).StartValue(5)
         ReDim Job(jobNum).MaleSprite(5)
         ReDim Job(jobNum).FemaleSprite(5)
-        ReDim Job(jobNum).Vital(VitalType.Count - 1)
     End Sub
 
     Sub LoadJob(jobNum As Integer)
@@ -67,10 +71,6 @@ Module modDatabase
         Job(jobNum).StartX = reader.ReadByte
         Job(jobNum).StartY = reader.ReadByte
         Job(jobNum).BaseExp = reader.ReadInt32
-
-        For i = 0 To VitalType.Count - 1
-            Job(jobNum).Vital(i) = reader.ReadInt32
-        Next
 
         If Job(jobNum).Name Is Nothing Then Animation(jobNum).Name = ""
         If Job(jobNum).Desc Is Nothing Then Job(jobNum).Desc = ""
@@ -113,10 +113,6 @@ Module modDatabase
         writer.WriteByte(Job(jobNum).StartY)
         writer.WriteInt32(Job(jobNum).BaseExp)
 
-        For x = 0 To VitalType.Count - 1
-            writer.WriteInt32(Job(jobNum).Vital(x))
-        Next
-
         ByteFile.Save(filename, writer)
     End Sub
 
@@ -157,6 +153,14 @@ Module modDatabase
     End Sub
 
     Sub ClearMaps()
+        ReDim Map(MAX_CACHED_MAPS)
+        ReDim MapNpc(MAX_CACHED_MAPS)
+
+        For i = 0 To MAX_CACHED_MAPS
+            ReDim MapNpc(i).Npc(MAX_MAP_NPCS)
+            ReDim Map(i).Npc(MAX_MAP_NPCS)
+        Next
+
         For i = 0 To MAX_CACHED_MAPS
             ClearMap(i)
         Next
@@ -166,7 +170,6 @@ Module modDatabase
         Dim x As Integer
         Dim y As Integer
 
-        Map(mapNum) = Nothing
         Map(mapNum).Tileset = 1
         Map(mapNum).Name = ""
         Map(mapNum).MaxX = MAX_MAPX
@@ -178,10 +181,6 @@ Module modDatabase
             For y = 0 To MAX_MAPY
                 ReDim Map(mapNum).Tile(x, y).Layer(LayerType.Count - 1)
             Next
-        Next
-
-        For i = 0 To MAX_MAP_NPCS
-            Map(mapnum).Npc(i) = -1
         Next
 
         Map(mapNum).EventCount = 0
@@ -258,7 +257,7 @@ Module modDatabase
             Next
         Next
 
-        For x = 0 To MAX_MAP_NPCS
+        For x = 1 To MAX_MAP_NPCS
             writer.WriteInt32(Map(mapNum).Npc(x))
         Next
 
@@ -584,7 +583,7 @@ Module modDatabase
             Next
         Next
 
-        For x = 0 To MAX_MAP_NPCS
+        For x = 1 To MAX_MAP_NPCS
             Map(mapNum).Npc(x) = reader.ReadInt32()
             MapNpc(mapNum).Npc(x).Num = Map(mapNum).Npc(x)
         Next
@@ -598,7 +597,6 @@ Module modDatabase
     End Sub
 
     Sub ClearMapItem(index As Integer, mapNum As Integer)
-        MapItem(mapNum, index) = Nothing
         MapItem(mapNum, index).RandData.Prefix = ""
         MapItem(mapNum, index).RandData.Suffix = ""
     End Sub
@@ -608,7 +606,7 @@ Module modDatabase
         Dim y As Integer
 
         For y = 0 To MAX_CACHED_MAPS
-            For x = 0 To MAX_MAP_ITEMS
+            For x = 1 To MAX_MAP_ITEMS
                 ClearMapItem(x, y)
             Next
         Next
@@ -736,6 +734,7 @@ Module modDatabase
     End Sub
 
     Sub ClearMapNpc(index As Integer, mapNum As Integer)
+        MapNpc(mapNum).Npc(index).Num = 0
         ReDim MapNpc(mapNum).Npc(index).Vital(VitalType.Count - 1)
         ReDim MapNpc(mapNum).Npc(index).SkillCd(MAX_NPC_SKILLS)
     End Sub
@@ -751,18 +750,14 @@ Module modDatabase
 
     Sub ClearMapNpcs(mapNum As Integer)
         Dim x As Integer
-        Dim y As Integer
 
-        For x = 0 To MAX_MAP_NPCS
-            For y = 0 To MAX_MAPS
-                ClearMapNpc(x, y)
-            Next
+        For x = 1 To MAX_MAP_NPCS               
+            ClearMapNpc(x, mapNum)
         Next
 
     End Sub
 
     Sub ClearNpc(index As Integer)
-        Npc(index) = Nothing
         Npc(index).Name = ""
         Npc(index).AttackSay = ""
         ReDim Npc(index).Stat(StatType.Count - 1)
@@ -865,7 +860,6 @@ Module modDatabase
     Sub ClearShop(index As Integer)
         Dim i As Integer
 
-        Shop(index) = Nothing
         Shop(index).Name = ""
 
         ReDim Shop(index).TradeItem(MAX_TRADES)
@@ -996,7 +990,6 @@ Module modDatabase
     End Sub
 
     Sub ClearSkill(index As Integer)
-        Skill(index) = Nothing
         Skill(index).Name = ""
         Skill(index).LevelReq = 1 'Needs to be 1 for the skill editor
     End Sub
@@ -1075,14 +1068,33 @@ Module modDatabase
     End Sub
 
     Sub ClearPlayer(index As Integer)
+        ReDim TempPlayer(MAX_PLAYERS)
+
+        For i = 1 To MAX_PLAYERS
+            ReDim TempPlayer(i).SkillCd(MAX_PLAYER_SKILLS)
+            ReDim TempPlayer(i).PetSkillCd(4)
+            ReDim TempPlayer(i).TradeOffer(MAX_INV)
+        Next
+
         ReDim TempPlayer(index).SkillCd(MAX_PLAYER_SKILLS)
         ReDim TempPlayer(index).PetSkillCd(4)
+        TempPlayer(index).Editor = -1
+
+        ReDim Bank(MAX_PLAYERS)
+
+        For i = 0 To MAX_PLAYERS
+            ReDim Bank(i).Item(MAX_BANK)
+            ReDim Bank(i).ItemRand(MAX_BANK)
+            For x = 1 To MAX_BANK
+                ReDim Bank(i).ItemRand(x).Stat(StatType.Count - 1)
+            Next
+        Next
 
         Player(index).Login = ""
         Player(index).Password = ""
 
         Player(index).Access = 0
-        ClearCharacter(index)
+        ClearCharacter(index)   
     End Sub
 
 #End Region
@@ -1127,9 +1139,6 @@ Module modDatabase
             writer.WriteByte(Bank(index).Item(i).Num)
             writer.WriteInt32(Bank(index).Item(i).Value)
 
-            If Bank(index).ItemRand(i).Prefix = Nothing Then Bank(index).ItemRand(i).Prefix = ""
-            If Bank(index).ItemRand(i).Suffix = Nothing Then Bank(index).ItemRand(i).Suffix = ""
-
             writer.WriteString(Bank(index).ItemRand(i).Prefix)
             writer.WriteString(Bank(index).ItemRand(i).Suffix)
             writer.WriteInt32(Bank(index).ItemRand(i).Rarity)
@@ -1140,12 +1149,6 @@ Module modDatabase
                 writer.WriteInt32(Bank(index).ItemRand(i).Stat(X))
             Next
 
-            'writer.WriteInt32(Bank(Index).ItemRand(i).Stat(Stats.Strength))
-            'writer.WriteInt32(Bank(Index).ItemRand(i).Stat(Stats.Endurance))
-            'writer.WriteInt32(Bank(Index).ItemRand(i).Stat(Stats.Vitality))
-            'writer.WriteInt32(Bank(Index).ItemRand(i).Stat(Stats.Luck))
-            'writer.WriteInt32(Bank(Index).ItemRand(i).Stat(Stats.Intelligence))
-            'writer.WriteInt32(Bank(Index).ItemRand(i).Stat(Stats.Spirit))
         Next
 
         ByteFile.Save(filename, writer)
@@ -1182,12 +1185,12 @@ Module modDatabase
 
         ReDim Player(index).Equipment(EquipmentType.Count - 1)
         For i = 0 To EquipmentType.Count - 1
-            Player(index).Equipment(i) = -1
+            Player(index).Equipment(i) = 0
         Next
 
         ReDim Player(index).Inv(MAX_INV)
-        For i = 1 To MAX_INV
-            Player(index).Inv(i).Num = -1
+        For i = 0 To MAX_INV
+            Player(index).Inv(i).Num = 0
             Player(index).Inv(i).Value = 0
         Next
 
@@ -1200,8 +1203,8 @@ Module modDatabase
         Player(index).Sex = 0
 
         ReDim Player(index).Skill(MAX_PLAYER_SKILLS)
-        For i = 1 To MAX_PLAYER_SKILLS
-            Player(index).Skill(i).Num = -1
+        For i = 0 To MAX_PLAYER_SKILLS
+            Player(index).Skill(i).Num = 0
             Player(index).Skill(i).CD = 0
         Next
 
@@ -1272,7 +1275,7 @@ Module modDatabase
 
         'random items
         ReDim Player(index).RandInv(MAX_INV)
-        For i = 1 To MAX_INV
+        For i = 0 To MAX_INV
             Player(index).RandInv(i).Prefix = ""
             Player(index).RandInv(i).Suffix = ""
             Player(index).RandInv(i).Rarity = 0
@@ -1287,7 +1290,7 @@ Module modDatabase
 
         ReDim Player(index).RandEquip(EquipmentType.Count - 1)
         For i = 0 To EquipmentType.Count - 1
-            Player(index).Equipment(i) = -1
+            Player(index).Equipment(i) = 0
             Player(index).RandEquip(i).Prefix = ""
             Player(index).RandEquip(i).Suffix = ""
             Player(index).RandEquip(i).Rarity = 0
@@ -1323,7 +1326,6 @@ Module modDatabase
         Player(index).Pet.AdoptiveStats = 0
         Player(index).Pet.Points = 0
         Player(index).Pet.Exp = 0
-        TempPlayer(index).Editor = -1
     End Sub
 
     Sub LoadCharacter(index As Integer)
@@ -1632,7 +1634,7 @@ Module modDatabase
 
             For n = 0 To StatType.Count - 1
                 Player(index).Stat(n) = Job(jobNum).Stat(n)
-            Next n
+            Next
 
             Player(index).Dir = DirectionType.Down
             Player(index).Map = Job(jobNum).StartMap

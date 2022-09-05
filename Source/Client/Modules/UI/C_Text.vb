@@ -147,7 +147,7 @@ Module C_Text
                             tX = ((ConvertMapX(X * PicX)) - 4) + (PicX * 0.5)
                             tY = ((ConvertMapY(y * PicY)) - 7) + (PicY * 0.5)
                             Select Case .Type
-                                Case modEnumerators.TileType.Blocked
+                                Case TileType.Blocked
                                     DrawText(tX, tY, "B", (Color.Red), (Color.Black), GameWindow)
                                 Case TileType.Warp
                                     DrawText(tX, tY, "W", (Color.Blue), (Color.Black), GameWindow)

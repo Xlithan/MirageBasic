@@ -163,7 +163,6 @@ Module C_Variables
 
     Friend BloodIndex As Byte
 
-
     ' New char
     Friend NewCharSprite As Integer
 
@@ -195,6 +194,10 @@ Module C_Variables
     Friend ShowAnimTimer As Integer
 
     Friend EKeyPair As New Asfw.IO.Encryption.KeyPair()
+
+    ' Stream Content
+    Friend Item_Loaded(MAX_ITEMS)
+    Friend Skill_Loaded(MAX_SKILLS)
 
     ' Editor edited items array
     Friend Item_Changed(MAX_ITEMS) As Boolean

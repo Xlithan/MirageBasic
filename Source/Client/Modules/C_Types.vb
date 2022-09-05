@@ -1,15 +1,15 @@
 ﻿Imports MirageBasic.Core
+Imports SFML.System
 
 Module C_Types
-
-    ' client-side stuff
     Friend ActionMsg(Byte.MaxValue) As ActionMsgStruct
 
     Friend Blood(Byte.MaxValue) As BloodStruct
 
     Friend Chat As New List(Of ChatStruct)
 
-    'Mapreport
+    Public tempTileLights As List(Of LightTileStruct)
+
     Friend MapNames(MAX_MAPS) As String
 
     Public Structure ChatStruct
@@ -55,6 +55,13 @@ Module C_Types
         Dim Timer As Integer
         Dim X As Integer
         Dim Y As Integer
+    End Structure
+
+    Public Structure LightTileStruct
+        Public tiles As List(Of Vector2i)
+        Public isFlicker As Boolean
+        Public isSmooth As Boolean
+        Public scale As Vector2f
     End Structure
 
 End Module

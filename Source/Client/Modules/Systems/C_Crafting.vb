@@ -78,12 +78,6 @@ Friend Module C_Crafting
     End Sub
 
     Friend Sub ClearChanged_Recipe()
-        Dim i As Integer
-
-       For i = 0 To MAX_RECIPE
-            RecipeChanged(i) = Nothing
-        Next
-
         ReDim RecipeChanged(MAX_RECIPE)
     End Sub
 
@@ -207,7 +201,7 @@ Friend Module C_Crafting
 
         'enough ingredients?
        For i = 0 To MAX_INGREDIENT
-            If Recipe(recipeindex).Ingredients(i).ItemNum > 0 AndAlso HasItem(Myindex, Recipe(recipeindex).Ingredients(i).ItemNum) < (amount * Recipe(recipeindex).Ingredients(i).Value) Then
+            If Recipe(recipeindex).Ingredients(i).itemnum > 0 AndAlso HasItem(Myindex, Recipe(recipeindex).Ingredients(i).ItemNum) < (amount * Recipe(recipeindex).Ingredients(i).Value) Then
                 AddText(Language.Crafting.NotEnough, ColorType.Red)
                 Exit Sub
             End If
@@ -360,7 +354,7 @@ Friend Module C_Crafting
         LblProductAmountText = "X 1"
 
        For i = 0 To MAX_INGREDIENT
-            If Recipe(recipeindex).Ingredients(i).ItemNum > 0 Then
+            If Recipe(recipeindex).Ingredients(i).itemnum > 0 Then
                 PicMaterialIndex(i) = Item(Recipe(recipeindex).Ingredients(i).ItemNum).Pic
                 LblMaterialName(i) = Item(Recipe(recipeindex).Ingredients(i).ItemNum).Name
                 LblMaterialAmount(i) = "X " & HasItem(Myindex, Recipe(recipeindex).Ingredients(i).ItemNum) & "/" & Recipe(recipeindex).Ingredients(i).Value

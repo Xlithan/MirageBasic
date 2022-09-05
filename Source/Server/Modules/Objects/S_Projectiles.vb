@@ -148,7 +148,7 @@ Friend Module S_Projectiles
         Dim buffer As New ByteStream(4)
 
         ' Prevent hacking
-        If GetPlayerAccess(index) < modEnumerators.AdminType.Developer Then Exit Sub
+        If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
 
         Dim user As String
 

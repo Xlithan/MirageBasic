@@ -150,7 +150,7 @@ Module C_GameLogic
                 ' check if trade timed out
                 If TradeRequest = True Then
                     If TradeTimer < tick Then
-                        AddText(Language.Trade.Timeout, modEnumerators.ColorType.Yellow)
+                        AddText(Language.Trade.Timeout, ColorType.Yellow)
                         TradeRequest = False
                         TradeTimer = 0
                     End If
@@ -177,6 +177,7 @@ Module C_GameLogic
                         SkillBufferTimer = 0
                     End If
                 End If
+
                 ' check if we need to unlock the pets's spell casting restriction
                 If PetSkillBuffer > 0 Then
                     If PetSkillBufferTimer + (Skill(Pet(Player(Myindex).Pet.Num).Skill(PetSkillBuffer)).CastTime * 1000) < tick Then
@@ -185,92 +186,89 @@ Module C_GameLogic
                     End If
                 End If
 
-                SyncLock MapLock
-                    If CanMoveNow Then
-                        CheckMovement() ' Check if player is trying to move
-                        CheckAttack()   ' Check to see if player is trying to attack
-                    End If
+                If CanMoveNow Then
+                    CheckMovement() ' Check if player is trying to move
+                    CheckAttack()   ' Check to see if player is trying to attack
+                End If
 
-                    ' Process input before rendering, otherwise input will be behind by 1 frame
-                    If walkTimer < tick Then
+                ' Process input before rendering, otherwise input will be behind by 1 frame
+                If walkTimer < tick Then
 
-                       For i = 0 To TotalOnline 'MAX_PLAYERS
-                            If IsPlaying(i) Then
-                                ProcessMovement(i)
-                                If PetAlive(i) Then
-                                    ProcessPetMovement(i)
-                                End If
+                    For i = 0 To TotalOnline 'MAX_PLAYERS
+                        If IsPlaying(i) Then
+                            ProcessMovement(i)
+                            If PetAlive(i) Then
+                                ProcessPetMovement(i)
                             End If
-                        Next
-
-                        ' Process npc movements (actually move them)
-                       For i = 0 To MAX_MAP_NPCS
-                            If Map.Npc(i) > 0 Then
-                                ProcessNpcMovement(i)
-                            End If
-                        Next
-
-                        For i = 0 To Map.CurrentEvents
-                            ProcessEventMovement(i)
-                        Next
-
-                        walkTimer = tick + 30 ' edit this value to change WalkTimer
-                    End If
-
-                    ' fog scrolling
-                    If fogtmr < tick Then
-                        If CurrentFogSpeed > 0 Then
-                            ' move
-                            FogOffsetX = FogOffsetX - 1
-                            FogOffsetY = FogOffsetY - 1
-                            ' reset
-                            If FogOffsetX < -255 Then FogOffsetX = 1
-                            If FogOffsetY < -255 Then FogOffsetY = 1
-                            fogtmr = tick + 255 - CurrentFogSpeed
                         End If
+                    Next
+
+                    ' Process npc movements (actually move them)
+                    For i = 1 To MAX_MAP_NPCS
+                        If Map.Npc(i) > 0 Then
+                            ProcessNpcMovement(i)
+                        End If
+                    Next
+
+                    For i = 0 To Map.CurrentEvents
+                        ProcessEventMovement(i)
+                    Next
+
+                    walkTimer = tick + 30 ' edit this value to change WalkTimer
+                End If
+
+                ' fog scrolling
+                If fogtmr < tick Then
+                    If CurrentFogSpeed > 0 Then
+                        ' move
+                        FogOffsetX = FogOffsetX - 1
+                        FogOffsetY = FogOffsetY - 1
+                        ' reset
+                        If FogOffsetX < -255 Then FogOffsetX = 1
+                        If FogOffsetY < -255 Then FogOffsetY = 1
+                        fogtmr = tick + 255 - CurrentFogSpeed
                     End If
+                End If
 
-                    If tmr500 < tick Then
-                        ' animate waterfalls
-                        Select Case WaterfallFrame
-                            Case 0
-                                WaterfallFrame = 1
-                            Case 1
-                                WaterfallFrame = 2
-                            Case 2
-                                WaterfallFrame = 0
-                        End Select
-                        ' animate autotiles
-                        Select Case AutoTileFrame
-                            Case 0
-                                AutoTileFrame = 1
-                            Case 1
-                                AutoTileFrame = 2
-                            Case 2
-                                AutoTileFrame = 0
-                        End Select
+                If tmr500 < tick Then
+                    ' animate waterfalls
+                    Select Case WaterfallFrame
+                        Case 0
+                            WaterfallFrame = 1
+                        Case 1
+                            WaterfallFrame = 2
+                        Case 2
+                            WaterfallFrame = 0
+                    End Select
+                    ' animate autotiles
+                    Select Case AutoTileFrame
+                        Case 0
+                            AutoTileFrame = 1
+                        Case 1
+                            AutoTileFrame = 2
+                        Case 2
+                            AutoTileFrame = 0
+                    End Select
 
-                        tmr500 = tick + 500
-                    End If
+                    tmr500 = tick + 500
+                End If
 
-                    If FadeInSwitch = True Then
-                        FadeIn()
-                    End If
+                If FadeInSwitch = True Then
+                    FadeIn()
+                End If
 
-                    If FadeOutSwitch = True Then
-                        FadeOut()
-                    End If
+                If FadeOutSwitch = True Then
+                    FadeOut()
+                End If
 
-                    If InMapEditor Then FrmEditor_Map.EditorMap_DrawTileset()
+                If InMapEditor Then FrmEditor_Map.EditorMap_DrawTileset()
 
-                    Application.DoEvents()
+                Application.DoEvents()
 
-                    If GettingMap Then
-                        Dim font As New Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FontName, FontSize)
-                        g.DrawString(Language.Game.MapReceive, font, Brushes.DarkCyan, FrmGame.picscreen.Width - 130, 5)
-                    End If
-
-                End SyncLock
+                If GettingMap Then
+                    Dim font As New Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FontName, FontSize)
+                    g.DrawString(Language.Game.MapReceive, font, Brushes.DarkCyan, FrmGame.picscreen.Width - 130, 5)
+                End If
             End If
 
             If tmrweather < tick Then
@@ -1186,7 +1184,6 @@ Continue1:
         Dim i As Integer, index As Integer
 
         ' set the global index
-
         ChatBubbleindex = ChatBubbleindex + 1
         If ChatBubbleindex < 1 OrElse ChatBubbleindex > Byte.MaxValue Then ChatBubbleindex = 1
         ' default to new bubble
@@ -1214,5 +1211,4 @@ Continue1:
         End With
 
     End Sub
-
 End Module

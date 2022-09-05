@@ -1,20 +1,17 @@
 ﻿<Properties StartupConfiguration="{B554FD23-0844-49D1-A05A-D79CEAD3FA7A}|Default">
+  <Debugger.DebugSourceFolders>
+    <String>/Users/seth/Documents/GitHub/MirageBasic/Source/Network/IO</String>
+  </Debugger.DebugSourceFolders>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MultiItemStartupConfigurations />
-  <Debugger.DebugSourceFolders>
-    <String>/Users/seth/Documents/GitHub/MirageBasic/Source/Network/IO</String>
-  </Debugger.DebugSourceFolders>
-  <MonoDevelop.Ide.ItemProperties.Server PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Source/Server/Source/Modules/Network/S_NetworkReceive.vb">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../../../../usr/local/share/dotnet/sdk/6.0.400/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets">
     <Files>
-      <File FileName="Source/Server/Source/Modules/Network/S_NetworkReceive.vb" Line="2360" Column="35" />
-      <File FileName="Source/Server/Source/Modules/S_Database.vb" Line="44" Column="1" />
+      <File FileName="../../../../../usr/local/share/dotnet/sdk/6.0.400/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" Line="267" Column="5" IsPinned="True" />
       <File FileName="Source/Core/Globals/Paths.vb" Line="32" Column="20" />
-      <File FileName="Source/Server/Source/Modules/Objects/S_Resources.vb" Line="167" Column="7" />
       <File FileName="Source/Core/Configurations/Language.vb" Line="47" Column="58" />
     </Files>
     <Pads>
@@ -24,12 +21,11 @@
             <Node name="Asfw" expanded="True">
               <Node name="IO" expanded="True" />
             </Node>
-            <Node name="Core" expanded="True">
-              <Node name="Configurations" expanded="True">
-                <Node name="Language.vb" selected="True" />
+            <Node name="Server" expanded="True" selected="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
               </Node>
             </Node>
-            <Node name="Server" expanded="True" />
           </Node>
         </State>
       </Pad>
@@ -38,4 +34,5 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Server PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>

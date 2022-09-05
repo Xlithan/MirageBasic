@@ -10,7 +10,6 @@ Module C_Maps
 #Region "Globals"
 
     Friend Map As MapStruct
-    Friend MapLock As New Object()
     Friend MapItem(MAX_MAP_ITEMS) As MapItemStruct
     Friend MapNpc(MAX_MAP_NPCS) As MapNpcStruct
 
@@ -58,6 +57,8 @@ Module C_Maps
 
         Dim Panorama As Byte
         Dim Parallax As Byte
+
+        Dim Brightness As Byte
 
         'Client Side Only -- Temporary
         Dim CurrentEvents As Integer
@@ -111,53 +112,45 @@ Module C_Maps
     End Sub
 
     Sub ClearMap()
+        Map.Name = ""
+        Map.Tileset = 1
+        Map.MaxX = ScreenMapx
+        Map.MaxY = ScreenMapy
+        Map.BootMap = 0
+        Map.BootX = 0
+        Map.BootY = 0
+        Map.Down = 0
+        Map.Left = 0
+        Map.Moral = 0
+        Map.Music = ""
+        Map.Revision = 0
+        Map.Right = 0
+        Map.Up = 0
 
-        SyncLock MapLock
-            Map.Name = ""
-            Map.Tileset = 1
-            Map.MaxX = ScreenMapx
-            Map.MaxY = ScreenMapy
-            Map.BootMap = 0
-            Map.BootX = 0
-            Map.BootY = 0
-            Map.Down = 0
-            Map.Left = 0
-            Map.Moral = 0
-            Map.Music = ""
-            Map.Revision = 0
-            Map.Right = 0
-            Map.Up = 0
+        ReDim Map.Npc(MAX_MAP_NPCS)
+        ReDim Map.Tile(Map.MaxX, Map.MaxY)
 
-            ReDim Map.Npc(MAX_MAP_NPCS)
-            ReDim Map.Tile(Map.MaxX, Map.MaxY)
-
-            For X = 0 To ScreenMapx
-                For Y = 0 To ScreenMapy
-                    ReDim Map.Tile(x, y).Layer(LayerType.Count - 1)
-                    For l = 0 To LayerType.Count - 1
-                        Map.Tile(x, y).Layer(l).Tileset = 0
-                        Map.Tile(x, y).Layer(l).X = 0
-                        Map.Tile(x, y).Layer(l).Y = 0
-                        Map.Tile(x, y).Layer(l).AutoTile = 0
-                    Next
-
+        For X = 0 To ScreenMapx
+            For Y = 0 To ScreenMapy
+                ReDim Map.Tile(x, y).Layer(LayerType.Count - 1)
+                For l = 0 To LayerType.Count - 1
+                    Map.Tile(x, y).Layer(l).Tileset = 0
+                    Map.Tile(x, y).Layer(l).X = 0
+                    Map.Tile(x, y).Layer(l).Y = 0
+                    Map.Tile(x, y).Layer(l).AutoTile = 0
                 Next
+
             Next
+        Next
 
-            For i = 0 To MAX_MAP_NPCS
-                Map.Npc(i) = -1
-            Next
-
-            ClearMapEvents
-
-        End SyncLock
+        ClearMapEvents
 
     End Sub
 
     Sub ClearMapItems()
         Dim i As Integer
 
-       For i = 0 To MAX_MAP_ITEMS
+       For i = 1 To MAX_MAP_ITEMS
             ClearMapItem(i)
         Next
 
@@ -177,7 +170,7 @@ Module C_Maps
         MapNpc(index).Dir = 0
         MapNpc(index).Map = 0
         MapNpc(index).Moving = 0
-        MapNpc(index).Num = -1
+        MapNpc(index).Num = 0
         MapNpc(index).Steps = 0
         MapNpc(index).Target = 0
         MapNpc(index).TargetType = 0
@@ -194,7 +187,7 @@ Module C_Maps
     Sub ClearMapNpcs()
        Dim i As Integer
 
-       For i = 0 To MAX_MAP_NPCS
+       For i = 1 To MAX_MAP_NPCS
             ClearMapNpc(i)
         Next
 
@@ -255,220 +248,217 @@ Module C_Maps
 
         ClearMap()
 
-        SyncLock MapLock
-            If buffer.ReadInt32 = 1 Then
-                mapNum = buffer.ReadInt32
-                Map.Name = Trim(buffer.ReadString)
-                Map.Music = Trim(buffer.ReadString)
-                Map.Revision = buffer.ReadInt32
-                Map.Moral = buffer.ReadInt32
-                Map.Tileset = buffer.ReadInt32
-                Map.Up = buffer.ReadInt32
-                Map.Down = buffer.ReadInt32
-                Map.Left = buffer.ReadInt32
-                Map.Right = buffer.ReadInt32
-                Map.BootMap = buffer.ReadInt32
-                Map.BootX = buffer.ReadInt32
-                Map.BootY = buffer.ReadInt32
-                Map.MaxX = buffer.ReadInt32
-                Map.MaxY = buffer.ReadInt32
-                Map.WeatherType = buffer.ReadInt32
-                Map.Fogindex = buffer.ReadInt32
-                Map.WeatherIntensity = buffer.ReadInt32
-                Map.FogAlpha = buffer.ReadInt32
-                Map.FogSpeed = buffer.ReadInt32
-                Map.HasMapTint = buffer.ReadInt32
-                Map.MapTintR = buffer.ReadInt32
-                Map.MapTintG = buffer.ReadInt32
-                Map.MapTintB = buffer.ReadInt32
-                Map.MapTintA = buffer.ReadInt32
-                Map.Instanced = buffer.ReadInt32
-                Map.Panorama = buffer.ReadInt32
-                Map.Parallax = buffer.ReadInt32
+        If buffer.ReadInt32 = 1 Then
+            mapNum = buffer.ReadInt32
+            Map.Name = Trim(buffer.ReadString)
+            Map.Music = Trim(buffer.ReadString)
+            Map.Revision = buffer.ReadInt32
+            Map.Moral = buffer.ReadInt32
+            Map.Tileset = buffer.ReadInt32
+            Map.Up = buffer.ReadInt32
+            Map.Down = buffer.ReadInt32
+            Map.Left = buffer.ReadInt32
+            Map.Right = buffer.ReadInt32
+            Map.BootMap = buffer.ReadInt32
+            Map.BootX = buffer.ReadInt32
+            Map.BootY = buffer.ReadInt32
+            Map.MaxX = buffer.ReadInt32
+            Map.MaxY = buffer.ReadInt32
+            Map.WeatherType = buffer.ReadInt32
+            Map.Fogindex = buffer.ReadInt32
+            Map.WeatherIntensity = buffer.ReadInt32
+            Map.FogAlpha = buffer.ReadInt32
+            Map.FogSpeed = buffer.ReadInt32
+            Map.HasMapTint = buffer.ReadInt32
+            Map.MapTintR = buffer.ReadInt32
+            Map.MapTintG = buffer.ReadInt32
+            Map.MapTintB = buffer.ReadInt32
+            Map.MapTintA = buffer.ReadInt32
+            Map.Instanced = buffer.ReadInt32
+            Map.Panorama = buffer.ReadInt32
+            Map.Parallax = buffer.ReadInt32
 
-                ReDim Map.Tile(Map.MaxX, Map.MaxY)
+            ReDim Map.Tile(Map.MaxX, Map.MaxY)
 
-                For x = 0 To MAX_MAP_NPCS
-                    Map.Npc(x) = buffer.ReadInt32
-                Next
+            For x = 1 To MAX_MAP_NPCS
+                Map.Npc(x) = buffer.ReadInt32
+            Next
 
-                For X = 0 To Map.MaxX
-                    For Y = 0 To Map.MaxY
-                        Map.Tile(x, y).Data1 = buffer.ReadInt32
-                        Map.Tile(x, y).Data2 = buffer.ReadInt32
-                        Map.Tile(x, y).Data3 = buffer.ReadInt32
-                        Map.Tile(x, y).DirBlock = buffer.ReadInt32
+            For X = 0 To Map.MaxX
+                For Y = 0 To Map.MaxY
+                    Map.Tile(x, y).Data1 = buffer.ReadInt32
+                    Map.Tile(x, y).Data2 = buffer.ReadInt32
+                    Map.Tile(x, y).Data3 = buffer.ReadInt32
+                    Map.Tile(x, y).DirBlock = buffer.ReadInt32
 
-                        ReDim Map.Tile(x, y).Layer(LayerType.Count - 1)
+                    ReDim Map.Tile(x, y).Layer(LayerType.Count - 1)
 
-                        For i = 0 To LayerType.Count - 1
-                            Map.Tile(x, y).Layer(i).Tileset = buffer.ReadInt32
-                            Map.Tile(x, y).Layer(i).X = buffer.ReadInt32
-                            Map.Tile(x, y).Layer(i).Y = buffer.ReadInt32
-                            Map.Tile(x, y).Layer(i).AutoTile = buffer.ReadInt32
-                        Next
-                        Map.Tile(x, y).Type = buffer.ReadInt32
+                    For i = 0 To LayerType.Count - 1
+                        Map.Tile(x, y).Layer(i).Tileset = buffer.ReadInt32
+                        Map.Tile(x, y).Layer(i).X = buffer.ReadInt32
+                        Map.Tile(x, y).Layer(i).Y = buffer.ReadInt32
+                        Map.Tile(x, y).Layer(i).AutoTile = buffer.ReadInt32
                     Next
+                    Map.Tile(x, y).Type = buffer.ReadInt32
                 Next
+            Next
 
-                Map.EventCount = buffer.ReadInt32
+            Map.EventCount = buffer.ReadInt32
 
-                If Map.EventCount > 0 Then
-                   ReDim Map.Events(Map.EventCount)
-                   For i = 0 To Map.EventCount
-                        With Map.Events(i)
-                            .Name = Trim(buffer.ReadString)
-                            .Globals = buffer.ReadByte
-                            .X = buffer.ReadInt32
-                            .Y = buffer.ReadInt32
-                            .PageCount = buffer.ReadInt32
-                        End With
+            If Map.EventCount > 0 Then
+                ReDim Map.Events(Map.EventCount)
+                For i = 0 To Map.EventCount
+                    With Map.Events(i)
+                        .Name = Trim(buffer.ReadString)
+                        .Globals = buffer.ReadByte
+                        .X = buffer.ReadInt32
+                        .Y = buffer.ReadInt32
+                        .PageCount = buffer.ReadInt32
+                    End With
 
-                        If Map.Events(i).PageCount > 0 Then
-                            ReDim Map.Events(i).Pages(Map.Events(i).PageCount)
-                            For x = 0 To Map.Events(i).PageCount
-                                With Map.Events(i).Pages(x)
-                                    .ChkVariable = buffer.ReadInt32
-                                    .Variableindex = buffer.ReadInt32
-                                    .VariableCondition = buffer.ReadInt32
-                                    .VariableCompare = buffer.ReadInt32
+                    If Map.Events(i).PageCount > 0 Then
+                        ReDim Map.Events(i).Pages(Map.Events(i).PageCount)
+                        For x = 0 To Map.Events(i).PageCount
+                            With Map.Events(i).Pages(x)
+                                .ChkVariable = buffer.ReadInt32
+                                .Variableindex = buffer.ReadInt32
+                                .VariableCondition = buffer.ReadInt32
+                                .VariableCompare = buffer.ReadInt32
 
-                                    .ChkSwitch = buffer.ReadInt32
-                                    .Switchindex = buffer.ReadInt32
-                                    .SwitchCompare = buffer.ReadInt32
+                                .ChkSwitch = buffer.ReadInt32
+                                .Switchindex = buffer.ReadInt32
+                                .SwitchCompare = buffer.ReadInt32
 
-                                    .ChkHasItem = buffer.ReadInt32
-                                    .HasItemindex = buffer.ReadInt32
-                                    .HasItemAmount = buffer.ReadInt32
+                                .ChkHasItem = buffer.ReadInt32
+                                .HasItemindex = buffer.ReadInt32
+                                .HasItemAmount = buffer.ReadInt32
 
-                                    .ChkSelfSwitch = buffer.ReadInt32
-                                    .SelfSwitchindex = buffer.ReadInt32
-                                    .SelfSwitchCompare = buffer.ReadInt32
+                                .ChkSelfSwitch = buffer.ReadInt32
+                                .SelfSwitchindex = buffer.ReadInt32
+                                .SelfSwitchCompare = buffer.ReadInt32
 
-                                    .GraphicType = buffer.ReadByte
-                                    .Graphic = buffer.ReadInt32
-                                    .GraphicX = buffer.ReadInt32
-                                    .GraphicY = buffer.ReadInt32
-                                    .GraphicX2 = buffer.ReadInt32
-                                    .GraphicY2 = buffer.ReadInt32
+                                .GraphicType = buffer.ReadByte
+                                .Graphic = buffer.ReadInt32
+                                .GraphicX = buffer.ReadInt32
+                                .GraphicY = buffer.ReadInt32
+                                .GraphicX2 = buffer.ReadInt32
+                                .GraphicY2 = buffer.ReadInt32
 
-                                    .MoveType = buffer.ReadByte
-                                    .MoveSpeed = buffer.ReadByte
-                                    .MoveFreq = buffer.ReadByte
-                                    .MoveRouteCount = buffer.ReadInt32
-                                    .IgnoreMoveRoute = buffer.ReadInt32
-                                    .RepeatMoveRoute = buffer.ReadInt32
+                                .MoveType = buffer.ReadByte
+                                .MoveSpeed = buffer.ReadByte
+                                .MoveFreq = buffer.ReadByte
+                                .MoveRouteCount = buffer.ReadInt32
+                                .IgnoreMoveRoute = buffer.ReadInt32
+                                .RepeatMoveRoute = buffer.ReadInt32
 
-                                    If .MoveRouteCount > 0 Then
-                                        ReDim Map.Events(i).Pages(x).MoveRoute(.MoveRouteCount)
-                                        For y = 0 To .MoveRouteCount
-                                            .MoveRoute(y).Index = buffer.ReadInt32
-                                            .MoveRoute(y).Data1 = buffer.ReadInt32
-                                            .MoveRoute(y).Data2 = buffer.ReadInt32
-                                            .MoveRoute(y).Data3 = buffer.ReadInt32
-                                            .MoveRoute(y).Data4 = buffer.ReadInt32
-                                            .MoveRoute(y).Data5 = buffer.ReadInt32
-                                            .MoveRoute(y).Data6 = buffer.ReadInt32
-                                        Next
-                                    End If
-
-                                    .WalkAnim = buffer.ReadInt32
-                                    .DirFix = buffer.ReadInt32
-                                    .WalkThrough = buffer.ReadInt32
-                                    .ShowName = buffer.ReadInt32
-                                    .Trigger = buffer.ReadByte
-                                    .CommandListCount = buffer.ReadInt32
-                                    .Position = buffer.ReadByte
-                                    .Questnum = buffer.ReadInt32
-                                End With
-
-                                If Map.Events(i).Pages(x).CommandListCount > 0 Then
-                                    ReDim Map.Events(i).Pages(x).CommandList(Map.Events(i).Pages(x).CommandListCount)
-                                    For y = 0 To Map.Events(i).Pages(x).CommandListCount
-                                        Map.Events(i).Pages(x).CommandList(y).CommandCount = buffer.ReadInt32
-                                        Map.Events( i).Pages(x).CommandList(y).ParentList = buffer.ReadInt32
-                                        If Map.Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
-                                            ReDim Map.Events(i).Pages(x).CommandList(y).Commands(Map.Events(i).Pages(x).CommandList(y).CommandCount)
-                                            For z = 0 To Map.Events(i).Pages(x).CommandList(y).CommandCount
-                                                With Map.Events(i).Pages(x).CommandList(y).Commands(z)
-                                                    .Index = buffer.ReadByte
-                                                    .Text1 = Trim(buffer.ReadString)
-                                                    .Text2 = Trim(buffer.ReadString)
-                                                    .Text3 = Trim(buffer.ReadString)
-                                                    .Text4 = Trim(buffer.ReadString)
-                                                    .Text5 = Trim(buffer.ReadString)
-                                                    .Data1 = buffer.ReadInt32
-                                                    .Data2 = buffer.ReadInt32
-                                                    .Data3 = buffer.ReadInt32
-                                                    .Data4 = buffer.ReadInt32
-                                                    .Data5 = buffer.ReadInt32
-                                                    .Data6 = buffer.ReadInt32
-                                                    .ConditionalBranch.CommandList = buffer.ReadInt32
-                                                    .ConditionalBranch.Condition = buffer.ReadInt32
-                                                    .ConditionalBranch.Data1 = buffer.ReadInt32
-                                                    .ConditionalBranch.Data2 = buffer.ReadInt32
-                                                    .ConditionalBranch.Data3 = buffer.ReadInt32
-                                                    .ConditionalBranch.ElseCommandList = buffer.ReadInt32
-                                                    .MoveRouteCount = buffer.ReadInt32
-                                                    If .MoveRouteCount > 0 Then
-                                                        ReDim Preserve .MoveRoute(.MoveRouteCount)
-                                                        For w = 0 To .MoveRouteCount
-                                                            .MoveRoute(w).Index = buffer.ReadInt32
-                                                            .MoveRoute(w).Data1 = buffer.ReadInt32
-                                                            .MoveRoute(w).Data2 = buffer.ReadInt32
-                                                            .MoveRoute(w).Data3 = buffer.ReadInt32
-                                                            .MoveRoute(w).Data4 = buffer.ReadInt32
-                                                            .MoveRoute(w).Data5 = buffer.ReadInt32
-                                                            .MoveRoute(w).Data6 = buffer.ReadInt32
-                                                        Next
-                                                    End If
-                                                End With
-                                            Next
-                                        End If
+                                If .MoveRouteCount > 0 Then
+                                    ReDim Map.Events(i).Pages(x).MoveRoute(.MoveRouteCount)
+                                    For y = 0 To .MoveRouteCount
+                                        .MoveRoute(y).Index = buffer.ReadInt32
+                                        .MoveRoute(y).Data1 = buffer.ReadInt32
+                                        .MoveRoute(y).Data2 = buffer.ReadInt32
+                                        .MoveRoute(y).Data3 = buffer.ReadInt32
+                                        .MoveRoute(y).Data4 = buffer.ReadInt32
+                                        .MoveRoute(y).Data5 = buffer.ReadInt32
+                                        .MoveRoute(y).Data6 = buffer.ReadInt32
                                     Next
                                 End If
-                            Next
-                        End If
-                    Next
-                End If
-                'End Event Data
+
+                                .WalkAnim = buffer.ReadInt32
+                                .DirFix = buffer.ReadInt32
+                                .WalkThrough = buffer.ReadInt32
+                                .ShowName = buffer.ReadInt32
+                                .Trigger = buffer.ReadByte
+                                .CommandListCount = buffer.ReadInt32
+                                .Position = buffer.ReadByte
+                                .Questnum = buffer.ReadInt32
+                            End With
+
+                            If Map.Events(i).Pages(x).CommandListCount > 0 Then
+                                ReDim Map.Events(i).Pages(x).CommandList(Map.Events(i).Pages(x).CommandListCount)
+                                For y = 0 To Map.Events(i).Pages(x).CommandListCount
+                                    Map.Events(i).Pages(x).CommandList(y).CommandCount = buffer.ReadInt32
+                                    Map.Events( i).Pages(x).CommandList(y).ParentList = buffer.ReadInt32
+                                    If Map.Events(i).Pages(x).CommandList(y).CommandCount > 0 Then
+                                        ReDim Map.Events(i).Pages(x).CommandList(y).Commands(Map.Events(i).Pages(x).CommandList(y).CommandCount)
+                                        For z = 0 To Map.Events(i).Pages(x).CommandList(y).CommandCount
+                                            With Map.Events(i).Pages(x).CommandList(y).Commands(z)
+                                                .Index = buffer.ReadByte
+                                                .Text1 = Trim(buffer.ReadString)
+                                                .Text2 = Trim(buffer.ReadString)
+                                                .Text3 = Trim(buffer.ReadString)
+                                                .Text4 = Trim(buffer.ReadString)
+                                                .Text5 = Trim(buffer.ReadString)
+                                                .Data1 = buffer.ReadInt32
+                                                .Data2 = buffer.ReadInt32
+                                                .Data3 = buffer.ReadInt32
+                                                .Data4 = buffer.ReadInt32
+                                                .Data5 = buffer.ReadInt32
+                                                .Data6 = buffer.ReadInt32
+                                                .ConditionalBranch.CommandList = buffer.ReadInt32
+                                                .ConditionalBranch.Condition = buffer.ReadInt32
+                                                .ConditionalBranch.Data1 = buffer.ReadInt32
+                                                .ConditionalBranch.Data2 = buffer.ReadInt32
+                                                .ConditionalBranch.Data3 = buffer.ReadInt32
+                                                .ConditionalBranch.ElseCommandList = buffer.ReadInt32
+                                                .MoveRouteCount = buffer.ReadInt32
+                                                If .MoveRouteCount > 0 Then
+                                                    ReDim Preserve .MoveRoute(.MoveRouteCount)
+                                                    For w = 0 To .MoveRouteCount
+                                                        .MoveRoute(w).Index = buffer.ReadInt32
+                                                        .MoveRoute(w).Data1 = buffer.ReadInt32
+                                                        .MoveRoute(w).Data2 = buffer.ReadInt32
+                                                        .MoveRoute(w).Data3 = buffer.ReadInt32
+                                                        .MoveRoute(w).Data4 = buffer.ReadInt32
+                                                        .MoveRoute(w).Data5 = buffer.ReadInt32
+                                                        .MoveRoute(w).Data6 = buffer.ReadInt32
+                                                    Next
+                                                End If
+                                            End With
+                                        Next
+                                    End If
+                                Next
+                            End If
+                        Next
+                    End If
+                Next
             End If
+        End If
 
-           For i = 0 To MAX_MAP_ITEMS
-                MapItem(i).Num = buffer.ReadInt32
-                MapItem(i).Value = buffer.ReadInt32()
-                MapItem(i).X = buffer.ReadInt32()
-                MapItem(i).Y = buffer.ReadInt32()
-            Next
+        For i = 1 To MAX_MAP_ITEMS
+            MapItem(i).Num = buffer.ReadInt32
+            MapItem(i).Value = buffer.ReadInt32()
+            MapItem(i).X = buffer.ReadInt32()
+            MapItem(i).Y = buffer.ReadInt32()
+        Next
 
-           For i = 0 To MAX_MAP_NPCS
-                MapNpc(i).Num = buffer.ReadInt32()
-                MapNpc(i).X = buffer.ReadInt32()
-                MapNpc(i).Y = buffer.ReadInt32()
-                MapNpc(i).Dir = buffer.ReadInt32()
-                MapNpc(i).Vital(VitalType.HP) = buffer.ReadInt32()
-                MapNpc(i).Vital(VitalType.MP) = buffer.ReadInt32()
-            Next
+        For i = 1 To MAX_MAP_NPCS
+            MapNpc(i).Num = buffer.ReadInt32()
+            MapNpc(i).X = buffer.ReadInt32()
+            MapNpc(i).Y = buffer.ReadInt32()
+            MapNpc(i).Dir = buffer.ReadInt32()
+            MapNpc(i).Vital(VitalType.HP) = buffer.ReadInt32()
+            MapNpc(i).Vital(VitalType.MP) = buffer.ReadInt32()
+        Next
 
-            If buffer.ReadInt32 = 1 Then
-                ResourceIndex = buffer.ReadInt32
-                ResourcesInit = False
-                ReDim MapResource(ResourceIndex)
+        If buffer.ReadInt32 = 1 Then
+            ResourceIndex = buffer.ReadInt32
+            ResourcesInit = False
+            ReDim MapResource(ResourceIndex)
 
-                If ResourceIndex > 0 Then
-                    For i = 0 To ResourceIndex
-                        MapResource(i).State = buffer.ReadByte
-                        MapResource(i).X = buffer.ReadInt32
-                        MapResource(i).Y = buffer.ReadInt32
-                    Next
+            If ResourceIndex > 0 Then
+                For i = 0 To ResourceIndex
+                    MapResource(i).State = buffer.ReadByte
+                    MapResource(i).X = buffer.ReadInt32
+                    MapResource(i).Y = buffer.ReadInt32
+                Next
 
-                    ResourcesInit = True
-                End If
+                ResourcesInit = True
             End If
+        End If
 
-            buffer.Dispose()
+        buffer.Dispose()
 
-        End SyncLock
 
         InitAutotiles()
 
@@ -500,7 +490,7 @@ Module C_Maps
     Sub Packet_MapNPCData(ByRef data() As Byte)
         Dim i As Integer
         Dim buffer As New ByteStream(data)
-       For i = 0 To MAX_MAP_NPCS
+       For i = 1 To MAX_MAP_NPCS
 
             With MapNpc(i)
                 .Num = buffer.ReadInt32
@@ -620,7 +610,7 @@ Module C_Maps
         buffer.WriteInt32(Map.Panorama)
         buffer.WriteInt32(Map.Parallax)
 
-       For i = 0 To MAX_MAP_NPCS
+       For i = 1 To MAX_MAP_NPCS
             buffer.WriteInt32(Map.Npc(i))
         Next
 

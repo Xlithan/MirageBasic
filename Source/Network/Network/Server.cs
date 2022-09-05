@@ -47,6 +47,7 @@ namespace Asfw.Network
     {
       if (this._listener != null || this._socket != null)
         return;
+
       if (packetSize <= 0)
         packetSize = 8192;
       this._socket = new Dictionary<int, Socket>();
@@ -346,6 +347,7 @@ namespace Asfw.Network
       int num = 0;
       bool flag = false;
       int count;
+
       while (true)
       {
         count = length1 - num;
@@ -381,23 +383,23 @@ namespace Asfw.Network
                   flag = true;
                 }
                 else
-                  goto label_14;
+                  goto NullReference;
               }
               else
-                goto label_19;
+                goto IndexOutofRange;
             }
             else
-              goto label_29;
+              goto Overflow;
           }
           else
-            goto label_24;
+            goto BrokenPacket;
         }
         else
-          goto label_29;
+          goto Overflow;
       }
       so.Dispose();
       return;
-label_14:
+    NullReference:
       if (!this._socket.ContainsKey(index))
       {
         so.Dispose();
@@ -409,7 +411,7 @@ label_14:
       this.Disconnect(index);
       so.Dispose();
       return;
-label_19:
+    IndexOutofRange:
       if (!this._socket.ContainsKey(index))
       {
         so.Dispose();
@@ -421,7 +423,7 @@ label_19:
       this.Disconnect(index);
       so.Dispose();
       return;
-label_24:
+    BrokenPacket:
       if (!this._socket.ContainsKey(index))
       {
         so.Dispose();
@@ -433,7 +435,7 @@ label_24:
       this.Disconnect(index);
       so.Dispose();
       return;
-label_29:
+    Overflow:
       if (count == 0)
       {
         so.RingBuffer = (byte[]) null;
