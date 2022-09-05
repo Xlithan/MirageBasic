@@ -204,7 +204,7 @@ Friend Module C_Projectiles
         End If
 
         'Check for npc collision
-       For i = 0 To MAX_MAP_NPCS
+       For i = 1 To MAX_MAP_NPCS
             If MapNpc(i).X = x AndAlso MapNpc(i).Y = y Then
                 canClearProjectile = True
                 collisionindex = i
@@ -215,7 +215,7 @@ Friend Module C_Projectiles
         Next
 
         'Check for player collision
-       For i = 0 To MAX_PLAYERS
+       For i = 1 To MAX_PLAYERS
             If IsPlaying(i) AndAlso GetPlayerMap(i) = GetPlayerMap(Myindex) Then
                 If GetPlayerX(i) = x AndAlso GetPlayerY(i) = y Then
                     canClearProjectile = True

@@ -1,4 +1,4 @@
-﻿Public Module modConstants
+﻿Public Module Constants
     Public Const MAX_ANIMATIONS As Integer = 100
     Public Const MAX_BANK As Byte = 90
     Public Const MAX_JOBS As Byte = 3

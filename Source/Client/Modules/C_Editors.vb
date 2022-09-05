@@ -105,7 +105,7 @@ Module C_Editors
             .cmbQuest.SelectedIndex = Npc(Editorindex).QuestNum
             .cmbSpawnPeriod.SelectedIndex = Npc(Editorindex).SpawnTime
 
-            .nudStrength.Value = Npc(Editorindex).Stat(modEnumerators.StatType.Strength)
+            .nudStrength.Value = Npc(Editorindex).Stat(StatType.Strength)
             .nudEndurance.Value = Npc(Editorindex).Stat(StatType.Endurance)
             .nudIntelligence.Value = Npc(Editorindex).Stat(StatType.Intelligence)
             .nudSpirit.Value = Npc(Editorindex).Stat(StatType.Spirit)
@@ -156,9 +156,6 @@ Module C_Editors
 
 #Region "Resource Editor"
     Friend Sub ClearChanged_Resource()
-       For i = 0 To MAX_RESOURCES
-            Resource_Changed(i) = Nothing
-        Next 
         ReDim Resource_Changed(MAX_RESOURCES)
     End Sub
 
@@ -324,7 +321,6 @@ Module C_Editors
         frmEditor_Skill.Visible = False
         ClearChanged_Skill()
         ClearSkills()
-        SendRequestSkills()
     End Sub
 
     Friend Sub ClearChanged_Skill()
@@ -629,7 +625,6 @@ Module C_Editors
         frmEditor_Item.Visible = False
         ClearChangedItem()
         ClearItems()
-        SendRequestItems()
     End Sub
 
     Friend Sub ItemEditorOk()

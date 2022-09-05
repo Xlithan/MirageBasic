@@ -561,7 +561,7 @@ Module S_NetworkSend
             buffer.WriteInt32(Map(mapNum).Panorama)
             buffer.WriteInt32(Map(mapNum).Parallax)
 
-            For i = 0 To MAX_MAP_NPCS
+            For i = 1 To MAX_MAP_NPCS
                 buffer.WriteInt32(Map(mapNum).Npc(i))
             Next
 
@@ -695,14 +695,14 @@ Module S_NetworkSend
             buffer.WriteInt32(0)
         End If
 
-        For i = 0 To MAX_MAP_ITEMS
+        For i = 1 To MAX_MAP_ITEMS
             buffer.WriteInt32(MapItem(mapNum, i).Num)
             buffer.WriteInt32(MapItem(mapNum, i).Value)
             buffer.WriteInt32(MapItem(mapNum, i).X)
             buffer.WriteInt32(MapItem(mapNum, i).Y)
         Next
 
-        For i = 0 To MAX_MAP_NPCS
+        For i = 1 To MAX_MAP_NPCS
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).Num)
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).X)
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).Y)
@@ -758,8 +758,6 @@ Module S_NetworkSend
 
     Function PlayerData(index As Integer) As Byte()
         Dim buffer As New ByteStream(4), i As Integer
-        PlayerData = Nothing
-        If index > MAX_PLAYERS Then Exit Function
 
         buffer.WriteInt32(ServerPackets.SPlayerData)
         buffer.WriteInt32(index)
@@ -885,95 +883,6 @@ Module S_NetworkSend
     Sub SendPlayerData(index As Integer)
         Dim data = PlayerData(index)
         SendDataToMap(GetPlayerMap(index), data, data.Length)
-    End Sub
-
-    Sub SendGameData(index As Integer)
-        Dim buffer As New ByteStream(4)
-        Dim i As Integer
-        Dim data() As Byte
-
-        buffer.WriteBlock(JobData)
-
-        i = 0
-
-        For x = 0 To MAX_ITEMS
-            If Item(x).Name.Trim.Length > 0 Then
-                i = i + 1
-            End If
-        Next
-
-        'Write Number of Items it is Sending and then The Item Data
-        buffer.WriteInt32(i)
-        buffer.WriteBlock(ItemsData)
-
-        i = 0
-
-        For x = 0 To MAX_ANIMATIONS
-            If Animation(x).Name.Trim.Length > 0 Then
-                i = i + 1
-            End If
-        Next
-
-        buffer.WriteInt32(i)
-        buffer.WriteBlock(AnimationsData)
-
-        i = 0
-
-        For x = 0 To MAX_NPCS
-            If Npc(x).Name.Trim.Length > 0 Then
-                i = i + 1
-            End If
-        Next
-
-        buffer.WriteInt32(i)
-        buffer.WriteBlock(NpcsData)
-
-        i = 0
-
-        For x = 0 To MAX_SHOPS
-            If Shop(x).Name.Trim.Length > 0 Then
-                i = i + 1
-            End If
-        Next
-
-        buffer.WriteInt32(i)
-        buffer.WriteBlock(ShopsData)
-
-        i = 0
-
-        For x = 0 To MAX_SKILLS
-            If Skill(x).Name.Trim.Length > 0 Then
-                i = i + 1
-            End If
-        Next
-
-        buffer.WriteInt32(i)
-        buffer.WriteBlock(SkillsData)
-
-        i = 0
-
-        For x = 0 To MAX_RESOURCES
-            If Resource(x).Name.Trim.Length > 0 Then
-                i = i + 1
-            End If
-        Next
-
-        buffer.WriteInt32(i)
-        buffer.WriteBlock(ResourcesData)
-
-        data = Compression.CompressBytes(buffer.ToArray)
-
-        buffer = New ByteStream(4)
-
-        buffer.WriteInt32(ServerPackets.SGameData)
-
-        AddDebug("Sent SMSG: SGameData")
-
-        buffer.WriteBlock(data)
-
-        Socket.SendDataTo(index, buffer.Data, buffer.Head)
-
-        buffer.Dispose()
     End Sub
 
     Sub SayMsg_Global(index As Integer, Message As String, SayColour As Integer)

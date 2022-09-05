@@ -204,7 +204,7 @@ Public Class frmEditor_Map
 
         lstNpc.Items.Clear()
 
-        For n = 0 To MAX_MAP_NPCS
+        For n = 1 To MAX_MAP_NPCS
             If Map.Npc(n) > 0 Then
                 lstNpc.Items.Add(n & ": " & Npc(Map.Npc(n)).Name)
             Else
@@ -538,7 +538,7 @@ Public Class frmEditor_Map
 
         lstMapNpc.Items.Clear()
         
-        For x = 0 To MAX_MAP_NPCS
+        For x = 1 To MAX_MAP_NPCS
              lstMapNpc.Items.Add(X & ": " & Trim$(Npc(Map.Npc(X)).Name))
         Next
 

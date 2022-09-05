@@ -84,10 +84,6 @@ Friend Module C_Housing
     End Sub
 
     Friend Sub ClearChanged_House()
-        For i = 0 To MAX_HOUSES
-            HouseChanged(i) = Nothing
-        Next i
-
         ReDim HouseChanged(MAX_HOUSES)
     End Sub
 

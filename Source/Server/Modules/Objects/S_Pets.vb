@@ -52,7 +52,7 @@ Module S_Pets
         writer.WriteByte(Pet(petNum).StatType)
         writer.WriteByte(Pet(petNum).LevelingType)
 
-        For i = 0 To modEnumerators.StatType.Count - 1
+        For i = 0 To StatType.Count - 1
             writer.WriteByte(Pet(petNum).Stat(i))
         Next
 
@@ -498,7 +498,7 @@ Module S_Pets
 
         'Search For Target First
         ' Check for an npc
-        For i = 0 To MAX_MAP_NPCS
+        For i = 1 To MAX_MAP_NPCS
             If MapNpc(GetPlayerMap(index)).Npc(i).Num > 0 AndAlso MapNpc(GetPlayerMap(index)).Npc(i).X = x AndAlso MapNpc(GetPlayerMap(index)).Npc(i).Y = y Then
                 If TempPlayer(index).PetTarget = i AndAlso TempPlayer(index).PetTargetType = TargetType.Npc Then
                     ' Change target
@@ -688,7 +688,7 @@ Module S_Pets
                             Next
 
                             If TempPlayer(playerindex).PetTargetType = 0 Then
-                                For i = 0 To MAX_MAP_NPCS
+                                For i = 1 To MAX_MAP_NPCS
 
                                     If TempPlayer(playerindex).PetTargetType > 0 Then Exit For
                                     If PetAlive(playerindex) Then
@@ -965,7 +965,7 @@ Module S_Pets
 
         PlayerMsg(index, "You released your pet!", ColorType.BrightGreen)
 
-        For i = 0 To MAX_MAP_NPCS
+        For i = 1 To MAX_MAP_NPCS
             If MapNpc(GetPlayerMap(index)).Npc(i).Vital(VitalType.HP) > 0 Then
                 If MapNpc(GetPlayerMap(index)).Npc(i).TargetType = TargetType.Pet Then
                     If MapNpc(GetPlayerMap(index)).Npc(i).Target = index Then
@@ -1113,7 +1113,7 @@ Module S_Pets
                     Next
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 0 To MAX_MAP_NPCS
+                    For i = 1 To MAX_MAP_NPCS
                         If (MapNpc(mapNum).Npc(i).Num > 0) AndAlso (MapNpc(mapNum).Npc(i).X = GetPetX(index)) AndAlso (MapNpc(mapNum).Npc(i).Y = GetPetY(index) - 1) Then
                             CanPetMove = False
                             Exit Function
@@ -1154,7 +1154,7 @@ Module S_Pets
                     Next
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 0 To MAX_MAP_NPCS
+                    For i = 1 To MAX_MAP_NPCS
                         If (MapNpc(mapNum).Npc(i).Num > 0) AndAlso (MapNpc(mapNum).Npc(i).X = GetPetX(index)) AndAlso (MapNpc(mapNum).Npc(i).Y = GetPetY(index) + 1) Then
                             CanPetMove = False
                             Exit Function
@@ -1195,7 +1195,7 @@ Module S_Pets
                     Next
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 0 To MAX_MAP_NPCS
+                    For i = 1 To MAX_MAP_NPCS
                         If (MapNpc(mapNum).Npc(i).Num > 0) AndAlso (MapNpc(mapNum).Npc(i).X = GetPetX(index) - 1) AndAlso (MapNpc(mapNum).Npc(i).Y = GetPetY(index)) Then
                             CanPetMove = False
                             Exit Function
@@ -1236,7 +1236,7 @@ Module S_Pets
                     Next
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 0 To MAX_MAP_NPCS
+                    For i = 1 To MAX_MAP_NPCS
                         If (MapNpc(mapNum).Npc(i).Num > 0) AndAlso (MapNpc(mapNum).Npc(i).X = GetPetX(index) + 1) AndAlso (MapNpc(mapNum).Npc(i).Y = GetPetY(index)) Then
                             CanPetMove = False
                             Exit Function
@@ -2112,7 +2112,7 @@ Module S_Pets
             ' Now check for guard ai and if so have all onmap guards come after'm
             If Npc(MapNpc(mapNum).Npc(mapnpcnum).Num).Behaviour = NpcBehavior.Guard Then
 
-                For i = 0 To MAX_MAP_NPCS
+                For i = 1 To MAX_MAP_NPCS
 
                     If MapNpc(mapNum).Npc(i).Num = MapNpc(mapNum).Npc(mapnpcnum).Num Then
                         MapNpc(mapNum).Npc(i).Target = attacker
@@ -3024,10 +3024,10 @@ Module S_Pets
             Case 0 ' self-cast target
                 Select Case Skill(skillnum).Type
                     Case SkillType.HealHp
-                        SkillPet_Effect(modEnumerators.VitalType.HP, True, index, vital, skillnum)
+                        SkillPet_Effect(Core.VitalType.HP, True, index, vital, skillnum)
                         didCast = True
                     Case SkillType.HealMp
-                        SkillPet_Effect(modEnumerators.VitalType.MP, True, index, vital, skillnum)
+                        SkillPet_Effect(Core.VitalType.MP, True, index, vital, skillnum)
                         didCast = True
                 End Select
 
@@ -3086,8 +3086,8 @@ Module S_Pets
                             End If
                         Next
 
-                        For i = 0 To MAX_MAP_NPCS
-                            If MapNpc(mapNum).Npc(i).Num > 0 AndAlso MapNpc(mapNum).Npc(i).Vital(modEnumerators.VitalType.HP) > 0 Then
+                        For i = 1 To MAX_MAP_NPCS
+                            If MapNpc(mapNum).Npc(i).Num > 0 AndAlso MapNpc(mapNum).Npc(i).Vital(Core.VitalType.HP) > 0 Then
                                 If IsInRange(aoE, x, y, MapNpc(mapNum).Npc(i).X, MapNpc(mapNum).Npc(i).Y) Then
                                     If CanPetAttackNpc(index, i, True) Then
                                         SendAnimation(mapNum, Skill(skillnum).SkillAnim, 0, 0, TargetType.Npc, i)
@@ -3100,13 +3100,13 @@ Module S_Pets
                     Case SkillType.HealHp, SkillType.HealMp, SkillType.DamageMp
 
                         If Skill(skillnum).Type = SkillType.HealHp Then
-                            vitalType = modEnumerators.VitalType.HP
+                            vitalType = Core.VitalType.HP
                             increment = True
                         ElseIf Skill(skillnum).Type = SkillType.HealMp Then
-                            vitalType = modEnumerators.VitalType.MP
+                            vitalType = Core.VitalType.MP
                             increment = True
                         ElseIf Skill(skillnum).Type = SkillType.DamageMp Then
-                            vitalType = modEnumerators.VitalType.MP
+                            vitalType = Core.VitalType.MP
                             increment = False
                         End If
 
@@ -3182,13 +3182,13 @@ Module S_Pets
                     Case SkillType.DamageMp, SkillType.HealMp, SkillType.HealHp
 
                         If Skill(skillnum).Type = SkillType.DamageMp Then
-                            vitalType = modEnumerators.VitalType.MP
+                            vitalType = Core.VitalType.MP
                             increment = False
                         ElseIf Skill(skillnum).Type = SkillType.HealMp Then
-                            vitalType = modEnumerators.VitalType.MP
+                            vitalType = Core.VitalType.MP
                             increment = True
                         ElseIf Skill(skillnum).Type = SkillType.HealHp Then
-                            vitalType = modEnumerators.VitalType.HP
+                            vitalType = Enumerations.VitalType.HP
                             increment = True
                         End If
 
@@ -3234,9 +3234,9 @@ Module S_Pets
         End Select
 
         If didCast Then
-            If takeMana Then SetPetVital(index, modEnumerators.VitalType.MP, GetPetVital(index, modEnumerators.VitalType.MP) - mpCost)
-            SendPetVital(index, modEnumerators.VitalType.MP)
-            SendPetVital(index, modEnumerators.VitalType.HP)
+            If takeMana Then SetPetVital(index, Core.VitalType.MP, GetPetVital(index, Core.VitalType.MP) - mpCost)
+            SendPetVital(index, Core.VitalType.MP)
+            SendPetVital(index, Core.VitalType.HP)
 
             TempPlayer(index).PetSkillCd(skillslot) = GetTimeMs() + (Skill(skillnum).CdTime * 1000)
 
@@ -3886,9 +3886,6 @@ Module S_Pets
     End Sub
 
     Function GetPetMaxVital(index As Integer, vital As VitalType) As Integer
-
-        If index > MAX_PLAYERS Then Exit Function
-
         Select Case vital
             Case VitalType.HP
                 GetPetMaxVital = ((Player(index).Pet.Level * 4) + (Player(index).Pet.Stat(StatType.Endurance) * 10)) + 150

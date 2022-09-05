@@ -92,7 +92,6 @@ Friend Module S_Resources
     End Sub
 
     Sub ClearResource(index As Integer)
-        Resource(index) = Nothing
         Resource(index).Name = ""
         Resource(index).EmptyMessage = ""
         Resource(index).SuccessMessage = ""

@@ -161,7 +161,7 @@ Friend Module S_Items
     Sub CheckItems()
         Dim i As Integer
 
-       For i = 0 To MAX_ITEMS
+        For i = 0 To MAX_ITEMS
 
             If Not File.Exists(Paths.Item(i)) Then
                 SaveItem(i)
@@ -172,7 +172,6 @@ Friend Module S_Items
     End Sub
 
     Sub ClearItem(index As Integer)
-        Item(index) = Nothing
         Item(index).Name = ""
         Item(index).Description = ""
 
@@ -182,11 +181,17 @@ Friend Module S_Items
             ReDim Item(i).FurnitureBlocks(3, 3)
             ReDim Item(i).FurnitureFringe(3, 3)
         Next
-
     End Sub
 
     Sub ClearItems()
-       For i = 0 To MAX_ITEMS
+        For i = 0 To MAX_ITEMS
+            ReDim Item(i).Add_Stat(StatType.Count - 1)
+            ReDim Item(i).Stat_Req(StatType.Count - 1)
+            ReDim Item(i).FurnitureBlocks(3, 3)
+            ReDim Item(i).FurnitureFringe(3, 3)
+        Next
+
+        For i = 0 To MAX_ITEMS
             ClearItem(i)
         Next
     End Sub
@@ -240,7 +245,7 @@ Friend Module S_Items
         buffer.WriteInt32(Item(itemNum).SubType)
 
         buffer.WriteInt32(Item(itemNum).ItemLevel)
-        'Housing
+
         buffer.WriteInt32(Item(itemNum).FurnitureWidth)
         buffer.WriteInt32(Item(itemNum).FurnitureHeight)
 
@@ -270,7 +275,7 @@ Friend Module S_Items
 
         AddDebug("Sent SMSG: SMapItemData")
 
-       For i = 0 To MAX_MAP_ITEMS
+       For i = 1 To MAX_MAP_ITEMS
             buffer.WriteInt32(MapItem(mapNum, i).Num)
             buffer.WriteInt32(MapItem(mapNum, i).Value)
             buffer.WriteInt32(MapItem(mapNum, i).X)
@@ -291,7 +296,7 @@ Friend Module S_Items
 
         AddDebug("Sent SMSG: SMapItemData To All")
 
-       For i = 0 To MAX_MAP_ITEMS
+       For i = 1 To MAX_MAP_ITEMS
             buffer.WriteInt32(MapItem(mapNum, i).Num)
             buffer.WriteInt32(MapItem(mapNum, i).Value)
             buffer.WriteInt32(MapItem(mapNum, i).X)
@@ -327,7 +332,7 @@ Friend Module S_Items
         i = MapItemSlot
 
         If i <> -1 Then
-            If itemNum > 0 AndAlso itemNum <= MAX_ITEMS Then
+            If itemnum > 0 AndAlso itemNum <= MAX_ITEMS Then
                 MapItem(mapNum, i).Num = itemNum
                 MapItem(mapNum, i).Value = ItemVal
                 MapItem(mapNum, i).X = x
@@ -358,7 +363,7 @@ Friend Module S_Items
         ' Check for subscript out of range
         If mapNum < 0 OrElse mapNum > MAX_CACHED_MAPS Then Exit Function
 
-       For i = 0 To MAX_MAP_ITEMS
+       For i = 1 To MAX_MAP_ITEMS
             If MapItem(mapNum, i).Num = 0 Then
                 FindOpenMapItemSlot = i
                 Exit Function
@@ -409,12 +414,16 @@ Friend Module S_Items
 
 #Region "Incoming Packets"
 
-    Sub Packet_RequestItems(index As Integer, ByRef data() As Byte)
+    Sub Packet_RequestItem(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestItems")
+        Dim Buffer = New ByteStream(data), n As Integer
 
+        n = Buffer.ReadInt32
         TempPlayer(index).Editor = -1
+        
+        If n < 0 Or n > MAX_ITEMS Then Exit Sub
 
-        SendItems(index)
+        SendUpdateItemTo(index, n)
     End Sub
 
     Sub Packet_EditItem(index As Integer, ByRef data() As Byte)
@@ -433,6 +442,8 @@ Friend Module S_Items
         End If
 
         TempPlayer(index).Editor = EditorType.Item
+
+        SendItems(index)
 
         Dim Buffer = New ByteStream(4)
 

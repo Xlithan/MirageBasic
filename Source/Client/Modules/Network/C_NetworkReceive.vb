@@ -746,14 +746,9 @@ Module C_NetworkReceive
        For i = 0 To MAX_JOBS
             With Job(i)
                 ReDim .Stat(StatType.Count - 1)
-                ReDim .Vital(VitalType.Count - 1)
 
                 .Name = Trim(buffer.ReadString)
                 .Desc = Trim$(buffer.ReadString)
-
-                .Vital(VitalType.HP) = buffer.ReadInt32
-                .Vital(VitalType.MP) = buffer.ReadInt32
-                .Vital(VitalType.SP) = buffer.ReadInt32
 
                 ' get array size
                 z = buffer.ReadInt32

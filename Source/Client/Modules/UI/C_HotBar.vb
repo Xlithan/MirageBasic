@@ -99,6 +99,7 @@ Friend Module C_HotBar
                 num = Player(Myindex).Skill(Player(Myindex).Hotbar(i).Slot).Num
 
                 If Num > 0 Then
+                    StreamSkill(num)
                     pic = Skill(num).Icon
 
                     If SkillIconsGfxInfo(pic).IsLoaded = False Then
@@ -136,6 +137,10 @@ Friend Module C_HotBar
                 num = Player(Myindex).Inv(Player(Myindex).Hotbar(i).Slot).Num
 
                 If num > 0 Then
+                    If num > 0 and Item(num).Name = "" And Item_Changed(num) = False Then
+                        Item_Changed(num) = True
+                        SendRequestItem(num)
+                    End If
                     pic = Item(num).Pic
 
                     If ItemsGfxInfo(pic).IsLoaded = False Then

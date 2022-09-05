@@ -1,7 +1,9 @@
 ﻿Imports System
+Imports System.Data
 Imports System.Diagnostics
 Imports System.IO
 Imports System.Net
+Imports System.Runtime.InteropServices
 Imports MirageBasic.Core
 Imports MirageBasic.Core.Database
 
@@ -58,17 +60,8 @@ Module S_General
         End If
         ' END LOAD ENCRYPTION
 
-        ReDim Map(MAX_CACHED_MAPS)
-
-        ReDim MapNpc(MAX_CACHED_MAPS)
-        For i = 0 To MAX_CACHED_MAPS
-            ReDim MapNpc(i).Npc(MAX_MAP_NPCS)
-            ReDim Map(i).Npc(MAX_MAP_NPCS)
-        Next
-
-        'quests
-        ReDim Quest(MAX_QUESTS)
-        ClearQuests()
+        ' Get that network READY SUN! ~ SpiceyWOlf
+        InitNetwork()
 
         'event
         ReDim Switches(MAX_SWITCHES)
@@ -77,67 +70,6 @@ Module S_General
 
         'Housing
         ReDim HouseConfig(MAX_HOUSES)
-
-        For i = 0 To MAX_CACHED_MAPS
-            For x = 0 To MAX_MAP_NPCS
-                ReDim MapNpc(i).Npc(x).Vital(VitalType.Count)
-            Next
-        Next
-
-        ReDim Bank(MAX_PLAYERS)
-        ReDim Job(MAX_JOBS)
-
-        For i = 0 To MAX_PLAYERS
-            ReDim Bank(i).Item(MAX_BANK)
-            ReDim Bank(i).ItemRand(MAX_BANK)
-            For x = 1 To MAX_BANK
-                ReDim Bank(i).ItemRand(x).Stat(StatType.Count - 1)
-            Next
-        Next
-
-        ReDim Player(MAX_PLAYERS)
-        ReDim TempPlayer(MAX_PLAYERS)
-
-        For i = 0 To MAX_PLAYERS
-            ReDim Player(i).Switches(MAX_SWITCHES)
-            ReDim Player(i).Variables(NAX_VARIABLES)
-            ReDim Player(i).Vital(VitalType.Count - 1)
-            ReDim Player(i).Stat(StatType.Count - 1)
-            ReDim Player(i).Equipment(EquipmentType.Count - 1)
-            ReDim Player(i).Inv(MAX_INV)
-            ReDim Player(i).Skill(MAX_PLAYER_SKILLS)
-            ReDim Player(i).PlayerQuest(MAX_QUESTS)
-
-            ReDim Player(i).RandEquip(EquipmentType.Count - 1)
-            ReDim Player(i).RandInv(MAX_INV)
-            For y = 0 To EquipmentType.Count - 1
-                ReDim Player(i).RandEquip(y).Stat(StatType.Count - 1)
-            Next
-            For y = 1 To MAX_INV
-                ReDim Player(i).RandInv(y).Stat(StatType.Count - 1)
-            Next
-        Next
-
-        For i = 0 To MAX_PLAYERS
-            ReDim TempPlayer(i).SkillCd(MAX_PLAYER_SKILLS)
-            ReDim TempPlayer(i).PetSkillCd(4)
-            ReDim TempPlayer(i).TradeOffer(MAX_INV)
-        Next
-
-        ReDim Job(MAX_JOBS)
-        For i = 0 To MAX_JOBS
-            ReDim Job(i).Stat(StatType.Count - 1)
-            ReDim Job(i).StartItem(5)
-            ReDim Job(i).StartValue(5)
-        Next
-
-        For i = 0 To MAX_ITEMS
-            ReDim Item(i).Add_Stat(StatType.Count - 1)
-            ReDim Item(i).Stat_Req(StatType.Count - 1)
-            ReDim Item(i).FurnitureBlocks(3, 3)
-            ReDim Item(i).FurnitureFringe(3, 3)
-        Next
-        ReDim Npc(MAX_NPCS).Stat(StatType.Count - 1)
 
         ReDim Shop(MAX_SHOPS).TradeItem(MAX_TRADES)
 
@@ -148,23 +80,6 @@ Module S_General
 
         ReDim MapProjectile(MAX_CACHED_MAPS, MAX_PROJECTILES)
         ReDim Projectile(MAX_PROJECTILES)
-
-        'parties
-        ClearParties()
-
-        'pets
-        ReDim Pet(MAX_PETS)
-        ClearPets()
-
-        ' Get that network READY SUN! ~ SpiceyWOlf
-        InitNetwork()
-
-        ' Init all the player sockets
-        Console.WriteLine("Initializing Players...")
-
-        For x = 0 To MAX_PLAYERS
-            ClearPlayer(x)
-        Next
 
         ' Serves as a constructor
         ClearGameData()
@@ -236,7 +151,7 @@ Module S_General
         SaveAllPlayersOnline()
 
         Console.WriteLine("Unloading players...")
-        For i As Integer = 0 To MAX_PLAYERS
+        For i As Integer = 1 To MAX_PLAYERS
             SendLeftGame(i)
             LeftGame(i)
         Next
@@ -248,11 +163,22 @@ Module S_General
     End Sub
 
     Friend Sub ClearGameData()
+        Dim i As Integer
+
+        ' Init all the player sockets
+        Console.WriteLine("Clearing Players...")
+
+        For i = 1 To MAX_PLAYERS
+            ClearPlayer(i)
+        Next
+
+        ClearParties()
+
         Console.WriteLine("Clearing Jobs...") : ClearJobs()
         Console.WriteLine("Clearing Maps...") : ClearMaps()
         Console.WriteLine("Clearing Map Items...") : ClearMapItems()
-        Console.WriteLine("Clearing Map Npc's...") : ClearAllMapNpcs()
-        Console.WriteLine("Clearing Npc's...") : ClearNpcs()
+        Console.WriteLine("Clearing Map NPC's...") : ClearAllMapNpcs()
+        Console.WriteLine("Clearing NPC's...") : ClearNpcs()
         Console.WriteLine("Clearing Resources...") : ClearResources()
         Console.WriteLine("Clearing Items...") : ClearItems()
         Console.WriteLine("Clearing Shops...") : ClearShops()
@@ -269,7 +195,7 @@ Module S_General
         Console.WriteLine("Loading Jobs...") : LoadJobs()
         Console.WriteLine("Loading Maps...") : LoadMaps()
         Console.WriteLine("Loading Items...") : LoadItems()
-        Console.WriteLine("Loading Npc's...") : LoadNpcs()
+        Console.WriteLine("Loading NPC's...") : LoadNpcs()
         Console.WriteLine("Loading Resources...") : LoadResources()
         Console.WriteLine("Loading Shops...") : LoadShops()
         Console.WriteLine("Loading Skills...") : LoadSkills()
@@ -282,7 +208,7 @@ Module S_General
         Console.WriteLine("Loading Projectiles...") : LoadProjectile()
         Console.WriteLine("Loading Recipes...") : LoadRecipes()
         Console.WriteLine("Loading Pets...") : LoadPets()
-        Console.WriteLine("Loading character list...") : CharactersList = New CharacterList().Load()
+        Console.WriteLine("Loading Character List...") : CharactersList = New CharacterList().Load()
     End Sub
 
     ' Used for checking validity of names

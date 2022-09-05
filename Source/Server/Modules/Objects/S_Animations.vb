@@ -99,7 +99,6 @@ Friend Module S_Animations
     End Sub
 
     Sub ClearAnimation(index As Integer)
-        Animation(index) = Nothing
         Animation(index).Name = ""
         Animation(index).Sound = ""
         ReDim Animation(index).Sprite(1)

@@ -26,9 +26,6 @@ Partial Class FrmAdmin
         Me.btnRespawn = New System.Windows.Forms.Button()
         Me.btnMapReport = New System.Windows.Forms.Button()
         Me.btnALoc = New System.Windows.Forms.Button()
-        Me.btnSpawnItem = New System.Windows.Forms.Button()
-        Me.lblSpawnItemAmount = New System.Windows.Forms.Label()
-        Me.lblItemSpawn = New System.Windows.Forms.Label()
         Me.btnAdminSetSprite = New System.Windows.Forms.Button()
         Me.btnAdminWarpTo = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -52,9 +49,6 @@ Partial Class FrmAdmin
         Me.cmbAccess = New System.Windows.Forms.ComboBox()
         Me.tabMapList = New System.Windows.Forms.TabPage()
         Me.tabMapTools = New System.Windows.Forms.TabPage()
-        Me.btnRefreshItems = New System.Windows.Forms.Button()
-        Me.nudSpawnItemAmount = New System.Windows.Forms.NumericUpDown()
-        Me.cmbSpawnItem = New System.Windows.Forms.ComboBox()
         Me.tabEditors = New System.Windows.Forms.TabPage()
         Me.btnPetEditor = New System.Windows.Forms.Button()
         Me.btnJobEditor = New System.Windows.Forms.Button()
@@ -75,7 +69,6 @@ Partial Class FrmAdmin
         CType(Me.nudAdminMap,System.ComponentModel.ISupportInitialize).BeginInit
         Me.tabMapList.SuspendLayout
         Me.tabMapTools.SuspendLayout
-        CType(Me.nudSpawnItemAmount,System.ComponentModel.ISupportInitialize).BeginInit
         Me.tabEditors.SuspendLayout
         Me.SuspendLayout
         '
@@ -108,36 +101,6 @@ Partial Class FrmAdmin
         Me.btnALoc.TabIndex = 31
         Me.btnALoc.Text = "Location"
         Me.btnALoc.UseVisualStyleBackColor = true
-        '
-        'btnSpawnItem
-        '
-        Me.btnSpawnItem.Location = New System.Drawing.Point(16, 167)
-        Me.btnSpawnItem.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnSpawnItem.Name = "btnSpawnItem"
-        Me.btnSpawnItem.Size = New System.Drawing.Size(266, 25)
-        Me.btnSpawnItem.TabIndex = 29
-        Me.btnSpawnItem.Text = "Spawn Item"
-        Me.btnSpawnItem.UseVisualStyleBackColor = true
-        '
-        'lblSpawnItemAmount
-        '
-        Me.lblSpawnItemAmount.AutoSize = true
-        Me.lblSpawnItemAmount.Location = New System.Drawing.Point(36, 140)
-        Me.lblSpawnItemAmount.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblSpawnItemAmount.Name = "lblSpawnItemAmount"
-        Me.lblSpawnItemAmount.Size = New System.Drawing.Size(54, 15)
-        Me.lblSpawnItemAmount.TabIndex = 26
-        Me.lblSpawnItemAmount.Text = "Amount:"
-        '
-        'lblItemSpawn
-        '
-        Me.lblItemSpawn.AutoSize = true
-        Me.lblItemSpawn.Location = New System.Drawing.Point(13, 110)
-        Me.lblItemSpawn.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblItemSpawn.Name = "lblItemSpawn"
-        Me.lblItemSpawn.Size = New System.Drawing.Size(72, 15)
-        Me.lblItemSpawn.TabIndex = 25
-        Me.lblItemSpawn.Text = "Spawn Item:"
         '
         'btnAdminSetSprite
         '
@@ -373,14 +336,8 @@ Partial Class FrmAdmin
         '
         'tabMapTools
         '
-        Me.tabMapTools.Controls.Add(Me.btnRefreshItems)
-        Me.tabMapTools.Controls.Add(Me.nudSpawnItemAmount)
-        Me.tabMapTools.Controls.Add(Me.cmbSpawnItem)
         Me.tabMapTools.Controls.Add(Me.btnRespawn)
         Me.tabMapTools.Controls.Add(Me.btnALoc)
-        Me.tabMapTools.Controls.Add(Me.lblItemSpawn)
-        Me.tabMapTools.Controls.Add(Me.lblSpawnItemAmount)
-        Me.tabMapTools.Controls.Add(Me.btnSpawnItem)
         Me.tabMapTools.Location = New System.Drawing.Point(4, 24)
         Me.tabMapTools.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.tabMapTools.Name = "tabMapTools"
@@ -389,34 +346,6 @@ Partial Class FrmAdmin
         Me.tabMapTools.TabIndex = 3
         Me.tabMapTools.Text = "Map Tools"
         Me.tabMapTools.UseVisualStyleBackColor = true
-        '
-        'btnRefreshItems
-        '
-        Me.btnRefreshItems.Location = New System.Drawing.Point(16, 198)
-        Me.btnRefreshItems.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnRefreshItems.Name = "btnRefreshItems"
-        Me.btnRefreshItems.Size = New System.Drawing.Size(266, 25)
-        Me.btnRefreshItems.TabIndex = 38
-        Me.btnRefreshItems.Text = "Refresh Items"
-        Me.btnRefreshItems.UseVisualStyleBackColor = true
-        '
-        'nudSpawnItemAmount
-        '
-        Me.nudSpawnItemAmount.Location = New System.Drawing.Point(142, 137)
-        Me.nudSpawnItemAmount.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudSpawnItemAmount.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
-        Me.nudSpawnItemAmount.Name = "nudSpawnItemAmount"
-        Me.nudSpawnItemAmount.Size = New System.Drawing.Size(140, 23)
-        Me.nudSpawnItemAmount.TabIndex = 37
-        '
-        'cmbSpawnItem
-        '
-        Me.cmbSpawnItem.FormattingEnabled = true
-        Me.cmbSpawnItem.Location = New System.Drawing.Point(97, 106)
-        Me.cmbSpawnItem.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbSpawnItem.Name = "cmbSpawnItem"
-        Me.cmbSpawnItem.Size = New System.Drawing.Size(185, 23)
-        Me.cmbSpawnItem.TabIndex = 36
         '
         'tabEditors
         '
@@ -594,8 +523,6 @@ Partial Class FrmAdmin
         CType(Me.nudAdminMap,System.ComponentModel.ISupportInitialize).EndInit
         Me.tabMapList.ResumeLayout(false)
         Me.tabMapTools.ResumeLayout(false)
-        Me.tabMapTools.PerformLayout
-        CType(Me.nudSpawnItemAmount,System.ComponentModel.ISupportInitialize).EndInit
         Me.tabEditors.ResumeLayout(false)
         Me.ResumeLayout(false)
 
@@ -603,9 +530,6 @@ End Sub
     Friend WithEvents btnRespawn As Windows.Forms.Button
     Friend WithEvents btnMapReport As Windows.Forms.Button
     Friend WithEvents btnALoc As Windows.Forms.Button
-    Friend WithEvents btnSpawnItem As Windows.Forms.Button
-    Friend WithEvents lblSpawnItemAmount As Windows.Forms.Label
-    Friend WithEvents lblItemSpawn As Windows.Forms.Label
     Friend WithEvents btnAdminSetSprite As Windows.Forms.Button
     Friend WithEvents btnAdminWarpTo As Windows.Forms.Button
     Friend WithEvents Label5 As Windows.Forms.Label
@@ -626,11 +550,9 @@ End Sub
     Friend WithEvents tabMapList As Windows.Forms.TabPage
     Friend WithEvents tabMapTools As Windows.Forms.TabPage
     Friend WithEvents cmbAccess As Windows.Forms.ComboBox
-    Friend WithEvents cmbSpawnItem As Windows.Forms.ComboBox
     Friend WithEvents nudAdminSprite As Windows.Forms.NumericUpDown
     Friend WithEvents nudAdminMap As Windows.Forms.NumericUpDown
     Friend WithEvents btnLevelUp As Windows.Forms.Button
-    Friend WithEvents nudSpawnItemAmount As Windows.Forms.NumericUpDown
     Friend WithEvents tabEditors As Windows.Forms.TabPage
     Friend WithEvents btnPetEditor As Windows.Forms.Button
     Friend WithEvents btnJobEditor As Windows.Forms.Button
@@ -645,5 +567,4 @@ End Sub
     Friend WithEvents btnSkillEditor As Windows.Forms.Button
     Friend WithEvents btnShopEditor As Windows.Forms.Button
     Friend WithEvents btnAnimationEditor As Windows.Forms.Button
-    Friend WithEvents btnRefreshItems As Button
 End Class

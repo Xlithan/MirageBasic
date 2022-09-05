@@ -2,7 +2,7 @@
 Imports System.Reflection
 
 Namespace Paths
-    Public Module modPaths
+    Public Module Paths
 
         ''' <summary> Returns app directory </summary>
         Public ReadOnly Property Local As String

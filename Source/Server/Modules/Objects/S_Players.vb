@@ -10,7 +10,7 @@ Module S_Players
 
         If Not IsSkill Then
             ' Check attack timer
-            If GetPlayerEquipment(Attacker, modEnumerators.EquipmentType.Weapon) > 0 Then
+            If GetPlayerEquipment(Attacker, Core.EquipmentType.Weapon) > 0 Then
                 If GetTimeMs() < TempPlayer(Attacker).AttackTimer + Item(GetPlayerEquipment(Attacker, EquipmentType.Weapon)).Speed Then Exit Function
             Else
                 If GetTimeMs() < TempPlayer(Attacker).AttackTimer + 1000 Then Exit Function
@@ -925,7 +925,7 @@ Module S_Players
 
         If Map(MapNum).Instanced = 1 And NoInstance = False Then
             MapNum = CreateInstance(MapNum) ' AndAlso MAP_NUMBER_MASK)
-            If MapNum = -1 Then
+            If MapNum = 0 Then
                 'Couldn't create instanced map!
                 MapNum = GetPlayerMap(index)
                 X = GetPlayerX(index)
@@ -1017,7 +1017,7 @@ Module S_Players
             End If
 
             ' Regenerate all NPCs' health
-            For i = 0 To MAX_MAP_NPCS
+            For i = 1 To MAX_MAP_NPCS
 
                 If MapNpc(OldMap).Npc(i).Num > 0 Then
                     MapNpc(OldMap).Npc(i).Vital(VitalType.HP) = GetNpcMaxVital(MapNpc(OldMap).Npc(i).Num, VitalType.HP)
@@ -1227,7 +1227,7 @@ Module S_Players
                 VitalType = .Data1
                 amount = .Data2
                 If Not GetPlayerVital(index, VitalType) = GetPlayerMaxVital(index, VitalType) Then
-                    If VitalType = modEnumerators.VitalType.HP Then
+                    If VitalType = Core.VitalType.HP Then
                         Colour = ColorType.BrightGreen
                     Else
                         Colour = ColorType.BrightBlue
@@ -1246,13 +1246,13 @@ Module S_Players
             If .Type = TileType.Trap Then
                 amount = .Data1
                 SendActionMsg(GetPlayerMap(index), "-" & amount, ColorType.BrightRed, ActionMsgType.Scroll, GetPlayerX(index) * 32, GetPlayerY(index) * 32, 1)
-                If GetPlayerVital(index, modEnumerators.VitalType.HP) - amount < 0 Then
+                If GetPlayerVital(index, Core.VitalType.HP) - amount < 0 Then
                     KillPlayer(index)
                     PlayerMsg(index, "You've been killed by a trap.", ColorType.BrightRed)
                 Else
-                    SetPlayerVital(index, modEnumerators.VitalType.HP, GetPlayerVital(index, modEnumerators.VitalType.HP) - amount)
+                    SetPlayerVital(index, Core.VitalType.HP, GetPlayerVital(index, Core.VitalType.HP) - amount)
                     PlayerMsg(index, "You've been injured by a trap.", ColorType.BrightRed)
-                    SendVital(index, modEnumerators.VitalType.HP)
+                    SendVital(index, Core.VitalType.HP)
                     ' send vitals to party if in one
                     If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
                 End If
@@ -1398,7 +1398,7 @@ Module S_Players
         If Not IsPlaying(index) Then Exit Sub
         mapNum = GetPlayerMap(index)
 
-        For i = 0 To MAX_MAP_ITEMS
+        For i = 1 To MAX_MAP_ITEMS
 
             ' See if theres even an item here
             If (MapItem(mapNum, i).Num > 0) And (MapItem(mapNum, i).Num <= MAX_ITEMS) Then
@@ -1503,7 +1503,7 @@ Module S_Players
             End If
         Next
 
-        FindOpenInvSlot = 0
+        FindOpenInvSlot = -1
     End Function
 
     Function TakeInvItem(index As Integer, ItemNum As Integer, ItemVal As Integer) As Boolean
@@ -2310,7 +2310,7 @@ Module S_Players
         For i = 0 To EquipmentType.Count - 1
             itemNum = GetPlayerEquipment(index, i)
 
-            If itemNum > 0 Then
+            If itemnum > 0 Then
 
                 Select Case i
                     Case EquipmentType.Weapon
@@ -2408,7 +2408,6 @@ Module S_Players
         ' Send all the required game data to the user.
         SendTotalOnlineTo(index)
         CheckEquippedItems(index)
-        SendGameData(index)
         SendInventory(index)
         SendWornEquipment(index)
         SendMapEquipment(index)
@@ -2423,7 +2422,6 @@ Module S_Players
         SendRecipes(index)
         SendStats(index)
         SendJoinMap(index)
-        SendHouseConfigs(index)
         SendPets(index)
         SendUpdatePlayerPet(index, True)
         SendTimeTo(index)
@@ -2498,7 +2496,6 @@ Module S_Players
 
             Console.WriteLine(String.Format("{0} has left {1}!", GetPlayerName(index), Settings.GameName))
 
-            TempPlayer(index) = Nothing
             ReDim TempPlayer(i).SkillCd(MAX_PLAYER_SKILLS)
             ReDim TempPlayer(i).TradeOffer(MAX_INV)
         End If

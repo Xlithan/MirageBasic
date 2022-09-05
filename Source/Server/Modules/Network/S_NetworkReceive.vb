@@ -52,14 +52,14 @@ Module S_NetworkReceive
         Socket.PacketId(ClientPackets.CCheckPing) = AddressOf Packet_CheckPing
         Socket.PacketId(ClientPackets.CUnequip) = AddressOf Packet_Unequip
         Socket.PacketId(ClientPackets.CRequestPlayerData) = AddressOf Packet_RequestPlayerData
-        Socket.PacketId(ClientPackets.CRequestItems) = AddressOf Packet_RequestItems
+        Socket.PacketId(ClientPackets.CRequestItem) = AddressOf Packet_RequestItem
         Socket.PacketId(ClientPackets.CRequestNPCS) = AddressOf Packet_RequestNpcs
         Socket.PacketId(ClientPackets.CRequestResources) = AddressOf Packet_RequestResources
         Socket.PacketId(ClientPackets.CSpawnItem) = AddressOf Packet_SpawnItem
         Socket.PacketId(ClientPackets.CTrainStat) = AddressOf Packet_TrainStat
 
         Socket.PacketId(ClientPackets.CRequestAnimations) = AddressOf Packet_RequestAnimations
-        Socket.PacketId(ClientPackets.CRequestSkills) = AddressOf Packet_RequestSkills
+        Socket.PacketId(ClientPackets.CRequestSkill) = AddressOf Packet_RequestSkill
         Socket.PacketId(ClientPackets.CRequestShops) = AddressOf Packet_RequestShops
         Socket.PacketId(ClientPackets.CRequestLevelUp) = AddressOf Packet_RequestLevelUp
         Socket.PacketId(ClientPackets.CForgetSkill) = AddressOf Packet_ForgetSkill
@@ -427,7 +427,7 @@ Module S_NetworkReceive
 
             Next
 
-            If (Sex < modEnumerators.SexType.Male) OrElse (Sex > modEnumerators.SexType.Female) Then Exit Sub
+            If (Sex < SexType.Male) OrElse (Sex > SexType.Female) Then Exit Sub
 
             If Job < 0 OrElse Job > MAX_JOBS Then Exit Sub
 
@@ -669,7 +669,7 @@ Module S_NetworkReceive
         Next
 
         ' Try to attack a npc
-        For i = 0 To MAX_MAP_NPCS
+        For i = 1 To MAX_MAP_NPCS
             TryPlayerAttackNpc(index, i)
         Next
 
@@ -916,7 +916,7 @@ Module S_NetworkReceive
 
         ReDim Map(mapNum).Tile(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
-        For x = 0 To MAX_MAP_NPCS
+        For x = 1 To MAX_MAP_NPCS
             ClearMapNpc(x, mapNum)
             Map(mapNum).Npc(x) = buffer.ReadInt32
         Next
@@ -1082,7 +1082,7 @@ Module S_NetworkReceive
         Next
 
         ' Clear it all out
-        For i = 0 To MAX_MAP_ITEMS
+        For i = 1 To MAX_MAP_ITEMS
             SpawnItemSlot(i, 0, 0, GetPlayerMap(index), MapItem(GetPlayerMap(index), i).X, MapItem(GetPlayerMap(index), i).Y)
             ClearMapItem(i, GetPlayerMap(index))
         Next
@@ -1135,7 +1135,7 @@ Module S_NetworkReceive
         If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
 
         ' Clear out it all
-        For i = 0 To MAX_MAP_ITEMS
+        For i = 1 To MAX_MAP_ITEMS
             SpawnItemSlot(i, 0, 0, GetPlayerMap(index), MapItem(GetPlayerMap(index), i).X, MapItem(GetPlayerMap(index), i).Y)
             ClearMapItem(i, GetPlayerMap(index))
         Next
@@ -1144,7 +1144,7 @@ Module S_NetworkReceive
         SpawnMapItems(GetPlayerMap(index))
 
         ' Respawn NPCS
-        For i = 0 To MAX_MAP_NPCS
+        For i = 1 To MAX_MAP_NPCS
             SpawnNpc(i, GetPlayerMap(index))
         Next
 
@@ -1351,6 +1351,8 @@ Module S_NetworkReceive
 
         TempPlayer(index).Editor = EditorType.Skill
 
+        SendSkills(index)
+
         Dim Buffer = New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SSkillEditor)
         Socket.SendDataTo(index, Buffer.Data, Buffer.Head)
@@ -1541,7 +1543,7 @@ Module S_NetworkReceive
         Next
 
         ' Check for an item
-        For i = 0 To MAX_MAP_ITEMS
+        For i = 1 To MAX_MAP_ITEMS
 
             If MapItem(GetPlayerMap(index), i).Num > 0 Then
                 If MapItem(GetPlayerMap(index), i).X = x Then
@@ -1555,7 +1557,7 @@ Module S_NetworkReceive
         Next
 
         ' Check for an npc
-        For i = 0 To MAX_MAP_NPCS
+        For i = 1 To MAX_MAP_NPCS
 
             If MapNpc(GetPlayerMap(index)).Npc(i).Num > 0 Then
                 If MapNpc(GetPlayerMap(index)).Npc(i).X = x Then
@@ -1662,6 +1664,7 @@ Module S_NetworkReceive
         Dim buffer As ByteStream
         buffer = New ByteStream(4)
         buffer.WriteInt32(ServerPackets.SSendPing)
+
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
 
         AddDebug("Sent SMSG: SSendPing")
@@ -1733,12 +1736,17 @@ Module S_NetworkReceive
         buffer.Dispose()
     End Sub
 
-    Sub Packet_RequestSkills(index As Integer, ByRef data() As Byte)
-        AddDebug("Recieved CMSG: CRequestSkills")
+    Sub Packet_RequestSkill(index As Integer, ByRef data() As Byte)
+        AddDebug("Recieved CMSG: CRequestSkill")
 
+        Dim Buffer = New ByteStream(data), n As Integer
+
+        n = Buffer.ReadInt32
         TempPlayer(index).Editor = -1
+        
+        If n < 0 Or n > MAX_SKILLS Then Exit Sub
 
-        SendSkills(index)
+        SendUpdateSkillTo(index, n)
     End Sub
 
     Sub Packet_RequestShops(index As Integer, ByRef data() As Byte)
@@ -2054,7 +2062,7 @@ Module S_NetworkReceive
             ' player
             If TempPlayer(index).TradeOffer(i).Num > 0 Then
                 itemNum = Player(index).Inv(TempPlayer(index).TradeOffer(i).Num).Num
-                If itemNum > 0 Then
+                If itemnum > 0 Then
                     ' store temp
                     tmpTradeItem(i).Num = itemNum
                     tmpTradeItem(i).Value = TempPlayer(index).TradeOffer(i).Value
@@ -2065,7 +2073,7 @@ Module S_NetworkReceive
             ' target
             If TempPlayer(tradeTarget).TradeOffer(i).Num > 0 Then
                 itemNum = GetPlayerInvItemNum(tradeTarget, TempPlayer(tradeTarget).TradeOffer(i).Num)
-                If itemNum > 0 Then
+                If itemnum > 0 Then
                     ' store temp
                     tmpTradeItem2(i).Num = itemNum
                     tmpTradeItem2(i).Value = TempPlayer(tradeTarget).TradeOffer(i).Value
@@ -2498,7 +2506,7 @@ Module S_NetworkReceive
 
         ReDim Map(mapNum).Tile(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
-        For x = 0 To MAX_MAP_NPCS
+        For x = 1 To MAX_MAP_NPCS
             ClearMapNpc(x, mapNum)
             Map(mapNum).Npc(x) = buffer.ReadInt32
         Next
@@ -2664,7 +2672,7 @@ Module S_NetworkReceive
         Next
 
         ' Clear out it all
-        For i = 0 To MAX_MAP_ITEMS
+        For i = 1 To MAX_MAP_ITEMS
             SpawnItemSlot(i, 0, 0, GetPlayerMap(index), MapItem(GetPlayerMap(index), i).X, MapItem(GetPlayerMap(index), i).Y)
             ClearMapItem(i, GetPlayerMap(index))
         Next

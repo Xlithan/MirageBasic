@@ -14,10 +14,7 @@ Module C_Shops
 #Region "Database"
 
     Sub ClearShop(index As Integer)
-        Shop(index) = Nothing
-        Shop(index) = New ShopStruct With {
-            .Name = ""
-        }
+        Shop(index).Name = ""
         ReDim Shop(index).TradeItem(MAX_TRADES)
         For x = 0 To MAX_TRADES
             ReDim Shop(index).TradeItem(x)
@@ -169,6 +166,7 @@ Module C_Shops
        For i = 0 To MAX_TRADES
             itemnum = Shop(InShop).TradeItem(i).Item
             If itemnum > 0 AndAlso itemnum <= MAX_ITEMS Then
+               StreamItem(itemnum)
                 itempic = Item(itemnum).Pic
                 If itempic > 0 AndAlso itempic <= NumItems Then
 

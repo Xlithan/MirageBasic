@@ -194,10 +194,11 @@ Module C_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Sub SendRequestSkills()
+    Sub SendRequestSkill(skillNum As Integer)
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CRequestSkills)
+        buffer.WriteInt32(ClientPackets.CRequestSkill)
+        buffer.WriteInt32(skillNum)
 
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()

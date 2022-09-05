@@ -129,7 +129,7 @@ Module C_Banks
        For i = 1 To MAX_BANK
             itemnum = GetBankItemNum(i)
             If itemnum > 0 AndAlso itemnum <= MAX_ITEMS Then
-
+                StreamItem(itemnum)
                 sprite = Item(itemnum).Pic
 
                 If ItemsGfxInfo(sprite).IsLoaded = False Then

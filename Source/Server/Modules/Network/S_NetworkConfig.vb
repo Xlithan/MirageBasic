@@ -32,7 +32,7 @@ Friend Module S_NetworkConfig
     End Function
 
     Function IsMultiAccounts(Index As Integer, Login As String) As Boolean
-        For i As Integer = 0 To GetPlayersOnline()
+        For i As Integer = 1 To GetPlayersOnline()
             If i <> Index then
                 If Player(i).Login.Trim.ToLower() = Login.Trim.ToLower() Then
                     Return True
@@ -43,7 +43,7 @@ Friend Module S_NetworkConfig
     End Function
 
     Friend Sub SendDataToAll(ByRef data() As Byte, head As Integer)
-        For i As Integer = 0 To GetPlayersOnline()
+        For i As Integer = 1 To GetPlayersOnline()
             If IsPlaying(i) Then
                 Socket.SendDataTo(i, data, head)
             End If
@@ -95,29 +95,21 @@ Friend Module S_NetworkConfig
     End Sub
 
     Friend Sub Socket_CrashReport(index As Integer, err As String) Handles Socket.CrashReport
-        Console.WriteLine("There was a network error -> Index[" & index & "]")
+        Console.WriteLine("There was a network error index[" & index & "]")
         Console.WriteLine("Report: " & err)
         LeftGame(index)
     End Sub
 
     Private Sub Socket_TrafficReceived(size As Integer, ByRef data() As Byte) Handles Socket.TrafficReceived
         If DebugTxt = True Then
-            Console.WriteLine("Traffic Received : [Size: " & size & "]")
+            Console.WriteLine("Traffic Received: [Size: " & size & "]")
         End If
-
-        Dim tmpData = data
-        Dim BreakPointDummy As Integer = 0
-        'Put breakline on BreakPointDummy to look at what is contained in data at runtime in the VS logger.
     End Sub
 
     Private Sub Socket_PacketReceived(size As Integer, header As Integer, ByRef data() As Byte) Handles Socket.PacketReceived
         If DebugTxt = True Then
-            Console.WriteLine("Packet Received : [Size: " & size & "| Packet: " & CType(header, ClientPackets).ToString() & "]")
+            Console.WriteLine("Packet Received: [Size: " & size & "| Packet: " & CType(header, ClientPackets).ToString() & "]")
         End If
-
-        Dim tmpData = data
-        Dim BreakPointDummy As Integer = 0
-        'Put breakline on BreakPointDummy to look at what is contained in data at runtime in the VS logger.
     End Sub
 
 #End Region

@@ -187,28 +187,16 @@ Module C_Database
     End Sub
 
     Sub ClearNpc(index As Integer)
-        Npc(index) = Nothing
-        Npc(index) = New NpcStruct With {
-            .Name = "",
-            .AttackSay = ""
-        }
-        For X = 0 To StatType.Count - 1
-            ReDim Npc(index).Stat(x)
-        Next
-
+        ReDim Npc(index).Stat(StatType.Count - 1)
         ReDim Npc(index).DropChance(5)
         ReDim Npc(index).DropItem(5)
         ReDim Npc(index).DropItemValue(5)
-
         ReDim Npc(index).Skill(6)
     End Sub
 
 #End Region
 
     Friend Sub ClearChangedItem()
-       For i = 0 To MAX_ITEMS
-            Item_Changed(i) = Nothing
-        Next i
         ReDim Item_Changed(MAX_ITEMS)
     End Sub
 
@@ -224,8 +212,14 @@ Module C_Database
     End Sub
 
     Sub ClearSkill(index As Integer)
-        Skill(index) = Nothing
         Skill(index).Name = ""
+    End Sub
+
+    Sub StreamSkill(skillNum As Integer)
+        If skillNum > 0 and Item(skillNum).Name = "" And SKill_Loaded(skillNum) = False Then
+            Item_Loaded(skillNum) = True
+            SendRequestSkill(skillNum)
+        End If
     End Sub
 
 #End Region

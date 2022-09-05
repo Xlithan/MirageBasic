@@ -235,7 +235,7 @@
     End Sub
 
     Public Function IsEditorLocked(index As Integer, id As Integer) As String
-        For i = 0 To MAX_PLAYERS
+        For i = 1 To MAX_PLAYERS
             If i <> index Then
                 if TempPlayer(i).Editor = id then
                     IsEditorLocked = GetPlayerName(i)
