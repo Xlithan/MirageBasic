@@ -30,6 +30,7 @@ Module C_Resources
     End Sub
 
     Sub ClearResource(index As Integer)
+        Resource(index) = Nothing
         Resource(index).Name = ""
     End Sub
 
@@ -40,6 +41,13 @@ Module C_Resources
             ClearResource(i)
         Next
 
+    End Sub
+
+    Sub StreamResource(resourceNum As Integer)
+        If resourceNum > 0 and Item(resourceNum).Name = "" And Resource_Loaded(resourceNum) = False Then
+            Resource_Loaded(resourceNum) = True
+            SendRequestResource(resourceNum)
+        End If
     End Sub
 
 #End Region
@@ -98,11 +106,12 @@ Module C_Resources
 
 #Region "Outgoing Packets"
 
-    Sub SendRequestResources()
+    Sub SendRequestResource(resourceNum As Integer)
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CRequestResources)
+        buffer.WriteInt32(ClientPackets.CRequestResource)
 
+        buffer.WriteInt32(resourcenum)
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
@@ -135,7 +144,6 @@ Module C_Resources
         End With
 
         RenderSprite(ResourcesSprite(resource), GameWindow, x, y, rec.X, rec.Y, rec.Width, rec.Height)
-
     End Sub
 
     Friend Sub DrawMapResource(resourceNum As Integer)
@@ -148,6 +156,8 @@ Module C_Resources
 
         If GettingMap Then Exit Sub
         If MapData = False Then Exit Sub
+
+        StreamResource(resourceNum)
 
         If MapResource(resourceNum).X > Map.MaxX OrElse MapResource(resourceNum).Y > Map.MaxY Then Exit Sub
 

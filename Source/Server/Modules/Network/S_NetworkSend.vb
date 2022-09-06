@@ -46,12 +46,8 @@ Module S_NetworkSend
         buffer.WriteInt32(ServerPackets.SNewCharJob)
 
         For i = 0 To MAX_JOBS
-            buffer.WriteString((GetJobName(i)))
+            buffer.WriteString((job(i).Name.Trim()))
             buffer.WriteString((Trim$(Job(i).Desc)))
-
-            buffer.WriteInt32(GetJobMaxVital(i, VitalType.HP))
-            buffer.WriteInt32(GetJobMaxVital(i, VitalType.MP))
-            buffer.WriteInt32(GetJobMaxVital(i, VitalType.SP))
 
             ' set sprite array size
             n = UBound(Job(i).MaleSprite)
@@ -129,17 +125,6 @@ Module S_NetworkSend
         Buffer.Dispose()
     End Sub
 
-    Sub SendEditorLoadOk(index As Integer)
-        Dim Buffer As New ByteStream(4)
-        Buffer.WriteInt32(ServerPackets.SLoginOk)
-        Buffer.WriteInt32(index)
-        Socket.SendDataTo(index, Buffer.Data, Buffer.Head)
-
-        AddDebug("Sent SMSG: SLoginOk")
-
-        Buffer.Dispose()
-    End Sub
-
     Sub SendInGame(index As Integer)
         Dim Buffer As New ByteStream(4)
         Buffer.WriteInt32(ServerPackets.SInGame)
@@ -150,28 +135,36 @@ Module S_NetworkSend
         Buffer.Dispose()
     End Sub
 
-    Sub SendJob(index As Integer)
-        'Dim i As Integer, n As Integer, q As Integer
+    sub SendUpdateJobTo(index as Integer, jobNum as integer)
+
+    End sub
+
+    Sub SendJobs(index As Integer)
+        Dim i as Integer
         Dim buffer As New ByteStream(4)
         buffer.WriteInt32(ServerPackets.SJobData)
 
         AddDebug("Sent SMSG: SJobData")
 
-        buffer.WriteBlock(JobData)
+        For i = 0 to MAX_JOBS
+            buffer.WriteBlock(JobData(i))
+        Next
 
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
 
-    Sub SendJobToAll()
-        'Dim i As Integer, n As Integer, q As Integer
+    Sub SendJobToAll(jobNum as Integer)
+        Dim i As Integer
         Dim buffer As New ByteStream(4)
         buffer.WriteInt32(ServerPackets.SJobData)
 
         AddDebug("Sent SMSG: SJobData To All")
 
-        buffer.WriteBlock(JobData)
-
+        For i = 0 to MAX_JOBS
+            buffer.WriteBlock(JobData(i))
+        Next
+        
         SendDataToAll(buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
@@ -558,8 +551,9 @@ Module S_NetworkSend
             buffer.WriteInt32(Map(mapNum).MapTintB)
             buffer.WriteInt32(Map(mapNum).MapTintA)
             buffer.WriteInt32(Map(mapNum).Instanced)
-            buffer.WriteInt32(Map(mapNum).Panorama)
-            buffer.WriteInt32(Map(mapNum).Parallax)
+            buffer.WriteByte(Map(mapNum).Panorama)
+            buffer.WriteByte(Map(mapNum).Parallax)
+            buffer.WriteByte(Map(mapNum).Brightness)
 
             For i = 1 To MAX_MAP_NPCS
                 buffer.WriteInt32(Map(mapNum).Npc(i))
@@ -779,16 +773,10 @@ Module S_NetworkSend
             buffer.WriteInt32(GetPlayerStat(index, i))
         Next
 
-        buffer.WriteInt32(Player(index).InHouse)
-
         For i = 0 To ResourceSkills.Count - 1
             buffer.WriteInt32(GetPlayerGatherSkillLvl(index, i))
             buffer.WriteInt32(GetPlayerGatherSkillExp(index, i))
             buffer.WriteInt32(GetPlayerGatherSkillMaxExp(index, i))
-        Next
-
-        For i = 0 To MAX_RECIPE
-            buffer.WriteInt32(Player(index).RecipeLearned(i))
         Next
 
         PlayerData = buffer.ToArray()

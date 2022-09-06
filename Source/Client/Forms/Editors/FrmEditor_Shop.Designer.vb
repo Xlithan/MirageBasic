@@ -25,9 +25,6 @@ Partial Class frmEditor_Shop
         Me.DarkGroupBox1 = New DarkUI.Controls.DarkGroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
         Me.DarkGroupBox2 = New DarkUI.Controls.DarkGroupBox()
-        Me.btnCancel = New DarkUI.Controls.DarkButton()
-        Me.btnDelete = New DarkUI.Controls.DarkButton()
-        Me.btnSave = New DarkUI.Controls.DarkButton()
         Me.DarkGroupBox3 = New DarkUI.Controls.DarkGroupBox()
         Me.btnDeleteTrade = New DarkUI.Controls.DarkButton()
         Me.btnUpdate = New DarkUI.Controls.DarkButton()
@@ -48,6 +45,9 @@ Partial Class frmEditor_Shop
         Me.txtName = New DarkUI.Controls.DarkTextBox()
         Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
         Me.picFace = New System.Windows.Forms.PictureBox()
+        Me.btnCancel = New DarkUI.Controls.DarkButton()
+        Me.btnDelete = New DarkUI.Controls.DarkButton()
+        Me.btnSave = New DarkUI.Controls.DarkButton()
         Me.DarkGroupBox1.SuspendLayout
         Me.DarkGroupBox2.SuspendLayout
         Me.DarkGroupBox3.SuspendLayout
@@ -68,7 +68,7 @@ Partial Class frmEditor_Shop
         Me.DarkGroupBox1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DarkGroupBox1.Name = "DarkGroupBox1"
         Me.DarkGroupBox1.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox1.Size = New System.Drawing.Size(244, 459)
+        Me.DarkGroupBox1.Size = New System.Drawing.Size(244, 335)
         Me.DarkGroupBox1.TabIndex = 0
         Me.DarkGroupBox1.TabStop = false
         Me.DarkGroupBox1.Text = "Shop List"
@@ -83,16 +83,13 @@ Partial Class frmEditor_Shop
         Me.lstIndex.Location = New System.Drawing.Point(7, 22)
         Me.lstIndex.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.lstIndex.Name = "lstIndex"
-        Me.lstIndex.Size = New System.Drawing.Size(228, 422)
+        Me.lstIndex.Size = New System.Drawing.Size(228, 302)
         Me.lstIndex.TabIndex = 1
         '
         'DarkGroupBox2
         '
         Me.DarkGroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
         Me.DarkGroupBox2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
-        Me.DarkGroupBox2.Controls.Add(Me.btnCancel)
-        Me.DarkGroupBox2.Controls.Add(Me.btnDelete)
-        Me.DarkGroupBox2.Controls.Add(Me.btnSave)
         Me.DarkGroupBox2.Controls.Add(Me.DarkGroupBox3)
         Me.DarkGroupBox2.Controls.Add(Me.DarkLabel4)
         Me.DarkGroupBox2.Controls.Add(Me.nudBuy)
@@ -107,40 +104,10 @@ Partial Class frmEditor_Shop
         Me.DarkGroupBox2.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DarkGroupBox2.Name = "DarkGroupBox2"
         Me.DarkGroupBox2.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox2.Size = New System.Drawing.Size(483, 459)
+        Me.DarkGroupBox2.Size = New System.Drawing.Size(483, 434)
         Me.DarkGroupBox2.TabIndex = 1
         Me.DarkGroupBox2.TabStop = false
         Me.DarkGroupBox2.Text = "Shop Properties"
-        '
-        'btnCancel
-        '
-        Me.btnCancel.Location = New System.Drawing.Point(385, 421)
-        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnCancel.Size = New System.Drawing.Size(88, 27)
-        Me.btnCancel.TabIndex = 55
-        Me.btnCancel.Text = "Cancel"
-        '
-        'btnDelete
-        '
-        Me.btnDelete.Location = New System.Drawing.Point(197, 422)
-        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnDelete.Size = New System.Drawing.Size(88, 27)
-        Me.btnDelete.TabIndex = 54
-        Me.btnDelete.Text = "Delete"
-        '
-        'btnSave
-        '
-        Me.btnSave.Location = New System.Drawing.Point(14, 422)
-        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnSave.Size = New System.Drawing.Size(88, 27)
-        Me.btnSave.TabIndex = 53
-        Me.btnSave.Text = "Save"
         '
         'DarkGroupBox3
         '
@@ -162,7 +129,7 @@ Partial Class frmEditor_Shop
         Me.DarkGroupBox3.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DarkGroupBox3.Name = "DarkGroupBox3"
         Me.DarkGroupBox3.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox3.Size = New System.Drawing.Size(468, 275)
+        Me.DarkGroupBox3.Size = New System.Drawing.Size(468, 281)
         Me.DarkGroupBox3.TabIndex = 52
         Me.DarkGroupBox3.TabStop = false
         Me.DarkGroupBox3.Text = "Items the Shop Sells"
@@ -363,16 +330,50 @@ Partial Class frmEditor_Shop
         Me.picFace.TabIndex = 44
         Me.picFace.TabStop = false
         '
+        'btnCancel
+        '
+        Me.btnCancel.Location = New System.Drawing.Point(11, 410)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnCancel.Size = New System.Drawing.Size(228, 27)
+        Me.btnCancel.TabIndex = 55
+        Me.btnCancel.Text = "Cancel"
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Location = New System.Drawing.Point(11, 377)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnDelete.Size = New System.Drawing.Size(228, 27)
+        Me.btnDelete.TabIndex = 54
+        Me.btnDelete.Text = "Delete"
+        '
+        'btnSave
+        '
+        Me.btnSave.Location = New System.Drawing.Point(11, 344)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnSave.Size = New System.Drawing.Size(228, 27)
+        Me.btnSave.TabIndex = 53
+        Me.btnSave.Text = "Save"
+        '
         'frmEditor_Shop
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
-        Me.ClientSize = New System.Drawing.Size(740, 464)
+        Me.ClientSize = New System.Drawing.Size(740, 441)
+        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.DarkGroupBox2)
+        Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.DarkGroupBox1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Controls.Add(Me.btnSave)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.MaximizeBox = false
         Me.Name = "frmEditor_Shop"
         Me.Text = "Shop Editor"
         Me.DarkGroupBox1.ResumeLayout(false)

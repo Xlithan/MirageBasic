@@ -84,6 +84,13 @@ Module C_Animations
         AnimInstance(index).lockindex = 0
     End Sub
 
+    Sub StreamAnimation(animationNum As Integer)
+        If animationNum > 0 and Item(animationNum).Name = "" And Animation_Loaded(animationNum) = False Then
+            Animation_Loaded(animationNum) = True
+            SendRequestAnimation(animationNum)
+        End If
+    End Sub
+
 #End Region
 
 #Region "Incoming Traffic"
@@ -141,10 +148,12 @@ Module C_Animations
 
 #Region "Outgoing Traffic"
 
-    Sub SendRequestAnimations()
+    Sub SendRequestAnimation(animationNum as Integer)
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CRequestAnimations)
+        buffer.WriteInt32(ClientPackets.CRequestAnimation)
+        
+        buffer.WriteInt32(animationNum)
 
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
@@ -167,6 +176,8 @@ Module C_Animations
             ClearAnimInstance(index)
             Exit Sub
         End If
+
+        streamanimation(AnimInstance(index).Animation)
 
         sprite = Animation(AnimInstance(index).Animation).Sprite(layer)
 

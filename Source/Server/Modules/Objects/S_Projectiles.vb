@@ -149,6 +149,7 @@ Friend Module S_Projectiles
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
+        If TempPlayer(index).Editor > -1 Then  Exit Sub
 
         Dim user As String
 
@@ -195,9 +196,7 @@ Friend Module S_Projectiles
     End Sub
 
     Sub HandleRequestProjectile(index As Integer, ByRef data() As Byte)
-        TempPlayer(index).Editor = -1
-
-        SendProjectile(index)
+        SendProjectiles(index)
     End Sub
 
     Sub HandleClearProjectile(index As Integer, ByRef data() As Byte)
@@ -307,7 +306,7 @@ Friend Module S_Projectiles
 
     End Sub
 
-    Sub SendProjectile(index As Integer)
+    Sub SendProjectiles(index As Integer)
         Dim i As Integer
 
         For i = 0 To MAX_PROJECTILES

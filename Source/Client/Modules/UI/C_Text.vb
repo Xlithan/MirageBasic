@@ -167,8 +167,6 @@ Module C_Text
                                     DrawText(tX, tY, "H", (Color.Green), (Color.Black), GameWindow)
                                 Case TileType.Trap
                                     DrawText(tX, tY, "T", (Color.Red), (Color.Black), GameWindow)
-                                Case TileType.House
-                                    DrawText(tX, tY, "H", (Color.Green), (Color.Black), GameWindow)
                                 Case TileType.Craft
                                     DrawText(tX, tY, "C", (Color.Green), (Color.Black), GameWindow)
                                 Case TileType.Light

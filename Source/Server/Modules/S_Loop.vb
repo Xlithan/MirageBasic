@@ -72,13 +72,6 @@ Module modLoop
             End If
 
             If tick > tmr1000 Then
-                ' Handle our player crafting
-                Dim playercrafts = (
-                    From p In onlinePlayers
-                    Where GetTimeMs() > p.player.CraftTimer + (p.player.CraftTimeNeeded * 1000) AndAlso p.player.CraftIt = 1
-                    Select New With {p.Index, .Success = HandlePlayerCraft(p.Index)}
-                ).ToArray()
-
                 Time.Instance.Tick()
 
                 ' Move the timer up 1000ms.
@@ -86,15 +79,6 @@ Module modLoop
             End If
 
             If tick > tmr500 Then
-
-                ' Handle player housing timers.
-                Dim playerhousing = (
-                    From p In onlinePlayers
-                    Where Player(p.Index).InHouse > 0 AndAlso
-                          IsPlaying(Player(p.Index).InHouse) AndAlso
-                          Player(Player(p.Index).InHouse).InHouse <> Player(p.Index).InHouse
-                    Select New With {p.Index, Key .Success = HandlePlayerHouse(p.Index)}
-                ).ToArray()
 
                 ' Move the timer up 500ms.
                 tmr500 = GetTimeMs() + 500
@@ -606,13 +590,6 @@ Module modLoop
         HandleCloseSocket = True
     End Function
 
-    Friend Function HandlePlayerHouse(index As Integer) As Boolean
-        Player(index).InHouse = 0
-        PlayerWarp(index, Player(index).LastMap, Player(index).LastX, Player(index).LastY)
-        PlayerMsg(index, "Your visitation has ended. Possibly due to a disconnection. You are being warped back to your previous location.", ColorType.Yellow)
-        HandlePlayerHouse = True
-    End Function
-
     Friend Function HandlePetSkill(index As Integer) As Boolean
         PetCastSkill(index, TempPlayer(index).PetskillBuffer.Skill, TempPlayer(index).PetskillBuffer.Target, TempPlayer(index).PetskillBuffer.TargetTypes, True)
         TempPlayer(index).PetskillBuffer.Skill = 0
@@ -620,14 +597,6 @@ Module modLoop
         TempPlayer(index).PetskillBuffer.Target = 0
         TempPlayer(index).PetskillBuffer.TargetTypes = 0
         HandlePetSkill = True
-    End Function
-
-    Friend Function HandlePlayerCraft(index As Integer) As Boolean
-        TempPlayer(index).CraftIt = 0
-        TempPlayer(index).CraftTimer = 0
-        TempPlayer(index).CraftTimeNeeded = 0
-        UpdateCraft(index)
-        HandlePlayerCraft = True
     End Function
 
     Friend Function HandleClearStun(index As Integer) As Boolean

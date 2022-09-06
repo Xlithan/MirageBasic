@@ -74,9 +74,6 @@ Module C_Constants
     Friend ItemRarityColor4 = New SFML.Graphics.Color(159, 0, 197) ' purple
     Friend ItemRarityColor5 = New SFML.Graphics.Color(255, 215, 0) ' gold
 
-    ' Used to check if in editor or not and variables for use in editor
-    Public InMapEditor As Boolean
-
     Public EditorTileX As Integer
     Public EditorTileY As Integer
     Public EditorTileWidth As Integer

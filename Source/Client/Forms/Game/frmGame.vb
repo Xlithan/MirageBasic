@@ -162,7 +162,7 @@ Friend Class FrmGame
     Private Sub Picscreen_MouseDown(sender As Object, e As MouseEventArgs) Handles picscreen.MouseDown
         If Not CheckGuiClick(e.X, e.Y, e) Then
 
-            If InMapEditor Then
+            If Editor = EditorType.Map Then
                 FrmEditor_Map.MapEditorMouseDown(e.Button, e.X, e.Y, False)
             End If
 
@@ -200,7 +200,6 @@ Friend Class FrmGame
                         PlayerSearch(CurX, CurY, 1)
                     End If
                 End If
-                FurnitureSelected = 0
             End If
         End If
 
@@ -228,7 +227,7 @@ Friend Class FrmGame
         CurMouseY = e.Location.Y
         CheckGuiMove(e.X, e.Y)
 
-        If InMapEditor Then
+        If Editor = EditorType.Map Then
             If e.Button = MouseButtons.Left OrElse e.Button = MouseButtons.Right Then
                 FrmEditor_Map.MapEditorMouseDown(e.Button, e.X, e.Y)
             End If
@@ -316,14 +315,6 @@ Friend Class FrmGame
         Dim index As Integer = Array.IndexOf(_nonAcceptableKeys, keyData)
         Return index >= 0
     End Function
-
-#End Region
-
-#Region "Crafting"
-
-    Private Sub ChkKnownOnly_CheckedChanged(sender As Object, e As EventArgs)
-        CraftingInit()
-    End Sub
 
 #End Region
 

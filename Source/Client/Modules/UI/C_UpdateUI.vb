@@ -406,16 +406,6 @@ Module C_UpdateUI
             InitItemEditor = False
         End If
 
-        If InitRecipeEditor = True Then
-            With frmEditor_Recipe
-                Editor = EditorType.Recipe
-                .Show()
-                .lstIndex.SelectedIndex = 0
-                RecipeEditorInit()
-            End With
-            InitRecipeEditor = False
-        End If
-
         If InitJobEditor = True Then
             With frmEditor_Job
                 Editor = EditorType.Job
@@ -427,8 +417,6 @@ Module C_UpdateUI
         End If
 
         If InitResourceEditor = True Then
-            Dim i As Integer
-
             With frmEditor_Resource
                 Editor = EditorType.Resource
                 .Show()
@@ -468,16 +456,6 @@ Module C_UpdateUI
             InitShopEditor = False
         End If
 
-        If HouseEdit = True Then
-            With frmEditor_House
-                Editor = EditorType.House
-                .Show()
-                .lstIndex.SelectedIndex = 0
-                HouseEditorInit()
-            End With
-            HouseEdit = False
-        End If
-
         If InitProjectileEditor = True Then
             With frmEditor_Projectile
                 Editor = EditorType.Projectile
@@ -491,11 +469,6 @@ Module C_UpdateUI
 
         If frmEditor_Projectile.Visible Then
             EditorProjectile_DrawProjectile()
-        End If
-
-        If InitCrafting = True Then
-            CraftingInit()
-            InitCrafting = False
         End If
 
         If NeedToOpenShop = True Then

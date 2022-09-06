@@ -15,8 +15,6 @@ Module C_Variables
 
     Friend DirArrowY(4) As Byte
 
-    Friend LastTileset As Byte
-
     Friend UseFade As Boolean
     Friend FadeType As Integer
     Friend FadeAmount As Integer
@@ -197,7 +195,12 @@ Module C_Variables
 
     ' Stream Content
     Friend Item_Loaded(MAX_ITEMS)
+    Friend NPC_Loaded(MAX_NPCS)
+    Friend Resource_Loaded(MAX_RESOURCES)
+    Friend Animation_Loaded(MAX_ANIMATIONS)
     Friend Skill_Loaded(MAX_SKILLS)
+    Friend Shop_Loaded(MAX_SHOPS)
+    Friend Pet_Loaded(MAX_PETS)
 
     ' Editor edited items array
     Friend Item_Changed(MAX_ITEMS) As Boolean
@@ -207,6 +210,7 @@ Module C_Variables
     Friend Skill_Changed(MAX_SKILLS) As Boolean
     Friend Shop_Changed(MAX_SHOPS) As Boolean
     Friend Pet_Changed(MAX_PETS) As Boolean
+    Friend Job_Changed(MAX_JOBS) as Boolean
 
     Friend AnimEditorFrame(1) As Integer
     Friend AnimEditorTimer(1) As Integer

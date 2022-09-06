@@ -112,7 +112,7 @@ Partial Class frmEditor_Pet
         Me.DarkGroupBox1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DarkGroupBox1.Name = "DarkGroupBox1"
         Me.DarkGroupBox1.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox1.Size = New System.Drawing.Size(244, 578)
+        Me.DarkGroupBox1.Size = New System.Drawing.Size(244, 444)
         Me.DarkGroupBox1.TabIndex = 0
         Me.DarkGroupBox1.TabStop = false
         Me.DarkGroupBox1.Text = "Pet List"
@@ -127,7 +127,7 @@ Partial Class frmEditor_Pet
         Me.lstIndex.Location = New System.Drawing.Point(7, 16)
         Me.lstIndex.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.lstIndex.Name = "lstIndex"
-        Me.lstIndex.Size = New System.Drawing.Size(231, 557)
+        Me.lstIndex.Size = New System.Drawing.Size(231, 407)
         Me.lstIndex.TabIndex = 1
         '
         'DarkGroupBox2
@@ -640,7 +640,7 @@ Partial Class frmEditor_Pet
         '
         Me.DarkLabel3.AutoSize = true
         Me.DarkLabel3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel3.Location = New System.Drawing.Point(244, 61)
+        Me.DarkLabel3.Location = New System.Drawing.Point(7, 55)
         Me.DarkLabel3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel3.Name = "DarkLabel3"
         Me.DarkLabel3.Size = New System.Drawing.Size(43, 15)
@@ -649,7 +649,7 @@ Partial Class frmEditor_Pet
         '
         'nudRange
         '
-        Me.nudRange.Location = New System.Drawing.Point(317, 59)
+        Me.nudRange.Location = New System.Drawing.Point(80, 53)
         Me.nudRange.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.nudRange.Name = "nudRange"
         Me.nudRange.Size = New System.Drawing.Size(89, 23)
@@ -659,7 +659,7 @@ Partial Class frmEditor_Pet
         '
         Me.DarkLabel2.AutoSize = true
         Me.DarkLabel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel2.Location = New System.Drawing.Point(7, 61)
+        Me.DarkLabel2.Location = New System.Drawing.Point(262, 55)
         Me.DarkLabel2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel2.Name = "DarkLabel2"
         Me.DarkLabel2.Size = New System.Drawing.Size(40, 15)
@@ -668,7 +668,7 @@ Partial Class frmEditor_Pet
         '
         'nudSprite
         '
-        Me.nudSprite.Location = New System.Drawing.Point(80, 59)
+        Me.nudSprite.Location = New System.Drawing.Point(321, 53)
         Me.nudSprite.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.nudSprite.Name = "nudSprite"
         Me.nudSprite.Size = New System.Drawing.Size(89, 23)
@@ -708,31 +708,31 @@ Partial Class frmEditor_Pet
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(252, 554)
+        Me.btnSave.Location = New System.Drawing.Point(8, 453)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnSave.Size = New System.Drawing.Size(88, 27)
+        Me.btnSave.Size = New System.Drawing.Size(231, 27)
         Me.btnSave.TabIndex = 2
         Me.btnSave.Text = "Save"
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(642, 554)
+        Me.btnCancel.Location = New System.Drawing.Point(8, 519)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnCancel.Size = New System.Drawing.Size(88, 27)
+        Me.btnCancel.Size = New System.Drawing.Size(231, 27)
         Me.btnCancel.TabIndex = 3
         Me.btnCancel.Text = "Cancel"
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(450, 554)
+        Me.btnDelete.Location = New System.Drawing.Point(8, 486)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnDelete.Size = New System.Drawing.Size(88, 27)
+        Me.btnDelete.Size = New System.Drawing.Size(231, 27)
         Me.btnDelete.TabIndex = 4
         Me.btnDelete.Text = "Delete"
         '
@@ -741,7 +741,7 @@ Partial Class frmEditor_Pet
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
-        Me.ClientSize = New System.Drawing.Size(737, 584)
+        Me.ClientSize = New System.Drawing.Size(737, 552)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)

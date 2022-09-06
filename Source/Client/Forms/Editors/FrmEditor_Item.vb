@@ -30,27 +30,11 @@ Friend Class frmEditor_Item
 
     Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
         ItemEditorInit()
-        PicFurniture_MouseDown(sender, e)
-    End Sub
-
-    Private Sub PicItem_Paint(sender As Object, e As PaintEventArgs) Handles picItem.Paint
-        'Dont let it auto paint ;)
-    End Sub
-
-    Private Sub PicPaperdoll_Paint(sender As Object, e As PaintEventArgs) Handles picPaperdoll.Paint
-        'Dont let it auto paint :0
-    End Sub
-
-    Private Sub PicFurniture_Paint(sender As Object, e As PaintEventArgs) Handles picFurniture.Paint
-        'Dont let it auto paint ;)
     End Sub
 
     Private Sub FrmEditor_Item_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         nudPic.Maximum = NumItems
         nudPaperdoll.Maximum = NumPaperdolls
-        nudFurniture.Maximum = NumFurniture
-        cmbFurnitureType.SelectedIndex = 0
-        nudSpanwAmount.Minimum = 1
 
         'populate combo boxes
         cmbAnimation.Items.Clear()
@@ -78,11 +62,6 @@ Friend Class frmEditor_Item
             cmbPet.Items.Add(i & ": " & Pet(i).Name)
         Next
 
-        cmbRecipe.Items.Clear()
-        For i = 0 To MAX_RECIPE
-            cmbRecipe.Items.Add(i & ": " & Recipe(i).Name)
-        Next
-
         lstIndex.Items.Clear()
 
         ' Add the names
@@ -90,6 +69,7 @@ Friend Class frmEditor_Item
             lstIndex.Items.Add(i & ": " & Trim$(Item(i).Name))
         Next
         nudPaperdoll.Maximum = NumPaperdolls
+        nudSpanwAmount.Maximum = Integer.MaxValue
     End Sub
 
     Private Sub BtnBasics_Click(sender As Object, e As EventArgs) Handles btnBasics.Click
@@ -107,7 +87,6 @@ Friend Class frmEditor_Item
 #Region "Basics"
 
     Private Sub NudPic_ValueChanged(sender As Object, e As EventArgs) Handles nudPic.Click
-
         Item(Editorindex).Pic = nudPic.Value
         EditorItem_DrawItem()
     End Sub
@@ -182,18 +161,6 @@ Friend Class frmEditor_Item
             fraProjectile.Visible = False
         End If
 
-        If cmbType.SelectedIndex = ItemType.Furniture Then
-            fraFurniture.Visible = True
-        Else
-            fraFurniture.Visible = False
-        End If
-
-        If cmbType.SelectedIndex = ItemType.Recipe Then
-            fraRecipe.Visible = True
-        Else
-            fraRecipe.Visible = False
-        End If
-
         If cmbType.SelectedIndex = ItemType.Pet Then
             fraPet.Visible = True
             fraEquipment.Visible = True
@@ -251,10 +218,6 @@ Friend Class frmEditor_Item
         End If
     End Sub
 
-    Private Sub CmbRecipe_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbRecipe.SelectedIndexChanged
-        Item(Editorindex).Data1 = cmbRecipe.SelectedIndex
-    End Sub
-
     Private Sub TxtDescription_TextChanged(sender As Object, e As EventArgs) Handles txtDescription.TextChanged
         Item(Editorindex).Description = Trim$(txtDescription.Text)
     End Sub
@@ -279,10 +242,6 @@ Friend Class frmEditor_Item
 
      Private Sub nudEvents_ValueChanged(sender As Object, e As EventArgs) Handles nudEvent.ValueChanged
          Item(Editorindex).Data1 = nudVitalMod.Value
-    End Sub
-
-    Private Sub nudEventValue_ValueChanged(sender As Object, e As EventArgs) 
-         Item(Editorindex).Data2 = nudEventValue.Value
     End Sub
 
 #End Region
@@ -400,90 +359,8 @@ Friend Class frmEditor_Item
         Item(Editorindex).Ammo = cmbAmmo.SelectedIndex
     End Sub
 
-#End Region
+    Private Sub nudSpanwAmount_ValueChanged(sender As Object, e As EventArgs) Handles nudSpanwAmount.ValueChanged
 
-#Region "Furniture"
-
-    Private Sub CmbFurnitureType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFurnitureType.SelectedIndexChanged
-        Item(Editorindex).Data1 = cmbFurnitureType.SelectedIndex
-    End Sub
-
-    Private Sub OptNoFurnitureEditing_CheckedChanged(sender As Object, e As EventArgs) Handles optNoFurnitureEditing.CheckedChanged
-        If optNoFurnitureEditing.Checked = True Then
-            lblSetOption.Text = "No Editing: Lets you look at the image without setting any options (blocks/fringes)."
-        End If
-        EditorItem_DrawFurniture()
-    End Sub
-
-    Private Sub OptSetBlocks_CheckedChanged(sender As Object, e As EventArgs) Handles optSetBlocks.CheckedChanged
-        If optSetBlocks.Checked = True Then
-            lblSetOption.Text = "Set Blocks: Os are passable and Xs are not. Simply place Xs where you do not want the player to walk."
-        End If
-        EditorItem_DrawFurniture()
-    End Sub
-
-    Private Sub OptSetFringe_CheckedChanged(sender As Object, e As EventArgs) Handles optSetFringe.CheckedChanged
-        If optSetFringe.Checked = True Then
-            lblSetOption.Text = "Set Fringe: Os are draw on the fringe layer (the player can walk behind)."
-        End If
-        EditorItem_DrawFurniture()
-    End Sub
-
-    Private Sub NudFurniture_ValueChanged(sender As Object, e As EventArgs) Handles nudFurniture.Click
-        Item(Editorindex).Data2 = nudFurniture.Value
-
-        If FurnitureGFXInfo(nudFurniture.Value).IsLoaded = False Then
-            LoadTexture(nudFurniture.Value, 10)
-        End If
-
-        'seeying we still use it, lets update timer
-        With FurnitureGFXInfo(nudFurniture.Value)
-            .TextureTimer = GetTickCount() + 100000
-        End With
-
-        If nudFurniture.Value > 0 AndAlso nudFurniture.Value <= NumFurniture Then
-            Item(Editorindex).FurnitureWidth = FurnitureGFXInfo(nudFurniture.Value).width / 32
-            Item(Editorindex).FurnitureHeight = FurnitureGFXInfo(nudFurniture.Value).height / 32
-            If Item(Editorindex).FurnitureHeight > 1 Then Item(Editorindex).FurnitureHeight = Item(Editorindex).FurnitureHeight - 1
-        Else
-            Item(Editorindex).FurnitureWidth = 1
-            Item(Editorindex).FurnitureHeight = 1
-        End If
-
-        EditorItem_DrawFurniture()
-    End Sub
-
-    Private Sub PicFurniture_MouseDown(sender As Object, e As MouseEventArgs) Handles picFurniture.MouseDown
-        Dim X As Integer, Y As Integer
-
-        X = e.X / 32
-        Y = e.Y / 32
-
-        If X > 3 Then Exit Sub
-        If Y > 3 Then Exit Sub
-
-        If optSetBlocks.Checked = True Then
-            If Item(Editorindex).FurnitureBlocks(X, Y) = 1 Then
-                Item(Editorindex).FurnitureBlocks(X, Y) = 0
-            Else
-                Item(Editorindex).FurnitureBlocks(X, Y) = 1
-            End If
-        ElseIf optSetFringe.Checked = True Then
-            If Item(Editorindex).FurnitureFringe(X, Y) = 1 Then
-                Item(Editorindex).FurnitureFringe(X, Y) = 0
-            Else
-                Item(Editorindex).FurnitureFringe(X, Y) = 1
-            End If
-        End If
-        EditorItem_DrawFurniture()
-    End Sub
-
-    Private Sub btnSpawn_Click(sender As Object, e As EventArgs) Handles btnSpawn.Click
-        SendSpawnItem(Editorindex, nudSpanwAmount.Value)
-    End Sub
-
-    Private Sub frmEditor_Item_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        ItemEditorCancel
     End Sub
 
 #End Region

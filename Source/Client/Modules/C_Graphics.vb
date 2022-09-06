@@ -11,7 +11,6 @@ Module C_Graphics
     Friend GameWindow As RenderWindow
     Friend TilesetWindow As RenderWindow
 
-    Friend EditorItem_Furniture As RenderWindow
     Friend EditorSkill_Icon As RenderWindow
     Friend EditorAnimation_Anim1 As RenderWindow
     Friend EditorAnimation_Anim2 As RenderWindow
@@ -308,13 +307,6 @@ Module C_Graphics
     Sub InitGraphics()
 
         GameWindow = New RenderWindow(FrmGame.picscreen.Handle)
-        TilesetWindow = New RenderWindow(FrmEditor_Map.picBackSelect.Handle)
-
-        EditorItem_Furniture = New RenderWindow(frmEditor_Item.picFurniture.Handle)
-        EditorSkill_Icon = New RenderWindow(frmEditor_Skill.picSprite.Handle)
-        EditorAnimation_Anim1 = New RenderWindow(FrmEditor_Animation.picSprite0.Handle)
-        EditorAnimation_Anim2 = New RenderWindow(FrmEditor_Animation.picSprite1.Handle)
-
         SfmlGameFont = New Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FontName)
 
         'this stuff only loads when needed :)
@@ -350,10 +342,6 @@ Module C_Graphics
         ReDim FacesGfx(NumFaces)
         ReDim FacesSprite(NumFaces)
         ReDim FacesGfxInfo(NumFaces)
-
-        ReDim FurnitureGfx(NumFurniture)
-        ReDim FurnitureSprite(NumFurniture)
-        ReDim FurnitureGfxInfo(NumFurniture)
 
         ReDim ProjectileGfx(NumProjectiles)
         ReDim ProjectileSprite(NumProjectiles)
@@ -883,20 +871,7 @@ Module C_Graphics
                 .TextureTimer = GetTickCount() + 100000
             End With
 
-        ElseIf texType = 10 Then 'furniture
-            If index < 0 OrElse index > NumFurniture Then Exit Sub
-
-            'Load texture first, dont care about memory streams (just use the filename)
-            FurnitureGfx(index) = New Texture(MirageBasic.Core.Paths.Graphics & "furniture\" & index & GfxExt)
-            FurnitureSprite(index) = New Sprite(FurnitureGfx(index))
-
-            'Cache the width and height
-            With FurnitureGfxInfo(index)
-                .Width = FurnitureGfx(index).Size.X
-                .Height = FurnitureGfx(index).Size.Y
-                .IsLoaded = True
-                .TextureTimer = GetTickCount() + 100000
-            End With
+        ElseIf texType = 10 Then
 
         ElseIf texType = 11 Then 'projectiles
             If index <= 0 OrElse index > NumProjectiles Then Exit Sub
@@ -1528,7 +1503,7 @@ Module C_Graphics
             End If
         Next
 
-'clear SkillIcons
+        'clear SkillIcons
         For i = 0 To NumSkillIcons
             If SkillIconsGfxInfo(I).IsLoaded Then
                 If SkillIconsGfxInfo(I).TextureTimer < GetTickCount() Then
@@ -1540,17 +1515,6 @@ Module C_Graphics
             End If
         Next
 
-        'clear Furniture
-        For i = 0 To NumFurniture
-            If FurnitureGfxInfo(I).IsLoaded Then
-                If FurnitureGfxInfo(I).TextureTimer < GetTickCount() Then
-                    FurnitureGfx(I).Dispose()
-                    FurnitureSprite(I).Dispose()
-                    FurnitureGfxInfo(I).IsLoaded = False
-                    FurnitureGfxInfo(I).TextureTimer = 0
-                End If
-            End If
-        Next
 
         'clear Projectiles
         For i = 0 To NumProjectiles
@@ -1634,7 +1598,7 @@ Module C_Graphics
             DrawParallax(Map.Parallax)
         End If
 
-' blit lower tiles
+        ' Draw lower tiles
         If NumTileSets > 0 Then
             For x = TileView.Left To TileView.Right + 1
                 For y = TileView.Top To TileView.Bottom + 1
@@ -1645,21 +1609,8 @@ Module C_Graphics
             Next
         End If
 
-' Furniture
-        If FurnitureHouse > 0 Then
-            If FurnitureHouse = Player(Myindex).InHouse Then
-                If FurnitureCount > 0 Then
-                    For i = 0 To FurnitureCount
-                        If Furniture(i).itemnum > 0 Then
-                            DrawFurniture(i, 0)
-                        End If
-                    Next
-                End If
-            End If
-        End If
-
         ' events
-        If InMapEditor = False Then
+        If Editor <> EditorType.Map Then
             if Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
 
                 For i = 0 To Map.CurrentEvents
@@ -1722,8 +1673,8 @@ Module C_Graphics
                     End If
                 Next
 
-' events
-                If InMapEditor = False Then
+                ' events
+                If Editor <> EditorType.Map Then
                     If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
                         For i = 0 To Map.CurrentEvents
                             If Map.MapEvents(I).Position = 1 Then
@@ -1735,7 +1686,7 @@ Module C_Graphics
                     End If
                 End If
 
-' Draw the target icon
+'                Draw the target icon
                 If MyTarget > 0 Then
                     If MyTargetType = TargetType.Player Then
                         DrawTarget(Player(MyTarget).X*32 - 16 + Player(MyTarget).XOffset,
@@ -1817,19 +1768,6 @@ Module C_Graphics
             Next
         End If
 
-        ' Furniture
-        If FurnitureHouse > 0 Then
-            If FurnitureHouse = Player(Myindex).InHouse Then
-                If FurnitureCount > 0 Then
-                    For i = 0 To FurnitureCount
-                        If Furniture(I).itemnum > 0 Then
-                            DrawFurniture(I, 1)
-                        End If
-                    Next
-                End If
-            End If
-        End If
-
         DrawNight()
 
         DrawWeather()
@@ -1837,7 +1775,7 @@ Module C_Graphics
         DrawMapTint()
 
         ' Draw out a square at mouse cursor
-        If MapGrid = True AndAlso InMapEditor Then
+        If MapGrid = True AndAlso Editor = EditorType.Map Then
             DrawGrid()
         End If
 
@@ -1851,16 +1789,9 @@ Module C_Graphics
             Next
         End If
 
-        If InMapEditor Then FrmEditor_Map.DrawTileOutline()
+        If Editor = EditorType.Map Then FrmEditor_Map.DrawTileOutline()
 
-        'furniture
-        If FurnitureSelected > 0 Then
-            If Player(Myindex).InHouse = Myindex Then
-                DrawFurnitureOutline()
-            End If
-        End If
-
-' draw cursor, player X and Y locations
+        ' draw cursor, player X and Y locations
         If BLoc Then
             DrawText(1, HudWindowY + HudPanelGfxInfo.Height + 1,
                      Trim$(String.Format(Language.Game.MapCurLoc, CurX, CurY)), Color.Yellow, Color.Black, GameWindow)
@@ -1915,11 +1846,11 @@ Module C_Graphics
         Next
 
         ' Blit out map attributes
-        If InMapEditor Then
+        If Editor = EditorType.Map Then
             DrawMapAttributes()
         End If
 
-        If InMapEditor AndAlso FrmEditor_Map.tabpages.SelectedTab Is FrmEditor_Map.tpEvents Then
+        If Editor = EditorType.Map AndAlso FrmEditor_Map.tabpages.SelectedTab Is FrmEditor_Map.tpEvents Then
             DrawEvents()
             EditorEvent_DrawGraphic()
         End If
@@ -2097,26 +2028,6 @@ Module C_Graphics
         DrawText(DrawMapNameX, DrawMapNameY, Language.Game.MapName & Map.Name, DrawMapNameColor, Color.Black, GameWindow)
     End Sub
 
-    Friend Sub DrawFurnitureOutline()
-        Dim rec As Rectangle
-
-        With rec
-            .Y = 0
-            .Height = Item(GetPlayerInvItemNum(Myindex, FurnitureSelected)).FurnitureHeight*PicY
-            .X = 0
-            .Width = Item(GetPlayerInvItemNum(Myindex, FurnitureSelected)).FurnitureWidth*PicX
-        End With
-
-        Dim rec2 As New RectangleShape With {
-                .OutlineColor = New Color(Color.Blue),
-                .OutlineThickness = 0.6,
-                .FillColor = New Color(Color.Transparent),
-                .Size = New Vector2f(rec.Width, rec.Height),
-                .Position = New Vector2f(ConvertMapX(CurX*PicX), ConvertMapY(CurY*PicY))
-                }
-        GameWindow.Draw(rec2)
-    End Sub
-
     Friend Sub DrawGrid()
         For x = TileView.Left To TileView.Right ' - 1
             For y = TileView.Top To TileView.Bottom ' - 1
@@ -2194,10 +2105,6 @@ Module C_Graphics
             For i = 0 To NumTileSets
                 If Not TileSetTexture(i) Is Nothing Then TileSetTexture(i).Dispose()
             Next i
-
-            For i = 0 To NumFurniture
-                If Not FurnitureGfx(i) Is Nothing Then FurnitureGfx(i).Dispose()
-            Next
 
             For i = 0 To NumFaces
                 If Not FacesGfx(i) Is Nothing Then FacesGfx(i).Dispose()
@@ -2964,10 +2871,6 @@ Module C_Graphics
             DrawQuestLog()
         End If
 
-        If PnlCraftVisible = True Then
-            DrawCraftPanel()
-        End If
-
         If DragInvSlotNum > 0 Then
             DrawInventoryItem(CurMouseX, CurMouseY)
         End If
@@ -2995,6 +2898,8 @@ Module C_Graphics
 
         If File.Exists(Paths.Graphics & "items\" & itemnum & GfxExt) Then
             frmEditor_Item.picItem.BackgroundImage = Drawing.Image.FromFile(Paths.Graphics & "items\" & itemnum & GfxExt)
+        Else
+            frmEditor_Item.picItem.BackgroundImage = Nothing
         End If
     End Sub
 
@@ -3012,76 +2917,6 @@ Module C_Graphics
             frmEditor_Item.picPaperdoll.BackgroundImage =
                 Drawing.Image.FromFile(Paths.Graphics & "paperdolls\" & Sprite & GfxExt)
         End If
-    End Sub
-
-    Friend Sub EditorItem_DrawFurniture()
-        Dim Furniturenum As Integer
-        Dim sRECT As Rectangle
-        Dim dRECT As Rectangle
-
-        If Editor <> EditorType.House Then Exit sub
-
-        Furniturenum = frmEditor_Item.nudFurniture.Value
-
-        If Furniturenum < 1 OrElse Furniturenum > NumFurniture Then
-            EditorItem_Furniture.Clear(ToSfmlColor(frmEditor_Item.picFurniture.BackColor))
-            EditorItem_Furniture.Display()
-            Exit Sub
-        End If
-
-        If FurnitureGfxInfo(Furniturenum).IsLoaded = False Then
-            LoadTexture(Furniturenum, 10)
-        End If
-
-        'seeying we still use it, lets update timer
-        With FurnitureGfxInfo(Furniturenum)
-            .TextureTimer = GetTickCount() + 100000
-        End With
-
-        ' rect for source
-        With sRECT
-            .Y = 0
-            .Height = FurnitureGfxInfo(Furniturenum).Height
-            .X = 0
-            .Width = FurnitureGfxInfo(Furniturenum).Width
-        End With
-
-        ' same for destination as source
-        dRECT = sRECT
-
-        EditorItem_Furniture.Clear(ToSfmlColor(frmEditor_Item.picFurniture.BackColor))
-
-        RenderSprite(FurnitureSprite(Furniturenum), EditorItem_Furniture, dRECT.X, dRECT.Y, sRECT.X, sRECT.Y,
-                     sRECT.Width, sRECT.Height)
-
-        If frmEditor_Item.optSetBlocks.Checked = True Then
-            For X = 0 To 3
-                For Y = 0 To 3
-                    If X <= (FurnitureGfxInfo(Furniturenum).Width/32) - 1 Then
-                        If Y <= (FurnitureGfxInfo(Furniturenum).Height/32) - 1 Then
-                            If Item(Editorindex).FurnitureBlocks(X, Y) = 1 Then
-                                DrawText(X*32 + 8, Y*32 + 8, "X", Color.Red, Color.Black, EditorItem_Furniture)
-                            Else
-                                DrawText(X*32 + 8, Y*32 + 8, "O", Color.Blue, Color.Black, EditorItem_Furniture)
-                            End If
-                        End If
-                    End If
-                Next
-            Next
-        ElseIf frmEditor_Item.optSetFringe.Checked = True Then
-            For X = 0 To 3
-                For Y = 0 To 3
-                    If X <= (FurnitureGfxInfo(Furniturenum).Width/32) - 1 Then
-                        If Y <= (FurnitureGfxInfo(Furniturenum).Height/32) Then
-                            If Item(Editorindex).FurnitureFringe(X, Y) = 1 Then
-                                DrawText(X*32 + 8, Y*32 + 8, "O", Color.Blue, Color.Black, EditorItem_Furniture)
-                            End If
-                        End If
-                    End If
-                Next
-            Next
-        End If
-        EditorItem_Furniture.Display()
     End Sub
 
     Friend Sub EditorNpc_DrawSprite()
@@ -3135,6 +2970,8 @@ Module C_Graphics
     Public Sub DrawNight()
         Dim x = 0
         Dim y = 0
+
+        If InGame = False Then Exit Sub
 
         If Map.Moral = CByte(MapMoralType.Indoors) Then
             NightGfx.Clear(New Color(CByte(0), CByte(0), CByte(0), CByte(Map.Brightness)))
@@ -3396,6 +3233,7 @@ Module C_Graphics
                         .X = 0
                         .Width = width
                     End With
+                    
                     EditorAnimation_Anim1.Clear(ToSfmlColor(FrmEditor_Animation.picSprite0.BackColor))
                     RenderSprite(AnimationsSprite(Animationnum), EditorAnimation_Anim1, dRECT.X, dRECT.Y, sRECT.X,
                                  sRECT.Y, sRECT.Width, sRECT.Height)
@@ -3405,6 +3243,7 @@ Module C_Graphics
         End If
 
         Animationnum = FrmEditor_Animation.nudSprite1.Value
+
         If Animationnum < 1 OrElse Animationnum > NumAnimations Then
             EditorAnimation_Anim2.Clear(ToSfmlColor(FrmEditor_Animation.picSprite1.BackColor))
             EditorAnimation_Anim2.Display()

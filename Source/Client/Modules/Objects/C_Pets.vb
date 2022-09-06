@@ -34,7 +34,7 @@ Module C_Pets
 #Region "Database"
 
     Sub ClearPet(index As Integer)
-
+        Pet(index) = Nothing
         Pet(index).Name = ""
 
         ReDim Pet(index).Stat(StatType.Count - 1)
@@ -781,21 +781,16 @@ Module C_Pets
             End If
         Next
 
-        frmEditor_Pet.Dispose()
-
         Editor = -1
         ClearChanged_Pet()
+        SendCloseEditor()
     End Sub
 
     Friend Sub PetEditorCancel()
         Editor = -1
-
-        frmEditor_Pet.Dispose()
-
         ClearChanged_Pet()
         ClearPets()
-        SendRequestPets()
-
+        SendCloseEditor()
     End Sub
 
     Friend Sub ClearChanged_Pet()

@@ -111,7 +111,7 @@ Friend Module C_EventSystem
     Sub DeleteEvent(ByVal X As Integer, ByVal Y As Integer)
         Dim count As Integer, i As Integer, lowIndex As Integer
 
-        If Not InMapEditor Then Exit Sub
+        If Editor <> EditorType.Map Then Exit Sub
         If FrmEditor_Events.Visible = True Then Exit Sub
 
         count = Map.EventCount
@@ -2870,7 +2870,7 @@ nextevent:
 #Region "Misc"
 
     Sub ProcessEventMovement(id As Integer)
-        If InMapEditor Then Exit Sub
+        If Editor = EditorType.Map Then Exit Sub
         If id > Map.EventCount Then Exit Sub
         If id > Map.MapEvents.Length Then Exit Sub
 

@@ -14,6 +14,7 @@ Module C_Shops
 #Region "Database"
 
     Sub ClearShop(index As Integer)
+        Shop(index) = Nothing
         Shop(index).Name = ""
         ReDim Shop(index).TradeItem(MAX_TRADES)
         For x = 0 To MAX_TRADES
@@ -30,6 +31,13 @@ Module C_Shops
             ClearShop(i)
         Next
 
+    End Sub
+
+    Sub StreamShop(shopNum As Integer)
+        If shopNum > 0 and Shop(shopNum).Name = "" And Shop_Loaded(shopNum) = False Then
+            Shop_Loaded(shopNum) = True
+            SendRequestItem(shopNum)
+        End If
     End Sub
 
 #End Region
@@ -76,10 +84,10 @@ Module C_Shops
 
 #Region "Outgoing Packets"
 
-    Friend Sub SendRequestShops()
+    Friend Sub SendRequestShop(shopNum As Integer)
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CRequestShops)
+        buffer.WriteInt32(ClientPackets.CRequestShop)
 
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
@@ -119,6 +127,10 @@ Module C_Shops
 
         'first render panel
         RenderSprite(ShopPanelSprite, GameWindow, ShopWindowX, ShopWindowY, 0, 0, ShopPanelGfxInfo.Width, ShopPanelGfxInfo.Height)
+
+        if InShop = 0 Then Exit Sub
+
+        StreamShop(InShop)
 
         If Shop(InShop).Face > 0 Then
             'render face
@@ -166,7 +178,7 @@ Module C_Shops
        For i = 0 To MAX_TRADES
             itemnum = Shop(InShop).TradeItem(i).Item
             If itemnum > 0 AndAlso itemnum <= MAX_ITEMS Then
-               StreamItem(itemnum)
+                StreamItem(itemnum)
                 itempic = Item(itemnum).Pic
                 If itempic > 0 AndAlso itempic <= NumItems Then
 

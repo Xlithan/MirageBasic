@@ -1,6 +1,5 @@
 ﻿Imports System.IO
 Imports MirageBasic.Core
-
 Friend Class frmEditor_Pet
 
 #Region "Basics"
@@ -35,13 +34,12 @@ Friend Class frmEditor_Pet
 
         tmpindex = lstIndex.SelectedIndex
         Pet(Editorindex).Name = Trim$(txtName.Text)
-        lstIndex.Items.RemoveAt(EditorIndex)
+lstIndex.Items.RemoveAt(EditorIndex)
         lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & Pet(Editorindex).Name)
         lstIndex.SelectedIndex = tmpindex
     End Sub
 
-    Private Sub NudSprite_ValueChanged(sender As Object, e As EventArgs) Handles nudSprite.Click
-
+    Private Sub NudSprite_Click(sender As Object, e As EventArgs) Handles nudSprite.Click
         Pet(Editorindex).Sprite = nudSprite.Value
 
         EditorPet_DrawPet()
@@ -58,7 +56,11 @@ Friend Class frmEditor_Pet
         End If
 
         If File.Exists(Paths.Graphics & "Characters\" & petnum & GfxExt) Then
+            picSprite.Width = Drawing.Image.FromFile(Paths.Graphics & "characters\" & petnum & GfxExt).Width/4
+            picSprite.Height = Drawing.Image.FromFile(Paths.Graphics & "characters\" & petnum & GfxExt).Height/4
             picSprite.BackgroundImage = Image.FromFile(Paths.Graphics & "Characters\" & petnum & GfxExt)
+        Else
+            picSprite.BackgroundImage = Nothing
         End If
 
     End Sub
@@ -75,10 +77,13 @@ Friend Class frmEditor_Pet
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         PetEditorCancel()
         Dispose()
-    End Sub
+End Sub
+
+
+
+
 
 #End Region
-
 #Region "Stats"
 
     Private Sub OptCustomStats_CheckedChanged(sender As Object, e As EventArgs) Handles optCustomStats.CheckedChanged
@@ -129,8 +134,10 @@ Friend Class frmEditor_Pet
         Pet(Editorindex).Level = nudLevel.Value
     End Sub
 
-#End Region
 
+
+
+#End Region
 #Region "Leveling"
 
     Private Sub NudPetExp_ValueChanged(sender As Object, e As EventArgs) Handles nudPetExp.Click
@@ -156,11 +163,13 @@ Friend Class frmEditor_Pet
         If optDoNotLevel.Checked = True Then
             pnlPetlevel.Visible = False
             Pet(Editorindex).LevelingType = 0
-        End If
+End If
     End Sub
 
-#End Region
 
+
+
+#End Region
 #Region "Skills"
 
     Private Sub CmbSkill1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSkill1.SelectedIndexChanged
@@ -179,8 +188,10 @@ Friend Class frmEditor_Pet
         Pet(Editorindex).Skill(4) = cmbSkill4.SelectedIndex
     End Sub
 
-#End Region
 
+
+
+#End Region
 #Region "Evolving"
 
     Private Sub ChkEvolve_CheckedChanged(sender As Object, e As EventArgs) Handles chkEvolve.CheckedChanged

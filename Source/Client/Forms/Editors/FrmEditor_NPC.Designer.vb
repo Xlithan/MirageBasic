@@ -125,7 +125,7 @@ Partial Class frmEditor_NPC
         Me.DarkGroupBox1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DarkGroupBox1.Name = "DarkGroupBox1"
         Me.DarkGroupBox1.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox1.Size = New System.Drawing.Size(265, 582)
+        Me.DarkGroupBox1.Size = New System.Drawing.Size(265, 444)
         Me.DarkGroupBox1.TabIndex = 0
         Me.DarkGroupBox1.TabStop = false
         Me.DarkGroupBox1.Text = "Npc List"
@@ -140,7 +140,7 @@ Partial Class frmEditor_NPC
         Me.lstIndex.Location = New System.Drawing.Point(5, 18)
         Me.lstIndex.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.lstIndex.Name = "lstIndex"
-        Me.lstIndex.Size = New System.Drawing.Size(255, 557)
+        Me.lstIndex.Size = New System.Drawing.Size(255, 422)
         Me.lstIndex.TabIndex = 2
         '
         'DarkGroupBox2
@@ -882,31 +882,31 @@ Partial Class frmEditor_NPC
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(648, 557)
+        Me.btnCancel.Location = New System.Drawing.Point(9, 518)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnCancel.Size = New System.Drawing.Size(88, 27)
+        Me.btnCancel.Size = New System.Drawing.Size(255, 27)
         Me.btnCancel.TabIndex = 5
         Me.btnCancel.Text = "Cancel"
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(458, 557)
+        Me.btnDelete.Location = New System.Drawing.Point(9, 485)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnDelete.Size = New System.Drawing.Size(88, 27)
+        Me.btnDelete.Size = New System.Drawing.Size(255, 27)
         Me.btnDelete.TabIndex = 6
         Me.btnDelete.Text = "Delete"
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(275, 557)
+        Me.btnSave.Location = New System.Drawing.Point(9, 452)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnSave.Size = New System.Drawing.Size(88, 27)
+        Me.btnSave.Size = New System.Drawing.Size(255, 27)
         Me.btnSave.TabIndex = 7
         Me.btnSave.Text = "Save"
         '
@@ -915,7 +915,7 @@ Partial Class frmEditor_NPC
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
-        Me.ClientSize = New System.Drawing.Size(743, 588)
+        Me.ClientSize = New System.Drawing.Size(743, 557)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnCancel)

@@ -333,20 +333,16 @@ Friend Module C_Projectiles
             End If
         Next
 
-        frmEditor_Projectile.Dispose()
         Editor = -1
         ClearChanged_Projectile()
-
+        SendCloseEditor()
     End Sub
 
     Friend Sub ProjectileEditorCancel()
-
         Editor = -1
-        frmEditor_Projectile.Dispose()
         ClearChanged_Projectile()
         ClearProjectile()
-        SendRequestProjectile()
-
+        SendCloseEditor()
     End Sub
 
     Friend Sub ClearChanged_Projectile()

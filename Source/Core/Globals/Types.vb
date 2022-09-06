@@ -181,12 +181,6 @@ Public Module Types
         Dim Stackable As Byte
         Dim ItemLevel As Byte
 
-        'Housing
-        Dim FurnitureWidth As Integer
-        Dim FurnitureHeight As Integer
-        Dim FurnitureBlocks(,) As Integer
-        Dim FurnitureFringe(,) As Integer
-
         Dim KnockBack As Byte
         Dim KnockBackTiles As Byte
 
@@ -350,14 +344,6 @@ Public Module Types
         Dim Dir As Byte
 
         Dim PlayerQuest() As PlayerQuestStruct
-
-        'Housing
-        Dim House As PlayerHouseStruct
-
-        Dim InHouse As Integer
-        Dim LastMap As Integer
-        Dim LastX As Integer
-        Dim LastY As Integer
 
         'Hotbar
         Dim Hotbar() As HotbarStruct
@@ -523,6 +509,7 @@ Public Module Types
 
         Dim Panorama As Byte
         Dim Parallax As Byte
+        Dim Brightness as Byte
     End Structure
 
     Public Structure MapItemStruct

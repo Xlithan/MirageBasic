@@ -351,6 +351,7 @@ Module S_Pets
         Dim buffer = New ByteStream(4)
 
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
+        If TempPlayer(index).Editor > -1 Then  Exit Sub
 
         Dim user As String
 
@@ -415,8 +416,6 @@ Module S_Pets
     End Sub
 
     Sub Packet_RequestPets(index As Integer, ByRef data() As Byte)
-        TempPlayer(index).Editor = -1
-
         SendPets(index)
     End Sub
 

@@ -860,7 +860,7 @@ Module S_Players
         Do While GetPlayerExp(index) >= GetPlayerNextLevel(index)
             expRollover = GetPlayerExp(index) - GetPlayerNextLevel(index)
             SetPlayerLevel(index, GetPlayerLevel(index) + 1)
-            SetPlayerPOINTS(index, GetPlayerPOINTS(index) + 3)
+            SetPlayerPOINTS(index, GetPlayerPOINTS(index) + STAT_PER_LEVEL)
             SetPlayerExp(index, expRollover)
             level_count += 1
         Loop
@@ -952,22 +952,6 @@ Module S_Players
 
         TempPlayer(index).EventProcessingCount = 0
         TempPlayer(index).EventMap.CurrentEvents = 0
-
-        If HouseTeleport = False Then
-            Player(index).InHouse = 0
-        End If
-
-        If Player(index).InHouse > 0 Then
-            If IsPlaying(Player(index).InHouse) Then
-                If Player(index).InHouse <> Player(index).InHouse Then
-                    Player(index).InHouse = 0
-                    PlayerWarp(index, Player(index).LastMap, Player(index).LastX, Player(index).LastY)
-                    Exit Sub
-                Else
-                    SendFurnitureToHouse(Player(index).InHouse)
-                End If
-            End If
-        End If
 
         'clear target
         TempPlayer(index).Target = 0
@@ -1259,50 +1243,7 @@ Module S_Players
                 Moved = True
             End If
 
-            'Housing
-            If .Type = TileType.House Then
-                If Player(index).House.Houseindex = .Data1 Then
-                    'Do warping and such to the player's house :/
-                    Player(index).LastMap = GetPlayerMap(index)
-                    Player(index).LastX = GetPlayerX(index)
-                    Player(index).LastY = GetPlayerY(index)
-                    Player(index).InHouse = index
-                    Dim data = PlayerData(index)
-                    Socket.SendDataTo(index, data, data.Length)
-                    PlayerWarp(index, HouseConfig(Player(index).House.Houseindex).BaseMap, HouseConfig(Player(index).House.Houseindex).X, HouseConfig(Player(index).House.Houseindex).Y, True)
-                    DidWarp = True
-                    Exit Sub
-                Else
-                    'Send the buy sequence and see what happens. (To be recreated in events.)
-                    Buffer = New ByteStream(4)
-                    Buffer.WriteInt32(ServerPackets.SBuyHouse)
-                    Buffer.WriteInt32(.Data1)
-                    Socket.SendDataTo(index, Buffer.Data, Buffer.Head)
-                    Buffer.Dispose()
-                    TempPlayer(index).BuyHouseindex = .Data1
-                End If
-            End If
-
-            'crafting
-            If .Type = TileType.Craft Then
-                TempPlayer(index).IsCrafting = True
-                SendPlayerRecipes(index)
-                SendOpenCraft(index)
-                Moved = True
-            End If
-
         End With
-
-        If Moved = True Then
-            If Player(index).InHouse > 0 Then
-                If Player(index).X = HouseConfig(Player(Player(index).InHouse).House.Houseindex).X Then
-                    If Player(index).Y = HouseConfig(Player(Player(index).InHouse).House.Houseindex).Y Then
-                        PlayerWarp(index, Player(index).LastMap, Player(index).LastX, Player(index).LastY)
-                        DidWarp = True
-                    End If
-                End If
-            End If
-        End If
 
         ' They tried to hack
         If Moved = False OrElse (ExpectingWarp AndAlso Not DidWarp) Then
@@ -2200,18 +2141,12 @@ Module S_Players
                             PlayerMsg(index, "You must be level " & i & " to learn this skill.", ColorType.Yellow)
                         End If
                     Else
-                        PlayerMsg(index, "This skill can only be learned by " & CheckGrammar(GetJobName(Skill(n).JobReq)) & ".", ColorType.Yellow)
+                        PlayerMsg(index, "This skill can only be learned by " & CheckGrammar(Job(Skill(n).JobReq).Name.Trim) & ".", ColorType.Yellow)
                     End If
                 Else
                     PlayerMsg(index, "This scroll is not connected to a skill, please inform an admin!", ColorType.BrightRed)
                 End If
-            Case ItemType.Furniture
-                PlayerMsg(index, "To place furniture, simply click on it in your inventory, then click in your house where you want it.", ColorType.Yellow)
 
-            Case ItemType.Recipe
-                ' Get the recipe num
-                n = Item(InvItemNum).Data1
-                LearnRecipe(index, n, InvNum)
             Case ItemType.Pet
                 If Item(InvItemNum).Stackable = 1 Then
                     TakeInvItem(index, InvItemNum, 1)
@@ -2397,32 +2332,20 @@ Module S_Players
         ' Send an ok to client to start receiving in game data
         SendLoadCharOk(index)
 
-        ' Set some data related to housing instances.
-        If Player(index).InHouse Then
-            Player(index).InHouse = 0
-            Player(index).X = Player(index).LastX
-            Player(index).Y = Player(index).LastY
-            Player(index).Map = Player(index).LastMap
-        End If
-
         ' Send all the required game data to the user.
         SendTotalOnlineTo(index)
         CheckEquippedItems(index)
         SendInventory(index)
         SendWornEquipment(index)
         SendMapEquipment(index)
-        SendProjectile(index)
         SendVitals(index)
         SendExp(index)
         SendQuests(index)
         SendPlayerQuests(index)
-        SendMapNames(index)
         SendHotbar(index)
         SendPlayerSkills(index)
-        SendRecipes(index)
         SendStats(index)
         SendJoinMap(index)
-        SendPets(index)
         SendUpdatePlayerPet(index, True)
         SendTimeTo(index)
         SendGameClockTo(index)
@@ -2728,12 +2651,6 @@ Module S_Players
                     PlayerMsg(index, "You do not have a target.", ColorType.BrightRed)
                 End If
                 If TargetType = TargetType.Player Then
-                    'Housing
-                    If Player(Target).InHouse = Player(index).InHouse Then
-                        If CanPlayerAttackPlayer(index, Target, True) Then
-                            HasBuffered = True
-                        End If
-                    End If
                     ' if have target, check in range
                     If Not IsInRange(range, GetPlayerX(index), GetPlayerY(index), GetPlayerX(Target), GetPlayerY(Target)) Then
                         PlayerMsg(index, "Target not in range.", ColorType.BrightRed)

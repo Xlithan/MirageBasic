@@ -622,56 +622,56 @@ Module C_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Friend Sub SendSaveJob()
+    Friend Sub SendSaveJob(jobNum As Integer)
         Dim i As Integer, n As Integer, q As Integer
         Dim buffer As New ByteStream(4)
 
         buffer.WriteInt32(ClientPackets.CSaveJob)
 
-       For i = 0 To MAX_JOBS
-            buffer.WriteString((Trim$(Job(i).Name)))
-            buffer.WriteString((Trim$(Job(i).Desc)))
+        buffer.WriteInt32(jobNum)
 
-            ' set sprite array size
-            n = UBound(Job(i).MaleSprite)
+        buffer.WriteString((Trim$(Job(jobNum).Name)))
+        buffer.WriteString((Trim$(Job(jobNum).Desc)))
 
-            ' send array size
-            buffer.WriteInt32(n)
+        ' set sprite array size
+        n = UBound(Job(jobNum).MaleSprite)
 
-            ' loop around sending each sprite
-            For q = 0 To n
-                buffer.WriteInt32(Job(i).MaleSprite(q))
-            Next
+        ' send array size
+        buffer.WriteInt32(n)
 
-            ' set sprite array size
-            n = UBound(Job(i).FemaleSprite)
-
-            ' send array size
-            buffer.WriteInt32(n)
-
-            ' loop around sending each sprite
-            For q = 0 To n
-                buffer.WriteInt32(Job(i).FemaleSprite(q))
-            Next
-
-            buffer.WriteInt32(Job(i).Stat(StatType.Strength))
-            buffer.WriteInt32(Job(i).Stat(StatType.Endurance))
-            buffer.WriteInt32(Job(i).Stat(StatType.Vitality))
-            buffer.WriteInt32(Job(i).Stat(StatType.Intelligence))
-            buffer.WriteInt32(Job(i).Stat(StatType.Luck))
-            buffer.WriteInt32(Job(i).Stat(StatType.Spirit))
-
-            For q = 0 To 5
-                buffer.WriteInt32(Job(i).StartItem(q))
-                buffer.WriteInt32(Job(i).StartValue(q))
-            Next
-
-            buffer.WriteInt32(Job(i).StartMap)
-            buffer.WriteInt32(Job(i).StartX)
-            buffer.WriteInt32(Job(i).StartY)
-
-            buffer.WriteInt32(Job(i).BaseExp)
+        ' loop around sending each sprite
+        For q = 0 To n
+            buffer.WriteInt32(Job(jobNum).MaleSprite(q))
         Next
+
+        ' set sprite array size
+        n = UBound(Job(jobNum).FemaleSprite)
+
+        ' send array size
+        buffer.WriteInt32(n)
+
+        ' loop around sending each sprite
+        For q = 0 To n
+            buffer.WriteInt32(Job(jobNum).FemaleSprite(q))
+        Next
+
+        buffer.WriteInt32(Job(jobNum).Stat(StatType.Strength))
+        buffer.WriteInt32(Job(jobNum).Stat(StatType.Endurance))
+        buffer.WriteInt32(Job(jobNum).Stat(StatType.Vitality))
+        buffer.WriteInt32(Job(jobNum).Stat(StatType.Intelligence))
+        buffer.WriteInt32(Job(jobNum).Stat(StatType.Luck))
+        buffer.WriteInt32(Job(jobNum).Stat(StatType.Spirit))
+
+        For q = 0 To 5
+            buffer.WriteInt32(Job(jobNum).StartItem(q))
+            buffer.WriteInt32(Job(jobNum).StartValue(q))
+        Next
+
+        buffer.WriteInt32(Job(jobNum).StartMap)
+        buffer.WriteInt32(Job(jobNum).StartX)
+        buffer.WriteInt32(Job(jobNum).StartY)
+
+        buffer.WriteInt32(Job(jobNum).BaseExp)
 
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
@@ -719,17 +719,6 @@ Module C_NetworkSend
 
         buffer.WriteInt32(Item(itemNum).ItemLevel)
 
-        'Housing
-        buffer.WriteInt32(Item(itemNum).FurnitureWidth)
-        buffer.WriteInt32(Item(itemNum).FurnitureHeight)
-
-        For i = 0 To 3
-            For X = 0 To 3
-                buffer.WriteInt32(Item(itemNum).FurnitureBlocks(i, x))
-                buffer.WriteInt32(Item(itemNum).FurnitureFringe(i, x))
-            Next
-        Next
-
         buffer.WriteInt32(Item(itemNum).KnockBack)
         buffer.WriteInt32(Item(itemNum).KnockBackTiles)
 
@@ -748,4 +737,11 @@ Module C_NetworkSend
         buffer.Dispose()
     End Sub
 
+    Friend Sub SendCloseEditor()
+        Dim buffer As New ByteStream(4)
+
+        buffer.WriteInt32(ClientPackets.CCloseEditor)
+        Socket.SendData(buffer.Data, buffer.Head)
+        buffer.Dispose()
+    End Sub
 End Module

@@ -73,7 +73,7 @@ Partial Class frmEditor_Skill
         Me.DarkLabel7 = New DarkUI.Controls.DarkLabel()
         Me.DarkGroupBox4 = New DarkUI.Controls.DarkGroupBox()
         Me.DarkLabel6 = New DarkUI.Controls.DarkLabel()
-        Me.cmbClass = New DarkUI.Controls.DarkComboBox()
+        Me.cmbJob = New DarkUI.Controls.DarkComboBox()
         Me.cmbAccessReq = New DarkUI.Controls.DarkComboBox()
         Me.DarkLabel5 = New DarkUI.Controls.DarkLabel()
         Me.nudLevel = New DarkUI.Controls.DarkNumericUpDown()
@@ -119,7 +119,7 @@ Partial Class frmEditor_Skill
         Me.DarkGroupBox1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DarkGroupBox1.Name = "DarkGroupBox1"
         Me.DarkGroupBox1.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox1.Size = New System.Drawing.Size(214, 455)
+        Me.DarkGroupBox1.Size = New System.Drawing.Size(214, 354)
         Me.DarkGroupBox1.TabIndex = 0
         Me.DarkGroupBox1.TabStop = false
         Me.DarkGroupBox1.Text = "Skill List"
@@ -134,16 +134,13 @@ Partial Class frmEditor_Skill
         Me.lstIndex.Location = New System.Drawing.Point(7, 22)
         Me.lstIndex.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.lstIndex.Name = "lstIndex"
-        Me.lstIndex.Size = New System.Drawing.Size(199, 422)
+        Me.lstIndex.Size = New System.Drawing.Size(199, 317)
         Me.lstIndex.TabIndex = 1
         '
         'DarkGroupBox2
         '
         Me.DarkGroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
         Me.DarkGroupBox2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
-        Me.DarkGroupBox2.Controls.Add(Me.btnDelete)
-        Me.DarkGroupBox2.Controls.Add(Me.btnCancel)
-        Me.DarkGroupBox2.Controls.Add(Me.btnSave)
         Me.DarkGroupBox2.Controls.Add(Me.DarkGroupBox5)
         Me.DarkGroupBox2.Controls.Add(Me.DarkGroupBox3)
         Me.DarkGroupBox2.ForeColor = System.Drawing.Color.Gainsboro
@@ -158,31 +155,31 @@ Partial Class frmEditor_Skill
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(161, 417)
+        Me.btnDelete.Location = New System.Drawing.Point(11, 396)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnDelete.Size = New System.Drawing.Size(88, 27)
+        Me.btnDelete.Size = New System.Drawing.Size(199, 27)
         Me.btnDelete.TabIndex = 4
         Me.btnDelete.Text = "Delete"
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(303, 417)
+        Me.btnCancel.Location = New System.Drawing.Point(11, 429)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnCancel.Size = New System.Drawing.Size(88, 27)
+        Me.btnCancel.Size = New System.Drawing.Size(199, 27)
         Me.btnCancel.TabIndex = 3
         Me.btnCancel.Text = "Cancel"
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(7, 417)
+        Me.btnSave.Location = New System.Drawing.Point(11, 363)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnSave.Size = New System.Drawing.Size(88, 27)
+        Me.btnSave.Size = New System.Drawing.Size(199, 27)
         Me.btnSave.TabIndex = 2
         Me.btnSave.Text = "Save"
         '
@@ -684,7 +681,7 @@ Partial Class frmEditor_Skill
         Me.DarkGroupBox4.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
         Me.DarkGroupBox4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.DarkGroupBox4.Controls.Add(Me.DarkLabel6)
-        Me.DarkGroupBox4.Controls.Add(Me.cmbClass)
+        Me.DarkGroupBox4.Controls.Add(Me.cmbJob)
         Me.DarkGroupBox4.Controls.Add(Me.cmbAccessReq)
         Me.DarkGroupBox4.Controls.Add(Me.DarkLabel5)
         Me.DarkGroupBox4.Controls.Add(Me.nudLevel)
@@ -710,15 +707,15 @@ Partial Class frmEditor_Skill
         Me.DarkLabel6.TabIndex = 11
         Me.DarkLabel6.Text = "Job Required:"
         '
-        'cmbClass
+        'cmbJob
         '
-        Me.cmbClass.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbClass.FormattingEnabled = true
-        Me.cmbClass.Location = New System.Drawing.Point(110, 52)
-        Me.cmbClass.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbClass.Name = "cmbClass"
-        Me.cmbClass.Size = New System.Drawing.Size(254, 24)
-        Me.cmbClass.TabIndex = 10
+        Me.cmbJob.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbJob.FormattingEnabled = true
+        Me.cmbJob.Location = New System.Drawing.Point(110, 52)
+        Me.cmbJob.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbJob.Name = "cmbJob"
+        Me.cmbJob.Size = New System.Drawing.Size(254, 24)
+        Me.cmbJob.TabIndex = 10
         '
         'cmbAccessReq
         '
@@ -831,8 +828,11 @@ Partial Class frmEditor_Skill
         Me.AutoSize = true
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
         Me.ClientSize = New System.Drawing.Size(952, 463)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.DarkGroupBox2)
         Me.Controls.Add(Me.DarkGroupBox1)
+        Me.Controls.Add(Me.btnSave)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.Name = "frmEditor_Skill"
@@ -885,7 +885,7 @@ End Sub
     Friend WithEvents DarkLabel5 As DarkUI.Controls.DarkLabel
     Friend WithEvents cmbAccessReq As DarkUI.Controls.DarkComboBox
     Friend WithEvents DarkLabel6 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbClass As DarkUI.Controls.DarkComboBox
+    Friend WithEvents cmbJob As DarkUI.Controls.DarkComboBox
     Friend WithEvents nudCast As DarkUI.Controls.DarkNumericUpDown
     Friend WithEvents DarkLabel7 As DarkUI.Controls.DarkLabel
     Friend WithEvents nudCool As DarkUI.Controls.DarkNumericUpDown

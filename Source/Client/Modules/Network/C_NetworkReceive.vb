@@ -89,12 +89,6 @@ Module C_NetworkReceive
         Socket.PacketId(ServerPackets.SPlayerQuests) = AddressOf Packet_PlayerQuests
         Socket.PacketId(ServerPackets.SQuestMessage) = AddressOf Packet_QuestMessage
 
-        'Housing
-        Socket.PacketId(ServerPackets.SHouseConfigs) = AddressOf Packet_HouseConfigurations
-        Socket.PacketId(ServerPackets.SBuyHouse) = AddressOf Packet_HouseOffer
-        Socket.PacketId(ServerPackets.SVisit) = AddressOf Packet_Visit
-        Socket.PacketId(ServerPackets.SFurniture) = AddressOf Packet_Furniture
-
         'hotbar
         Socket.PacketId(ServerPackets.SHotbar) = AddressOf Packet_Hotbar
 
@@ -118,12 +112,6 @@ Module C_NetworkReceive
 
         Socket.PacketId(ServerPackets.SUpdateProjectile) = AddressOf HandleUpdateProjectile
         Socket.PacketId(ServerPackets.SMapProjectile) = AddressOf HandleMapProjectile
-
-        'craft
-        Socket.PacketId(ServerPackets.SUpdateRecipe) = AddressOf Packet_UpdateRecipe
-        Socket.PacketId(ServerPackets.SSendPlayerRecipe) = AddressOf Packet_SendPlayerRecipe
-        Socket.PacketId(ServerPackets.SOpenCraft) = AddressOf Packet_OpenCraft
-        Socket.PacketId(ServerPackets.SUpdateCraft) = AddressOf Packet_UpdateCraft
 
         'emotes
         Socket.PacketId(ServerPackets.SEmote) = AddressOf Packet_Emote
@@ -155,9 +143,7 @@ Module C_NetworkReceive
         Socket.PacketId(ServerPackets.SResourceEditor) = AddressOf Packet_ResourceEditor
         Socket.PacketId(ServerPackets.SAnimationEditor) = AddressOf Packet_EditAnimation
         Socket.PacketId(ServerPackets.SQuestEditor) = AddressOf Packet_QuestEditor
-        Socket.PacketId(ServerPackets.SHouseEdit) = AddressOf Packet_EditHouses
         Socket.PacketId(ServerPackets.SProjectileEditor) = AddressOf HandleProjectileEditor
-        Socket.PacketId(ServerPackets.SRecipeEditor) = AddressOf Packet_RecipeEditor
         Socket.PacketId(ServerPackets.SJobEditor) = AddressOf Packet_ClassEditor
         Socket.PacketId(ServerPackets.SPetEditor) = AddressOf Packet_PetEditor
     End Sub
@@ -271,9 +257,147 @@ Module C_NetworkReceive
 
     End Sub
 
+        Sub Packet_NewCharJob(ByRef data() As Byte)
+        Dim i As Integer, z As Integer, x As Integer
+        Dim buffer As New ByteStream(data)
+
+       For i = 0 To MAX_JOBS
+            With Job(i)
+                .Name = Trim(buffer.ReadString)
+                .Desc = Trim(buffer.ReadString)
+
+                ' get array size
+                z = buffer.ReadInt32
+
+                ' redim array
+                ReDim .MaleSprite(z)
+
+                ' loop-receive data
+                For x = 0 To z
+                    .MaleSprite(x) = buffer.ReadInt32
+                Next
+
+                ' get array size
+                z = buffer.ReadInt32
+
+                ' redim array
+                ReDim .FemaleSprite(z)
+                ' loop-receive data
+                For x = 0 To z
+                    .FemaleSprite(x) = buffer.ReadInt32
+                Next
+
+                ReDim .Stat(StatType.Count - 1)
+
+                .Stat(StatType.Strength) = buffer.ReadInt32
+                .Stat(StatType.Endurance) = buffer.ReadInt32
+                .Stat(StatType.Vitality) = buffer.ReadInt32
+                .Stat(StatType.Intelligence) = buffer.ReadInt32
+                .Stat(StatType.Luck) = buffer.ReadInt32
+                .Stat(StatType.Spirit) = buffer.ReadInt32
+
+                ReDim .StartItem(5)
+                ReDim .StartValue(5)
+                For q = 0 To 5
+                    .StartItem(q) = buffer.ReadInt32
+                    .StartValue(q) = buffer.ReadInt32
+                Next
+
+                .StartMap = buffer.ReadInt32
+                .StartX = buffer.ReadInt32
+                .StartY = buffer.ReadInt32
+
+                .BaseExp = buffer.ReadInt32
+            End With
+
+        Next
+
+        buffer.Dispose()
+
+        ' Used for if the player is creating a new character
+        Frmmenuvisible = True
+        Pnlloadvisible = False
+        PnlCreditsVisible = False
+        PnlRegisterVisible = False
+        PnlCharCreateVisible = True
+        PnlLoginVisible = False
+
+        ReDim CmbJob(MAX_JOBS)
+
+       For i = 0 To MAX_JOBS
+            CmbJob(i) = Job(i).Name
+        Next
+
+        FrmMenu.DrawCharacter()
+
+        NewCharSprite = 0
+    End Sub
+
+    Sub Packet_JobData(ByRef data() As Byte)
+        Dim i As Integer, z As Integer, x As Integer
+        Dim buffer As New ByteStream(data)
+
+        For i = 0 To MAX_JOBS
+            With Job(i)
+                .Name = Trim(buffer.ReadString)
+                .Desc = Trim(buffer.ReadString)
+
+                ' get array size
+                z = buffer.ReadInt32
+
+                ' redim array
+                ReDim .MaleSprite(z)
+
+                ' loop-receive data
+                For x = 0 To z
+                    .MaleSprite(x) = buffer.ReadInt32
+                Next
+
+                ' get array size
+                z = buffer.ReadInt32
+
+                ' redim array
+                ReDim .FemaleSprite(z)
+
+                ' loop-receive data
+                For x = 0 To z
+                    .FemaleSprite(x) = buffer.ReadInt32
+                Next
+
+                for x = 0 to StatType.Count - 1
+                    .Stat(x) = buffer.ReadInt32()
+                Next
+
+                ReDim .StartItem(5)
+                ReDim .StartValue(5)
+
+                For q = 0 To 5
+                    .StartItem(q) = buffer.ReadInt32
+                    .StartValue(q) = buffer.ReadInt32
+                Next
+
+                .StartMap = buffer.ReadInt32
+                .StartX = buffer.ReadInt32
+                .StartY = buffer.ReadInt32
+
+                .BaseExp = buffer.ReadInt32
+            End With
+
+        Next
+
+       ReDim CmbJob(MAX_JOBS)
+       For i = 0 To MAX_JOBS
+            CmbJob(i) = Job(i).Name
+        Next
+        FrmMenu.DrawCharacter()
+
+        buffer.Dispose()
+    End Sub
+
     Private Sub Packet_InGame(ByRef data() As Byte)
         InGame = True
         CanMoveNow = True
+        Editor = -1
         GameInit()
     End Sub
 
@@ -843,17 +967,6 @@ Module C_NetworkReceive
             Item(n).SubType = buffer.ReadInt32
 
             Item(n).ItemLevel = buffer.ReadInt32
-
-            'Housing
-            Item(n).FurnitureWidth = buffer.ReadInt32()
-            Item(n).FurnitureHeight = buffer.ReadInt32()
-
-            For a = 0 To 3
-                For b = 0 To 3
-                    Item(n).FurnitureBlocks(a, b) = buffer.ReadInt32()
-                    Item(n).FurnitureFringe(a, b) = buffer.ReadInt32()
-                Next
-            Next
 
             Item(n).KnockBack = buffer.ReadInt32()
             Item(n).KnockBackTiles = buffer.ReadInt32()

@@ -44,13 +44,13 @@
         CRequestPlayerData
         CRequestItem
         CRequestNPCS
-        CRequestResources
+        CRequestResource
         CSpawnItem
         CTrainStat
 
-        CRequestAnimations
+        CRequestAnimation
         CRequestSkill
-        CRequestShops
+        CRequestShop
         CRequestLevelUp
         CForgetSkill
         CCloseShop
@@ -77,14 +77,6 @@
         CPlayerHandleQuest
         CQuestReset
 
-        'Housing
-        CBuyHouse
-        CVisit
-        CAcceptVisit
-        CPlaceFurniture
-
-        CSellHouse
-
         'Hotbar
         CSetHotbarSlot
         CDeleteHotbarSlot
@@ -99,12 +91,7 @@
         CRequestProjectiles
         CClearProjectile
 
-        CRequestRecipes
-
-        CCloseCraft
-        CStartCraft
-
-        CRequestClass
+        CRequestJob
 
         'emotes
         CEmote
@@ -142,13 +129,9 @@
         CRequestEditAnimation
         CSaveAnimation
 
-        'Class Editor
+        'job
         CRequestEditJob
         CSaveJob
-
-        'houses
-        CRequestEditHouse
-        CSaveHouses
 
         'items
         CRequestEditItem
@@ -170,10 +153,6 @@
         CRequestEditQuest
         CSaveQuest
 
-        'recipe
-        CRequestEditRecipes
-        CSaveRecipe
-
         'resources
         CRequestEditResource
         CSaveResource
@@ -185,6 +164,8 @@
         'skills
         CRequestEditSkill
         CSaveSkill
+
+        CCloseEditor
 
         ' Make sure COUNT is below everything else
         Count
@@ -315,13 +296,6 @@
         SProjectileEditor
         SUpdateProjectile
         SMapProjectile
-
-        'recipes
-        SUpdateRecipe
-        SRecipeEditor
-        SSendPlayerRecipe
-        SOpenCraft
-        SUpdateCraft
 
         'Class Editor
         SJobEditor

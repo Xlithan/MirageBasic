@@ -1,4 +1,5 @@
 ﻿Imports MirageBasic.Core
+Imports SFML.Graphics
 
 Friend Class FrmEditor_Animation
     Private Sub NudSprite0_ValueChanged(sender As Object, e As EventArgs) Handles nudSprite0.Click
@@ -77,8 +78,19 @@ Friend Class FrmEditor_Animation
             lstIndex.Items.Add(i & ": " & Trim$(Animation(i).Name))
         Next
 
+        ' find the music we have set
+        cmbSound.Items.Clear()
+
+        CacheSound
+        For i = 0 To UBound(SoundCache)
+            cmbSound.Items.Add(SoundCache(i))
+        Next
+
         nudSprite0.Maximum = NumAnimations
         nudSprite1.Maximum = NumAnimations
+
+        EditorAnimation_Anim1 = New RenderWindow(picSprite0.Handle)
+        EditorAnimation_Anim2 = New RenderWindow(picSprite1.Handle)
     End Sub
 
     Private Sub CmbSound_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSound.SelectedIndexChanged
@@ -88,4 +100,5 @@ Friend Class FrmEditor_Animation
     Private Sub FrmEditor_Animation_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         AnimationEditorCancel
     End Sub
+
 End Class

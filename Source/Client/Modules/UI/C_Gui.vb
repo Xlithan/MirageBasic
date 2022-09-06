@@ -377,26 +377,6 @@ Friend Module C_Gui
                     End If
                 End If
             End If
-
-            'Inventory panel
-        ElseIf PnlInventoryVisible Then
-            If AboveInvpanel(x, y) Then
-                invNum = IsInvItem(e.Location.X, e.Location.Y)
-
-                If e.Button = MouseButtons.Left Then
-                    If invNum <> 0 Then
-                        If InTrade Then Exit Function
-                        If InBank OrElse InShop Then Exit Function
-
-                        If Item(GetPlayerInvItemNum(Myindex, invNum)).Type = ItemType.Furniture Then
-                            PlaySound("Click.ogg")
-                            FurnitureSelected = invNum
-                            CheckGuiClick = True
-                        End If
-
-                    End If
-                End If
-            End If
         End If
 
         If DialogPanelVisible Then
@@ -407,11 +387,7 @@ Friend Module C_Gui
                 VbKeyLeft = False
                 VbKeyRight = False
 
-                If DialogType = DialogueTypeBuyhome Then 'house offer
-                    SendBuyHouse(1)
-                ElseIf DialogType = DialogueTypeVisit Then
-                    SendVisit(1)
-                ElseIf DialogType = DialogueTypeParty Then
+                If DialogType = DialogueTypeParty Then
                     SendAcceptParty()
                 ElseIf DialogType = DialogueTypeQuest Then
                     If QuestAcceptTag > 0 Then
@@ -433,11 +409,7 @@ Friend Module C_Gui
                 VbKeyLeft = False
                 VbKeyRight = False
 
-                If DialogType = DialogueTypeBuyhome Then 'house offer declined
-                    SendBuyHouse(0)
-                ElseIf DialogueTypeVisit Then 'visit declined
-                    SendVisit(0)
-                ElseIf DialogueTypeParty Then 'party declined
+                If DialogueTypeParty Then 'party declined
                     SendLeaveParty()
                 ElseIf DialogueTypeQuest Then 'quest declined
                     QuestAcceptTag = 0
@@ -605,16 +577,6 @@ Friend Module C_Gui
                     End If
                 End If
 
-                'House
-                If x > RClickX + (RClickGfxInfo.Width \ 2) - (GetTextWidth("Invite to House") \ 2) AndAlso x < RClickX + (RClickGfxInfo.Width \ 2) - (GetTextWidth("Invite to House") \ 2) + GetTextWidth("Invite to House") Then
-                    If y > RClickY + 85 AndAlso y < RClickY + 85 + 12 Then
-                        If MyTarget > 0 Then
-                            SendInvite(Player(MyTarget).Name)
-                        End If
-                        PnlRClickVisible = False
-                    End If
-                End If
-
                 CheckGuiClick = True
             End If
         End If
@@ -643,64 +605,6 @@ Friend Module C_Gui
 
                     CheckGuiClick = True
                 End If
-            End If
-        End If
-
-        If PnlCraftVisible Then
-            If AboveCraftPanel(x, y) Then
-                'check if they press the list
-                Dim tmpy As Integer = 10
-               For i = 0 To MAX_RECIPE
-                    If Len(Trim$(RecipeNames(i))) > 0 Then
-                        If x > (CraftPanelX + 12) AndAlso x < (CraftPanelX + 12) + (GetTextWidth(RecipeNames(i))) Then
-                            If y > (CraftPanelY + tmpy) AndAlso y < (CraftPanelY + tmpy + 13) Then
-                                SelectedRecipe = i
-                                CraftingInit()
-                            End If
-                        End If
-                        tmpy += 20
-                    End If
-                Next
-
-                'start button
-                If x > (CraftPanelX + 256) AndAlso x < (CraftPanelX + 330) Then
-                    If y > (CraftPanelY + 415) AndAlso y < (CraftPanelY + 437) Then
-                        If SelectedRecipe > 0 Then
-                            CraftProgressValue = 0
-                            SendCraftIt(RecipeNames(SelectedRecipe), CraftAmountValue)
-                        End If
-                    End If
-                End If
-
-                'close button
-                If x > (CraftPanelX + 614) AndAlso x < (CraftPanelX + 689) Then
-                    If y > (CraftPanelY + 472) AndAlso y < (CraftPanelY + 494) Then
-                        ResetCraftPanel()
-                        PnlCraftVisible = False
-                        InCraft = False
-                        SendCloseCraft()
-                    End If
-                End If
-
-                'minus
-                If x > (CraftPanelX + 340) AndAlso x < (CraftPanelX + 340 + 10) Then
-                    If y > (CraftPanelY + 422) AndAlso y < (CraftPanelY + 422 + 10) Then
-                        If CraftAmountValue > 1 Then
-                            CraftAmountValue -= 1
-                        End If
-                    End If
-                End If
-
-                'plus
-                If x > (CraftPanelX + 392) AndAlso x < (CraftPanelX + 392 + 10) Then
-                    If y > (CraftPanelY + 422) AndAlso y < (CraftPanelY + 422 + 10) Then
-                        If CraftAmountValue < 100 Then
-                            CraftAmountValue += 1
-                        End If
-                    End If
-                End If
-
-                CheckGuiClick = True
             End If
         End If
 
@@ -880,24 +784,6 @@ Friend Module C_Gui
                 End If
 
                 DragInvSlotNum = 0
-            Else
-                If FurnitureSelected > 0 Then
-                    If Player(Myindex).InHouse = Myindex Then
-                        If Item(Player(Myindex).Inv(FurnitureSelected).Num).Type = ItemType.Furniture Then
-                            buffer = New ByteStream(4)
-                            buffer.WriteInt32(ClientPackets.CPlaceFurniture)
-                            i = CurX
-                            buffer.WriteInt32(i)
-                            i = CurY
-                            buffer.WriteInt32(i)
-                            buffer.WriteInt32(FurnitureSelected)
-                            Socket.SendData(buffer.Data, buffer.Head)
-                            buffer.Dispose()
-
-                            FurnitureSelected = 0
-                        End If
-                    End If
-                End If
             End If
         End If
 

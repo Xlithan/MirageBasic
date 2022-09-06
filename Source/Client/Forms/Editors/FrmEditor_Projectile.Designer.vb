@@ -58,7 +58,7 @@ Partial Class frmEditor_Projectile
         Me.DarkGroupBox1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DarkGroupBox1.Name = "DarkGroupBox1"
         Me.DarkGroupBox1.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox1.Size = New System.Drawing.Size(219, 360)
+        Me.DarkGroupBox1.Size = New System.Drawing.Size(219, 216)
         Me.DarkGroupBox1.TabIndex = 0
         Me.DarkGroupBox1.TabStop = false
         Me.DarkGroupBox1.Text = "Projectile List"
@@ -73,7 +73,7 @@ Partial Class frmEditor_Projectile
         Me.lstIndex.Location = New System.Drawing.Point(7, 20)
         Me.lstIndex.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.lstIndex.Name = "lstIndex"
-        Me.lstIndex.Size = New System.Drawing.Size(205, 332)
+        Me.lstIndex.Size = New System.Drawing.Size(205, 182)
         Me.lstIndex.TabIndex = 1
         '
         'DarkGroupBox2
@@ -96,7 +96,7 @@ Partial Class frmEditor_Projectile
         Me.DarkGroupBox2.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DarkGroupBox2.Name = "DarkGroupBox2"
         Me.DarkGroupBox2.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox2.Size = New System.Drawing.Size(290, 327)
+        Me.DarkGroupBox2.Size = New System.Drawing.Size(290, 315)
         Me.DarkGroupBox2.TabIndex = 1
         Me.DarkGroupBox2.TabStop = false
         Me.DarkGroupBox2.Text = "Projectile Properties"
@@ -211,31 +211,31 @@ Partial Class frmEditor_Projectile
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(230, 336)
+        Me.btnSave.Location = New System.Drawing.Point(11, 225)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnSave.Size = New System.Drawing.Size(88, 27)
+        Me.btnSave.Size = New System.Drawing.Size(205, 27)
         Me.btnSave.TabIndex = 2
         Me.btnSave.Text = "Save"
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(432, 336)
+        Me.btnCancel.Location = New System.Drawing.Point(11, 291)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnCancel.Size = New System.Drawing.Size(88, 27)
+        Me.btnCancel.Size = New System.Drawing.Size(205, 27)
         Me.btnCancel.TabIndex = 3
         Me.btnCancel.Text = "Cancel"
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(326, 336)
+        Me.btnDelete.Location = New System.Drawing.Point(11, 258)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnDelete.Size = New System.Drawing.Size(98, 27)
+        Me.btnDelete.Size = New System.Drawing.Size(205, 27)
         Me.btnDelete.TabIndex = 4
         Me.btnDelete.Text = "Delete"
         '
@@ -245,7 +245,7 @@ Partial Class frmEditor_Projectile
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = true
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
-        Me.ClientSize = New System.Drawing.Size(527, 368)
+        Me.ClientSize = New System.Drawing.Size(527, 323)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)

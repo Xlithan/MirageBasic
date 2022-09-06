@@ -53,7 +53,6 @@ Partial Class frmEditor_Quest
         Me.chkRepeat = New DarkUI.Controls.DarkCheckBox()
         Me.txtName = New DarkUI.Controls.DarkTextBox()
         Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel8 = New DarkUI.Controls.DarkLabel()
         Me.btnSave = New DarkUI.Controls.DarkButton()
         Me.btnCancel = New DarkUI.Controls.DarkButton()
         Me.fraTasks = New DarkUI.Controls.DarkGroupBox()
@@ -109,6 +108,7 @@ Partial Class frmEditor_Quest
         Me.DarkLabel18 = New DarkUI.Controls.DarkLabel()
         Me.rdbItemReq = New DarkUI.Controls.DarkRadioButton()
         Me.rdbNoneReq = New DarkUI.Controls.DarkRadioButton()
+        Me.btnDelete = New DarkUI.Controls.DarkButton()
         Me.fraQuestList.SuspendLayout
         Me.DarkGroupBox2.SuspendLayout
         Me.DarkGroupBox5.SuspendLayout
@@ -136,7 +136,7 @@ Partial Class frmEditor_Quest
         Me.fraQuestList.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraQuestList.Name = "fraQuestList"
         Me.fraQuestList.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraQuestList.Size = New System.Drawing.Size(247, 561)
+        Me.fraQuestList.Size = New System.Drawing.Size(247, 425)
         Me.fraQuestList.TabIndex = 0
         Me.fraQuestList.TabStop = false
         Me.fraQuestList.Text = "Quest List"
@@ -151,7 +151,7 @@ Partial Class frmEditor_Quest
         Me.lstIndex.Location = New System.Drawing.Point(10, 22)
         Me.lstIndex.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.lstIndex.Name = "lstIndex"
-        Me.lstIndex.Size = New System.Drawing.Size(226, 527)
+        Me.lstIndex.Size = New System.Drawing.Size(226, 392)
         Me.lstIndex.TabIndex = 1
         '
         'DarkGroupBox2
@@ -511,34 +511,23 @@ Partial Class frmEditor_Quest
         Me.DarkLabel1.TabIndex = 0
         Me.DarkLabel1.Text = "Name:"
         '
-        'DarkLabel8
-        '
-        Me.DarkLabel8.AutoSize = true
-        Me.DarkLabel8.ForeColor = System.Drawing.Color.Red
-        Me.DarkLabel8.Location = New System.Drawing.Point(258, 545)
-        Me.DarkLabel8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel8.Name = "DarkLabel8"
-        Me.DarkLabel8.Size = New System.Drawing.Size(238, 15)
-        Me.DarkLabel8.TabIndex = 2
-        Me.DarkLabel8.Text = "Use /questreset # to reset a quest for testing"
-        '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(653, 539)
+        Me.btnSave.Location = New System.Drawing.Point(14, 434)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnSave.Size = New System.Drawing.Size(88, 27)
+        Me.btnSave.Size = New System.Drawing.Size(226, 27)
         Me.btnSave.TabIndex = 3
         Me.btnSave.Text = "Save"
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(749, 539)
+        Me.btnCancel.Location = New System.Drawing.Point(14, 500)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnCancel.Size = New System.Drawing.Size(88, 27)
+        Me.btnCancel.Size = New System.Drawing.Size(226, 27)
         Me.btnCancel.TabIndex = 4
         Me.btnCancel.Text = "Cancel"
         '
@@ -1159,15 +1148,25 @@ Partial Class frmEditor_Quest
         Me.rdbNoneReq.TabStop = true
         Me.rdbNoneReq.Text = "None"
         '
+        'btnDelete
+        '
+        Me.btnDelete.Location = New System.Drawing.Point(14, 467)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnDelete.Size = New System.Drawing.Size(226, 27)
+        Me.btnDelete.TabIndex = 6
+        Me.btnDelete.Text = "Delete"
+        '
         'frmEditor_Quest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
-        Me.ClientSize = New System.Drawing.Size(841, 570)
+        Me.ClientSize = New System.Drawing.Size(841, 534)
+        Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
-        Me.Controls.Add(Me.DarkLabel8)
         Me.Controls.Add(Me.DarkGroupBox2)
         Me.Controls.Add(Me.fraQuestList)
         Me.Controls.Add(Me.fraTasks)
@@ -1198,7 +1197,6 @@ Partial Class frmEditor_Quest
         CType(Me.nudTakeAmount,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.nudGiveAmount,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
-        Me.PerformLayout
 
 End Sub
 
@@ -1233,7 +1231,6 @@ End Sub
     Friend WithEvents lstTasks As Windows.Forms.ListBox
     Friend WithEvents btnRemoveTask As DarkUI.Controls.DarkButton
     Friend WithEvents btnAddTask As DarkUI.Controls.DarkButton
-    Friend WithEvents DarkLabel8 As DarkUI.Controls.DarkLabel
     Friend WithEvents btnSave As DarkUI.Controls.DarkButton
     Friend WithEvents btnCancel As DarkUI.Controls.DarkButton
     Friend WithEvents fraTasks As DarkUI.Controls.DarkGroupBox
@@ -1289,4 +1286,5 @@ End Sub
     Friend WithEvents cmbMap As DarkUI.Controls.DarkComboBox
     Friend WithEvents cmbItem As DarkUI.Controls.DarkComboBox
     Friend WithEvents cmbNpc As DarkUI.Controls.DarkComboBox
+    Friend WithEvents btnDelete As DarkUI.Controls.DarkButton
 End Class

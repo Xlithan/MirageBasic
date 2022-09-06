@@ -18,7 +18,6 @@
     Public Const MAX_PLAYERS As Integer = 70
     Public Const MAX_PLAYER_SKILLS As Byte = 20
     Public Const MAX_RANDOM_TYPES As Byte = 16
-    Public Const MAX_RECIPE As Integer = 100
     Public Const MAX_RESOURCES As Integer = 100
     Public Const MAX_SHOPS As Integer = 50
     Public Const MAX_SKILLS As Integer = 255
@@ -26,7 +25,6 @@
     Public Const NAME_LENGTH As Byte = 20
     Public Const MAX_INSTANCED_MAPS As Integer = 100
     Public Const MAX_CACHED_MAPS As Integer = MAX_MAPS + MAX_INSTANCED_MAPS
-    Public const MAX_HOUSES As Integer = 100
     Public Const MAX_QUESTS As Integer = 250
     Public Const MAX_HOTBAR As Byte = 7
     Public Const MAX_MAPX As Byte = 50

@@ -77,9 +77,6 @@
     <Compile Update="Forms\Editors\frmEditor_Events.Designer.vb">
       <DependentUpon>FrmEditor_Events.vb</DependentUpon>
     </Compile>
-    <Compile Update="Forms\Editors\FrmEditor_House.Designer.vb">
-      <DependentUpon>FrmEditor_House.vb</DependentUpon>
-    </Compile>
     <Compile Update="Forms\Editors\FrmEditor_Item.Designer.vb">
       <DependentUpon>FrmEditor_Item.vb</DependentUpon>
     </Compile>
@@ -97,9 +94,6 @@
     </Compile>
     <Compile Update="Forms\Editors\FrmEditor_Quest.Designer.vb">
       <DependentUpon>FrmEditor_Quest.vb</DependentUpon>
-    </Compile>
-    <Compile Update="Forms\Editors\FrmEditor_Recipe.Designer.vb">
-      <DependentUpon>FrmEditor_Recipe.vb</DependentUpon>
     </Compile>
     <Compile Update="Forms\Editors\FrmEditor_Resource.Designer.vb">
       <DependentUpon>FrmEditor_Resource.vb</DependentUpon>
@@ -322,21 +316,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Contents\Graphics\Fogs\1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Contents\Graphics\Furniture\1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Contents\Graphics\Furniture\2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Contents\Graphics\Furniture\3.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Contents\Graphics\Furniture\4.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Contents\Graphics\Furniture\5.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Contents\Gui\Actionbar\ActionBar.png">

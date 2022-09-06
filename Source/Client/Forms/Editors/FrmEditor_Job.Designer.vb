@@ -75,6 +75,7 @@ Partial Class frmEditor_Job
         Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
         Me.btnCancel = New DarkUI.Controls.DarkButton()
         Me.btnSave = New DarkUI.Controls.DarkButton()
+        Me.btnDelete = New DarkUI.Controls.DarkButton()
         Me.DarkGroupBox1.SuspendLayout
         Me.DarkGroupBox2.SuspendLayout
         Me.DarkGroupBox7.SuspendLayout
@@ -105,11 +106,11 @@ Partial Class frmEditor_Job
         Me.DarkGroupBox1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.DarkGroupBox1.Controls.Add(Me.lstIndex)
         Me.DarkGroupBox1.ForeColor = System.Drawing.Color.Gainsboro
-        Me.DarkGroupBox1.Location = New System.Drawing.Point(2, 2)
+        Me.DarkGroupBox1.Location = New System.Drawing.Point(1, 2)
         Me.DarkGroupBox1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DarkGroupBox1.Name = "DarkGroupBox1"
         Me.DarkGroupBox1.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox1.Size = New System.Drawing.Size(202, 472)
+        Me.DarkGroupBox1.Size = New System.Drawing.Size(202, 433)
         Me.DarkGroupBox1.TabIndex = 0
         Me.DarkGroupBox1.TabStop = false
         Me.DarkGroupBox1.Text = "Job List"
@@ -124,7 +125,7 @@ Partial Class frmEditor_Job
         Me.lstIndex.Location = New System.Drawing.Point(7, 18)
         Me.lstIndex.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.lstIndex.Name = "lstIndex"
-        Me.lstIndex.Size = New System.Drawing.Size(186, 437)
+        Me.lstIndex.Size = New System.Drawing.Size(186, 407)
         Me.lstIndex.TabIndex = 0
         '
         'DarkGroupBox2
@@ -347,11 +348,9 @@ Partial Class frmEditor_Job
         '
         Me.nudBaseExp.Location = New System.Drawing.Point(119, 81)
         Me.nudBaseExp.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudBaseExp.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
         Me.nudBaseExp.Name = "nudBaseExp"
         Me.nudBaseExp.Size = New System.Drawing.Size(120, 23)
         Me.nudBaseExp.TabIndex = 13
-        Me.nudBaseExp.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
         'DarkLabel10
         '
@@ -704,23 +703,33 @@ Partial Class frmEditor_Job
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(8, 513)
+        Me.btnCancel.Location = New System.Drawing.Point(8, 510)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnCancel.Size = New System.Drawing.Size(187, 27)
+        Me.btnCancel.Size = New System.Drawing.Size(186, 27)
         Me.btnCancel.TabIndex = 4
         Me.btnCancel.Text = "Cancel"
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(8, 480)
+        Me.btnSave.Location = New System.Drawing.Point(8, 444)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnSave.Size = New System.Drawing.Size(187, 27)
+        Me.btnSave.Size = New System.Drawing.Size(186, 27)
         Me.btnSave.TabIndex = 5
         Me.btnSave.Text = "Save"
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Location = New System.Drawing.Point(8, 477)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnDelete.Size = New System.Drawing.Size(186, 27)
+        Me.btnDelete.TabIndex = 6
+        Me.btnDelete.Text = "Delete"
         '
         'frmEditor_Job
         '
@@ -729,6 +738,7 @@ Partial Class frmEditor_Job
         Me.AutoSize = true
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
         Me.ClientSize = New System.Drawing.Size(608, 549)
+        Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.DarkGroupBox2)
@@ -821,4 +831,5 @@ End Sub
     Friend WithEvents DarkLabel15 As DarkUI.Controls.DarkLabel
     Friend WithEvents nudStartX As DarkUI.Controls.DarkNumericUpDown
     Friend WithEvents DarkLabel14 As DarkUI.Controls.DarkLabel
+    Friend WithEvents btnDelete As DarkUI.Controls.DarkButton
 End Class

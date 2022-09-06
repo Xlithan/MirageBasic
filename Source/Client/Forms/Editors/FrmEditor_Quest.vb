@@ -467,6 +467,19 @@ Friend Class frmEditor_Quest
         QuestEditorCancel
     End Sub
 
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        Dim tmpindex As Integer
+
+        ClearQuest(Editorindex)
+
+        tmpindex = lstIndex.SelectedIndex
+        lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & Quest(Editorindex).Name)
+        lstIndex.SelectedIndex = tmpindex
+
+        QuestEditorInit()
+    End Sub
+
 #End Region
 
 End Class

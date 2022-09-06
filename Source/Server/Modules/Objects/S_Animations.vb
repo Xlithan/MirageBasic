@@ -128,15 +128,15 @@ Friend Module S_Animations
         Dim buffer As New ByteStream(4)
 
         buffer.WriteInt32(AnimationNum)
-        For i = 0 To Animation(AnimationNum).Frames.Length
+        For i = 0 To Animation(AnimationNum).Frames.Length - 1
             buffer.WriteInt32(Animation(AnimationNum).Frames(i))
         Next
 
-        For i = 0 To Animation(AnimationNum).LoopCount.Length
+        For i = 0 To Animation(AnimationNum).LoopCount.Length - 1
             buffer.WriteInt32(Animation(AnimationNum).LoopCount(i))
         Next
 
-        For i = 0 To Animation(AnimationNum).LoopTime.Length
+        For i = 0 To Animation(AnimationNum).LoopTime.Length - 1
             buffer.WriteInt32(Animation(AnimationNum).LoopTime(i))
         Next
 
@@ -159,6 +159,7 @@ Friend Module S_Animations
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
+        If TempPlayer(index).Editor > -1 Then  Exit Sub
 
         Dim user As String
 
@@ -219,12 +220,16 @@ Friend Module S_Animations
 
     End Sub
 
-    Sub Packet_RequestAnimations(index As Integer, ByRef data() As Byte)
-        AddDebug("Recieved CMSG: CRequestAnimations")
+    Sub Packet_RequestAnimation(index As Integer, ByRef data() As Byte)
+        AddDebug("Recieved CMSG: CRequestAnimation")
 
-        TempPlayer(index).Editor = -1
+        Dim Buffer = New ByteStream(data), n As Integer
 
-        SendAnimations(index)
+        n = Buffer.ReadInt32
+
+        If n < 0 Or n > MAX_ANIMATIONS Then Exit Sub
+
+        SendUpdateAnimationTo(index, n)
     End Sub
 
 #End Region
@@ -300,27 +305,6 @@ Friend Module S_Animations
         buffer.WriteInt32(ServerPackets.SUpdateAnimation)
 
         buffer.WriteBlock(AnimationData(AnimationNum))
-
-        'buffer.WriteInt32(AnimationNum)
-
-        'For i = 0 To UBound(Animation(AnimationNum).Frames)
-        '    buffer.WriteInt32(Animation(AnimationNum).Frames(i))
-        'Next
-
-        'For i = 0 To UBound(Animation(AnimationNum).LoopCount)
-        '    buffer.WriteInt32(Animation(AnimationNum).LoopCount(i))
-        'Next
-
-        'For i = 0 To UBound(Animation(AnimationNum).LoopTime)
-        '    buffer.WriteInt32(Animation(AnimationNum).LoopTime(i))
-        'Next
-
-        'buffer.WriteString((Animation(AnimationNum).Name))
-        'buffer.WriteString((Animation(AnimationNum).Sound))
-
-        'For i = 0 To UBound(Animation(AnimationNum).Sprite)
-        '    buffer.WriteInt32(Animation(AnimationNum).Sprite(i))
-        'Next
 
         AddDebug("Sent SMSG: SUpdateAnimation To All")
 

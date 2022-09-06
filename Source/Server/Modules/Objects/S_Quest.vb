@@ -285,6 +285,7 @@ Friend Module S_Quest
     Sub Packet_RequestEditQuest(index As Integer, ByRef data() As Byte)
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
+        If TempPlayer(index).Editor > -1 Then  Exit Sub
 
         Dim user As String
 
@@ -370,8 +371,6 @@ Friend Module S_Quest
     End Sub
 
     Sub Packet_RequestQuests(index As Integer, ByRef data() As Byte)
-        TempPlayer(index).Editor = -1
-
         SendQuests(index)
     End Sub
 
