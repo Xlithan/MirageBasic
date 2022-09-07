@@ -11,7 +11,7 @@ Friend Class frmEditor_Job
 
         cmbItems.Items.Clear()
 
-        For i = 0 To MAX_JOBS
+        For i = 0 To MAX_ITEMS
             cmbItems.Items.Add(i & ": " & Trim(Item(i).Name))
         Next
 
