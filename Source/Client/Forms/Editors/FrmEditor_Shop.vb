@@ -48,11 +48,8 @@ Friend Class frmEditor_Shop
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        If Len(Trim$(txtName.Text)) = 0 Then
-            MsgBox("Name required.")
-        Else
-            ShopEditorOk()
-        End If
+        ShopEditorOk()
+        Dispose()
     End Sub
 
     Private Sub BtnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -76,7 +73,9 @@ Friend Class frmEditor_Shop
     Private Sub ScrlFace_Scroll(sender As Object, e As EventArgs) Handles nudFace.ValueChanged
 
         If File.Exists(Paths.Graphics & "Faces\" & nudFace.Value & GfxExt) Then
-            Me.picFace.BackgroundImage = Image.FromFile(Paths.Graphics & "\Faces\" & nudFace.Value & GfxExt)
+            picFace.BackgroundImage = Image.FromFile(Paths.Graphics & "\Faces\" & nudFace.Value & GfxExt)
+        Else
+            picFace.BackgroundImage = Nothing
         End If
 
         Shop(Editorindex).Face = nudFace.Value

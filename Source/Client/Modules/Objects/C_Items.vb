@@ -31,15 +31,14 @@ Module C_Items
     End Sub
 
     Friend Sub ClearItem(index As Integer)
+        Item(index) = Nothing
         For X = 0 To StatType.Count - 1
             ReDim Item(index).Add_Stat(x)
         Next
+
         For X = 0 To StatType.Count - 1
             ReDim Item(index).Stat_Req(x)
         Next
-
-        ReDim Item(index).FurnitureBlocks(3, 3)
-        ReDim Item(index).FurnitureFringe(3, 3)
 
         Item(index).Name = ""
         Item(index).Description = ""
@@ -50,10 +49,14 @@ Module C_Items
 
         ReDim Item(MAX_ITEMS)
 
-       For i = 0 To MAX_ITEMS
+        For i = 0 To MAX_ITEMS
             ClearItem(i)
         Next
 
+    End Sub
+
+     Friend Sub ClearChangedItem()
+        ReDim Item_Changed(MAX_ITEMS)
     End Sub
 
     Sub StreamItem(itemNum As Integer)
@@ -108,17 +111,6 @@ Module C_Items
 
         Item(n).Type = buffer.ReadInt32()
         Item(n).SubType = buffer.ReadInt32
-
-        'Housing
-        Item(n).FurnitureWidth = buffer.ReadInt32()
-        Item(n).FurnitureHeight = buffer.ReadInt32()
-
-        For a = 0 To 3
-            For b = 0 To 3
-                Item(n).FurnitureBlocks(a, b) = buffer.ReadInt32()
-                Item(n).FurnitureFringe(a, b) = buffer.ReadInt32()
-            Next
-        Next
 
         Item(n).KnockBack = buffer.ReadInt32()
         Item(n).KnockBackTiles = buffer.ReadInt32()

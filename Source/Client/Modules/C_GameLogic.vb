@@ -112,18 +112,6 @@ Module C_GameLogic
                     tmr1000 = tick + 1000
                 End If
 
-                'crafting timer
-                If CraftTimerEnabled Then
-                    If CraftTimer < tick Then
-                        CraftProgressValue = CraftProgressValue + (100 / Recipe(GetRecipeIndex(RecipeNames(SelectedRecipe))).CreateTime)
-
-                        If CraftProgressValue >= 100 Then
-                            CraftTimerEnabled = False
-                        End If
-                        CraftTimer = tick + 1000
-                    End If
-                End If
-
                 'screenshake timer
                 If ShakeTimerEnabled Then
                     If ShakeTimer < tick Then
@@ -261,7 +249,8 @@ Module C_GameLogic
                     FadeOut()
                 End If
 
-                If InMapEditor Then FrmEditor_Map.EditorMap_DrawTileset()
+                If Editor = EditorType.Map Then FrmEditor_Map.DrawTileset()
+                iF Editor = EditorType.Animation Then EditorAnim_DrawAnim
 
                 Application.DoEvents()
 
@@ -550,21 +539,6 @@ Module C_GameLogic
                     AddText(Language.Chat.Help4, ColorType.Yellow)
                     AddText(Language.Chat.Help5, ColorType.Yellow)
 
-                Case "/houseinvite"
-
-                    ' Checks to make sure we have more than one string in the array
-                    If UBound(command) < 1 OrElse IsNumeric(command(1)) Then
-                        AddText(Language.Chat.HouseInvite, ColorType.Yellow)
-                        GoTo Continue1
-                    End If
-
-                    SendInvite(command(1))
-
-                Case "/sellhouse"
-                    buffer = New ByteStream(4)
-                    buffer.WriteInt32(ClientPackets.CSellHouse)
-                    Socket.SendData(buffer.Data, buffer.Head)
-                    buffer.Dispose()
                 Case "/info"
 
                     ' Checks to make sure we have more than one string in the array
@@ -953,8 +927,6 @@ Continue1:
             Case ItemType.Skill
                 ItemDescInfo = Language.ItemDescription.NotAvailable
                 ItemDescType = Language.ItemDescription.Skill
-            Case ItemType.Furniture
-                ItemDescInfo = Language.ItemDescription.Furniture
         End Select
 
         ' Currency

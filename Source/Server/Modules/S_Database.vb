@@ -123,22 +123,6 @@ Module modDatabase
             SaveJob(i)
         Next
     End Sub
-
-    Function GetJobMaxVital(jobNum As Integer, Vital As VitalType) As Integer
-        Select Case Vital
-            Case VitalType.HP
-                GetJobMaxVital = (1 + (Job(jobNum).Stat(StatType.Vitality) \ 2) + Job(jobNum).Stat(StatType.Vitality)) * 2
-            Case VitalType.MP
-                GetJobMaxVital = (1 + (Job(jobNum).Stat(StatType.Intelligence) \ 2) + Job(jobNum).Stat(StatType.Intelligence)) * 2
-            Case VitalType.SP
-                GetJobMaxVital = (1 + (Job(jobNum).Stat(StatType.Spirit) \ 2) + Job(jobNum).Stat(StatType.Spirit)) * 2
-        End Select
-    End Function
-
-    Function GetJobName(jobNum As Integer) As String
-        GetJobName = Trim$(Job(jobNum).Name)
-    End Function
-
 #End Region
 
 #Region "Maps"
@@ -240,6 +224,7 @@ Module modDatabase
         writer.WriteByte(Map(mapNum).Instanced)
         writer.WriteByte(Map(mapNum).Panorama)
         writer.WriteByte(Map(mapNum).Parallax)
+        writer.WriteByte(Map(mapNum).Brightness)
 
         For x = 0 To Map(mapNum).MaxX
             For y = 0 To Map(mapNum).MaxY
@@ -1230,22 +1215,6 @@ Module modDatabase
             Player(index).PlayerQuest(i).CurrentCount = 0
         Next
 
-        ' Housing
-        Player(index).House.Houseindex = 0
-        Player(index).House.FurnitureCount = 0
-
-        ReDim Player(index).House.Furniture(Player(index).House.FurnitureCount)
-        For i = 0 To Player(index).House.FurnitureCount
-            Player(index).House.Furniture(i).ItemNum = 0
-            Player(index).House.Furniture(i).X = 0
-            Player(index).House.Furniture(i).Y = 0
-        Next
-
-        Player(index).InHouse = 0
-        Player(index).LastMap = 0
-        Player(index).LastX = 0
-        Player(index).LastY = 0
-
         ReDim Player(index).Hotbar(MAX_HOTBAR)
         For i = 0 To MAX_HOTBAR
             Player(index).Hotbar(i).Slot = 0
@@ -1266,11 +1235,6 @@ Module modDatabase
             Player(index).GatherSkills(i).SkillLevel = 1
             Player(index).GatherSkills(i).SkillCurExp = 0
             Player(index).GatherSkills(i).SkillNextLvlExp = 100
-        Next
-
-        ReDim Player(index).RecipeLearned(MAX_RECIPE)
-        For i = 0 To MAX_RECIPE
-            Player(index).RecipeLearned(i) = 0
         Next
 
         'random items
@@ -1380,20 +1344,6 @@ Module modDatabase
             Player(index).PlayerQuest(i).CurrentCount = reader.ReadInt32()
         Next
 
-        'Housing
-        Player(index).House.Houseindex = reader.ReadInt32()
-        Player(index).House.FurnitureCount = reader.ReadInt32()
-        ReDim Player(index).House.Furniture(Player(index).House.FurnitureCount)
-        For i = 0 To Player(index).House.FurnitureCount
-            Player(index).House.Furniture(i).ItemNum = reader.ReadInt32()
-            Player(index).House.Furniture(i).X = reader.ReadInt32()
-            Player(index).House.Furniture(i).Y = reader.ReadInt32()
-        Next
-        Player(index).InHouse = reader.ReadInt32()
-        Player(index).LastMap = reader.ReadInt32()
-        Player(index).LastX = reader.ReadInt32()
-        Player(index).LastY = reader.ReadInt32()
-
         For i = 0 To MAX_HOTBAR
             Player(index).Hotbar(i).Slot = reader.ReadInt32()
             Player(index).Hotbar(i).SlotType = reader.ReadByte()
@@ -1415,11 +1365,6 @@ Module modDatabase
             Player(index).GatherSkills(i).SkillNextLvlExp = reader.ReadInt32()
             If Player(index).GatherSkills(i).SkillLevel = 0 Then Player(index).GatherSkills(i).SkillLevel = 1
             If Player(index).GatherSkills(i).SkillNextLvlExp = 0 Then Player(index).GatherSkills(i).SkillNextLvlExp = 100
-        Next
-
-        ReDim Player(index).RecipeLearned(MAX_RECIPE)
-        For i = 0 To MAX_RECIPE
-            Player(index).RecipeLearned(i) = reader.ReadByte()
         Next
 
         'random items
@@ -1527,19 +1472,6 @@ Module modDatabase
             writer.WriteInt32(Player(index).PlayerQuest(i).CurrentCount)
         Next
 
-        'Housing
-        writer.WriteInt32(Player(index).House.Houseindex)
-        writer.WriteInt32(Player(index).House.FurnitureCount)
-        For i = 0 To Player(index).House.FurnitureCount
-            writer.WriteInt32(Player(index).House.Furniture(i).ItemNum)
-            writer.WriteInt32(Player(index).House.Furniture(i).X)
-            writer.WriteInt32(Player(index).House.Furniture(i).Y)
-        Next
-        writer.WriteInt32(Player(index).InHouse)
-        writer.WriteInt32(Player(index).LastMap)
-        writer.WriteInt32(Player(index).LastX)
-        writer.WriteInt32(Player(index).LastY)
-
         For i = 0 To MAX_HOTBAR
             writer.WriteInt32(Player(index).Hotbar(i).Slot)
             writer.WriteByte(Player(index).Hotbar(i).SlotType)
@@ -1557,10 +1489,6 @@ Module modDatabase
             writer.WriteInt32(Player(index).GatherSkills(i).SkillLevel)
             writer.WriteInt32(Player(index).GatherSkills(i).SkillCurExp)
             writer.WriteInt32(Player(index).GatherSkills(i).SkillNextLvlExp)
-        Next
-
-        For i = 0 To MAX_RECIPE
-            writer.WriteByte(Player(index).RecipeLearned(i))
         Next
 
         'random items
@@ -1821,58 +1749,52 @@ Module modDatabase
 #End Region
 
 #Region "Data Functions"
-    Function JobData() As Byte()
-        Dim i As Integer, n As Integer, q As Integer
+    Function JobData(jobNum as integer) As Byte()
+        Dim n As Integer, q As Integer
         Dim buffer As New ByteStream(4)
 
-        For i = 0 To MAX_JOBS
-            buffer.WriteString((GetJobName(i).Trim))
-            buffer.WriteString((Job(i).Desc.Trim))
+        buffer.WriteString((Job(jobnum).Name.Trim))
+        buffer.WriteString((Job(jobNum).Desc.Trim))
 
-            buffer.WriteInt32(GetJobMaxVital(i, VitalType.HP))
-            buffer.WriteInt32(GetJobMaxVital(i, VitalType.MP))
-            buffer.WriteInt32(GetJobMaxVital(i, VitalType.SP))
+        ' set sprite array size
+        n = UBound(Job(jobNum).MaleSprite)
 
-            ' set sprite array size
-            n = UBound(Job(i).MaleSprite)
+        ' send array size
+        buffer.WriteInt32(n)
 
-            ' send array size
-            buffer.WriteInt32(n)
-
-            ' loop around sending each sprite
-            For q = 0 To n
-                buffer.WriteInt32(Job(i).MaleSprite(q))
-            Next
-
-            ' set sprite array size
-            n = UBound(Job(i).FemaleSprite)
-
-            ' send array size
-            buffer.WriteInt32(n)
-
-            ' loop around sending each sprite
-            For q = 0 To n
-                buffer.WriteInt32(Job(i).FemaleSprite(q))
-            Next
-
-            buffer.WriteInt32(Job(i).Stat(StatType.Strength))
-            buffer.WriteInt32(Job(i).Stat(StatType.Endurance))
-            buffer.WriteInt32(Job(i).Stat(StatType.Vitality))
-            buffer.WriteInt32(Job(i).Stat(StatType.Intelligence))
-            buffer.WriteInt32(Job(i).Stat(StatType.Luck))
-            buffer.WriteInt32(Job(i).Stat(StatType.Spirit))
-
-            For q = 0 To 5
-                buffer.WriteInt32(Job(i).StartItem(q))
-                buffer.WriteInt32(Job(i).StartValue(q))
-            Next
-
-            buffer.WriteInt32(Job(i).StartMap)
-            buffer.WriteInt32(Job(i).StartX)
-            buffer.WriteInt32(Job(i).StartY)
-
-            buffer.WriteInt32(Job(i).BaseExp)
+        ' loop around sending each sprite
+        For q = 0 To n
+            buffer.WriteInt32(Job(jobNum).MaleSprite(q))
         Next
+
+        ' set sprite array size
+        n = UBound(Job(jobNum).FemaleSprite)
+
+        ' send array size
+        buffer.WriteInt32(n)
+
+        ' loop around sending each sprite
+        For q = 0 To n
+            buffer.WriteInt32(Job(jobNum).FemaleSprite(q))
+        Next
+
+        buffer.WriteInt32(Job(jobNum).Stat(StatType.Strength))
+        buffer.WriteInt32(Job(jobNum).Stat(StatType.Endurance))
+        buffer.WriteInt32(Job(jobNum).Stat(StatType.Vitality))
+        buffer.WriteInt32(Job(jobNum).Stat(StatType.Intelligence))
+        buffer.WriteInt32(Job(jobNum).Stat(StatType.Luck))
+        buffer.WriteInt32(Job(jobNum).Stat(StatType.Spirit))
+
+        For q = 0 To 5
+            buffer.WriteInt32(Job(jobNum).StartItem(q))
+            buffer.WriteInt32(Job(jobNum).StartValue(q))
+        Next
+
+        buffer.WriteInt32(Job(jobNum).StartMap)
+        buffer.WriteInt32(Job(jobNum).StartX)
+        buffer.WriteInt32(Job(jobNum).StartY)
+
+        buffer.WriteInt32(Job(jobNum).BaseExp)
 
         Return buffer.ToArray()
     End Function

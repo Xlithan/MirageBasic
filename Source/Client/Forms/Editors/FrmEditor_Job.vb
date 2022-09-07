@@ -33,6 +33,14 @@ Friend Class frmEditor_Job
         For i = 0 To UBound(Job(Editorindex).FemaleSprite)
             cmbFemaleSprite.Items.Add("Sprite " & i + 1)
         Next
+
+        lstStartItems.Items.Clear()
+
+        For i = 0 To MAX_DROP_ITEMS
+            If Job(Editorindex).StartItem(i) > 0 Then
+                lstStartItems.Items.Add(Item(Job(Editorindex).StartItem(i)).Name & " X " & Job(Editorindex).StartValue(i))
+            End If
+        Next
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -99,7 +107,7 @@ Friend Class frmEditor_Job
         ReDim Preserve Job(Editorindex).FemaleSprite(tmpamount)
     End Sub
 
-    Private Sub NudMaleSprite_ValueChanged(sender As Object, e As EventArgs) Handles nudMaleSprite.Click
+    Private Sub NudMaleSprite_Click(sender As Object, e As EventArgs) Handles nudMaleSprite.Click
         If cmbMaleSprite.SelectedIndex < 0 Then Exit Sub
 
         Job(Editorindex).MaleSprite(cmbMaleSprite.SelectedIndex) = nudMaleSprite.Value
@@ -129,12 +137,16 @@ Friend Class frmEditor_Job
             picMale.Width = Image.FromFile(Paths.Graphics & "characters\" & nudMaleSprite.Value & GfxExt).Width \ 4
             picMale.Height = Image.FromFile(Paths.Graphics & "characters\" & nudMaleSprite.Value & GfxExt).Height \ 4
             picMale.BackgroundImage = Image.FromFile(Paths.Graphics & "Characters\" & nudMaleSprite.Value & GfxExt)
+        Else
+            picMale.BackgroundImage = Nothing
         End If
 
         If File.Exists(Paths.Graphics & "Characters\" & nudFemaleSprite.Value & GfxExt) Then
             picFemale.Width = Image.FromFile(Paths.Graphics & "characters\" & nudFemaleSprite.Value & GfxExt).Width \ 4
             picFemale.Height = Image.FromFile(Paths.Graphics & "characters\" & nudFemaleSprite.Value & GfxExt).Height \ 4
             picFemale.BackgroundImage = Image.FromFile(Paths.Graphics & "Characters\" & nudFemaleSprite.Value & GfxExt)
+        Else
+            picFemale.BackgroundImage = Nothing
         End If
 
     End Sub
@@ -210,6 +222,19 @@ Friend Class frmEditor_Job
 
     Private Sub frmEditor_Job_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         JobEditorCancel
+    End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        Dim tmpindex As Integer
+
+        ClearJob(Editorindex)
+
+        tmpindex = lstIndex.SelectedIndex
+        lstIndex.Items.RemoveAt(Editorindex)
+        lstIndex.Items.Insert(Editorindex, Editorindex & ": " & Job(Editorindex).Name)
+        lstIndex.SelectedIndex = tmpindex
+
+        JobEditorInit()
     End Sub
 
 #End Region

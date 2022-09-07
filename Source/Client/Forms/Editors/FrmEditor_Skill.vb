@@ -1,4 +1,5 @@
 ﻿Imports MirageBasic.Core
+Imports SFML.Graphics
 
 Friend Class frmEditor_Skill
 
@@ -27,8 +28,8 @@ Friend Class frmEditor_Skill
         Skill(Editorindex).AccessReq = cmbAccessReq.SelectedIndex
     End Sub
 
-    Private Sub CmbClass_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClass.SelectedIndexChanged
-        Skill(Editorindex).JobReq = cmbClass.SelectedIndex
+    Private Sub CmbClass_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJob.SelectedIndexChanged
+        Skill(Editorindex).JobReq = cmbJob.SelectedIndex
     End Sub
 
     Private Sub NudCast_Scroll(sender As Object, e As EventArgs) Handles nudCast.ValueChanged
@@ -139,6 +140,25 @@ Friend Class frmEditor_Skill
         For i = 0 To MAX_SKILLS
             lstIndex.Items.Add(i & ": " & Trim$(Skill(i).Name))
         Next
+
+        cmbAnimCast.Items.Clear()
+        cmbAnim.Items.Clear()
+        For i = 0 To MAX_ANIMATIONS
+            cmbAnimCast.Items.Add(i & ": " & Animation(i).Name.Trim)
+            cmbAnim.Items.Add(i & ": " & Animation(i).Name.Trim)
+        Next
+
+        cmbProjectile.Items.Clear()
+        For i = 0 To MAX_ANIMATIONS
+            cmbProjectile.Items.Add(i & ": " & Projectile(i).Name.Trim)
+        Next
+
+        cmbJob.Items.Clear()
+        For i = 0 To MAX_JOBS
+            cmbJob.Items.Add(i & ": " & Job(i).Name.Trim)
+        Next
+
+        EditorSkill_Icon = New RenderWindow(picSprite.Handle)
     End Sub
 
     Private Sub ChkProjectile_CheckedChanged(sender As Object, e As EventArgs) Handles chkProjectile.CheckedChanged

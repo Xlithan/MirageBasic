@@ -54,13 +54,13 @@ Module S_NetworkReceive
         Socket.PacketId(ClientPackets.CRequestPlayerData) = AddressOf Packet_RequestPlayerData
         Socket.PacketId(ClientPackets.CRequestItem) = AddressOf Packet_RequestItem
         Socket.PacketId(ClientPackets.CRequestNPCS) = AddressOf Packet_RequestNpcs
-        Socket.PacketId(ClientPackets.CRequestResources) = AddressOf Packet_RequestResources
+        Socket.PacketId(ClientPackets.CRequestResource) = AddressOf Packet_RequestResource
         Socket.PacketId(ClientPackets.CSpawnItem) = AddressOf Packet_SpawnItem
         Socket.PacketId(ClientPackets.CTrainStat) = AddressOf Packet_TrainStat
 
-        Socket.PacketId(ClientPackets.CRequestAnimations) = AddressOf Packet_RequestAnimations
+        Socket.PacketId(ClientPackets.CRequestAnimation) = AddressOf Packet_RequestAnimation
         Socket.PacketId(ClientPackets.CRequestSkill) = AddressOf Packet_RequestSkill
-        Socket.PacketId(ClientPackets.CRequestShops) = AddressOf Packet_RequestShops
+        Socket.PacketId(ClientPackets.CRequestShop) = AddressOf Packet_RequestShop
         Socket.PacketId(ClientPackets.CRequestLevelUp) = AddressOf Packet_RequestLevelUp
         Socket.PacketId(ClientPackets.CForgetSkill) = AddressOf Packet_ForgetSkill
         Socket.PacketId(ClientPackets.CCloseShop) = AddressOf Packet_CloseShop
@@ -86,15 +86,7 @@ Module S_NetworkReceive
         Socket.PacketId(ClientPackets.CQuestLogUpdate) = AddressOf Packet_QuestLogUpdate
         Socket.PacketId(ClientPackets.CPlayerHandleQuest) = AddressOf Packet_PlayerHandleQuest
         Socket.PacketId(ClientPackets.CQuestReset) = AddressOf Packet_QuestReset
-
-        'Housing
-        Socket.PacketId(ClientPackets.CBuyHouse) = AddressOf Packet_BuyHouse
-        Socket.PacketId(ClientPackets.CVisit) = AddressOf Packet_InviteToHouse
-        Socket.PacketId(ClientPackets.CAcceptVisit) = AddressOf Packet_AcceptInvite
-        Socket.PacketId(ClientPackets.CPlaceFurniture) = AddressOf Packet_PlaceFurniture
-
-        Socket.PacketId(ClientPackets.CSellHouse) = AddressOf Packet_SellHouse
-
+        
         'hotbar
         Socket.PacketId(ClientPackets.CSetHotbarSlot) = AddressOf Packet_SetHotBarSlot
         Socket.PacketId(ClientPackets.CDeleteHotbarSlot) = AddressOf Packet_DeleteHotBarSlot
@@ -111,13 +103,7 @@ Module S_NetworkReceive
         Socket.PacketId(ClientPackets.CRequestProjectiles) = AddressOf HandleRequestProjectile
         Socket.PacketId(ClientPackets.CClearProjectile) = AddressOf HandleClearProjectile
 
-        'craft
-        Socket.PacketId(ClientPackets.CRequestRecipes) = AddressOf Packet_RequestRecipes
-
-        Socket.PacketId(ClientPackets.CCloseCraft) = AddressOf Packet_CloseCraft
-        Socket.PacketId(ClientPackets.CStartCraft) = AddressOf Packet_StartCraft
-
-        Socket.PacketId(ClientPackets.CRequestClass) = AddressOf Packet_RequestJob
+        Socket.PacketId(ClientPackets.CRequestJob) = AddressOf Packet_RequestJob
 
         'emotes
         Socket.PacketId(ClientPackets.CEmote) = AddressOf Packet_Emote
@@ -153,17 +139,15 @@ Module S_NetworkReceive
         Socket.PacketId(ClientPackets.CSaveAnimation) = AddressOf Packet_SaveAnimation
         Socket.PacketId(ClientPackets.CRequestEditQuest) = AddressOf Packet_RequestEditQuest
         Socket.PacketId(ClientPackets.CSaveQuest) = AddressOf Packet_SaveQuest
-        Socket.PacketId(ClientPackets.CRequestEditHouse) = AddressOf Packet_RequestEditHouse
-        Socket.PacketId(ClientPackets.CSaveHouses) = AddressOf Packet_SaveHouses
         Socket.PacketId(ClientPackets.CRequestEditProjectiles) = AddressOf HandleRequestEditProjectile
         Socket.PacketId(ClientPackets.CSaveProjectile) = AddressOf HandleSaveProjectile
-        Socket.PacketId(ClientPackets.CRequestEditRecipes) = AddressOf Packet_RequestEditRecipes
-        Socket.PacketId(ClientPackets.CSaveRecipe) = AddressOf Packet_SaveRecipe
         Socket.PacketId(ClientPackets.CRequestEditJob) = AddressOf Packet_RequestEditJob
         Socket.PacketId(ClientPackets.CSaveJob) = AddressOf Packet_SaveJob
 
         Socket.PacketId(ClientPackets.CRequestEditPet) = AddressOf Packet_RequestEditPet
         Socket.PacketId(ClientPackets.CSavePet) = AddressOf Packet_SavePet
+
+        Socket.PacketId(ClientPackets.CCloseEditor) = AddressOf Packet_CloseEditor
 
     End Sub
 
@@ -862,8 +846,6 @@ Module S_NetworkReceive
         ' Prevent hacking
         If dir < DirectionType.Up OrElse dir > DirectionType.Right Then Exit Sub
 
-        TempPlayer(index).Editor = -1
-
         PlayerMove(index, dir, 1, True)
     End Sub
 
@@ -911,8 +893,9 @@ Module S_NetworkReceive
         Map(mapNum).MapTintA = buffer.ReadInt32
 
         Map(mapNum).Instanced = buffer.ReadInt32
-        Map(mapNum).Panorama = buffer.ReadInt32
-        Map(mapNum).Parallax = buffer.ReadInt32
+        Map(mapNum).Panorama = buffer.ReadByte
+        Map(mapNum).Parallax = buffer.ReadByte
+        Map(mapNum).Brightness = buffer.ReadByte
 
         ReDim Map(mapNum).Tile(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
@@ -1247,6 +1230,7 @@ Module S_NetworkReceive
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub 
+        If TempPlayer(index).Editor > -1 Then  Exit Sub
 
         If GetPlayerMap(index) > MAX_MAPS Then
             PlayerMsg(index, "Cant edit instanced maps!", ColorType.BrightRed)
@@ -1278,6 +1262,7 @@ Module S_NetworkReceive
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
+        If TempPlayer(index).Editor > -1 Then  Exit Sub
 
         Dim user As String
 
@@ -1290,6 +1275,7 @@ Module S_NetworkReceive
 
         TempPlayer(index).Editor = EditorType.Shop
 
+        SendItems(index)
         SendShops(index)
 
         Dim Buffer = New ByteStream(4)
@@ -1341,6 +1327,7 @@ Module S_NetworkReceive
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
+        If TempPlayer(index).Editor > -1 Then  Exit Sub
 
         Dim user As String
 
@@ -1353,6 +1340,9 @@ Module S_NetworkReceive
 
         TempPlayer(index).Editor = EditorType.Skill
 
+        SendJobs(index)
+        SendProjectiles(index)
+        SendAnimations(index)
         SendSkills(index)
 
         Dim Buffer = New ByteStream(4)
@@ -1577,37 +1567,6 @@ Module S_NetworkReceive
 
         Next
 
-        'Housing
-        If Player(index).InHouse > 0 Then
-            If Player(index).InHouse = index Then
-                If Player(index).House.Houseindex > 0 Then
-                    If Player(index).House.FurnitureCount > 0 Then
-                        For i = 0 To Player(index).House.FurnitureCount
-                            If x >= Player(index).House.Furniture(i).X AndAlso x <= Player(index).House.Furniture(i).X + Item(Player(index).House.Furniture(i).ItemNum).FurnitureWidth - 1 Then
-                                If y <= Player(index).House.Furniture(i).Y AndAlso y >= Player(index).House.Furniture(i).Y - Item(Player(index).House.Furniture(i).ItemNum).FurnitureHeight + 1 Then
-                                    'Found an Item, get the index and lets pick it up!
-                                    x = FindOpenInvSlot(index, Player(index).House.Furniture(i).ItemNum)
-                                    If x > 0 Then
-                                        GiveInvItem(index, Player(index).House.Furniture(i).ItemNum, 0, True)
-                                        Player(index).House.FurnitureCount = Player(index).House.FurnitureCount - 1
-                                        For x = i + 1 To Player(index).House.FurnitureCount + 1
-                                            Player(index).House.Furniture(x - 1) = Player(index).House.Furniture(x)
-                                        Next
-                                        ReDim Preserve Player(index).House.Furniture(Player(index).House.FurnitureCount)
-                                        SendFurnitureToHouse(index)
-                                        Exit Sub
-                                    Else
-                                        PlayerMsg(index, "No inventory space available!", ColorType.BrightRed)
-                                    End If
-                                    Exit Sub
-                                End If
-                            End If
-                        Next
-                    End If
-                End If
-            End If
-        End If
-
         If TargetFound = 0 Then
             SendTarget(index, 0, 0)
         End If
@@ -1693,9 +1652,13 @@ Module S_NetworkReceive
     Sub Packet_RequestNpcs(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestNPCS")
 
-        TempPlayer(index).Editor = -1
+        Dim Buffer As New ByteStream(data), n as integer
 
-        SendNpcs(index)
+        n = Buffer.ReadInt32
+
+        If n < 0 Or n > MAX_NPCS Then Exit Sub
+
+        SendUpdateNpcTo(index, n)
     End Sub
 
     Sub Packet_SpawnItem(index As Integer, ByRef data() As Byte)
@@ -1744,19 +1707,22 @@ Module S_NetworkReceive
         Dim Buffer = New ByteStream(data), n As Integer
 
         n = Buffer.ReadInt32
-        TempPlayer(index).Editor = -1
-        
+
         If n < 0 Or n > MAX_SKILLS Then Exit Sub
 
         SendUpdateSkillTo(index, n)
     End Sub
 
-    Sub Packet_RequestShops(index As Integer, ByRef data() As Byte)
-        AddDebug("Recieved CMSG: CRequestShops")
+    Sub Packet_RequestShop(index As Integer, ByRef data() As Byte)
+        AddDebug("Recieved CMSG: CRequestShop")
 
-        TempPlayer(index).Editor = -1
+        Dim Buffer As New ByteStream(data), n as integer
 
-        SendShops(index)
+        n = Buffer.ReadInt32
+
+        If n < 0 Or n > MAX_SHOPS Then Exit Sub
+
+        SendUpdateShopTo(index, n)
     End Sub
 
     Sub Packet_RequestLevelUp(index As Integer, ByRef data() As Byte)
@@ -2336,9 +2302,13 @@ Module S_NetworkReceive
     Sub Packet_RequestJob(index As Integer, ByRef data() As Byte)
         AddDebug("Recieved CMSG: CRequestJob")
 
-        TempPlayer(index).Editor = -1
+        Dim Buffer As New ByteStream(data), n as integer
 
-        SendJob(index)
+        n = Buffer.ReadInt32
+ 
+        If n < 0 Or n > MAX_JOBS Then Exit Sub
+
+        SendUpdateJobTo(index, n)
     End Sub
 
     Sub Packet_RequestEditJob(index As Integer, ByRef data() As Byte)
@@ -2346,6 +2316,7 @@ Module S_NetworkReceive
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
+        If TempPlayer(index).Editor > -1 Then  Exit Sub
 
         Dim user As String
 
@@ -2358,77 +2329,68 @@ Module S_NetworkReceive
 
         TempPlayer(index).Editor = EditorType.Job
 
-        SendJob(index)
+        SendJobs(index)
 
         SendClassEditor(index)
     End Sub
 
     Sub Packet_SaveJob(index As Integer, ByRef data() As Byte)
-        Dim i As Integer, z As Integer, x As Integer
+        Dim i As Integer, z As Integer, x As Integer, jobNum As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved EMSG: SaveJob")
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
+        
+        jobnum = buffer.ReadInt32
 
-        For i = 0 To MAX_JOBS
-            ReDim Job(i).Stat(StatType.Count - 1)
-        Next
+        With Job(jobnum)
+            .Name = buffer.ReadString
+            .Desc = buffer.ReadString
 
-        For i = 0 To MAX_JOBS
+            ' get array size
+            z = buffer.ReadInt32
 
-            With Job(i)
-                .Name = buffer.ReadString
-                .Desc = buffer.ReadString
+            ' redim array
+            ReDim .MaleSprite(z)
 
-                ' get array size
-                z = buffer.ReadInt32
+            ' loop-receive data
+            For X = 0 To z
+                .MaleSprite(x) = buffer.ReadInt32
+            Next
 
-                ' redim array
-                ReDim .MaleSprite(z)
+            ' get array size
+            z = buffer.ReadInt32
 
-                ' loop-receive data
-                For X = 0 To z
-                    .MaleSprite(x) = buffer.ReadInt32
-                Next
+            ' redim array
+            ReDim .FemaleSprite(z)
 
-                ' get array size
-                z = buffer.ReadInt32
+            ' loop-receive data
+            For X = 0 To z
+                .FemaleSprite(x) = buffer.ReadInt32
+            Next
 
-                ' redim array
-                ReDim .FemaleSprite(z)
+            for x = 0 to StatType.Count - 1
+                .Stat(x) = buffer.ReadInt32()
+            Next
 
-                ' loop-receive data
-                For X = 0 To z
-                    .FemaleSprite(x) = buffer.ReadInt32
-                Next
+            For q = 0 To 5
+                .StartItem(q) = buffer.ReadInt32
+                .StartValue(q) = buffer.ReadInt32
+            Next
 
-                .Stat(StatType.Strength) = buffer.ReadInt32
-                .Stat(StatType.Endurance) = buffer.ReadInt32
-                .Stat(StatType.Vitality) = buffer.ReadInt32
-                .Stat(StatType.Intelligence) = buffer.ReadInt32
-                .Stat(StatType.Luck) = buffer.ReadInt32
-                .Stat(StatType.Spirit) = buffer.ReadInt32
+            .StartMap = buffer.ReadInt32
+            .StartX = buffer.ReadInt32
+            .StartY = buffer.ReadInt32
 
-                For q = 0 To 5
-                    .StartItem(q) = buffer.ReadInt32
-                    .StartValue(q) = buffer.ReadInt32
-                Next
-
-                .StartMap = buffer.ReadInt32
-                .StartX = buffer.ReadInt32
-                .StartY = buffer.ReadInt32
-
-                .BaseExp = buffer.ReadInt32
-            End With
-
-        Next
+            .BaseExp = buffer.ReadInt32
+        End With
 
         buffer.Dispose()
 
         SaveJobs()
-        SendJobToAll()
+        SendJobToAll(index)
     End Sub
 
     Private Sub Packet_EditorRequestMap(index As Integer, ByRef data() As Byte)
@@ -2503,8 +2465,9 @@ Module S_NetworkReceive
         Map(mapNum).MapTintA = buffer.ReadInt32
 
         Map(mapNum).Instanced = buffer.ReadInt32
-        Map(mapNum).Panorama = buffer.ReadInt32
-        Map(mapNum).Parallax = buffer.ReadInt32
+        Map(mapNum).Panorama = buffer.ReadByte
+        Map(mapNum).Parallax = buffer.ReadByte
+        map(mapNum).Brightness = buffer.ReadByte
 
         ReDim Map(mapNum).Tile(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
@@ -2533,7 +2496,6 @@ Module S_NetworkReceive
 
         End With
 
-        'Event Data!
         Map(mapNum).EventCount = buffer.ReadInt32
 
         If Map(mapNum).EventCount > 0 Then
@@ -2655,7 +2617,6 @@ Module S_NetworkReceive
                 End If
             Next
         End If
-        'End Event Data
 
         ' Save the map
         SaveMap(mapNum)
@@ -2713,6 +2674,14 @@ Module S_NetworkReceive
         SendEmote(index, Emote)
 
         buffer.Dispose()
+    End Sub
+
+    Private Sub Packet_CloseEditor(index As Integer, ByRef data() As Byte)
+        ' Prevent hacking
+        If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
+        If TempPlayer(index).Editor = -1 Then Exit Sub
+
+        TempPlayer(index).Editor = -1
     End Sub
 
 End Module

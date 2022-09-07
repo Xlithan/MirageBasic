@@ -198,6 +198,7 @@ Friend Module S_Resources
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
+        If TempPlayer(index).Editor > -1 Then  Exit Sub
 
         Dim user As String
 
@@ -210,6 +211,8 @@ Friend Module S_Resources
 
         TempPlayer(index).Editor = EditorType.Resource
 
+        SendItems(index)
+        SendAnimations(index)
         SendResources(index)
 
         Buffer.WriteInt32(ServerPackets.SResourceEditor)
@@ -258,12 +261,16 @@ Friend Module S_Resources
         buffer.Dispose()
     End Sub
 
-    Sub Packet_RequestResources(index As Integer, ByRef data() As Byte)
-        AddDebug("Recieved CMSG: CRequestResources")
+    Sub Packet_RequestResource(index As Integer, ByRef data() As Byte)
+        AddDebug("Recieved CMSG: CRequestResource")
 
-        TempPlayer(index).Editor = -1
+        Dim Buffer = New ByteStream(data), n As Integer
 
-        SendResources(index)
+        n = Buffer.ReadInt32
+
+        If n < 0 Or n > MAX_RESOURCES Then Exit Sub
+
+        SendUpdateResourceTo(index, n)
     End Sub
 
 #End Region

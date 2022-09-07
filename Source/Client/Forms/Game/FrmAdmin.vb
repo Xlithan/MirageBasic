@@ -88,6 +88,11 @@ Friend Class FrmAdmin
 #Region "Editors"
 
     Private Sub btnAnimationEditor_Click(sender As Object, e As EventArgs) Handles btnAnimationEditor.Click
+        If Editor <> - 1 Then
+            MsgBox("You are already in an Editor. Please close the editor to use another one.")
+            Exit Sub
+        End If
+
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
@@ -97,6 +102,11 @@ Friend Class FrmAdmin
     End Sub
 
     Private Sub btnClassEditor_Click(sender As Object, e As EventArgs) Handles btnJobEditor.Click
+        If Editor <> - 1 Then
+            MsgBox("You are already in an Editor. Please close the editor to use another one.")
+            Exit Sub
+        End If
+
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
@@ -105,16 +115,12 @@ Friend Class FrmAdmin
         SendRequestEditJob()
     End Sub
 
-    Private Sub btnhouseEditor_Click(sender As Object, e As EventArgs) Handles btnhouseEditor.Click
-        If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+    Private Sub btnItemEditor_Click(sender As Object, e As EventArgs) Handles btnItemEditor.Click
+        If Editor <> - 1 Then
+            MsgBox("You are already in an Editor. Please close the editor to use another one.")
             Exit Sub
         End If
 
-        SendRequestEditHouse()
-    End Sub
-
-    Private Sub btnItemEditor_Click(sender As Object, e As EventArgs) Handles btnItemEditor.Click
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
@@ -124,6 +130,11 @@ Friend Class FrmAdmin
     End Sub
 
     Private Sub BtnMapEditor_Click(sender As Object, e As EventArgs) Handles btnMapEditor.Click
+        If Editor <> - 1 Then
+            MsgBox("You are already in an Editor. Please close the editor to use another one.")
+            Exit Sub
+        End If
+
         If GetPlayerAccess(Myindex) < AdminType.Mapper Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
@@ -133,6 +144,11 @@ Friend Class FrmAdmin
     End Sub
 
     Private Sub btnNPCEditor_Click(sender As Object, e As EventArgs) Handles btnNPCEditor.Click
+        If Editor <> - 1 Then
+            MsgBox("You are already in an Editor. Please close the editor to use another one.")
+            Exit Sub
+        End If
+
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
@@ -142,6 +158,11 @@ Friend Class FrmAdmin
     End Sub
 
     Private Sub btnPetEditor_Click(sender As Object, e As EventArgs) Handles btnPetEditor.Click
+        If Editor <> - 1 Then
+            MsgBox("You are already in an Editor. Please close the editor to use another one.")
+            Exit Sub
+        End If
+
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
@@ -151,6 +172,11 @@ Friend Class FrmAdmin
     End Sub
 
     Private Sub btnProjectiles_Click(sender As Object, e As EventArgs) Handles btnProjectiles.Click
+        If Editor <> - 1 Then
+            MsgBox("You are already in an Editor. Please close the editor to use another one.")
+            Exit Sub
+        End If
+
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
@@ -160,6 +186,11 @@ Friend Class FrmAdmin
     End Sub
 
     Private Sub btnQuest_Click(sender As Object, e As EventArgs) Handles btnQuest.Click
+        If Editor <> - 1 Then
+            MsgBox("You are already in an Editor. Please close the editor to use another one.")
+            Exit Sub
+        End If
+
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
@@ -168,16 +199,12 @@ Friend Class FrmAdmin
         SendRequestEditQuest()
     End Sub
 
-    Private Sub btnRecipeEditor_Click(sender As Object, e As EventArgs) Handles btnRecipeEditor.Click
-        If GetPlayerAccess(Myindex) < AdminType.Developer Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+    Private Sub btnResourceEditor_Click(sender As Object, e As EventArgs) Handles btnResourceEditor.Click
+        If Editor <> - 1 Then
+            MsgBox("You are already in an Editor. Please close the editor to use another one.")
             Exit Sub
         End If
 
-        SendRequestEditRecipes()
-    End Sub
-
-    Private Sub btnResourceEditor_Click(sender As Object, e As EventArgs) Handles btnResourceEditor.Click
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
@@ -187,6 +214,11 @@ Friend Class FrmAdmin
     End Sub
 
     Private Sub btnShopEditor_Click(sender As Object, e As EventArgs) Handles btnShopEditor.Click
+        If Editor <> - 1 Then
+            MsgBox("You are already in an Editor. Please close the editor to use another one.")
+            Exit Sub
+        End If
+
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub
@@ -196,6 +228,11 @@ Friend Class FrmAdmin
     End Sub
 
     Private Sub btnSkillEditor_Click(sender As Object, e As EventArgs) Handles btnSkillEditor.Click
+        If Editor <> - 1 Then
+            MsgBox("You are already in an Editor. Please close the editor to use another one.")
+            Exit Sub
+        End If
+
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
             AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
             Exit Sub

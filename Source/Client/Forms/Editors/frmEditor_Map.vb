@@ -29,7 +29,9 @@ Public Class frmEditor_Map
 
         scrlFog.Maximum = NumFogs
 
-        Me.TopMost = True
+        TilesetWindow = New RenderWindow(picBackSelect.Handle)
+
+        TopMost = True
     End Sub
 
 #End Region
@@ -69,14 +71,6 @@ Public Class frmEditor_Map
 
     Private Sub PicBackSelect_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picBackSelect.MouseMove
         MapEditorDrag(e.Button, e.X, e.Y)
-    End Sub
-
-    Private Sub PicBackSelect_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles picBackSelect.Paint
-        'Overrides the paint sub
-    End Sub
-
-    Private Sub PnlBack_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles pnlBack.Paint
-        'Overrides the paint sub
     End Sub
 
     Private Sub CmbTileSets_Click(sender As Object, e As EventArgs) Handles cmbTileSets.Click
@@ -145,7 +139,7 @@ Public Class frmEditor_Map
             scrlMapItemValue.Enabled = False
         End If
 
-        EditorMap_DrawMapItem()
+        DrawMapItem()
         lblMapItem.Text = "Item: " & scrlMapItem.Value & ". " & Trim$(Item(scrlMapItem.Value).Name) & " x" & scrlMapItemValue.Value
     End Sub
 
@@ -170,7 +164,7 @@ Public Class frmEditor_Map
         scrlMapItem.Maximum = MAX_ITEMS
         scrlMapItem.Value = 1
         lblMapItem.Text = Trim$(Item(scrlMapItem.Value).Name) & " x" & scrlMapItemValue.Value
-        EditorMap_DrawMapItem()
+        DrawMapItem()
     End Sub
 
     Private Sub BtnResourceOk_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnResourceOk.Click
@@ -290,26 +284,6 @@ Public Class frmEditor_Map
 
     Private Sub OptBlocked_CheckedChanged(sender As Object, e As EventArgs) Handles optBlocked.CheckedChanged
         If optBlocked.Checked Then pnlAttributes.Visible = False
-    End Sub
-
-    Private Sub OptHouse_CheckedChanged(sender As Object, e As EventArgs) Handles optHouse.CheckedChanged
-        If optHouse.Checked = False Then Exit Sub
-
-        ClearAttributeDialogue()
-        pnlAttributes.Visible = True
-        fraBuyHouse.Visible = True
-        scrlBuyHouse.Maximum = MAX_HOUSES
-        scrlBuyHouse.Value = 1
-    End Sub
-
-    Private Sub ScrlBuyHouse_Scroll(sender As Object, e As EventArgs) Handles scrlBuyHouse.ValueChanged
-        lblHouseName.Text = scrlBuyHouse.Value & ". " & HouseConfig(scrlBuyHouse.Value).ConfigName
-    End Sub
-
-    Private Sub BtnHouseTileOk_Click(sender As Object, e As EventArgs) Handles btnHouseTileOk.Click
-        HouseTileindex = scrlBuyHouse.Value
-        pnlAttributes.Visible = False
-        fraBuyHouse.Visible = False
     End Sub
 
     Private Sub ChkInstance_CheckedChanged(sender As Object, e As EventArgs) Handles chkInstance.CheckedChanged
@@ -574,6 +548,8 @@ Public Class frmEditor_Map
 
         tabpages.SelectedIndex = 0
 
+        scrlMapBrightness.Value = Map.Brightness
+
         ' show the form
         Visible = True
 
@@ -581,7 +557,7 @@ Public Class frmEditor_Map
 
     Public Sub MapEditorInit()
         ' we're in the map editor
-        InMapEditor = True
+        Editor = EditorType.Map
 
         ' set the scrolly bars
         If Map.Tileset = 0 Then Map.Tileset = 1
@@ -589,16 +565,6 @@ Public Class frmEditor_Map
 
         EditorTileSelStart = New Point(0, 0)
         EditorTileSelEnd = New Point(1, 1)
-
-        LastTileset = 1
-
-        If TileSetTextureInfo(LastTileset).IsLoaded = False Then
-            LoadTexture(LastTileset, 1)
-        End If
-        ' we use it, lets update timer
-        With TileSetTextureInfo(LastTileset)
-            .TextureTimer = GetTickCount() + 100000
-        End With
 
         ' set shops for the shop attribute
         For i = 0 To MAX_SHOPS
@@ -776,13 +742,6 @@ Public Class frmEditor_Map
                         .Data2 = 0
                         .Data3 = 0
                     End If
-                    'Housing
-                    If optHouse.Checked Then
-                        .Type = TileType.House
-                        .Data1 = HouseTileindex
-                        .Data2 = 0
-                        .Data3 = 0
-                    End If
                     'craft tile
                     If optCraft.Checked Then
                         .Type = TileType.Craft
@@ -853,24 +812,25 @@ Public Class frmEditor_Map
     End Sub
 
     Public Sub MapEditorCancel()
-        If InMapEditor = false Then Exit sub
+        If Editor <> EditorType.Map Then Exit sub
+
         Dim Buffer As ByteStream
         Buffer = New ByteStream(4)
         Buffer.WriteInt32(ClientPackets.CNeedMap)
         Buffer.WriteInt32(1)
         Socket?.SendData(Buffer.Data, Buffer.Head)
-        InMapEditor = False
-        Visible = False
+        Editor = -1
         GettingMap = True
-        ' unload the form
+        SendCloseEditor()
+
         FrmEditor_Events.Dispose()
     End Sub
 
     Public Sub MapEditorSend()
         SendMap()
-        InMapEditor = False
-        Visible = False
+        Editor = -1
         GettingMap = True
+        SendCloseEditor()
     End Sub
 
     Public Sub MapEditorSetTile(ByVal X As Integer, ByVal Y As Integer, ByVal CurLayer As Integer, Optional ByVal multitile As Boolean = False, Optional ByVal theAutotile As Byte = 0, Optional eraseTile As Byte = 0)
@@ -1002,18 +962,13 @@ Public Class frmEditor_Map
     End Sub
 
     Public Sub ClearAttributeDialogue()
-
         fraNpcSpawn.Visible = False
         fraResource.Visible = False
         fraMapItem.Visible = False
-        fraMapKey.Visible = False
-        fraKeyOpen.Visible = False
         fraMapWarp.Visible = False
         fraShop.Visible = False
         fraHeal.Visible = False
         fraTrap.Visible = False
-        fraBuyHouse.Visible = False
-
     End Sub
 
     Public Sub MapEditorClearAttribs()
@@ -1032,35 +987,41 @@ Public Class frmEditor_Map
 
     End Sub
 
-    Public Sub MapEditorLeaveMap()
+    Private Sub cmbTileSets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTileSets.SelectedIndexChanged
+        If cmbTileSets.SelectedIndex = 0 Then cmbTileSets.SelectedIndex = 1
+    End Sub
 
-        If InMapEditor Then
-            If MsgBox("Save changes to current map?", vbYesNo) = vbYes Then
-                MapEditorSend()
-            Else
-                MapEditorCancel()
-            End If
-        End If
+    Private Sub txtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
+        Map.Name = txtName.Text
+    End Sub
 
+    Private Sub frmEditor_Map_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        MapEditorCancel
+    End Sub
+
+    Private Sub scrMapBrightness_Scroll(sender As Object, e As ScrollEventArgs) Handles scrlMapBrightness.Scroll
+        Map.Brightness = scrlMapBrightness.Value
+        lblMapBrightness.Text = "Brightness: " & scrlMapBrightness.Value
     End Sub
 
 #End Region
 
 #Region "Drawing"
 
-    Public Sub EditorMap_DrawTileset()
+    Public Sub DrawTileset()
         'Dim height As Integer
         'Dim width As Integer
         Dim tileset As Byte
 
-        TilesetWindow.DispatchEvents()
-        TilesetWindow.Clear(SFML.Graphics.Color.Black)
-
         ' find tileset number
-        tileset = Me.cmbTileSets.SelectedIndex
+        tileset = cmbTileSets.SelectedIndex
 
         ' exit out if doesn't exist
-        If tileset <= 0 OrElse tileset > NumTileSets Then Exit Sub
+        If tileset <= 0 OrElse tileset > NumTileSets Then
+            TilesetWindow.Clear(ToSfmlColor(picBackSelect.BackColor))
+            TilesetWindow.Display()
+            Exit Sub
+        End If
 
         Dim rec2 As New RectangleShape With {
             .OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Red),
@@ -1075,13 +1036,6 @@ Public Class frmEditor_Map
         With TileSetTextureInfo(tileset)
             .TextureTimer = GetTickCount() + 100000
         End With
-
-        'height = TileSetTextureInfo(tileset).Height
-        'width = TileSetTextureInfo(tileset).Width
-        'Me.picBackSelect.Height = height
-        'Me.picBackSelect.Width = width
-
-        'TilesetWindow.SetView(New SFML.Graphics.View(New FloatRect(0, 0, picbackleft + Me.picBackSelect.Width, picbacktop + Me.picBackSelect.Height)))
 
         ' change selected shape for autotiles
         If Me.cmbAutoTile.SelectedIndex > 0 Then
@@ -1113,19 +1067,16 @@ Public Class frmEditor_Map
             RenderSprite(TileSetSprite(tileset), TilesetWindow, 0, 0, picbackleft, picbacktop, picbackleft + picBackSelect.Width, picbacktop + picBackSelect.Height)
         End If
 
-
         rec2.Size = New Vector2f(EditorTileWidth * PicX, EditorTileHeight * PicY)
-
         rec2.Position = New Vector2f((EditorTileSelStart.X * PicX - picbackleft), (EditorTileSelStart.Y * PicY - picbacktop))
+
         TilesetWindow.Draw(rec2)
 
         'and finally show everything on screen
         TilesetWindow.Display()
-
-        LastTileset = tileset
     End Sub
 
-    Public Sub EditorMap_DrawMapItem()
+    Public Sub DrawMapItem()
         Dim itemnum As Integer
         itemnum = Item(Me.scrlMapItem.Value).Pic
 
@@ -1138,34 +1089,6 @@ Public Class frmEditor_Map
             Me.picMapItem.BackgroundImage = Drawing.Image.FromFile(Paths.Graphics & "items\" & itemnum & GfxExt)
         End If
 
-    End Sub
-
-    Public Sub EditorMap_DrawKey()
-        Dim itemnum As Integer
-
-        itemnum = Item(Me.scrlMapKey.Value).Pic
-
-        If itemnum < 0 OrElse itemnum > NumItems Then
-            Me.picMapKey.BackgroundImage = Nothing
-            Exit Sub
-        End If
-
-        If File.Exists(Paths.Graphics & "items\" & itemnum & GfxExt) Then
-            Me.picMapKey.BackgroundImage = Drawing.Image.FromFile(Paths.Graphics & "items\" & itemnum & GfxExt)
-        End If
-
-    End Sub
-
-    Private Sub cmbTileSets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTileSets.SelectedIndexChanged
-       If cmbTileSets.SelectedIndex = 0 Then cmbTileSets.SelectedIndex = 1
-    End Sub
-
-    Private Sub txtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
-        Map.Name = txtName.Text
-    End Sub
-
-    Private Sub frmEditor_Map_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        MapEditorCancel
     End Sub
 
     Friend Sub DrawTileOutline()

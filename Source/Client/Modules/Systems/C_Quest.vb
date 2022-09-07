@@ -619,22 +619,24 @@ Friend Module C_Quest
             .cmbQuestReq.Enabled = False
             .cmbJobReq.Enabled = False
 
-            Select Case Quest(QuestNum).Requirement(ReqNum)
-                Case 0
-                    .rdbNoneReq.Checked = True
-                Case 1
-                    .rdbItemReq.Checked = True
-                    .cmbItemReq.Enabled = True
-                    .cmbItemReq.SelectedIndex = Quest(QuestNum).RequirementIndex(ReqNum)
-                Case 2
-                    .rdbQuestReq.Checked = True
-                    .cmbQuestReq.Enabled = True
-                    .cmbQuestReq.SelectedIndex = Quest(QuestNum).RequirementIndex(ReqNum)
-                Case 3
-                    .rdbJobReq.Checked = True
-                    .cmbJobReq.Enabled = True
-                    .cmbJobReq.SelectedIndex = Quest(QuestNum).RequirementIndex(ReqNum)
-            End Select
+            If ReqNum > -1 Then
+                Select Case Quest(QuestNum).Requirement(ReqNum)
+                    Case 0
+                        .rdbNoneReq.Checked = True
+                    Case 1
+                        .rdbItemReq.Checked = True
+                        .cmbItemReq.Enabled = True
+                        .cmbItemReq.SelectedIndex = Quest(QuestNum).RequirementIndex(ReqNum)
+                    Case 2
+                        .rdbQuestReq.Checked = True
+                        .cmbQuestReq.Enabled = True
+                        .cmbQuestReq.SelectedIndex = Quest(QuestNum).RequirementIndex(ReqNum)
+                    Case 3
+                        .rdbJobReq.Checked = True
+                        .cmbJobReq.Enabled = True
+                        .cmbJobReq.SelectedIndex = Quest(QuestNum).RequirementIndex(ReqNum)
+                End Select
+            End If
 
         End With
 
@@ -915,18 +917,16 @@ Friend Module C_Quest
             End If
         Next
 
-        frmEditor_Quest.Dispose()
         Editor = -1
         ClearChanged_Quest()
-
+        SendCloseEditor()
     End Sub
 
     Friend Sub QuestEditorCancel()
         Editor = -1
-        frmEditor_Quest.Dispose()
         ClearChanged_Quest()
         ClearQuests()
-        SendRequestQuests()
+        SendCloseEditor()
     End Sub
 
     Friend Sub ClearChanged_Quest()

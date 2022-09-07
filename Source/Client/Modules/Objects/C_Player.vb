@@ -87,7 +87,6 @@ Module C_Player
         ReDim Player(i).PlayerQuest(MAX_QUESTS)
         ReDim Player(i).Hotbar(MaxHotbar)
         ReDim Player(i).GatherSkills(ResourceSkills.Count - 1)
-        ReDim Player(i).RecipeLearned(MAX_RECIPE)
 
         'pets
         Player(i).Pet.Num = 0
@@ -196,12 +195,6 @@ Module C_Player
         End If
 
         If InEvent Then
-            CanMove = False
-            Exit Function
-        End If
-
-        ' craft
-        If InCraft Then
             CanMove = False
             Exit Function
         End If
@@ -382,45 +375,8 @@ Module C_Player
             Exit Function
         End If
 
-        If FurnitureHouse > 0 AndAlso FurnitureHouse = Player(Myindex).InHouse Then
-            If FurnitureCount > 0 Then
-               For i = 0 To FurnitureCount
-                    If Item(Furniture(i).ItemNum).Data3 = 0 Then
-                        If x >= Furniture(i).X AndAlso x <= Furniture(i).X + Item(Furniture(i).ItemNum).FurnitureWidth - 1 Then
-                            If y <= Furniture(i).Y AndAlso y >= Furniture(i).Y - Item(Furniture(i).ItemNum).FurnitureHeight Then
-                                z = Item(Furniture(i).ItemNum).FurnitureBlocks(x - Furniture(i).X, ((Furniture(i).Y - y) * -1) + Item(Furniture(i).ItemNum).FurnitureHeight)
-                                If z = 1 Then CheckDirection = True : Exit Function
-                            End If
-                        End If
-                    End If
-                Next
-            End If
-        End If
-
-        ' Check to see if a player is already on that tile
-       For i = 1 To MAX_PLAYERS
-            If IsPlaying(i) AndAlso GetPlayerMap(i) = GetPlayerMap(Myindex) Then
-                If Player(i).InHouse = Player(Myindex).InHouse Then
-                    If GetPlayerX(i) = x Then
-                        If GetPlayerY(i) = y Then
-                            CheckDirection = True
-                            Exit Function
-                        ElseIf Player(i).Pet.X = x AndAlso Player(i).Pet.Alive = True Then
-                            If Player(i).Pet.Y = y Then
-                                CheckDirection = True
-                                Exit Function
-                            End If
-                        End If
-                    ElseIf Player(i).Pet.X = x AndAlso Player(i).Pet.Y = y AndAlso Player(i).Pet.Alive = True Then
-                        CheckDirection = True
-                        Exit Function
-                    End If
-                End If
-            End If
-        Next
-
         ' Check to see if a npc is already on that tile
-       For i = 1 To MAX_MAP_NPCS
+        For i = 1 To MAX_MAP_NPCS
             If MapNpc(i).Num > 0 AndAlso MapNpc(i).X = x AndAlso MapNpc(i).Y = y Then
                 CheckDirection = True
                 Exit Function
@@ -987,16 +943,10 @@ Module C_Player
             SetPlayerStat(i, x, buffer.ReadInt32)
         Next
 
-        Player(i).InHouse = buffer.ReadInt32
-
         For X = 0 To ResourceSkills.Count - 1
             Player(i).GatherSkills(x).SkillLevel = buffer.ReadInt32
             Player(i).GatherSkills(x).SkillCurExp = buffer.ReadInt32
             Player(i).GatherSkills(x).SkillNextLvlExp = buffer.ReadInt32
-        Next
-
-        For x = 0 To MAX_RECIPE
-            Player(i).RecipeLearned(x) = buffer.ReadInt32
         Next
 
         ' Check if the player is the client player

@@ -208,6 +208,14 @@ Module C_Maps
         Dim x As Integer, y As Integer, i As Integer
         Dim needMap As Byte
         Dim buffer As New ByteStream(data)
+
+        If Editor = EditorType.Map Then
+            If MsgBox("Save changes to current map?", vbYesNo) = vbYes Then
+                frmEditor_Map.MapEditorSend()
+            Else
+                frmEditor_Map.MapEditorCancel()
+            End If
+        End If
         GettingMap = True
 
         ' Erase all players except self
@@ -275,8 +283,9 @@ Module C_Maps
             Map.MapTintB = buffer.ReadInt32
             Map.MapTintA = buffer.ReadInt32
             Map.Instanced = buffer.ReadInt32
-            Map.Panorama = buffer.ReadInt32
-            Map.Parallax = buffer.ReadInt32
+            Map.Panorama = buffer.ReadByte
+            Map.Parallax = buffer.ReadByte
+            Map.Brightness = buffer.ReadByte
 
             ReDim Map.Tile(Map.MaxX, Map.MaxY)
 
@@ -607,8 +616,9 @@ Module C_Maps
         buffer.WriteInt32(Map.MapTintB)
         buffer.WriteInt32(Map.MapTintA)
         buffer.WriteInt32(Map.Instanced)
-        buffer.WriteInt32(Map.Panorama)
-        buffer.WriteInt32(Map.Parallax)
+        buffer.WriteByte(Map.Panorama)
+        buffer.WriteByte(Map.Parallax)
+        buffer.WriteByte(Map.Brightness)
 
        For i = 1 To MAX_MAP_NPCS
             buffer.WriteInt32(Map.Npc(i))

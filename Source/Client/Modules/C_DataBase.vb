@@ -29,7 +29,6 @@ Module C_Database
             i = i + 1
         End While
 
-        If NumCharacters = 0 Then Exit Sub
     End Sub
 
     Friend Sub CheckPaperdolls()
@@ -41,7 +40,6 @@ Module C_Database
             i = i + 1
         End While
 
-        If NumPaperdolls = 0 Then Exit Sub
     End Sub
 
     Friend Sub CheckAnimations()
@@ -53,7 +51,6 @@ Module C_Database
             i = i + 1
         End While
 
-        If NumAnimations = 0 Then Exit Sub
     End Sub
 
     Friend Sub CheckSkillIcons()
@@ -65,7 +62,6 @@ Module C_Database
             i = i + 1
         End While
 
-        If NumSkillIcons = 0 Then Exit Sub
     End Sub
 
     Friend Sub CheckFaces()
@@ -101,7 +97,6 @@ Module C_Database
             i = i + 1
         End While
 
-        If NumEmotes = 0 Then Exit Sub
     End Sub
 
     Friend Sub CheckPanoramas()
@@ -112,8 +107,6 @@ Module C_Database
             NumPanorama = NumPanorama + 1
             i = i + 1
         End While
-
-        If NumPanorama = 0 Then Exit Sub
     End Sub
 
     Friend Sub CheckParallax()
@@ -125,7 +118,6 @@ Module C_Database
             i = i + 1
         End While
 
-        If NumParallax = 0 Then Exit Sub
     End Sub
 
     Friend Sub CacheMusic()
@@ -187,6 +179,7 @@ Module C_Database
     End Sub
 
     Sub ClearNpc(index As Integer)
+        Npc(index) = Nothing
         ReDim Npc(index).Stat(StatType.Count - 1)
         ReDim Npc(index).DropChance(5)
         ReDim Npc(index).DropItem(5)
@@ -196,9 +189,24 @@ Module C_Database
 
 #End Region
 
-    Friend Sub ClearChangedItem()
-        ReDim Item_Changed(MAX_ITEMS)
+#Region "Jobs"
+    Sub ClearJobs()
+        For i = 0 To MAX_JOBS
+            ClearJob(i)
+        Next
     End Sub
+
+    Sub ClearJob(index As Integer)
+        Job(index) = Nothing
+        ReDim Job(index).Stat(StatType.Count - 1)
+        Job(index).Name = ""
+        Job(index).Desc = ""
+        ReDim Job(index).StartItem(5)
+        ReDim Job(index).StartValue(5)
+        ReDim Job(index).MaleSprite(0)
+        ReDim Job(index).FemaleSprite(0)
+    End Sub
+#End Region
 
 #Region "Skills"
 
@@ -212,6 +220,7 @@ Module C_Database
     End Sub
 
     Sub ClearSkill(index As Integer)
+        Skill(index) = Nothing
         Skill(index).Name = ""
     End Sub
 

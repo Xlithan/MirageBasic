@@ -54,9 +54,6 @@ Partial Class frmEditor_Item
         Me.nudPic = New DarkUI.Controls.DarkNumericUpDown()
         Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
         Me.txtName = New DarkUI.Controls.DarkTextBox()
-        Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
-        Me.fraRecipe = New DarkUI.Controls.DarkGroupBox()
-        Me.cmbRecipe = New DarkUI.Controls.DarkComboBox()
         Me.DarkLabel35 = New DarkUI.Controls.DarkLabel()
         Me.fraVitals = New DarkUI.Controls.DarkGroupBox()
         Me.nudVitalMod = New DarkUI.Controls.DarkNumericUpDown()
@@ -121,16 +118,6 @@ Partial Class frmEditor_Item
         Me.btnSave = New DarkUI.Controls.DarkButton()
         Me.btnDelete = New DarkUI.Controls.DarkButton()
         Me.btnCancel = New DarkUI.Controls.DarkButton()
-        Me.fraFurniture = New DarkUI.Controls.DarkGroupBox()
-        Me.nudFurniture = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel37 = New DarkUI.Controls.DarkLabel()
-        Me.lblSetOption = New DarkUI.Controls.DarkLabel()
-        Me.optSetFringe = New DarkUI.Controls.DarkRadioButton()
-        Me.optSetBlocks = New DarkUI.Controls.DarkRadioButton()
-        Me.optNoFurnitureEditing = New DarkUI.Controls.DarkRadioButton()
-        Me.cmbFurnitureType = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel36 = New DarkUI.Controls.DarkLabel()
-        Me.picFurniture = New System.Windows.Forms.PictureBox()
         Me.btnSpawn = New DarkUI.Controls.DarkButton()
         Me.nudSpanwAmount = New DarkUI.Controls.DarkNumericUpDown()
         Me.DarkGroupBox1.SuspendLayout
@@ -144,7 +131,6 @@ Partial Class frmEditor_Item
         CType(Me.picItem,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.nudRarity,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.nudPic,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.fraRecipe.SuspendLayout
         Me.fraVitals.SuspendLayout
         CType(Me.nudVitalMod,System.ComponentModel.ISupportInitialize).BeginInit
         Me.fraSkill.SuspendLayout
@@ -170,9 +156,6 @@ Partial Class frmEditor_Item
         CType(Me.nudEndReq,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.nudStrReq,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.nudLevelReq,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.fraFurniture.SuspendLayout
-        CType(Me.nudFurniture,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.picFurniture,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.nudSpanwAmount,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
@@ -232,7 +215,6 @@ Partial Class frmEditor_Item
         Me.fraBasics.Controls.Add(Me.DarkLabel2)
         Me.fraBasics.Controls.Add(Me.txtName)
         Me.fraBasics.Controls.Add(Me.DarkLabel1)
-        Me.fraBasics.Controls.Add(Me.fraRecipe)
         Me.fraBasics.Controls.Add(Me.fraVitals)
         Me.fraBasics.Controls.Add(Me.fraSkill)
         Me.fraBasics.ForeColor = System.Drawing.Color.Gainsboro
@@ -459,7 +441,7 @@ Partial Class frmEditor_Item
         '
         Me.cmbSubType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbSubType.FormattingEnabled = true
-        Me.cmbSubType.Items.AddRange(New Object() {"None", "Weapon", "Armor", "Helmet", "Shield", "Shoes", "Gloves", "Potion Add HP", "Potion Add MP", "Potion Add SP", "Potion Sub HP", "Potion Sub MP", "Potion Sub SP", "Event", "Currency", "Skill", "Furniture", "Recipe"})
+        Me.cmbSubType.Items.AddRange(New Object() {"None", "Weapon", "Armor", "Helmet", "Shield", "Shoes", "Gloves", "Potion Add HP", "Potion Add MP", "Potion Add SP", "Potion Sub HP", "Potion Sub MP", "Potion Sub SP", "Event", "Currency", "Skill"})
         Me.cmbSubType.Location = New System.Drawing.Point(85, 77)
         Me.cmbSubType.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbSubType.Name = "cmbSubType"
@@ -481,7 +463,7 @@ Partial Class frmEditor_Item
         '
         Me.cmbType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbType.FormattingEnabled = true
-        Me.cmbType.Items.AddRange(New Object() {"None", "Equipment", "Consumables", "Event", "Currency", "Skill", "Projectile", "Furniture", "Recipe", "Pet"})
+        Me.cmbType.Items.AddRange(New Object() {"None", "Equipment", "Consumable", "Event", "Currency", "Skill", "Projectile", "Pet"})
         Me.cmbType.Location = New System.Drawing.Point(85, 46)
         Me.cmbType.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbType.Name = "cmbType"
@@ -569,43 +551,6 @@ Partial Class frmEditor_Item
         Me.DarkLabel1.Size = New System.Drawing.Size(42, 15)
         Me.DarkLabel1.TabIndex = 0
         Me.DarkLabel1.Text = "Name:"
-        '
-        'fraRecipe
-        '
-        Me.fraRecipe.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
-        Me.fraRecipe.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
-        Me.fraRecipe.Controls.Add(Me.cmbRecipe)
-        Me.fraRecipe.Controls.Add(Me.DarkLabel35)
-        Me.fraRecipe.ForeColor = System.Drawing.Color.Gainsboro
-        Me.fraRecipe.Location = New System.Drawing.Point(284, 185)
-        Me.fraRecipe.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraRecipe.Name = "fraRecipe"
-        Me.fraRecipe.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraRecipe.Size = New System.Drawing.Size(233, 46)
-        Me.fraRecipe.TabIndex = 26
-        Me.fraRecipe.TabStop = false
-        Me.fraRecipe.Text = "Recipe"
-        '
-        'cmbRecipe
-        '
-        Me.cmbRecipe.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbRecipe.FormattingEnabled = true
-        Me.cmbRecipe.Location = New System.Drawing.Point(65, 14)
-        Me.cmbRecipe.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbRecipe.Name = "cmbRecipe"
-        Me.cmbRecipe.Size = New System.Drawing.Size(160, 24)
-        Me.cmbRecipe.TabIndex = 1
-        '
-        'DarkLabel35
-        '
-        Me.DarkLabel35.AutoSize = true
-        Me.DarkLabel35.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel35.Location = New System.Drawing.Point(7, 20)
-        Me.DarkLabel35.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel35.Name = "DarkLabel35"
-        Me.DarkLabel35.Size = New System.Drawing.Size(45, 15)
-        Me.DarkLabel35.TabIndex = 0
-        Me.DarkLabel35.Text = "Recipe:"
         '
         'fraVitals
         '
@@ -1326,123 +1271,6 @@ Partial Class frmEditor_Item
         Me.btnCancel.TabIndex = 8
         Me.btnCancel.Text = "Cancel"
         '
-        'fraFurniture
-        '
-        Me.fraFurniture.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
-        Me.fraFurniture.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
-        Me.fraFurniture.Controls.Add(Me.nudFurniture)
-        Me.fraFurniture.Controls.Add(Me.DarkLabel37)
-        Me.fraFurniture.Controls.Add(Me.lblSetOption)
-        Me.fraFurniture.Controls.Add(Me.optSetFringe)
-        Me.fraFurniture.Controls.Add(Me.optSetBlocks)
-        Me.fraFurniture.Controls.Add(Me.optNoFurnitureEditing)
-        Me.fraFurniture.Controls.Add(Me.cmbFurnitureType)
-        Me.fraFurniture.Controls.Add(Me.DarkLabel36)
-        Me.fraFurniture.Controls.Add(Me.picFurniture)
-        Me.fraFurniture.ForeColor = System.Drawing.Color.Gainsboro
-        Me.fraFurniture.Location = New System.Drawing.Point(253, 283)
-        Me.fraFurniture.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraFurniture.Name = "fraFurniture"
-        Me.fraFurniture.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraFurniture.Size = New System.Drawing.Size(525, 283)
-        Me.fraFurniture.TabIndex = 9
-        Me.fraFurniture.TabStop = false
-        Me.fraFurniture.Text = "Furniture Settings"
-        '
-        'nudFurniture
-        '
-        Me.nudFurniture.Location = New System.Drawing.Point(429, 198)
-        Me.nudFurniture.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudFurniture.Name = "nudFurniture"
-        Me.nudFurniture.Size = New System.Drawing.Size(89, 23)
-        Me.nudFurniture.TabIndex = 15
-        '
-        'DarkLabel37
-        '
-        Me.DarkLabel37.AutoSize = true
-        Me.DarkLabel37.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel37.Location = New System.Drawing.Point(344, 201)
-        Me.DarkLabel37.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel37.Name = "DarkLabel37"
-        Me.DarkLabel37.Size = New System.Drawing.Size(58, 15)
-        Me.DarkLabel37.TabIndex = 14
-        Me.DarkLabel37.Text = "Furniture:"
-        '
-        'lblSetOption
-        '
-        Me.lblSetOption.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.lblSetOption.Location = New System.Drawing.Point(100, 76)
-        Me.lblSetOption.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblSetOption.Name = "lblSetOption"
-        Me.lblSetOption.Size = New System.Drawing.Size(237, 119)
-        Me.lblSetOption.TabIndex = 13
-        Me.lblSetOption.Text = "Set Blocks: Os are passable and Xs are not. Simply place Xs where you do not want"& _ 
-    " the player to walk."
-        '
-        'optSetFringe
-        '
-        Me.optSetFringe.AutoSize = true
-        Me.optSetFringe.Location = New System.Drawing.Point(7, 125)
-        Me.optSetFringe.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.optSetFringe.Name = "optSetFringe"
-        Me.optSetFringe.Size = New System.Drawing.Size(77, 19)
-        Me.optSetFringe.TabIndex = 12
-        Me.optSetFringe.Text = "Set Fringe"
-        '
-        'optSetBlocks
-        '
-        Me.optSetBlocks.AutoSize = true
-        Me.optSetBlocks.Location = New System.Drawing.Point(7, 98)
-        Me.optSetBlocks.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.optSetBlocks.Name = "optSetBlocks"
-        Me.optSetBlocks.Size = New System.Drawing.Size(78, 19)
-        Me.optSetBlocks.TabIndex = 11
-        Me.optSetBlocks.Text = "Set Blocks"
-        '
-        'optNoFurnitureEditing
-        '
-        Me.optNoFurnitureEditing.AutoSize = true
-        Me.optNoFurnitureEditing.Checked = true
-        Me.optNoFurnitureEditing.Location = New System.Drawing.Point(7, 72)
-        Me.optNoFurnitureEditing.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.optNoFurnitureEditing.Name = "optNoFurnitureEditing"
-        Me.optNoFurnitureEditing.Size = New System.Drawing.Size(81, 19)
-        Me.optNoFurnitureEditing.TabIndex = 10
-        Me.optNoFurnitureEditing.TabStop = true
-        Me.optNoFurnitureEditing.Text = "No Editing"
-        '
-        'cmbFurnitureType
-        '
-        Me.cmbFurnitureType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbFurnitureType.FormattingEnabled = true
-        Me.cmbFurnitureType.Items.AddRange(New Object() {"Normal"})
-        Me.cmbFurnitureType.Location = New System.Drawing.Point(102, 28)
-        Me.cmbFurnitureType.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbFurnitureType.Name = "cmbFurnitureType"
-        Me.cmbFurnitureType.Size = New System.Drawing.Size(235, 24)
-        Me.cmbFurnitureType.TabIndex = 16
-        '
-        'DarkLabel36
-        '
-        Me.DarkLabel36.AutoSize = true
-        Me.DarkLabel36.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel36.Location = New System.Drawing.Point(7, 31)
-        Me.DarkLabel36.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel36.Name = "DarkLabel36"
-        Me.DarkLabel36.Size = New System.Drawing.Size(85, 15)
-        Me.DarkLabel36.TabIndex = 8
-        Me.DarkLabel36.Text = "Furniture Type:"
-        '
-        'picFurniture
-        '
-        Me.picFurniture.BackColor = System.Drawing.Color.Black
-        Me.picFurniture.Location = New System.Drawing.Point(343, 22)
-        Me.picFurniture.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.picFurniture.Name = "picFurniture"
-        Me.picFurniture.Size = New System.Drawing.Size(175, 173)
-        Me.picFurniture.TabIndex = 7
-        Me.picFurniture.TabStop = false
-        '
         'btnSpawn
         '
         Me.btnSpawn.Location = New System.Drawing.Point(463, 9)
@@ -1457,9 +1285,11 @@ Partial Class frmEditor_Item
         '
         Me.nudSpanwAmount.Location = New System.Drawing.Point(559, 12)
         Me.nudSpanwAmount.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudSpanwAmount.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudSpanwAmount.Name = "nudSpanwAmount"
         Me.nudSpanwAmount.Size = New System.Drawing.Size(148, 23)
         Me.nudSpanwAmount.TabIndex = 11
+        Me.nudSpanwAmount.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'frmEditor_Item
         '
@@ -1479,7 +1309,6 @@ Partial Class frmEditor_Item
         Me.Controls.Add(Me.fraBasics)
         Me.Controls.Add(Me.fraRequirements)
         Me.Controls.Add(Me.fraEquipment)
-        Me.Controls.Add(Me.fraFurniture)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.Name = "frmEditor_Item"
@@ -1498,8 +1327,6 @@ Partial Class frmEditor_Item
         CType(Me.picItem,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.nudRarity,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.nudPic,System.ComponentModel.ISupportInitialize).EndInit
-        Me.fraRecipe.ResumeLayout(false)
-        Me.fraRecipe.PerformLayout
         Me.fraVitals.ResumeLayout(false)
         Me.fraVitals.PerformLayout
         CType(Me.nudVitalMod,System.ComponentModel.ISupportInitialize).EndInit
@@ -1532,10 +1359,6 @@ Partial Class frmEditor_Item
         CType(Me.nudEndReq,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.nudStrReq,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.nudLevelReq,System.ComponentModel.ISupportInitialize).EndInit
-        Me.fraFurniture.ResumeLayout(false)
-        Me.fraFurniture.PerformLayout
-        CType(Me.nudFurniture,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.picFurniture,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.nudSpanwAmount,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
 
@@ -1624,22 +1447,10 @@ End Sub
     Friend WithEvents DarkLabel30 As DarkUI.Controls.DarkLabel
     Friend WithEvents nudStrReq As DarkUI.Controls.DarkNumericUpDown
     Friend WithEvents DarkLabel31 As DarkUI.Controls.DarkLabel
-    Friend WithEvents fraRecipe As DarkUI.Controls.DarkGroupBox
     Friend WithEvents DarkLabel35 As DarkUI.Controls.DarkLabel
     Friend WithEvents btnSave As DarkUI.Controls.DarkButton
     Friend WithEvents btnDelete As DarkUI.Controls.DarkButton
     Friend WithEvents btnCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents cmbRecipe As DarkUI.Controls.DarkComboBox
-    Friend WithEvents fraFurniture As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents picFurniture As Windows.Forms.PictureBox
-    Friend WithEvents cmbFurnitureType As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel36 As DarkUI.Controls.DarkLabel
-    Friend WithEvents optSetFringe As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents optSetBlocks As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents optNoFurnitureEditing As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents lblSetOption As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudFurniture As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel37 As DarkUI.Controls.DarkLabel
     Friend WithEvents fraEvents As DarkUI.Controls.DarkGroupBox
     Friend WithEvents nudEventValue As DarkUI.Controls.DarkNumericUpDown
     Friend WithEvents DarkLabel39 As DarkUI.Controls.DarkLabel

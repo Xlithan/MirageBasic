@@ -68,9 +68,6 @@ Module S_General
         ReDim Variables(NAX_VARIABLES)
         ReDim TempEventMap(MAX_CACHED_MAPS)
 
-        'Housing
-        ReDim HouseConfig(MAX_HOUSES)
-
         ReDim Shop(MAX_SHOPS).TradeItem(MAX_TRADES)
 
         ReDim Animation(MAX_ANIMATIONS).Sprite(1)
@@ -187,7 +184,6 @@ Module S_General
         Console.WriteLine("Clearing Quests...") : ClearQuests()
         Console.WriteLine("Clearing Map Projectiles...") : ClearMapProjectile()
         Console.WriteLine("Clearing Projectiles...") : ClearProjectile()
-        Console.WriteLine("Clearing Recipes...") : ClearRecipes()
         Console.WriteLine("Clearing Pets...") : ClearPets()
     End Sub
 
@@ -201,12 +197,10 @@ Module S_General
         Console.WriteLine("Loading Skills...") : LoadSkills()
         Console.WriteLine("Loading Animations...") : LoadAnimations()
         Console.WriteLine("Loading Quests...") : LoadQuests()
-        Console.WriteLine("Loading House Configurations...") : LoadHouses()
         Console.WriteLine("Loading Switches...") : LoadSwitches()
         Console.WriteLine("Loading Variables...") : LoadVariables()
         Console.WriteLine("Spawning Global Events...") : SpawnAllMapGlobalEvents()
         Console.WriteLine("Loading Projectiles...") : LoadProjectile()
-        Console.WriteLine("Loading Recipes...") : LoadRecipes()
         Console.WriteLine("Loading Pets...") : LoadPets()
         Console.WriteLine("Loading Character List...") : CharactersList = New CharacterList().Load()
     End Sub

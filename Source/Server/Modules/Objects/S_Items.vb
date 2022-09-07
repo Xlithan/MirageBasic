@@ -52,17 +52,6 @@ Friend Module S_Items
         writer.WriteInt32(Item(itemNum).Animation)
         writer.WriteInt32(Item(itemNum).Paperdoll)
 
-        'Housing
-        writer.WriteInt32(Item(itemNum).FurnitureWidth)
-        writer.WriteInt32(Item(itemNum).FurnitureHeight)
-
-        For a = 0 To 3
-            For b = 0 To 3
-                writer.WriteInt32(Item(itemNum).FurnitureBlocks(a, b))
-                writer.WriteInt32(Item(itemNum).FurnitureFringe(a, b))
-            Next
-        Next
-
         writer.WriteByte(Item(itemNum).KnockBack)
         writer.WriteByte(Item(itemNum).KnockBackTiles)
 
@@ -131,17 +120,6 @@ Friend Module S_Items
         Item(ItemNum).Animation = reader.ReadInt32()
         Item(ItemNum).Paperdoll = reader.ReadInt32()
 
-        'Housing
-        Item(ItemNum).FurnitureWidth = reader.ReadInt32()
-        Item(ItemNum).FurnitureHeight = reader.ReadInt32()
-
-        For a = 0 To 3
-            For b = 0 To 3
-                Item(ItemNum).FurnitureBlocks(a, b) = reader.ReadInt32()
-                Item(ItemNum).FurnitureFringe(a, b) = reader.ReadInt32()
-            Next
-        Next
-
         Item(ItemNum).KnockBack = reader.ReadByte()
         Item(ItemNum).KnockBackTiles = reader.ReadByte()
 
@@ -178,8 +156,6 @@ Friend Module S_Items
         For i = 0 To MAX_ITEMS
             ReDim Item(i).Add_Stat(StatType.Count - 1)
             ReDim Item(i).Stat_Req(StatType.Count - 1)
-            ReDim Item(i).FurnitureBlocks(3, 3)
-            ReDim Item(i).FurnitureFringe(3, 3)
         Next
     End Sub
 
@@ -187,8 +163,6 @@ Friend Module S_Items
         For i = 0 To MAX_ITEMS
             ReDim Item(i).Add_Stat(StatType.Count - 1)
             ReDim Item(i).Stat_Req(StatType.Count - 1)
-            ReDim Item(i).FurnitureBlocks(3, 3)
-            ReDim Item(i).FurnitureFringe(3, 3)
         Next
 
         For i = 0 To MAX_ITEMS
@@ -245,16 +219,6 @@ Friend Module S_Items
         buffer.WriteInt32(Item(itemNum).SubType)
 
         buffer.WriteInt32(Item(itemNum).ItemLevel)
-
-        buffer.WriteInt32(Item(itemNum).FurnitureWidth)
-        buffer.WriteInt32(Item(itemNum).FurnitureHeight)
-
-        For i = 0 To 3
-            For X = 0 To 3
-                buffer.WriteInt32(Item(itemNum).FurnitureBlocks(i, x))
-                buffer.WriteInt32(Item(itemNum).FurnitureFringe(i, x))
-            Next
-        Next
 
         buffer.WriteInt32(Item(itemNum).KnockBack)
         buffer.WriteInt32(Item(itemNum).KnockBackTiles)
@@ -412,12 +376,12 @@ Friend Module S_Items
 #Region "Incoming Packets"
 
     Sub Packet_RequestItem(index As Integer, ByRef data() As Byte)
-        AddDebug("Recieved CMSG: CRequestItems")
+        AddDebug("Recieved CMSG: CRequestItem")
+
         Dim Buffer = New ByteStream(data), n As Integer
 
         n = Buffer.ReadInt32
-        TempPlayer(index).Editor = -1
-        
+
         If n < 0 Or n > MAX_ITEMS Then Exit Sub
 
         SendUpdateItemTo(index, n)
@@ -428,6 +392,7 @@ Friend Module S_Items
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Mapper Then Exit Sub
+        If TempPlayer(index).Editor > -1 Then  Exit Sub
 
         Dim user As String
 
@@ -440,6 +405,9 @@ Friend Module S_Items
 
         TempPlayer(index).Editor = EditorType.Item
 
+        SendAnimations(index)
+        SendProjectiles(index)
+        SendJobs(index)
         SendItems(index)
 
         Dim Buffer = New ByteStream(4)
@@ -503,17 +471,6 @@ Friend Module S_Items
         Item(n).SubType = buffer.ReadInt32
 
         Item(n).ItemLevel = buffer.ReadInt32
-
-        'Housing
-        Item(n).FurnitureWidth = buffer.ReadInt32()
-        Item(n).FurnitureHeight = buffer.ReadInt32()
-
-        For a = 0 To 3
-            For b = 0 To 3
-                Item(n).FurnitureBlocks(a, b) = buffer.ReadInt32()
-                Item(n).FurnitureFringe(a, b) = buffer.ReadInt32()
-            Next
-        Next
 
         Item(n).KnockBack = buffer.ReadInt32()
         Item(n).KnockBackTiles = buffer.ReadInt32()

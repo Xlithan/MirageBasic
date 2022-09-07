@@ -107,7 +107,7 @@ Friend Class frmEditor_NPC
         Npc(Editorindex).AttackSay = txtAttackSay.Text
     End Sub
 
-    Private Sub NudSprite_ValueChanged(sender As Object, e As EventArgs) Handles nudSprite.ValueChanged
+    Private Sub NudSprite_Click(sender As Object, e As EventArgs) Handles nudSprite.Click
         Npc(Editorindex).Sprite = nudSprite.Value
 
         EditorNpc_DrawSprite()

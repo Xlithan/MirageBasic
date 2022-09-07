@@ -62,7 +62,6 @@
         Bank
         Heal
         Trap
-        House
         Craft
         Light
 
@@ -78,7 +77,6 @@
         Currency
         Skill
         Projectile
-        Furniture
         Recipe
         Pet
 

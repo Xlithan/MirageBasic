@@ -1054,6 +1054,7 @@ Module S_Npc
 
         ' Prevent hacking
         If GetPlayerAccess(index) < AdminType.Developer Then Exit Sub
+        If TempPlayer(index).Editor > -1 Then  Exit Sub
 
         Dim user As String
 
@@ -1066,6 +1067,9 @@ Module S_Npc
 
         TempPlayer(index).Editor = EditorType.NPC
 
+        SendItems(index)
+        SendAnimations(index)
+        SendQuests(index)
         SendNpcs(index)
 
         Dim Buffer = New ByteStream(4)

@@ -8,17 +8,9 @@ Module C_Editors
 #Region "Animation Editor"
 
     Friend Sub AnimationEditorInit()
+        Editorindex = FrmEditor_Animation.lstIndex.SelectedIndex
+
         With Animation(Editorindex)
-            Editorindex = FrmEditor_Animation.lstIndex.SelectedIndex
-
-            ' find the music we have set
-            FrmEditor_Animation.cmbSound.Items.Clear()
-
-            CacheSound
-            For i = 0 To UBound(SoundCache)
-                FrmEditor_Animation.cmbSound.Items.Add(SoundCache(i))
-            Next
-
             If Trim$(Animation(Editorindex).Sound) = "" Then
                 FrmEditor_Animation.cmbSound.SelectedIndex = 0
             Else
@@ -31,18 +23,17 @@ Module C_Editors
             End If
             FrmEditor_Animation.txtName.Text = Trim$(.Name)
 
-            FrmEditor_Animation.nudSprite0.Value = 0
+            FrmEditor_Animation.nudSprite0.Value = .Sprite(0)
             FrmEditor_Animation.nudFrameCount0.Value = .Frames(0)
             FrmEditor_Animation.nudLoopCount0.Value = .LoopCount(0)
             FrmEditor_Animation.nudLoopTime0.Value = .LoopTime(0)
 
-            FrmEditor_Animation.nudSprite1.Value = 0
+            FrmEditor_Animation.nudSprite1.Value = .Sprite(1)
             FrmEditor_Animation.nudFrameCount1.Value = .Frames(1)
             FrmEditor_Animation.nudLoopCount1.Value = .LoopCount(1)
             FrmEditor_Animation.nudLoopTime1.Value = .LoopTime(1)
         End With
 
-        EditorAnim_DrawAnim()
         Animation_Changed(Editorindex) = True
     End Sub
 
@@ -55,17 +46,16 @@ Module C_Editors
             End If
         Next
 
-        FrmEditor_Animation.Visible = False
         Editor = -1
         ClearChanged_Animation()
+        SendCloseEditor()
     End Sub
 
     Friend Sub AnimationEditorCancel()
         Editor = -1
-        FrmEditor_Animation.Visible = False
         ClearChanged_Animation()
         ClearAnimations()
-        SendRequestAnimations()
+        SendCloseEditor()
     End Sub
 
     Friend Sub ClearChanged_Animation()
@@ -133,17 +123,16 @@ Module C_Editors
             End If
         Next
 
-        frmEditor_NPC.Visible = False
         Editor = -1
         ClearChanged_NPC()
+        SendCloseEditor()
     End Sub
 
     Friend Sub NpcEditorCancel()
         Editor = -1
-        frmEditor_NPC.Visible = False
         ClearChanged_NPC()
         ClearNpcs()
-        SendRequestNpcs()
+        SendCloseEditor()
     End Sub
 
     Friend Sub ClearChanged_NPC()
@@ -210,17 +199,16 @@ Module C_Editors
             End If
         Next
 
-        frmEditor_Resource.Visible = False
         Editor = -1
         ClearChanged_Resource()
+        SendCloseEditor()
     End Sub
 
     Friend Sub ResourceEditorCancel()
         Editor = -1
-        frmEditor_Resource.Visible = False
         ClearChanged_Resource()
         ClearResources()
-        SendRequestResources()
+        SendCloseEditor()
     End Sub
 
 #End Region
@@ -228,32 +216,9 @@ Module C_Editors
 #Region "Skill Editor"
 
     Friend Sub SkillEditorInit()
-        Dim i As Integer
-
         With frmEditor_Skill
             Editorindex = .lstIndex.SelectedIndex
 
-            ' build class combo
-            .cmbClass.Items.Clear()
-
-           For i = 0 To MAX_JOBS
-                .cmbClass.Items.Add(Trim$(Job(i).Name))
-            Next
-            .cmbClass.SelectedIndex = 0
-            .cmbProjectile.Items.Clear()
-
-           For i = 0 To MAX_PROJECTILES
-                .cmbProjectile.Items.Add(Trim$(Projectile(i).Name))
-            Next
-            .cmbProjectile.SelectedIndex = 0
-
-            .cmbAnimCast.Items.Clear()
-            .cmbAnim.Items.Clear()
-
-           For i = 0 To MAX_ANIMATIONS
-                .cmbAnimCast.Items.Add(Trim$(Animation(i).Name))
-                .cmbAnim.Items.Add(Trim$(Animation(i).Name))
-            Next
             .cmbAnimCast.SelectedIndex = 0
             .cmbAnim.SelectedIndex = 0
 
@@ -263,7 +228,7 @@ Module C_Editors
             .nudMp.Value = Skill(Editorindex).MpCost
             .nudLevel.Value = Skill(Editorindex).LevelReq
             .cmbAccessReq.SelectedIndex = Skill(Editorindex).AccessReq
-            .cmbClass.SelectedIndex = Skill(Editorindex).JobReq
+            .cmbJob.SelectedIndex = Skill(Editorindex).JobReq
             .nudCast.Value = Skill(Editorindex).CastTime
             .nudCool.Value = Skill(Editorindex).CdTime
             .nudIcon.Value = Skill(Editorindex).Icon
@@ -305,22 +270,22 @@ Module C_Editors
     Friend Sub SkillEditorOk()
         Dim i As Integer
 
-       For i = 0 To MAX_SKILLS
+        For i = 0 To MAX_SKILLS
             If Skill_Changed(i) Then
                 SendSaveSkill(i)
             End If
         Next
 
-        frmEditor_Skill.Visible = False
         Editor = -1
         ClearChanged_Skill()
+        SendCloseEditor()
     End Sub
 
     Friend Sub SkillEditorCancel()
         Editor = -1
-        frmEditor_Skill.Visible = False
         ClearChanged_Skill()
         ClearSkills()
+        SendCloseEditor()
     End Sub
 
     Friend Sub ClearChanged_Skill()
@@ -337,23 +302,27 @@ Module C_Editors
 
         Editorindex = frmEditor_Shop.lstIndex.SelectedIndex
 
-        frmEditor_Shop.txtName.Text = Trim$(Shop(Editorindex).Name)
-        If Shop(Editorindex).BuyRate > 0 Then
-            frmEditor_Shop.nudBuy.Value = Shop(Editorindex).BuyRate
-        Else
-            frmEditor_Shop.nudBuy.Value = 100
-        End If
+        With frmEditor_Shop
+            .txtName.Text = Trim$(Shop(Editorindex).Name)
 
-        frmEditor_Shop.nudFace.Value = Shop(Editorindex).Face
-        If File.Exists(Paths.Graphics & "Faces\" & Shop(Editorindex).Face & GfxExt) Then
-            frmEditor_Shop.picFace.BackgroundImage = Drawing.Image.FromFile(Paths.Graphics & "Faces\" & Shop(Editorindex).Face & GfxExt)
-        End If
+            If Shop(Editorindex).BuyRate > 0 Then
+                .nudBuy.Value = Shop(Editorindex).BuyRate
+            Else
+                .nudBuy.Value = 100
+            End If
 
-        frmEditor_Shop.cmbItem.SelectedIndex = 0
-        frmEditor_Shop.cmbCostItem.SelectedIndex = 0
+            .nudFace.Value = Shop(Editorindex).Face
+            If File.Exists(Paths.Graphics & "Faces\" & Shop(Editorindex).Face & GfxExt) Then
+                .picFace.BackgroundImage = Drawing.Image.FromFile(Paths.Graphics & "Faces\" & Shop(Editorindex).Face & GfxExt)
+            Else
+                .picFace.BackgroundImage = Nothing
+            End If
+
+            .cmbItem.SelectedIndex = 0
+            .cmbCostItem.SelectedIndex = 0
+        End With
 
         UpdateShopTrade()
-
         Shop_Changed(Editorindex) = True
     End Sub
 
@@ -385,17 +354,16 @@ Module C_Editors
             End If
         Next
 
-        frmEditor_Shop.Visible = False
         Editor = -1
         ClearChanged_Shop()
+        SendCloseEditor()
     End Sub
 
     Friend Sub ShopEditorCancel()
         Editor = -1
-        frmEditor_Shop.Visible = False
         ClearChanged_Shop()
         ClearShops()
-        SendRequestShops()
+        SendCloseEditor()
     End Sub
 
     Friend Sub ClearChanged_Shop()
@@ -408,15 +376,20 @@ Module C_Editors
 
 #Region "Job Editor"
     Friend Sub JobEditorOk()
-        SendSaveJob()
-        frmEditor_Job.Visible = False
+        For i = 0 To MAX_JOBS
+            If Job_Changed(i) Then
+                SendSaveJob(i)
+            End If
+        Next
         Editor = -1
+        SendCloseEditor()
     End Sub
 
     Friend Sub JobEditorCancel()
         Editor = -1
-        frmEditor_Job.Visible = False
-        SendRequestJobs()
+        ClearChanged_Job()
+        ClearJobs()
+        SendCloseEditor()
     End Sub
 
     Friend Sub JobEditorInit()
@@ -434,8 +407,6 @@ Module C_Editors
             .cmbMaleSprite.SelectedIndex = 0
             .cmbFemaleSprite.SelectedIndex = 0
 
-            .DrawPreview()
-
             For i = 0 To StatType.Count - 1
                 If Job(Editorindex).Stat(i) = 0 Then Job(Editorindex).Stat(i) = 1
             Next
@@ -446,26 +417,24 @@ Module C_Editors
             .nudIntelligence.Value = Job(Editorindex).Stat(StatType.Intelligence)
             .nudVitality.Value = Job(Editorindex).Stat(StatType.Vitality)
             .nudSpirit.Value = Job(Editorindex).Stat(StatType.Spirit)
+            .nudBaseExp.Value = Job(Editorindex).BaseExp
 
-            If Job(Editorindex).BaseExp < 00 Then
-                .nudBaseExp.Value = 10
-            Else
-                .nudBaseExp.Value = Job(Editorindex).BaseExp
-            End If
-
-            .lstStartItems.Items.Clear()
-
-           For i = 0 To MAX_DROP_ITEMS
-                If Job(Editorindex).StartItem(i) > 0 Then
-                    .lstStartItems.Items.Add(Item(Job(Editorindex).StartItem(i)).Name & " X " & Job(Editorindex).StartValue(i))
-                End If
-            Next
-
+            if Job(Editorindex).StartMap = 0 Then Job(Editorindex).StartMap = 1
             .nudStartMap.Value = Job(Editorindex).StartMap
             .nudStartX.Value = Job(Editorindex).StartX
             .nudStartY.Value = Job(Editorindex).StartY
+
+            Job_Changed(Editorindex) = True
+            .DrawPreview()
         End With
     End Sub
+
+    Friend Sub ClearChanged_Job()
+       For i = 0 To MAX_JOBS
+            Job_Changed(i) = False
+        Next
+    End Sub
+
 
 #End Region
 
@@ -561,18 +530,6 @@ Module C_Editors
                 frmEditor_Item.fraEvents.Visible = False
             End If
 
-            If frmEditor_Item.cmbType.SelectedIndex = ItemType.Furniture Then
-                frmEditor_Item.fraFurniture.Visible = True
-                If Item(Editorindex).Data2 > 0 AndAlso Item(Editorindex).Data2 <= NumFurniture Then
-                    frmEditor_Item.nudFurniture.Value = Item(Editorindex).Data2
-                Else
-                    frmEditor_Item.nudFurniture.Value = 1
-                End If
-                frmEditor_Item.cmbFurnitureType.SelectedIndex = Item(Editorindex).Data1
-            Else
-                frmEditor_Item.fraFurniture.Visible = False
-            End If
-
             If (frmEditor_Item.cmbType.SelectedIndex = ItemType.Pet) Then
                 frmEditor_Item.fraPet.Visible = True
                 frmEditor_Item.cmbPet.SelectedIndex = .Data1
@@ -616,29 +573,28 @@ Module C_Editors
 
         EditorItem_DrawItem()
         EditorItem_DrawPaperdoll()
-        EditorItem_DrawFurniture()
         Item_Changed(Editorindex) = True
     End Sub
 
     Friend Sub ItemEditorCancel()
         Editor = -1
-        frmEditor_Item.Visible = False
         ClearChangedItem()
         ClearItems()
+        SendCloseEditor()
     End Sub
 
     Friend Sub ItemEditorOk()
         Dim i As Integer
 
-       For i = 0 To MAX_ITEMS
+        For i = 0 To MAX_ITEMS
             If Item_Changed(i) Then
                 SendSaveItem(i)
             End If
         Next
 
-        frmEditor_Item.Visible = False
         Editor = -1
         ClearChangedItem()
+        SendCloseEditor()
     End Sub
 
 #End Region

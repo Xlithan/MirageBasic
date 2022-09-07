@@ -52,10 +52,8 @@ Partial Class FrmAdmin
         Me.tabEditors = New System.Windows.Forms.TabPage()
         Me.btnPetEditor = New System.Windows.Forms.Button()
         Me.btnJobEditor = New System.Windows.Forms.Button()
-        Me.btnRecipeEditor = New System.Windows.Forms.Button()
         Me.btnProjectiles = New System.Windows.Forms.Button()
         Me.btnQuest = New System.Windows.Forms.Button()
-        Me.btnhouseEditor = New System.Windows.Forms.Button()
         Me.btnMapEditor = New System.Windows.Forms.Button()
         Me.btnItemEditor = New System.Windows.Forms.Button()
         Me.btnResourceEditor = New System.Windows.Forms.Button()
@@ -351,10 +349,8 @@ Partial Class FrmAdmin
         '
         Me.tabEditors.Controls.Add(Me.btnPetEditor)
         Me.tabEditors.Controls.Add(Me.btnJobEditor)
-        Me.tabEditors.Controls.Add(Me.btnRecipeEditor)
         Me.tabEditors.Controls.Add(Me.btnProjectiles)
         Me.tabEditors.Controls.Add(Me.btnQuest)
-        Me.tabEditors.Controls.Add(Me.btnhouseEditor)
         Me.tabEditors.Controls.Add(Me.btnMapEditor)
         Me.tabEditors.Controls.Add(Me.btnItemEditor)
         Me.tabEditors.Controls.Add(Me.btnResourceEditor)
@@ -373,7 +369,7 @@ Partial Class FrmAdmin
         '
         'btnPetEditor
         '
-        Me.btnPetEditor.Location = New System.Drawing.Point(152, 7)
+        Me.btnPetEditor.Location = New System.Drawing.Point(152, 6)
         Me.btnPetEditor.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnPetEditor.Name = "btnPetEditor"
         Me.btnPetEditor.Size = New System.Drawing.Size(131, 29)
@@ -383,7 +379,7 @@ Partial Class FrmAdmin
         '
         'btnJobEditor
         '
-        Me.btnJobEditor.Location = New System.Drawing.Point(7, 43)
+        Me.btnJobEditor.Location = New System.Drawing.Point(7, 41)
         Me.btnJobEditor.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnJobEditor.Name = "btnJobEditor"
         Me.btnJobEditor.Size = New System.Drawing.Size(131, 29)
@@ -391,19 +387,9 @@ Partial Class FrmAdmin
         Me.btnJobEditor.Text = "Job Editor"
         Me.btnJobEditor.UseVisualStyleBackColor = true
         '
-        'btnRecipeEditor
-        '
-        Me.btnRecipeEditor.Location = New System.Drawing.Point(152, 114)
-        Me.btnRecipeEditor.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnRecipeEditor.Name = "btnRecipeEditor"
-        Me.btnRecipeEditor.Size = New System.Drawing.Size(131, 29)
-        Me.btnRecipeEditor.TabIndex = 65
-        Me.btnRecipeEditor.Text = "Recipe Editor"
-        Me.btnRecipeEditor.UseVisualStyleBackColor = true
-        '
         'btnProjectiles
         '
-        Me.btnProjectiles.Location = New System.Drawing.Point(152, 43)
+        Me.btnProjectiles.Location = New System.Drawing.Point(152, 41)
         Me.btnProjectiles.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnProjectiles.Name = "btnProjectiles"
         Me.btnProjectiles.Size = New System.Drawing.Size(131, 29)
@@ -413,7 +399,7 @@ Partial Class FrmAdmin
         '
         'btnQuest
         '
-        Me.btnQuest.Location = New System.Drawing.Point(152, 78)
+        Me.btnQuest.Location = New System.Drawing.Point(152, 76)
         Me.btnQuest.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnQuest.Name = "btnQuest"
         Me.btnQuest.Size = New System.Drawing.Size(131, 29)
@@ -421,19 +407,9 @@ Partial Class FrmAdmin
         Me.btnQuest.Text = "Quest Editor"
         Me.btnQuest.UseVisualStyleBackColor = true
         '
-        'btnhouseEditor
-        '
-        Me.btnhouseEditor.Location = New System.Drawing.Point(7, 78)
-        Me.btnhouseEditor.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnhouseEditor.Name = "btnhouseEditor"
-        Me.btnhouseEditor.Size = New System.Drawing.Size(131, 29)
-        Me.btnhouseEditor.TabIndex = 63
-        Me.btnhouseEditor.Text = "House Editor"
-        Me.btnhouseEditor.UseVisualStyleBackColor = true
-        '
         'btnMapEditor
         '
-        Me.btnMapEditor.Location = New System.Drawing.Point(7, 186)
+        Me.btnMapEditor.Location = New System.Drawing.Point(7, 181)
         Me.btnMapEditor.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnMapEditor.Name = "btnMapEditor"
         Me.btnMapEditor.Size = New System.Drawing.Size(131, 29)
@@ -443,7 +419,7 @@ Partial Class FrmAdmin
         '
         'btnItemEditor
         '
-        Me.btnItemEditor.Location = New System.Drawing.Point(7, 114)
+        Me.btnItemEditor.Location = New System.Drawing.Point(7, 111)
         Me.btnItemEditor.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnItemEditor.Name = "btnItemEditor"
         Me.btnItemEditor.Size = New System.Drawing.Size(131, 29)
@@ -453,7 +429,7 @@ Partial Class FrmAdmin
         '
         'btnResourceEditor
         '
-        Me.btnResourceEditor.Location = New System.Drawing.Point(152, 150)
+        Me.btnResourceEditor.Location = New System.Drawing.Point(152, 111)
         Me.btnResourceEditor.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnResourceEditor.Name = "btnResourceEditor"
         Me.btnResourceEditor.Size = New System.Drawing.Size(131, 29)
@@ -463,7 +439,7 @@ Partial Class FrmAdmin
         '
         'btnNPCEditor
         '
-        Me.btnNPCEditor.Location = New System.Drawing.Point(7, 222)
+        Me.btnNPCEditor.Location = New System.Drawing.Point(8, 76)
         Me.btnNPCEditor.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnNPCEditor.Name = "btnNPCEditor"
         Me.btnNPCEditor.Size = New System.Drawing.Size(131, 29)
@@ -473,7 +449,7 @@ Partial Class FrmAdmin
         '
         'btnSkillEditor
         '
-        Me.btnSkillEditor.Location = New System.Drawing.Point(7, 149)
+        Me.btnSkillEditor.Location = New System.Drawing.Point(7, 146)
         Me.btnSkillEditor.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnSkillEditor.Name = "btnSkillEditor"
         Me.btnSkillEditor.Size = New System.Drawing.Size(131, 29)
@@ -483,7 +459,7 @@ Partial Class FrmAdmin
         '
         'btnShopEditor
         '
-        Me.btnShopEditor.Location = New System.Drawing.Point(152, 186)
+        Me.btnShopEditor.Location = New System.Drawing.Point(8, 216)
         Me.btnShopEditor.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnShopEditor.Name = "btnShopEditor"
         Me.btnShopEditor.Size = New System.Drawing.Size(131, 29)
@@ -493,7 +469,7 @@ Partial Class FrmAdmin
         '
         'btnAnimationEditor
         '
-        Me.btnAnimationEditor.Location = New System.Drawing.Point(7, 7)
+        Me.btnAnimationEditor.Location = New System.Drawing.Point(8, 6)
         Me.btnAnimationEditor.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnAnimationEditor.Name = "btnAnimationEditor"
         Me.btnAnimationEditor.Size = New System.Drawing.Size(131, 29)
@@ -556,10 +532,8 @@ End Sub
     Friend WithEvents tabEditors As Windows.Forms.TabPage
     Friend WithEvents btnPetEditor As Windows.Forms.Button
     Friend WithEvents btnJobEditor As Windows.Forms.Button
-    Friend WithEvents btnRecipeEditor As Windows.Forms.Button
     Friend WithEvents btnProjectiles As Windows.Forms.Button
     Friend WithEvents btnQuest As Windows.Forms.Button
-    Friend WithEvents btnhouseEditor As Windows.Forms.Button
     Friend WithEvents btnMapEditor As Windows.Forms.Button
     Friend WithEvents btnItemEditor As Windows.Forms.Button
     Friend WithEvents btnResourceEditor As Windows.Forms.Button

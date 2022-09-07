@@ -72,7 +72,18 @@ Friend Class frmEditor_Resource
     End Sub
 
     Private Sub FrmEditor_Resource_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lstIndex.Items.Clear()
 
+        ' Add the names
+        For i = 0 To MAX_RESOURCES
+            lstIndex.Items.Add(i & ": " & Trim$(Resource(i).Name))
+        Next
+
+        'populate combo boxes
+        cmbRewardItem.Items.Clear()
+        For i = 0 To MAX_ITEMS
+            cmbRewardItem.Items.Add(i & ": " & Item(i).Name)
+        Next
     End Sub
 
     Private Sub TxtName_TextChanged(sender As Object, e As EventArgs) Handles txtName.TextChanged
