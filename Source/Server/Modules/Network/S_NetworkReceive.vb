@@ -2327,6 +2327,9 @@ Module S_NetworkReceive
             Exit Sub
         End If
 
+        SendItems(index)
+        SendJobs(index)
+
         TempPlayer(index).Editor = EditorType.Job
 
         SendJobs(index)

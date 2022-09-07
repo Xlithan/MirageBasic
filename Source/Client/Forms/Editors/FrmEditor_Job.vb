@@ -9,29 +9,22 @@ Friend Class frmEditor_Job
         nudMaleSprite.Maximum = NumCharacters
         nudFemaleSprite.Maximum = NumCharacters
 
-        For i = 0 To MAX_JOBS
-            lstIndex.Items.Add(i & ": " & Trim(Job(i).Name))
-        Next
-
-        nudMaleSprite.Maximum = NumCharacters
-        nudFemaleSprite.Maximum = NumCharacters
-
         cmbItems.Items.Clear()
 
-        For i = 0 To MAX_ITEMS
-            cmbItems.Items.Add(Trim(Item(i).Name))
+        For i = 0 To MAX_JOBS
+            lstIndex.Items.Add(i & ": " & Trim(Job(i).Name))
         Next
 
         cmbMaleSprite.Items.Clear()
 
         For i = 0 To UBound(Job(Editorindex).MaleSprite)
-            cmbMaleSprite.Items.Add("Sprite " & i + 1)
+            cmbMaleSprite.Items.Add(i + 1)
         Next
 
         cmbFemaleSprite.Items.Clear()
 
         For i = 0 To UBound(Job(Editorindex).FemaleSprite)
-            cmbFemaleSprite.Items.Add("Sprite " & i + 1)
+            cmbFemaleSprite.Items.Add(i + 1)
         Next
 
         lstStartItems.Items.Clear()
@@ -149,14 +142,6 @@ Friend Class frmEditor_Job
             picFemale.BackgroundImage = Nothing
         End If
 
-    End Sub
-
-    Private Sub PicMale_Paint(sender As Object, e As EventArgs) Handles picMale.Paint
-        'nope
-    End Sub
-
-    Private Sub PicFemale_Paint(sender As Object, e As EventArgs) Handles picFemale.Paint
-        'nope
     End Sub
 
 #End Region
