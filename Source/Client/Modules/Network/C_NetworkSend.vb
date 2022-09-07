@@ -738,6 +738,7 @@ Module C_NetworkSend
     End Sub
 
     Friend Sub SendCloseEditor()
+        If InGame = False Then Exit Sub
         Dim buffer As New ByteStream(4)
 
         buffer.WriteInt32(ClientPackets.CCloseEditor)
