@@ -12,6 +12,12 @@ Friend Class frmEditor_Job
         cmbItems.Items.Clear()
 
         For i = 0 To MAX_JOBS
+            cmbItems.Items.Add(i & ": " & Trim(Item(i).Name))
+        Next
+
+        lstIndex.Items.Clear()
+
+        For i = 0 To MAX_JOBS
             lstIndex.Items.Add(i & ": " & Trim(Job(i).Name))
         Next
 
