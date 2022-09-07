@@ -95,6 +95,8 @@ Module C_Editors
             .cmbQuest.SelectedIndex = Npc(Editorindex).QuestNum
             .cmbSpawnPeriod.SelectedIndex = Npc(Editorindex).SpawnTime
 
+            .cmbAnimation.SelectedIndex = Npc(Editorindex).Animation
+
             .nudStrength.Value = Npc(Editorindex).Stat(StatType.Strength)
             .nudEndurance.Value = Npc(Editorindex).Stat(StatType.Endurance)
             .nudIntelligence.Value = Npc(Editorindex).Stat(StatType.Intelligence)
@@ -406,6 +408,8 @@ Module C_Editors
 
             .cmbMaleSprite.SelectedIndex = 0
             .cmbFemaleSprite.SelectedIndex = 0
+
+            .cmbItems.SelectedIndex = 0
 
             For i = 0 To StatType.Count - 1
                 If Job(Editorindex).Stat(i) = 0 Then Job(Editorindex).Stat(i) = 1
