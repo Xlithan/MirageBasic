@@ -5,6 +5,7 @@ Friend Class FrmAdmin
 
     Private Sub FrmAdmin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SendRequestMapReport()
+        cmbAccess.SelectedIndex = 0
     End Sub
 
 #Region "Moderation"
