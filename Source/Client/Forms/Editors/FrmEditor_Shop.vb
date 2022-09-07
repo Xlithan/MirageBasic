@@ -96,6 +96,8 @@ Friend Class frmEditor_Shop
             cmbItem.Items.Add(i & ": " & Trim$(Item(i).Name))
             cmbCostItem.Items.Add(i & ": " & Trim$(Item(i).Name))
         Next
+
+        nudFace.Maximum = NumFaces
     End Sub
 
     Private Sub frmEditor_Shop_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
