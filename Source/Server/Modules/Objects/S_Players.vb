@@ -918,7 +918,7 @@ Module S_Players
 
 #Region "Movement"
 
-    Sub PlayerWarp(index As Integer, MapNum As Integer, X As Integer, Y As Integer, Optional HouseTeleport As Boolean = False, Optional NoInstance As Boolean = False)
+    Sub PlayerWarp(index As Integer, MapNum As Integer, X As Integer, Y As Integer, Optional NoInstance As Boolean = False)
         Dim OldMap As Integer
         Dim i As Integer
         Dim buffer As ByteStream

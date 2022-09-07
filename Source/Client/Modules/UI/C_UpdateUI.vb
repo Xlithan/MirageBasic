@@ -397,7 +397,7 @@ Module C_UpdateUI
         End If
 
         If InitItemEditor = True Then
-            With frmEditor_Item
+            With FrmEditor_Item
                 Editor = EditorType.Item
                 .Show()
                 .lstIndex.SelectedIndex = 0

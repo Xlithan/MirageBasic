@@ -172,30 +172,6 @@ Namespace Paths
             Return Quests() & index & ".dat"
         End Function
 
-        ''' <summary> Returns quests directory <\summary>
-        Public ReadOnly Property Housing As String
-            Get
-                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Housing\"
-            End Get
-        End Property
-
-        ''' <summary> Returns house file <\summary>
-        Public Function House(index As Integer) As String
-            Return Housing() & index & ".json"
-        End Function
-
-        ''' <summary> Returns recipes directory <\summary>
-        Public ReadOnly Property Recipes As String
-            Get
-                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Recipes\"
-            End Get
-        End Property
-
-        ''' <summary> Returns recipe file <\summary>
-        Public Function Recipe(index As Integer) As String
-            Return Recipes() & index & ".dat"
-        End Function
-
         ''' <summary> Returns resources directory <\summary>
         Public ReadOnly Property Resources As String
             Get

@@ -265,13 +265,6 @@
         SPlayerQuests
         SQuestMessage
 
-        'Housing
-        SBuyHouse
-        SVisit
-        SFurniture
-        SHouseEdit
-        SHouseConfigs
-
         'hotbar
         SHotbar
 

@@ -76,8 +76,7 @@
         CommonEvent
         Currency
         Skill
-        Projectile
-        Recipe
+        Projectile    
         Pet
 
         Count
@@ -406,8 +405,6 @@
         Animation
         Pet
         Quest
-        House
-        Recipe
         Job
         Projectile
     End Enum

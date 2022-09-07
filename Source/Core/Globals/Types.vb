@@ -19,9 +19,6 @@ Public Module Types
     Public Player(MAX_PLAYERS) As PlayerStruct
     Public InstancedMaps(MAX_INSTANCED_MAPS) As InstancedMap
     Public CharSelection() As CharSelStruct
-    Public House() As HouseStruct
-    Public HouseConfig() As HouseStruct
-    Public Furniture() As FurnitureStruct
     Public Quest(MAX_QUESTS) As QuestStruct
     Public Projectile(MAX_PROJECTILES) As ProjectileStruct
     Public MapProjectile(MAX_PROJECTILES) As MapProjectileStruct
@@ -356,8 +353,6 @@ Public Module Types
         'gather skills
         Dim GatherSkills() As ResourceSkillsStruct
 
-        Dim RecipeLearned() As Byte
-
         ' Random Items
         Dim RandInv() As RandInvStruct
 
@@ -407,25 +402,9 @@ Public Module Types
         Dim TradeOffer() As PlayerInvStruct
         Dim AcceptTrade As Boolean
 
-        'Housing
-        Dim BuyHouseindex As Integer
-
-        Dim Invitationindex As Integer
-        Dim InvitationTimer As Integer
-
         Dim EventMap As EventMapStruct
         Dim EventProcessingCount As Integer
         Dim EventProcessing() As EventProcessingStruct
-
-        'craft shit
-        Dim IsCrafting As Boolean
-
-        Dim CraftIt As Byte
-        Dim CraftTimer As Integer
-        Dim CraftTimeNeeded As Integer
-
-        Dim CraftRecipe As Integer
-        Dim CraftAmount As Integer
 
         Dim StopRegenTimer As Integer
         Dim StopRegen As Byte
@@ -822,27 +801,6 @@ Public Module Types
         Dim Gender As Integer
         Dim ClassName As String
         Dim Level As Integer
-    End Structure
-
-    Public Structure HouseStruct
-        Dim ConfigName As String
-        Dim BaseMap As Integer
-        Dim Price As Integer
-        Dim MaxFurniture As Integer
-        Dim X As Integer
-        Dim Y As Integer
-    End Structure
-
-    Public Structure FurnitureStruct
-        Dim ItemNum As Integer
-        Dim X As Integer
-        Dim Y As Integer
-    End Structure
-
-    Public Structure PlayerHouseStruct
-        Dim Houseindex As Integer
-        Dim FurnitureCount As Integer
-        Dim Furniture() As FurnitureStruct
     End Structure
 
     Public Structure PlayerQuestStruct

@@ -54,6 +54,7 @@ Partial Class frmEditor_Item
         Me.nudPic = New DarkUI.Controls.DarkNumericUpDown()
         Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
         Me.txtName = New DarkUI.Controls.DarkTextBox()
+        Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
         Me.DarkLabel35 = New DarkUI.Controls.DarkLabel()
         Me.fraVitals = New DarkUI.Controls.DarkGroupBox()
         Me.nudVitalMod = New DarkUI.Controls.DarkNumericUpDown()
@@ -214,7 +215,6 @@ Partial Class frmEditor_Item
         Me.fraBasics.Controls.Add(Me.nudPic)
         Me.fraBasics.Controls.Add(Me.DarkLabel2)
         Me.fraBasics.Controls.Add(Me.txtName)
-        Me.fraBasics.Controls.Add(Me.DarkLabel1)
         Me.fraBasics.Controls.Add(Me.fraVitals)
         Me.fraBasics.Controls.Add(Me.fraSkill)
         Me.fraBasics.ForeColor = System.Drawing.Color.Gainsboro

@@ -51,8 +51,10 @@ Module S_NetworkSend
 
             ' set sprite array size
             n = UBound(Job(i).MaleSprite)
+
             ' send array size
             buffer.WriteInt32(n)
+
             ' loop around sending each sprite
             For q = 0 To n
                 buffer.WriteInt32(Job(i).MaleSprite(q))
@@ -60,8 +62,10 @@ Module S_NetworkSend
 
             ' set sprite array size
             n = UBound(Job(i).FemaleSprite)
+
             ' send array size
             buffer.WriteInt32(n)
+
             ' loop around sending each sprite
             For q = 0 To n
                 buffer.WriteInt32(Job(i).FemaleSprite(q))

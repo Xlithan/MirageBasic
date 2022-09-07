@@ -310,7 +310,7 @@ Partial Class frmEditor_NPC
         '
         Me.cmbFaction.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbFaction.FormattingEnabled = true
-        Me.cmbFaction.Items.AddRange(New Object() {"None", "Baddies", "Goodies"})
+        Me.cmbFaction.Items.AddRange(New Object() {"None", "Good", "Bad"})
         Me.cmbFaction.Location = New System.Drawing.Point(302, 143)
         Me.cmbFaction.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbFaction.Name = "cmbFaction"
