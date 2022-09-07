@@ -42,11 +42,9 @@ Module S_General
         CheckDir(Paths.Animations)
         CheckDir(Paths.Logs)
         CheckDir(Paths.Quests)
-        CheckDir(Paths.Recipes)
         CheckDir(Paths.Pets)
         CheckDir(Paths.Projectiles)
         CheckDir(Paths.Quests)
-        CheckDir(Paths.Housing)
 
         ' LOAD ENCRYPTION
         Dim fi = Paths.Database & "\AsyncKeys.xml"

@@ -1070,6 +1070,7 @@ Module S_Npc
         SendItems(index)
         SendAnimations(index)
         SendQuests(index)
+        SendSkills(index)
         SendNpcs(index)
 
         Dim Buffer = New ByteStream(4)

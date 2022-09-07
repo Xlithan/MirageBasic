@@ -37,12 +37,12 @@ Friend Class frmEditor_NPC
         cmbSkill6.Items.Clear()
 
         For i = 0 To MAX_SKILLS
-            cmbSkill1.Items.Add(Skill(i).Name)
-            cmbSkill2.Items.Add(Skill(i).Name)
-            cmbSkill3.Items.Add(Skill(i).Name)
-            cmbSkill4.Items.Add(Skill(i).Name)
-            cmbSkill5.Items.Add(Skill(i).Name)
-            cmbSkill6.Items.Add(Skill(i).Name)
+            cmbSkill1.Items.Add(i & ": " & Skill(i).Name)
+            cmbSkill2.Items.Add(i & ": " & Skill(i).Name)
+            cmbSkill3.Items.Add(i & ": " & Skill(i).Name)
+            cmbSkill4.Items.Add(i & ": " & Skill(i).Name)
+            cmbSkill5.Items.Add(i & ": " & Skill(i).Name)
+            cmbSkill6.Items.Add(i & ": " & Skill(i).Name)
         Next
 
         cmbItem.Items.Clear()
@@ -50,8 +50,6 @@ Friend Class frmEditor_NPC
         For i = 0 To MAX_ITEMS
             cmbItem.Items.Add(i & ": " & Item(i).Name)
         Next
-
-        lstIndex.Items.Clear()
 
         ' Add the names
         For i = 0 To MAX_RESOURCES
