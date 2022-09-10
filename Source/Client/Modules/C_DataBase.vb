@@ -182,9 +182,16 @@ Module C_Database
         Npc(index) = Nothing
         ReDim Npc(index).Stat(StatType.Count - 1)
         ReDim Npc(index).DropChance(5)
-        ReDim Npc(index).DropItem(5)
+        ReDim Npc(index).DropItem(5)    
         ReDim Npc(index).DropItemValue(5)
         ReDim Npc(index).Skill(6)
+    End Sub
+
+    Sub StreamNpc(npcNum As Integer)
+        If npcNum > 0 and Npc(npcNum).Name = "" And NPC_Loaded(npcNum) = False Then
+            NPC_Loaded(npcNum) = True
+            SendRequestNpc(npcNum)
+        End If
     End Sub
 
 #End Region
@@ -203,8 +210,13 @@ Module C_Database
         Job(index).Desc = ""
         ReDim Job(index).StartItem(5)
         ReDim Job(index).StartValue(5)
-        ReDim Job(index).MaleSprite(0)
-        ReDim Job(index).FemaleSprite(0)
+        ReDim Job(index).MaleSprite(5)
+        ReDim Job(index).FemaleSprite(5)
+
+        For i = 0 To 5
+            Job(index).MaleSprite(i) = 1
+            Job(index).FemaleSprite(i) = 1
+        Next
     End Sub
 #End Region
 

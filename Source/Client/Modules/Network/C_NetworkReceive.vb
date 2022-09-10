@@ -389,6 +389,7 @@ Module C_NetworkReceive
        For i = 0 To MAX_JOBS
             CmbJob(i) = Job(i).Name
         Next
+        
         FrmMenu.DrawCharacter()
 
         buffer.Dispose()

@@ -115,7 +115,7 @@ Friend Class FrmGame
 
         'admin
         If Inputs.Admin(e.KeyCode) Then
-            If Player(Myindex).Access > 0 Then
+            If GetPlayerAccess(Myindex) > 0 Then
                 SendRequestAdmin()
             End If
         End If
@@ -259,7 +259,7 @@ Friend Class FrmGame
 
         'admin
         If Inputs.Admin(e.KeyCode) Then
-            If Player(Myindex).Access > 0 Then
+            If GetPlayerAccess(Myindex) > 0 Then
                 SendRequestAdmin()
             End If
         End If
