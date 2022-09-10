@@ -70,7 +70,7 @@ Module S_Instances
 
         ClearMap(Slot + MAX_MAPS)
 
-        For x = 1 To MAX_MAP_NPCS
+        For x = 0 To MAX_MAP_NPCS
             ClearMapNpc(x, Slot + MAX_MAPS)
         Next
 

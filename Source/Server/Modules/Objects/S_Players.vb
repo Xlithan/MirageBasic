@@ -437,7 +437,7 @@ Module S_Players
 
     Sub PlayerAttackNpc(Attacker As Integer, MapNpcNum As Integer, Damage As Integer)
         ' Check for subscript out of range
-        If IsPlaying(Attacker) = False OrElse MapNpcNum < 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse Damage < 0 Then Exit Sub
+        If IsPlaying(Attacker) = False OrElse MapNpcNum <= 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse Damage <= 0 Then Exit Sub
 
         Dim MapNum = GetPlayerMap(Attacker)
         Dim NpcNum = MapNpc(MapNum).Npc(MapNpcNum).Num

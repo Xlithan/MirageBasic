@@ -91,7 +91,6 @@ Partial Class frmEditor_Map
         Me.cmbTileSets = New System.Windows.Forms.ComboBox()
         Me.tpAttributes = New System.Windows.Forms.TabPage()
         Me.optLight = New System.Windows.Forms.RadioButton()
-        Me.optCraft = New System.Windows.Forms.RadioButton()
         Me.tpNpcs = New System.Windows.Forms.TabPage()
         Me.fraNpcs = New System.Windows.Forms.GroupBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -735,7 +734,7 @@ Partial Class frmEditor_Map
         Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip.Name = "ToolStrip"
-        Me.ToolStrip.Size = New System.Drawing.Size(552, 25)
+        Me.ToolStrip.Size = New System.Drawing.Size(558, 25)
         Me.ToolStrip.TabIndex = 13
         Me.ToolStrip.Text = "ToolStrip1"
         '
@@ -890,7 +889,6 @@ Partial Class frmEditor_Map
         'tpAttributes
         '
         Me.tpAttributes.Controls.Add(Me.optLight)
-        Me.tpAttributes.Controls.Add(Me.optCraft)
         Me.tpAttributes.Controls.Add(Me.btnClearAttribute)
         Me.tpAttributes.Controls.Add(Me.optTrap)
         Me.tpAttributes.Controls.Add(Me.optBlocked)
@@ -921,17 +919,6 @@ Partial Class frmEditor_Map
         Me.optLight.TabIndex = 18
         Me.optLight.Text = "Light"
         Me.optLight.UseVisualStyleBackColor = true
-        '
-        'optCraft
-        '
-        Me.optCraft.AutoSize = true
-        Me.optCraft.Location = New System.Drawing.Point(477, 58)
-        Me.optCraft.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.optCraft.Name = "optCraft"
-        Me.optCraft.Size = New System.Drawing.Size(51, 19)
-        Me.optCraft.TabIndex = 17
-        Me.optCraft.Text = "Craft"
-        Me.optCraft.UseVisualStyleBackColor = true
         '
         'tpNpcs
         '
@@ -1778,7 +1765,7 @@ Partial Class frmEditor_Map
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = true
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(552, 658)
+        Me.ClientSize = New System.Drawing.Size(558, 658)
         Me.Controls.Add(Me.tabpages)
         Me.Controls.Add(Me.ToolStrip)
         Me.Controls.Add(Me.pnlAttributes)
@@ -1944,7 +1931,6 @@ End Sub
     Friend WithEvents Label13 As Windows.Forms.Label
     Friend WithEvents tsbMapGrid As Windows.Forms.ToolStripButton
     Friend WithEvents btnPreview As Windows.Forms.Button
-    Friend WithEvents optCraft As Windows.Forms.RadioButton
     Friend WithEvents tsbFill As Windows.Forms.ToolStripButton
     Friend WithEvents tsbClear As Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator

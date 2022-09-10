@@ -119,7 +119,6 @@ Module modLoop
 
         If GetPlayersOnline() > 0 Then
             Console.WriteLine("Saving all online players...")
-            GlobalMsg("Saving all online players...")
 
             For i = 1 To GetPlayersOnline()
                 If IsPlaying(i) Then
@@ -248,7 +247,7 @@ Module modLoop
             If PlayersOnMap(mapNum) = True Then
                 tickCount = GetTimeMs()
 
-                For x = 1 To MAX_MAP_NPCS
+                For x = 0 To MAX_MAP_NPCS
                     npcNum = MapNpc(mapNum).Npc(x).Num
 
                     ' check if they've completed casting, and if so set the actual skill going
@@ -320,7 +319,7 @@ Module modLoop
                                     ' Check if target was found for NPC targetting
                                     If MapNpc(mapNum).Npc(x).Target = 0 AndAlso Npc(npcNum).Faction > 0 Then
                                         ' search for npc of another faction to target
-                                        For i = 1 To MAX_MAP_NPCS
+                                        For i = 0 To MAX_MAP_NPCS
                                             ' exist?
                                             If MapNpc(mapNum).Npc(i).Num > 0 Then
                                                 ' different faction?
@@ -1007,7 +1006,8 @@ Module modLoop
                                 End If
                             End If
                         Next
-                        For i = 1 To MAX_MAP_NPCS
+
+                        For i = 0 To MAX_MAP_NPCS
                             If MapNpc(mapNum).Npc(i).Num > 0 Then
                                 If MapNpc(mapNum).Npc(i).Vital(Core.VitalType.HP) > 0 Then
                                     If IsInRange(aoe, x, y, MapNpc(mapNum).Npc(i).X, MapNpc(mapNum).Npc(i).Y) Then
@@ -1042,7 +1042,8 @@ Module modLoop
                                 End If
                             End If
                         Next
-                        For i = 1 To MAX_MAP_NPCS
+
+                        For i = 0 To MAX_MAP_NPCS
                             If MapNpc(mapNum).Npc(i).Num > 0 AndAlso MapNpc(mapNum).Npc(i).Vital(Core.VitalType.HP) > 0 Then
                                 If IsInRange(aoe, x, y, MapNpc(mapNum).Npc(i).X, MapNpc(mapNum).Npc(i).Y) Then
                                     SkillNpc_Effect(vital, increment, i, vital, skillnum, mapNum)
@@ -1163,7 +1164,7 @@ Module modLoop
         Dim sSymbol As String
         Dim color As Integer
 
-        If index < 0 OrElse index > MAX_MAP_NPCS OrElse damage < 0 OrElse MapNpc(mapNum).Npc(index).Vital(vital) < 0 Then Exit Sub
+        If index <= 0 OrElse index > MAX_MAP_NPCS OrElse damage <= 0 OrElse MapNpc(mapNum).Npc(index).Vital(vital) <= 0 Then Exit Sub
 
         If damage > 0 Then
             If increment Then

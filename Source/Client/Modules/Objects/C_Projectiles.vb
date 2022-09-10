@@ -204,7 +204,7 @@ Friend Module C_Projectiles
         End If
 
         'Check for npc collision
-       For i = 1 To MAX_MAP_NPCS
+       For i = 0 To MAX_MAP_NPCS
             If MapNpc(i).X = x AndAlso MapNpc(i).Y = y Then
                 canClearProjectile = True
                 collisionindex = i

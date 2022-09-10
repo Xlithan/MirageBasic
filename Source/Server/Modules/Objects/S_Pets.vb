@@ -2188,7 +2188,7 @@ Module S_Pets
 
         CanNpcAttackPet = False
 
-        If mapNpcNum < 0 OrElse mapNpcNum > MAX_MAP_NPCS OrElse Not IsPlaying(index) OrElse Not PetAlive(index) Then
+        If mapNpcNum <= 0 OrElse mapNpcNum > MAX_MAP_NPCS OrElse Not IsPlaying(index) OrElse Not PetAlive(index) Then
             Exit Function
         End If
 

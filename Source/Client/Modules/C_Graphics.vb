@@ -1667,7 +1667,7 @@ Module C_Graphics
                 Next
 
                 ' Npcs
-                For i = 1 To MAX_MAP_NPCS
+                For i = 0 To MAX_MAP_NPCS
                     If MapNpc(I).Y = y Then
                         DrawNpc(I)
                     End If
@@ -1823,7 +1823,7 @@ Module C_Graphics
         Next
 
         ' draw npc names
-        For i = 1 To MAX_MAP_NPCS
+        For i = 0 To MAX_MAP_NPCS
             If MapNpc(I).Num > 0 Then
                 DrawNpcName(I)
             End If
@@ -1946,7 +1946,7 @@ Module C_Graphics
 
         If Settings.ShowNpcBar = 1 Then
             ' check for hp bar
-            For i = 1 To MAX_MAP_NPCS
+            For i = 0 To MAX_MAP_NPCS
                 If Map.Npc Is Nothing Then Exit Sub
                 If Map.Npc(i) > 0 Then
                     If _

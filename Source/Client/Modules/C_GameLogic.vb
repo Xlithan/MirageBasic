@@ -192,7 +192,7 @@ Module C_GameLogic
                     Next
 
                     ' Process npc movements (actually move them)
-                    For i = 1 To MAX_MAP_NPCS
+                    For i = 0 To MAX_MAP_NPCS
                         If Map.Npc(i) > 0 Then
                             ProcessNpcMovement(i)
                         End If

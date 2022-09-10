@@ -198,7 +198,7 @@ Public Class frmEditor_Map
 
         lstNpc.Items.Clear()
 
-        For n = 1 To MAX_MAP_NPCS
+        For n = 0 To MAX_MAP_NPCS
             If Map.Npc(n) > 0 Then
                 lstNpc.Items.Add(n & ": " & Npc(Map.Npc(n)).Name)
             Else
@@ -299,7 +299,7 @@ Public Class frmEditor_Map
 #Region "Npc's"
 
     Private Sub CmbNpcList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNpcList.SelectedIndexChanged
-        If cmbNpcList.SelectedIndex > 0 Then
+        If lstMapNpc.SelectedIndex > -1 Then
             lstMapNpc.Items.Item(lstMapNpc.SelectedIndex) = cmbNpcList.SelectedIndex & ": " & Npc(cmbNpcList.SelectedIndex).Name
             Map.Npc(lstMapNpc.SelectedIndex) = cmbNpcList.SelectedIndex
         End If
@@ -512,7 +512,7 @@ Public Class frmEditor_Map
 
         lstMapNpc.Items.Clear()
         
-        For x = 1 To MAX_MAP_NPCS
+        For x = 0 To MAX_MAP_NPCS
              lstMapNpc.Items.Add(X & ": " & Trim$(Npc(Map.Npc(X)).Name))
         Next
 
@@ -529,6 +529,8 @@ Public Class frmEditor_Map
         cmbTileSets.SelectedIndex = 0
         cmbLayers.SelectedIndex = 0
         cmbAutoTile.SelectedIndex = 0
+        cmbNpcList.SelectedIndex = 0
+        lstMapNpc.SelectedIndex = 1
 
         cmbWeather.SelectedIndex = Map.WeatherType
         scrlFog.Value = Map.Fogindex
@@ -739,13 +741,6 @@ Public Class frmEditor_Map
                     If optTrap.Checked = True Then
                         .Type = TileType.Trap
                         .Data1 = MapEditorHealAmount
-                        .Data2 = 0
-                        .Data3 = 0
-                    End If
-                    'craft tile
-                    If optCraft.Checked Then
-                        .Type = TileType.Craft
-                        .Data1 = 0
                         .Data2 = 0
                         .Data3 = 0
                     End If
@@ -1089,6 +1084,10 @@ Public Class frmEditor_Map
             Me.picMapItem.BackgroundImage = Drawing.Image.FromFile(Paths.Graphics & "items\" & itemnum & GfxExt)
         End If
 
+    End Sub
+
+    Private Sub lstMapNpc_Click(sender As Object, e As EventArgs) Handles lstMapNpc.Click
+        If lstMapNpc.SelectedIndex = 0 Then lstMapNpc.SelectedIndex = 1
     End Sub
 
     Friend Sub DrawTileOutline()

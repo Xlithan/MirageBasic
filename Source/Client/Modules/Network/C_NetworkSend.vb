@@ -185,11 +185,11 @@ Module C_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Sub SendRequestNpcs()
+    Sub SendRequestNpc(npcNum As Integer)
         Dim buffer As New ByteStream(4)
 
-        buffer.WriteInt32(ClientPackets.CRequestNPCS)
-
+        buffer.WriteInt32(ClientPackets.CRequestNPC)
+        buffer.WriteInt32(npcNum)
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub

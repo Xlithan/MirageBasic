@@ -187,7 +187,7 @@ Module C_Maps
     Sub ClearMapNpcs()
        Dim i As Integer
 
-       For i = 1 To MAX_MAP_NPCS
+       For i = 0 To MAX_MAP_NPCS
             ClearMapNpc(i)
         Next
 
@@ -289,7 +289,7 @@ Module C_Maps
 
             ReDim Map.Tile(Map.MaxX, Map.MaxY)
 
-            For x = 1 To MAX_MAP_NPCS
+            For x = 0 To MAX_MAP_NPCS
                 Map.Npc(x) = buffer.ReadInt32
             Next
 
@@ -441,7 +441,7 @@ Module C_Maps
             MapItem(i).Y = buffer.ReadInt32()
         Next
 
-        For i = 1 To MAX_MAP_NPCS
+        For i = 0 To MAX_MAP_NPCS
             MapNpc(i).Num = buffer.ReadInt32()
             MapNpc(i).X = buffer.ReadInt32()
             MapNpc(i).Y = buffer.ReadInt32()
@@ -499,7 +499,8 @@ Module C_Maps
     Sub Packet_MapNPCData(ByRef data() As Byte)
         Dim i As Integer
         Dim buffer As New ByteStream(data)
-       For i = 1 To MAX_MAP_NPCS
+
+       For i = 0 To MAX_MAP_NPCS
 
             With MapNpc(i)
                 .Num = buffer.ReadInt32
@@ -620,7 +621,7 @@ Module C_Maps
         buffer.WriteByte(Map.Parallax)
         buffer.WriteByte(Map.Brightness)
 
-       For i = 1 To MAX_MAP_NPCS
+       For i = 0 To MAX_MAP_NPCS
             buffer.WriteInt32(Map.Npc(i))
         Next
 

@@ -53,7 +53,7 @@ Module S_NetworkReceive
         Socket.PacketId(ClientPackets.CUnequip) = AddressOf Packet_Unequip
         Socket.PacketId(ClientPackets.CRequestPlayerData) = AddressOf Packet_RequestPlayerData
         Socket.PacketId(ClientPackets.CRequestItem) = AddressOf Packet_RequestItem
-        Socket.PacketId(ClientPackets.CRequestNPCS) = AddressOf Packet_RequestNpcs
+        Socket.PacketId(ClientPackets.CRequestNPC) = AddressOf Packet_RequestNpc
         Socket.PacketId(ClientPackets.CRequestResource) = AddressOf Packet_RequestResource
         Socket.PacketId(ClientPackets.CSpawnItem) = AddressOf Packet_SpawnItem
         Socket.PacketId(ClientPackets.CTrainStat) = AddressOf Packet_TrainStat
@@ -653,7 +653,7 @@ Module S_NetworkReceive
         Next
 
         ' Try to attack a npc
-        For i = 1 To MAX_MAP_NPCS
+        For i = 0 To MAX_MAP_NPCS
             TryPlayerAttackNpc(index, i)
         Next
 
@@ -899,7 +899,7 @@ Module S_NetworkReceive
 
         ReDim Map(mapNum).Tile(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
-        For x = 1 To MAX_MAP_NPCS
+        For x = 0 To MAX_MAP_NPCS
             ClearMapNpc(x, mapNum)
             Map(mapNum).Npc(x) = buffer.ReadInt32
         Next
@@ -1127,7 +1127,7 @@ Module S_NetworkReceive
         SpawnMapItems(GetPlayerMap(index))
 
         ' Respawn NPCS
-        For i = 1 To MAX_MAP_NPCS
+        For i = 0 To MAX_MAP_NPCS
             SpawnNpc(i, GetPlayerMap(index))
         Next
 
@@ -1245,6 +1245,8 @@ Module S_NetworkReceive
             PlayerMsg(index, "The game editor is locked and being used by " + user + ".", ColorType.BrightRed)
             Exit Sub
         End If
+
+        SendNpcs(index)
 
         TempPlayer(index).Editor = EditorType.Map
 
@@ -1549,7 +1551,7 @@ Module S_NetworkReceive
         Next
 
         ' Check for an npc
-        For i = 1 To MAX_MAP_NPCS
+        For i = 0 To MAX_MAP_NPCS
 
             If MapNpc(GetPlayerMap(index)).Npc(i).Num > 0 Then
                 If MapNpc(GetPlayerMap(index)).Npc(i).X = x Then
@@ -1649,8 +1651,8 @@ Module S_NetworkReceive
         SendPlayerData(index)
     End Sub
 
-    Sub Packet_RequestNpcs(index As Integer, ByRef data() As Byte)
-        AddDebug("Recieved CMSG: CRequestNPCS")
+    Sub Packet_RequestNPC(index As Integer, ByRef data() As Byte)
+        AddDebug("Recieved CMSG: CRequestNPC")
 
         Dim Buffer As New ByteStream(data), n as integer
 
@@ -2474,7 +2476,7 @@ Module S_NetworkReceive
 
         ReDim Map(mapNum).Tile(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
-        For x = 1 To MAX_MAP_NPCS
+        For x = 0 To MAX_MAP_NPCS
             ClearMapNpc(x, mapNum)
             Map(mapNum).Npc(x) = buffer.ReadInt32
         Next

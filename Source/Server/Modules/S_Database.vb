@@ -44,6 +44,11 @@ Module modDatabase
         ReDim Job(jobNum).StartValue(5)
         ReDim Job(jobNum).MaleSprite(5)
         ReDim Job(jobNum).FemaleSprite(5)
+
+        For i = 0 To 5
+            Job(jobNum).MaleSprite(i) = 1
+            Job(jobNum).FemaleSprite(i) = 1
+        Next
     End Sub
 
     Sub LoadJob(jobNum As Integer)
@@ -242,7 +247,7 @@ Module modDatabase
             Next
         Next
 
-        For x = 1 To MAX_MAP_NPCS
+        For x = 0 To MAX_MAP_NPCS
             writer.WriteInt32(Map(mapNum).Npc(x))
         Next
 
@@ -568,7 +573,7 @@ Module modDatabase
             Next
         Next
 
-        For x = 1 To MAX_MAP_NPCS
+        For x = 0 To MAX_MAP_NPCS
             Map(mapNum).Npc(x) = reader.ReadInt32()
             MapNpc(mapNum).Npc(x).Num = Map(mapNum).Npc(x)
         Next
@@ -736,7 +741,7 @@ Module modDatabase
     Sub ClearMapNpcs(mapNum As Integer)
         Dim x As Integer
 
-        For x = 1 To MAX_MAP_NPCS               
+        For x = 0 To MAX_MAP_NPCS               
             ClearMapNpc(x, mapNum)
         Next
 
@@ -1234,7 +1239,7 @@ Module modDatabase
         For i = 0 To ResourceSkills.Count - 1
             Player(index).GatherSkills(i).SkillLevel = 1
             Player(index).GatherSkills(i).SkillCurExp = 0
-            Player(index).GatherSkills(i).SkillNextLvlExp = 100
+            SetPlayerGatherSkillMaxExp(index, i, GetSkillNextLevel(index, i))
         Next
 
         'random items
@@ -1364,7 +1369,7 @@ Module modDatabase
             Player(index).GatherSkills(i).SkillCurExp = reader.ReadInt32()
             Player(index).GatherSkills(i).SkillNextLvlExp = reader.ReadInt32()
             If Player(index).GatherSkills(i).SkillLevel = 0 Then Player(index).GatherSkills(i).SkillLevel = 1
-            If Player(index).GatherSkills(i).SkillNextLvlExp = 0 Then Player(index).GatherSkills(i).SkillNextLvlExp = 100
+            If GetPlayerGatherSkillMaxExp(index, i) = 0 Then SetPlayerGatherSkillMaxExp(index, i, GetSkillNextLevel(index, i))
         Next
 
         'random items
@@ -1569,9 +1574,9 @@ Module modDatabase
             Player(index).X = Job(jobNum).StartX
             Player(index).Y = Job(jobNum).StartY
             Player(index).Dir = DirectionType.Down
-            Player(index).Vital(VitalType.HP) = GetPlayerMaxVital(index, VitalType.HP)
-            Player(index).Vital(VitalType.MP) = GetPlayerMaxVital(index, VitalType.MP)
-            Player(index).Vital(VitalType.SP) = GetPlayerMaxVital(index, VitalType.SP)
+            Call SetPlayerVital(index, VitalType.HP, GetPlayerMaxVital(index, VitalType.HP))
+            Call SetPlayerVital(index, VitalType.MP, GetPlayerMaxVital(index, VitalType.MP))
+            Call SetPlayerVital(index, VitalType.SP, GetPlayerMaxVital(index, VitalType.SP))
 
             ' set starter equipment
             For n = 0 To 5
@@ -1597,10 +1602,16 @@ Module modDatabase
             For i = 0 To ResourceSkills.Count - 1
                 Player(index).GatherSkills(i).SkillLevel = 1
                 Player(index).GatherSkills(i).SkillCurExp = 0
-                Player(index).GatherSkills(i).SkillNextLvlExp = 100
+                SetPlayerGatherSkillMaxExp(index, i, GetSkillNextLevel(index, i))
             Next
 
             ' Add name to character list.
+            If CharactersList.IsEmpty()
+                Player(index).Access = AdminType.Creator
+            End If
+
+            If Player(index).Sprite = 0 Then Player(index).Sprite = 1
+
             CharactersList.Add(Name).Save()
 
             SavePlayer(index)

@@ -17,7 +17,7 @@ Module S_Npc
     Sub SpawnMapNpcs(mapNum As Integer)
         Dim i As Integer
 
-        For i = 1 To MAX_MAP_NPCS
+        For i = 0 To MAX_MAP_NPCS
             SpawnNpc(i, mapNum)
         Next
 
@@ -32,7 +32,7 @@ Module S_Npc
         Dim spawned As Boolean
 
         ' Check for subscript out of range
-        If mapNpcNum < 0 OrElse mapNpcNum > MAX_MAP_NPCS OrElse mapNum < 0 OrElse mapNum > MAX_CACHED_MAPS Then Exit Sub
+        If mapNpcNum <= 0 OrElse mapNpcNum > MAX_MAP_NPCS OrElse mapNum <= 0 OrElse mapNum > MAX_CACHED_MAPS Then Exit Sub
 
         npcNum = Map(mapNum).Npc(mapNpcNum)
 
@@ -138,7 +138,7 @@ Module S_Npc
             Next
         End If
 
-        For LoopI = 1 To MAX_MAP_NPCS
+        For LoopI = 0 To MAX_MAP_NPCS
             If MapNpc(mapNum).Npc(LoopI).Num > 0 AndAlso MapNpc(mapNum).Npc(LoopI).X = x AndAlso MapNpc(mapNum).Npc(LoopI).Y = y Then
                 NpcTileIsOpen = False
                 Exit Function
@@ -158,7 +158,7 @@ Module S_Npc
         Dim y As Integer
 
         ' Check for subscript out of range
-        If mapNum < 0 OrElse mapNum > MAX_CACHED_MAPS OrElse MapNpcNum < 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse Dir < DirectionType.Up OrElse Dir > DirectionType.Right Then
+        If mapNum <= 0 OrElse mapNum > MAX_CACHED_MAPS OrElse MapNpcNum <= 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse Dir < DirectionType.Up OrElse Dir > DirectionType.Right Then
             Exit Function
         End If
 
@@ -190,7 +190,7 @@ Module S_Npc
                     Next
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 1 To MAX_MAP_NPCS
+                    For i = 0 To MAX_MAP_NPCS
                         If (i <> MapNpcNum) AndAlso (MapNpc(mapNum).Npc(i).Num > 0) AndAlso (MapNpc(mapNum).Npc(i).X = MapNpc(mapNum).Npc(MapNpcNum).X) AndAlso (MapNpc(mapNum).Npc(i).Y = MapNpc(mapNum).Npc(MapNpcNum).Y - 1) Then
                             CanNpcMove = False
                             Exit Function
@@ -223,7 +223,7 @@ Module S_Npc
                     Next
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 1 To MAX_MAP_NPCS
+                    For i = 0 To MAX_MAP_NPCS
                         If (i <> MapNpcNum) AndAlso (MapNpc(mapNum).Npc(i).Num > 0) AndAlso (MapNpc(mapNum).Npc(i).X = MapNpc(mapNum).Npc(MapNpcNum).X) AndAlso (MapNpc(mapNum).Npc(i).Y = MapNpc(mapNum).Npc(MapNpcNum).Y + 1) Then
                             CanNpcMove = False
                             Exit Function
@@ -256,7 +256,7 @@ Module S_Npc
                     Next
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 1 To MAX_MAP_NPCS
+                    For i = 0 To MAX_MAP_NPCS
                         If (i <> MapNpcNum) AndAlso (MapNpc(mapNum).Npc(i).Num > 0) AndAlso (MapNpc(mapNum).Npc(i).X = MapNpc(mapNum).Npc(MapNpcNum).X - 1) AndAlso (MapNpc(mapNum).Npc(i).Y = MapNpc(mapNum).Npc(MapNpcNum).Y) Then
                             CanNpcMove = False
                             Exit Function
@@ -289,7 +289,7 @@ Module S_Npc
                     Next
 
                     ' Check to make sure that there is not another npc in the way
-                    For i = 1 To MAX_MAP_NPCS
+                    For i = 0 To MAX_MAP_NPCS
                         If (i <> MapNpcNum) AndAlso (MapNpc(mapNum).Npc(i).Num > 0) AndAlso (MapNpc(mapNum).Npc(i).X = MapNpc(mapNum).Npc(MapNpcNum).X + 1) AndAlso (MapNpc(mapNum).Npc(i).Y = MapNpc(mapNum).Npc(MapNpcNum).Y) Then
                             CanNpcMove = False
                             Exit Function
@@ -309,7 +309,7 @@ Module S_Npc
         Dim buffer As New ByteStream(4)
 
         ' Check for subscript out of range
-        If mapNum < 0 OrElse mapNum > MAX_CACHED_MAPS OrElse MapNpcNum < 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse Dir < DirectionType.Up OrElse Dir > DirectionType.Right OrElse Movement < 0 OrElse Movement > 2 Then
+        If mapNum <= 0 OrElse mapNum > MAX_CACHED_MAPS OrElse MapNpcNum <= 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse Dir < DirectionType.Up OrElse Dir > DirectionType.Right OrElse Movement < 0 OrElse Movement > 2 Then
             Exit Sub
         End If
 
@@ -381,7 +381,7 @@ Module S_Npc
         Dim buffer As New ByteStream(4)
 
         ' Check for subscript out of range
-        If mapNum < 0 OrElse mapNum > MAX_CACHED_MAPS OrElse MapNpcNum < 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse Dir < DirectionType.Up OrElse Dir > DirectionType.Right Then
+        If mapNum <= 0 OrElse mapNum > MAX_CACHED_MAPS OrElse MapNpcNum <= 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse Dir < DirectionType.Up OrElse Dir > DirectionType.Right Then
             Exit Sub
         End If
 
@@ -461,7 +461,7 @@ Module S_Npc
         Dim NpcNum As Integer
 
         ' Check for subscript out of range
-        If MapNpcNum < 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse Not IsPlaying(index) Then
+        If MapNpcNum <= 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse Not IsPlaying(index) Then
             Exit Function
         End If
 
@@ -525,11 +525,11 @@ Module S_Npc
         CanNpcAttackNpc = False
 
         ' Check for subscript out of range
-        If Attacker < 0 OrElse Attacker > MAX_MAP_NPCS Then
+        If Attacker <= 0 OrElse Attacker > MAX_MAP_NPCS Then
             Exit Function
         End If
 
-        If Victim < 0 OrElse Victim > MAX_MAP_NPCS Then
+        If Victim <= 0 OrElse Victim > MAX_MAP_NPCS Then
             Exit Function
         End If
 
@@ -599,8 +599,7 @@ Module S_Npc
         Dim buffer As New ByteStream(4)
 
         ' Check for subscript out of range
-
-        If MapNpcNum < 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse IsPlaying(Victim) = False Then Exit Sub
+        If MapNpcNum <= 0 OrElse MapNpcNum > MAX_MAP_NPCS OrElse IsPlaying(Victim) = False Then Exit Sub
 
         ' Check for subscript out of range
         If MapNpc(GetPlayerMap(Victim)).Npc(MapNpcNum).Num < 0 Then Exit Sub
@@ -716,8 +715,8 @@ Module S_Npc
         Dim vNpcNum As Integer
         Dim n As Integer
 
-        If Attacker < 0 OrElse Attacker > MAX_MAP_NPCS Then Exit Sub
-        If Victim < 0 OrElse Victim > MAX_MAP_NPCS Then Exit Sub
+        If Attacker <= 0 OrElse Attacker > MAX_MAP_NPCS Then Exit Sub
+        If Victim <= 0 OrElse Victim > MAX_MAP_NPCS Then Exit Sub
 
         If Damage <= 0 Then Exit Sub
 
@@ -1005,7 +1004,7 @@ Module S_Npc
 
     Friend Function IsNpcDead(mapNum As Integer, MapNpcNum As Integer)
         IsNpcDead = False
-        If mapNum < 0 OrElse mapNum > MAX_MAPS OrElse MapNpcNum < 0 OrElse MapNpcNum > MAX_MAP_NPCS Then Exit Function
+        If mapNum <= 0 OrElse mapNum > MAX_MAPS OrElse MapNpcNum <= 0 OrElse MapNpcNum > MAX_MAP_NPCS Then Exit Function
         If MapNpc(mapNum).Npc(MapNpcNum).Vital(VitalType.HP) <= 0 Then IsNpcDead = True
     End Function
 
@@ -1031,7 +1030,7 @@ Module S_Npc
 
         AddDebug("Sent SMSG: SMapNpcData")
 
-        For i = 1 To MAX_MAP_NPCS
+        For i = 0 To MAX_MAP_NPCS
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).Num)
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).X)
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).Y)
@@ -1241,7 +1240,7 @@ Module S_Npc
 
         AddDebug("Sent SMSG: SMapNpcData")
 
-        For i = 1 To MAX_MAP_NPCS
+        For i = 0 To MAX_MAP_NPCS
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).Num)
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).X)
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).Y)
