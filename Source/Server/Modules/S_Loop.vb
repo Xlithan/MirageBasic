@@ -91,26 +91,25 @@ Module modLoop
                 tmr300 = GetTimeMs() + 300
             End If
 
-            ' Checks to update player vitals every 5 seconds - Can be tweaked
+            ' Checks to update player vitals every 5 seconds
             If tick > lastUpdatePlayerVitals Then
                 UpdatePlayerVitals()
                 lastUpdatePlayerVitals = GetTimeMs() + 5000
             End If
 
-            ' Checks to spawn map items every 5 minutes - Can be tweaked
+            ' Checks to spawn map items every 1 minute
             If tick > lastUpdateMapSpawnItems Then
                 UpdateMapSpawnItems()
-                lastUpdateMapSpawnItems = GetTimeMs() + 300000
+                lastUpdateMapSpawnItems = GetTimeMs() + 60000
             End If
 
-            ' Checks to save players every 10 minutes - Can be tweaked
+            ' Checks to save players every 1 minute
             If tick > lastUpdateSavePlayers Then
                 UpdateSavePlayers()
-                lastUpdateSavePlayers = GetTimeMs() + 600000
+                lastUpdateSavePlayers = GetTimeMs() + 60000
             End If
 
-            'Thread.Yield()
-            Thread.Sleep(1)
+            Thread.Yield()
         Loop
     End Sub
 
@@ -119,7 +118,6 @@ Module modLoop
 
         If GetPlayersOnline() > 0 Then
             Console.WriteLine("Saving all online players...")
-            GlobalMsg("Saving all online players...")
 
             For i = 1 To GetPlayersOnline()
                 If IsPlaying(i) Then
@@ -161,24 +159,17 @@ Module modLoop
     Private Sub UpdatePlayerVitals()
         Dim i As Integer
 
-        For i = 0 To GetPlayersOnline()
+        For i = 1 To GetPlayersOnline()
 
             If IsPlaying(i) Then
-                If GetPlayerVital(i, VitalType.HP) <> GetPlayerMaxVital(i, VitalType.HP) Then
-                    SetPlayerVital(i, VitalType.HP, GetPlayerVital(i, VitalType.HP) + GetPlayerVitalRegen(i, VitalType.HP))
-                    SendVital(i, VitalType.HP)
-                End If
-
-                If GetPlayerVital(i, VitalType.MP) <> GetPlayerMaxVital(i, VitalType.MP) Then
-                    SetPlayerVital(i, VitalType.MP, GetPlayerVital(i, VitalType.MP) + GetPlayerVitalRegen(i, VitalType.MP))
-                    SendVital(i, VitalType.MP)
-                End If
-
-                If GetPlayerVital(i, VitalType.SP) <> GetPlayerMaxVital(i, VitalType.SP) Then
-                    SetPlayerVital(i, VitalType.SP, GetPlayerVital(i, VitalType.SP) + GetPlayerVitalRegen(i, VitalType.SP))
-                    SendVital(i, VitalType.SP)
-                End If
+                For x = 0 To VitalType.Count - 1
+                    If GetPlayerVital(i, x) <> GetPlayerMaxVital(i, x) Then
+                        SetPlayerVital(i, x, GetPlayerVital(i, x) + GetPlayerVitalRegen(i, x))
+                        SendVital(i, x)
+                    End If
+                Next
             End If
+
             ' send vitals to party if in one
             If TempPlayer(i).InParty > 0 Then SendPartyVitals(TempPlayer(i).InParty, i)
         Next
@@ -248,7 +239,7 @@ Module modLoop
             If PlayersOnMap(mapNum) = True Then
                 tickCount = GetTimeMs()
 
-                For x = 1 To MAX_MAP_NPCS
+                For x = 0 To MAX_MAP_NPCS
                     npcNum = MapNpc(mapNum).Npc(x).Num
 
                     ' check if they've completed casting, and if so set the actual skill going
@@ -320,7 +311,7 @@ Module modLoop
                                     ' Check if target was found for NPC targetting
                                     If MapNpc(mapNum).Npc(x).Target = 0 AndAlso Npc(npcNum).Faction > 0 Then
                                         ' search for npc of another faction to target
-                                        For i = 1 To MAX_MAP_NPCS
+                                        For i = 0 To MAX_MAP_NPCS
                                             ' exist?
                                             If MapNpc(mapNum).Npc(i).Num > 0 Then
                                                 ' different faction?
@@ -1007,7 +998,8 @@ Module modLoop
                                 End If
                             End If
                         Next
-                        For i = 1 To MAX_MAP_NPCS
+
+                        For i = 0 To MAX_MAP_NPCS
                             If MapNpc(mapNum).Npc(i).Num > 0 Then
                                 If MapNpc(mapNum).Npc(i).Vital(Core.VitalType.HP) > 0 Then
                                     If IsInRange(aoe, x, y, MapNpc(mapNum).Npc(i).X, MapNpc(mapNum).Npc(i).Y) Then
@@ -1042,7 +1034,8 @@ Module modLoop
                                 End If
                             End If
                         Next
-                        For i = 1 To MAX_MAP_NPCS
+
+                        For i = 0 To MAX_MAP_NPCS
                             If MapNpc(mapNum).Npc(i).Num > 0 AndAlso MapNpc(mapNum).Npc(i).Vital(Core.VitalType.HP) > 0 Then
                                 If IsInRange(aoe, x, y, MapNpc(mapNum).Npc(i).X, MapNpc(mapNum).Npc(i).Y) Then
                                     SkillNpc_Effect(vital, increment, i, vital, skillnum, mapNum)
@@ -1163,7 +1156,7 @@ Module modLoop
         Dim sSymbol As String
         Dim color As Integer
 
-        If index < 0 OrElse index > MAX_MAP_NPCS OrElse damage < 0 OrElse MapNpc(mapNum).Npc(index).Vital(vital) < 0 Then Exit Sub
+        If index <= 0 OrElse index > MAX_MAP_NPCS OrElse damage <= 0 OrElse MapNpc(mapNum).Npc(index).Vital(vital) <= 0 Then Exit Sub
 
         If damage > 0 Then
             If increment Then

@@ -559,7 +559,7 @@ Module S_NetworkSend
             buffer.WriteByte(Map(mapNum).Parallax)
             buffer.WriteByte(Map(mapNum).Brightness)
 
-            For i = 1 To MAX_MAP_NPCS
+            For i = 0 To MAX_MAP_NPCS
                 buffer.WriteInt32(Map(mapNum).Npc(i))
             Next
 
@@ -700,7 +700,7 @@ Module S_NetworkSend
             buffer.WriteInt32(MapItem(mapNum, i).Y)
         Next
 
-        For i = 1 To MAX_MAP_NPCS
+        For i = 0 To MAX_MAP_NPCS
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).Num)
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).X)
             buffer.WriteInt32(MapNpc(mapNum).Npc(i).Y)

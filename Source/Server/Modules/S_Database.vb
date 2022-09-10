@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports System.Data
 Imports System.IO
 Imports Asfw
 Imports Asfw.IO
@@ -44,6 +45,11 @@ Module modDatabase
         ReDim Job(jobNum).StartValue(5)
         ReDim Job(jobNum).MaleSprite(5)
         ReDim Job(jobNum).FemaleSprite(5)
+
+        For i = 0 To 5
+            Job(jobNum).MaleSprite(i) = 1
+            Job(jobNum).FemaleSprite(i) = 1
+        Next
     End Sub
 
     Sub LoadJob(jobNum As Integer)
@@ -192,7 +198,7 @@ Module modDatabase
     Sub SaveMap(mapNum As Integer)
         Dim filename As String
         Dim x As Integer, y As Integer, l As Integer
-        Dim writer As New ByteStream(100)
+        Dim writer As New ByteStream(Map.Length)
 
         filename = Paths.Map(mapNum)
 
@@ -547,6 +553,7 @@ Module modDatabase
         Map(mapNum).Instanced = reader.ReadByte()
         Map(mapNum).Panorama = reader.ReadByte()
         Map(mapNum).Parallax = reader.ReadByte()
+        Map(mapNum).Brightness = reader.ReadByte()
 
         ' have to set the tile()
         ReDim Map(mapNum).Tile(Map(mapNum).MaxX, Map(mapNum).MaxY)
@@ -574,10 +581,6 @@ Module modDatabase
         Next
 
         CacheResources(mapNum)
-
-        If Map(mapNum).Name Is Nothing Then Map(mapNum).Name = ""
-        If Map(mapNum).Music Is Nothing Then Map(mapNum).Music = ""
-
         LoadMapEvent(mapNum)
     End Sub
 
@@ -736,7 +739,7 @@ Module modDatabase
     Sub ClearMapNpcs(mapNum As Integer)
         Dim x As Integer
 
-        For x = 1 To MAX_MAP_NPCS               
+        For x = 0 To MAX_MAP_NPCS               
             ClearMapNpc(x, mapNum)
         Next
 
@@ -991,22 +994,22 @@ Module modDatabase
 #Region "Accounts"
 
     Function AccountExist(Name As String) As Boolean
-        Return File.Exists(Paths.Database & "Accounts\" & Name.Trim & "\Data.bin")
+        Return File.Exists(Paths.Database & "Accounts\" & Name.Trim & ".bin")
     End Function
 
     Function PasswordOK(Name As String, Password As String) As Boolean
         If Not AccountExist(Name) Then Return False
         Dim reader As New ByteStream()
-        ByteFile.Load(Paths.Database & "Accounts\" & Name.Trim & "\Data.bin", reader)
+        ByteFile.Load(Paths.Database & "Accounts\" & Name.Trim & ".bin", reader)
         If reader.ReadString().Trim <> Name.Trim Then Return False
         Return reader.ReadString().Trim.ToUpper = Password.Trim.ToUpper
     End Function
 
-    Sub AddAccount(index As Integer, Name As String, Password As String)
+    Sub AddAccount(index As Integer, name As String, password As String)
         ClearPlayer(index)
 
-        Player(index).Login = Name
-        Player(index).Password = Password
+        SetPlayerLogin(index, Name)
+        SetPlayerPassword(index, Password)
 
         SavePlayer(index)
     End Sub
@@ -1024,35 +1027,58 @@ Module modDatabase
     End Sub
 
     Sub SavePlayer(index As Integer)
-        Dim playername As String = Player(index).Login.Trim
-        Dim filename As String = Paths.Database & "Accounts\" & playername
-        CheckDir(filename) : filename += "\Data.bin"
+        Dim filename As String = Paths.Database & "Accounts\" & GetPlayerLogin(index) & ".bin"
 
-        Dim writer As New ByteStream(9 + Player(index).Login.Length + Player(index).Password.Length)
+        ' Create path to character folder
+        CheckDir(Paths.Database & "Accounts\" & GetPlayerLogin(index) & "\")
 
-        writer.WriteString(Player(index).Login)
-        writer.WriteString(Player(index).Password)
-        writer.WriteByte(Player(index).Access)
+        Dim writer As New ByteStream(Account.Length)
+
+        writer.WriteString(GetPlayerLogin(index))
+        writer.WriteString(GetPlayerPassword(index))
+        writer.WriteByte(GetPlayerAccess(index))
+        writer.WriteByte(Account(index).Index)
+
+        For i = 1 To MAX_CHARACTERS
+            writer.WriteString(GetCharName(index, i))
+        Next
 
         ByteFile.Save(filename, writer)
 
-        SaveCharacter(index)
+        SaveCharacter(index, Account(index).Index)
     End Sub
 
-    Sub LoadPlayer(index As Integer, Name As String)
-        Dim filename As String = Paths.Database & "Accounts\" & Name.Trim() & "\Data.bin"
+    Sub LoadPlayer(index As Integer)
+        Dim filename As String = Paths.Database & "Accounts\" & GetPlayerLogin(index) & ".bin"
         ClearPlayer(index)
-        Dim reader As New ByteStream()
+        Dim reader As New ByteStream(Account.Length)
         ByteFile.Load(filename, reader)
 
-        Player(index).Login = reader.ReadString()
-        Player(index).Password = reader.ReadString()
-        Player(index).Access = reader.ReadByte()
+        SetPlayerLogin(index, reader.ReadString())
+        SetPlayerPassword(index, reader.ReadString())
+        SetPlayerAccess(index, reader.ReadByte())
+        Account(index).Index = reader.ReadByte()
 
-        LoadCharacter(index)
+        For i = 1 To MAX_CHARACTERS
+            SetPlayerCharName(index, i, reader.ReadString())
+        Next
+
+        LoadCharacter(index, Account(index).Index)
+    End Sub
+
+    Sub ClearAccount(index As Integer)
+        SetPlayerLogin(index, "")
+        SetPlayerPassword(index, "")
+        ReDim Account(index).Character(MAX_CHARACTERS)
+
+        For i = 1 To MAX_CHARACTERS
+            SetPlayerCharName(index, i, "")
+        Next
     End Sub
 
     Sub ClearPlayer(index As Integer)
+        ClearAccount(index)
+
         ReDim TempPlayer(MAX_PLAYERS)
 
         For i = 1 To MAX_PLAYERS
@@ -1065,20 +1091,6 @@ Module modDatabase
         ReDim TempPlayer(index).PetSkillCd(4)
         TempPlayer(index).Editor = -1
 
-        ReDim Bank(MAX_PLAYERS)
-
-        For i = 0 To MAX_PLAYERS
-            ReDim Bank(i).Item(MAX_BANK)
-            ReDim Bank(i).ItemRand(MAX_BANK)
-            For x = 1 To MAX_BANK
-                ReDim Bank(i).ItemRand(x).Stat(StatType.Count - 1)
-            Next
-        Next
-
-        Player(index).Login = ""
-        Player(index).Password = ""
-
-        Player(index).Access = 0
         ClearCharacter(index)   
     End Sub
 
@@ -1086,8 +1098,10 @@ Module modDatabase
 
 #Region "Bank"
 
-    Friend Sub LoadBank(index As Integer, Name As String)
-        Dim filename As String = Paths.Database & "Accounts\" & Name.Trim() & "\Bank.bin"
+    Friend Sub LoadBank(index As Integer)
+        If GetPlayerLogin(index) = "" Then Exit Sub
+        
+        Dim filename As String = Paths.Database & "Accounts\" & GetPlayerLogin(index) & "_Bank.bin"
 
         ClearBank(index)
 
@@ -1116,9 +1130,10 @@ Module modDatabase
     End Sub
 
     Sub SaveBank(index As Integer)
-        Dim filename = Paths.Database & "Accounts\" & Player(index).Login.Trim() & "\Bank.bin"
+        Dim filename = Paths.Database & "Accounts\" & GetPlayerLogin(index) & "_Bank.bin"
+        Dim writer As New ByteStream(Bank.Length)
 
-        Dim writer As New ByteStream(100)
+        ClearBank(index)
 
         For i = 1 To MAX_BANK
             writer.WriteByte(Bank(index).Item(i).Num)
@@ -1144,7 +1159,6 @@ Module modDatabase
         ReDim Bank(index).ItemRand(MAX_BANK)
 
         For i = 1 To MAX_BANK
-
             Bank(index).Item(i).Num = 0
             Bank(index).Item(i).Value = 0
             Bank(index).ItemRand(i).Prefix = ""
@@ -1163,7 +1177,6 @@ Module modDatabase
 #End Region
 
 #Region "Characters"
-
     Sub ClearCharacter(index As Integer)
         Player(index).Job = 0
         Player(index).Dir = 0
@@ -1234,7 +1247,7 @@ Module modDatabase
         For i = 0 To ResourceSkills.Count - 1
             Player(index).GatherSkills(i).SkillLevel = 1
             Player(index).GatherSkills(i).SkillCurExp = 0
-            Player(index).GatherSkills(i).SkillNextLvlExp = 100
+            SetPlayerGatherSkillMaxExp(index, i, GetSkillNextLevel(index, i))
         Next
 
         'random items
@@ -1276,7 +1289,7 @@ Module modDatabase
         For i = 0 To StatType.Count - 1
             Player(index).Pet.Stat(i) = 0
         Next
-
+                    
         ReDim Player(index).Pet.Skill(4)
         For i = 0 To 4
             Player(index).Pet.Skill(i) = 0
@@ -1292,16 +1305,17 @@ Module modDatabase
         Player(index).Pet.Exp = 0
     End Sub
 
-    Sub LoadCharacter(index As Integer)
-        Dim filename As String = Paths.Database & "Accounts\" & Player(index).Login.Trim & ".bin"
+    Sub LoadCharacter(index As Integer, charNum As Integer)
+        Dim filename As String = Paths.Database & "Accounts\" & GetPlayerLogin(index) & "\" & GetCharName(index, charNum) & ".bin"
 
         ClearCharacter(index)
 
-        Dim reader As New ByteStream()
+        Dim reader As New ByteStream(Player.Length)
         ByteFile.Load(filename, reader)
 
         Player(index).Job = reader.ReadByte()
         Player(index).Dir = reader.ReadByte()
+        Player(index).Sprite = reader.ReadInt32()
 
         For i = 0 To EquipmentType.Count - 1
             Player(index).Equipment(i) = reader.ReadInt32()
@@ -1322,10 +1336,8 @@ Module modDatabase
         Player(index).Sex = reader.ReadByte()
 
         For i = 1 To MAX_PLAYER_SKILLS
-            Player(index).Skill(i).Num = reader.ReadByte()
+            Player(index).Skill(i).Num = reader.ReadInt32()
         Next
-
-        Player(index).Sprite = reader.ReadInt32()
 
         For i = 0 To StatType.Count - 1
             Player(index).Stat(i) = reader.ReadByte()
@@ -1364,7 +1376,7 @@ Module modDatabase
             Player(index).GatherSkills(i).SkillCurExp = reader.ReadInt32()
             Player(index).GatherSkills(i).SkillNextLvlExp = reader.ReadInt32()
             If Player(index).GatherSkills(i).SkillLevel = 0 Then Player(index).GatherSkills(i).SkillLevel = 1
-            If Player(index).GatherSkills(i).SkillNextLvlExp = 0 Then Player(index).GatherSkills(i).SkillNextLvlExp = 100
+            If GetPlayerGatherSkillMaxExp(index, i) = 0 Then SetPlayerGatherSkillMaxExp(index, i, GetSkillNextLevel(index, i))
         Next
 
         'random items
@@ -1423,13 +1435,14 @@ Module modDatabase
 
     End Sub
 
-    Sub SaveCharacter(index As Integer)
-        Dim filename As String = Paths.Database & "Accounts\" & Player(index).Login.Trim & ".bin"
+    Sub SaveCharacter(index As Integer, charNum As Integer)
+        Dim filename As String = Paths.Database & "Accounts\" & GetPlayerLogin(index) & "\" & GetCharName(index, charNum) & ".bin"
 
-        Dim writer As New ByteStream(100)
+        Dim writer As New ByteStream(Player.Length)
 
         writer.WriteByte(Player(index).Job)
         writer.WriteByte(Player(index).Dir)
+        writer.WriteInt32(Player(index).Sprite)
 
         For i = 0 To EquipmentType.Count - 1
             writer.WriteInt32(Player(index).Equipment(i))
@@ -1452,8 +1465,6 @@ Module modDatabase
         For i = 1 To MAX_PLAYER_SKILLS
             writer.WriteInt32(Player(index).Skill(i).Num)
         Next
-
-        writer.WriteInt32(Player(index).Sprite)
 
         For i = 0 To StatType.Count - 1
             writer.WriteByte(Player(index).Stat(i))
@@ -1540,8 +1551,8 @@ Module modDatabase
         ByteFile.Save(filename, writer)
     End Sub
 
-    Function CharExist(index As Integer, CharNum As Integer) As Boolean
-        Return Player(index).Name.Trim.Length > 0
+    Function CharExist(index As Integer, charnUm As Integer) As Boolean
+        Return Account(index).Character(charNum).Trim.Length > 0
     End Function
 
     Sub AddChar(index As Integer, CharNum As Integer, Name As String, Sex As Byte, jobNum As Byte, Sprite As Integer)
@@ -1569,10 +1580,11 @@ Module modDatabase
             Player(index).X = Job(jobNum).StartX
             Player(index).Y = Job(jobNum).StartY
             Player(index).Dir = DirectionType.Down
-            Player(index).Vital(VitalType.HP) = GetPlayerMaxVital(index, VitalType.HP)
-            Player(index).Vital(VitalType.MP) = GetPlayerMaxVital(index, VitalType.MP)
-            Player(index).Vital(VitalType.SP) = GetPlayerMaxVital(index, VitalType.SP)
 
+            For i = 0 To VitalType.Count - 1
+                Call SetPlayerVital(index, i, GetPlayerMaxVital(index, i))
+            Next
+   
             ' set starter equipment
             For n = 0 To 5
                 If Job(jobNum).StartItem(n) > 0 Then
@@ -1597,12 +1609,20 @@ Module modDatabase
             For i = 0 To ResourceSkills.Count - 1
                 Player(index).GatherSkills(i).SkillLevel = 1
                 Player(index).GatherSkills(i).SkillCurExp = 0
-                Player(index).GatherSkills(i).SkillNextLvlExp = 100
+                SetPlayerGatherSkillMaxExp(index, i, GetSkillNextLevel(index, i))
             Next
+          
+            If CharactersList.IsEmpty()
+                Call SetPlayerAccess(index, AdminType.Creator)
+            End If
+
+            If Player(index).Sprite = 0 Then Player(index).Sprite = 1
 
             ' Add name to character list.
             CharactersList.Add(Name).Save()
 
+            Account(index).Index = CharNum
+            SetPlayerCharName(index, Account(index).Index, Name)
             SavePlayer(index)
             Exit Sub
         End If

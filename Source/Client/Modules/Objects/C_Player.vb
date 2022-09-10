@@ -16,8 +16,11 @@ Module C_Player
     End Sub
 
     Sub ClearPlayer(i As Integer)
+        Account(i).Access = 0
+        Account(i).Login = ""
+        Account(i).Password = ""
+
         Player(i).Name = ""
-        Player(i).Access = 0
         Player(i).Attacking = 0
         Player(i).AttackTimer = 0
         Player(i).Job = 0
@@ -376,7 +379,7 @@ Module C_Player
         End If
 
         ' Check to see if a npc is already on that tile
-        For i = 1 To MAX_MAP_NPCS
+        For i = 0 To MAX_MAP_NPCS
             If MapNpc(i).Num > 0 AndAlso MapNpc(i).X = x AndAlso MapNpc(i).Y = y Then
                 CheckDirection = True
                 Exit Function

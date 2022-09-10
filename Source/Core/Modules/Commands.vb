@@ -1,7 +1,29 @@
 ﻿Public Module Commands
     Public Function GetPlayerLogin(index As Integer) As String
-        GetPlayerLogin = Trim$(Player(index).Login)
+        GetPlayerLogin = Trim$(Account(index).Login)
     End Function
+
+    Public Sub SetPlayerLogin(index As Integer, login As String)
+        Account(index).Login = login.Trim
+    End Sub
+
+    Public Function GetPlayerPassword(index As Integer) As String
+        GetPlayerPassword = Trim$(Account(index).Password)
+    End Function
+
+    Public Sub SetPlayerPassword(index As Integer, password As String)
+        Account(index).Password = password.Trim
+    End Sub
+
+    Public Function GetCharName(index As Integer, charNum As Integer) As String
+        If charNum = 0 Then charNum = 1
+        GetCharName = Account(index).Character(charNum).Trim 
+    End Function
+
+    Public sub SetPlayerCharName(index As String, charNum As Integer, name As string)
+        Account(index).Character(charNum) = name.Trim
+        Player(index).Name = name.Trim
+    End sub
 
     Public Function GetPlayerMaxVital(index As Integer, Vital As VitalType) As Integer
         Select Case Vital
@@ -32,7 +54,7 @@
     End Function
 
     Public Function GetPlayerAccess(index As Integer) As Integer
-        GetPlayerAccess = Player(index).Access
+        GetPlayerAccess = Account(index).Access
     End Function
 
     Public Function GetPlayerX(index As Integer) As Integer
@@ -175,7 +197,7 @@
     End Function
 
     Public Sub SetPlayerAccess(index As Integer, access As Integer)
-        Player(index).Access = access
+        Account(index).Access = access
     End Sub
 
     Public Sub SetPlayerPk(index As Integer, pk As Integer)

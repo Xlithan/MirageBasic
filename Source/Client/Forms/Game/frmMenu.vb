@@ -127,9 +127,11 @@ Friend Class FrmMenu
 
             If rdoMale.Checked = True Then
                 If NewCharSprite > UBound(Job(NewCharJob).MaleSprite) Then Exit sub
+                If NewCharSprite < 1 Then Exit Sub
                 filename = Paths.Graphics & "characters\" & Job(NewCharJob).MaleSprite(NewCharSprite) & GfxExt
             Else
                 If NewCharSprite > Ubound(Job(NewCharJob).FemaleSprite) Then Exit Sub
+                If NewCharSprite < 1 Then Exit Sub
                 filename = Paths.Graphics & "characters\" & Job(NewCharJob).FemaleSprite(NewCharSprite) & GfxExt
             End If
 
@@ -286,7 +288,7 @@ Friend Class FrmMenu
                     lblScrollingCredits.Top = 177
                 End If
                 Application.DoEvents()
-                Threading.Thread.Sleep(1)
+                Threading.Thread.Yield()
             Loop
         End If
     End Sub
@@ -376,9 +378,9 @@ Friend Class FrmMenu
     Private Sub LblPrevChar_Click(sender As Object, e As EventArgs) Handles lblPrevChar.Click
         NewCharSprite = NewCharSprite - 1
         If rdoMale.Checked = True Then
-            If NewCharSprite = 0 Then NewCharSprite = Job(NewCharJob).MaleSprite.Length
+            If NewCharSprite <= 0 Then NewCharSprite = Job(NewCharJob).MaleSprite.Length
         ElseIf rdoFemale.Checked = True Then
-            If NewCharSprite = 0 Then NewCharSprite = Job(NewCharJob).FemaleSprite.Length
+            If NewCharSprite <= 0 Then NewCharSprite = Job(NewCharJob).FemaleSprite.Length
         End If
         DrawCharacter()
     End Sub

@@ -8,9 +8,15 @@ Module S_Console
     Sub Main()
         threadConsole = New Thread(New ThreadStart(AddressOf ConsoleThread))
         threadConsole.Start()
+       
+        AddHandler AppDomain.CurrentDomain.ProcessExit, AddressOf ProcessExitHandler
 
         ' Spin up the server on the main thread
         InitServer()
+    End Sub
+
+    Private Sub ProcessExitHandler(ByVal sender As Object, ByVal e As EventArgs)
+        UpdateSavePlayers()
     End Sub
 
     Private Sub ConsoleThread()
