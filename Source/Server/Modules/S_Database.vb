@@ -1099,8 +1099,6 @@ Module modDatabase
 #Region "Bank"
 
     Friend Sub LoadBank(index As Integer)
-        If GetPlayerLogin(index) = "" Then Exit Sub
-        
         Dim filename As String = Paths.Database & "Accounts\" & GetPlayerLogin(index) & "_Bank.bin"
 
         ClearBank(index)
