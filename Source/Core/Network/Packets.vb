@@ -43,7 +43,7 @@
         CUnequip
         CRequestPlayerData
         CRequestItem
-        CRequestNPCS
+        CRequestNPC
         CRequestResource
         CSpawnItem
         CTrainStat

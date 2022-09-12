@@ -76,9 +76,9 @@ Module C_Parties
         If partyindex < 0 OrElse partyindex > MAX_PARTY_MEMBERS Then Exit Sub
 
         ' set vitals
-        Player(playerNum).Vital(VitalType.HP) = buffer.ReadInt32
-        Player(playerNum).Vital(VitalType.MP) = buffer.ReadInt32
-        Player(playerNum).Vital(VitalType.SP) = buffer.ReadInt32
+        For i = 0 To VitalType.Count - 1
+            Player(playerNum).Vital(i) = buffer.ReadInt32
+        Next
 
         buffer.Dispose()
     End Sub

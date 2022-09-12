@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Net.Mime.MediaTypeNames
+Imports System.Reflection.PortableExecutable
 Imports Asfw
 Imports Asfw.IO
 Imports MirageBasic.Core
@@ -53,7 +54,7 @@ Module S_NetworkReceive
         Socket.PacketId(ClientPackets.CUnequip) = AddressOf Packet_Unequip
         Socket.PacketId(ClientPackets.CRequestPlayerData) = AddressOf Packet_RequestPlayerData
         Socket.PacketId(ClientPackets.CRequestItem) = AddressOf Packet_RequestItem
-        Socket.PacketId(ClientPackets.CRequestNPCS) = AddressOf Packet_RequestNpcs
+        Socket.PacketId(ClientPackets.CRequestNPC) = AddressOf Packet_RequestNpc
         Socket.PacketId(ClientPackets.CRequestResource) = AddressOf Packet_RequestResource
         Socket.PacketId(ClientPackets.CSpawnItem) = AddressOf Packet_SpawnItem
         Socket.PacketId(ClientPackets.CTrainStat) = AddressOf Packet_TrainStat
@@ -175,12 +176,12 @@ Module S_NetworkReceive
 
             ' Prevent hacking
             If username.Trim.Length < MIN_STRING_LENGTH OrElse password.Trim.Length < MIN_STRING_LENGTH Then
-                AlertMsg(index, "Your username and password must be at least three characters in length")
+                AlertMsg(index, "Your username and password must be at least " & MIN_STRING_LENGTH & " characters in length")
                 Exit Sub
             End If
 
             If username.Trim.Length > MAX_STRING_LENGTH OrElse password.Trim.Length > MAX_STRING_LENGTH Then
-                AlertMsg(index, "Your name and password must be 21 characters or less!")
+                AlertMsg(index, "Your name and password must be " & MAX_STRING_LENGTH & " characters or less!")
             End If
 
             ' Prevent hacking
@@ -188,7 +189,7 @@ Module S_NetworkReceive
                 n = Microsoft.VisualBasic.Strings.AscW(Microsoft.VisualBasic.Strings.Mid$(username, i, 1))
 
                 If Not IsNameLegal(n) Then
-                    AlertMsg(index, "Invalid username, only letters, numbers, spaces, and _ allowed in usernames.")
+                    AlertMsg(index, "Invalid username, only letters, numbers, and spaces allowed in usernames.")
                     Exit Sub
                 End If
             Next
@@ -208,7 +209,7 @@ Module S_NetworkReceive
 
             IP = Microsoft.VisualBasic.Strings.Mid$(IP, 1, i)
             If IsBanned(IP) Then
-                AlertMsg(index, "You are Banned!")
+                AlertMsg(index, "You are banned, have a nice day!")
             End If
 
             ' Check to see if account already exists
@@ -217,9 +218,10 @@ Module S_NetworkReceive
 
                 Console.WriteLine("Account " & username & " has been created.")
                 Addlog("Account " & username & " has been created.", PLAYER_LOG)
+                Call SetPlayerLogin(index, username)
 
                 ' Load the player
-                LoadPlayer(index, username)
+                LoadPlayer(index)
 
                 ' Check if character data has been created
                 If Player(index).Name.Trim.Length > 0 Then
@@ -259,7 +261,7 @@ Module S_NetworkReceive
 
         For i = 0 To GetPlayersOnline()
             If IsPlaying(i) Then
-                If Player(i).Login.Trim = Name.Trim Then
+                If GetPlayerLogin(i) = Name.Trim Then
                     AlertMsg(i, "Your account has been removed by an admin!")
                     ClearPlayer(i)
                 End If
@@ -268,8 +270,8 @@ Module S_NetworkReceive
     End Sub
 
     Private Sub Packet_Login(index As Integer, ByRef data() As Byte)
-        Dim Name As String, IP As String
-        Dim Password As String, i As Integer
+        Dim name As String, IP As String
+        Dim password As String, i As Integer
         Dim buffer As New ByteStream(data)
 
         AddDebug("Recieved CMSG: CLogin")
@@ -291,12 +293,12 @@ Module S_NetworkReceive
 
                 IP = Mid$(IP, 1, i)
                 If IsBanned(IP) Then
-                    AlertMsg(index, "You are Banned!")
+                    AlertMsg(index, "You are banned, have a nice day!")
                 End If
 
                 ' Get the data
-                Name = EKeyPair.DecryptString(buffer.ReadString())
-                Password = EKeyPair.DecryptString(buffer.ReadString())
+                name = EKeyPair.DecryptString(buffer.ReadString())
+                password = EKeyPair.DecryptString(buffer.ReadString())
 
                 ' Check versions
                 If EKeyPair.DecryptString(buffer.ReadString) <> Settings.Version Then
@@ -304,34 +306,34 @@ Module S_NetworkReceive
                     Exit Sub
                 End If
 
-                If Name.Trim.Length < MIN_STRING_LENGTH OrElse Password.Trim.Length < MIN_STRING_LENGTH Then
+                If name.Trim.Length < MIN_STRING_LENGTH OrElse password.Trim.Length < MIN_STRING_LENGTH Then
                     AlertMsg(index, "Your name and password must be at least three characters in length")
                     Exit Sub
                 End If
 
-                If Name.Trim.Length > MAX_STRING_LENGTH OrElse Password.Trim.Length > MAX_STRING_LENGTH Then
+                If name.Trim.Length > MAX_STRING_LENGTH OrElse password.Trim.Length > MAX_STRING_LENGTH Then
                     AlertMsg(index, "Your name and password must be 21 characters or less!")
                 End If
 
-                If Not AccountExist(Name) Then
+                If Not AccountExist(name) Then
                     AlertMsg(index, "That account name does not exist.")
                     Exit Sub
                 End If
 
-                If Not PasswordOK(Name, Password) Then
+                If Not PasswordOK(name, password) Then
                     AlertMsg(index, "Incorrect password.")
                     Exit Sub
                 End If
 
-                If IsMultiAccounts(index, Name) Then
+                If IsMultiAccounts(index, name) Then
                     AlertMsg(index, "Multiple account logins is not authorized.")
                     Exit Sub
                 End If
 
                 ' Load the player
-                LoadPlayer(index, Name)
-                ClearBank(index)
-                LoadBank(index, Name)
+                SetPlayerLogin(index, name)
+                LoadPlayer(index)
+                LoadBank(index)
 
                 ' Show the player up on the socket status
                 Addlog(GetPlayerLogin(index) & " has logged in from " & Socket.ClientIp(index) & ".", PLAYER_LOG)
@@ -362,8 +364,7 @@ Module S_NetworkReceive
                 If Len(Trim$(Player(index).Name)) > 0 Then
                     ' we have a char!
                     HandleUseChar(index)
-                    ClearBank(index)
-                    LoadBank(index, Trim$(Player(index).Login))
+                    LoadBank(index)
                 Else
                     SendNewCharJob(index)
                 End If
@@ -386,26 +387,34 @@ Module S_NetworkReceive
 
         If Not IsPlaying(index) Then
             slot = buffer.ReadInt32
+            
+            If slot < 1 Or slot > MAX_CHARACTERS Then slot = 1
+
+            If Account(index).Character(slot) <> "" Then
+                AlertMsg(index, "Incorrect character slot.")
+                Exit Sub
+            End If
+
             Name = buffer.ReadString
             Sex = buffer.ReadInt32
-            Job = buffer.ReadInt32 + 1
+            Job = buffer.ReadInt32
             Sprite = buffer.ReadInt32
 
             ' Prevent hacking
             If Len(Name.Trim) < MIN_STRING_LENGTH Then
-                AlertMsg(index, "Character name must be at least three characters in length.")
+                AlertMsg(index, "Character name must be at least " & MIN_STRING_LENGTH & " characters in length.")
                 Exit Sub
             End If
 
             If Name.Trim.Length > MAX_STRING_LENGTH Then
-                AlertMsg(index, "Your name and password must be 21 characters or less!")
+                AlertMsg(index, "Your name and password must be " & MAX_STRING_LENGTH & " characters or less!")
             End If
 
             For i = 1 To Len(Name)
                 n = AscW(Mid$(Name, i, 1))
 
                 If Not IsNameLegal(n) Then
-                    AlertMsg(index, "Invalid name, only letters, numbers, spaces, and _ allowed in names.")
+                    AlertMsg(index, "Invalid name, only letters, numbers, and spaces allowed in names.")
                     Exit Sub
                 End If
 
@@ -653,7 +662,7 @@ Module S_NetworkReceive
         Next
 
         ' Try to attack a npc
-        For i = 1 To MAX_MAP_NPCS
+        For i = 0 To MAX_MAP_NPCS
             TryPlayerAttackNpc(index, i)
         Next
 
@@ -697,7 +706,7 @@ Module S_NetworkReceive
         i = FindPlayer(name)
 
         If i > 0 Then
-            PlayerMsg(index, "Account:  " & Trim$(Player(i).Login) & ", Name: " & GetPlayerName(i), ColorType.Yellow)
+            PlayerMsg(index, "Account:  " & GetPlayerLogin(i) & ", Name: " & GetPlayerName(i), ColorType.Yellow)
 
             If GetPlayerAccess(index) > AdminType.Monitor Then
                 PlayerMsg(index, " Stats for " & GetPlayerName(i) & " ", ColorType.Yellow)
@@ -899,7 +908,7 @@ Module S_NetworkReceive
 
         ReDim Map(mapNum).Tile(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
-        For x = 1 To MAX_MAP_NPCS
+        For x = 0 To MAX_MAP_NPCS
             ClearMapNpc(x, mapNum)
             Map(mapNum).Npc(x) = buffer.ReadInt32
         Next
@@ -1127,7 +1136,7 @@ Module S_NetworkReceive
         SpawnMapItems(GetPlayerMap(index))
 
         ' Respawn NPCS
-        For i = 1 To MAX_MAP_NPCS
+        For i = 0 To MAX_MAP_NPCS
             SpawnNpc(i, GetPlayerMap(index))
         Next
 
@@ -1245,6 +1254,8 @@ Module S_NetworkReceive
             PlayerMsg(index, "The game editor is locked and being used by " + user + ".", ColorType.BrightRed)
             Exit Sub
         End If
+
+        SendNpcs(index)
 
         TempPlayer(index).Editor = EditorType.Map
 
@@ -1549,7 +1560,7 @@ Module S_NetworkReceive
         Next
 
         ' Check for an npc
-        For i = 1 To MAX_MAP_NPCS
+        For i = 0 To MAX_MAP_NPCS
 
             If MapNpc(GetPlayerMap(index)).Npc(i).Num > 0 Then
                 If MapNpc(GetPlayerMap(index)).Npc(i).X = x Then
@@ -1649,8 +1660,8 @@ Module S_NetworkReceive
         SendPlayerData(index)
     End Sub
 
-    Sub Packet_RequestNpcs(index As Integer, ByRef data() As Byte)
-        AddDebug("Recieved CMSG: CRequestNPCS")
+    Sub Packet_RequestNPC(index As Integer, ByRef data() As Byte)
+        AddDebug("Recieved CMSG: CRequestNPC")
 
         Dim Buffer As New ByteStream(data), n as integer
 
@@ -2474,7 +2485,7 @@ Module S_NetworkReceive
 
         ReDim Map(mapNum).Tile(Map(mapNum).MaxX, Map(mapNum).MaxY)
 
-        For x = 1 To MAX_MAP_NPCS
+        For x = 0 To MAX_MAP_NPCS
             ClearMapNpc(x, mapNum)
             Map(mapNum).Npc(x) = buffer.ReadInt32
         Next

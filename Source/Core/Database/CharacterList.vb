@@ -8,6 +8,14 @@ Namespace Database
             names = New List(Of String)()
         End Sub
 
+        Public Function IsEmpty As Boolean
+            If names.Count = 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        End Function
+
         Function Find(Name As String) As Boolean
             Return names.Contains(Trim$(LCase(Name)))
         End Function
