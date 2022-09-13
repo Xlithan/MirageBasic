@@ -31,9 +31,6 @@ Module S_Npc
         Dim i = 0
         Dim spawned As Boolean
 
-        ' Check for subscript out of range
-        If mapNpcNum <= 0 OrElse mapNpcNum > MAX_MAP_NPCS OrElse mapNum <= 0 OrElse mapNum > MAX_CACHED_MAPS Then Exit Sub
-
         npcNum = Map(mapNum).Npc(mapNpcNum)
 
         If npcNum > 0 Then

@@ -198,7 +198,7 @@ Module modDatabase
     Sub SaveMap(mapNum As Integer)
         Dim filename As String
         Dim x As Integer, y As Integer, l As Integer
-        Dim writer As New ByteStream(Map.Length)
+        Dim writer As New ByteStream(100)
 
         filename = Paths.Map(mapNum)
 
@@ -248,7 +248,7 @@ Module modDatabase
             Next
         Next
 
-        For x = 1 To MAX_MAP_NPCS
+        For x = 0 To MAX_MAP_NPCS
             writer.WriteInt32(Map(mapNum).Npc(x))
         Next
 
@@ -575,7 +575,7 @@ Module modDatabase
             Next
         Next
 
-        For x = 1 To MAX_MAP_NPCS
+        For x = 0 To MAX_MAP_NPCS
             Map(mapNum).Npc(x) = reader.ReadInt32()
             MapNpc(mapNum).Npc(x).Num = Map(mapNum).Npc(x)
         Next
@@ -1051,7 +1051,7 @@ Module modDatabase
     Sub LoadPlayer(index As Integer)
         Dim filename As String = Paths.Database & "Accounts\" & GetPlayerLogin(index) & ".bin"
         ClearPlayer(index)
-        Dim reader As New ByteStream(Account.Length)
+        Dim reader As New ByteStream(100)
         ByteFile.Load(filename, reader)
 
         SetPlayerLogin(index, reader.ReadString())
