@@ -379,7 +379,6 @@ Module S_NetworkSend
 
         AddDebug("Sent SMSG: SUpdateSkill To All")
 
-        'projectiles
         buffer.WriteInt32(Skill(skillnum).IsProjectile)
         buffer.WriteInt32(Skill(skillnum).Projectile)
 
@@ -395,12 +394,11 @@ Module S_NetworkSend
 
         buffer.WriteInt32(ServerPackets.SPlayerStats)
         buffer.WriteInt32(index)
-        buffer.WriteInt32(GetPlayerStat(index, StatType.Strength))
-        buffer.WriteInt32(GetPlayerStat(index, StatType.Endurance))
-        buffer.WriteInt32(GetPlayerStat(index, StatType.Vitality))
-        buffer.WriteInt32(GetPlayerStat(index, StatType.Luck))
-        buffer.WriteInt32(GetPlayerStat(index, StatType.Intelligence))
-        buffer.WriteInt32(GetPlayerStat(index, StatType.Spirit))
+
+        For i = 0 To StatType.Count - 1
+            buffer.WriteInt32(GetPlayerStat(index, i))
+        Next
+
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
 
         AddDebug("Sent SMSG: SPlayerStats")
