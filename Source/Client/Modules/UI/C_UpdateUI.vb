@@ -315,10 +315,6 @@ Module C_UpdateUI
             DrawChar = True
         End If
 
-        If Lblnextcharleft <> FrmMenu.lblNextChar.Left Then
-            FrmMenu.lblNextChar.Left = Lblnextcharleft
-        End If
-
         If Not cmbJob Is Nothing Then
             FrmMenu.cmbJob.Items.Clear()
 

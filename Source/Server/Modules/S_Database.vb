@@ -43,13 +43,8 @@ Module modDatabase
         ReDim Job(jobNum).Stat(StatType.Count - 1)
         ReDim Job(jobNum).StartItem(5)
         ReDim Job(jobNum).StartValue(5)
-        ReDim Job(jobNum).MaleSprite(5)
-        ReDim Job(jobNum).FemaleSprite(5)
-
-        For i = 0 To 5
-            Job(jobNum).MaleSprite(i) = 1
-            Job(jobNum).FemaleSprite(i) = 1
-        Next
+        Job(jobNum).MaleSprite = 1
+        Job(jobNum).FemaleSprite = 1
     End Sub
 
     Sub LoadJob(jobNum As Integer)
@@ -62,13 +57,14 @@ Module modDatabase
         Job(jobNum).Name = reader.ReadString()
         Job(jobNum).Desc = reader.ReadString()
 
+        Job(jobNum).MaleSprite = reader.ReadInt32
+        Job(jobNum).FemaleSprite = reader.ReadInt32
+
         For i = 0 To StatType.Count - 1
             Job(jobNum).Stat(i) = reader.ReadByte
         Next
 
         For i = 0 To 5
-            Job(jobNum).MaleSprite(i) = reader.ReadInt32
-            Job(jobNum).FemaleSprite(i) = reader.ReadInt32
             Job(jobNum).StartItem(i) = reader.ReadInt32
             Job(jobNum).StartValue(i) = reader.ReadInt32
         Next
@@ -103,13 +99,14 @@ Module modDatabase
         writer.WriteString(Job(jobNum).Name)
         writer.WriteString(Job(jobNum).Desc)
 
+        writer.WriteInt32(Job(jobNum).MaleSprite)
+        writer.WriteInt32(Job(jobNum).FemaleSprite)
+
         For x = 0 To StatType.Count - 1
             writer.WriteByte(Job(jobNum).Stat(x))
         Next
 
         For x = 0 To 5
-            writer.WriteInt32(Job(jobNum).MaleSprite(x))
-            writer.WriteInt32(Job(jobNum).FemaleSprite(x))
             writer.WriteInt32(Job(jobNum).StartItem(x))
             writer.WriteInt32(Job(jobNum).StartValue(x))
         Next
@@ -198,7 +195,7 @@ Module modDatabase
     Sub SaveMap(mapNum As Integer)
         Dim filename As String
         Dim x As Integer, y As Integer, l As Integer
-        Dim writer As New ByteStream(Map.Length)
+        Dim writer As New ByteStream(100)
 
         filename = Paths.Map(mapNum)
 
@@ -248,7 +245,7 @@ Module modDatabase
             Next
         Next
 
-        For x = 1 To MAX_MAP_NPCS
+        For x = 0 To MAX_MAP_NPCS
             writer.WriteInt32(Map(mapNum).Npc(x))
         Next
 
@@ -575,7 +572,7 @@ Module modDatabase
             Next
         Next
 
-        For x = 1 To MAX_MAP_NPCS
+        For x = 0 To MAX_MAP_NPCS
             Map(mapNum).Npc(x) = reader.ReadInt32()
             MapNpc(mapNum).Npc(x).Num = Map(mapNum).Npc(x)
         Next
@@ -1051,7 +1048,7 @@ Module modDatabase
     Sub LoadPlayer(index As Integer)
         Dim filename As String = Paths.Database & "Accounts\" & GetPlayerLogin(index) & ".bin"
         ClearPlayer(index)
-        Dim reader As New ByteStream(Account.Length)
+        Dim reader As New ByteStream(100)
         ByteFile.Load(filename, reader)
 
         SetPlayerLogin(index, reader.ReadString())
@@ -1553,19 +1550,14 @@ Module modDatabase
         Return Account(index).Character(charNum).Trim.Length > 0
     End Function
 
-    Sub AddChar(index As Integer, CharNum As Integer, Name As String, Sex As Byte, jobNum As Byte, Sprite As Integer)
+    Sub AddChar(index As Integer, charNum As Integer, name As String, Sex As Byte, jobNum As Byte, sprite As Integer)
         Dim n As Integer, i As Integer
 
         If Len(Trim$(Player(index).Name)) = 0 Then
             Player(index).Name = Name
             Player(index).Sex = Sex
             Player(index).Job = jobNum
-
-            If Player(index).Sex = SexType.Male Then
-                Player(index).Sprite = Job(jobNum).MaleSprite(Sprite)
-            Else
-                Player(index).Sprite = Job(jobNum).FemaleSprite(Sprite)
-            End If
+            Player(index).Sprite = sprite
 
             Player(index).Level = 1
 
@@ -1603,7 +1595,6 @@ Module modDatabase
             Next
 
             'set skills
-            ReDim Player(index).GatherSkills(ResourceSkills.Count - 1)
             For i = 0 To ResourceSkills.Count - 1
                 Player(index).GatherSkills(i).SkillLevel = 1
                 Player(index).GatherSkills(i).SkillCurExp = 0
@@ -1614,13 +1605,11 @@ Module modDatabase
                 Call SetPlayerAccess(index, AdminType.Creator)
             End If
 
-            If Player(index).Sprite = 0 Then Player(index).Sprite = 1
-
             ' Add name to character list.
-            CharactersList.Add(Name).Save()
+            CharactersList.Add(name).Save()
 
             Account(index).Index = CharNum
-            SetPlayerCharName(index, Account(index).Index, Name)
+            SetPlayerCharName(index, Account(index).Index, name)
             SavePlayer(index)
             Exit Sub
         End If
@@ -1774,34 +1763,12 @@ Module modDatabase
         buffer.WriteString((Job(jobnum).Name.Trim))
         buffer.WriteString((Job(jobNum).Desc.Trim))
 
-        ' set sprite array size
-        n = UBound(Job(jobNum).MaleSprite)
+        buffer.WriteInt32(Job(jobNum).MaleSprite)
+        buffer.WriteInt32(Job(jobNum).FemaleSprite)
 
-        ' send array size
-        buffer.WriteInt32(n)
-
-        ' loop around sending each sprite
-        For q = 0 To n
-            buffer.WriteInt32(Job(jobNum).MaleSprite(q))
+        For i = 0 To StatType.Count - 1
+            buffer.WriteInt32(Job(jobNum).Stat(i))
         Next
-
-        ' set sprite array size
-        n = UBound(Job(jobNum).FemaleSprite)
-
-        ' send array size
-        buffer.WriteInt32(n)
-
-        ' loop around sending each sprite
-        For q = 0 To n
-            buffer.WriteInt32(Job(jobNum).FemaleSprite(q))
-        Next
-
-        buffer.WriteInt32(Job(jobNum).Stat(StatType.Strength))
-        buffer.WriteInt32(Job(jobNum).Stat(StatType.Endurance))
-        buffer.WriteInt32(Job(jobNum).Stat(StatType.Vitality))
-        buffer.WriteInt32(Job(jobNum).Stat(StatType.Intelligence))
-        buffer.WriteInt32(Job(jobNum).Stat(StatType.Luck))
-        buffer.WriteInt32(Job(jobNum).Stat(StatType.Spirit))
 
         For q = 0 To 5
             buffer.WriteInt32(Job(jobNum).StartItem(q))

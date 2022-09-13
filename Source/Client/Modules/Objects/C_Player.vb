@@ -90,6 +90,7 @@ Module C_Player
         ReDim Player(i).PlayerQuest(MAX_QUESTS)
         ReDim Player(i).Hotbar(MaxHotbar)
         ReDim Player(i).GatherSkills(ResourceSkills.Count - 1)
+        ReDim Player(i).GatherSkills(ResourceSkills.Count - 1)
 
         'pets
         Player(i).Pet.Num = 0
