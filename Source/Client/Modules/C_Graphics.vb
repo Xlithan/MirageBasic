@@ -2224,7 +2224,7 @@ Module C_Graphics
         Dim curHp As Integer, curMp As Integer, curExp As Integer
 
         'HP Bar
-        curHp = (GetPlayerVital(Myindex, 1)/GetPlayerMaxVital(Myindex, 1))*100
+        curHp = (GetPlayerVital(Myindex, VitalType.HP)/GetPlayerMaxVital(Myindex, VitalType.HP))*100
 
         With rec
             .Y = 0
@@ -2239,12 +2239,12 @@ Module C_Graphics
 
         'then draw the text onto that
         DrawText(HudWindowX + HudhpBarX + 65, HudWindowY + HudhpBarY + 4,
-                 GetPlayerVital(Myindex, 1) & "/" & GetPlayerMaxVital(Myindex, 1), Color.White, Color.Black, GameWindow)
+                 LblHpText, Color.White, Color.Black, GameWindow)
 
         '==============================
 
         'MP Bar
-        curMp = (GetPlayerVital(Myindex, 2)/GetPlayerMaxVital(Myindex, 2))*100
+        curMp = (GetPlayerVital(Myindex, VitalType.MP)/GetPlayerMaxVital(Myindex, VitalType.MP))*100
 
         'then render full ontop of it
         With rec
@@ -2259,7 +2259,7 @@ Module C_Graphics
 
         'draw text onto that
         DrawText(HudWindowX + HudmpBarX + 45, HudWindowY + HudmpBarY + 4,
-                 GetPlayerVital(Myindex, 2) & "/" & GetPlayerMaxVital(Myindex, 2), Color.White, Color.Black, GameWindow)
+                 LblManaText, Color.White, Color.Black, GameWindow)
 
         '====================================================
         'EXP Bar

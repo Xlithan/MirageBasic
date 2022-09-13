@@ -405,12 +405,12 @@ Module S_NetworkReceive
                 Exit Sub
             End If
 
-            If Name.Trim.Length > MAX_STRING_LENGTH Then
+            If name.Trim.Length > MAX_STRING_LENGTH Then
                 AlertMsg(index, "Your name and password must be " & MAX_STRING_LENGTH & " characters or less!")
             End If
 
             For i = 1 To Len(name)
-                n = AscW(Mid$(Name, i, 1))
+                n = AscW(Mid$(name, i, 1))
 
                 If Not IsNameLegal(n) Then
                     AlertMsg(index, "Invalid name, only letters, numbers, and spaces allowed in names.")

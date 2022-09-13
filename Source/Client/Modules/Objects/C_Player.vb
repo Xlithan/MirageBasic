@@ -883,11 +883,9 @@ Module C_Player
 
         SetPlayerVital(Myindex, VitalType.HP, buffer.ReadInt32)
 
-        If GetPlayerMaxVital(Myindex, VitalType.HP) > 0 Then
-            LblHpText = GetPlayerVital(Myindex, VitalType.HP) & "/" & GetPlayerMaxVital(Myindex, VitalType.HP)
-            ' hp bar
-            PicHpWidth = Int(((GetPlayerVital(Myindex, VitalType.HP) / 169) / (GetPlayerMaxVital(Myindex, VitalType.HP) / 169)) * 169)
-        End If
+        LblHpText = GetPlayerVital(Myindex, VitalType.HP) & "/" &  GetPlayerMaxVital(Myindex, VitalType.HP)
+        ' hp bar
+        PicHpWidth = Int(((GetPlayerVital(Myindex, VitalType.HP) / 169) / ( GetPlayerMaxVital(Myindex, VitalType.HP)/ 169)) * 169)
 
         buffer.Dispose()
     End Sub
@@ -897,11 +895,9 @@ Module C_Player
 
         SetPlayerVital(Myindex, VitalType.MP, buffer.ReadInt32)
 
-        If GetPlayerMaxVital(Myindex, VitalType.MP) > 0 Then
-            LblManaText = GetPlayerVital(Myindex, VitalType.MP) & "/" & GetPlayerMaxVital(Myindex, VitalType.MP)
-            ' mp bar
-            PicManaWidth = Int(((GetPlayerVital(Myindex, VitalType.MP) / 169) / (GetPlayerMaxVital(Myindex, VitalType.MP) / 169)) * 169)
-        End If
+        LblManaText = GetPlayerVital(Myindex, VitalType.MP) & "/" & GetPlayerMaxVital(Myindex, VitalType.MP)
+        ' mp bar
+        PicManaWidth = Int(((GetPlayerVital(Myindex, VitalType.MP) / 169) / ( GetPlayerMaxVital(Myindex, VitalType.MP)/ 169)) * 169)
 
         buffer.Dispose()
     End Sub

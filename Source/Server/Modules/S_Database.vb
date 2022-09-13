@@ -1611,7 +1611,6 @@ Module modDatabase
             Account(index).Index = CharNum
             SetPlayerCharName(index, Account(index).Index, name)
             SavePlayer(index)
-            Exit Sub
         End If
 
     End Sub

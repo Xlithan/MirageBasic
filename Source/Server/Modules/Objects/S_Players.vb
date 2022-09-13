@@ -2472,7 +2472,7 @@ Module S_Players
 
         ' Restore vitals
         For i = 0 To VitalType.Count - 1
-            SetPlayerVital(index, VitalType.HP, GetPlayerMaxVital(index, i))
+            SetPlayerVital(index, i, GetPlayerMaxVital(index, i))
         Next
         SendVitals(index)
 

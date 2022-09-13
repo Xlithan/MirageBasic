@@ -79,10 +79,8 @@ Module modLoop
             End If
 
             If tick > tmr500 Then
-
                 ' Move the timer up 500ms.
                 tmr500 = GetTimeMs() + 500
-
             End If
 
             If GetTimeMs() > tmr300 Then
@@ -109,7 +107,7 @@ Module modLoop
                 lastUpdateSavePlayers = GetTimeMs() + 60000
             End If
 
-            Thread.Yield()
+            Thread.Sleep(1)
         Loop
     End Sub
 
