@@ -236,8 +236,8 @@ Public Module Types
         Dim Name As String
         Dim Desc As String
         Dim Stat() As Integer
-        Dim MaleSprite() As Integer
-        Dim FemaleSprite() As Integer
+        Dim MaleSprite As Integer
+        Dim FemaleSprite As Integer
         Dim StartItem() As Integer
         Dim StartValue() As Integer
         Dim StartMap As Integer

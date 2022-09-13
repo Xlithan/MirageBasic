@@ -266,38 +266,13 @@ Module C_NetworkReceive
                 .Name = Trim(buffer.ReadString)
                 .Desc = Trim(buffer.ReadString)
 
-                ' get array size
-                z = buffer.ReadInt32
-
-                ' redim array
-                ReDim .MaleSprite(z)
-
-                ' loop-receive data
-                For x = 0 To z
-                    .MaleSprite(x) = buffer.ReadInt32
+                .MaleSprite = buffer.ReadInt32
+                .FemaleSprite = buffer.ReadInt32
+                
+                For q = 0 To StatType.Count - 1
+                    .Stat(q) = buffer.ReadInt32
                 Next
 
-                ' get array size
-                z = buffer.ReadInt32
-
-                ' redim array
-                ReDim .FemaleSprite(z)
-                ' loop-receive data
-                For x = 0 To z
-                    .FemaleSprite(x) = buffer.ReadInt32
-                Next
-
-                ReDim .Stat(StatType.Count - 1)
-
-                .Stat(StatType.Strength) = buffer.ReadInt32
-                .Stat(StatType.Endurance) = buffer.ReadInt32
-                .Stat(StatType.Vitality) = buffer.ReadInt32
-                .Stat(StatType.Intelligence) = buffer.ReadInt32
-                .Stat(StatType.Luck) = buffer.ReadInt32
-                .Stat(StatType.Spirit) = buffer.ReadInt32
-
-                ReDim .StartItem(5)
-                ReDim .StartValue(5)
                 For q = 0 To 5
                     .StartItem(q) = buffer.ReadInt32
                     .StartValue(q) = buffer.ReadInt32
@@ -329,8 +304,6 @@ Module C_NetworkReceive
         Next
 
         FrmMenu.DrawCharacter()
-
-        NewCharSprite = 0
     End Sub
 
     Sub Packet_JobData(ByRef data() As Byte)
@@ -342,27 +315,8 @@ Module C_NetworkReceive
                 .Name = Trim(buffer.ReadString)
                 .Desc = Trim(buffer.ReadString)
 
-                ' get array size
-                z = buffer.ReadInt32
-
-                ' redim array
-                ReDim .MaleSprite(z)
-
-                ' loop-receive data
-                For x = 0 To z
-                    .MaleSprite(x) = buffer.ReadInt32
-                Next
-
-                ' get array size
-                z = buffer.ReadInt32
-
-                ' redim array
-                ReDim .FemaleSprite(z)
-
-                ' loop-receive data
-                For x = 0 To z
-                    .FemaleSprite(x) = buffer.ReadInt32
-                Next
+                .MaleSprite = buffer.ReadInt32
+                .FemaleSprite = buffer.ReadInt32
 
                 for x = 0 to StatType.Count - 1
                     .Stat(x) = buffer.ReadInt32()
@@ -875,37 +829,13 @@ Module C_NetworkReceive
                 .Name = Trim(buffer.ReadString)
                 .Desc = Trim$(buffer.ReadString)
 
-                ' get array size
-                z = buffer.ReadInt32
+                .MaleSprite = buffer.ReadInt32
+                .FemaleSprite = buffer.ReadInt32
 
-                ' redim array
-                ReDim .MaleSprite(z)
-
-                ' loop-receive data
-                For X = 0 To z
-                    .MaleSprite(x) = buffer.ReadInt32
+                For q = 0 To StatType.Count - 1
+                    .Stat(q) = buffer.ReadInt32
                 Next
 
-                ' get array size
-                z = buffer.ReadInt32
-
-                ' redim array
-                ReDim .FemaleSprite(z)
-
-                ' loop-receive data
-                For X = 0 To z
-                    .FemaleSprite(x) = buffer.ReadInt32
-                Next
-
-                .Stat(StatType.Strength) = buffer.ReadInt32
-                .Stat(StatType.Endurance) = buffer.ReadInt32
-                .Stat(StatType.Vitality) = buffer.ReadInt32
-                .Stat(StatType.Intelligence) = buffer.ReadInt32
-                .Stat(StatType.Luck) = buffer.ReadInt32
-                .Stat(StatType.Spirit) = buffer.ReadInt32
-
-                ReDim .StartItem(5)
-                ReDim .StartValue(5)
                 For q = 0 To 5
                     .StartItem(q) = buffer.ReadInt32
                     .StartValue(q) = buffer.ReadInt32

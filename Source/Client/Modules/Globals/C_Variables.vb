@@ -162,8 +162,6 @@ Module C_Variables
     Friend BloodIndex As Byte
 
     ' New char
-    Friend NewCharSprite As Integer
-
     Friend NewCharJob As Integer
 
     Friend TempMapData() As Byte

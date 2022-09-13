@@ -374,10 +374,10 @@ Module S_NetworkReceive
     End Sub
 
     Private Sub Packet_AddChar(index As Integer, ByRef data() As Byte)
-        Dim Name As String, slot As Byte
-        Dim Sex As Integer
-        Dim Job As Integer
-        Dim Sprite As Integer
+        Dim name As String, slot As Byte
+        Dim sexNum As Integer
+        Dim jobNum As Integer
+        Dim sprite As integer
         Dim i As Integer
         Dim n As Integer
 
@@ -395,13 +395,12 @@ Module S_NetworkReceive
                 Exit Sub
             End If
 
-            Name = buffer.ReadString
-            Sex = buffer.ReadInt32
-            Job = buffer.ReadInt32
-            Sprite = buffer.ReadInt32
+            name = buffer.ReadString
+            sexNum = buffer.ReadInt32
+            jobNum = buffer.ReadInt32 + 1
 
             ' Prevent hacking
-            If Len(Name.Trim) < MIN_STRING_LENGTH Then
+            If Len(name.Trim) < MIN_STRING_LENGTH Then
                 AlertMsg(index, "Character name must be at least " & MIN_STRING_LENGTH & " characters in length.")
                 Exit Sub
             End If
@@ -410,7 +409,7 @@ Module S_NetworkReceive
                 AlertMsg(index, "Your name and password must be " & MAX_STRING_LENGTH & " characters or less!")
             End If
 
-            For i = 1 To Len(Name)
+            For i = 1 To Len(name)
                 n = AscW(Mid$(Name, i, 1))
 
                 If Not IsNameLegal(n) Then
@@ -420,9 +419,15 @@ Module S_NetworkReceive
 
             Next
 
-            If (Sex < SexType.Male) OrElse (Sex > SexType.Female) Then Exit Sub
+            If (sexNum < SexType.Male) OrElse (sexNum > SexType.Female) Then Exit Sub
 
-            If Job < 0 OrElse Job > MAX_JOBS Then Exit Sub
+            If jobNum < 0 OrElse jobNum > MAX_JOBS Then Exit Sub
+
+            If sexNum =  SexType.Male Then
+                sprite = Job(jobNum).MaleSprite
+            Else
+                sprite = Job(jobNum).FemaleSprite
+            End If
 
             ' Check if char already exists in slot
             If CharExist(index, slot) Then
@@ -431,14 +436,14 @@ Module S_NetworkReceive
             End If
 
             ' Check if name is already in use
-            If CharactersList.Find(Name) Then
+            If CharactersList.Find(name) Then
                 AlertMsg(index, "Sorry, but that name is in use!")
                 Exit Sub
             End If
 
             ' Everything went ok, add the character
-            AddChar(index, slot, Name, Sex, Job, Sprite)
-            Addlog("Character " & Name & " added to " & GetPlayerLogin(index) & "'s account.", PLAYER_LOG)
+            AddChar(index, slot, name, sexNum, jobNum, sprite)
+            Addlog("Character " & name & " added to " & GetPlayerLogin(index) & "'s account.", PLAYER_LOG)
             HandleUseChar(index)
 
             buffer.Dispose()
@@ -2366,24 +2371,8 @@ Module S_NetworkReceive
             ' get array size
             z = buffer.ReadInt32
 
-            ' redim array
-            ReDim .MaleSprite(z)
-
-            ' loop-receive data
-            For X = 0 To z
-                .MaleSprite(x) = buffer.ReadInt32
-            Next
-
-            ' get array size
-            z = buffer.ReadInt32
-
-            ' redim array
-            ReDim .FemaleSprite(z)
-
-            ' loop-receive data
-            For X = 0 To z
-                .FemaleSprite(x) = buffer.ReadInt32
-            Next
+            .MaleSprite = buffer.ReadInt32
+            .FemaleSprite = buffer.ReadInt32
 
             for x = 0 to StatType.Count - 1
                 .Stat(x) = buffer.ReadInt32()

@@ -21,18 +21,6 @@ Friend Class frmEditor_Job
             lstIndex.Items.Add(i & ": " & Trim(Job(i).Name))
         Next
 
-        cmbMaleSprite.Items.Clear()
-
-        For i = 0 To UBound(Job(Editorindex).MaleSprite)
-            cmbMaleSprite.Items.Add(i + 1)
-        Next
-
-        cmbFemaleSprite.Items.Clear()
-
-        For i = 0 To UBound(Job(Editorindex).FemaleSprite)
-            cmbFemaleSprite.Items.Add(i + 1)
-        Next
-
         lstStartItems.Items.Clear()
 
         For i = 0 To MAX_DROP_ITEMS
@@ -69,66 +57,6 @@ Friend Class frmEditor_Job
 #End Region
 
 #Region "Sprites"
-
-    Private Sub BtnAddMaleSprite_Click(sender As Object, e As EventArgs) Handles btnAddMaleSprite.Click
-        Dim tmpamount As Byte
-
-        tmpamount = UBound(Job(Editorindex).MaleSprite)
-
-        ReDim Preserve Job(Editorindex).MaleSprite(tmpamount + 1)
-
-        Job(Editorindex).MaleSprite(tmpamount + 1) = 1
-    End Sub
-
-    Private Sub BtnDeleteMaleSprite_Click(sender As Object, e As EventArgs) Handles btnDeleteMaleSprite.Click
-        Dim tmpamount As Byte
-
-        tmpamount = UBound(Job(Editorindex).MaleSprite)
-
-        ReDim Preserve Job(Editorindex).MaleSprite(tmpamount)
-    End Sub
-
-    Private Sub BtnAddFemaleSprite_Click(sender As Object, e As EventArgs) Handles btnAddFemaleSprite.Click
-        Dim tmpamount As Byte
-
-        tmpamount = UBound(Job(Editorindex).FemaleSprite)
-
-        ReDim Preserve Job(Editorindex).FemaleSprite(tmpamount + 1)
-
-        Job(Editorindex).FemaleSprite(tmpamount) = 1
-    End Sub
-
-    Private Sub BtnDeleteFemaleSprite_Click(sender As Object, e As EventArgs) Handles btnDeleteFemaleSprite.Click
-        Dim tmpamount As Byte
-
-        tmpamount = UBound(Job(Editorindex).FemaleSprite)
-
-        ReDim Preserve Job(Editorindex).FemaleSprite(tmpamount)
-    End Sub
-
-    Private Sub NudMaleSprite_Click(sender As Object, e As EventArgs) Handles nudMaleSprite.Click
-        If cmbMaleSprite.SelectedIndex < 0 Then Exit Sub
-
-        Job(Editorindex).MaleSprite(cmbMaleSprite.SelectedIndex) = nudMaleSprite.Value
-
-        DrawPreview()
-    End Sub
-
-    Private Sub NudFemaleSprite_ValueChanged(sender As Object, e As EventArgs) Handles nudFemaleSprite.Click
-        Job(Editorindex).FemaleSprite(cmbFemaleSprite.SelectedIndex) = nudFemaleSprite.Value
-
-        DrawPreview()
-    End Sub
-
-    Private Sub CmbMaleSprite_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMaleSprite.SelectedIndexChanged
-        nudMaleSprite.Value = Job(Editorindex).MaleSprite(cmbMaleSprite.SelectedIndex)
-        DrawPreview()
-    End Sub
-
-    Private Sub CmbFemaleSprite_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFemaleSprite.SelectedIndexChanged
-        nudFemaleSprite.Value = Job(Editorindex).FemaleSprite(cmbFemaleSprite.SelectedIndex)
-        DrawPreview()
-    End Sub
 
     Sub DrawPreview()
 
@@ -195,15 +123,15 @@ Friend Class frmEditor_Job
 
 #Region "Starting Point"
 
-    Private Sub NumStartMap_ValueChanged(sender As Object, e As EventArgs) Handles nudStartMap.Click
+    Private Sub NumStartMap_Click(sender As Object, e As EventArgs) Handles nudStartMap.Click
         Job(Editorindex).StartMap = nudStartMap.Value
     End Sub
 
-    Private Sub NumStartX_ValueChanged(sender As Object, e As EventArgs) Handles nudStartX.Click
+    Private Sub NumStartX_Click(sender As Object, e As EventArgs) Handles nudStartX.Click
         Job(Editorindex).StartX = nudStartX.Value
     End Sub
 
-    Private Sub NumStartY_ValueChanged(sender As Object, e As EventArgs) Handles nudStartY.Click
+    Private Sub NumStartY_Click(sender As Object, e As EventArgs) Handles nudStartY.Click
         Job(Editorindex).StartY = nudStartY.Value
     End Sub
 
@@ -226,6 +154,16 @@ Friend Class frmEditor_Job
         lstIndex.SelectedIndex = tmpindex
 
         JobEditorInit()
+    End Sub
+
+    Private Sub nudFemaleSprite_Click(sender As Object, e As EventArgs) Handles nudFemaleSprite.Click
+        Job(Editorindex).FemaleSprite = nudFemaleSprite.Value
+        DrawPreview
+    End Sub
+
+    Private Sub nudMaleSprite_Click(sender As Object, e As EventArgs) Handles nudMaleSprite.Click
+        Job(Editorindex).MaleSprite = nudMaleSprite.Value
+        DrawPreview
     End Sub
 
 #End Region

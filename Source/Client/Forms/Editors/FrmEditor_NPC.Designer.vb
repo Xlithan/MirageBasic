@@ -190,7 +190,7 @@ Partial Class frmEditor_NPC
         '
         Me.cmbSpawnPeriod.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
         Me.cmbSpawnPeriod.FormattingEnabled = true
-        Me.cmbSpawnPeriod.Items.AddRange(New Object() {"Day", "Night", "Dawn", "Dusk", "Always"})
+        Me.cmbSpawnPeriod.Items.AddRange(New Object() {"Always", "Day", "Night", "Dawn", "Dusk"})
         Me.cmbSpawnPeriod.Location = New System.Drawing.Point(332, 233)
         Me.cmbSpawnPeriod.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbSpawnPeriod.Name = "cmbSpawnPeriod"

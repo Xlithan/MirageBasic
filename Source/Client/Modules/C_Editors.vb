@@ -403,11 +403,8 @@ Module C_Editors
             .txtName.Text = Job(Editorindex).Name
             .txtDescription.Text = Job(Editorindex).Desc
 
-            .nudMaleSprite.Value = Job(Editorindex).MaleSprite(0)
-            .nudFemaleSprite.Value = Job(Editorindex).FemaleSprite(0)
-
-            .cmbMaleSprite.SelectedIndex = 0
-            .cmbFemaleSprite.SelectedIndex = 0
+            .nudMaleSprite.Value = Job(Editorindex).MaleSprite
+            .nudFemaleSprite.Value = Job(Editorindex).FemaleSprite
 
             .cmbItems.SelectedIndex = 0
 

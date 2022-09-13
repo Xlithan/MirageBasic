@@ -34,15 +34,19 @@ Module S_Npc
         npcNum = Map(mapNum).Npc(mapNpcNum)
 
         If npcNum > 0 Then
-            If Not Npc(npcNum).SpawnTime = Time.Instance.TimeOfDay AndAlso Not Npc(npcNum).SpawnTime = 4 Then Exit Sub
+            If Not Npc(npcNum).SpawnTime = Time.Instance.TimeOfDay And Npc(npcNum).SpawnTime <> 0 Then
+                ClearMapNpc(mapNpcNum, mapNum)
+                SendMapNpcsToMap(mapNum)
+                Exit Sub
+            End If
 
             MapNpc(mapNum).Npc(mapNpcNum).Num = npcNum
             MapNpc(mapNum).Npc(mapNpcNum).Target = 0
             MapNpc(mapNum).Npc(mapNpcNum).TargetType = 0 ' clear
 
-            MapNpc(mapNum).Npc(mapNpcNum).Vital(VitalType.HP) = GetNpcMaxVital(npcNum, VitalType.HP)
-            MapNpc(mapNum).Npc(mapNpcNum).Vital(VitalType.MP) = GetNpcMaxVital(npcNum, VitalType.MP)
-            MapNpc(mapNum).Npc(mapNpcNum).Vital(VitalType.SP) = GetNpcMaxVital(npcNum, VitalType.SP)
+            For i = 0 To VitalType.Count - 1
+                MapNpc(mapNum).Npc(mapNpcNum).Vital(i) = GetNpcMaxVital(npcNum, i)
+            Next
 
             MapNpc(mapNum).Npc(mapNpcNum).Dir = Int(Rnd() * 4)
 

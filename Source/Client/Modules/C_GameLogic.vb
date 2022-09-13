@@ -18,7 +18,6 @@ Module C_GameLogic
         Dim fadetmr As Integer, renderFrame As Boolean, rendertmr As Integer
 
         starttime = GetTickCount()
-        FrmMenu.lblNextChar.Left = Lblnextcharleft
 
         Do
             If GameDestroyed Then End
