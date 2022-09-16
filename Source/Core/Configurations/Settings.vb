@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 Imports System.Xml.Serialization
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Public Class SettingsDef
 

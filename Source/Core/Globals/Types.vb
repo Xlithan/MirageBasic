@@ -1,5 +1,5 @@
 ﻿
-Imports MirageBasic.Core.Database
+Imports Mirage.Basic.Engine.Database
 
 Public Module Types
     ' Common data structure arrays

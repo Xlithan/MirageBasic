@@ -1,7 +1,7 @@
 ﻿Imports System.Drawing
 Imports System.IO
 Imports System.Windows.Forms
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Public Class FrmEditor_Events
     Dim tmpGraphicIndex As Integer

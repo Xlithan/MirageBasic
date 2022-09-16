@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports Asfw
-Imports MirageBasic.Core.Serialization
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine.Serialization
+Imports Mirage.Basic.Engine
 Imports System.Drawing
 
 Friend Module S_Events

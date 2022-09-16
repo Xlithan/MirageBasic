@@ -2,9 +2,10 @@
 
   <PropertyGroup>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <RootNamespace>MirageBasic.Core</RootNamespace>
+    <RootNamespace>$(MSBuildProjectName)</RootNamespace>
     <TargetFramework>net6.0</TargetFramework>
     <Configurations>Release;Debug</Configurations>
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">

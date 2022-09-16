@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports System.Windows.Forms
 Imports SFML.Audio
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Module C_Sound
 

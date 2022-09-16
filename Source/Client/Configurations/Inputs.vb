@@ -3,7 +3,7 @@ Imports System.Diagnostics.Metrics
 Imports System.IO
 Imports System.Runtime.ConstrainedExecution
 Imports System.Xml.Serialization
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Public Class InputsDef
     Public Class Input

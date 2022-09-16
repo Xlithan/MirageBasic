@@ -1,6 +1,6 @@
 ﻿Imports Asfw
 Imports Asfw.IO
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Module S_NetworkSend
 

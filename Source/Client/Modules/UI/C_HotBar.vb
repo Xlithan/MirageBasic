@@ -1,6 +1,6 @@
 ﻿Imports System.Drawing
 Imports Asfw
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Friend Module C_HotBar
     Friend SelHotbarSlot As Integer

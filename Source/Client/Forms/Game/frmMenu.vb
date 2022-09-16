@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 Imports Asfw
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Friend Class FrmMenu
     Inherits Form

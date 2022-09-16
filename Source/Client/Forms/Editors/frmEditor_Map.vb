@@ -2,7 +2,7 @@
 Imports Asfw
 Imports SFML.Graphics
 Imports SFML.Window
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 Imports SFML.System
 
 Public Class frmEditor_Map

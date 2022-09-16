@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports Asfw
 Imports Asfw.IO
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Friend Module S_Resources
 

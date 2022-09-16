@@ -1,6 +1,6 @@
 ﻿Imports System
 Imports System.Threading
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Module S_Console
     Private threadConsole As Thread
