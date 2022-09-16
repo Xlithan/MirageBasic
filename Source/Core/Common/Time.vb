@@ -22,10 +22,11 @@
 Imports System.Timers
 
 Public Enum TimeOfDay As Byte
-    Day = 0
-    Night = 1
-    Dawn = 2
-    Dusk = 3
+    None
+    Day
+    Night
+    Dawn
+    Dusk
 End Enum
 
 Public Delegate Sub HandleTimeEvent(ByRef source As Time)

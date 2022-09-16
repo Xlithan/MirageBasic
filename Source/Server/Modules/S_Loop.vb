@@ -79,10 +79,8 @@ Module modLoop
             End If
 
             If tick > tmr500 Then
-
                 ' Move the timer up 500ms.
                 tmr500 = GetTimeMs() + 500
-
             End If
 
             If GetTimeMs() > tmr300 Then
@@ -91,25 +89,24 @@ Module modLoop
                 tmr300 = GetTimeMs() + 300
             End If
 
-            ' Checks to update player vitals every 5 seconds - Can be tweaked
+            ' Checks to update player vitals every 5 seconds
             If tick > lastUpdatePlayerVitals Then
                 UpdatePlayerVitals()
                 lastUpdatePlayerVitals = GetTimeMs() + 5000
             End If
 
-            ' Checks to spawn map items every 5 minutes - Can be tweaked
+            ' Checks to spawn map items every 1 minute
             If tick > lastUpdateMapSpawnItems Then
                 UpdateMapSpawnItems()
-                lastUpdateMapSpawnItems = GetTimeMs() + 300000
+                lastUpdateMapSpawnItems = GetTimeMs() + 60000
             End If
 
-            ' Checks to save players every 10 minutes - Can be tweaked
+            ' Checks to save players every 1 minute
             If tick > lastUpdateSavePlayers Then
                 UpdateSavePlayers()
-                lastUpdateSavePlayers = GetTimeMs() + 600000
+                lastUpdateSavePlayers = GetTimeMs() + 60000
             End If
 
-            'Thread.Yield()
             Thread.Sleep(1)
         Loop
     End Sub
@@ -160,24 +157,17 @@ Module modLoop
     Private Sub UpdatePlayerVitals()
         Dim i As Integer
 
-        For i = 0 To GetPlayersOnline()
+        For i = 1 To GetPlayersOnline()
 
             If IsPlaying(i) Then
-                If GetPlayerVital(i, VitalType.HP) <> GetPlayerMaxVital(i, VitalType.HP) Then
-                    SetPlayerVital(i, VitalType.HP, GetPlayerVital(i, VitalType.HP) + GetPlayerVitalRegen(i, VitalType.HP))
-                    SendVital(i, VitalType.HP)
-                End If
-
-                If GetPlayerVital(i, VitalType.MP) <> GetPlayerMaxVital(i, VitalType.MP) Then
-                    SetPlayerVital(i, VitalType.MP, GetPlayerVital(i, VitalType.MP) + GetPlayerVitalRegen(i, VitalType.MP))
-                    SendVital(i, VitalType.MP)
-                End If
-
-                If GetPlayerVital(i, VitalType.SP) <> GetPlayerMaxVital(i, VitalType.SP) Then
-                    SetPlayerVital(i, VitalType.SP, GetPlayerVital(i, VitalType.SP) + GetPlayerVitalRegen(i, VitalType.SP))
-                    SendVital(i, VitalType.SP)
-                End If
+                For x = 0 To VitalType.Count - 1
+                    If GetPlayerVital(i, x) <> GetPlayerMaxVital(i, x) Then
+                        SetPlayerVital(i, x, GetPlayerVital(i, x) + GetPlayerVitalRegen(i, x))
+                        SendVital(i, x)
+                    End If
+                Next
             End If
+
             ' send vitals to party if in one
             If TempPlayer(i).InParty > 0 Then SendPartyVitals(TempPlayer(i).InParty, i)
         Next

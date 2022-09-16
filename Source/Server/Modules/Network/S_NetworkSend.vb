@@ -41,7 +41,7 @@ Module S_NetworkSend
     End Sub
 
     Sub SendNewCharJob(index As Integer)
-        Dim i As Integer, n As Integer, q As Integer
+        Dim i As Integer, n As Integer
         Dim buffer As New ByteStream(4)
         buffer.WriteInt32(ServerPackets.SNewCharJob)
 
@@ -49,34 +49,12 @@ Module S_NetworkSend
             buffer.WriteString((job(i).Name.Trim()))
             buffer.WriteString((Trim$(Job(i).Desc)))
 
-            ' set sprite array size
-            n = UBound(Job(i).MaleSprite)
+            buffer.WriteInt32(Job(i).MaleSprite)
+            buffer.WriteInt32(Job(i).FemaleSprite)
 
-            ' send array size
-            buffer.WriteInt32(n)
-
-            ' loop around sending each sprite
-            For q = 0 To n
-                buffer.WriteInt32(Job(i).MaleSprite(q))
+            For q = 0 To StatType.Count - 1
+                buffer.WriteInt32(Job(i).Stat(q))
             Next
-
-            ' set sprite array size
-            n = UBound(Job(i).FemaleSprite)
-
-            ' send array size
-            buffer.WriteInt32(n)
-
-            ' loop around sending each sprite
-            For q = 0 To n
-                buffer.WriteInt32(Job(i).FemaleSprite(q))
-            Next
-
-            buffer.WriteInt32(Job(i).Stat(StatType.Strength))
-            buffer.WriteInt32(Job(i).Stat(StatType.Endurance))
-            buffer.WriteInt32(Job(i).Stat(StatType.Vitality))
-            buffer.WriteInt32(Job(i).Stat(StatType.Luck))
-            buffer.WriteInt32(Job(i).Stat(StatType.Intelligence))
-            buffer.WriteInt32(Job(i).Stat(StatType.Spirit))
 
             For q = 0 To 5
                 buffer.WriteInt32(Job(i).StartItem(q))
@@ -401,7 +379,6 @@ Module S_NetworkSend
 
         AddDebug("Sent SMSG: SUpdateSkill To All")
 
-        'projectiles
         buffer.WriteInt32(Skill(skillnum).IsProjectile)
         buffer.WriteInt32(Skill(skillnum).Projectile)
 
@@ -417,12 +394,11 @@ Module S_NetworkSend
 
         buffer.WriteInt32(ServerPackets.SPlayerStats)
         buffer.WriteInt32(index)
-        buffer.WriteInt32(GetPlayerStat(index, StatType.Strength))
-        buffer.WriteInt32(GetPlayerStat(index, StatType.Endurance))
-        buffer.WriteInt32(GetPlayerStat(index, StatType.Vitality))
-        buffer.WriteInt32(GetPlayerStat(index, StatType.Luck))
-        buffer.WriteInt32(GetPlayerStat(index, StatType.Intelligence))
-        buffer.WriteInt32(GetPlayerStat(index, StatType.Spirit))
+
+        For i = 0 To StatType.Count - 1
+            buffer.WriteInt32(GetPlayerStat(index, i))
+        Next
+
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
 
         AddDebug("Sent SMSG: SPlayerStats")

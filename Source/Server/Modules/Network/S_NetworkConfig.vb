@@ -12,7 +12,7 @@ Friend Module S_NetworkConfig
             .BufferLimit = 2048000, ' <- this is 2mb max data storage
             .MinimumIndex = 1, ' <- this prevents the network from giving us 0 as an index
             .PacketAcceptLimit = 500, ' Dunno what is a reasonable cap right now so why not? :P
-            .PacketDisconnectCount = 100 ' If the other thing was even remotely reasonable, this is DEFINITELY spam count!
+            .PacketDisconnectCount = 125 ' If the other thing was even remotely reasonable, this is DEFINITELY spam count!
             }
         ' END THE ESTABLISHMENT! WOOH ANARCHY! ~SpiceyWolf
 
@@ -24,7 +24,7 @@ Friend Module S_NetworkConfig
     End Sub
 
     Function IsLoggedIn(index As Integer) As Boolean
-        Return Player(index).Login.Trim.Length > 0
+        Return Account(index).Login.Trim.Length > 0
     End Function
 
     Function IsPlaying(index As Integer) As Boolean
@@ -34,7 +34,7 @@ Friend Module S_NetworkConfig
     Function IsMultiAccounts(Index As Integer, Login As String) As Boolean
         For i As Integer = 1 To GetPlayersOnline()
             If i <> Index then
-                If Player(i).Login.Trim.ToLower() = Login.Trim.ToLower() Then
+                If Account(i).Login.Trim.ToLower() = Login.Trim.ToLower() Then
                     Return True
                 End If
             End If

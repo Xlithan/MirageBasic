@@ -1805,7 +1805,7 @@ Friend Module S_EventLogic
 
                                                             buffer.Dispose()
                                                         Case EventType.SetAccess
-                                                            Player(i).Access = Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1
+                                                            SetPlayerAccess(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1)
                                                             SendPlayerData(i)
                                                         Case EventType.OpenShop
                                                             If Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1 > 0 Then ' shop exists?

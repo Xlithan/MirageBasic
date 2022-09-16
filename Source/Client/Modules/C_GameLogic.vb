@@ -15,10 +15,9 @@ Module C_GameLogic
         Dim tmpfps As Integer, tmplps As Integer, walkTimer As Integer, frameTime As Integer
         Dim tmr10000 As Integer, tmr1000 As Integer, tmrweather As Integer
         Dim tmr100 As Integer, tmr500 As Integer, tmrconnect As Integer
-        Dim fadetmr As Integer
+        Dim fadetmr As Integer, renderFrame As Boolean, rendertmr As Integer
 
         starttime = GetTickCount()
-        FrmMenu.lblNextChar.Left = Lblnextcharleft
 
         Do
             If GameDestroyed Then End
@@ -151,7 +150,6 @@ Module C_GameLogic
                             If Player(Myindex).Skill(i).CD > 0 Then
                                 If  Player(Myindex).Skill(i).CD + (Skill(Player(Myindex).Skill(i).Num).CdTime * 1000) < tick Then
                                     Player(Myindex).Skill(i).CD = 0
-                                    DrawPlayerSkills()
                                 End If
                             End If
                         End If
@@ -250,9 +248,7 @@ Module C_GameLogic
                 End If
 
                 If Editor = EditorType.Map Then FrmEditor_Map.DrawTileset()
-                iF Editor = EditorType.Animation Then EditorAnim_DrawAnim
-
-                Application.DoEvents()
+                iF Editor = EditorType.Animation Then EditorAnim_DrawAnim()
 
                 If GettingMap Then
                     Dim font As New Font(Environment.GetFolderPath(Environment.SpecialFolder.Fonts) + "\" + FontName, FontSize)
@@ -283,17 +279,25 @@ Module C_GameLogic
                 fadetmr = tick + 30
             End If
 
-            Render_Graphics()
-            tmpfps = tmpfps + 1
-
-            Application.DoEvents()
-
-            If Settings.Vsync = 0 Then
-                Thread.Yield()
-            Else
-                Thread.Sleep(1)
+            If Settings.Vsync Then
+                If rendertmr < tick Then
+                    rendertmr = tick + 5
+                    renderFrame =  True
+                    tmpfps = tmpfps + 1
+                Else
+                    renderFrame = False
+                End If
+            Else                
+                renderFrame = True
+                tmpfps = tmpfps + 1
             End If
 
+            If renderFrame Then
+                Render_Graphics
+            End If
+
+            Thread.Sleep(1)
+            Application.DoEvents()
         Loop
     End Sub
 

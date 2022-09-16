@@ -16,8 +16,11 @@ Module C_Player
     End Sub
 
     Sub ClearPlayer(i As Integer)
+        Account(i).Access = 0
+        Account(i).Login = ""
+        Account(i).Password = ""
+
         Player(i).Name = ""
-        Player(i).Access = 0
         Player(i).Attacking = 0
         Player(i).AttackTimer = 0
         Player(i).Job = 0
@@ -86,6 +89,7 @@ Module C_Player
 
         ReDim Player(i).PlayerQuest(MAX_QUESTS)
         ReDim Player(i).Hotbar(MaxHotbar)
+        ReDim Player(i).GatherSkills(ResourceSkills.Count - 1)
         ReDim Player(i).GatherSkills(ResourceSkills.Count - 1)
 
         'pets
@@ -879,11 +883,9 @@ Module C_Player
 
         SetPlayerVital(Myindex, VitalType.HP, buffer.ReadInt32)
 
-        If GetPlayerMaxVital(Myindex, VitalType.HP) > 0 Then
-            LblHpText = GetPlayerVital(Myindex, VitalType.HP) & "/" & GetPlayerMaxVital(Myindex, VitalType.HP)
-            ' hp bar
-            PicHpWidth = Int(((GetPlayerVital(Myindex, VitalType.HP) / 169) / (GetPlayerMaxVital(Myindex, VitalType.HP) / 169)) * 169)
-        End If
+        LblHpText = GetPlayerVital(Myindex, VitalType.HP) & "/" &  GetPlayerMaxVital(Myindex, VitalType.HP)
+        ' hp bar
+        PicHpWidth = Int(((GetPlayerVital(Myindex, VitalType.HP) / 169) / ( GetPlayerMaxVital(Myindex, VitalType.HP)/ 169)) * 169)
 
         buffer.Dispose()
     End Sub
@@ -893,11 +895,9 @@ Module C_Player
 
         SetPlayerVital(Myindex, VitalType.MP, buffer.ReadInt32)
 
-        If GetPlayerMaxVital(Myindex, VitalType.MP) > 0 Then
-            LblManaText = GetPlayerVital(Myindex, VitalType.MP) & "/" & GetPlayerMaxVital(Myindex, VitalType.MP)
-            ' mp bar
-            PicManaWidth = Int(((GetPlayerVital(Myindex, VitalType.MP) / 169) / (GetPlayerMaxVital(Myindex, VitalType.MP) / 169)) * 169)
-        End If
+        LblManaText = GetPlayerVital(Myindex, VitalType.MP) & "/" & GetPlayerMaxVital(Myindex, VitalType.MP)
+        ' mp bar
+        PicManaWidth = Int(((GetPlayerVital(Myindex, VitalType.MP) / 169) / ( GetPlayerMaxVital(Myindex, VitalType.MP)/ 169)) * 169)
 
         buffer.Dispose()
     End Sub

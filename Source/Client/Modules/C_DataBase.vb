@@ -210,13 +210,8 @@ Module C_Database
         Job(index).Desc = ""
         ReDim Job(index).StartItem(5)
         ReDim Job(index).StartValue(5)
-        ReDim Job(index).MaleSprite(5)
-        ReDim Job(index).FemaleSprite(5)
-
-        For i = 0 To 5
-            Job(index).MaleSprite(i) = 1
-            Job(index).FemaleSprite(i) = 1
-        Next
+        Job(index).MaleSprite = 1
+        Job(index).FemaleSprite = 1
     End Sub
 #End Region
 

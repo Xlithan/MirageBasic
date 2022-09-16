@@ -126,13 +126,9 @@ Friend Class FrmMenu
             Dim charheight As Integer
 
             If rdoMale.Checked = True Then
-                If NewCharSprite > UBound(Job(NewCharJob).MaleSprite) Then Exit sub
-                If NewCharSprite < 1 Then Exit Sub
-                filename = Paths.Graphics & "characters\" & Job(NewCharJob).MaleSprite(NewCharSprite) & GfxExt
+                filename = Paths.Graphics & "characters\" & Job(NewCharJob).MaleSprite & GfxExt
             Else
-                If NewCharSprite > Ubound(Job(NewCharJob).FemaleSprite) Then Exit Sub
-                If NewCharSprite < 1 Then Exit Sub
-                filename = Paths.Graphics & "characters\" & Job(NewCharJob).FemaleSprite(NewCharSprite) & GfxExt
+                filename = Paths.Graphics & "characters\" & Job(NewCharJob).FemaleSprite & GfxExt
             End If
 
             If File.Exists(filename) = False Then Exit sub
@@ -356,32 +352,6 @@ Friend Class FrmMenu
     ''' Switches to female gender.
     ''' </summary>
     Private Sub RdoFemale_CheckedChanged(sender As Object, e As EventArgs) Handles rdoFemale.CheckedChanged
-        DrawCharacter()
-    End Sub
-
-    ''' <summary>
-    ''' Switches sprite for selected class to next one, if any.
-    ''' </summary>
-    Private Sub LblNextChar_Click(sender As Object, e As EventArgs) Handles lblNextChar.Click
-        NewCharSprite = NewCharSprite + 1
-        If rdoMale.Checked = True Then
-            If NewCharSprite > Job(NewCharJob).MaleSprite.Length Then NewCharSprite = 0
-        ElseIf rdoFemale.Checked = True Then
-            If NewCharSprite > Job(NewCharJob).FemaleSprite.Length Then NewCharSprite = 0
-        End If
-        DrawCharacter()
-    End Sub
-
-    ''' <summary>
-    ''' Switches sprite for selected class to previous one, if any.
-    ''' </summary>
-    Private Sub LblPrevChar_Click(sender As Object, e As EventArgs) Handles lblPrevChar.Click
-        NewCharSprite = NewCharSprite - 1
-        If rdoMale.Checked = True Then
-            If NewCharSprite <= 0 Then NewCharSprite = Job(NewCharJob).MaleSprite.Length
-        ElseIf rdoFemale.Checked = True Then
-            If NewCharSprite <= 0 Then NewCharSprite = Job(NewCharJob).FemaleSprite.Length
-        End If
         DrawCharacter()
     End Sub
 

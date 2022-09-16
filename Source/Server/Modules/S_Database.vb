@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports System.Data
 Imports System.IO
 Imports Asfw
 Imports Asfw.IO
@@ -42,13 +43,8 @@ Module modDatabase
         ReDim Job(jobNum).Stat(StatType.Count - 1)
         ReDim Job(jobNum).StartItem(5)
         ReDim Job(jobNum).StartValue(5)
-        ReDim Job(jobNum).MaleSprite(5)
-        ReDim Job(jobNum).FemaleSprite(5)
-
-        For i = 0 To 5
-            Job(jobNum).MaleSprite(i) = 1
-            Job(jobNum).FemaleSprite(i) = 1
-        Next
+        Job(jobNum).MaleSprite = 1
+        Job(jobNum).FemaleSprite = 1
     End Sub
 
     Sub LoadJob(jobNum As Integer)
@@ -61,13 +57,14 @@ Module modDatabase
         Job(jobNum).Name = reader.ReadString()
         Job(jobNum).Desc = reader.ReadString()
 
+        Job(jobNum).MaleSprite = reader.ReadInt32
+        Job(jobNum).FemaleSprite = reader.ReadInt32
+
         For i = 0 To StatType.Count - 1
             Job(jobNum).Stat(i) = reader.ReadByte
         Next
 
         For i = 0 To 5
-            Job(jobNum).MaleSprite(i) = reader.ReadInt32
-            Job(jobNum).FemaleSprite(i) = reader.ReadInt32
             Job(jobNum).StartItem(i) = reader.ReadInt32
             Job(jobNum).StartValue(i) = reader.ReadInt32
         Next
@@ -102,13 +99,14 @@ Module modDatabase
         writer.WriteString(Job(jobNum).Name)
         writer.WriteString(Job(jobNum).Desc)
 
+        writer.WriteInt32(Job(jobNum).MaleSprite)
+        writer.WriteInt32(Job(jobNum).FemaleSprite)
+
         For x = 0 To StatType.Count - 1
             writer.WriteByte(Job(jobNum).Stat(x))
         Next
 
         For x = 0 To 5
-            writer.WriteInt32(Job(jobNum).MaleSprite(x))
-            writer.WriteInt32(Job(jobNum).FemaleSprite(x))
             writer.WriteInt32(Job(jobNum).StartItem(x))
             writer.WriteInt32(Job(jobNum).StartValue(x))
         Next
@@ -552,6 +550,7 @@ Module modDatabase
         Map(mapNum).Instanced = reader.ReadByte()
         Map(mapNum).Panorama = reader.ReadByte()
         Map(mapNum).Parallax = reader.ReadByte()
+        Map(mapNum).Brightness = reader.ReadByte()
 
         ' have to set the tile()
         ReDim Map(mapNum).Tile(Map(mapNum).MaxX, Map(mapNum).MaxY)
@@ -579,10 +578,6 @@ Module modDatabase
         Next
 
         CacheResources(mapNum)
-
-        If Map(mapNum).Name Is Nothing Then Map(mapNum).Name = ""
-        If Map(mapNum).Music Is Nothing Then Map(mapNum).Music = ""
-
         LoadMapEvent(mapNum)
     End Sub
 
@@ -996,22 +991,22 @@ Module modDatabase
 #Region "Accounts"
 
     Function AccountExist(Name As String) As Boolean
-        Return File.Exists(Paths.Database & "Accounts\" & Name.Trim & "\Data.bin")
+        Return File.Exists(Paths.Database & "Accounts\" & Name.Trim & ".bin")
     End Function
 
     Function PasswordOK(Name As String, Password As String) As Boolean
         If Not AccountExist(Name) Then Return False
         Dim reader As New ByteStream()
-        ByteFile.Load(Paths.Database & "Accounts\" & Name.Trim & "\Data.bin", reader)
+        ByteFile.Load(Paths.Database & "Accounts\" & Name.Trim & ".bin", reader)
         If reader.ReadString().Trim <> Name.Trim Then Return False
         Return reader.ReadString().Trim.ToUpper = Password.Trim.ToUpper
     End Function
 
-    Sub AddAccount(index As Integer, Name As String, Password As String)
+    Sub AddAccount(index As Integer, name As String, password As String)
         ClearPlayer(index)
 
-        Player(index).Login = Name
-        Player(index).Password = Password
+        SetPlayerLogin(index, Name)
+        SetPlayerPassword(index, Password)
 
         SavePlayer(index)
     End Sub
@@ -1029,35 +1024,58 @@ Module modDatabase
     End Sub
 
     Sub SavePlayer(index As Integer)
-        Dim playername As String = Player(index).Login.Trim
-        Dim filename As String = Paths.Database & "Accounts\" & playername
-        CheckDir(filename) : filename += "\Data.bin"
+        Dim filename As String = Paths.Database & "Accounts\" & GetPlayerLogin(index) & ".bin"
 
-        Dim writer As New ByteStream(9 + Player(index).Login.Length + Player(index).Password.Length)
+        ' Create path to character folder
+        CheckDir(Paths.Database & "Accounts\" & GetPlayerLogin(index) & "\")
 
-        writer.WriteString(Player(index).Login)
-        writer.WriteString(Player(index).Password)
-        writer.WriteByte(Player(index).Access)
+        Dim writer As New ByteStream(Account.Length)
+
+        writer.WriteString(GetPlayerLogin(index))
+        writer.WriteString(GetPlayerPassword(index))
+        writer.WriteByte(GetPlayerAccess(index))
+        writer.WriteByte(Account(index).Index)
+
+        For i = 1 To MAX_CHARACTERS
+            writer.WriteString(GetCharName(index, i))
+        Next
 
         ByteFile.Save(filename, writer)
 
-        SaveCharacter(index)
+        SaveCharacter(index, Account(index).Index)
     End Sub
 
-    Sub LoadPlayer(index As Integer, Name As String)
-        Dim filename As String = Paths.Database & "Accounts\" & Name.Trim() & "\Data.bin"
+    Sub LoadPlayer(index As Integer)
+        Dim filename As String = Paths.Database & "Accounts\" & GetPlayerLogin(index) & ".bin"
         ClearPlayer(index)
-        Dim reader As New ByteStream()
+        Dim reader As New ByteStream(100)
         ByteFile.Load(filename, reader)
 
-        Player(index).Login = reader.ReadString()
-        Player(index).Password = reader.ReadString()
-        Player(index).Access = reader.ReadByte()
+        SetPlayerLogin(index, reader.ReadString())
+        SetPlayerPassword(index, reader.ReadString())
+        SetPlayerAccess(index, reader.ReadByte())
+        Account(index).Index = reader.ReadByte()
 
-        LoadCharacter(index)
+        For i = 1 To MAX_CHARACTERS
+            SetPlayerCharName(index, i, reader.ReadString())
+        Next
+
+        LoadCharacter(index, Account(index).Index)
+    End Sub
+
+    Sub ClearAccount(index As Integer)
+        SetPlayerLogin(index, "")
+        SetPlayerPassword(index, "")
+        ReDim Account(index).Character(MAX_CHARACTERS)
+
+        For i = 1 To MAX_CHARACTERS
+            SetPlayerCharName(index, i, "")
+        Next
     End Sub
 
     Sub ClearPlayer(index As Integer)
+        ClearAccount(index)
+
         ReDim TempPlayer(MAX_PLAYERS)
 
         For i = 1 To MAX_PLAYERS
@@ -1070,20 +1088,6 @@ Module modDatabase
         ReDim TempPlayer(index).PetSkillCd(4)
         TempPlayer(index).Editor = -1
 
-        ReDim Bank(MAX_PLAYERS)
-
-        For i = 0 To MAX_PLAYERS
-            ReDim Bank(i).Item(MAX_BANK)
-            ReDim Bank(i).ItemRand(MAX_BANK)
-            For x = 1 To MAX_BANK
-                ReDim Bank(i).ItemRand(x).Stat(StatType.Count - 1)
-            Next
-        Next
-
-        Player(index).Login = ""
-        Player(index).Password = ""
-
-        Player(index).Access = 0
         ClearCharacter(index)   
     End Sub
 
@@ -1091,8 +1095,8 @@ Module modDatabase
 
 #Region "Bank"
 
-    Friend Sub LoadBank(index As Integer, Name As String)
-        Dim filename As String = Paths.Database & "Accounts\" & Name.Trim() & "\Bank.bin"
+    Friend Sub LoadBank(index As Integer)
+        Dim filename As String = Paths.Database & "Accounts\" & GetPlayerLogin(index) & "_Bank.bin"
 
         ClearBank(index)
 
@@ -1121,9 +1125,10 @@ Module modDatabase
     End Sub
 
     Sub SaveBank(index As Integer)
-        Dim filename = Paths.Database & "Accounts\" & Player(index).Login.Trim() & "\Bank.bin"
+        Dim filename = Paths.Database & "Accounts\" & GetPlayerLogin(index) & "_Bank.bin"
+        Dim writer As New ByteStream(Bank.Length)
 
-        Dim writer As New ByteStream(100)
+        ClearBank(index)
 
         For i = 1 To MAX_BANK
             writer.WriteByte(Bank(index).Item(i).Num)
@@ -1149,7 +1154,6 @@ Module modDatabase
         ReDim Bank(index).ItemRand(MAX_BANK)
 
         For i = 1 To MAX_BANK
-
             Bank(index).Item(i).Num = 0
             Bank(index).Item(i).Value = 0
             Bank(index).ItemRand(i).Prefix = ""
@@ -1168,7 +1172,6 @@ Module modDatabase
 #End Region
 
 #Region "Characters"
-
     Sub ClearCharacter(index As Integer)
         Player(index).Job = 0
         Player(index).Dir = 0
@@ -1281,7 +1284,7 @@ Module modDatabase
         For i = 0 To StatType.Count - 1
             Player(index).Pet.Stat(i) = 0
         Next
-
+                    
         ReDim Player(index).Pet.Skill(4)
         For i = 0 To 4
             Player(index).Pet.Skill(i) = 0
@@ -1297,16 +1300,17 @@ Module modDatabase
         Player(index).Pet.Exp = 0
     End Sub
 
-    Sub LoadCharacter(index As Integer)
-        Dim filename As String = Paths.Database & "Accounts\" & Player(index).Login.Trim & ".bin"
+    Sub LoadCharacter(index As Integer, charNum As Integer)
+        Dim filename As String = Paths.Database & "Accounts\" & GetPlayerLogin(index) & "\" & GetCharName(index, charNum) & ".bin"
 
         ClearCharacter(index)
 
-        Dim reader As New ByteStream()
+        Dim reader As New ByteStream(Player.Length)
         ByteFile.Load(filename, reader)
 
         Player(index).Job = reader.ReadByte()
         Player(index).Dir = reader.ReadByte()
+        Player(index).Sprite = reader.ReadInt32()
 
         For i = 0 To EquipmentType.Count - 1
             Player(index).Equipment(i) = reader.ReadInt32()
@@ -1327,10 +1331,8 @@ Module modDatabase
         Player(index).Sex = reader.ReadByte()
 
         For i = 1 To MAX_PLAYER_SKILLS
-            Player(index).Skill(i).Num = reader.ReadByte()
+            Player(index).Skill(i).Num = reader.ReadInt32()
         Next
-
-        Player(index).Sprite = reader.ReadInt32()
 
         For i = 0 To StatType.Count - 1
             Player(index).Stat(i) = reader.ReadByte()
@@ -1428,13 +1430,14 @@ Module modDatabase
 
     End Sub
 
-    Sub SaveCharacter(index As Integer)
-        Dim filename As String = Paths.Database & "Accounts\" & Player(index).Login.Trim & ".bin"
+    Sub SaveCharacter(index As Integer, charNum As Integer)
+        Dim filename As String = Paths.Database & "Accounts\" & GetPlayerLogin(index) & "\" & GetCharName(index, charNum) & ".bin"
 
-        Dim writer As New ByteStream(100)
+        Dim writer As New ByteStream(Player.Length)
 
         writer.WriteByte(Player(index).Job)
         writer.WriteByte(Player(index).Dir)
+        writer.WriteInt32(Player(index).Sprite)
 
         For i = 0 To EquipmentType.Count - 1
             writer.WriteInt32(Player(index).Equipment(i))
@@ -1457,8 +1460,6 @@ Module modDatabase
         For i = 1 To MAX_PLAYER_SKILLS
             writer.WriteInt32(Player(index).Skill(i).Num)
         Next
-
-        writer.WriteInt32(Player(index).Sprite)
 
         For i = 0 To StatType.Count - 1
             writer.WriteByte(Player(index).Stat(i))
@@ -1545,23 +1546,18 @@ Module modDatabase
         ByteFile.Save(filename, writer)
     End Sub
 
-    Function CharExist(index As Integer, CharNum As Integer) As Boolean
-        Return Player(index).Name.Trim.Length > 0
+    Function CharExist(index As Integer, charnUm As Integer) As Boolean
+        Return Account(index).Character(charNum).Trim.Length > 0
     End Function
 
-    Sub AddChar(index As Integer, CharNum As Integer, Name As String, Sex As Byte, jobNum As Byte, Sprite As Integer)
+    Sub AddChar(index As Integer, charNum As Integer, name As String, Sex As Byte, jobNum As Byte, sprite As Integer)
         Dim n As Integer, i As Integer
 
         If Len(Trim$(Player(index).Name)) = 0 Then
             Player(index).Name = Name
             Player(index).Sex = Sex
             Player(index).Job = jobNum
-
-            If Player(index).Sex = SexType.Male Then
-                Player(index).Sprite = Job(jobNum).MaleSprite(Sprite)
-            Else
-                Player(index).Sprite = Job(jobNum).FemaleSprite(Sprite)
-            End If
+            Player(index).Sprite = sprite
 
             Player(index).Level = 1
 
@@ -1574,10 +1570,11 @@ Module modDatabase
             Player(index).X = Job(jobNum).StartX
             Player(index).Y = Job(jobNum).StartY
             Player(index).Dir = DirectionType.Down
-            Call SetPlayerVital(index, VitalType.HP, GetPlayerMaxVital(index, VitalType.HP))
-            Call SetPlayerVital(index, VitalType.MP, GetPlayerMaxVital(index, VitalType.MP))
-            Call SetPlayerVital(index, VitalType.SP, GetPlayerMaxVital(index, VitalType.SP))
 
+            For i = 0 To VitalType.Count - 1
+                Call SetPlayerVital(index, i, GetPlayerMaxVital(index, i))
+            Next
+   
             ' set starter equipment
             For n = 0 To 5
                 If Job(jobNum).StartItem(n) > 0 Then
@@ -1598,24 +1595,22 @@ Module modDatabase
             Next
 
             'set skills
-            ReDim Player(index).GatherSkills(ResourceSkills.Count - 1)
             For i = 0 To ResourceSkills.Count - 1
                 Player(index).GatherSkills(i).SkillLevel = 1
                 Player(index).GatherSkills(i).SkillCurExp = 0
                 SetPlayerGatherSkillMaxExp(index, i, GetSkillNextLevel(index, i))
             Next
-
-            ' Add name to character list.
+          
             If CharactersList.IsEmpty()
-                Player(index).Access = AdminType.Creator
+                Call SetPlayerAccess(index, AdminType.Creator)
             End If
 
-            If Player(index).Sprite = 0 Then Player(index).Sprite = 1
+            ' Add name to character list.
+            CharactersList.Add(name).Save()
 
-            CharactersList.Add(Name).Save()
-
+            Account(index).Index = CharNum
+            SetPlayerCharName(index, Account(index).Index, name)
             SavePlayer(index)
-            Exit Sub
         End If
 
     End Sub
@@ -1767,34 +1762,12 @@ Module modDatabase
         buffer.WriteString((Job(jobnum).Name.Trim))
         buffer.WriteString((Job(jobNum).Desc.Trim))
 
-        ' set sprite array size
-        n = UBound(Job(jobNum).MaleSprite)
+        buffer.WriteInt32(Job(jobNum).MaleSprite)
+        buffer.WriteInt32(Job(jobNum).FemaleSprite)
 
-        ' send array size
-        buffer.WriteInt32(n)
-
-        ' loop around sending each sprite
-        For q = 0 To n
-            buffer.WriteInt32(Job(jobNum).MaleSprite(q))
+        For i = 0 To StatType.Count - 1
+            buffer.WriteInt32(Job(jobNum).Stat(i))
         Next
-
-        ' set sprite array size
-        n = UBound(Job(jobNum).FemaleSprite)
-
-        ' send array size
-        buffer.WriteInt32(n)
-
-        ' loop around sending each sprite
-        For q = 0 To n
-            buffer.WriteInt32(Job(jobNum).FemaleSprite(q))
-        Next
-
-        buffer.WriteInt32(Job(jobNum).Stat(StatType.Strength))
-        buffer.WriteInt32(Job(jobNum).Stat(StatType.Endurance))
-        buffer.WriteInt32(Job(jobNum).Stat(StatType.Vitality))
-        buffer.WriteInt32(Job(jobNum).Stat(StatType.Intelligence))
-        buffer.WriteInt32(Job(jobNum).Stat(StatType.Luck))
-        buffer.WriteInt32(Job(jobNum).Stat(StatType.Spirit))
 
         For q = 0 To 5
             buffer.WriteInt32(Job(jobNum).StartItem(q))

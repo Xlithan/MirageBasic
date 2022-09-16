@@ -22,7 +22,6 @@ Partial Class frmEditor_Job
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmEditor_Job))
         Me.DarkGroupBox1 = New DarkUI.Controls.DarkGroupBox()
         Me.lstIndex = New System.Windows.Forms.ListBox()
         Me.DarkGroupBox2 = New DarkUI.Controls.DarkGroupBox()
@@ -58,16 +57,10 @@ Partial Class frmEditor_Job
         Me.DarkGroupBox4 = New DarkUI.Controls.DarkGroupBox()
         Me.nudFemaleSprite = New DarkUI.Controls.DarkNumericUpDown()
         Me.DarkLabel4 = New DarkUI.Controls.DarkLabel()
-        Me.btnDeleteFemaleSprite = New DarkUI.Controls.DarkButton()
-        Me.btnAddFemaleSprite = New DarkUI.Controls.DarkButton()
-        Me.cmbFemaleSprite = New DarkUI.Controls.DarkComboBox()
         Me.picFemale = New System.Windows.Forms.PictureBox()
         Me.DarkGroupBox3 = New DarkUI.Controls.DarkGroupBox()
         Me.nudMaleSprite = New DarkUI.Controls.DarkNumericUpDown()
         Me.lblMaleSprite = New DarkUI.Controls.DarkLabel()
-        Me.btnDeleteMaleSprite = New DarkUI.Controls.DarkButton()
-        Me.btnAddMaleSprite = New DarkUI.Controls.DarkButton()
-        Me.cmbMaleSprite = New DarkUI.Controls.DarkComboBox()
         Me.picMale = New System.Windows.Forms.PictureBox()
         Me.txtDescription = New DarkUI.Controls.DarkTextBox()
         Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
@@ -498,9 +491,6 @@ Partial Class frmEditor_Job
         Me.DarkGroupBox4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.DarkGroupBox4.Controls.Add(Me.nudFemaleSprite)
         Me.DarkGroupBox4.Controls.Add(Me.DarkLabel4)
-        Me.DarkGroupBox4.Controls.Add(Me.btnDeleteFemaleSprite)
-        Me.DarkGroupBox4.Controls.Add(Me.btnAddFemaleSprite)
-        Me.DarkGroupBox4.Controls.Add(Me.cmbFemaleSprite)
         Me.DarkGroupBox4.Controls.Add(Me.picFemale)
         Me.DarkGroupBox4.ForeColor = System.Drawing.Color.Gainsboro
         Me.DarkGroupBox4.Location = New System.Drawing.Point(202, 100)
@@ -514,8 +504,9 @@ Partial Class frmEditor_Job
         '
         'nudFemaleSprite
         '
-        Me.nudFemaleSprite.Location = New System.Drawing.Point(54, 62)
+        Me.nudFemaleSprite.Location = New System.Drawing.Point(56, 97)
         Me.nudFemaleSprite.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudFemaleSprite.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudFemaleSprite.Name = "nudFemaleSprite"
         Me.nudFemaleSprite.Size = New System.Drawing.Size(64, 23)
         Me.nudFemaleSprite.TabIndex = 18
@@ -525,42 +516,12 @@ Partial Class frmEditor_Job
         '
         Me.DarkLabel4.AutoSize = true
         Me.DarkLabel4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel4.Location = New System.Drawing.Point(4, 65)
+        Me.DarkLabel4.Location = New System.Drawing.Point(8, 99)
         Me.DarkLabel4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel4.Name = "DarkLabel4"
         Me.DarkLabel4.Size = New System.Drawing.Size(40, 15)
         Me.DarkLabel4.TabIndex = 17
         Me.DarkLabel4.Text = "Sprite:"
-        '
-        'btnDeleteFemaleSprite
-        '
-        Me.btnDeleteFemaleSprite.Image = CType(resources.GetObject("btnDeleteFemaleSprite.Image"),System.Drawing.Image)
-        Me.btnDeleteFemaleSprite.Location = New System.Drawing.Point(42, 22)
-        Me.btnDeleteFemaleSprite.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnDeleteFemaleSprite.Name = "btnDeleteFemaleSprite"
-        Me.btnDeleteFemaleSprite.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnDeleteFemaleSprite.Size = New System.Drawing.Size(28, 28)
-        Me.btnDeleteFemaleSprite.TabIndex = 16
-        '
-        'btnAddFemaleSprite
-        '
-        Me.btnAddFemaleSprite.Image = CType(resources.GetObject("btnAddFemaleSprite.Image"),System.Drawing.Image)
-        Me.btnAddFemaleSprite.Location = New System.Drawing.Point(7, 22)
-        Me.btnAddFemaleSprite.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnAddFemaleSprite.Name = "btnAddFemaleSprite"
-        Me.btnAddFemaleSprite.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnAddFemaleSprite.Size = New System.Drawing.Size(28, 28)
-        Me.btnAddFemaleSprite.TabIndex = 13
-        '
-        'cmbFemaleSprite
-        '
-        Me.cmbFemaleSprite.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbFemaleSprite.FormattingEnabled = true
-        Me.cmbFemaleSprite.Location = New System.Drawing.Point(7, 92)
-        Me.cmbFemaleSprite.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbFemaleSprite.Name = "cmbFemaleSprite"
-        Me.cmbFemaleSprite.Size = New System.Drawing.Size(173, 24)
-        Me.cmbFemaleSprite.TabIndex = 15
         '
         'picFemale
         '
@@ -579,9 +540,6 @@ Partial Class frmEditor_Job
         Me.DarkGroupBox3.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.DarkGroupBox3.Controls.Add(Me.nudMaleSprite)
         Me.DarkGroupBox3.Controls.Add(Me.lblMaleSprite)
-        Me.DarkGroupBox3.Controls.Add(Me.btnDeleteMaleSprite)
-        Me.DarkGroupBox3.Controls.Add(Me.btnAddMaleSprite)
-        Me.DarkGroupBox3.Controls.Add(Me.cmbMaleSprite)
         Me.DarkGroupBox3.Controls.Add(Me.picMale)
         Me.DarkGroupBox3.ForeColor = System.Drawing.Color.Gainsboro
         Me.DarkGroupBox3.Location = New System.Drawing.Point(7, 100)
@@ -595,8 +553,9 @@ Partial Class frmEditor_Job
         '
         'nudMaleSprite
         '
-        Me.nudMaleSprite.Location = New System.Drawing.Point(54, 62)
+        Me.nudMaleSprite.Location = New System.Drawing.Point(56, 97)
         Me.nudMaleSprite.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudMaleSprite.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudMaleSprite.Name = "nudMaleSprite"
         Me.nudMaleSprite.Size = New System.Drawing.Size(64, 23)
         Me.nudMaleSprite.TabIndex = 12
@@ -606,42 +565,12 @@ Partial Class frmEditor_Job
         '
         Me.lblMaleSprite.AutoSize = true
         Me.lblMaleSprite.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.lblMaleSprite.Location = New System.Drawing.Point(4, 65)
+        Me.lblMaleSprite.Location = New System.Drawing.Point(8, 99)
         Me.lblMaleSprite.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblMaleSprite.Name = "lblMaleSprite"
         Me.lblMaleSprite.Size = New System.Drawing.Size(40, 15)
         Me.lblMaleSprite.TabIndex = 11
         Me.lblMaleSprite.Text = "Sprite:"
-        '
-        'btnDeleteMaleSprite
-        '
-        Me.btnDeleteMaleSprite.Image = CType(resources.GetObject("btnDeleteMaleSprite.Image"),System.Drawing.Image)
-        Me.btnDeleteMaleSprite.Location = New System.Drawing.Point(42, 22)
-        Me.btnDeleteMaleSprite.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnDeleteMaleSprite.Name = "btnDeleteMaleSprite"
-        Me.btnDeleteMaleSprite.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnDeleteMaleSprite.Size = New System.Drawing.Size(28, 28)
-        Me.btnDeleteMaleSprite.TabIndex = 10
-        '
-        'btnAddMaleSprite
-        '
-        Me.btnAddMaleSprite.Image = CType(resources.GetObject("btnAddMaleSprite.Image"),System.Drawing.Image)
-        Me.btnAddMaleSprite.Location = New System.Drawing.Point(7, 22)
-        Me.btnAddMaleSprite.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnAddMaleSprite.Name = "btnAddMaleSprite"
-        Me.btnAddMaleSprite.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnAddMaleSprite.Size = New System.Drawing.Size(28, 28)
-        Me.btnAddMaleSprite.TabIndex = 6
-        '
-        'cmbMaleSprite
-        '
-        Me.cmbMaleSprite.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbMaleSprite.FormattingEnabled = true
-        Me.cmbMaleSprite.Location = New System.Drawing.Point(7, 92)
-        Me.cmbMaleSprite.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbMaleSprite.Name = "cmbMaleSprite"
-        Me.cmbMaleSprite.Size = New System.Drawing.Size(173, 24)
-        Me.cmbMaleSprite.TabIndex = 9
         '
         'picMale
         '
@@ -789,13 +718,7 @@ End Sub
     Friend WithEvents DarkGroupBox4 As DarkUI.Controls.DarkGroupBox
     Friend WithEvents DarkGroupBox3 As DarkUI.Controls.DarkGroupBox
     Friend WithEvents picMale As Windows.Forms.PictureBox
-    Friend WithEvents cmbMaleSprite As DarkUI.Controls.DarkComboBox
-    Friend WithEvents btnAddMaleSprite As DarkUI.Controls.DarkButton
-    Friend WithEvents btnDeleteMaleSprite As DarkUI.Controls.DarkButton
     Friend WithEvents DarkLabel4 As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnDeleteFemaleSprite As DarkUI.Controls.DarkButton
-    Friend WithEvents btnAddFemaleSprite As DarkUI.Controls.DarkButton
-    Friend WithEvents cmbFemaleSprite As DarkUI.Controls.DarkComboBox
     Friend WithEvents picFemale As Windows.Forms.PictureBox
     Friend WithEvents lblMaleSprite As DarkUI.Controls.DarkLabel
     Friend WithEvents btnCancel As DarkUI.Controls.DarkButton

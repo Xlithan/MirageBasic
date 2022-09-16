@@ -99,7 +99,6 @@ Partial Class frmEditor_Map
         Me.lstMapNpc = New System.Windows.Forms.ListBox()
         Me.ComboBox23 = New System.Windows.Forms.ComboBox()
         Me.tpSettings = New System.Windows.Forms.TabPage()
-        Me.btnSaveSettings = New System.Windows.Forms.Button()
         Me.fraMapSettings = New System.Windows.Forms.GroupBox()
         Me.chkInstance = New System.Windows.Forms.CheckBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -999,7 +998,6 @@ Partial Class frmEditor_Map
         '
         'tpSettings
         '
-        Me.tpSettings.Controls.Add(Me.btnSaveSettings)
         Me.tpSettings.Controls.Add(Me.fraMapSettings)
         Me.tpSettings.Controls.Add(Me.fraMapLinks)
         Me.tpSettings.Controls.Add(Me.fraBootSettings)
@@ -1015,16 +1013,6 @@ Partial Class frmEditor_Map
         Me.tpSettings.TabIndex = 2
         Me.tpSettings.Text = "Settings"
         Me.tpSettings.UseVisualStyleBackColor = true
-        '
-        'btnSaveSettings
-        '
-        Me.btnSaveSettings.Location = New System.Drawing.Point(408, 555)
-        Me.btnSaveSettings.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnSaveSettings.Name = "btnSaveSettings"
-        Me.btnSaveSettings.Size = New System.Drawing.Size(126, 27)
-        Me.btnSaveSettings.TabIndex = 16
-        Me.btnSaveSettings.Text = "Save Settings"
-        Me.btnSaveSettings.UseVisualStyleBackColor = true
         '
         'fraMapSettings
         '
@@ -1914,7 +1902,6 @@ End Sub
     Friend WithEvents fraMapSettings As Windows.Forms.GroupBox
     Friend WithEvents Label8 As Windows.Forms.Label
     Friend WithEvents cmbMoral As Windows.Forms.ComboBox
-    Friend WithEvents btnSaveSettings As Windows.Forms.Button
     Friend WithEvents ToolStripSeparator1 As Windows.Forms.ToolStripSeparator
     Friend WithEvents cmbNpcList As Windows.Forms.ComboBox
     Friend WithEvents lstMapNpc As Windows.Forms.ListBox

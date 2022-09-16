@@ -2224,7 +2224,7 @@ Module C_Graphics
         Dim curHp As Integer, curMp As Integer, curExp As Integer
 
         'HP Bar
-        curHp = (GetPlayerVital(Myindex, 1)/GetPlayerMaxVital(Myindex, 1))*100
+        curHp = (GetPlayerVital(Myindex, VitalType.HP)/GetPlayerMaxVital(Myindex, VitalType.HP))*100
 
         With rec
             .Y = 0
@@ -2239,12 +2239,12 @@ Module C_Graphics
 
         'then draw the text onto that
         DrawText(HudWindowX + HudhpBarX + 65, HudWindowY + HudhpBarY + 4,
-                 GetPlayerVital(Myindex, 1) & "/" & GetPlayerMaxVital(Myindex, 1), Color.White, Color.Black, GameWindow)
+                 LblHpText, Color.White, Color.Black, GameWindow)
 
         '==============================
 
         'MP Bar
-        curMp = (GetPlayerVital(Myindex, 2)/GetPlayerMaxVital(Myindex, 2))*100
+        curMp = (GetPlayerVital(Myindex, VitalType.MP)/GetPlayerMaxVital(Myindex, VitalType.MP))*100
 
         'then render full ontop of it
         With rec
@@ -2259,7 +2259,7 @@ Module C_Graphics
 
         'draw text onto that
         DrawText(HudWindowX + HudmpBarX + 45, HudWindowY + HudmpBarY + 4,
-                 GetPlayerVital(Myindex, 2) & "/" & GetPlayerMaxVital(Myindex, 2), Color.White, Color.Black, GameWindow)
+                 LblManaText, Color.White, Color.Black, GameWindow)
 
         '====================================================
         'EXP Bar
@@ -2332,8 +2332,6 @@ Module C_Graphics
         Dim amount As String
         Dim rec As Rectangle, recPos As Rectangle
         Dim colour As Color
-
-        If Not InGame Then Exit Sub
 
         'first render panel
         RenderSprite(InvPanelSprite, GameWindow, InvWindowX, InvWindowY, 0, 0, InvPanelGfxInfo.Width,
@@ -2417,7 +2415,6 @@ Module C_Graphics
     Sub DrawAnimatedInvItems()
         Dim i As Integer
         Dim itemnum As Integer, itempic As Integer
-
         Dim x As Integer, y As Integer
         Dim maxFrames As Byte
         Dim amount As Integer
@@ -2425,8 +2422,6 @@ Module C_Graphics
         Dim clearregion(1) As Rectangle
         Static tmr100 As Integer
         If tmr100 = 0 Then tmr100 = GetTickCount() + 100
-
-        If Not InGame Then Exit Sub
 
         If GetTickCount() > tmr100 Then
             ' check for map animation changes#
@@ -2498,7 +2493,7 @@ Module C_Graphics
                             y = recPos.Top + 22
                             x = recPos.Left - 4
                             amount = CStr(GetPlayerInvItemValue(Myindex, i))
-' Draw currency but with k, m, b etc. using a convertion function
+                            ' Draw currency but with k, m, b etc. using a convertion function
                             DrawText(x, y, ConvertCurrency(amount), Color.Yellow, Color.Black, GameWindow)
 
                         End If

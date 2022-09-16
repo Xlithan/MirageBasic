@@ -2424,10 +2424,7 @@ Module S_Players
         End If
 
         SendTotalOnlineToAll()
-
         ClearPlayer(index)
-        ClearBank(index)
-
         UpdateCaption()
     End Sub
 
@@ -2474,9 +2471,9 @@ Module S_Players
         SendClearSkillBuffer(index)
 
         ' Restore vitals
-        SetPlayerVital(index, VitalType.HP, GetPlayerMaxVital(index, VitalType.HP))
-        SetPlayerVital(index, VitalType.MP, GetPlayerMaxVital(index, VitalType.MP))
-        SetPlayerVital(index, VitalType.SP, GetPlayerMaxVital(index, VitalType.SP))
+        For i = 0 To VitalType.Count - 1
+            SetPlayerVital(index, i, GetPlayerMaxVital(index, i))
+        Next
         SendVitals(index)
 
         ' send vitals to party if in one

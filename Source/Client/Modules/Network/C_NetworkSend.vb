@@ -16,15 +16,14 @@ Module C_NetworkSend
         buffer.Dispose()
     End Sub
 
-    Friend Sub SendAddChar(slot As Integer, name As String, sex As Integer, jobNum As Integer, sprite As Integer)
+    Friend Sub SendAddChar(slot As Integer, name As String, sexNum As Integer, jobNum As Integer)
         Dim buffer As New ByteStream(4)
 
         buffer.WriteInt32(ClientPackets.CAddChar)
         buffer.WriteInt32(slot)
         buffer.WriteString((name))
-        buffer.WriteInt32(sex)
+        buffer.WriteInt32(sexNum)
         buffer.WriteInt32(jobNum)
-        buffer.WriteInt32(sprite)
         Socket.SendData(buffer.Data, buffer.Head)
 
         buffer.Dispose()
@@ -633,34 +632,12 @@ Module C_NetworkSend
         buffer.WriteString((Trim$(Job(jobNum).Name)))
         buffer.WriteString((Trim$(Job(jobNum).Desc)))
 
-        ' set sprite array size
-        n = UBound(Job(jobNum).MaleSprite)
+        buffer.WriteInt32(Job(jobNum).MaleSprite)
+        buffer.WriteInt32(Job(jobNum).FemaleSprite)
 
-        ' send array size
-        buffer.WriteInt32(n)
-
-        ' loop around sending each sprite
-        For q = 0 To n
-            buffer.WriteInt32(Job(jobNum).MaleSprite(q))
+        For i = 0 To StatType.Count - 1
+            buffer.WriteInt32(Job(jobNum).Stat(i))
         Next
-
-        ' set sprite array size
-        n = UBound(Job(jobNum).FemaleSprite)
-
-        ' send array size
-        buffer.WriteInt32(n)
-
-        ' loop around sending each sprite
-        For q = 0 To n
-            buffer.WriteInt32(Job(jobNum).FemaleSprite(q))
-        Next
-
-        buffer.WriteInt32(Job(jobNum).Stat(StatType.Strength))
-        buffer.WriteInt32(Job(jobNum).Stat(StatType.Endurance))
-        buffer.WriteInt32(Job(jobNum).Stat(StatType.Vitality))
-        buffer.WriteInt32(Job(jobNum).Stat(StatType.Intelligence))
-        buffer.WriteInt32(Job(jobNum).Stat(StatType.Luck))
-        buffer.WriteInt32(Job(jobNum).Stat(StatType.Spirit))
 
         For q = 0 To 5
             buffer.WriteInt32(Job(jobNum).StartItem(q))

@@ -50,8 +50,6 @@ Partial Class FrmMenu
         Me.txtDescription = New System.Windows.Forms.TextBox()
         Me.lblNewCharSprite = New System.Windows.Forms.Label()
         Me.placeholderforsprite = New System.Windows.Forms.PictureBox()
-        Me.lblNextChar = New System.Windows.Forms.Label()
-        Me.lblPrevChar = New System.Windows.Forms.Label()
         Me.rdoFemale = New System.Windows.Forms.RadioButton()
         Me.rdoMale = New System.Windows.Forms.RadioButton()
         Me.cmbJob = New System.Windows.Forms.ComboBox()
@@ -336,8 +334,6 @@ Partial Class FrmMenu
         Me.pnlNewChar.Controls.Add(Me.txtDescription)
         Me.pnlNewChar.Controls.Add(Me.lblNewCharSprite)
         Me.pnlNewChar.Controls.Add(Me.placeholderforsprite)
-        Me.pnlNewChar.Controls.Add(Me.lblNextChar)
-        Me.pnlNewChar.Controls.Add(Me.lblPrevChar)
         Me.pnlNewChar.Controls.Add(Me.rdoFemale)
         Me.pnlNewChar.Controls.Add(Me.rdoMale)
         Me.pnlNewChar.Controls.Add(Me.cmbJob)
@@ -389,24 +385,6 @@ Partial Class FrmMenu
         Me.placeholderforsprite.TabIndex = 41
         Me.placeholderforsprite.TabStop = false
         Me.placeholderforsprite.Visible = false
-        '
-        'lblNextChar
-        '
-        Me.lblNextChar.AutoSize = true
-        Me.lblNextChar.Location = New System.Drawing.Point(100, 156)
-        Me.lblNextChar.Name = "lblNextChar"
-        Me.lblNextChar.Size = New System.Drawing.Size(15, 13)
-        Me.lblNextChar.TabIndex = 40
-        Me.lblNextChar.Text = ">"
-        '
-        'lblPrevChar
-        '
-        Me.lblPrevChar.AutoSize = true
-        Me.lblPrevChar.Location = New System.Drawing.Point(37, 156)
-        Me.lblPrevChar.Name = "lblPrevChar"
-        Me.lblPrevChar.Size = New System.Drawing.Size(15, 13)
-        Me.lblPrevChar.TabIndex = 39
-        Me.lblPrevChar.Text = "<"
         '
         'rdoFemale
         '
@@ -607,7 +585,6 @@ Partial Class FrmMenu
         'btnNewChar
         '
         Me.btnNewChar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnNewChar.Image = CType(resources.GetObject("btnNewChar.Image"),System.Drawing.Image)
         Me.btnNewChar.Location = New System.Drawing.Point(9, 144)
         Me.btnNewChar.Name = "btnNewChar"
         Me.btnNewChar.Size = New System.Drawing.Size(130, 40)
@@ -748,12 +725,12 @@ Partial Class FrmMenu
         Me.Controls.Add(Me.btnRegister)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.pnlLogin)
-        Me.Controls.Add(Me.pnlMainMenu)
-        Me.Controls.Add(Me.pnlCharSelect)
         Me.Controls.Add(Me.pnlNewChar)
         Me.Controls.Add(Me.pnlCredits)
         Me.Controls.Add(Me.pnlRegister)
+        Me.Controls.Add(Me.pnlLogin)
+        Me.Controls.Add(Me.pnlMainMenu)
+        Me.Controls.Add(Me.pnlCharSelect)
         Me.DoubleBuffered = true
         Me.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
         Me.ForeColor = System.Drawing.Color.Black
@@ -816,8 +793,6 @@ End Sub
     Friend WithEvents tmrCredits As System.Windows.Forms.Timer
     Friend WithEvents pnlNewChar As System.Windows.Forms.Panel
     Friend WithEvents placeholderforsprite As System.Windows.Forms.PictureBox
-    Friend WithEvents lblNextChar As System.Windows.Forms.Label
-    Friend WithEvents lblPrevChar As System.Windows.Forms.Label
     Friend WithEvents rdoFemale As System.Windows.Forms.RadioButton
     Friend WithEvents rdoMale As System.Windows.Forms.RadioButton
     Friend WithEvents cmbJob As System.Windows.Forms.ComboBox

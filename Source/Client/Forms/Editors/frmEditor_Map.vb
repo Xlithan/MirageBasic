@@ -39,6 +39,63 @@ Public Class frmEditor_Map
 #Region "Toolbar"
 
     Private Sub TsbSave_Click(sender As Object, e As EventArgs) Handles tsbSave.Click
+        Dim X As Integer, x2 As Integer
+        Dim Y As Integer, y2 As Integer
+        Dim tempArr(,) As TileStruct
+
+        If Not IsNumeric(txtMaxX.Text) Then txtMaxX.Text = Map.MaxX
+        If Val(txtMaxX.Text) < ScreenMapx Then txtMaxX.Text = ScreenMapx
+        If Val(txtMaxX.Text) > Byte.MaxValue Then txtMaxX.Text = Byte.MaxValue
+        If Not IsNumeric(txtMaxY.Text) Then txtMaxY.Text = Map.MaxY
+        If Val(txtMaxY.Text) < ScreenMapy Then txtMaxY.Text = ScreenMapy
+        If Val(txtMaxY.Text) > Byte.MaxValue Then txtMaxY.Text = Byte.MaxValue
+
+        With Map
+            .Name = Trim$(txtName.Text)
+            If lstMusic.SelectedIndex >= 0 Then
+                .Music = lstMusic.Items(lstMusic.SelectedIndex).ToString
+            Else
+                .Music = ""
+            End If
+            .Up = Val(txtUp.Text)
+            .Down = Val(txtDown.Text)
+            .Left = Val(txtLeft.Text)
+            .Right = Val(txtRight.Text)
+            .Moral = cmbMoral.SelectedIndex
+            .BootMap = Val(txtBootMap.Text)
+            .BootX = Val(txtBootX.Text)
+            .BootY = Val(txtBootY.Text)
+
+            ' set the data before changing it
+            tempArr = Map.Tile.Clone
+
+            x2 = Map.MaxX
+            y2 = Map.MaxY
+
+            ' change the data
+            .MaxX = Val(txtMaxX.Text)
+            .MaxY = Val(txtMaxY.Text)
+
+            ReDim Map.Tile(.MaxX, .MaxY)
+            ReDim Autotile(.MaxX, .MaxY)
+
+            If x2 > .MaxX Then x2 = .MaxX
+            If y2 > .MaxY Then y2 = .MaxY
+
+            For X = 0 To .MaxX
+                For Y = 0 To .MaxY
+                    ReDim .Tile(X, Y).Layer(LayerType.Count - 1)
+                    ReDim Autotile(X, Y).Layer(LayerType.Count - 1)
+
+                    If X <= x2 Then
+                        If Y <= y2 Then
+                            .Tile(X, Y) = tempArr(X, Y)
+                        End If
+                    End If
+                Next
+            Next
+        End With
+
         MapEditorSend()      
         GettingMap = True
         Dispose()
@@ -308,67 +365,6 @@ Public Class frmEditor_Map
 #End Region
 
 #Region "Settings"
-
-    Private Sub BtnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
-        Dim X As Integer, x2 As Integer
-        Dim Y As Integer, y2 As Integer
-        Dim tempArr(,) As TileStruct
-
-        If Not IsNumeric(txtMaxX.Text) Then txtMaxX.Text = Map.MaxX
-        If Val(txtMaxX.Text) < ScreenMapx Then txtMaxX.Text = ScreenMapx
-        If Val(txtMaxX.Text) > Byte.MaxValue Then txtMaxX.Text = Byte.MaxValue
-        If Not IsNumeric(txtMaxY.Text) Then txtMaxY.Text = Map.MaxY
-        If Val(txtMaxY.Text) < ScreenMapy Then txtMaxY.Text = ScreenMapy
-        If Val(txtMaxY.Text) > Byte.MaxValue Then txtMaxY.Text = Byte.MaxValue
-
-        With Map
-            .Name = Trim$(txtName.Text)
-            If lstMusic.SelectedIndex >= 0 Then
-                .Music = lstMusic.Items(lstMusic.SelectedIndex).ToString
-            Else
-                .Music = ""
-            End If
-            .Up = Val(txtUp.Text)
-            .Down = Val(txtDown.Text)
-            .Left = Val(txtLeft.Text)
-            .Right = Val(txtRight.Text)
-            .Moral = cmbMoral.SelectedIndex
-            .BootMap = Val(txtBootMap.Text)
-            .BootX = Val(txtBootX.Text)
-            .BootY = Val(txtBootY.Text)
-
-            ' set the data before changing it
-            tempArr = Map.Tile.Clone
-
-            x2 = Map.MaxX
-            y2 = Map.MaxY
-
-            ' change the data
-            .MaxX = Val(txtMaxX.Text)
-            .MaxY = Val(txtMaxY.Text)
-
-            ReDim Map.Tile(.MaxX, .MaxY)
-            ReDim Autotile(.MaxX, .MaxY)
-
-            If x2 > .MaxX Then x2 = .MaxX
-            If y2 > .MaxY Then y2 = .MaxY
-
-            For X = 0 To .MaxX
-                For Y = 0 To .MaxY
-                    ReDim .Tile(X, Y).Layer(LayerType.Count - 1)
-                    ReDim Autotile(X, Y).Layer(LayerType.Count - 1)
-
-                    If X <= x2 Then
-                        If Y <= y2 Then
-                            .Tile(X, Y) = tempArr(X, Y)
-                        End If
-                    End If
-                Next
-            Next
-
-            MapEditorSend()
-        End With
-    End Sub
 
     Private Sub BtnPreview_Click(sender As Object, e As EventArgs) Handles btnPreview.Click
         If PreviewPlayer Is Nothing Then

@@ -16,6 +16,7 @@ Public Module Types
     Public MapNpc(MAX_MAP_NPCS) As MapDataStruct
     Public Bank(MAX_PLAYERS) As BankStruct
     Public TempPlayer(MAX_PLAYERS) As TempPlayerStruct
+    Public Account(MAX_PLAYERS) as AccountStruct
     Public Player(MAX_PLAYERS) As PlayerStruct
     Public InstancedMaps(MAX_INSTANCED_MAPS) As InstancedMap
     Public CharSelection() As CharSelStruct
@@ -235,8 +236,8 @@ Public Module Types
         Dim Name As String
         Dim Desc As String
         Dim Stat() As Integer
-        Dim MaleSprite() As Integer
-        Dim FemaleSprite() As Integer
+        Dim MaleSprite As Integer
+        Dim FemaleSprite As Integer
         Dim StartItem() As Integer
         Dim StartValue() As Integer
         Dim StartMap As Integer
@@ -300,13 +301,15 @@ Public Module Types
         Dim Damage As Integer
     End Structure
 
-    Public Structure PlayerStruct
-        ' Account
+    Public Structure AccountStruct
         Dim Login As String
         Dim Password As String
         Dim Access As Byte
+        Dim Character() as String
+        Dim Index As Byte
+    End Structure
 
-        ' General
+    Public Structure PlayerStruct
         Dim Name As String
 
         Dim Sex As Byte

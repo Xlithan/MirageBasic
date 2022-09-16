@@ -1,17 +1,16 @@
 ﻿Imports System.IO
+Imports System.Runtime.InteropServices
 Imports System.Threading
 Imports System.Windows.Forms
 Imports MirageBasic.Core
 
 Module C_General
-
     Friend Started As Boolean
 
     Friend Function GetTickCount() As Integer
         Return Environment.TickCount
     End Function
-
-    Sub Startup()
+Sub Startup()
         SetStatus(Language.Load.Loading) 
         FrmMenu.Text = Settings.GameName
         FrmMenu.Visible = True
@@ -46,7 +45,7 @@ Module C_General
 
         CheckPaths()
         InitGraphics()
-    End Function
+End Function
 
     Friend function ClearGameData()
         ClearMap()
@@ -105,7 +104,7 @@ Module C_General
     Friend Function IsStringLegal(sInput As String) As Boolean
         Dim i As Integer
 
-        ' Prevent high ascii chars
+' Prevent high ascii chars
        For i = 1 To Len(sInput)
 
             If (Asc(Mid$(sInput, i, 1))) < 32 OrElse Asc(Mid$(sInput, i, 1)) > 126 Then
@@ -147,9 +146,9 @@ Module C_General
                     SetStatus(Language.MainMenu.SendNewCharacter)
 
                     If FrmMenu.rdoMale.Checked = True Then
-                        SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Male, FrmMenu.cmbJob.SelectedIndex, NewCharSprite)
+                        SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Male, FrmMenu.cmbJob.SelectedIndex)
                     Else
-                        SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Female, FrmMenu.cmbJob.SelectedIndex, NewCharSprite)
+                        SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Female, FrmMenu.cmbJob.SelectedIndex)
                     End If
                 End If
 
@@ -201,7 +200,6 @@ Module C_General
         ' Wait until connected or a few seconds have passed and report the server being down
         Do While (Not Socket.IsConnected()) AndAlso (GetTickCount() <= until)
             Application.DoEvents()
-            Thread.Sleep(5)
         Loop
 
         ' return value
