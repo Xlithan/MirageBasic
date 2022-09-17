@@ -1813,7 +1813,7 @@ Module C_Graphics
             End If
         Next
 
-'draw event names
+        'draw event names
         For i = 0 To Map.CurrentEvents
             If Map.MapEvents(I).Visible = 1 Then
                 If Map.MapEvents(I).ShowName = 1 Then
