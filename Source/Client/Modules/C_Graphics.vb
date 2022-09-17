@@ -1063,7 +1063,7 @@ Module C_Graphics
         RenderSprite(DirectionsSprite, GameWindow, ConvertMapX(x*PicX), ConvertMapY(y*PicY), rec.X, rec.Y, rec.Width,
                      rec.Height)
 
-' render dir blobs
+        ' render dir blobs
         For i = 0 To 4
             rec.X = (i - 1)*8
             rec.Width = 8
@@ -2967,6 +2967,8 @@ Module C_Graphics
         Dim y = 0
 
         If InGame = False Then Exit Sub
+        If NightGfx Is Nothing Then Exit Sub
+        If GettingMap Then Exit Sub
 
         If Map.Moral = CByte(MapMoralType.Indoors) Then
             NightGfx.Clear(New Color(CByte(0), CByte(0), CByte(0), CByte(Map.Brightness)))
