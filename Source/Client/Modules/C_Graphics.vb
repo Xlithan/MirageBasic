@@ -2391,7 +2391,7 @@ Module C_Graphics
 
                             colour = Color.White
 
-' Draw currency but with k, m, b etc. using a convertion function
+                            ' Draw currency but with k, m, b etc. using a convertion function
                             If CLng(amount) < 1000000 Then
                                 colour = Color.White
                             ElseIf CLng(amount) > 1000000 AndAlso CLng(amount) < 10000000 Then

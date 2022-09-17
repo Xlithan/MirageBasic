@@ -71,7 +71,6 @@ Module S_Pets
     Sub LoadPets()
         Dim i As Integer
 
-        ClearPets()
         CheckPets()
 
         For i = 0 To MAX_PETS
@@ -99,12 +98,10 @@ Module S_Pets
         Pet(petNum).StatType = reader.ReadByte()
         Pet(petNum).LevelingType = reader.ReadByte()
 
-        ReDim Pet(petNum).Stat(StatType.Count - 1)
         For i = 0 To StatType.Count - 1
             Pet(petNum).Stat(i) = reader.ReadByte()
         Next
-
-        ReDim Pet(petNum).Skill(4)
+   
         For i = 0 To 4
             Pet(petNum).Skill(i) = reader.ReadInt32()
         Next
@@ -117,14 +114,13 @@ Module S_Pets
 
     Sub CheckPets()
         For i = 0 To MAX_PETS
-            If Not File.Exists(Paths.Database & "pets\pet" & i & ".dat") Then
+            If Not File.Exists(Paths.Pet(i)) Then
                 SavePet(i)
             End If
         Next
     End Sub
 
     Sub ClearPet(petNum As Integer)
-
         Pet(petNum).Name = ""
 
         ReDim Pet(petNum).Stat(StatType.Count - 1)
