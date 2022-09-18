@@ -1578,11 +1578,11 @@ Partial Class FrmEditor_Events
         '
         'btnLabeling
         '
-        Me.btnLabeling.Location = New System.Drawing.Point(4, 674)
+        Me.btnLabeling.Location = New System.Drawing.Point(8, 671)
         Me.btnLabeling.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnLabeling.Name = "btnLabeling"
         Me.btnLabeling.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnLabeling.Size = New System.Drawing.Size(198, 27)
+        Me.btnLabeling.Size = New System.Drawing.Size(205, 27)
         Me.btnLabeling.TabIndex = 6
         Me.btnLabeling.Text = "Edit Variables/Switches"
         '

@@ -295,7 +295,7 @@ Friend Module C_EventSystem
             X = 0
             ReDim Preserve EventList(X)
 newlist:
-            For i = 0 To TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
+            For i = 1 To TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
                 If listleftoff(curlist) > 0 Then
                     If (TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(listleftoff(curlist)).Index = EventType.Condition OrElse TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(listleftoff(curlist)).Index = EventType.ShowChoices) AndAlso conditionalstage(curlist) <> 0 Then
                         i = listleftoff(curlist)
@@ -1733,7 +1733,7 @@ newlist:
                 X = 1
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).ParentList = oldCommandList.ParentList
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = p
-                For i = 0 To p + 1
+                For i = 1 To p + 1
                     If i <> curslot Then
                         TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(X) = oldCommandList.Commands(i)
                         X = X + 1
@@ -1751,7 +1751,7 @@ newlist:
                 ReDim TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(p)
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).ParentList = oldCommandList.ParentList
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = p
-                For i = 0 To p + 1
+                For i = 1 To p + 1
                     If i <> curslot Then
                         TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(X) = oldCommandList.Commands(i)
                         X = X + 1
