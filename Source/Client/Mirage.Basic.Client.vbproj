@@ -3,9 +3,9 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <TargetFramework>net6.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
-    <StartupObject>Mirage.Basic.Client.My.MyApplication</StartupObject>
-    <RootNamespace>$(MSBuildProjectName)</RootNamespace>
-    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+    <StartupObject>Engine.My.MyApplication</StartupObject>
+    <RootNamespace>Engine</RootNamespace>
+    <AssemblyName>MirageBasic Client</AssemblyName>
     <MyType>WindowsForms</MyType>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -896,7 +896,7 @@
     <PackageReference Include="SFML.Graphics" Version="2.5.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Mirage.Basic.Engine.vbproj" />
+    <ProjectReference Include="..\Core\Core.vbproj" />
     <ProjectReference Include="..\Network\Asfw.csproj" />
   </ItemGroup>
   <ItemGroup>
