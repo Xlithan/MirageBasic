@@ -1,5 +1,5 @@
 ﻿Imports Asfw
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Module S_Npc
 
@@ -875,14 +875,14 @@ Module S_Npc
                 If Not Target > 0 Then
                     Exit Sub
                 End If
-                If TargetType = Core.TargetType.Player Then
+                If TargetType = Engine.TargetType.Player Then
                     ' if have target, check in range
                     If Not IsInRange(range, MapNpc(mapNum).Npc(MapNpcNum).X, MapNpc(mapNum).Npc(MapNpcNum).Y, GetPlayerX(Target), GetPlayerY(Target)) Then
                         Exit Sub
                     Else
                         HasBuffered = True
                     End If
-                ElseIf TargetType = Core.TargetType.Npc Then
+                ElseIf TargetType = Engine.TargetType.Npc Then
                     '' if have target, check in range
                     'If Not isInRange(range, GetPlayerX(Index), GetPlayerY(Index), MapNpc(MapNum).Npc(Target).x, MapNpc(MapNum).Npc(Target).y) Then
                     '    PlayerMsg(Index, "Target not in range.")
@@ -901,7 +901,7 @@ Module S_Npc
         End Select
 
         If HasBuffered Then
-            SendAnimation(mapNum, Skill(skillnum).CastAnim, 0, 0, Core.TargetType.Player, Target)
+            SendAnimation(mapNum, Skill(skillnum).CastAnim, 0, 0, Engine.TargetType.Player, Target)
             MapNpc(mapNum).Npc(MapNpcNum).SkillBuffer = skillslot
             MapNpc(mapNum).Npc(MapNpcNum).SkillBufferTimer = GetTimeMs()
             Exit Sub

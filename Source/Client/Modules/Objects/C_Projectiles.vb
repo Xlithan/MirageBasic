@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports System.Windows.Forms
 Imports Asfw
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 Imports SFML.Graphics
 Imports SFML.System
 Imports SFML.Window

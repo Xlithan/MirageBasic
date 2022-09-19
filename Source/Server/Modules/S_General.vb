@@ -4,8 +4,8 @@ Imports System.Diagnostics
 Imports System.IO
 Imports System.Net
 Imports System.Runtime.InteropServices
-Imports MirageBasic.Core
-Imports MirageBasic.Core.Database
+Imports Mirage.Basic.Engine
+Imports Mirage.Basic.Engine.Database
 
 Module S_General
     'Friend Declare Function GetQueueStatus Lib "user32" (fuFlags As Integer) As Integer

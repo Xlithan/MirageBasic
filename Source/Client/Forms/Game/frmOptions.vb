@@ -1,4 +1,4 @@
-﻿Imports MirageBasic.Core
+﻿Imports Mirage.Basic.Engine
 
 Friend Class FrmOptions
 

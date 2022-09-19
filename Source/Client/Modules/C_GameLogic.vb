@@ -2,7 +2,7 @@
 Imports System.Threading
 Imports System.Windows.Forms
 Imports Asfw
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Module C_GameLogic
     Friend GameRand As New Random()

@@ -3,7 +3,7 @@ Imports System.Net.Mime.MediaTypeNames
 Imports System.Reflection.PortableExecutable
 Imports Asfw
 Imports Asfw.IO
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Module S_NetworkReceive
 

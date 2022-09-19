@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports System.Linq
 Imports System.Windows.Forms
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Module C_Database
     Friend Function GetFileContents(fullPath As String, Optional ByRef errInfo As String = "") As String

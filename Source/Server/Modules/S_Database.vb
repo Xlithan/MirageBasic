@@ -3,7 +3,7 @@ Imports System.Data
 Imports System.IO
 Imports Asfw
 Imports Asfw.IO
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Module modDatabase
 

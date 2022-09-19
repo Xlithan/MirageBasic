@@ -1,6 +1,6 @@
 ﻿Imports System.Windows.Forms
 Imports Asfw
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Module C_NetworkSend
 

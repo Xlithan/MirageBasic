@@ -1,6 +1,6 @@
 ﻿Imports System.Linq
 Imports Asfw
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Module S_Players
 
@@ -10,7 +10,7 @@ Module S_Players
 
         If Not IsSkill Then
             ' Check attack timer
-            If GetPlayerEquipment(Attacker, Core.EquipmentType.Weapon) > 0 Then
+            If GetPlayerEquipment(Attacker, Engine.EquipmentType.Weapon) > 0 Then
                 If GetTimeMs() < TempPlayer(Attacker).AttackTimer + Item(GetPlayerEquipment(Attacker, EquipmentType.Weapon)).Speed Then Exit Function
             Else
                 If GetTimeMs() < TempPlayer(Attacker).AttackTimer + 1000 Then Exit Function
@@ -860,7 +860,7 @@ Module S_Players
         Do While GetPlayerExp(index) >= GetPlayerNextLevel(index)
             expRollover = GetPlayerExp(index) - GetPlayerNextLevel(index)
             SetPlayerLevel(index, GetPlayerLevel(index) + 1)
-            SetPlayerPOINTS(index, GetPlayerPOINTS(index) + STAT_PER_LEVEL)
+            SetPlayerPoints(index, GetPlayerPoints(index) + STAT_PER_LEVEL)
             SetPlayerExp(index, expRollover)
             level_count += 1
         Loop
@@ -1052,7 +1052,7 @@ Module S_Players
                     ' Check to make sure that the tile is walkable
                     If Not IsDirBlocked(Map(GetPlayerMap(index)).Tile(GetPlayerX(index), GetPlayerY(index)).DirBlock, DirectionType.Up + 1) Then
                         If Map(GetPlayerMap(index)).Tile(GetPlayerX(index), GetPlayerY(index) - 1).Type <> TileType.Blocked Then
-                            If Map(GetPlayerMap(index)).Tile(GetPlayerX(index), GetPlayerY(index) - 1).Type <> TileType.Resource Then                              
+                            If Map(GetPlayerMap(index)).Tile(GetPlayerX(index), GetPlayerY(index) - 1).Type <> TileType.Resource Then
                                 SetPlayerY(index, GetPlayerY(index) - 1)
                                 SendPlayerMove(index, Movement)
                                 Moved = True
@@ -1086,7 +1086,7 @@ Module S_Players
                             If Map(GetPlayerMap(index)).Tile(GetPlayerX(index), GetPlayerY(index) + 1).Type <> TileType.Resource Then
                                 SetPlayerY(index, GetPlayerY(index) + 1)
                                 SendPlayerMove(index, Movement)
-                                Moved = true
+                                Moved = True
 
                                 'check for event
                                 For i = 0 To TempPlayer(index).EventMap.CurrentEvents
@@ -1116,7 +1116,7 @@ Module S_Players
                             If Map(GetPlayerMap(index)).Tile(GetPlayerX(index) - 1, GetPlayerY(index)).Type <> TileType.Resource Then
                                 SetPlayerX(index, GetPlayerX(index) - 1)
                                 SendPlayerMove(index, Movement)
-                                Moved = true
+                                Moved = True
 
                                 'check for event
                                 For i = 0 To TempPlayer(index).EventMap.CurrentEvents
@@ -1147,7 +1147,7 @@ Module S_Players
                             If Map(GetPlayerMap(index)).Tile(GetPlayerX(index) + 1, GetPlayerY(index)).Type <> TileType.Resource Then
                                 SetPlayerX(index, GetPlayerX(index) + 1)
                                 SendPlayerMove(index, Movement)
-                                Moved = true
+                                Moved = True
 
                                 'check for event
                                 For i = 0 To TempPlayer(index).EventMap.CurrentEvents
@@ -1211,7 +1211,7 @@ Module S_Players
                 VitalType = .Data1
                 amount = .Data2
                 If Not GetPlayerVital(index, VitalType) = GetPlayerMaxVital(index, VitalType) Then
-                    If VitalType = Core.VitalType.HP Then
+                    If VitalType = Engine.VitalType.HP Then
                         Colour = ColorType.BrightGreen
                     Else
                         Colour = ColorType.BrightBlue
@@ -1230,13 +1230,13 @@ Module S_Players
             If .Type = TileType.Trap Then
                 amount = .Data1
                 SendActionMsg(GetPlayerMap(index), "-" & amount, ColorType.BrightRed, ActionMsgType.Scroll, GetPlayerX(index) * 32, GetPlayerY(index) * 32, 1)
-                If GetPlayerVital(index, Core.VitalType.HP) - amount < 0 Then
+                If GetPlayerVital(index, Engine.VitalType.HP) - amount < 0 Then
                     KillPlayer(index)
                     PlayerMsg(index, "You've been killed by a trap.", ColorType.BrightRed)
                 Else
-                    SetPlayerVital(index, Core.VitalType.HP, GetPlayerVital(index, Core.VitalType.HP) - amount)
+                    SetPlayerVital(index, Engine.VitalType.HP, GetPlayerVital(index, Engine.VitalType.HP) - amount)
                     PlayerMsg(index, "You've been injured by a trap.", ColorType.BrightRed)
-                    SendVital(index, Core.VitalType.HP)
+                    SendVital(index, Engine.VitalType.HP)
                     ' send vitals to party if in one
                     If TempPlayer(index).InParty > 0 Then SendPartyVitals(TempPlayer(index).InParty, index)
                 End If

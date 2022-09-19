@@ -5,7 +5,7 @@ using System.Net.Sockets;
 
 namespace Asfw.Network
 {
-  public sealed class Server : IDisposable
+  public sealed class NetworkServer : IDisposable
   {
     public Dictionary<int, Socket> _socket;
     public List<int> _unsignedIndex;
@@ -13,7 +13,7 @@ namespace Asfw.Network
     private IAsyncResult _pendingAccept;
     private int _packetCount;
     private int _packetSize;
-    public Server.DataArgs[] PacketId;
+    public NetworkServer.DataArgs[] PacketId;
 
     public int BufferLimit { get; set; }
 
@@ -31,19 +31,19 @@ namespace Asfw.Network
 
     public int PacketDisconnectCount { get; set; }
 
-    public event Server.AccessArgs AccessCheck;
+    public event NetworkServer.AccessArgs AccessCheck;
 
-    public event Server.ConnectionArgs ConnectionReceived;
+    public event NetworkServer.ConnectionArgs ConnectionReceived;
 
-    public event Server.ConnectionArgs ConnectionLost;
+    public event NetworkServer.ConnectionArgs ConnectionLost;
 
-    public event Server.CrashReportArgs CrashReport;
+    public event NetworkServer.CrashReportArgs CrashReport;
 
-    public event Server.PacketInfoArgs PacketReceived;
+    public event NetworkServer.PacketInfoArgs PacketReceived;
 
-    public event Server.TrafficInfoArgs TrafficReceived;
+    public event NetworkServer.TrafficInfoArgs TrafficReceived;
 
-    public Server(int packetCount, int packetSize = 8192, int clientLimit = 0)
+    public NetworkServer(int packetCount, int packetSize = 8192, int clientLimit = 0)
     {
       if (this._listener != null || this._socket != null)
         return;
@@ -55,7 +55,7 @@ namespace Asfw.Network
       this.ClientLimit = clientLimit;
       this._packetCount = packetCount;
       this._packetSize = packetSize;
-      this.PacketId = new Server.DataArgs[packetCount];
+      this.PacketId = new NetworkServer.DataArgs[packetCount];
     }
 
     public void Dispose()
@@ -70,16 +70,16 @@ namespace Asfw.Network
       }
       this._socket.Clear();
       this._socket = (Dictionary<int, Socket>) null;
-      this.PacketId = (Server.DataArgs[]) null;
+      this.PacketId = (NetworkServer.DataArgs[]) null;
       this._unsignedIndex.Clear();
       this._unsignedIndex = (List<int>) null;
-      this.AccessCheck = (Server.AccessArgs) null;
-      this.ConnectionReceived = (Server.ConnectionArgs) null;
-      this.ConnectionLost = (Server.ConnectionArgs) null;
-      this.CrashReport = (Server.CrashReportArgs) null;
-      this.PacketReceived = (Server.PacketInfoArgs) null;
-      this.TrafficReceived = (Server.TrafficInfoArgs) null;
-      this.PacketId = (Server.DataArgs[]) null;
+      this.AccessCheck = (NetworkServer.AccessArgs) null;
+      this.ConnectionReceived = (NetworkServer.ConnectionArgs) null;
+      this.ConnectionLost = (NetworkServer.ConnectionArgs) null;
+      this.CrashReport = (NetworkServer.CrashReportArgs) null;
+      this.PacketReceived = (NetworkServer.PacketInfoArgs) null;
+      this.TrafficReceived = (NetworkServer.TrafficInfoArgs) null;
+      this.PacketId = (NetworkServer.DataArgs[]) null;
     }
 
     public bool IsConnected(int index)
@@ -132,7 +132,7 @@ namespace Asfw.Network
       while (!this._socket.ContainsKey(highIndex) && highIndex != this.MinimumIndex)
         --highIndex;
       this.HighIndex = highIndex;
-      Server.ConnectionArgs connectionLost = this.ConnectionLost;
+      NetworkServer.ConnectionArgs connectionLost = this.ConnectionLost;
       if (connectionLost == null)
         return;
       connectionLost(asyncState);
@@ -196,7 +196,7 @@ namespace Asfw.Network
           this._socket[emptySlot].ReceiveBufferSize = this._packetSize;
           this._socket[emptySlot].SendBufferSize = this._packetSize;
           this.BeginReceiveData(emptySlot);
-          Server.ConnectionArgs connectionReceived = this.ConnectionReceived;
+          NetworkServer.ConnectionArgs connectionReceived = this.ConnectionReceived;
           if (connectionReceived != null)
             connectionReceived(emptySlot);
         }
@@ -226,7 +226,7 @@ namespace Asfw.Network
 
     private void BeginReceiveData(int index)
     {
-      Server.ReceiveState state = new Server.ReceiveState(index, this._packetSize);
+      NetworkServer.ReceiveState state = new NetworkServer.ReceiveState(index, this._packetSize);
       try
       {
         this._socket[index].BeginReceive(state.Buffer, 0, this._packetSize, SocketFlags.None, new AsyncCallback(this.DoReceive), (object) state);
@@ -240,7 +240,7 @@ namespace Asfw.Network
     {
       if (this._socket == null)
         return;
-      Server.ReceiveState asyncState = (Server.ReceiveState) ar.AsyncState;
+      NetworkServer.ReceiveState asyncState = (NetworkServer.ReceiveState) ar.AsyncState;
       int length1;
       try
       {
@@ -248,7 +248,7 @@ namespace Asfw.Network
       }
       catch
       {
-        Server.CrashReportArgs crashReport = this.CrashReport;
+        NetworkServer.CrashReportArgs crashReport = this.CrashReport;
         if (crashReport != null)
           crashReport(asyncState.Index, "ConnectionForciblyClosedException");
         this.Disconnect(asyncState.Index);
@@ -265,7 +265,7 @@ namespace Asfw.Network
         }
         else
         {
-          Server.CrashReportArgs crashReport = this.CrashReport;
+          NetworkServer.CrashReportArgs crashReport = this.CrashReport;
           if (crashReport != null)
             crashReport(asyncState.Index, "BufferUnderflowException");
           this.Disconnect(asyncState.Index);
@@ -274,13 +274,13 @@ namespace Asfw.Network
       }
       else
       {
-        Server.TrafficInfoArgs trafficReceived = this.TrafficReceived;
+        NetworkServer.TrafficInfoArgs trafficReceived = this.TrafficReceived;
         if (trafficReceived != null)
           trafficReceived(length1, ref asyncState.Buffer);
         ++asyncState.PacketCount;
         if (this.PacketDisconnectCount > 0 && asyncState.PacketCount >= this.PacketDisconnectCount)
         {
-          Server.CrashReportArgs crashReport = this.CrashReport;
+          NetworkServer.CrashReportArgs crashReport = this.CrashReport;
           if (crashReport != null)
             crashReport(asyncState.Index, "Packet Spamming/DDOS");
           this.Disconnect(asyncState.Index);
@@ -340,7 +340,7 @@ namespace Asfw.Network
       }
     }
 
-    private void PacketHandler(ref Server.ReceiveState so)
+    private void PacketHandler(ref NetworkServer.ReceiveState so)
     {
       int index = so.Index;
       int length1 = so.RingBuffer.Length;
@@ -374,7 +374,7 @@ namespace Asfw.Network
                   byte[] data = new byte[length2];
                   if (length2 > 0)
                     Buffer.BlockCopy((Array) so.RingBuffer, startIndex + 4, (Array) data, 0, length2);
-                  Server.PacketInfoArgs packetReceived = this.PacketReceived;
+                  NetworkServer.PacketInfoArgs packetReceived = this.PacketReceived;
                   if (packetReceived != null)
                     packetReceived(length2, int32_2, ref data);
                   this.PacketId[int32_2](index, ref data);
@@ -405,7 +405,7 @@ namespace Asfw.Network
         so.Dispose();
         return;
       }
-      Server.CrashReportArgs crashReport1 = this.CrashReport;
+      NetworkServer.CrashReportArgs crashReport1 = this.CrashReport;
       if (crashReport1 != null)
         crashReport1(index, "NullReferenceException");
       this.Disconnect(index);
@@ -417,7 +417,7 @@ namespace Asfw.Network
         so.Dispose();
         return;
       }
-      Server.CrashReportArgs crashReport2 = this.CrashReport;
+      NetworkServer.CrashReportArgs crashReport2 = this.CrashReport;
       if (crashReport2 != null)
         crashReport2(index, "IndexOutOfRangeException");
       this.Disconnect(index);
@@ -429,7 +429,7 @@ namespace Asfw.Network
         so.Dispose();
         return;
       }
-      Server.CrashReportArgs crashReport3 = this.CrashReport;
+      NetworkServer.CrashReportArgs crashReport3 = this.CrashReport;
       if (crashReport3 != null)
         crashReport3(index, "BrokenPacketException");
       this.Disconnect(index);
@@ -530,7 +530,7 @@ namespace Asfw.Network
       }
       catch
       {
-        Server.CrashReportArgs crashReport = this.CrashReport;
+        NetworkServer.CrashReportArgs crashReport = this.CrashReport;
         if (crashReport != null)
           crashReport(asyncState, "ConnectionForciblyClosedException");
         this.Disconnect(asyncState);
