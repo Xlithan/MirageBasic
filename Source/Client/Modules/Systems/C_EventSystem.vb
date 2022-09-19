@@ -303,7 +303,7 @@ newlist:
                         i = listleftoff(curlist) + 1
                     End If
                 End If
-                If i <= TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount Then
+                If i < TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount Then
                     If TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Index = EventType.Condition Then
                         X = X + 1
                         ReDim Preserve EventList(X)
