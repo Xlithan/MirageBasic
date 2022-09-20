@@ -1,7 +1,7 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
 Imports Asfw
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Friend Module C_Gui
 

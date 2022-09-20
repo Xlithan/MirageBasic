@@ -506,6 +506,7 @@ Partial Class frmEditor_Job
         '
         Me.nudFemaleSprite.Location = New System.Drawing.Point(56, 97)
         Me.nudFemaleSprite.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudFemaleSprite.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudFemaleSprite.Name = "nudFemaleSprite"
         Me.nudFemaleSprite.Size = New System.Drawing.Size(64, 23)
         Me.nudFemaleSprite.TabIndex = 18
@@ -554,6 +555,7 @@ Partial Class frmEditor_Job
         '
         Me.nudMaleSprite.Location = New System.Drawing.Point(56, 97)
         Me.nudMaleSprite.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudMaleSprite.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudMaleSprite.Name = "nudMaleSprite"
         Me.nudMaleSprite.Size = New System.Drawing.Size(64, 23)
         Me.nudMaleSprite.TabIndex = 12

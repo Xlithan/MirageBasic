@@ -3,7 +3,7 @@ Imports System.Data
 Imports System.IO
 Imports Asfw
 Imports Asfw.IO
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Module modDatabase
 
@@ -1611,7 +1611,6 @@ Module modDatabase
             Account(index).Index = CharNum
             SetPlayerCharName(index, Account(index).Index, name)
             SavePlayer(index)
-            Exit Sub
         End If
 
     End Sub

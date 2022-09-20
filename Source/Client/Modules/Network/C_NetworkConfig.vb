@@ -1,12 +1,12 @@
 ﻿Imports Asfw.Network
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Friend Module C_NetworkConfig
-    Friend WithEvents Socket As Client
+    Friend WithEvents Socket As NetworkClient
 
     Friend Sub InitNetwork()
         If Not Socket Is Nothing Then Return
-        Socket = New Client(ServerPackets.COUNT, 4096)
+        Socket = New NetworkClient(ServerPackets.COUNT, 4096)
         PacketRouter()
     End Sub
 

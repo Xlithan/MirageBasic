@@ -2,7 +2,7 @@
 Imports System.IO
 Imports Asfw
 Imports Asfw.IO
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 
 Module S_Pets
@@ -71,7 +71,6 @@ Module S_Pets
     Sub LoadPets()
         Dim i As Integer
 
-        ClearPets()
         CheckPets()
 
         For i = 0 To MAX_PETS
@@ -99,12 +98,10 @@ Module S_Pets
         Pet(petNum).StatType = reader.ReadByte()
         Pet(petNum).LevelingType = reader.ReadByte()
 
-        ReDim Pet(petNum).Stat(StatType.Count - 1)
         For i = 0 To StatType.Count - 1
             Pet(petNum).Stat(i) = reader.ReadByte()
         Next
-
-        ReDim Pet(petNum).Skill(4)
+   
         For i = 0 To 4
             Pet(petNum).Skill(i) = reader.ReadInt32()
         Next
@@ -117,14 +114,13 @@ Module S_Pets
 
     Sub CheckPets()
         For i = 0 To MAX_PETS
-            If Not File.Exists(Paths.Database & "pets\pet" & i & ".dat") Then
+            If Not File.Exists(Paths.Pet(i)) Then
                 SavePet(i)
             End If
         Next
     End Sub
 
     Sub ClearPet(petNum As Integer)
-
         Pet(petNum).Name = ""
 
         ReDim Pet(petNum).Stat(StatType.Count - 1)
@@ -3023,10 +3019,10 @@ Module S_Pets
             Case 0 ' self-cast target
                 Select Case Skill(skillnum).Type
                     Case SkillType.HealHp
-                        SkillPet_Effect(Core.VitalType.HP, True, index, vital, skillnum)
+                        SkillPet_Effect(Engine.VitalType.HP, True, index, vital, skillnum)
                         didCast = True
                     Case SkillType.HealMp
-                        SkillPet_Effect(Core.VitalType.MP, True, index, vital, skillnum)
+                        SkillPet_Effect(Engine.VitalType.MP, True, index, vital, skillnum)
                         didCast = True
                 End Select
 
@@ -3086,7 +3082,7 @@ Module S_Pets
                         Next
 
                         For i = 1 To MAX_MAP_NPCS
-                            If MapNpc(mapNum).Npc(i).Num > 0 AndAlso MapNpc(mapNum).Npc(i).Vital(Core.VitalType.HP) > 0 Then
+                            If MapNpc(mapNum).Npc(i).Num > 0 AndAlso MapNpc(mapNum).Npc(i).Vital(Engine.VitalType.HP) > 0 Then
                                 If IsInRange(aoE, x, y, MapNpc(mapNum).Npc(i).X, MapNpc(mapNum).Npc(i).Y) Then
                                     If CanPetAttackNpc(index, i, True) Then
                                         SendAnimation(mapNum, Skill(skillnum).SkillAnim, 0, 0, TargetType.Npc, i)
@@ -3099,13 +3095,13 @@ Module S_Pets
                     Case SkillType.HealHp, SkillType.HealMp, SkillType.DamageMp
 
                         If Skill(skillnum).Type = SkillType.HealHp Then
-                            vitalType = Core.VitalType.HP
+                            vitalType = Engine.VitalType.HP
                             increment = True
                         ElseIf Skill(skillnum).Type = SkillType.HealMp Then
-                            vitalType = Core.VitalType.MP
+                            vitalType = Engine.VitalType.MP
                             increment = True
                         ElseIf Skill(skillnum).Type = SkillType.DamageMp Then
-                            vitalType = Core.VitalType.MP
+                            vitalType = Engine.VitalType.MP
                             increment = False
                         End If
 
@@ -3181,10 +3177,10 @@ Module S_Pets
                     Case SkillType.DamageMp, SkillType.HealMp, SkillType.HealHp
 
                         If Skill(skillnum).Type = SkillType.DamageMp Then
-                            vitalType = Core.VitalType.MP
+                            vitalType = Engine.VitalType.MP
                             increment = False
                         ElseIf Skill(skillnum).Type = SkillType.HealMp Then
-                            vitalType = Core.VitalType.MP
+                            vitalType = Engine.VitalType.MP
                             increment = True
                         ElseIf Skill(skillnum).Type = SkillType.HealHp Then
                             vitalType = Enumerations.VitalType.HP
@@ -3233,9 +3229,9 @@ Module S_Pets
         End Select
 
         If didCast Then
-            If takeMana Then SetPetVital(index, Core.VitalType.MP, GetPetVital(index, Core.VitalType.MP) - mpCost)
-            SendPetVital(index, Core.VitalType.MP)
-            SendPetVital(index, Core.VitalType.HP)
+            If takeMana Then SetPetVital(index, Engine.VitalType.MP, GetPetVital(index, Engine.VitalType.MP) - mpCost)
+            SendPetVital(index, Engine.VitalType.MP)
+            SendPetVital(index, Engine.VitalType.HP)
 
             TempPlayer(index).PetSkillCd(skillslot) = GetTimeMs() + (Skill(skillnum).CdTime * 1000)
 

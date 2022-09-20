@@ -4,7 +4,7 @@ using System.Net.Sockets;
 
 namespace Asfw.Network
 {
-  public sealed class Client : IDisposable
+  public sealed class NetworkClient : IDisposable
   {
     private Socket _socket;
     private byte[] _receiveBuffer;
@@ -12,23 +12,23 @@ namespace Asfw.Network
     private int _packetCount;
     private int _packetSize;
     private bool _connecting;
-    public Client.DataArgs[] PacketId;
+    public NetworkClient.DataArgs[] PacketId;
 
     public bool ThreadControl { get; set; }
 
-    public event Client.ConnectionArgs ConnectionSuccess;
+    public event NetworkClient.ConnectionArgs ConnectionSuccess;
 
-    public event Client.ConnectionArgs ConnectionFailed;
+    public event NetworkClient.ConnectionArgs ConnectionFailed;
 
-    public event Client.ConnectionArgs ConnectionLost;
+    public event NetworkClient.ConnectionArgs ConnectionLost;
 
-    public event Client.CrashReportArgs CrashReport;
+    public event NetworkClient.CrashReportArgs CrashReport;
 
-    public event Client.PacketInfoArgs PacketReceived;
+    public event NetworkClient.PacketInfoArgs PacketReceived;
 
-    public event Client.TrafficInfoArgs TrafficReceived;
+    public event NetworkClient.TrafficInfoArgs TrafficReceived;
 
-    public Client(int packetCount, int packetSize = 8192)
+    public NetworkClient(int packetCount, int packetSize = 8192)
     {
       if (this._socket != null)
         return;
@@ -38,7 +38,7 @@ namespace Asfw.Network
       this._socket.NoDelay = true;
       this._packetCount = packetCount;
       this._packetSize = packetSize;
-      this.PacketId = new Client.DataArgs[packetCount];
+      this.PacketId = new NetworkClient.DataArgs[packetCount];
     }
 
     public void Dispose()
@@ -49,14 +49,14 @@ namespace Asfw.Network
       this._socket.Close();
       this._socket.Dispose();
       this._socket = (Socket) null;
-      this.PacketId = (Client.DataArgs[]) null;
-      this.ConnectionSuccess = (Client.ConnectionArgs) null;
-      this.ConnectionFailed = (Client.ConnectionArgs) null;
-      this.ConnectionLost = (Client.ConnectionArgs) null;
-      this.CrashReport = (Client.CrashReportArgs) null;
-      this.PacketReceived = (Client.PacketInfoArgs) null;
-      this.TrafficReceived = (Client.TrafficInfoArgs) null;
-      this.PacketId = (Client.DataArgs[]) null;
+      this.PacketId = (NetworkClient.DataArgs[]) null;
+      this.ConnectionSuccess = (NetworkClient.ConnectionArgs) null;
+      this.ConnectionFailed = (NetworkClient.ConnectionArgs) null;
+      this.ConnectionLost = (NetworkClient.ConnectionArgs) null;
+      this.CrashReport = (NetworkClient.CrashReportArgs) null;
+      this.PacketReceived = (NetworkClient.PacketInfoArgs) null;
+      this.TrafficReceived = (NetworkClient.TrafficInfoArgs) null;
+      this.PacketId = (NetworkClient.DataArgs[]) null;
     }
 
     public void Connect(string ip, int port)
@@ -84,7 +84,7 @@ namespace Asfw.Network
       }
       catch
       {
-        Client.ConnectionArgs connectionFailed = this.ConnectionFailed;
+        NetworkClient.ConnectionArgs connectionFailed = this.ConnectionFailed;
         if (connectionFailed != null)
           connectionFailed();
         this._connecting = false;
@@ -92,7 +92,7 @@ namespace Asfw.Network
       }
       if (!this._socket.Connected)
       {
-        Client.ConnectionArgs connectionFailed = this.ConnectionFailed;
+        NetworkClient.ConnectionArgs connectionFailed = this.ConnectionFailed;
         if (connectionFailed != null)
           connectionFailed();
         this._connecting = false;
@@ -100,7 +100,7 @@ namespace Asfw.Network
       else
       {
         this._connecting = false;
-        Client.ConnectionArgs connectionSuccess = this.ConnectionSuccess;
+        NetworkClient.ConnectionArgs connectionSuccess = this.ConnectionSuccess;
         if (connectionSuccess != null)
           connectionSuccess();
         this._socket.ReceiveBufferSize = this._packetSize;
@@ -131,7 +131,7 @@ namespace Asfw.Network
       catch
       {
       }
-      Client.ConnectionArgs connectionLost = this.ConnectionLost;
+      NetworkClient.ConnectionArgs connectionLost = this.ConnectionLost;
       if (connectionLost == null)
         return;
       connectionLost();
@@ -154,7 +154,7 @@ namespace Asfw.Network
       }
       catch
       {
-        Client.CrashReportArgs crashReport = this.CrashReport;
+        NetworkClient.CrashReportArgs crashReport = this.CrashReport;
         if (crashReport != null)
           crashReport("ConnectionForciblyClosedException");
         this.Disconnect();
@@ -164,14 +164,14 @@ namespace Asfw.Network
       {
         if (this._socket == null)
           return;
-        Client.CrashReportArgs crashReport = this.CrashReport;
+        NetworkClient.CrashReportArgs crashReport = this.CrashReport;
         if (crashReport != null)
           crashReport("BufferUnderflowException");
         this.Disconnect();
       }
       else
       {
-        Client.TrafficInfoArgs trafficReceived = this.TrafficReceived;
+        NetworkClient.TrafficInfoArgs trafficReceived = this.TrafficReceived;
         if (trafficReceived != null)
           trafficReceived(length1, ref this._receiveBuffer);
         if (this._packetRing == null)
@@ -218,7 +218,7 @@ namespace Asfw.Network
                   byte[] data = new byte[length2];
                   if (length2 > 0)
                     Buffer.BlockCopy((Array) this._packetRing, startIndex + 4, (Array) data, 0, length2);
-                  Client.PacketInfoArgs packetReceived = this.PacketReceived;
+                  NetworkClient.PacketInfoArgs packetReceived = this.PacketReceived;
                   if (packetReceived != null)
                     packetReceived(length2, int32_2, ref data);
                   this.PacketId[int32_2](ref data);
@@ -239,7 +239,7 @@ namespace Asfw.Network
         else
           goto EmptyPacket;
       }
-      Client.CrashReportArgs crashReport1 = this.CrashReport;
+      NetworkClient.CrashReportArgs crashReport1 = this.CrashReport;
 
       if (crashReport1 != null)
         crashReport1("NullReferenceException");
@@ -247,14 +247,14 @@ namespace Asfw.Network
       return;
 
     IndexOutOfRange:
-      Client.CrashReportArgs crashReport2 = this.CrashReport;
+      NetworkClient.CrashReportArgs crashReport2 = this.CrashReport;
       if (crashReport2 != null)
         crashReport2("IndexOutOfRangeException");
       this.Disconnect();
       return;
 
     BrokenPacket:
-      Client.CrashReportArgs crashReport3 = this.CrashReport;
+      NetworkClient.CrashReportArgs crashReport3 = this.CrashReport;
       if (crashReport3 != null)
         crashReport3("BrokenPacketException");
       this.Disconnect();
@@ -289,7 +289,7 @@ namespace Asfw.Network
           throw new Exception(string.Format("Receive error: {0}", (object) errorCode));
         if (length1 < 1)
           return;
-        Client.TrafficInfoArgs trafficReceived = this.TrafficReceived;
+        NetworkClient.TrafficInfoArgs trafficReceived = this.TrafficReceived;
         if (trafficReceived != null)
           trafficReceived(length1, ref this._receiveBuffer);
         if (this._packetRing == null)
@@ -339,7 +339,7 @@ namespace Asfw.Network
       }
       catch
       {
-        Client.CrashReportArgs crashReport = this.CrashReport;
+        NetworkClient.CrashReportArgs crashReport = this.CrashReport;
         if (crashReport != null)
           crashReport("ConnectionForciblyClosedException");
         this.Disconnect();

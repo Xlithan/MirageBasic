@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.Engine.frmMenu
+            Me.MainForm = Mirage.Basic.Client.FrmMenu
         End Sub
     End Class
 End Namespace

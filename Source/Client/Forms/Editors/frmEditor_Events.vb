@@ -1,7 +1,7 @@
 ﻿Imports System.Drawing
 Imports System.IO
 Imports System.Windows.Forms
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Public Class FrmEditor_Events
     Dim tmpGraphicIndex As Integer
@@ -207,11 +207,12 @@ Public Class FrmEditor_Events
         For i = 0 To NAX_VARIABLES
             cmbPlayerVar.Items.Add(i & ". " & Variables(i))
         Next
-        ' variables
+        ' switches
         cmbPlayerSwitch.Items.Clear()
         For i = 0 To MAX_SWITCHES
             cmbPlayerSwitch.Items.Add(i & ". " & Switches(i))
         Next
+        cmbSelfSwitch.SelectedIndex = 0
 
         ' enable delete button
         If TmpEvent.PageCount > 1 Then
@@ -1241,6 +1242,9 @@ Public Class FrmEditor_Events
     End Sub
 
     Private Sub BtnRename_Ok_Click(sender As Object, e As EventArgs) Handles btnRename_Ok.Click
+        FraRenaming.Visible = False
+        fraLabeling.Visible = True
+
         Select Case RenameType
             Case 1
                 'Variable
@@ -1277,6 +1281,8 @@ Public Class FrmEditor_Events
 
     Private Sub BtnRename_Cancel_Click(sender As Object, e As EventArgs) Handles btnRename_Cancel.Click
         FraRenaming.Visible = False
+        fraLabeling.Visible = True
+
         RenameType = 0
         Renameindex = 0
         lstSwitches.Items.Clear()

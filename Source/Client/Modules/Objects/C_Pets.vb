@@ -1,6 +1,6 @@
 ﻿Imports System.Drawing
 Imports Asfw
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Module C_Pets
 

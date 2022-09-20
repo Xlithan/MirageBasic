@@ -1,5 +1,5 @@
 ﻿Imports System.Drawing
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Module C_Variables
 

@@ -1,4 +1,4 @@
-﻿Imports MirageBasic.Core
+﻿Imports Mirage.Basic.Engine
 Imports SFML.Graphics
 Imports SFML.System
 Imports SFML.Window

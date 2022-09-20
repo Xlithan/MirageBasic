@@ -1,5 +1,5 @@
 ﻿Imports System.Windows.Forms.VisualStyles
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Friend Class FrmAdmin
 

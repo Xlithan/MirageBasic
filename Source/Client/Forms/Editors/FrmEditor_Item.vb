@@ -1,5 +1,5 @@
 ﻿Imports System.DirectoryServices.ActiveDirectory
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Friend Class frmEditor_Item
 

@@ -2,7 +2,7 @@
 Imports System.IO
 Imports System.Windows.Forms
 Imports Asfw
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine
 
 Module C_Resources
 
