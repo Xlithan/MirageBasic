@@ -47,15 +47,9 @@ Module S_General
         CheckDir(Paths.Quests)
 
         ' LOAD ENCRYPTION
-        Dim fi = Paths.Database & "\AsyncKeys.xml"
-        If Not File.Exists(fi) Then
-            EKeyPair.GenerateKeys()
-            EKeyPair.ExportKey(fi, True) ' True exports private key too.
-            ' Remember never pass private to client!
-            ' Exporting the Key above saves it as a file for later reuse.
-        Else
-            EKeyPair.ImportKey(fi)
-        End If
+        EKeyPair.GenerateKeys()
+        ' Remember never pass private to client!
+        ' Exporting the Key above saves it as a file for later reuse.
         ' END LOAD ENCRYPTION
 
         ' Get that network READY SUN! ~ SpiceyWOlf
