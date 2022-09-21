@@ -1,8 +1,10 @@
 ﻿Imports System.IO
 Imports System.Runtime.InteropServices
-Imports MirageBasic.Core
+Imports Mirage.Basic.Engine.Enumerations
 Imports SFML.Graphics
 Imports SFML.System
+Imports Mirage.Basic.Engine
+Imports Time = Mirage.Basic.Engine.Time
 
 Module C_Graphics
 
@@ -365,9 +367,9 @@ Module C_Graphics
 
         'sadly, gui shit is always needed, so we preload it :/
         CursorInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Graphics & "Misc\Cursor" & GfxExt) Then
+        If File.Exists(Paths.Graphics & "Misc\Cursor" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            CursorGfx = New Texture(MirageBasic.Core.Paths.Graphics & "Misc\Cursor" & GfxExt)
+            CursorGfx = New Texture(Paths.Graphics & "Misc\Cursor" & GfxExt)
             CursorSprite = New Sprite(CursorGfx)
 
             'Cache the width and height
@@ -376,9 +378,9 @@ Module C_Graphics
         End If
 
         DoorGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Graphics & "Misc\Door" & GfxExt) Then
+        If File.Exists(Paths.Graphics & "Misc\Door" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            DoorGfx = New Texture(MirageBasic.Core.Paths.Graphics & "Misc\Door" & GfxExt)
+            DoorGfx = New Texture(Paths.Graphics & "Misc\Door" & GfxExt)
             DoorSprite = New Sprite(DoorGfx)
 
             'Cache the width and height
@@ -387,9 +389,9 @@ Module C_Graphics
         End If
 
         BloodGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Graphics & "Misc\Blood" & GfxExt) Then
+        If File.Exists(Paths.Graphics & "Misc\Blood" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            BloodGfx = New Texture(MirageBasic.Core.Paths.Graphics & "Misc\Blood" & GfxExt)
+            BloodGfx = New Texture(Paths.Graphics & "Misc\Blood" & GfxExt)
             BloodSprite = New Sprite(BloodGfx)
 
             'Cache the width and height
@@ -398,9 +400,9 @@ Module C_Graphics
         End If
 
         DirectionsGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Graphics & "Misc\Direction" & GfxExt) Then
+        If File.Exists(Paths.Graphics & "Misc\Direction" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            DirectionsGfx = New Texture(MirageBasic.Core.Paths.Graphics & "Misc\Direction" & GfxExt)
+            DirectionsGfx = New Texture(Paths.Graphics & "Misc\Direction" & GfxExt)
             DirectionsSprite = New Sprite(DirectionsGfx)
 
             'Cache the width and height
@@ -409,9 +411,9 @@ Module C_Graphics
         End If
 
         WeatherGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Graphics & "Misc\Weather" & GfxExt) Then
+        If File.Exists(Paths.Graphics & "Misc\Weather" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            WeatherGfx = New Texture(MirageBasic.Core.Paths.Graphics & "Misc\Weather" & GfxExt)
+            WeatherGfx = New Texture(Paths.Graphics & "Misc\Weather" & GfxExt)
             WeatherSprite = New Sprite(WeatherGfx)
 
             'Cache the width and height
@@ -420,9 +422,9 @@ Module C_Graphics
         End If
 
         HotBarGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Main\HotBar" & GfxExt) Then
+        If File.Exists(Paths.Gui & "Main\HotBar" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            HotBarGfx = New Texture(MirageBasic.Core.Paths.Gui & "Main\HotBar" & GfxExt)
+            HotBarGfx = New Texture(Paths.Gui & "Main\HotBar" & GfxExt)
             HotBarSprite = New Sprite(HotBarGfx)
 
             'Cache the width and height
@@ -431,8 +433,8 @@ Module C_Graphics
         End If
 
         ChatWindowGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Main\" & "Chat" & GfxExt) Then
-            ChatWindowGfx = New Texture(MirageBasic.Core.Paths.Gui & "Main\" & "Chat" & GfxExt)
+        If File.Exists(Paths.Gui & "Main\" & "Chat" & GfxExt) Then
+            ChatWindowGfx = New Texture(Paths.Gui & "Main\" & "Chat" & GfxExt)
             ChatWindowSprite = New Sprite(ChatWindowGfx)
 
             'Cache the width and height
@@ -441,8 +443,8 @@ Module C_Graphics
         End If
 
         MyChatWindowGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Main\" & "MyChat" & GfxExt) Then
-            MyChatWindowGfx = New Texture(MirageBasic.Core.Paths.Gui & "Main\" & "MyChat" & GfxExt)
+        If File.Exists(Paths.Gui & "Main\" & "MyChat" & GfxExt) Then
+            MyChatWindowGfx = New Texture(Paths.Gui & "Main\" & "MyChat" & GfxExt)
             MyChatWindowSprite = New Sprite(MyChatWindowGfx)
 
             'Cache the width and height
@@ -451,8 +453,8 @@ Module C_Graphics
         End If
 
         ButtonGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Button" & GfxExt) Then
-            ButtonGfx = New Texture(MirageBasic.Core.Paths.Gui & "Button" & GfxExt)
+        If File.Exists(Paths.Gui & "Button" & GfxExt) Then
+            ButtonGfx = New Texture(Paths.Gui & "Button" & GfxExt)
             ButtonSprite = New Sprite(ButtonGfx)
 
             'Cache the width and height
@@ -461,8 +463,8 @@ Module C_Graphics
         End If
 
         ButtonHoverGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Button_Hover" & GfxExt) Then
-            ButtonHoverGfx = New Texture(MirageBasic.Core.Paths.Gui & "Button_Hover" & GfxExt)
+        If File.Exists(Paths.Gui & "Button_Hover" & GfxExt) Then
+            ButtonHoverGfx = New Texture(Paths.Gui & "Button_Hover" & GfxExt)
             ButtonHoverSprite = New Sprite(ButtonHoverGfx)
 
             'Cache the width and height
@@ -471,9 +473,9 @@ Module C_Graphics
         End If
 
         HudPanelGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Main\HUD" & GfxExt) Then
+        If File.Exists(Paths.Gui & "Main\HUD" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            HudPanelGfx = New Texture(MirageBasic.Core.Paths.Gui & "Main\HUD" & GfxExt)
+            HudPanelGfx = New Texture(Paths.Gui & "Main\HUD" & GfxExt)
             HudPanelSprite = New Sprite(HudPanelGfx)
 
             'Cache the width and height
@@ -482,8 +484,8 @@ Module C_Graphics
         End If
 
         HpBarGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "HPBar" & GfxExt) Then
-            HpBarGfx = New Texture(MirageBasic.Core.Paths.Gui & "HPBar" & GfxExt)
+        If File.Exists(Paths.Gui & "HPBar" & GfxExt) Then
+            HpBarGfx = New Texture(Paths.Gui & "HPBar" & GfxExt)
             HpBarSprite = New Sprite(HpBarGfx)
 
             'Cache the width and height
@@ -492,8 +494,8 @@ Module C_Graphics
         End If
 
         MpBarGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "MPBar" & GfxExt) Then
-            MpBarGfx = New Texture(MirageBasic.Core.Paths.Gui & "MPBar" & GfxExt)
+        If File.Exists(Paths.Gui & "MPBar" & GfxExt) Then
+            MpBarGfx = New Texture(Paths.Gui & "MPBar" & GfxExt)
             MpBarSprite = New Sprite(MpBarGfx)
 
             'Cache the width and height
@@ -502,8 +504,8 @@ Module C_Graphics
         End If
 
         ExpBarGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "EXPBar" & GfxExt) Then
-            ExpBarGfx = New Texture(MirageBasic.Core.Paths.Gui & "EXPBar" & GfxExt)
+        If File.Exists(Paths.Gui & "EXPBar" & GfxExt) Then
+            ExpBarGfx = New Texture(Paths.Gui & "EXPBar" & GfxExt)
             ExpBarSprite = New Sprite(ExpBarGfx)
 
             'Cache the width and height
@@ -512,9 +514,9 @@ Module C_Graphics
         End If
 
         ActionPanelGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "ActionBar\ActionBar" & GfxExt) Then
+        If File.Exists(Paths.Gui & "ActionBar\ActionBar" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            ActionPanelGfx = New Texture(MirageBasic.Core.Paths.Gui & "ActionBar\ActionBar" & GfxExt)
+            ActionPanelGfx = New Texture(Paths.Gui & "ActionBar\ActionBar" & GfxExt)
             ActionPanelSprite = New Sprite(ActionPanelGfx)
 
             'Cache the width and height
@@ -523,9 +525,9 @@ Module C_Graphics
         End If
 
         InvPanelGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Main\inventory" & GfxExt) Then
+        If File.Exists(Paths.Gui & "Main\inventory" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            InvPanelGfx = New Texture(MirageBasic.Core.Paths.Gui & "Main\inventory" & GfxExt)
+            InvPanelGfx = New Texture(Paths.Gui & "Main\inventory" & GfxExt)
             InvPanelSprite = New Sprite(InvPanelGfx)
 
             'Cache the width and height
@@ -534,9 +536,9 @@ Module C_Graphics
         End If
 
         SkillPanelGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Main\skills" & GfxExt) Then
+        If File.Exists(Paths.Gui & "Main\skills" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            SkillPanelGfx = New Texture(MirageBasic.Core.Paths.Gui & "Main\skills" & GfxExt)
+            SkillPanelGfx = New Texture(Paths.Gui & "Main\skills" & GfxExt)
             SkillPanelSprite = New Sprite(SkillPanelGfx)
 
             'Cache the width and height
@@ -545,9 +547,9 @@ Module C_Graphics
         End If
 
         CharPanelGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Main\char" & GfxExt) Then
+        If File.Exists(Paths.Gui & "Main\char" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            CharPanelGfx = New Texture(MirageBasic.Core.Paths.Gui & "Main\char" & GfxExt)
+            CharPanelGfx = New Texture(Paths.Gui & "Main\char" & GfxExt)
             CharPanelSprite = New Sprite(CharPanelGfx)
 
             'Cache the width and height
@@ -556,9 +558,9 @@ Module C_Graphics
         End If
 
         CharPanelPlusGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Main\plus" & GfxExt) Then
+        If File.Exists(Paths.Gui & "Main\plus" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            CharPanelPlusGfx = New Texture(MirageBasic.Core.Paths.Gui & "Main\plus" & GfxExt)
+            CharPanelPlusGfx = New Texture(Paths.Gui & "Main\plus" & GfxExt)
             CharPanelPlusSprite = New Sprite(CharPanelPlusGfx)
 
             'Cache the width and height
@@ -567,9 +569,9 @@ Module C_Graphics
         End If
 
         CharPanelMinGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Main\min" & GfxExt) Then
+        If File.Exists(Paths.Gui & "Main\min" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            CharPanelMinGfx = New Texture(MirageBasic.Core.Paths.Gui & "Main\min" & GfxExt)
+            CharPanelMinGfx = New Texture(Paths.Gui & "Main\min" & GfxExt)
             CharPanelMinSprite = New Sprite(CharPanelMinGfx)
 
             'Cache the width and height
@@ -578,9 +580,9 @@ Module C_Graphics
         End If
 
         BankPanelGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Main\Bank" & GfxExt) Then
+        If File.Exists(Paths.Gui & "Main\Bank" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            BankPanelGfx = New Texture(MirageBasic.Core.Paths.Gui & "Main\Bank" & GfxExt)
+            BankPanelGfx = New Texture(Paths.Gui & "Main\Bank" & GfxExt)
             BankPanelSprite = New Sprite(BankPanelGfx)
 
             'Cache the width and height
@@ -589,9 +591,9 @@ Module C_Graphics
         End If
 
         ShopPanelGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Main\Shop" & GfxExt) Then
+        If File.Exists(Paths.Gui & "Main\Shop" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            ShopPanelGfx = New Texture(MirageBasic.Core.Paths.Gui & "Main\Shop" & GfxExt)
+            ShopPanelGfx = New Texture(Paths.Gui & "Main\Shop" & GfxExt)
             ShopPanelSprite = New Sprite(ShopPanelGfx)
 
             'Cache the width and height
@@ -600,9 +602,9 @@ Module C_Graphics
         End If
 
         TradePanelGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Main\Trade" & GfxExt) Then
+        If File.Exists(Paths.Gui & "Main\Trade" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            TradePanelGfx = New Texture(MirageBasic.Core.Paths.Gui & "Main\Trade" & GfxExt)
+            TradePanelGfx = New Texture(Paths.Gui & "Main\Trade" & GfxExt)
             TradePanelSprite = New Sprite(TradePanelGfx)
 
             'Cache the width and height
@@ -611,9 +613,9 @@ Module C_Graphics
         End If
 
         EventChatGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Main\EventChat" & GfxExt) Then
+        If File.Exists(Paths.Gui & "Main\EventChat" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            EventChatGfx = New Texture(MirageBasic.Core.Paths.Gui & "Main\EventChat" & GfxExt)
+            EventChatGfx = New Texture(Paths.Gui & "Main\EventChat" & GfxExt)
             EventChatSprite = New Sprite(EventChatGfx)
 
             'Cache the width and height
@@ -622,9 +624,9 @@ Module C_Graphics
         End If
 
         TargetGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Graphics & "Misc\Target" & GfxExt) Then
+        If File.Exists(Paths.Graphics & "Misc\Target" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            TargetGfx = New Texture(MirageBasic.Core.Paths.Graphics & "Misc\Target" & GfxExt)
+            TargetGfx = New Texture(Paths.Graphics & "Misc\Target" & GfxExt)
             TargetSprite = New Sprite(TargetGfx)
 
             'Cache the width and height
@@ -633,8 +635,8 @@ Module C_Graphics
         End If
 
         DescriptionGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Main\" & "Description" & GfxExt) Then
-            DescriptionGfx = New Texture(MirageBasic.Core.Paths.Gui & "Main\" & "Description" & GfxExt)
+        If File.Exists(Paths.Gui & "Main\" & "Description" & GfxExt) Then
+            DescriptionGfx = New Texture(Paths.Gui & "Main\" & "Description" & GfxExt)
             DescriptionSprite = New Sprite(DescriptionGfx)
 
             'Cache the width and height
@@ -643,8 +645,8 @@ Module C_Graphics
         End If
 
         RClickGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Main\" & "RightClick" & GfxExt) Then
-            RClickGfx = New Texture(MirageBasic.Core.Paths.Gui & "Main\" & "RightClick" & GfxExt)
+        If File.Exists(Paths.Gui & "Main\" & "RightClick" & GfxExt) Then
+            RClickGfx = New Texture(Paths.Gui & "Main\" & "RightClick" & GfxExt)
             RClickSprite = New Sprite(RClickGfx)
 
             'Cache the width and height
@@ -653,8 +655,8 @@ Module C_Graphics
         End If
 
         QuestGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Main\" & "QuestLog" & GfxExt) Then
-            QuestGfx = New Texture(MirageBasic.Core.Paths.Gui & "Main\" & "QuestLog" & GfxExt)
+        If File.Exists(Paths.Gui & "Main\" & "QuestLog" & GfxExt) Then
+            QuestGfx = New Texture(Paths.Gui & "Main\" & "QuestLog" & GfxExt)
             QuestSprite = New Sprite(QuestGfx)
 
             'Cache the width and height
@@ -663,8 +665,8 @@ Module C_Graphics
         End If
 
         CraftGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Main\" & "Craft" & GfxExt) Then
-            CraftGfx = New Texture(MirageBasic.Core.Paths.Gui & "Main\" & "Craft" & GfxExt)
+        If File.Exists(Paths.Gui & "Main\" & "Craft" & GfxExt) Then
+            CraftGfx = New Texture(Paths.Gui & "Main\" & "Craft" & GfxExt)
             CraftSprite = New Sprite(CraftGfx)
 
             'Cache the width and height
@@ -673,8 +675,8 @@ Module C_Graphics
         End If
 
         ProgBarGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Main\" & "ProgBar" & GfxExt) Then
-            ProgBarGfx = New Texture(MirageBasic.Core.Paths.Gui & "Main\" & "ProgBar" & GfxExt)
+        If File.Exists(Paths.Gui & "Main\" & "ProgBar" & GfxExt) Then
+            ProgBarGfx = New Texture(Paths.Gui & "Main\" & "ProgBar" & GfxExt)
             ProgBarSprite = New Sprite(ProgBarGfx)
 
             'Cache the width and height
@@ -683,8 +685,8 @@ Module C_Graphics
         End If
 
         ChatBubbleGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Graphics & "Misc\ChatBubble" & GfxExt) Then
-            ChatBubbleGfx = New Texture(MirageBasic.Core.Paths.Graphics & "Misc\ChatBubble" & GfxExt)
+        If File.Exists(Paths.Graphics & "Misc\ChatBubble" & GfxExt) Then
+            ChatBubbleGfx = New Texture(Paths.Graphics & "Misc\ChatBubble" & GfxExt)
             ChatBubbleSprite = New Sprite(ChatBubbleGfx)
             'Cache the width and height
             ChatBubbleGfxInfo.Width = ChatBubbleGfx.Size.X
@@ -692,9 +694,9 @@ Module C_Graphics
         End If
 
         PetStatsGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Main\Pet" & GfxExt) Then
+        If File.Exists(Paths.Gui & "Main\Pet" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            PetStatsGfx = New Texture(MirageBasic.Core.Paths.Gui & "Main\Pet" & GfxExt)
+            PetStatsGfx = New Texture(Paths.Gui & "Main\Pet" & GfxExt)
             PetStatsSprite = New Sprite(PetStatsGfx)
 
             'Cache the width and height
@@ -703,9 +705,9 @@ Module C_Graphics
         End If
 
         PetbarGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Gui & "Main\Petbar" & GfxExt) Then
+        If File.Exists(Paths.Gui & "Main\Petbar" & GfxExt) Then
             'Load texture first, dont care about memory streams (just use the filename)
-            PetBarGfx = New Texture(MirageBasic.Core.Paths.Gui & "Main\Petbar" & GfxExt)
+            PetBarGfx = New Texture(Paths.Gui & "Main\Petbar" & GfxExt)
             PetBarSprite = New Sprite(PetBarGfx)
 
             'Cache the width and height
@@ -714,8 +716,8 @@ Module C_Graphics
         End If
 
         LightGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Graphics & "Misc\Light" & GfxExt) Then
-            LightGfx = New Texture(MirageBasic.Core.Paths.Graphics & "Misc\Light" & GfxExt)
+        If File.Exists(Paths.Graphics & "Misc\Light" & GfxExt) Then
+            LightGfx = New Texture(Paths.Graphics & "Misc\Light" & GfxExt)
             LightSprite = New Sprite(LightGfx)
 
             'Cache the width and height
@@ -724,8 +726,8 @@ Module C_Graphics
         End If
 
         ShadowGfxInfo = New GraphicInfo
-        If File.Exists(MirageBasic.Core.Paths.Graphics & "Misc\Shadow" & GfxExt) Then
-            ShadowGfx = New Texture(MirageBasic.Core.Paths.Graphics & "Misc\Shadow" & GfxExt)
+        If File.Exists(Paths.Graphics & "Misc\Shadow" & GfxExt) Then
+            ShadowGfx = New Texture(Paths.Graphics & "Misc\Shadow" & GfxExt)
             ShadowSprite = New Sprite(ShadowGfx)
 
             'Cache the width and height
@@ -740,7 +742,7 @@ Module C_Graphics
             If index <= 0 OrElse index > NumTileSets Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            TileSetTexture(index) = New Texture(MirageBasic.Core.Paths.Graphics & "tilesets\" & index & GfxExt)
+            TileSetTexture(index) = New Texture(Paths.Graphics & "tilesets\" & index & GfxExt)
             TileSetSprite(index) = New Sprite(TileSetTexture(index))
 
             'Cache the width and height
@@ -755,7 +757,7 @@ Module C_Graphics
             If index <= 0 OrElse index > NumCharacters Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            CharacterGfx(index) = New Texture(MirageBasic.Core.Paths.Graphics & "characters\" & index & GfxExt)
+            CharacterGfx(index) = New Texture(Paths.Graphics & "characters\" & index & GfxExt)
             CharacterSprite(index) = New Sprite(CharacterGfx(index))
 
             'Cache the width and height
@@ -770,7 +772,7 @@ Module C_Graphics
             If index <= 0 OrElse index > NumPaperdolls Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            PaperDollGfx(index) = New Texture(MirageBasic.Core.Paths.Graphics & "paperdolls\" & index & GfxExt)
+            PaperDollGfx(index) = New Texture(Paths.Graphics & "paperdolls\" & index & GfxExt)
             PaperDollSprite(index) = New Sprite(PaperDollGfx(index))
 
             'Cache the width and height
@@ -785,7 +787,7 @@ Module C_Graphics
             If index <= 0 OrElse index > NumItems Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            ItemsGfx(index) = New Texture(MirageBasic.Core.Paths.Graphics & "items\" & index & GfxExt)
+            ItemsGfx(index) = New Texture(Paths.Graphics & "items\" & index & GfxExt)
             ItemsSprite(index) = New Sprite(ItemsGfx(index))
 
             'Cache the width and height
@@ -800,7 +802,7 @@ Module C_Graphics
             If index <= 0 OrElse index > NumResources Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            ResourcesGfx(index) = New Texture(MirageBasic.Core.Paths.Graphics & "resources\" & index & GfxExt)
+            ResourcesGfx(index) = New Texture(Paths.Graphics & "resources\" & index & GfxExt)
             ResourcesSprite(index) = New Sprite(ResourcesGfx(index))
 
             'Cache the width and height
@@ -815,7 +817,7 @@ Module C_Graphics
             If index <= 0 OrElse index > NumAnimations Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            AnimationsGfx(index) = New Texture(MirageBasic.Core.Paths.Graphics & "animations\" & index & GfxExt)
+            AnimationsGfx(index) = New Texture(Paths.Graphics & "animations\" & index & GfxExt)
             AnimationsSprite(index) = New Sprite(AnimationsGfx(index))
 
             'Cache the width and height
@@ -830,7 +832,7 @@ Module C_Graphics
             If index <= 0 OrElse index > NumFaces Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            FacesGfx(index) = New Texture(MirageBasic.Core.Paths.Graphics & "faces\" & index & GfxExt)
+            FacesGfx(index) = New Texture(Paths.Graphics & "faces\" & index & GfxExt)
             FacesSprite(index) = New Sprite(FacesGfx(index))
 
             'Cache the width and height
@@ -845,7 +847,7 @@ Module C_Graphics
             If index <= 0 OrElse index > NumFogs Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            FogGfx(index) = New Texture(MirageBasic.Core.Paths.Graphics & "fogs\" & index & GfxExt)
+            FogGfx(index) = New Texture(Paths.Graphics & "fogs\" & index & GfxExt)
             FogSprite(index) = New Sprite(FogGfx(index))
 
             'Cache the width and height
@@ -860,7 +862,7 @@ Module C_Graphics
             If index <= 0 OrElse index > NumSkillIcons Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            SkillIconsGfx(index) = New Texture(MirageBasic.Core.Paths.Graphics & "skillicons\" & index & GfxExt)
+            SkillIconsGfx(index) = New Texture(Paths.Graphics & "skillicons\" & index & GfxExt)
             SkillIconsSprite(index) = New Sprite(SkillIconsGfx(index))
 
             'Cache the width and height
@@ -877,7 +879,7 @@ Module C_Graphics
             If index <= 0 OrElse index > NumProjectiles Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            ProjectileGfx(index) = New Texture(MirageBasic.Core.Paths.Graphics & "projectiles\" & index & GfxExt)
+            ProjectileGfx(index) = New Texture(Paths.Graphics & "projectiles\" & index & GfxExt)
             ProjectileSprite(index) = New Sprite(ProjectileGfx(index))
 
             'Cache the width and height
@@ -892,7 +894,7 @@ Module C_Graphics
             If index <= 0 OrElse index > NumEmotes Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            EmotesGfx(index) = New Texture(MirageBasic.Core.Paths.Graphics & "emotes\" & index & GfxExt)
+            EmotesGfx(index) = New Texture(Paths.Graphics & "emotes\" & index & GfxExt)
             EmotesSprite(index) = New Sprite(EmotesGfx(index))
 
             'Cache the width and height
@@ -907,7 +909,7 @@ Module C_Graphics
             If index <= 0 OrElse index > NumPanorama Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            PanoramasGfx(index) = New Texture(MirageBasic.Core.Paths.Graphics & "panoramas\" & index & GfxExt)
+            PanoramasGfx(index) = New Texture(Paths.Graphics & "panoramas\" & index & GfxExt)
             PanoramasSprite(index) = New Sprite(PanoramasGfx(index))
 
             'Cache the width and height
@@ -921,7 +923,7 @@ Module C_Graphics
             If index <= 0 OrElse index > NumParallax Then Exit Sub
 
             'Load texture first, dont care about memory streams (just use the filename)
-            ParallaxGfx(index) = New Texture(MirageBasic.Core.Paths.Graphics & "parallax\" & index & GfxExt)
+            ParallaxGfx(index) = New Texture(Paths.Graphics & "parallax\" & index & GfxExt)
             ParallaxSprite(index) = New Sprite(ParallaxGfx(index))
 
             'Cache the width and height
@@ -961,8 +963,8 @@ Module C_Graphics
         With rec
             .Y = 0
             .Height = PicX
-            .X = anim*(EmotesGfxInfo(sprite).Width/2)
-            .Width = (EmotesGfxInfo(sprite).Width/2)
+            .X = anim * (EmotesGfxInfo(sprite).Width / 2)
+            .Width = (EmotesGfxInfo(sprite).Width / 2)
         End With
 
         x = ConvertMapX(x2)
@@ -1020,14 +1022,14 @@ Module C_Graphics
         If hover = 0 Then
             RenderSprite(ButtonSprite, GameWindow, destX, destY, 0, 0, ButtonGfxInfo.Width, ButtonGfxInfo.Height)
 
-            DrawText(destX + (ButtonGfxInfo.Width\2) - (GetTextWidth(text)\2),
-                     destY + (ButtonGfxInfo.Height\2) - (FontSize\2), text, Color.White, Color.Black, GameWindow)
+            DrawText(destX + (ButtonGfxInfo.Width \ 2) - (GetTextWidth(text) \ 2),
+                     destY + (ButtonGfxInfo.Height \ 2) - (FontSize \ 2), text, Color.White, Color.Black, GameWindow)
         Else
             RenderSprite(ButtonHoverSprite, GameWindow, destX, destY, 0, 0, ButtonHoverGfxInfo.Width,
                          ButtonHoverGfxInfo.Height)
 
-            DrawText(destX + (ButtonHoverGfxInfo.Width\2) - (GetTextWidth(text)\2),
-                     destY + (ButtonHoverGfxInfo.Height\2) - (FontSize\2), text, Color.White, Color.Black, GameWindow)
+            DrawText(destX + (ButtonHoverGfxInfo.Width \ 2) - (GetTextWidth(text) \ 2),
+                     destY + (ButtonHoverGfxInfo.Height \ 2) - (FontSize \ 2), text, Color.White, Color.Black, GameWindow)
         End If
     End Sub
 
@@ -1046,7 +1048,7 @@ Module C_Graphics
                               sy As Single, dWidth As Single, dHeight As Single, sWidth As Single, sHeight As Single)
         Dim tmpImage = New Sprite(txture) With {
                 .TextureRect = New IntRect(sx, sy, sWidth, sHeight),
-                .Scale = New Vector2f(dWidth/sWidth, dHeight/sHeight),
+                .Scale = New Vector2f(dWidth / sWidth, dHeight / sHeight),
                 .Position = New Vector2f(dX, dY)
                 }
         target.Draw(tmpImage)
@@ -1060,12 +1062,12 @@ Module C_Graphics
         rec.X = 0
         rec.Width = 32
         rec.Height = 32
-        RenderSprite(DirectionsSprite, GameWindow, ConvertMapX(x*PicX), ConvertMapY(y*PicY), rec.X, rec.Y, rec.Width,
+        RenderSprite(DirectionsSprite, GameWindow, ConvertMapX(x * PicX), ConvertMapY(y * PicY), rec.X, rec.Y, rec.Width,
                      rec.Height)
 
         ' render dir blobs
         For i = 0 To 4
-            rec.X = (i - 1)*8
+            rec.X = (i - 1) * 8
             rec.Width = 8
             ' find out whether render blocked or not
             If Not IsDirBlocked(Map.Tile(x, y).DirBlock, (i)) Then
@@ -1075,17 +1077,17 @@ Module C_Graphics
             End If
             rec.Height = 8
 
-            RenderSprite(DirectionsSprite, GameWindow, ConvertMapX(x*PicX) + DirArrowX(i),
-                         ConvertMapY(y*PicY) + DirArrowY(i), rec.X, rec.Y, rec.Width, rec.Height)
+            RenderSprite(DirectionsSprite, GameWindow, ConvertMapX(x * PicX) + DirArrowX(i),
+                         ConvertMapY(y * PicY) + DirArrowY(i), rec.X, rec.Y, rec.Width, rec.Height)
         Next
     End Sub
 
     Friend Function ConvertMapX(x As Integer) As Integer
-        ConvertMapX = x - (TileView.Left*PicX) - Camera.Left
+        ConvertMapX = x - (TileView.Left * PicX) - Camera.Left
     End Function
 
     Friend Function ConvertMapY(y As Integer) As Integer
-        ConvertMapY = y - (TileView.Top*PicY) - Camera.Top
+        ConvertMapY = y - (TileView.Top * PicY) - Camera.Top
     End Function
 
     Friend Sub DrawPaperdoll(x2 As Integer, y2 As Integer, sprite As Integer, anim As Integer, spritetop As Integer)
@@ -1105,10 +1107,10 @@ Module C_Graphics
         End With
 
         With rec
-            .Y = spritetop*(PaperDollGfxInfo(sprite).Height/4)
-            .Height = (PaperDollGfxInfo(sprite).Height/4)
-            .X = anim*(PaperDollGfxInfo(sprite).Width/4)
-            .Width = (PaperDollGfxInfo(sprite).Width/4)
+            .Y = spritetop * (PaperDollGfxInfo(sprite).Height / 4)
+            .Height = (PaperDollGfxInfo(sprite).Height / 4)
+            .X = anim * (PaperDollGfxInfo(sprite).Width / 4)
+            .Width = (PaperDollGfxInfo(sprite).Width / 4)
         End With
 
         x = ConvertMapX(x2)
@@ -1143,7 +1145,7 @@ Module C_Graphics
         anim = 0
 
         ' Check for attacking animation
-        If MapNpc(mapNpcNum).AttackTimer + (attackspeed/2) > GetTickCount() Then
+        If MapNpc(mapNpcNum).AttackTimer + (attackspeed / 2) > GetTickCount() Then
             If MapNpc(mapNpcNum).Attacking = 1 Then
                 anim = 3
             End If
@@ -1153,11 +1155,11 @@ Module C_Graphics
                 Case DirectionType.Up
                     If (MapNpc(mapNpcNum).YOffset > 8) Then anim = MapNpc(mapNpcNum).Steps
                 Case DirectionType.Down
-                    If (MapNpc(mapNpcNum).YOffset < - 8) Then anim = MapNpc(mapNpcNum).Steps
+                    If (MapNpc(mapNpcNum).YOffset < -8) Then anim = MapNpc(mapNpcNum).Steps
                 Case DirectionType.Left
                     If (MapNpc(mapNpcNum).XOffset > 8) Then anim = MapNpc(mapNpcNum).Steps
                 Case DirectionType.Right
-                    If (MapNpc(mapNpcNum).XOffset < - 8) Then anim = MapNpc(mapNpcNum).Steps
+                    If (MapNpc(mapNpcNum).XOffset < -8) Then anim = MapNpc(mapNpcNum).Steps
             End Select
         End If
 
@@ -1181,22 +1183,22 @@ Module C_Graphics
                 spriteleft = 1
         End Select
 
-        srcrec = New Rectangle((anim)*(CharacterGfxInfo(sprite).Width/4), spriteleft*(CharacterGfxInfo(sprite).Height/4),
-                               (CharacterGfxInfo(sprite).Width/4), (CharacterGfxInfo(sprite).Height/4))
+        srcrec = New Rectangle((anim) * (CharacterGfxInfo(sprite).Width / 4), spriteleft * (CharacterGfxInfo(sprite).Height / 4),
+                               (CharacterGfxInfo(sprite).Width / 4), (CharacterGfxInfo(sprite).Height / 4))
 
         ' Calculate the X
-        x = MapNpc(mapNpcNum).X*PicX + MapNpc(mapNpcNum).XOffset - ((CharacterGfxInfo(sprite).Width/4 - 32)/2)
+        x = MapNpc(mapNpcNum).X * PicX + MapNpc(mapNpcNum).XOffset - ((CharacterGfxInfo(sprite).Width / 4 - 32) / 2)
 
         ' Is the player's height more than 32..?
-        If (CharacterGfxInfo(sprite).Height/4) > 32 Then
+        If (CharacterGfxInfo(sprite).Height / 4) > 32 Then
             ' Create a 32 pixel offset for larger sprites
-            y = MapNpc(mapNpcNum).Y*PicY + MapNpc(mapNpcNum).YOffset - ((CharacterGfxInfo(sprite).Height/4) - 32)
+            y = MapNpc(mapNpcNum).Y * PicY + MapNpc(mapNpcNum).YOffset - ((CharacterGfxInfo(sprite).Height / 4) - 32)
         Else
             ' Proceed as normal
-            y = MapNpc(mapNpcNum).Y*PicY + MapNpc(mapNpcNum).YOffset
+            y = MapNpc(mapNpcNum).Y * PicY + MapNpc(mapNpcNum).YOffset
         End If
 
-        destrec = New Rectangle(x, y, CharacterGfxInfo(sprite).Width/4, CharacterGfxInfo(sprite).Height/4)
+        destrec = New Rectangle(x, y, CharacterGfxInfo(sprite).Width / 4, CharacterGfxInfo(sprite).Height / 4)
 
         DrawCharacter(sprite, x, y, srcrec)
 
@@ -1237,16 +1239,16 @@ Module C_Graphics
         End With
 
         If ItemsGfxInfo(picNum).Width > 32 Then ' has more than 1 frame
-            srcrec = New Rectangle((MapItem(itemnum).Frame*32), 0, 32, 32)
-            destrec = New Rectangle(ConvertMapX(MapItem(itemnum).X*PicX), ConvertMapY(MapItem(itemnum).Y*PicY), 32, 32)
+            srcrec = New Rectangle((MapItem(itemnum).Frame * 32), 0, 32, 32)
+            destrec = New Rectangle(ConvertMapX(MapItem(itemnum).X * PicX), ConvertMapY(MapItem(itemnum).Y * PicY), 32, 32)
         Else
             srcrec = New Rectangle(0, 0, PicX, PicY)
-            destrec = New Rectangle(ConvertMapX(MapItem(itemnum).X*PicX), ConvertMapY(MapItem(itemnum).Y*PicY), PicX,
+            destrec = New Rectangle(ConvertMapX(MapItem(itemnum).X * PicX), ConvertMapY(MapItem(itemnum).Y * PicY), PicX,
                                     PicY)
         End If
 
-        x = ConvertMapX(MapItem(itemnum).X*PicX)
-        y = ConvertMapY(MapItem(itemnum).Y*PicY)
+        x = ConvertMapX(MapItem(itemnum).X * PicX)
+        y = ConvertMapY(MapItem(itemnum).Y * PicY)
 
         RenderSprite(ItemsSprite(picNum), GameWindow, x, y, srcrec.X, srcrec.Y, srcrec.Width, srcrec.Height)
     End Sub
@@ -1294,12 +1296,12 @@ Module C_Graphics
             ' check if we should be seeing it
             If .Timer + 20000 < GetTickCount() Then Exit Sub
 
-            x = ConvertMapX(Blood(index).X*PicX)
-            y = ConvertMapY(Blood(index).Y*PicY)
+            x = ConvertMapX(Blood(index).X * PicX)
+            y = ConvertMapY(Blood(index).Y * PicY)
 
-            srcrec = New Rectangle((.Sprite - 1)*PicX, 0, PicX, PicY)
+            srcrec = New Rectangle((.Sprite - 1) * PicX, 0, PicX, PicY)
 
-            destrec = New Rectangle(ConvertMapX(.X*PicX), ConvertMapY(.Y*PicY), PicX, PicY)
+            destrec = New Rectangle(ConvertMapX(.X * PicX), ConvertMapY(.Y * PicY), PicX, PicY)
 
             RenderSprite(BloodSprite, GameWindow, x, y, srcrec.X, srcrec.Y, srcrec.Width, srcrec.Height)
 
@@ -1328,14 +1330,14 @@ Module C_Graphics
             startX = GetPlayerX(Myindex) - ScreenMapx
             startY = GetPlayerY(Myindex) - ScreenMapy
         Else
-            StartX = Math.Floor(GetPlayerX(MyIndex) - ((ScreenMapx + 1)\2) - 1)
-            StartY = Math.Floor(GetPlayerY(MyIndex) - ((ScreenMapy + 1)\2) - 1)
+            startX = Math.Floor(GetPlayerX(Myindex) - ((ScreenMapx + 1) \ 2) - 1)
+            startY = Math.Floor(GetPlayerY(Myindex) - ((ScreenMapy + 1) \ 2) - 1)
         End If
 
         If startX < 0 Then
             offsetX = 0
 
-            If startX = - 1 Then
+            If startX = -1 Then
                 If Player(Myindex).XOffset > 0 Then
                     offsetX = Player(Myindex).XOffset
                 End If
@@ -1347,7 +1349,7 @@ Module C_Graphics
         If startY < 0 Then
             offsetY = 0
 
-            If startY = - 1 Then
+            If startY = -1 Then
                 If Player(Myindex).YOffset > 0 Then
                     offsetY = Player(Myindex).YOffset
                 End If
@@ -1409,108 +1411,108 @@ Module C_Graphics
 
     Sub ClearGfx()
 
-'clear tilesets
+        'clear tilesets
         For i = 0 To NumTileSets
-            If TileSetTextureInfo(I).IsLoaded Then
-                If TileSetTextureInfo(I).TextureTimer < GetTickCount() Then
-                    TileSetTexture(I).Dispose()
-                    TileSetSprite(I).Dispose()
-                    TileSetTextureInfo(I).IsLoaded = False
-                    TileSetTextureInfo(I).TextureTimer = 0
+            If TileSetTextureInfo(i).IsLoaded Then
+                If TileSetTextureInfo(i).TextureTimer < GetTickCount() Then
+                    TileSetTexture(i).Dispose()
+                    TileSetSprite(i).Dispose()
+                    TileSetTextureInfo(i).IsLoaded = False
+                    TileSetTextureInfo(i).TextureTimer = 0
                 End If
             End If
         Next
 
         'clear characters
         For i = 0 To NumCharacters
-            If CharacterGfxInfo(I).IsLoaded Then
-                If CharacterGfxInfo(I).TextureTimer < GetTickCount() Then
-                    CharacterGfx(I).Dispose()
-                    CharacterSprite(I).Dispose()
-                    CharacterGfxInfo(I).IsLoaded = False
-                    CharacterGfxInfo(I).TextureTimer = 0
+            If CharacterGfxInfo(i).IsLoaded Then
+                If CharacterGfxInfo(i).TextureTimer < GetTickCount() Then
+                    CharacterGfx(i).Dispose()
+                    CharacterSprite(i).Dispose()
+                    CharacterGfxInfo(i).IsLoaded = False
+                    CharacterGfxInfo(i).TextureTimer = 0
                 End If
             End If
         Next
 
-'clear paperdoll
+        'clear paperdoll
         For i = 0 To NumPaperdolls
-            If PaperDollGfxInfo(I).IsLoaded Then
-                If PaperDollGfxInfo(I).TextureTimer < GetTickCount() Then
-                    PaperDollGfx(I).Dispose()
-                    PaperDollSprite(I).Dispose()
-                    PaperDollGfxInfo(I).IsLoaded = False
-                    PaperDollGfxInfo(I).TextureTimer = 0
+            If PaperDollGfxInfo(i).IsLoaded Then
+                If PaperDollGfxInfo(i).TextureTimer < GetTickCount() Then
+                    PaperDollGfx(i).Dispose()
+                    PaperDollSprite(i).Dispose()
+                    PaperDollGfxInfo(i).IsLoaded = False
+                    PaperDollGfxInfo(i).TextureTimer = 0
                 End If
             End If
         Next
 
-'clear items
+        'clear items
         For i = 0 To NumItems
-            If ItemsGfxInfo(I).IsLoaded Then
-                If ItemsGfxInfo(I).TextureTimer < GetTickCount() Then
-                    ItemsGfx(I).Dispose()
-                    ItemsSprite(I).Dispose()
-                    ItemsGfxInfo(I).IsLoaded = False
-                    ItemsGfxInfo(I).TextureTimer = 0
+            If ItemsGfxInfo(i).IsLoaded Then
+                If ItemsGfxInfo(i).TextureTimer < GetTickCount() Then
+                    ItemsGfx(i).Dispose()
+                    ItemsSprite(i).Dispose()
+                    ItemsGfxInfo(i).IsLoaded = False
+                    ItemsGfxInfo(i).TextureTimer = 0
                 End If
             End If
         Next
 
-'clear resources
+        'clear resources
         For i = 0 To NumResources
-            If ResourcesGfxInfo(I).IsLoaded Then
-                If ResourcesGfxInfo(I).TextureTimer < GetTickCount() Then
-                    ResourcesGfx(I).Dispose()
-                    ResourcesSprite(I).Dispose()
-                    ResourcesGfxInfo(I).IsLoaded = False
-                    ResourcesGfxInfo(I).TextureTimer = 0
+            If ResourcesGfxInfo(i).IsLoaded Then
+                If ResourcesGfxInfo(i).TextureTimer < GetTickCount() Then
+                    ResourcesGfx(i).Dispose()
+                    ResourcesSprite(i).Dispose()
+                    ResourcesGfxInfo(i).IsLoaded = False
+                    ResourcesGfxInfo(i).TextureTimer = 0
                 End If
             End If
         Next
 
         'animations
         For i = 0 To NumAnimations
-            If AnimationsGfxInfo(I).IsLoaded Then
-                If AnimationsGfxInfo(I).TextureTimer < GetTickCount() Then
-                    AnimationsGfx(I).Dispose()
-                    AnimationsGfxInfo(I).IsLoaded = False
-                    AnimationsGfxInfo(I).TextureTimer = 0
+            If AnimationsGfxInfo(i).IsLoaded Then
+                If AnimationsGfxInfo(i).TextureTimer < GetTickCount() Then
+                    AnimationsGfx(i).Dispose()
+                    AnimationsGfxInfo(i).IsLoaded = False
+                    AnimationsGfxInfo(i).TextureTimer = 0
                 End If
             End If
         Next
 
-'clear faces
+        'clear faces
         For i = 0 To NumFaces
-            If FacesGfxInfo(I).IsLoaded Then
-                If FacesGfxInfo(I).TextureTimer < GetTickCount() Then
-                    FacesGfx(I).Dispose()
-                    FacesSprite(I).Dispose()
-                    FacesGfxInfo(I).IsLoaded = False
-                    FacesGfxInfo(I).TextureTimer = 0
+            If FacesGfxInfo(i).IsLoaded Then
+                If FacesGfxInfo(i).TextureTimer < GetTickCount() Then
+                    FacesGfx(i).Dispose()
+                    FacesSprite(i).Dispose()
+                    FacesGfxInfo(i).IsLoaded = False
+                    FacesGfxInfo(i).TextureTimer = 0
                 End If
             End If
         Next
 
-'clear fogs
+        'clear fogs
         For i = 0 To NumFogs
-            If FogGfxInfo(I).IsLoaded Then
-                If FogGfxInfo(I).TextureTimer < GetTickCount() Then
-                    FogGfx(I).Dispose()
-                    FogGfxInfo(I).IsLoaded = False
-                    FogGfxInfo(I).TextureTimer = 0
+            If FogGfxInfo(i).IsLoaded Then
+                If FogGfxInfo(i).TextureTimer < GetTickCount() Then
+                    FogGfx(i).Dispose()
+                    FogGfxInfo(i).IsLoaded = False
+                    FogGfxInfo(i).TextureTimer = 0
                 End If
             End If
         Next
 
         'clear SkillIcons
         For i = 0 To NumSkillIcons
-            If SkillIconsGfxInfo(I).IsLoaded Then
-                If SkillIconsGfxInfo(I).TextureTimer < GetTickCount() Then
-                    SkillIconsGfx(I).Dispose()
-                    SkillIconsSprite(I).Dispose()
-                    SkillIconsGfxInfo(I).IsLoaded = False
-                    SkillIconsGfxInfo(I).TextureTimer = 0
+            If SkillIconsGfxInfo(i).IsLoaded Then
+                If SkillIconsGfxInfo(i).TextureTimer < GetTickCount() Then
+                    SkillIconsGfx(i).Dispose()
+                    SkillIconsSprite(i).Dispose()
+                    SkillIconsGfxInfo(i).IsLoaded = False
+                    SkillIconsGfxInfo(i).TextureTimer = 0
                 End If
             End If
         Next
@@ -1518,48 +1520,48 @@ Module C_Graphics
 
         'clear Projectiles
         For i = 0 To NumProjectiles
-            If ProjectileGfxInfo(I).IsLoaded Then
-                If ProjectileGfxInfo(I).TextureTimer < GetTickCount() Then
-                    ProjectileGfx(I).Dispose()
-                    ProjectileSprite(I).Dispose()
-                    ProjectileGfxInfo(I).IsLoaded = False
-                    ProjectileGfxInfo(I).TextureTimer = 0
+            If ProjectileGfxInfo(i).IsLoaded Then
+                If ProjectileGfxInfo(i).TextureTimer < GetTickCount() Then
+                    ProjectileGfx(i).Dispose()
+                    ProjectileSprite(i).Dispose()
+                    ProjectileGfxInfo(i).IsLoaded = False
+                    ProjectileGfxInfo(i).TextureTimer = 0
                 End If
             End If
         Next
 
         'clear Emotes
         For i = 0 To NumEmotes
-            If EmotesGfxInfo(I).IsLoaded Then
-                If EmotesGfxInfo(I).TextureTimer < GetTickCount() Then
-                    EmotesGfx(I).Dispose()
-                    EmotesSprite(I).Dispose()
-                    EmotesGfxInfo(I).IsLoaded = False
-                    EmotesGfxInfo(I).TextureTimer = 0
+            If EmotesGfxInfo(i).IsLoaded Then
+                If EmotesGfxInfo(i).TextureTimer < GetTickCount() Then
+                    EmotesGfx(i).Dispose()
+                    EmotesSprite(i).Dispose()
+                    EmotesGfxInfo(i).IsLoaded = False
+                    EmotesGfxInfo(i).TextureTimer = 0
                 End If
             End If
         Next
 
-'clear Panoramas
+        'clear Panoramas
         For i = 0 To NumPanorama
-            If PanoramasGfxInfo(I).IsLoaded Then
-                If PanoramasGfxInfo(I).TextureTimer < GetTickCount() Then
-                    PanoramasGfx(I).Dispose()
-                    PanoramasSprite(I).Dispose()
-                    PanoramasGfxInfo(I).IsLoaded = False
-                    PanoramasGfxInfo(I).TextureTimer = 0
+            If PanoramasGfxInfo(i).IsLoaded Then
+                If PanoramasGfxInfo(i).TextureTimer < GetTickCount() Then
+                    PanoramasGfx(i).Dispose()
+                    PanoramasSprite(i).Dispose()
+                    PanoramasGfxInfo(i).IsLoaded = False
+                    PanoramasGfxInfo(i).TextureTimer = 0
                 End If
             End If
         Next
 
-'clear Parallax
+        'clear Parallax
         For i = 0 To NumParallax
-            If ParallaxGfxInfo(I).IsLoaded Then
-                If ParallaxGfxInfo(I).TextureTimer < GetTickCount() Then
-                    ParallaxGfx(I).Dispose()
-                    ParallaxSprite(I).Dispose()
-                    ParallaxGfxInfo(I).IsLoaded = False
-                    ParallaxGfxInfo(I).TextureTimer = 0
+            If ParallaxGfxInfo(i).IsLoaded Then
+                If ParallaxGfxInfo(i).TextureTimer < GetTickCount() Then
+                    ParallaxGfx(i).Dispose()
+                    ParallaxSprite(i).Dispose()
+                    ParallaxGfxInfo(i).IsLoaded = False
+                    ParallaxGfxInfo(i).TextureTimer = 0
                 End If
             End If
         Next
@@ -1568,27 +1570,27 @@ Module C_Graphics
     Friend Sub Render_Graphics()
         Dim x As Integer, y As Integer, I As Integer
 
-'Don't Render IF
+        'Don't Render IF
         If FrmGame.WindowState = FormWindowState.Minimized Then Exit Sub
         If GettingMap Then Exit Sub
 
-'lets get going
+        'lets get going
 
-'update view around player
+        'update view around player
         UpdateCamera()
 
-'let program do other things
+        'let program do other things
         Application.DoEvents()
 
-'Clear each of our render targets
+        'Clear each of our render targets
         GameWindow.DispatchEvents()
         GameWindow.Clear(Color.Black)
 
-'If CurMouseX > 0 AndAlso CurMouseX <= GameWindow.Size.X Then
-'    If CurMouseY > 0 AndAlso CurMouseY <= GameWindow.Size.Y Then
-'        GameWindow.SetMouseCursorVisible(False)
-'    End If
-'End If
+        'If CurMouseX > 0 AndAlso CurMouseX <= GameWindow.Size.X Then
+        '    If CurMouseY > 0 AndAlso CurMouseY <= GameWindow.Size.Y Then
+        '        GameWindow.SetMouseCursorVisible(False)
+        '    End If
+        'End If
 
         If NumPanorama > 0 AndAlso Map.Panorama > 0 Then
             DrawPanorama(Map.Panorama)
@@ -1611,26 +1613,26 @@ Module C_Graphics
 
         ' events
         If Editor <> EditorType.Map Then
-            if Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
+            If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
 
-                For i = 0 To Map.CurrentEvents
-                    If Map.MapEvents(i).Position = 0 Then
-                        DrawEvent(i)
+                For I = 0 To Map.CurrentEvents
+                    If Map.MapEvents(I).Position = 0 Then
+                        DrawEvent(I)
                     End If
                 Next
             End If
-        End if
+        End If
 
         'blood
-        For i = 0 To Byte.MaxValue
+        For I = 0 To Byte.MaxValue
             DrawBlood(I)
         Next
 
         ' Draw out the items
         If NumItems > 0 Then
-            For i = 1 To MAX_MAP_ITEMS
-                If MapItem(i).Num > 0 Then
-                    DrawItem(i)
+            For I = 1 To MAX_MAP_ITEMS
+                If MapItem(I).Num > 0 Then
+                    DrawItem(I)
                 End If
             Next
         End If
@@ -1640,7 +1642,7 @@ Module C_Graphics
 
         ' draw animations
         If NumAnimations > 0 Then
-            For i = 0 To MAX_ANIMATIONS
+            For I = 0 To MAX_ANIMATIONS
                 If AnimInstance(I).Used(0) Then
                     DrawAnimation(I, 0)
                 End If
@@ -1648,11 +1650,11 @@ Module C_Graphics
         End If
 
         ' Y-based render. Renders Players, Npcs and Resources based on Y-axis.
-        For Y = 0 To Map.MaxY
+        For y = 0 To Map.MaxY
 
             If NumCharacters > 0 Then
                 ' Players
-                For i = 0 To TotalOnline 'MAX_PLAYERS
+                For I = 0 To TotalOnline 'MAX_PLAYERS
                     If IsPlaying(I) AndAlso GetPlayerMap(I) = GetPlayerMap(Myindex) Then
                         If Player(I).Y = y Then
                             DrawPlayer(I)
@@ -1667,7 +1669,7 @@ Module C_Graphics
                 Next
 
                 ' Npcs
-                For i = 0 To MAX_MAP_NPCS
+                For I = 0 To MAX_MAP_NPCS
                     If MapNpc(I).Y = y Then
                         DrawNpc(I)
                     End If
@@ -1676,7 +1678,7 @@ Module C_Graphics
                 ' events
                 If Editor <> EditorType.Map Then
                     If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
-                        For i = 0 To Map.CurrentEvents
+                        For I = 0 To Map.CurrentEvents
                             If Map.MapEvents(I).Position = 1 Then
                                 If y = Map.MapEvents(I).Y Then
                                     DrawEvent(I)
@@ -1686,28 +1688,28 @@ Module C_Graphics
                     End If
                 End If
 
-'                Draw the target icon
+                '                Draw the target icon
                 If MyTarget > 0 Then
                     If MyTargetType = TargetType.Player Then
-                        DrawTarget(Player(MyTarget).X*32 - 16 + Player(MyTarget).XOffset,
-                                   Player(MyTarget).Y*32 + Player(MyTarget).YOffset)
+                        DrawTarget(Player(MyTarget).X * 32 - 16 + Player(MyTarget).XOffset,
+                                   Player(MyTarget).Y * 32 + Player(MyTarget).YOffset)
                     ElseIf MyTargetType = TargetType.Npc Then
-                        DrawTarget(MapNpc(MyTarget).X*32 - 16 + MapNpc(MyTarget).XOffset,
-                                   MapNpc(MyTarget).Y*32 + MapNpc(MyTarget).YOffset)
+                        DrawTarget(MapNpc(MyTarget).X * 32 - 16 + MapNpc(MyTarget).XOffset,
+                                   MapNpc(MyTarget).Y * 32 + MapNpc(MyTarget).YOffset)
                     ElseIf MyTargetType = TargetType.Pet Then
-                        DrawTarget(Player(MyTarget).Pet.X*32 - 16 + Player(MyTarget).Pet.XOffset,
-                                   (Player(MyTarget).Pet.Y*32) + Player(MyTarget).Pet.YOffset)
+                        DrawTarget(Player(MyTarget).Pet.X * 32 - 16 + Player(MyTarget).Pet.XOffset,
+                                   (Player(MyTarget).Pet.Y * 32) + Player(MyTarget).Pet.YOffset)
                     End If
                 End If
 
-                For i = 0 To TotalOnline 'MAX_PLAYERS
+                For I = 0 To TotalOnline 'MAX_PLAYERS
                     If IsPlaying(I) Then
                         If Player(I).Map = Player(Myindex).Map Then
                             If CurX = Player(I).X AndAlso CurY = Player(I).Y Then
                                 If MyTargetType = TargetType.Player AndAlso MyTarget = I Then
                                     ' dont render lol
                                 Else
-                                    DrawHover(Player(I).X*32 - 16, Player(I).Y*32 + Player(I).YOffset)
+                                    DrawHover(Player(I).X * 32 - 16, Player(I).Y * 32 + Player(I).YOffset)
                                 End If
                             End If
 
@@ -1720,7 +1722,7 @@ Module C_Graphics
             If NumResources > 0 Then
                 If ResourcesInit Then
                     If ResourceIndex > 0 Then
-                        For i = 0 To ResourceIndex
+                        For I = 0 To ResourceIndex
                             If MapResource(I).Y = y Then
                                 DrawMapResource(I)
                             End If
@@ -1732,16 +1734,16 @@ Module C_Graphics
 
         ' animations
         If NumAnimations > 0 Then
-            For i = 0 To MAX_ANIMATIONS
+            For I = 0 To MAX_ANIMATIONS
                 If AnimInstance(I).Used(1) Then
-                    DrawAnimation(i, 1)
+                    DrawAnimation(I, 1)
                 End If
             Next
         End If
 
         'projectiles
         If NumProjectiles > 0 Then
-            For i = 0 To MAX_PROJECTILES
+            For I = 0 To MAX_PROJECTILES
                 If MapProjectile(I).ProjectileNum > 0 Then
                     DrawProjectile(I)
                 End If
@@ -1750,7 +1752,7 @@ Module C_Graphics
 
         'events
         If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
-            For i = 0 To Map.CurrentEvents
+            For I = 0 To Map.CurrentEvents
                 If Map.MapEvents(I).Position = 2 Then
                     DrawEvent(I)
                 End If
@@ -1779,7 +1781,7 @@ Module C_Graphics
             DrawGrid()
         End If
 
-        If FrmEditor_Map.tabpages.SelectedTab Is FrmEditor_Map.tpDirBlock Then
+        If frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpDirBlock Then
             For x = TileView.Left To TileView.Right
                 For y = TileView.Top To TileView.Bottom
                     If IsValidMapPoint(x, y) Then
@@ -1789,7 +1791,7 @@ Module C_Graphics
             Next
         End If
 
-        If Editor = EditorType.Map Then FrmEditor_Map.DrawTileOutline()
+        If Editor = EditorType.Map Then frmEditor_Map.DrawTileOutline()
 
         ' draw cursor, player X and Y locations
         If BLoc Then
@@ -1804,7 +1806,7 @@ Module C_Graphics
         End If
 
         ' draw player names
-        For i = 0 To TotalOnline 'MAX_PLAYERS
+        For I = 0 To TotalOnline 'MAX_PLAYERS
             If IsPlaying(I) AndAlso GetPlayerMap(I) = GetPlayerMap(Myindex) Then
                 DrawPlayerName(I)
                 If PetAlive(I) Then
@@ -1814,7 +1816,7 @@ Module C_Graphics
         Next
 
         'draw event names
-        For i = 0 To Map.CurrentEvents
+        For I = 0 To Map.CurrentEvents
             If Map.MapEvents(I).Visible = 1 Then
                 If Map.MapEvents(I).ShowName = 1 Then
                     DrawEventName(I)
@@ -1823,7 +1825,7 @@ Module C_Graphics
         Next
 
         ' draw npc names
-        For i = 0 To MAX_MAP_NPCS
+        For I = 0 To MAX_MAP_NPCS
             If MapNpc(I).Num > 0 Then
                 DrawNpcName(I)
             End If
@@ -1834,14 +1836,14 @@ Module C_Graphics
         End If
 
         ' draw the messages
-        For i = 0 To Byte.MaxValue
+        For I = 0 To Byte.MaxValue
             If ChatBubble(I).Active Then
                 DrawChatBubble(I)
             End If
         Next
 
         'action msg
-        For i = 0 To Byte.MaxValue
+        For I = 0 To Byte.MaxValue
             DrawActionMsg(I)
         Next
 
@@ -1850,7 +1852,7 @@ Module C_Graphics
             DrawMapAttributes()
         End If
 
-        If Editor = EditorType.Map AndAlso FrmEditor_Map.tabpages.SelectedTab Is FrmEditor_Map.tpEvents Then
+        If Editor = EditorType.Map AndAlso frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpEvents Then
             DrawEvents()
             EditorEvent_DrawGraphic()
         End If
@@ -1910,7 +1912,7 @@ Module C_Graphics
         horz = ConvertMapX(GetPlayerX(Myindex))
         vert = ConvertMapY(GetPlayerY(Myindex))
 
-        ParallaxSprite(index).Position = New Vector2f((horz*2.5) - 50, (vert*2.5) - 50)
+        ParallaxSprite(index).Position = New Vector2f((horz * 2.5) - 50, (vert * 2.5) - 50)
 
         GameWindow.Draw(ParallaxSprite(index))
     End Sub
@@ -1926,14 +1928,14 @@ Module C_Graphics
         ' check for casting time bar
         If SkillBuffer > 0 Then
             ' lock to player
-            tmpX = GetPlayerX(Myindex)*PicX + Player(Myindex).XOffset
-            tmpY = GetPlayerY(Myindex)*PicY + Player(Myindex).YOffset + 35
+            tmpX = GetPlayerX(Myindex) * PicX + Player(Myindex).XOffset
+            tmpY = GetPlayerY(Myindex) * PicY + Player(Myindex).YOffset + 35
             If Skill(Player(Myindex).Skill(SkillBuffer).Num).CastTime = 0 Then _
                 Skill(Player(Myindex).Skill(SkillBuffer).Num).CastTime = 1
             ' calculate the width to fill
             barWidth =
-                ((GetTickCount() - SkillBufferTimer)/
-                 ((GetTickCount() - SkillBufferTimer) + (Skill(Player(Myindex).Skill(SkillBuffer).Num).CastTime*1000))*
+                ((GetTickCount() - SkillBufferTimer) /
+                 ((GetTickCount() - SkillBufferTimer) + (Skill(Player(Myindex).Skill(SkillBuffer).Num).CastTime * 1000)) *
                  64)
             ' draw bars
             rec(1) = New Rectangle(ConvertMapX(tmpX), ConvertMapY(tmpY), barWidth, 4)
@@ -1954,11 +1956,11 @@ Module C_Graphics
                         Npc(MapNpc(i).Num).Behaviour = NpcBehavior.AttackWhenAttacked OrElse
                         Npc(MapNpc(i).Num).Behaviour = NpcBehavior.Guard Then
                         ' lock to npc
-                        tmpX = MapNpc(i).X*PicX + MapNpc(i).XOffset
-                        tmpY = MapNpc(i).Y*PicY + MapNpc(i).YOffset + 35
+                        tmpX = MapNpc(i).X * PicX + MapNpc(i).XOffset
+                        tmpY = MapNpc(i).Y * PicY + MapNpc(i).YOffset + 35
                         If MapNpc(i).Vital(VitalType.HP) > 0 Then
                             ' calculate the width to fill
-                            barWidth = ((MapNpc(i).Vital(VitalType.HP)/(Npc(MapNpc(i).Num).HP)*32))
+                            barWidth = ((MapNpc(i).Vital(VitalType.HP) / (Npc(MapNpc(i).Num).HP) * 32))
                             ' draw bars
                             rec(1) = New Rectangle(ConvertMapX(tmpX), ConvertMapY(tmpY), barWidth, 4)
                             Dim rectShape As New RectangleShape(New Vector2f(barWidth, 4)) With {
@@ -1970,7 +1972,7 @@ Module C_Graphics
                             If MapNpc(i).Vital(VitalType.MP) > 0 Then
                                 ' calculate the width to fill
                                 barWidth =
-                                    ((MapNpc(i).Vital(VitalType.MP)/(Npc(MapNpc(i).Num).Stat(StatType.Intelligence)*2)*
+                                    ((MapNpc(i).Vital(VitalType.MP) / (Npc(MapNpc(i).Num).Stat(StatType.Intelligence) * 2) *
                                       32))
                                 ' draw bars
                                 rec(1) = New Rectangle(ConvertMapX(tmpX), ConvertMapY(tmpY), barWidth, 4)
@@ -1986,14 +1988,14 @@ Module C_Graphics
             Next
         End If
         If PetAlive(Myindex) Then
-' draw own health bar
+            ' draw own health bar
             If Player(Myindex).Pet.Health > 0 AndAlso Player(Myindex).Pet.Health <= Player(Myindex).Pet.MaxHp Then
                 'Debug.Print("pethealth:" & Player(Myindex).Pet.Health)
                 ' lock to Player
-                tmpX = Player(Myindex).Pet.X*PicX + Player(Myindex).Pet.XOffset
-                tmpY = Player(Myindex).Pet.Y*PicX + Player(Myindex).Pet.YOffset + 35
+                tmpX = Player(Myindex).Pet.X * PicX + Player(Myindex).Pet.XOffset
+                tmpY = Player(Myindex).Pet.Y * PicX + Player(Myindex).Pet.YOffset + 35
                 ' calculate the width to fill
-                barWidth = ((Player(Myindex).Pet.Health)/(Player(Myindex).Pet.MaxHp))*32
+                barWidth = ((Player(Myindex).Pet.Health) / (Player(Myindex).Pet.MaxHp)) * 32
                 ' draw bars
                 rec(1) = New Rectangle(ConvertMapX(tmpX), ConvertMapY(tmpY), barWidth, 4)
                 Dim rectShape As New RectangleShape(New Vector2f(barWidth, 4)) With {
@@ -2007,12 +2009,12 @@ Module C_Graphics
         If PetSkillBuffer > 0 Then
             If Skill(Pet(Player(Myindex).Pet.Num).Skill(PetSkillBuffer)).CastTime > 0 Then
                 ' lock to pet
-                tmpX = Player(Myindex).Pet.X*PicX + Player(Myindex).Pet.XOffset
-                tmpY = Player(Myindex).Pet.Y*PicY + Player(Myindex).Pet.YOffset + 35
+                tmpX = Player(Myindex).Pet.X * PicX + Player(Myindex).Pet.XOffset
+                tmpY = Player(Myindex).Pet.Y * PicY + Player(Myindex).Pet.YOffset + 35
 
                 ' calculate the width to fill
-                barWidth = (GetTickCount() - PetSkillBufferTimer)/
-                           ((Skill(Pet(Player(Myindex).Pet.Num).Skill(PetSkillBuffer)).CastTime*1000))*64
+                barWidth = (GetTickCount() - PetSkillBufferTimer) /
+                           ((Skill(Pet(Player(Myindex).Pet.Num).Skill(PetSkillBuffer)).CastTime * 1000)) * 64
                 ' draw bar background
                 rec(1) = New Rectangle(ConvertMapX(tmpX), ConvertMapY(tmpY), barWidth, 4)
                 Dim rectShape As New RectangleShape(New Vector2f(barWidth, 4)) With {
@@ -2037,8 +2039,8 @@ Module C_Graphics
                             .OutlineColor = New Color(Color.White),
                             .OutlineThickness = 0.6,
                             .FillColor = New Color(Color.Transparent),
-                            .Size = New Vector2f((x*PicX), (y*PicX)),
-                            .Position = New Vector2f(ConvertMapX((x - 1)*PicX), ConvertMapY((y - 1)*PicY))
+                            .Size = New Vector2f((x * PicX), (y * PicX)),
+                            .Position = New Vector2f(ConvertMapX((x - 1) * PicX), ConvertMapY((y - 1) * PicY))
                             }
 
                     GameWindow.Draw(rec)
@@ -2208,7 +2210,7 @@ Module C_Graphics
 
         DrawText(FrmGame.Width - 120, 10, Language.Game.Fps & Fps, Color.White, Color.Black, GameWindow)
         DrawText(FrmGame.Width - 120, 30, Language.Game.Ping & PingToDraw, Color.White, Color.Black, GameWindow)
-        DrawText(FrmGame.Width - 120, 50, Language.Game.Time & MirageBasic.Core.Time.Instance.ToString("h:mm"),
+        DrawText(FrmGame.Width - 120, 50, Language.Game.Time & Time.Instance.ToString("h:mm"),
                  Color.White, Color.Black, GameWindow)
 
         If Blps Then
@@ -2224,13 +2226,13 @@ Module C_Graphics
         Dim curHp As Integer, curMp As Integer, curExp As Integer
 
         'HP Bar
-        curHp = (GetPlayerVital(Myindex, VitalType.HP)/GetPlayerMaxVital(Myindex, VitalType.HP))*100
+        curHp = (GetPlayerVital(Myindex, VitalType.HP) / GetPlayerMaxVital(Myindex, VitalType.HP)) * 100
 
         With rec
             .Y = 0
             .Height = HpBarGfxInfo.Height
             .X = 0
-            .Width = curHp*HpBarGfxInfo.Width/100
+            .Width = curHp * HpBarGfxInfo.Width / 100
         End With
 
         'then render full ontop of it
@@ -2244,14 +2246,14 @@ Module C_Graphics
         '==============================
 
         'MP Bar
-        curMp = (GetPlayerVital(Myindex, VitalType.MP)/GetPlayerMaxVital(Myindex, VitalType.MP))*100
+        curMp = (GetPlayerVital(Myindex, VitalType.MP) / GetPlayerMaxVital(Myindex, VitalType.MP)) * 100
 
         'then render full ontop of it
         With rec
             .Y = 0
             .Height = MpBarGfxInfo.Height
             .X = 0
-            .Width = curMp*MpBarGfxInfo.Width/100
+            .Width = curMp * MpBarGfxInfo.Width / 100
         End With
 
         RenderSprite(MpBarSprite, GameWindow, HudWindowX + HudmpBarX, HudWindowY + HudmpBarY + 4, rec.X, rec.Y,
@@ -2263,14 +2265,14 @@ Module C_Graphics
 
         '====================================================
         'EXP Bar
-        curExp = (GetPlayerExp(Myindex)/NextlevelExp)*100
+        curExp = (GetPlayerExp(Myindex) / NextlevelExp) * 100
 
         'then render full ontop of it
         With rec
             .Y = 0
             .Height = ExpBarGfxInfo.Height
             .X = 0
-            .Width = curExp*ExpBarGfxInfo.Width/100
+            .Width = curExp * ExpBarGfxInfo.Width / 100
         End With
 
         RenderSprite(ExpBarSprite, GameWindow, HudWindowX + HudexpBarX, HudWindowY + HudexpBarY + 4, rec.X, rec.Y,
@@ -2374,9 +2376,9 @@ Module C_Graphics
                         End With
 
                         With recPos
-                            .Y = InvWindowY + InvTop + ((InvOffsetY + 32)*((i - 1)\InvColumns))
+                            .Y = InvWindowY + InvTop + ((InvOffsetY + 32) * ((i - 1) \ InvColumns))
                             .Height = PicY
-                            .X = InvWindowX + InvLeft + ((InvOffsetX + 32)*(((i - 1) Mod InvColumns)))
+                            .X = InvWindowX + InvLeft + ((InvOffsetX + 32) * (((i - 1) Mod InvColumns)))
                             .Width = PicX
                         End With
 
@@ -2406,7 +2408,7 @@ Module C_Graphics
                     End If
                 End If
             End If
-            NextLoop:
+NextLoop:
         Next
 
         DrawAnimatedInvItems()
@@ -2431,7 +2433,7 @@ Module C_Graphics
                     itempic = Item(MapItem(i).Num).Pic
 
                     If itempic < 1 OrElse itempic > NumItems Then Exit Sub
-                    maxFrames = (ItemsGfxInfo(itempic).Width/2)/32 _
+                    maxFrames = (ItemsGfxInfo(itempic).Width / 2) / 32 _
                     ' Work out how many frames there are. /2 because of inventory icons as well as ingame
 
                     If MapItem(i).Frame < maxFrames - 1 Then
@@ -2451,7 +2453,7 @@ Module C_Graphics
                 If itempic > 0 AndAlso itempic <= NumItems Then
                     If ItemsGfxInfo(itempic).Width > 64 Then
 
-                        maxFrames = (ItemsGfxInfo(itempic).Width/2)/32 _
+                        maxFrames = (ItemsGfxInfo(itempic).Width / 2) / 32 _
                         ' Work out how many frames there are. /2 because of inventory icons as well as ingame
 
                         If GetTickCount() > tmr100 Then
@@ -2466,15 +2468,15 @@ Module C_Graphics
                         With rec
                             .Y = 0
                             .Height = 32
-                            .X = (ItemsGfxInfo(itempic).Width/2) + (InvItemFrame(i)*32) _
+                            .X = (ItemsGfxInfo(itempic).Width / 2) + (InvItemFrame(i) * 32) _
                             ' middle to get the start of inv gfx, then +32 for each frame
                             .Width = 32
                         End With
 
                         With recPos
-                            .Y = InvTop + ((InvOffsetY + 32)*((i - 1)\InvColumns))
+                            .Y = InvTop + ((InvOffsetY + 32) * ((i - 1) \ InvColumns))
                             .Height = PicY
-                            .X = InvLeft + ((InvOffsetX + 32)*(((i - 1) Mod InvColumns)))
+                            .X = InvLeft + ((InvOffsetX + 32) * (((i - 1) Mod InvColumns)))
                             .Width = PicX
                         End With
                         With clearregion(1)
@@ -2548,7 +2550,7 @@ Module C_Graphics
         For i = 1 To MAX_PLAYER_SKILLS
             skillnum = Player(Myindex).Skill(i).Num
 
-            If skillNum > 0 AndAlso skillnum <= MAX_SKILLS Then
+            If skillnum > 0 AndAlso skillnum <= MAX_SKILLS Then
                 StreamSkill(skillnum)
                 skillicon = Skill(skillnum).Icon
 
@@ -2576,9 +2578,9 @@ Module C_Graphics
                     End If
 
                     With recPos
-                        .Y = SkillWindowY + SkillTop + ((SkillOffsetY + 32)*((i - 1)\SkillColumns))
+                        .Y = SkillWindowY + SkillTop + ((SkillOffsetY + 32) * ((i - 1) \ SkillColumns))
                         .Height = PicY
-                        .X = SkillWindowX + SkillLeft + ((SkillOffsetX + 32)*(((i - 1) Mod SkillColumns)))
+                        .X = SkillWindowX + SkillLeft + ((SkillOffsetX + 32) * (((i - 1) Mod SkillColumns)))
                         .Width = PicX
                     End With
 
@@ -2602,7 +2604,7 @@ Module C_Graphics
             .Y = 0
             .Height = TargetGfxInfo.Height
             .X = 0
-            .Width = TargetGfxInfo.Width/2
+            .Width = TargetGfxInfo.Width / 2
         End With
 
         x = ConvertMapX(x2)
@@ -2620,8 +2622,8 @@ Module C_Graphics
         With rec
             .Y = 0
             .Height = TargetGfxInfo.Height
-            .X = TargetGfxInfo.Width/2
-            .Width = TargetGfxInfo.Width/2 + TargetGfxInfo.Width/2
+            .X = TargetGfxInfo.Width / 2
+            .Width = TargetGfxInfo.Width / 2 + TargetGfxInfo.Width / 2
         End With
 
         x = ConvertMapX(x2)
@@ -2797,16 +2799,16 @@ Module C_Graphics
         'first render panel
         RenderSprite(RClickSprite, GameWindow, RClickX, RClickY, 0, 0, RClickGfxInfo.Width, RClickGfxInfo.Height)
 
-        DrawText(RClickX + (RClickGfxInfo.Width\2) - (GetTextWidth(RClickname)\2), RClickY + 10, RClickname, Color.White,
+        DrawText(RClickX + (RClickGfxInfo.Width \ 2) - (GetTextWidth(RClickname) \ 2), RClickY + 10, RClickname, Color.White,
                  Color.Black, GameWindow)
 
-        DrawText(RClickX + (RClickGfxInfo.Width\2) - (GetTextWidth("Invite to Trade")\2), RClickY + 35,
+        DrawText(RClickX + (RClickGfxInfo.Width \ 2) - (GetTextWidth("Invite to Trade") \ 2), RClickY + 35,
                  "Invite to Trade", Color.White, Color.Black, GameWindow)
 
-        DrawText(RClickX + (RClickGfxInfo.Width\2) - (GetTextWidth("Invite to Party")\2), RClickY + 60,
+        DrawText(RClickX + (RClickGfxInfo.Width \ 2) - (GetTextWidth("Invite to Party") \ 2), RClickY + 60,
                  "Invite to Party", Color.White, Color.Black, GameWindow)
 
-        DrawText(RClickX + (RClickGfxInfo.Width\2) - (GetTextWidth("Invite to House")\2), RClickY + 85,
+        DrawText(RClickX + (RClickGfxInfo.Width \ 2) - (GetTextWidth("Invite to House") \ 2), RClickY + 85,
                  "Invite to House", Color.White, Color.Black, GameWindow)
     End Sub
 
@@ -2926,9 +2928,9 @@ Module C_Graphics
 
         If File.Exists(Paths.Graphics & "characters\" & Sprite & GfxExt) Then
             frmEditor_NPC.picSprite.Width =
-                Drawing.Image.FromFile(Paths.Graphics & "characters\" & Sprite & GfxExt).Width/4
+                Drawing.Image.FromFile(Paths.Graphics & "characters\" & Sprite & GfxExt).Width / 4
             frmEditor_NPC.picSprite.Height =
-                Drawing.Image.FromFile(Paths.Graphics & "characters\" & Sprite & GfxExt).Height/4
+                Drawing.Image.FromFile(Paths.Graphics & "characters\" & Sprite & GfxExt).Height / 4
             frmEditor_NPC.picSprite.BackgroundImage =
                 Drawing.Image.FromFile(Paths.Graphics & "characters\" & Sprite & GfxExt)
         End If
@@ -2976,11 +2978,11 @@ Module C_Graphics
 
         If Map.Brightness > 0 Then
             NightGfx.Clear(New Color(CByte(0), CByte(0), CByte(0), CByte(Map.Brightness)))
-        ElseIf MirageBasic.Core.Time.Instance.TimeOfDay = TimeOfDay.Dawn Then
+        ElseIf Time.Instance.TimeOfDay = TimeOfDay.Dawn Then
             NightGfx.Clear(New Color(CByte(0), CByte(0), CByte(0), CByte(100)))
-        ElseIf MirageBasic.Core.Time.Instance.TimeOfDay = TimeOfDay.Dusk Then
+        ElseIf Time.Instance.TimeOfDay = TimeOfDay.Dusk Then
             NightGfx.Clear(New Color(CByte(0), CByte(0), CByte(0), CByte(150)))
-        ElseIf MirageBasic.Core.Time.Instance.TimeOfDay = TimeOfDay.Night Then
+        ElseIf Time.Instance.TimeOfDay = TimeOfDay.Night Then
             NightGfx.Clear(New Color(CByte(0), CByte(0), CByte(0), CByte(200)))
         Else
             Return
@@ -3003,20 +3005,20 @@ Module C_Graphics
                                 Dim scale = New Vector2f()
 
                                 If Map.Tile(x, y).Data2 = 1 Then
-                                    Dim r = CSng(RandomNumberBetween(- 0.01F, 0.01F))
+                                    Dim r = CSng(RandomNumberBetween(-0.01F, 0.01F))
                                     scale = New Vector2f(0.35F + r, 0.35F + r)
                                 Else
                                     scale = New Vector2f(0.35F, 0.35F)
                                 End If
 
-                                If useSmoothDynamicLightRendering Then
+                                If UseSmoothDynamicLightRendering Then
 
                                     For Each tile As Vector2i In tiles
                                         LightSprite.Scale = scale
                                         LightSprite.Position =
                                             New Vector2f(
-                                                (ConvertMapX(tile.X*32) - (LightGfx.Size.X/2*LightSprite.Scale.X) + 16),
-                                                (ConvertMapY(tile.Y*32) - (LightGfx.Size.Y/2*LightSprite.Scale.Y) + 16))
+                                                (ConvertMapX(tile.X * 32) - (LightGfx.Size.X / 2 * LightSprite.Scale.X) + 16),
+                                                (ConvertMapY(tile.Y * 32) - (LightGfx.Size.Y / 2 * LightSprite.Scale.Y) + 16))
                                         Dim dist = CByte(((Math.Abs(x - tile.X) + Math.Abs(y - tile.Y))))
                                         LightSprite.Color = New Color(0, 0, 0, 255)
                                         NightGfx.Draw(LightSprite, New RenderStates(BlendMode.Multiply))
@@ -3033,16 +3035,16 @@ Module C_Graphics
                                     If Map.Tile(x, y).Data1 = 0 Then
                                         alphaBump = 255
                                     Else
-                                        alphaBump = CByte((255/(Map.Tile(x, y).Data1)))
+                                        alphaBump = CByte((255 / (Map.Tile(x, y).Data1)))
                                     End If
 
                                     For Each tile As Vector2i In tiles
                                         LightDynamicSprite.Scale = scale
-                                        LightDynamicSprite.Position = New Vector2f((ConvertMapX(tile.X*32)),
-                                                                                   (ConvertMapY(tile.Y*32)))
+                                        LightDynamicSprite.Position = New Vector2f((ConvertMapX(tile.X * 32)),
+                                                                                   (ConvertMapY(tile.Y * 32)))
                                         Dim dist = CByte(((Math.Abs(x - tile.X) + Math.Abs(y - tile.Y))))
                                         LightDynamicSprite.Color = New Color(0, 0, 0,
-                                                                             CByte(Clamp((alphaBump*dist), 0, 255)))
+                                                                             CByte(Clamp((alphaBump * dist), 0, 255)))
                                         NightGfx.Draw(LightDynamicSprite, New RenderStates(BlendMode.Multiply))
                                     Next
 
@@ -3057,15 +3059,15 @@ Module C_Graphics
                                 Dim scale = New Vector2f()
 
                                 If Map.Tile(x, y).Data2 = 1 Then
-                                    Dim r = CSng(RandomNumberBetween(- 0.01F, 0.01F))
-                                    scale = New Vector2f(0.3F*Map.Tile(x, y).Data1 + r, 0.3F*Map.Tile(x, y).Data1 + r)
+                                    Dim r = CSng(RandomNumberBetween(-0.01F, 0.01F))
+                                    scale = New Vector2f(0.3F * Map.Tile(x, y).Data1 + r, 0.3F * Map.Tile(x, y).Data1 + r)
                                 Else
-                                    scale = New Vector2f(0.3F*Map.Tile(x, y).Data1, 0.3F*Map.Tile(x, y).Data1)
+                                    scale = New Vector2f(0.3F * Map.Tile(x, y).Data1, 0.3F * Map.Tile(x, y).Data1)
                                 End If
 
                                 LightSprite.Scale = scale
-                                Dim x1 = (ConvertMapX(x*32) + 16 - CDbl((LightGfxInfo.Width*scale.X))/2)
-                                Dim y1 = (ConvertMapY(y*32) + 16 - CDbl((LightGfxInfo.Height*scale.Y))/2)
+                                Dim x1 = (ConvertMapX(x * 32) + 16 - CDbl((LightGfxInfo.Width * scale.X)) / 2)
+                                Dim y1 = (ConvertMapY(y * 32) + 16 - CDbl((LightGfxInfo.Height * scale.Y)) / 2)
                                 LightSprite.Position = New Vector2f(CSng(x1), CSng(y1))
                                 tempTileLights.Add(New LightTileStruct() With {
                                                       .tiles = New List(Of Vector2i)() From {
@@ -3073,7 +3075,7 @@ Module C_Graphics
                                                       },
                                                       .isFlicker = Map.Tile(x, y).Data2 = 1,
                                                       .scale =
-                                                      New Vector2f(0.3F*Map.Tile(x, y).Data1, 0.3F*Map.Tile(x, y).Data1)
+                                                      New Vector2f(0.3F * Map.Tile(x, y).Data1, 0.3F * Map.Tile(x, y).Data1)
                                                       })
                                 NightGfx.Draw(LightSprite, New RenderStates(BlendMode.Multiply))
                             End If
@@ -3087,7 +3089,7 @@ Module C_Graphics
                 Dim scale = New Vector2f()
 
                 If light.isFlicker Then
-                    Dim r = CSng(RandomNumberBetween(- 0.004F, 0.004F))
+                    Dim r = CSng(RandomNumberBetween(-0.004F, 0.004F))
                     scale = New Vector2f(light.scale.X + r, light.scale.Y + r)
                 Else
                     scale = light.scale
@@ -3098,8 +3100,8 @@ Module C_Graphics
                     If light.isSmooth Then
                         LightSprite.Scale = scale
                         LightSprite.Position =
-                            New Vector2f((ConvertMapX(tile.X*32) - (LightGfx.Size.X/2*LightSprite.Scale.X) + 16),
-                                         (ConvertMapY(tile.Y*32) - (LightGfx.Size.Y/2*LightSprite.Scale.Y) + 16))
+                            New Vector2f((ConvertMapX(tile.X * 32) - (LightGfx.Size.X / 2 * LightSprite.Scale.X) + 16),
+                                         (ConvertMapY(tile.Y * 32) - (LightGfx.Size.Y / 2 * LightSprite.Scale.Y) + 16))
                         Dim dist = CByte(((Math.Abs(x - tile.X) + Math.Abs(y - tile.Y))))
                         LightSprite.Color = New Color(0, 0, 0, 255)
                         NightGfx.Draw(LightSprite, New RenderStates(BlendMode.Multiply))
@@ -3109,21 +3111,21 @@ Module C_Graphics
                         If Map.Tile(x, y).Data1 = 0 Then
                             alphaBump = 255
                         Else
-                            alphaBump = CByte((255/(Map.Tile(x, y).Data1)))
+                            alphaBump = CByte((255 / (Map.Tile(x, y).Data1)))
                         End If
 
                         LightDynamicSprite.Scale = scale
-                        LightDynamicSprite.Position = New Vector2f((ConvertMapX(tile.X*32)), (ConvertMapY(tile.Y*32)))
+                        LightDynamicSprite.Position = New Vector2f((ConvertMapX(tile.X * 32)), (ConvertMapY(tile.Y * 32)))
                         Dim dist = CByte(((Math.Abs(x - tile.X) + Math.Abs(y - tile.Y))))
-                        LightDynamicSprite.Color = New Color(0, 0, 0, CByte(Clamp((alphaBump*dist), 0, 255)))
+                        LightDynamicSprite.Color = New Color(0, 0, 0, CByte(Clamp((alphaBump * dist), 0, 255)))
                         NightGfx.Draw(LightDynamicSprite, New RenderStates(BlendMode.Multiply))
                     End If
                 Next
             Next
         End If
 
-        Dim x2 = ConvertMapX(Player(Myindex).X*32) + 56 + Player(Myindex).XOffset - CDbl(LightGfxInfo.Width)/2
-        Dim y2 = ConvertMapY(Player(Myindex).Y*32) + 56 + Player(Myindex).YOffset - CDbl(LightGfxInfo.Height)/2
+        Dim x2 = ConvertMapX(Player(Myindex).X * 32) + 56 + Player(Myindex).XOffset - CDbl(LightGfxInfo.Width) / 2
+        Dim y2 = ConvertMapY(Player(Myindex).Y * 32) + 56 + Player(Myindex).YOffset - CDbl(LightGfxInfo.Height) / 2
         LightSprite.Position = New Vector2f(CSng(x2), CSng(y2))
         LightSprite.Color = Color.Red
         LightSprite.Scale = New Vector2f(0.7F, 0.7F)
@@ -3217,11 +3219,11 @@ Module C_Graphics
                 If FrmEditor_Animation.nudFrameCount0.Value > 0 Then
                     ' total width divided by frame count
                     height = AnimationsGfxInfo(Animationnum).Height
-                    width = AnimationsGfxInfo(Animationnum).Width/FrmEditor_Animation.nudFrameCount0.Value
+                    width = AnimationsGfxInfo(Animationnum).Width / FrmEditor_Animation.nudFrameCount0.Value
                     With sRECT
                         .Y = 0
                         .Height = height
-                        .X = (AnimEditorFrame(0) - 1)*width
+                        .X = (AnimEditorFrame(0) - 1) * width
                         .Width = width
                     End With
                     With dRECT
@@ -3230,7 +3232,7 @@ Module C_Graphics
                         .X = 0
                         .Width = width
                     End With
-                    
+
                     EditorAnimation_Anim1.Clear(ToSfmlColor(FrmEditor_Animation.picSprite0.BackColor))
                     RenderSprite(AnimationsSprite(Animationnum), EditorAnimation_Anim1, dRECT.X, dRECT.Y, sRECT.X,
                                  sRECT.Y, sRECT.Width, sRECT.Height)
@@ -3274,11 +3276,11 @@ Module C_Graphics
                 If FrmEditor_Animation.nudFrameCount1.Value > 0 Then
                     ' total width divided by frame count
                     height = AnimationsGfxInfo(Animationnum).Height
-                    width = AnimationsGfxInfo(Animationnum).Width/FrmEditor_Animation.nudFrameCount1.Value
+                    width = AnimationsGfxInfo(Animationnum).Width / FrmEditor_Animation.nudFrameCount1.Value
                     With sRECT
                         .Y = 0
                         .Height = height
-                        .X = (AnimEditorFrame(1) - 1)*width
+                        .X = (AnimEditorFrame(1) - 1) * width
                         .Width = width
                     End With
 
@@ -3302,7 +3304,7 @@ Module C_Graphics
 
     Private Function RandomNumberBetween(minValue As Double, maxValue As Double) As Double
         Dim [next] = flickerRandom.NextDouble()
-        Return minValue + ([next]*(maxValue - minValue))
+        Return minValue + ([next] * (maxValue - minValue))
     End Function
 
     Private Function Clamp(value As Integer, min As Integer, max As Integer) As Integer
@@ -3353,8 +3355,8 @@ Module C_Graphics
         Dim litTiles = New List(Of Vector2i)()
         Dim dx As Integer = Math.Abs(xDestination - x)
         Dim dy As Integer = Math.Abs(yDestination - y)
-        Dim sx As Integer = If(x < xDestination, 1, - 1)
-        Dim sy As Integer = If(y < yDestination, 1, - 1)
+        Dim sx As Integer = If(x < xDestination, 1, -1)
+        Dim sy As Integer = If(y < yDestination, 1, -1)
         Dim err As Integer = dx - dy
 
         While True
@@ -3368,9 +3370,9 @@ Module C_Graphics
                 Exit While
             End If
 
-            Dim e2 As Integer = 2*err
+            Dim e2 As Integer = 2 * err
 
-            If e2 > - dy Then
+            If e2 > -dy Then
                 err = err - dy
                 x = x + sx
             ElseIf e2 < dx Then

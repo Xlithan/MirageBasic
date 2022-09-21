@@ -29,7 +29,6 @@ _ReSharper*/
 $tf*/
 *.db
 [Tt]est*/
-Source/Editors/Source/Forms/Forms.rar
 /build/
 *.bin
 *.dat
@@ -45,3 +44,7 @@ Source/Editors/Source/Forms/Forms.rar
 *.1
 *.txt
 *.pubxml
+*.json
+*.xml
+*.idea
+*.vs
