@@ -124,6 +124,13 @@ End Function
         ' Set the focus
         FrmGame.picscreen.Focus()
 
+        ' Send a request to the server to open the admin menu if the user wants it.
+        If Settings.OpenAdminPanelOnLogin = 1 Then
+            If GetPlayerAccess(Myindex) > 0 Then
+                SendRequestAdmin()
+            End If
+        End If
+
         'stop the song playing
         StopMusic()
     End Sub

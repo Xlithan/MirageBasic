@@ -2361,10 +2361,6 @@ Module S_Players
         ' Send the flag so they know they can start doing stuff
         SendInGame(index)
 
-        If GetPlayerAccess(index) > 0 Then
-            SendAdminPanel(index)
-        End If
-
         UpdateCaption()
     End Sub
 
