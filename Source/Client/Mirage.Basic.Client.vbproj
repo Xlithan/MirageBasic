@@ -3,9 +3,9 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <TargetFramework>net6.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
-    <StartupObject>Engine.My.MyApplication</StartupObject>
-    <RootNamespace>Engine</RootNamespace>
-    <AssemblyName>MirageBasic Client</AssemblyName>
+    <StartupObject>Mirage.Basic.Client.My.MyApplication</StartupObject>
+    <RootNamespace>$(MSBuildProjectName)</RootNamespace>
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <MyType>WindowsForms</MyType>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
     <IsWebBootstrapper>false</IsWebBootstrapper>
