@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 
-namespace Asfw.Network
+namespace Mirage.Sharp.Asfw.Network
 {
   public sealed class NetworkServer : IDisposable
   {

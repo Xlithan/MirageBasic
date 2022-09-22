@@ -3,9 +3,9 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <TargetFramework>net6.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
-    <StartupObject>Engine.My.MyApplication</StartupObject>
-    <RootNamespace>Engine</RootNamespace>
-    <AssemblyName>MirageBasic Client</AssemblyName>
+    <StartupObject>Mirage.Basic.Client.My.MyApplication</StartupObject>
+    <RootNamespace>$(MSBuildProjectName)</RootNamespace>
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <MyType>WindowsForms</MyType>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -897,7 +897,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Mirage.Basic.Engine.vbproj" />
-    <ProjectReference Include="..\Network\Asfw.csproj" />
+    <ProjectReference Include="..\Network\Mirage.Sharp.Asfw.csproj" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="My Project\Resources.resx">

@@ -1,4 +1,4 @@
-﻿Imports Asfw
+﻿Imports Mirage.Sharp.Asfw
 Imports Mirage.Basic.Engine
 
 Friend Module C_Quest

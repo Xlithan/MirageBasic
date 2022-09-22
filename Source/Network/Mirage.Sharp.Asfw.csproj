@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
     <ApplicationVersion>0.10.0.0</ApplicationVersion>
-    <RootNamespace>Asfw</RootNamespace>
+    <RootNamespace>$(AssemblyFileVersion)</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Asfw-NoTCPDelay</Title>
