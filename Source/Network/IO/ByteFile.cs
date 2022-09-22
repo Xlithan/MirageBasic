@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Asfw.IO
+namespace Mirage.Sharp.Asfw.IO
 {
   public static class ByteFile
   {

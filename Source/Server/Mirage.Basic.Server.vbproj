@@ -50,7 +50,7 @@
 </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Mirage.Basic.Engine.vbproj" />
-     <ProjectReference Include="..\Network\Asfw.csproj" />
+     <ProjectReference Include="..\Network\Mirage.Sharp.Asfw.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

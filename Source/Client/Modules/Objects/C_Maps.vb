@@ -1,8 +1,8 @@
 ﻿Imports System.Drawing
 Imports System.IO
 Imports System.Windows.Forms
-Imports Asfw
-Imports Asfw.IO
+Imports Mirage.Sharp.Asfw
+Imports Mirage.Sharp.Asfw.IO
 Imports Mirage.Basic.Engine
 
 Module C_Maps

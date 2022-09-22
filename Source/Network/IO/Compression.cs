@@ -3,7 +3,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
 
-namespace Asfw.IO
+namespace Mirage.Sharp.Asfw.IO
 {
   public static class Compression
   {

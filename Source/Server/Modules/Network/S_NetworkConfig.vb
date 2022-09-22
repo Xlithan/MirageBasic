@@ -1,14 +1,13 @@
-﻿Imports System.Net
-Imports Asfw.Network
+﻿Imports Mirage.Sharp.Asfw.Network
 Imports Mirage.Basic.Engine
 
 Friend Module S_NetworkConfig
-    Friend WithEvents Socket As Asfw.Network.NetworkServer
+    Friend WithEvents Socket As NetworkServer
 
     Friend Sub InitNetwork()
         If Not Socket Is Nothing Then Return
         ' Establish some Rulez
-        Socket = New Asfw.Network.NetworkServer(Packets.ClientPackets.Count, 4096, MAX_PLAYERS) With {
+        Socket = New NetworkServer(Packets.ClientPackets.Count, 4096, MAX_PLAYERS) With {
             .BufferLimit = 2048000, ' <- this is 2mb max data storage
             .MinimumIndex = 1, ' <- this prevents the network from giving us 0 as an index
             .PacketAcceptLimit = 500, ' Dunno what is a reasonable cap right now so why not? :P

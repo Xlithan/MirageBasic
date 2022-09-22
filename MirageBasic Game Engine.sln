@@ -8,7 +8,7 @@ Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "Mirage.Basic.Server", "Sour
 EndProject
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "Mirage.Basic.Engine", "Source\Core\Mirage.Basic.Engine.vbproj", "{384120CA-8F90-4B6E-B38E-2A524893403F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asfw", "Source\Network\Asfw.csproj", "{1919AC79-B888-4705-AF34-56FD9A26EC3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mirage.Sharp.Asfw", "Source\Network\Mirage.Sharp.Asfw.csproj", "{1919AC79-B888-4705-AF34-56FD9A26EC3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

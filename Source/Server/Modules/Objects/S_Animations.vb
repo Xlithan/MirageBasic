@@ -1,6 +1,6 @@
 ﻿Imports System.IO
-Imports Asfw
-Imports Asfw.IO
+Imports Mirage.Sharp.Asfw
+Imports Mirage.Sharp.Asfw.IO
 Imports Mirage.Basic.Engine
 
 Friend Module S_Animations

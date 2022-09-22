@@ -1,4 +1,4 @@
-﻿Imports System.Drawing
+﻿Imports Mirage.Sharp.Asfw.IO.Encryption
 Imports Mirage.Basic.Engine
 
 Module C_Variables
@@ -189,7 +189,7 @@ Module C_Variables
     Friend ShowAnimLayers As Boolean
     Friend ShowAnimTimer As Integer
 
-    Friend EKeyPair As New Asfw.IO.Encryption.KeyPair()
+    Friend EKeyPair As New KeyPair()
 
     ' Stream Content
     Friend Item_Loaded(MAX_ITEMS)
