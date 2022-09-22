@@ -61,7 +61,7 @@ Friend Class FrmOptions
         Else
             If Settings.Fullscreen = 1 Then
                 cmbScreenSize.Enabled = False
-            Else              
+            Else
                 resolution = cmbScreenSize.SelectedItem.ToString.ToLower.Split("x")
                 width = resolution(0)
                 height = resolution(1)
@@ -70,6 +70,12 @@ Friend Class FrmOptions
             End If
 
             Settings.Fullscreen = 0
+        End If
+
+        If chkOpenAdminPanelOnLogin.Checked Then
+            Settings.OpenAdminPanelOnLogin = 1
+        Else
+            Settings.OpenAdminPanelOnLogin = 0
         End If
 
         ' save to config.ini

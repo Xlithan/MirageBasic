@@ -20,6 +20,7 @@ Public Class SettingsDef
     Public ShowNpcBar As Byte = 1
     Public CameraType As Byte = 0
     Public Fullscreen As Byte = 1
+    Public OpenAdminPanelOnLogin As Byte = 0
 
     <XmlIgnore()> Public Ip As String = "127.0.0.1"
     <XmlIgnore()> Public Port As Integer = 7001

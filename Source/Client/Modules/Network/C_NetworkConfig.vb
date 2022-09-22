@@ -1,4 +1,4 @@
-﻿Imports Asfw.Network
+﻿Imports Mirage.Sharp.Asfw.Network
 Imports Mirage.Basic.Engine
 
 Friend Module C_NetworkConfig

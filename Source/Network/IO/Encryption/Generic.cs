@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Asfw.IO.Encryption
+namespace Mirage.Sharp.Asfw.IO.Encryption
 {
   public static class Generic
   {

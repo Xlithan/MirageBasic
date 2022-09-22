@@ -36,24 +36,25 @@ Partial Class FrmOptions
         Me.chkVsync = New System.Windows.Forms.CheckBox()
         Me.chkNpcBars = New System.Windows.Forms.CheckBox()
         Me.chkFullscreen = New System.Windows.Forms.CheckBox()
-        Me.GroupBox2.SuspendLayout
-        Me.GroupBox1.SuspendLayout
-        Me.SuspendLayout
+        Me.chkOpenAdminPanelOnLogin = New System.Windows.Forms.CheckBox()
+        Me.GroupBox2.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.SuspendLayout()
         '
         'btnSaveSettings
         '
         Me.btnSaveSettings.ForeColor = System.Drawing.Color.Black
-        Me.btnSaveSettings.Location = New System.Drawing.Point(13, 237)
+        Me.btnSaveSettings.Location = New System.Drawing.Point(13, 242)
         Me.btnSaveSettings.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnSaveSettings.Name = "btnSaveSettings"
         Me.btnSaveSettings.Size = New System.Drawing.Size(239, 27)
         Me.btnSaveSettings.TabIndex = 14
         Me.btnSaveSettings.Text = "Save Settings"
-        Me.btnSaveSettings.UseVisualStyleBackColor = true
+        Me.btnSaveSettings.UseVisualStyleBackColor = True
         '
         'Label1
         '
-        Me.Label1.AutoSize = true
+        Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(14, 115)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
@@ -63,7 +64,7 @@ Partial Class FrmOptions
         '
         'cmbScreenSize
         '
-        Me.cmbScreenSize.FormattingEnabled = true
+        Me.cmbScreenSize.FormattingEnabled = True
         Me.cmbScreenSize.Items.AddRange(New Object() {"800x600", "1024x768", "1152x864", "1280x720", "1336x768", "1600x900", "1920x1080", "2560x1440", "3840x2160"})
         Me.cmbScreenSize.Location = New System.Drawing.Point(13, 134)
         Me.cmbScreenSize.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -73,7 +74,7 @@ Partial Class FrmOptions
         '
         'lblVolume
         '
-        Me.lblVolume.AutoSize = true
+        Me.lblVolume.AutoSize = True
         Me.lblVolume.BackColor = System.Drawing.Color.Transparent
         Me.lblVolume.ForeColor = System.Drawing.Color.Black
         Me.lblVolume.Location = New System.Drawing.Point(14, 62)
@@ -103,32 +104,32 @@ Partial Class FrmOptions
         Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.GroupBox2.Size = New System.Drawing.Size(117, 44)
         Me.GroupBox2.TabIndex = 7
-        Me.GroupBox2.TabStop = false
+        Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Sound"
         '
         'optSOff
         '
-        Me.optSOff.AutoSize = true
+        Me.optSOff.AutoSize = True
         Me.optSOff.Location = New System.Drawing.Point(57, 22)
         Me.optSOff.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optSOff.Name = "optSOff"
         Me.optSOff.Size = New System.Drawing.Size(42, 19)
         Me.optSOff.TabIndex = 5
-        Me.optSOff.TabStop = true
+        Me.optSOff.TabStop = True
         Me.optSOff.Text = "Off"
-        Me.optSOff.UseVisualStyleBackColor = true
+        Me.optSOff.UseVisualStyleBackColor = True
         '
         'optSOn
         '
-        Me.optSOn.AutoSize = true
+        Me.optSOn.AutoSize = True
         Me.optSOn.Location = New System.Drawing.Point(5, 22)
         Me.optSOn.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optSOn.Name = "optSOn"
         Me.optSOn.Size = New System.Drawing.Size(41, 19)
         Me.optSOn.TabIndex = 4
-        Me.optSOn.TabStop = true
+        Me.optSOn.TabStop = True
         Me.optSOn.Text = "On"
-        Me.optSOn.UseVisualStyleBackColor = true
+        Me.optSOn.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
@@ -141,72 +142,84 @@ Partial Class FrmOptions
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.GroupBox1.Size = New System.Drawing.Size(117, 45)
         Me.GroupBox1.TabIndex = 6
-        Me.GroupBox1.TabStop = false
+        Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Music"
         '
         'optMOff
         '
-        Me.optMOff.AutoSize = true
+        Me.optMOff.AutoSize = True
         Me.optMOff.Location = New System.Drawing.Point(57, 20)
         Me.optMOff.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optMOff.Name = "optMOff"
         Me.optMOff.Size = New System.Drawing.Size(42, 19)
         Me.optMOff.TabIndex = 2
-        Me.optMOff.TabStop = true
+        Me.optMOff.TabStop = True
         Me.optMOff.Text = "Off"
-        Me.optMOff.UseVisualStyleBackColor = true
+        Me.optMOff.UseVisualStyleBackColor = True
         '
         'optMOn
         '
-        Me.optMOn.AutoSize = true
+        Me.optMOn.AutoSize = True
         Me.optMOn.Location = New System.Drawing.Point(5, 20)
         Me.optMOn.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optMOn.Name = "optMOn"
         Me.optMOn.Size = New System.Drawing.Size(41, 19)
         Me.optMOn.TabIndex = 1
-        Me.optMOn.TabStop = true
+        Me.optMOn.TabStop = True
         Me.optMOn.Text = "On"
-        Me.optMOn.UseVisualStyleBackColor = true
+        Me.optMOn.UseVisualStyleBackColor = True
         '
         'chkVsync
         '
-        Me.chkVsync.AutoSize = true
+        Me.chkVsync.AutoSize = True
         Me.chkVsync.Location = New System.Drawing.Point(14, 165)
         Me.chkVsync.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.chkVsync.Name = "chkVsync"
         Me.chkVsync.Size = New System.Drawing.Size(62, 19)
         Me.chkVsync.TabIndex = 15
         Me.chkVsync.Text = "Vsync?"
-        Me.chkVsync.UseVisualStyleBackColor = true
+        Me.chkVsync.UseVisualStyleBackColor = True
         '
         'chkNpcBars
         '
-        Me.chkNpcBars.AutoSize = true
+        Me.chkNpcBars.AutoSize = True
         Me.chkNpcBars.Location = New System.Drawing.Point(13, 192)
         Me.chkNpcBars.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.chkNpcBars.Name = "chkNpcBars"
         Me.chkNpcBars.Size = New System.Drawing.Size(110, 19)
         Me.chkNpcBars.TabIndex = 16
         Me.chkNpcBars.Text = "Show Npc Bars?"
-        Me.chkNpcBars.UseVisualStyleBackColor = true
+        Me.chkNpcBars.UseVisualStyleBackColor = True
         '
         'chkFullscreen
         '
-        Me.chkFullscreen.AutoSize = true
+        Me.chkFullscreen.AutoSize = True
         Me.chkFullscreen.Location = New System.Drawing.Point(168, 165)
         Me.chkFullscreen.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.chkFullscreen.Name = "chkFullscreen"
         Me.chkFullscreen.Size = New System.Drawing.Size(90, 19)
         Me.chkFullscreen.TabIndex = 17
         Me.chkFullscreen.Text = "Fullscreeen?"
-        Me.chkFullscreen.UseVisualStyleBackColor = true
+        Me.chkFullscreen.UseVisualStyleBackColor = True
+        '
+        'chkOpenAdminPanelOnLogin
+        '
+        Me.chkOpenAdminPanelOnLogin.AutoSize = True
+        Me.chkOpenAdminPanelOnLogin.Location = New System.Drawing.Point(13, 217)
+        Me.chkOpenAdminPanelOnLogin.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.chkOpenAdminPanelOnLogin.Name = "chkOpenAdminPanelOnLogin"
+        Me.chkOpenAdminPanelOnLogin.Size = New System.Drawing.Size(183, 19)
+        Me.chkOpenAdminPanelOnLogin.TabIndex = 18
+        Me.chkOpenAdminPanelOnLogin.Text = "Open Admin Panel On Login?"
+        Me.chkOpenAdminPanelOnLogin.UseVisualStyleBackColor = True
         '
         'FrmOptions
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.AutoSize = true
-        Me.ClientSize = New System.Drawing.Size(271, 272)
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(271, 278)
+        Me.Controls.Add(Me.chkOpenAdminPanelOnLogin)
         Me.Controls.Add(Me.chkFullscreen)
         Me.Controls.Add(Me.chkNpcBars)
         Me.Controls.Add(Me.chkVsync)
@@ -246,4 +259,5 @@ End Sub
     Friend WithEvents chkVsync As Windows.Forms.CheckBox
     Friend WithEvents chkNpcBars As Windows.Forms.CheckBox
     Friend WithEvents chkFullscreen As CheckBox
+    Friend WithEvents chkOpenAdminPanelOnLogin As CheckBox
 End Class

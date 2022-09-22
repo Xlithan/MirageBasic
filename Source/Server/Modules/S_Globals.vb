@@ -1,4 +1,6 @@
-﻿Module S_Globals
+﻿Imports Mirage.Sharp.Asfw.IO.Encryption
+
+Module S_Globals
     Friend Debugging As Boolean
     Friend DebugTxt As Boolean = False
     Friend ConsoleText As String
@@ -27,5 +29,5 @@
     Friend Secs As Integer
     Friend TempMapData As Byte
 
-    Friend EKeyPair As New Asfw.IO.Encryption.KeyPair()
+    Friend EKeyPair As New KeyPair()
 End Module

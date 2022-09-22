@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 
-namespace Asfw.Network
+namespace Mirage.Sharp.Asfw.Network
 {
   public sealed class NetworkClient : IDisposable
   {
