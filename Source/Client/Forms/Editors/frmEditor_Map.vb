@@ -1006,13 +1006,7 @@ Public Class frmEditor_Map
 
         ' find tileset number
         tileset = cmbTileSets.SelectedIndex
-
-        ' exit out if doesn't exist
-        If tileset <= 0 OrElse tileset > NumTileSets Then
-            TilesetWindow.Clear(ToSfmlColor(picBackSelect.BackColor))
-            TilesetWindow.Display()
-            Exit Sub
-        End If
+        TilesetWindow.Clear(ToSfmlColor(picBackSelect.BackColor))
 
         Dim rec2 As New RectangleShape With {
             .OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Red),
@@ -1061,6 +1055,7 @@ Public Class frmEditor_Map
         rec2.Size = New Vector2f(EditorTileWidth * PicX, EditorTileHeight * PicY)
         rec2.Position = New Vector2f((EditorTileSelStart.X * PicX - picbackleft), (EditorTileSelStart.Y * PicY - picbacktop))
 
+        'Me.picBackSelect.BackgroundImage = Drawing.Image.FromFile(Paths.Graphics & "tilesets\" & tileset * GfxExt)
         TilesetWindow.Draw(rec2)
 
         'and finally show everything on screen
