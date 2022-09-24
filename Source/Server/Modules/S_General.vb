@@ -46,15 +46,9 @@ Module S_General
         CheckDir(Paths.Projectiles)
         CheckDir(Paths.Quests)
 
-        ' LOAD ENCRYPTION
         EKeyPair.GenerateKeys()
-        ' Remember never pass private to client!
-        ' Exporting the Key above saves it as a file for later reuse.
-        ' END LOAD ENCRYPTION
-
-        ' Get that network READY SUN! ~ SpiceyWOlf
         InitNetwork()
-
+                                                                                                                                                                                                    
         'event
         ReDim Switches(MAX_SWITCHES)
         ReDim Variables(NAX_VARIABLES)
