@@ -653,6 +653,7 @@ Module C_NetworkSend
         Socket.SendData(buffer.Data, buffer.Head)
         buffer.Dispose()
     End Sub
+
     Sub SendSaveItem(itemNum As Integer)
         Dim buffer As New ByteStream(4)
 

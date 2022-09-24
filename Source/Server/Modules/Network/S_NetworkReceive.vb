@@ -2368,9 +2368,6 @@ Module S_NetworkReceive
             .Name = buffer.ReadString
             .Desc = buffer.ReadString
 
-            ' get array size
-            z = buffer.ReadInt32
-
             .MaleSprite = buffer.ReadInt32
             .FemaleSprite = buffer.ReadInt32
 
