@@ -1,7 +1,7 @@
 ﻿Public Module Constants
     Public Const MAX_ANIMATIONS As Integer = 100
     Public Const MAX_BANK As Byte = 90
-    Public Const MAX_JOBS As Byte = 3
+    Public Const MAX_JOBS As Byte = 10
     Public Const MAX_COTS As Integer = 30
     Public Const MAX_INGREDIENT As Byte = 5
     Public Const MAX_INV As Byte = 35
@@ -15,7 +15,7 @@
     Public Const MAX_PARTIES As Integer = 35
     Public Const MAX_PARTY_MEMBERS As Integer = 4
     Public Const MAX_PETS As Integer = 100
-    Public Const MAX_PLAYERS As Integer = 70
+    Public Const MAX_PLAYERS As Integer = 100
     Public Const MAX_PLAYER_SKILLS As Byte = 20
     Public Const MAX_RANDOM_TYPES As Byte = 16
     Public Const MAX_RESOURCES As Integer = 100

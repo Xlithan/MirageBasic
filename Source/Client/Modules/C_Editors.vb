@@ -403,7 +403,9 @@ Module C_Editors
             .txtName.Text = Job(Editorindex).Name
             .txtDescription.Text = Job(Editorindex).Desc
 
+            If Job(Editorindex).MaleSprite = 0 Then Job(Editorindex).MaleSprite = 1
             .nudMaleSprite.Value = Job(Editorindex).MaleSprite
+            If Job(Editorindex).FemaleSprite = 0 Then Job(Editorindex).FemaleSprite = 1
             .nudFemaleSprite.Value = Job(Editorindex).FemaleSprite
 
             .cmbItems.SelectedIndex = 0
