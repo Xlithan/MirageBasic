@@ -1601,10 +1601,6 @@ Module modDatabase
                 SetPlayerGatherSkillMaxExp(index, i, GetSkillNextLevel(index, i))
             Next
           
-            If CharactersList.IsEmpty()
-                Call SetPlayerAccess(index, AdminType.Creator)
-            End If
-
             ' Add name to character list.
             CharactersList.Add(name).Save()
 
