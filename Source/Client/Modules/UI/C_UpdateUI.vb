@@ -319,8 +319,14 @@ Module C_UpdateUI
             FrmMenu.cmbJob.Items.Clear()
 
             For i = 1 To UBound(CmbJob)
-                FrmMenu.cmbJob.Items.Add(CmbJob(i))
+                If CmbJob(i) <> "" Then
+                    FrmMenu.cmbJob.Items.Add(CmbJob(i))
+                End If
             Next
+
+            If FrmMenu.cmbJob.Items.Count = 0 Then
+                FrmMenu.cmbJob.Items.Add("None")
+            End If
 
             FrmMenu.cmbJob.SelectedIndex = 0
 
