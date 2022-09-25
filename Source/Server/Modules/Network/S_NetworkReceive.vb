@@ -312,7 +312,7 @@ Module S_NetworkReceive
                 End If
 
                 If name.Trim.Length > MAX_STRING_LENGTH OrElse password.Trim.Length > MAX_STRING_LENGTH Then
-                    AlertMsg(index, "Your name and password must be 21 characters or less!")
+                    AlertMsg(index, "Your name and password must be " & MAX_STRING_LENGTH & " characters or less!")
                 End If
 
                 If Not AccountExist(name) Then

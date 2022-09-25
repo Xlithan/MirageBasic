@@ -12,6 +12,10 @@ Public Class InputsDef
         Public MoveDown As Keys = Keys.S
         Public MoveLeft As Keys = Keys.A
         Public MoveRight As Keys = Keys.D
+        Public MoveUp2 As Keys = Keys.Up
+        Public MoveLeft2 As Keys = Keys.Left
+        Public MoveRight2 As Keys = keys.Right
+        Public MoveDown2 As Keys = keys.Down
 
         Public Attack As Keys = Keys.Z
         Public Run As Keys = Keys.Shift
@@ -40,19 +44,30 @@ Public Class InputsDef
 
     Public Function MoveUp(keyCode As Keys) As Boolean
         Return keyCode = Primary.MoveUp OrElse
-               keyCode = Secondary.MoveUp
+               keyCode = Secondary.MoveUp OrElse
+               keyCode = Primary.MoveUp2 OrElse
+               keyCode = Secondary.MoveUp2
     End Function
+
     Public Function MoveDown(keyCode As Keys) As Boolean
         Return keyCode = Primary.MoveDown OrElse
-               keyCode = Secondary.MoveDown
+               keyCode = Secondary.MoveDown OrElse
+               keyCode = Primary.MoveDown2 OrElse
+               keyCode = Secondary.MoveDown2
     End Function
+
     Public Function MoveLeft(keyCode As Keys) As Boolean
         Return keyCode = Primary.MoveLeft OrElse
-               keyCode = Secondary.MoveLeft
+               keyCode = Secondary.MoveLeft OrElse
+               keyCode = Primary.MoveLeft2 OrElse
+               keyCode = Secondary.MoveLeft2
     End Function
+
     Public Function MoveRight(keyCode As Keys) As Boolean
         Return keyCode = Primary.MoveRight OrElse
-               keyCode = Secondary.MoveRight
+               keyCode = Secondary.MoveRight OrElse
+               keyCode = Primary.MoveRight2 OrElse
+               keyCode = Secondary.MoveRight2
     End Function
 
     Public Function Attack(keyCode As Keys) As Boolean
@@ -64,6 +79,7 @@ Public Class InputsDef
         Return keyCode = Primary.Run OrElse
                keyCode = Secondary.Run
     End Function
+
     Public Function Loot(keyCode As Keys) As Boolean
         Return keyCode = Primary.Loot OrElse
                keyCode = Secondary.Loot
@@ -107,18 +123,22 @@ Public Class InputsDef
         Return keyCode = Primary.Inventory OrElse
                keyCode = Secondary.Inventory
     End Function
+
     Public Function Character(keyCode As Keys) As Boolean
         Return keyCode = Primary.Character OrElse
                keyCode = Secondary.Character
     End Function
+
     Public Function Quest(keyCode As Keys) As Boolean
         Return keyCode = Primary.Quest OrElse
                keyCode = Secondary.Quest
     End Function
+
     Public Function Skill(keyCode As Keys) As Boolean
         Return keyCode = Primary.Skill OrElse
                keyCode = Secondary.Skill
     End Function
+
     Public Function Settings(keyCode As Keys) As Boolean
         Return keyCode = Primary.Settings OrElse
                keyCode = Secondary.Settings
@@ -128,6 +148,7 @@ Public Class InputsDef
         Return keyCode = Primary.HudToggle OrElse
                keyCode = Secondary.HudToggle
     End Function
+
     Public Function Admin(keyCode As Keys) As Boolean
         Return keyCode = Primary.Admin OrElse
                keyCode = Secondary.Admin
