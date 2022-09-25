@@ -98,14 +98,14 @@ End Function
     End Function
 
     Friend Function IsLoginLegal(username As String, password As String) As Boolean
-        Return Len(Trim$(username)) >= 3 AndAlso Len(Trim$(password)) >= 3
+        Return Len(Trim$(username)) >= MIN_STRING_LENGTH AndAlso Len(Trim$(password)) >= MIN_STRING_LENGTH And Len(Trim$(username)) <= MAX_STRING_LENGTH And Len(Trim$(password)) <= MAX_STRING_LENGTH
     End Function
 
     Friend Function IsStringLegal(sInput As String) As Boolean
         Dim i As Integer
 
-' Prevent high ascii chars
-       For i = 1 To Len(sInput)
+        ' Prevent high ascii chars
+        For i = 1 To Len(sInput)
 
             If (Asc(Mid$(sInput, i, 1))) < 32 OrElse Asc(Mid$(sInput, i, 1)) > 126 Then
                 MsgBox(Language.MainMenu.StringLegal, vbOKOnly, Settings.GameName)
