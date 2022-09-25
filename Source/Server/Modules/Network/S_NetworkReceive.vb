@@ -165,7 +165,7 @@ Module S_NetworkReceive
 
         If Not IsPlaying(index) AndAlso Not IsLoggedIn(index) Then
             'Get the Data
-            username = EKeyPair.DecryptString(buffer.ReadString)
+            username = EKeyPair.DecryptString(buffer.ReadString).ToLower
             password = EKeyPair.DecryptString(buffer.ReadString)
 
             ' Check versions
@@ -252,7 +252,7 @@ Module S_NetworkReceive
         AddDebug("Recieved CMSG: CDelChar")
 
         ' Get the data
-        Name = buffer.ReadString
+        Name = buffer.ReadString.ToLower
 
         If GetPlayerLogin(index) = Name.Trim Then
             PlayerMsg(index, "You cannot delete your own account while online!", ColorType.BrightRed)
@@ -297,7 +297,7 @@ Module S_NetworkReceive
                 End If
 
                 ' Get the data
-                name = EKeyPair.DecryptString(buffer.ReadString())
+                name = EKeyPair.DecryptString(buffer.ReadString()).ToLower
                 password = EKeyPair.DecryptString(buffer.ReadString())
 
                 ' Check versions
@@ -395,7 +395,7 @@ Module S_NetworkReceive
                 Exit Sub
             End If
 
-            name = buffer.ReadString
+            name = buffer.ReadString.ToLower
             sexNum = buffer.ReadInt32
             jobNum = buffer.ReadInt32 + 1
 
