@@ -158,8 +158,6 @@ Friend Module C_Projectiles
             i = i + 1
         End While
 
-        If NumProjectiles = 0 Then Exit Sub
-
     End Sub
 
     Friend Sub DrawProjectile(projectileNum As Integer)
