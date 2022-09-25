@@ -307,7 +307,7 @@ Module S_NetworkReceive
                 End If
 
                 If name.Trim.Length < MIN_STRING_LENGTH OrElse password.Trim.Length < MIN_STRING_LENGTH Then
-                    AlertMsg(index, "Your name and password must be at least three characters in length")
+                    AlertMsg(index, "Your name and password must be at least " & MIN_STRING_LENGTH & " characters in length")
                     Exit Sub
                 End If
 
