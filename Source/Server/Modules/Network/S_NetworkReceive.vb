@@ -297,7 +297,7 @@ Module S_NetworkReceive
                 End If
 
                 ' Get the data
-                name = EKeyPair.DecryptString(buffer.ReadString()).ToLower
+                name = EKeyPair.DecryptString(buffer.ReadString())
                 password = EKeyPair.DecryptString(buffer.ReadString())
 
                 ' Check versions
@@ -395,7 +395,7 @@ Module S_NetworkReceive
                 Exit Sub
             End If
 
-            name = buffer.ReadString.ToLower
+            name = buffer.ReadString
             sexNum = buffer.ReadInt32
             jobNum = buffer.ReadInt32 + 1
 
