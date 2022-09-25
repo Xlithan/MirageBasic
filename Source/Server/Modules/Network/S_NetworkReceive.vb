@@ -297,7 +297,7 @@ Module S_NetworkReceive
                 End If
 
                 ' Get the data
-                name = EKeyPair.DecryptString(buffer.ReadString())
+                name = EKeyPair.DecryptString(buffer.ReadString()).ToLower
                 password = EKeyPair.DecryptString(buffer.ReadString())
 
                 ' Check versions
