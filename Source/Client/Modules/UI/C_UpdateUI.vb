@@ -372,7 +372,7 @@ Module C_UpdateUI
             With frmEditor_Pet
                 Editor = EditorType.Pet
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 PetEditorInit()
             End With
             InitPetEditor = False
@@ -382,7 +382,7 @@ Module C_UpdateUI
             With frmEditor_Quest
                 Editor = EditorType.Quest
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 QuestEditorInit()
             End With
             InitQuestEditor = False
@@ -392,7 +392,7 @@ Module C_UpdateUI
             With FrmEditor_Animation
                 Editor = EditorType.Animation
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 AnimationEditorInit()
             End With
             InitAnimationEditor = False
@@ -402,7 +402,7 @@ Module C_UpdateUI
             With FrmEditor_Item
                 Editor = EditorType.Item
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 ItemEditorInit()
             End With
             InitItemEditor = False
@@ -412,7 +412,7 @@ Module C_UpdateUI
             With frmEditor_Job
                 Editor = EditorType.Job
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 JobEditorInit()
             End With
             InitJobEditor = False
@@ -422,7 +422,7 @@ Module C_UpdateUI
             With frmEditor_Resource
                 Editor = EditorType.Resource
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 ResourceEditorInit()
             End With
             InitResourceEditor = False
@@ -432,7 +432,7 @@ Module C_UpdateUI
             With frmEditor_NPC
                 Editor = EditorType.NPC
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 NpcEditorInit()
             End With
             InitNPCEditor = False
@@ -442,7 +442,7 @@ Module C_UpdateUI
             With frmEditor_Skill
                 Editor = EditorType.Skill
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 SkillEditorInit()
             End With
             InitSkillEditor = False
@@ -452,7 +452,7 @@ Module C_UpdateUI
             With frmEditor_Shop
                 Editor = EditorType.Shop
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 ShopEditorInit()
             End With
             InitShopEditor = False
@@ -462,7 +462,7 @@ Module C_UpdateUI
             With frmEditor_Projectile
                 Editor = EditorType.Projectile
                 .Show()
-                .lstIndex.SelectedIndex = 0
+                .lstIndex.SelectedIndex = 1
                 ProjectileEditorInit()
             End With
 
