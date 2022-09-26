@@ -107,7 +107,8 @@ Module C_NetworkReceive
         Socket.PacketId(ServerPackets.SMapEventData) = AddressOf Packet_MapEventData
         Socket.PacketId(ServerPackets.SChatBubble) = AddressOf Packet_ChatBubble
         Socket.PacketId(ServerPackets.SSpecialEffect) = AddressOf Packet_SpecialEffect
-        'SPic
+
+        Socket.PacketId(ServerPackets.SPic) = AddressOf Packet_Picture
         Socket.PacketId(ServerPackets.SHoldPlayer) = AddressOf Packet_HoldPlayer
 
         Socket.PacketId(ServerPackets.SUpdateProjectile) = AddressOf HandleUpdateProjectile

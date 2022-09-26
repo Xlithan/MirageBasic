@@ -91,6 +91,7 @@ End Function
         CheckPanoramas()
         CheckPaperdolls()
         CheckParallax()
+        CheckPictures()
         CheckProjectile()
         CheckResources()
         CheckSkillIcons()

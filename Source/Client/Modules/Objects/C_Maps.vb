@@ -750,7 +750,6 @@ Module C_Maps
                 End If
             Next
         End If
-        'End Event Data
 
         data = buffer.ToArray
 
@@ -777,6 +776,8 @@ Module C_Maps
         For i = 0 To Map.EventCount
             Map.MapEvents(i).Name = ""
         Next
+
+        Map.CurrentEvents = 0
 
     End Sub
 
