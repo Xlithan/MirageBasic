@@ -54,14 +54,14 @@ Partial Class frmEditor_Item
         Me.nudPic = New DarkUI.Controls.DarkNumericUpDown()
         Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
         Me.txtName = New DarkUI.Controls.DarkTextBox()
-        Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel35 = New DarkUI.Controls.DarkLabel()
         Me.fraVitals = New DarkUI.Controls.DarkGroupBox()
         Me.nudVitalMod = New DarkUI.Controls.DarkNumericUpDown()
         Me.DarkLabel11 = New DarkUI.Controls.DarkLabel()
         Me.fraSkill = New DarkUI.Controls.DarkGroupBox()
         Me.cmbSkills = New DarkUI.Controls.DarkComboBox()
         Me.DarkLabel12 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel1 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel35 = New DarkUI.Controls.DarkLabel()
         Me.fraEquipment = New DarkUI.Controls.DarkGroupBox()
         Me.fraProjectile = New DarkUI.Controls.DarkGroupBox()
         Me.cmbAmmo = New DarkUI.Controls.DarkComboBox()
@@ -541,17 +541,6 @@ Partial Class frmEditor_Item
         Me.txtName.Size = New System.Drawing.Size(266, 23)
         Me.txtName.TabIndex = 1
         '
-        'DarkLabel1
-        '
-        Me.DarkLabel1.AutoSize = true
-        Me.DarkLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel1.Location = New System.Drawing.Point(7, 18)
-        Me.DarkLabel1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel1.Name = "DarkLabel1"
-        Me.DarkLabel1.Size = New System.Drawing.Size(42, 15)
-        Me.DarkLabel1.TabIndex = 0
-        Me.DarkLabel1.Text = "Name:"
-        '
         'fraVitals
         '
         Me.fraVitals.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
@@ -623,6 +612,25 @@ Partial Class frmEditor_Item
         Me.DarkLabel12.Size = New System.Drawing.Size(31, 15)
         Me.DarkLabel12.TabIndex = 0
         Me.DarkLabel12.Text = "Skill:"
+        '
+        'DarkLabel1
+        '
+        Me.DarkLabel1.AutoSize = true
+        Me.DarkLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel1.Location = New System.Drawing.Point(7, 18)
+        Me.DarkLabel1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel1.Name = "DarkLabel1"
+        Me.DarkLabel1.Size = New System.Drawing.Size(42, 15)
+        Me.DarkLabel1.TabIndex = 0
+        Me.DarkLabel1.Text = "Name:"
+        '
+        'DarkLabel35
+        '
+        Me.DarkLabel35.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel35.Location = New System.Drawing.Point(0, 0)
+        Me.DarkLabel35.Name = "DarkLabel35"
+        Me.DarkLabel35.Size = New System.Drawing.Size(100, 23)
+        Me.DarkLabel35.TabIndex = 0
         '
         'fraEquipment
         '

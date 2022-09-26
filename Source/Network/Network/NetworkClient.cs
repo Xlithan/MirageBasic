@@ -316,26 +316,15 @@ namespace Mirage.Sharp.Asfw.Network
 
     public void SendData(byte[] data)
     {
-      if (!this._socket.Connected)
-        return;
       this._socket?.BeginSend(data, 0, data.Length, SocketFlags.None, new AsyncCallback(this.DoSend), (object) null);
     }
 
     public void SendData(byte[] data, int head)
     {
-        try
-        {
-            if (!this._socket.Connected)
-                return;
-            byte[] numArray = new byte[head + 4];
-            Buffer.BlockCopy((Array)BitConverter.GetBytes(head), 0, (Array)numArray, 0, 4);
-            Buffer.BlockCopy((Array)data, 0, (Array)numArray, 4, head);
-            this._socket?.BeginSend(numArray, 0, head + 4, SocketFlags.None, new AsyncCallback(this.DoSend), (object)null);
-        }
-        catch
-        {
-            // socket is disposed
-        }
+        byte[] numArray = new byte[head + 4];
+        Buffer.BlockCopy((Array)BitConverter.GetBytes(head), 0, (Array)numArray, 0, 4);
+        Buffer.BlockCopy((Array)data, 0, (Array)numArray, 4, head);
+        this._socket?.BeginSend(numArray, 0, head + 4, SocketFlags.None, new AsyncCallback(this.DoSend), (object)null);
     }
 
     private void DoSend(IAsyncResult ar)

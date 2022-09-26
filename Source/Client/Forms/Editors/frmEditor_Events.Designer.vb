@@ -81,7 +81,10 @@ Partial Class FrmEditor_Events
         Dim TreeNode55 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Shop and Bank", New System.Windows.Forms.TreeNode() {TreeNode53, TreeNode54})
         Dim TreeNode56 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Fade In")
         Dim TreeNode57 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Fade Out")
-        Dim TreeNode58 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("CutScene Options", New System.Windows.Forms.TreeNode() {TreeNode56, TreeNode57})
+        Dim TreeNode58 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Flash White")
+        Dim TreeNode59 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Show Picture")
+        Dim TreeNode60 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Hide Picture")
+        Dim TreeNode61 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Cutscene Options", New System.Windows.Forms.TreeNode() {TreeNode56, TreeNode57, TreeNode58, TreeNode59, TreeNode60})
         Dim ListViewGroup1 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Movement", System.Windows.Forms.HorizontalAlignment.Left)
         Dim ListViewGroup2 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Wait", System.Windows.Forms.HorizontalAlignment.Left)
         Dim ListViewGroup3 As System.Windows.Forms.ListViewGroup = New System.Windows.Forms.ListViewGroup("Turning", System.Windows.Forms.HorizontalAlignment.Left)
@@ -147,14 +150,6 @@ Partial Class FrmEditor_Events
         Me.tabPages = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.pnlTabPage = New System.Windows.Forms.Panel()
-        Me.fraGraphic = New DarkUI.Controls.DarkGroupBox()
-        Me.btnGraphicOk = New DarkUI.Controls.DarkButton()
-        Me.btnGraphicCancel = New DarkUI.Controls.DarkButton()
-        Me.DarkLabel13 = New DarkUI.Controls.DarkLabel()
-        Me.nudGraphic = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel12 = New DarkUI.Controls.DarkLabel()
-        Me.cmbGraphic = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel11 = New DarkUI.Controls.DarkLabel()
         Me.fraGraphicPic = New DarkUI.Controls.DarkGroupBox()
         Me.picGraphic = New System.Windows.Forms.PictureBox()
         Me.DarkGroupBox6 = New DarkUI.Controls.DarkGroupBox()
@@ -162,14 +157,6 @@ Partial Class FrmEditor_Events
         Me.chkWalkThrough = New DarkUI.Controls.DarkCheckBox()
         Me.chkDirFix = New DarkUI.Controls.DarkCheckBox()
         Me.chkWalkAnim = New DarkUI.Controls.DarkCheckBox()
-        Me.fraCommands = New System.Windows.Forms.Panel()
-        Me.btnCancelCommand = New DarkUI.Controls.DarkButton()
-        Me.DarkGroupBox8 = New DarkUI.Controls.DarkGroupBox()
-        Me.btnClearCommand = New DarkUI.Controls.DarkButton()
-        Me.btnDeleteCommand = New DarkUI.Controls.DarkButton()
-        Me.btnEditCommand = New DarkUI.Controls.DarkButton()
-        Me.btnAddCommand = New DarkUI.Controls.DarkButton()
-        Me.lstCommands = New System.Windows.Forms.ListBox()
         Me.DarkLabel10 = New DarkUI.Controls.DarkLabel()
         Me.DarkLabel9 = New DarkUI.Controls.DarkLabel()
         Me.DarkGroupBox7 = New DarkUI.Controls.DarkGroupBox()
@@ -204,6 +191,22 @@ Partial Class FrmEditor_Events
         Me.DarkLabel2 = New DarkUI.Controls.DarkLabel()
         Me.cmbPlayerVar = New DarkUI.Controls.DarkComboBox()
         Me.chkPlayerVar = New DarkUI.Controls.DarkCheckBox()
+        Me.fraGraphic = New DarkUI.Controls.DarkGroupBox()
+        Me.btnGraphicOk = New DarkUI.Controls.DarkButton()
+        Me.btnGraphicCancel = New DarkUI.Controls.DarkButton()
+        Me.DarkLabel13 = New DarkUI.Controls.DarkLabel()
+        Me.nudGraphic = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel12 = New DarkUI.Controls.DarkLabel()
+        Me.cmbGraphic = New DarkUI.Controls.DarkComboBox()
+        Me.DarkLabel11 = New DarkUI.Controls.DarkLabel()
+        Me.fraCommands = New System.Windows.Forms.Panel()
+        Me.btnCancelCommand = New DarkUI.Controls.DarkButton()
+        Me.lstCommands = New System.Windows.Forms.ListBox()
+        Me.DarkGroupBox8 = New DarkUI.Controls.DarkGroupBox()
+        Me.btnClearCommand = New DarkUI.Controls.DarkButton()
+        Me.btnDeleteCommand = New DarkUI.Controls.DarkButton()
+        Me.btnEditCommand = New DarkUI.Controls.DarkButton()
+        Me.btnAddCommand = New DarkUI.Controls.DarkButton()
         Me.btnLabeling = New DarkUI.Controls.DarkButton()
         Me.btnCancel = New DarkUI.Controls.DarkButton()
         Me.btnOk = New DarkUI.Controls.DarkButton()
@@ -220,18 +223,19 @@ Partial Class FrmEditor_Events
         Me.cmbEvent = New DarkUI.Controls.DarkComboBox()
         Me.pnlGraphicSel = New System.Windows.Forms.Panel()
         Me.fraDialogue = New DarkUI.Controls.DarkGroupBox()
-        Me.fraPlayAnimation = New DarkUI.Controls.DarkGroupBox()
-        Me.btnPlayAnimationOk = New DarkUI.Controls.DarkButton()
-        Me.btnPlayAnimationCancel = New DarkUI.Controls.DarkButton()
-        Me.lblPlayAnimY = New DarkUI.Controls.DarkLabel()
-        Me.lblPlayAnimX = New DarkUI.Controls.DarkLabel()
-        Me.cmbPlayAnimEvent = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel62 = New DarkUI.Controls.DarkLabel()
-        Me.cmbAnimTargetType = New DarkUI.Controls.DarkComboBox()
-        Me.nudPlayAnimTileY = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudPlayAnimTileX = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel61 = New DarkUI.Controls.DarkLabel()
-        Me.cmbPlayAnim = New DarkUI.Controls.DarkComboBox()
+        Me.fraShowPic = New DarkUI.Controls.DarkGroupBox()
+        Me.btnShowPicOk = New DarkUI.Controls.DarkButton()
+        Me.btnShowPicCancel = New DarkUI.Controls.DarkButton()
+        Me.DarkLabel71 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel70 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel67 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel68 = New DarkUI.Controls.DarkLabel()
+        Me.nudPicOffsetY = New DarkUI.Controls.DarkNumericUpDown()
+        Me.nudPicOffsetX = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel69 = New DarkUI.Controls.DarkLabel()
+        Me.cmbPicLoc = New DarkUI.Controls.DarkComboBox()
+        Me.nudShowPicture = New DarkUI.Controls.DarkNumericUpDown()
+        Me.picShowPic = New System.Windows.Forms.PictureBox()
         Me.fraMoveRouteWait = New DarkUI.Controls.DarkGroupBox()
         Me.btnMoveWaitCancel = New DarkUI.Controls.DarkButton()
         Me.btnMoveWaitOk = New DarkUI.Controls.DarkButton()
@@ -266,28 +270,6 @@ Partial Class FrmEditor_Events
         Me.btnSetAccessOk = New DarkUI.Controls.DarkButton()
         Me.btnSetAccessCancel = New DarkUI.Controls.DarkButton()
         Me.cmbSetAccess = New DarkUI.Controls.DarkComboBox()
-        Me.fraSetWait = New DarkUI.Controls.DarkGroupBox()
-        Me.btnSetWaitOk = New DarkUI.Controls.DarkButton()
-        Me.btnSetWaitCancel = New DarkUI.Controls.DarkButton()
-        Me.DarkLabel74 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel72 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel73 = New DarkUI.Controls.DarkLabel()
-        Me.nudWaitAmount = New DarkUI.Controls.DarkNumericUpDown()
-        Me.fraShowPic = New DarkUI.Controls.DarkGroupBox()
-        Me.btnShowPicOk = New DarkUI.Controls.DarkButton()
-        Me.btnShowPicCancel = New DarkUI.Controls.DarkButton()
-        Me.DarkLabel71 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel70 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel67 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel68 = New DarkUI.Controls.DarkLabel()
-        Me.nudPicOffsetY = New DarkUI.Controls.DarkNumericUpDown()
-        Me.nudPicOffsetX = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel69 = New DarkUI.Controls.DarkLabel()
-        Me.cmbPicLoc = New DarkUI.Controls.DarkComboBox()
-        Me.nudShowPicture = New DarkUI.Controls.DarkNumericUpDown()
-        Me.picShowPic = New System.Windows.Forms.PictureBox()
-        Me.cmbPicIndex = New DarkUI.Controls.DarkComboBox()
-        Me.DarkLabel66 = New DarkUI.Controls.DarkLabel()
         Me.fraOpenShop = New DarkUI.Controls.DarkGroupBox()
         Me.btnOpenShopOk = New DarkUI.Controls.DarkButton()
         Me.btnOpenShopCancel = New DarkUI.Controls.DarkButton()
@@ -307,11 +289,6 @@ Partial Class FrmEditor_Events
         Me.btnGoToLabelCancel = New DarkUI.Controls.DarkButton()
         Me.txtGotoLabel = New DarkUI.Controls.DarkTextBox()
         Me.DarkLabel60 = New DarkUI.Controls.DarkLabel()
-        Me.fraHidePic = New DarkUI.Controls.DarkGroupBox()
-        Me.btnHidePicOk = New DarkUI.Controls.DarkButton()
-        Me.btnHidePicCancel = New DarkUI.Controls.DarkButton()
-        Me.nudHidePic = New DarkUI.Controls.DarkNumericUpDown()
-        Me.DarkLabel59 = New DarkUI.Controls.DarkLabel()
         Me.fraBeginQuest = New DarkUI.Controls.DarkGroupBox()
         Me.btnBeginQuestOk = New DarkUI.Controls.DarkButton()
         Me.btnBeginQuestCancel = New DarkUI.Controls.DarkButton()
@@ -512,6 +489,25 @@ Partial Class FrmEditor_Events
         Me.DarkLabel14 = New DarkUI.Controls.DarkLabel()
         Me.cmbCondition_PlayerVarIndex = New DarkUI.Controls.DarkComboBox()
         Me.optCondition0 = New DarkUI.Controls.DarkRadioButton()
+        Me.fraPlayAnimation = New DarkUI.Controls.DarkGroupBox()
+        Me.btnPlayAnimationOk = New DarkUI.Controls.DarkButton()
+        Me.btnPlayAnimationCancel = New DarkUI.Controls.DarkButton()
+        Me.lblPlayAnimY = New DarkUI.Controls.DarkLabel()
+        Me.lblPlayAnimX = New DarkUI.Controls.DarkLabel()
+        Me.cmbPlayAnimEvent = New DarkUI.Controls.DarkComboBox()
+        Me.DarkLabel62 = New DarkUI.Controls.DarkLabel()
+        Me.cmbAnimTargetType = New DarkUI.Controls.DarkComboBox()
+        Me.nudPlayAnimTileY = New DarkUI.Controls.DarkNumericUpDown()
+        Me.nudPlayAnimTileX = New DarkUI.Controls.DarkNumericUpDown()
+        Me.DarkLabel61 = New DarkUI.Controls.DarkLabel()
+        Me.cmbPlayAnim = New DarkUI.Controls.DarkComboBox()
+        Me.fraSetWait = New DarkUI.Controls.DarkGroupBox()
+        Me.btnSetWaitOk = New DarkUI.Controls.DarkButton()
+        Me.btnSetWaitCancel = New DarkUI.Controls.DarkButton()
+        Me.DarkLabel74 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel72 = New DarkUI.Controls.DarkLabel()
+        Me.DarkLabel73 = New DarkUI.Controls.DarkLabel()
+        Me.nudWaitAmount = New DarkUI.Controls.DarkNumericUpDown()
         Me.pnlVariableSwitches = New System.Windows.Forms.Panel()
         Me.FraRenaming = New System.Windows.Forms.GroupBox()
         Me.btnRename_Cancel = New System.Windows.Forms.Button()
@@ -531,13 +527,9 @@ Partial Class FrmEditor_Events
         Me.fraPageSetUp.SuspendLayout
         Me.tabPages.SuspendLayout
         Me.pnlTabPage.SuspendLayout
-        Me.fraGraphic.SuspendLayout
-        CType(Me.nudGraphic,System.ComponentModel.ISupportInitialize).BeginInit
         Me.fraGraphicPic.SuspendLayout
         CType(Me.picGraphic,System.ComponentModel.ISupportInitialize).BeginInit
         Me.DarkGroupBox6.SuspendLayout
-        Me.fraCommands.SuspendLayout
-        Me.DarkGroupBox8.SuspendLayout
         Me.DarkGroupBox7.SuspendLayout
         Me.DarkGroupBox5.SuspendLayout
         Me.DarkGroupBox4.SuspendLayout
@@ -545,12 +537,18 @@ Partial Class FrmEditor_Events
         Me.DarkGroupBox3.SuspendLayout
         Me.DarkGroupBox1.SuspendLayout
         CType(Me.nudPlayerVariable,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.fraGraphic.SuspendLayout
+        CType(Me.nudGraphic,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.fraCommands.SuspendLayout
+        Me.DarkGroupBox8.SuspendLayout
         Me.fraMoveRoute.SuspendLayout
         Me.DarkGroupBox10.SuspendLayout
         Me.fraDialogue.SuspendLayout
-        Me.fraPlayAnimation.SuspendLayout
-        CType(Me.nudPlayAnimTileY,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudPlayAnimTileX,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.fraShowPic.SuspendLayout
+        CType(Me.nudPicOffsetY,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.nudPicOffsetX,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.nudShowPicture,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.picShowPic,System.ComponentModel.ISupportInitialize).BeginInit
         Me.fraMoveRouteWait.SuspendLayout
         Me.fraCustomScript.SuspendLayout
         CType(Me.nudCustomScript,System.ComponentModel.ISupportInitialize).BeginInit
@@ -561,20 +559,11 @@ Partial Class FrmEditor_Events
         CType(Me.nudGiveExp,System.ComponentModel.ISupportInitialize).BeginInit
         Me.fraEndQuest.SuspendLayout
         Me.fraSetAccess.SuspendLayout
-        Me.fraSetWait.SuspendLayout
-        CType(Me.nudWaitAmount,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.fraShowPic.SuspendLayout
-        CType(Me.nudPicOffsetY,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudPicOffsetX,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.nudShowPicture,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.picShowPic,System.ComponentModel.ISupportInitialize).BeginInit
         Me.fraOpenShop.SuspendLayout
         Me.fraChangeLevel.SuspendLayout
         CType(Me.nudChangeLevel,System.ComponentModel.ISupportInitialize).BeginInit
         Me.fraChangeGender.SuspendLayout
         Me.fraGoToLabel.SuspendLayout
-        Me.fraHidePic.SuspendLayout
-        CType(Me.nudHidePic,System.ComponentModel.ISupportInitialize).BeginInit
         Me.fraBeginQuest.SuspendLayout
         Me.fraShowChoices.SuspendLayout
         CType(Me.picShowChoicesFace,System.ComponentModel.ISupportInitialize).BeginInit
@@ -625,6 +614,11 @@ Partial Class FrmEditor_Events
         CType(Me.nudCondition_LevelAmount,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.nudCondition_HasItem,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.nudCondition_PlayerVarCondition,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.fraPlayAnimation.SuspendLayout
+        CType(Me.nudPlayAnimTileY,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.nudPlayAnimTileX,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.fraSetWait.SuspendLayout
+        CType(Me.nudWaitAmount,System.ComponentModel.ISupportInitialize).BeginInit
         Me.pnlVariableSwitches.SuspendLayout
         Me.FraRenaming.SuspendLayout
         Me.fraRandom10.SuspendLayout
@@ -753,9 +747,15 @@ Partial Class FrmEditor_Events
         TreeNode56.Text = "Fade In"
         TreeNode57.Name = "Node2"
         TreeNode57.Text = "Fade Out"
-        TreeNode58.Name = "Node0"
-        TreeNode58.Text = "CutScene Options"
-        Me.tvCommands.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode5, TreeNode9, TreeNode14, TreeNode26, TreeNode33, TreeNode35, TreeNode39, TreeNode43, TreeNode48, TreeNode52, TreeNode55, TreeNode58})
+        TreeNode58.Name = "Node12"
+        TreeNode58.Text = "Flash White"
+        TreeNode59.Name = "Node13"
+        TreeNode59.Text = "Show Picture"
+        TreeNode60.Name = "Node14"
+        TreeNode60.Text = "Hide Picture"
+        TreeNode61.Name = "Node0"
+        TreeNode61.Text = "Cutscene Options"
+        Me.tvCommands.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode5, TreeNode9, TreeNode14, TreeNode26, TreeNode33, TreeNode35, TreeNode39, TreeNode43, TreeNode48, TreeNode52, TreeNode55, TreeNode61})
         Me.tvCommands.Size = New System.Drawing.Size(444, 511)
         Me.tvCommands.TabIndex = 1
         '
@@ -887,12 +887,8 @@ Partial Class FrmEditor_Events
         '
         'pnlTabPage
         '
-        Me.pnlTabPage.Controls.Add(Me.fraGraphic)
         Me.pnlTabPage.Controls.Add(Me.fraGraphicPic)
         Me.pnlTabPage.Controls.Add(Me.DarkGroupBox6)
-        Me.pnlTabPage.Controls.Add(Me.fraCommands)
-        Me.pnlTabPage.Controls.Add(Me.DarkGroupBox8)
-        Me.pnlTabPage.Controls.Add(Me.lstCommands)
         Me.pnlTabPage.Controls.Add(Me.DarkLabel10)
         Me.pnlTabPage.Controls.Add(Me.DarkLabel9)
         Me.pnlTabPage.Controls.Add(Me.DarkGroupBox7)
@@ -900,11 +896,499 @@ Partial Class FrmEditor_Events
         Me.pnlTabPage.Controls.Add(Me.DarkGroupBox4)
         Me.pnlTabPage.Controls.Add(Me.DarkGroupBox3)
         Me.pnlTabPage.Controls.Add(Me.DarkGroupBox1)
+        Me.pnlTabPage.Controls.Add(Me.fraGraphic)
+        Me.pnlTabPage.Controls.Add(Me.fraCommands)
+        Me.pnlTabPage.Controls.Add(Me.lstCommands)
+        Me.pnlTabPage.Controls.Add(Me.DarkGroupBox8)
         Me.pnlTabPage.Location = New System.Drawing.Point(4, 93)
         Me.pnlTabPage.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.pnlTabPage.Name = "pnlTabPage"
         Me.pnlTabPage.Size = New System.Drawing.Size(923, 573)
         Me.pnlTabPage.TabIndex = 4
+        '
+        'fraGraphicPic
+        '
+        Me.fraGraphicPic.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraGraphicPic.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.fraGraphicPic.Controls.Add(Me.picGraphic)
+        Me.fraGraphicPic.ForeColor = System.Drawing.Color.Gainsboro
+        Me.fraGraphicPic.Location = New System.Drawing.Point(4, 156)
+        Me.fraGraphicPic.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraGraphicPic.Name = "fraGraphicPic"
+        Me.fraGraphicPic.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraGraphicPic.Size = New System.Drawing.Size(202, 268)
+        Me.fraGraphicPic.TabIndex = 12
+        Me.fraGraphicPic.TabStop = false
+        Me.fraGraphicPic.Text = "Graphic"
+        '
+        'picGraphic
+        '
+        Me.picGraphic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.picGraphic.Location = New System.Drawing.Point(7, 22)
+        Me.picGraphic.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.picGraphic.Name = "picGraphic"
+        Me.picGraphic.Size = New System.Drawing.Size(188, 239)
+        Me.picGraphic.TabIndex = 1
+        Me.picGraphic.TabStop = false
+        '
+        'DarkGroupBox6
+        '
+        Me.DarkGroupBox6.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.DarkGroupBox6.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.DarkGroupBox6.Controls.Add(Me.chkShowName)
+        Me.DarkGroupBox6.Controls.Add(Me.chkWalkThrough)
+        Me.DarkGroupBox6.Controls.Add(Me.chkDirFix)
+        Me.DarkGroupBox6.Controls.Add(Me.chkWalkAnim)
+        Me.DarkGroupBox6.ForeColor = System.Drawing.Color.Gainsboro
+        Me.DarkGroupBox6.Location = New System.Drawing.Point(4, 430)
+        Me.DarkGroupBox6.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.DarkGroupBox6.Name = "DarkGroupBox6"
+        Me.DarkGroupBox6.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.DarkGroupBox6.Size = New System.Drawing.Size(205, 129)
+        Me.DarkGroupBox6.TabIndex = 10
+        Me.DarkGroupBox6.TabStop = false
+        Me.DarkGroupBox6.Text = "Options"
+        '
+        'chkShowName
+        '
+        Me.chkShowName.AutoSize = true
+        Me.chkShowName.Location = New System.Drawing.Point(8, 102)
+        Me.chkShowName.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.chkShowName.Name = "chkShowName"
+        Me.chkShowName.Size = New System.Drawing.Size(90, 19)
+        Me.chkShowName.TabIndex = 3
+        Me.chkShowName.Text = "Show Name"
+        '
+        'chkWalkThrough
+        '
+        Me.chkWalkThrough.AutoSize = true
+        Me.chkWalkThrough.Location = New System.Drawing.Point(8, 75)
+        Me.chkWalkThrough.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.chkWalkThrough.Name = "chkWalkThrough"
+        Me.chkWalkThrough.Size = New System.Drawing.Size(100, 19)
+        Me.chkWalkThrough.TabIndex = 2
+        Me.chkWalkThrough.Text = "Walk Through"
+        '
+        'chkDirFix
+        '
+        Me.chkDirFix.AutoSize = true
+        Me.chkDirFix.Location = New System.Drawing.Point(8, 48)
+        Me.chkDirFix.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.chkDirFix.Name = "chkDirFix"
+        Me.chkDirFix.Size = New System.Drawing.Size(105, 19)
+        Me.chkDirFix.TabIndex = 1
+        Me.chkDirFix.Text = "Direction Fixed"
+        '
+        'chkWalkAnim
+        '
+        Me.chkWalkAnim.AutoSize = true
+        Me.chkWalkAnim.Location = New System.Drawing.Point(8, 22)
+        Me.chkWalkAnim.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.chkWalkAnim.Name = "chkWalkAnim"
+        Me.chkWalkAnim.Size = New System.Drawing.Size(130, 19)
+        Me.chkWalkAnim.TabIndex = 0
+        Me.chkWalkAnim.Text = "No Walk Animation"
+        '
+        'DarkLabel10
+        '
+        Me.DarkLabel10.ForeColor = System.Drawing.Color.Red
+        Me.DarkLabel10.Location = New System.Drawing.Point(212, 528)
+        Me.DarkLabel10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel10.Name = "DarkLabel10"
+        Me.DarkLabel10.Size = New System.Drawing.Size(233, 35)
+        Me.DarkLabel10.TabIndex = 7
+        Me.DarkLabel10.Text = "** If global, only the first page will be processed. For shop keepers etc."
+        '
+        'DarkLabel9
+        '
+        Me.DarkLabel9.ForeColor = System.Drawing.Color.Red
+        Me.DarkLabel9.Location = New System.Drawing.Point(212, 489)
+        Me.DarkLabel9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel9.Name = "DarkLabel9"
+        Me.DarkLabel9.Size = New System.Drawing.Size(234, 39)
+        Me.DarkLabel9.TabIndex = 6
+        Me.DarkLabel9.Text = "* Self Switches are always global and will reset on server restart."
+        '
+        'DarkGroupBox7
+        '
+        Me.DarkGroupBox7.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.DarkGroupBox7.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.DarkGroupBox7.Controls.Add(Me.cmbEventQuest)
+        Me.DarkGroupBox7.Controls.Add(Me.DarkLabel8)
+        Me.DarkGroupBox7.ForeColor = System.Drawing.Color.Gainsboro
+        Me.DarkGroupBox7.Location = New System.Drawing.Point(212, 434)
+        Me.DarkGroupBox7.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.DarkGroupBox7.Name = "DarkGroupBox7"
+        Me.DarkGroupBox7.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.DarkGroupBox7.Size = New System.Drawing.Size(233, 52)
+        Me.DarkGroupBox7.TabIndex = 5
+        Me.DarkGroupBox7.TabStop = false
+        Me.DarkGroupBox7.Text = "Quest Icon"
+        '
+        'cmbEventQuest
+        '
+        Me.cmbEventQuest.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbEventQuest.FormattingEnabled = true
+        Me.cmbEventQuest.Location = New System.Drawing.Point(59, 20)
+        Me.cmbEventQuest.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbEventQuest.Name = "cmbEventQuest"
+        Me.cmbEventQuest.Size = New System.Drawing.Size(166, 24)
+        Me.cmbEventQuest.TabIndex = 1
+        '
+        'DarkLabel8
+        '
+        Me.DarkLabel8.AutoSize = true
+        Me.DarkLabel8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel8.Location = New System.Drawing.Point(8, 23)
+        Me.DarkLabel8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel8.Name = "DarkLabel8"
+        Me.DarkLabel8.Size = New System.Drawing.Size(41, 15)
+        Me.DarkLabel8.TabIndex = 0
+        Me.DarkLabel8.Text = "Quest:"
+        '
+        'DarkGroupBox5
+        '
+        Me.DarkGroupBox5.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.DarkGroupBox5.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.DarkGroupBox5.Controls.Add(Me.cmbTrigger)
+        Me.DarkGroupBox5.ForeColor = System.Drawing.Color.Gainsboro
+        Me.DarkGroupBox5.Location = New System.Drawing.Point(212, 370)
+        Me.DarkGroupBox5.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.DarkGroupBox5.Name = "DarkGroupBox5"
+        Me.DarkGroupBox5.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.DarkGroupBox5.Size = New System.Drawing.Size(233, 57)
+        Me.DarkGroupBox5.TabIndex = 4
+        Me.DarkGroupBox5.TabStop = false
+        Me.DarkGroupBox5.Text = "Trigger"
+        '
+        'cmbTrigger
+        '
+        Me.cmbTrigger.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbTrigger.FormattingEnabled = true
+        Me.cmbTrigger.Items.AddRange(New Object() {"Action Button", "Player Touch", "Parallel Process"})
+        Me.cmbTrigger.Location = New System.Drawing.Point(7, 22)
+        Me.cmbTrigger.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbTrigger.Name = "cmbTrigger"
+        Me.cmbTrigger.Size = New System.Drawing.Size(220, 24)
+        Me.cmbTrigger.TabIndex = 0
+        '
+        'DarkGroupBox4
+        '
+        Me.DarkGroupBox4.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.DarkGroupBox4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.DarkGroupBox4.Controls.Add(Me.picGraphicSel)
+        Me.DarkGroupBox4.Controls.Add(Me.cmbPositioning)
+        Me.DarkGroupBox4.ForeColor = System.Drawing.Color.Gainsboro
+        Me.DarkGroupBox4.Location = New System.Drawing.Point(212, 308)
+        Me.DarkGroupBox4.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.DarkGroupBox4.Name = "DarkGroupBox4"
+        Me.DarkGroupBox4.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.DarkGroupBox4.Size = New System.Drawing.Size(233, 55)
+        Me.DarkGroupBox4.TabIndex = 3
+        Me.DarkGroupBox4.TabStop = false
+        Me.DarkGroupBox4.Text = "Positioning"
+        '
+        'picGraphicSel
+        '
+        Me.picGraphicSel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.picGraphicSel.Location = New System.Drawing.Point(-220, -338)
+        Me.picGraphicSel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.picGraphicSel.Name = "picGraphicSel"
+        Me.picGraphicSel.Size = New System.Drawing.Size(936, 593)
+        Me.picGraphicSel.TabIndex = 5
+        Me.picGraphicSel.TabStop = false
+        '
+        'cmbPositioning
+        '
+        Me.cmbPositioning.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbPositioning.FormattingEnabled = true
+        Me.cmbPositioning.Items.AddRange(New Object() {"Below Characters", "Same as Characters", "Above Characters"})
+        Me.cmbPositioning.Location = New System.Drawing.Point(7, 22)
+        Me.cmbPositioning.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbPositioning.Name = "cmbPositioning"
+        Me.cmbPositioning.Size = New System.Drawing.Size(220, 24)
+        Me.cmbPositioning.TabIndex = 0
+        '
+        'DarkGroupBox3
+        '
+        Me.DarkGroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.DarkGroupBox3.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.DarkGroupBox3.Controls.Add(Me.DarkLabel7)
+        Me.DarkGroupBox3.Controls.Add(Me.cmbMoveFreq)
+        Me.DarkGroupBox3.Controls.Add(Me.DarkLabel6)
+        Me.DarkGroupBox3.Controls.Add(Me.cmbMoveSpeed)
+        Me.DarkGroupBox3.Controls.Add(Me.btnMoveRoute)
+        Me.DarkGroupBox3.Controls.Add(Me.cmbMoveType)
+        Me.DarkGroupBox3.Controls.Add(Me.DarkLabel5)
+        Me.DarkGroupBox3.ForeColor = System.Drawing.Color.Gainsboro
+        Me.DarkGroupBox3.Location = New System.Drawing.Point(214, 159)
+        Me.DarkGroupBox3.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.DarkGroupBox3.Name = "DarkGroupBox3"
+        Me.DarkGroupBox3.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.DarkGroupBox3.Size = New System.Drawing.Size(233, 142)
+        Me.DarkGroupBox3.TabIndex = 2
+        Me.DarkGroupBox3.TabStop = false
+        Me.DarkGroupBox3.Text = "Movement"
+        '
+        'DarkLabel7
+        '
+        Me.DarkLabel7.AutoSize = true
+        Me.DarkLabel7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel7.Location = New System.Drawing.Point(7, 115)
+        Me.DarkLabel7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel7.Name = "DarkLabel7"
+        Me.DarkLabel7.Size = New System.Drawing.Size(62, 15)
+        Me.DarkLabel7.TabIndex = 6
+        Me.DarkLabel7.Text = "Frequency"
+        '
+        'cmbMoveFreq
+        '
+        Me.cmbMoveFreq.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbMoveFreq.FormattingEnabled = true
+        Me.cmbMoveFreq.Items.AddRange(New Object() {"Lowest", "Lower", "Normal", "Higher", "Highest"})
+        Me.cmbMoveFreq.Location = New System.Drawing.Point(80, 112)
+        Me.cmbMoveFreq.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbMoveFreq.Name = "cmbMoveFreq"
+        Me.cmbMoveFreq.Size = New System.Drawing.Size(145, 24)
+        Me.cmbMoveFreq.TabIndex = 5
+        '
+        'DarkLabel6
+        '
+        Me.DarkLabel6.AutoSize = true
+        Me.DarkLabel6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel6.Location = New System.Drawing.Point(7, 84)
+        Me.DarkLabel6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel6.Name = "DarkLabel6"
+        Me.DarkLabel6.Size = New System.Drawing.Size(42, 15)
+        Me.DarkLabel6.TabIndex = 4
+        Me.DarkLabel6.Text = "Speed:"
+        '
+        'cmbMoveSpeed
+        '
+        Me.cmbMoveSpeed.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbMoveSpeed.FormattingEnabled = true
+        Me.cmbMoveSpeed.Items.AddRange(New Object() {"8x Slower", "4x Slower", "2x Slower", "Normal", "2x Faster", "4x Faster"})
+        Me.cmbMoveSpeed.Location = New System.Drawing.Point(80, 81)
+        Me.cmbMoveSpeed.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbMoveSpeed.Name = "cmbMoveSpeed"
+        Me.cmbMoveSpeed.Size = New System.Drawing.Size(145, 24)
+        Me.cmbMoveSpeed.TabIndex = 3
+        '
+        'btnMoveRoute
+        '
+        Me.btnMoveRoute.Location = New System.Drawing.Point(139, 47)
+        Me.btnMoveRoute.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.btnMoveRoute.Name = "btnMoveRoute"
+        Me.btnMoveRoute.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnMoveRoute.Size = New System.Drawing.Size(88, 27)
+        Me.btnMoveRoute.TabIndex = 2
+        Me.btnMoveRoute.Text = "Move Route"
+        '
+        'cmbMoveType
+        '
+        Me.cmbMoveType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbMoveType.FormattingEnabled = true
+        Me.cmbMoveType.Items.AddRange(New Object() {"Fixed Position", "Random", "Move Route"})
+        Me.cmbMoveType.Location = New System.Drawing.Point(80, 16)
+        Me.cmbMoveType.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbMoveType.Name = "cmbMoveType"
+        Me.cmbMoveType.Size = New System.Drawing.Size(145, 24)
+        Me.cmbMoveType.TabIndex = 1
+        '
+        'DarkLabel5
+        '
+        Me.DarkLabel5.AutoSize = true
+        Me.DarkLabel5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel5.Location = New System.Drawing.Point(7, 20)
+        Me.DarkLabel5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel5.Name = "DarkLabel5"
+        Me.DarkLabel5.Size = New System.Drawing.Size(34, 15)
+        Me.DarkLabel5.TabIndex = 0
+        Me.DarkLabel5.Text = "Type:"
+        '
+        'DarkGroupBox1
+        '
+        Me.DarkGroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.DarkGroupBox1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.DarkGroupBox1.Controls.Add(Me.cmbSelfSwitchCompare)
+        Me.DarkGroupBox1.Controls.Add(Me.DarkLabel4)
+        Me.DarkGroupBox1.Controls.Add(Me.cmbSelfSwitch)
+        Me.DarkGroupBox1.Controls.Add(Me.chkSelfSwitch)
+        Me.DarkGroupBox1.Controls.Add(Me.cmbHasItem)
+        Me.DarkGroupBox1.Controls.Add(Me.chkHasItem)
+        Me.DarkGroupBox1.Controls.Add(Me.cmbPlayerSwitchCompare)
+        Me.DarkGroupBox1.Controls.Add(Me.DarkLabel3)
+        Me.DarkGroupBox1.Controls.Add(Me.cmbPlayerSwitch)
+        Me.DarkGroupBox1.Controls.Add(Me.chkPlayerSwitch)
+        Me.DarkGroupBox1.Controls.Add(Me.nudPlayerVariable)
+        Me.DarkGroupBox1.Controls.Add(Me.cmbPlayervarCompare)
+        Me.DarkGroupBox1.Controls.Add(Me.DarkLabel2)
+        Me.DarkGroupBox1.Controls.Add(Me.cmbPlayerVar)
+        Me.DarkGroupBox1.Controls.Add(Me.chkPlayerVar)
+        Me.DarkGroupBox1.ForeColor = System.Drawing.Color.Gainsboro
+        Me.DarkGroupBox1.Location = New System.Drawing.Point(4, 7)
+        Me.DarkGroupBox1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.DarkGroupBox1.Name = "DarkGroupBox1"
+        Me.DarkGroupBox1.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.DarkGroupBox1.Size = New System.Drawing.Size(443, 145)
+        Me.DarkGroupBox1.TabIndex = 0
+        Me.DarkGroupBox1.TabStop = false
+        Me.DarkGroupBox1.Text = "Conditions"
+        '
+        'cmbSelfSwitchCompare
+        '
+        Me.cmbSelfSwitchCompare.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbSelfSwitchCompare.FormattingEnabled = true
+        Me.cmbSelfSwitchCompare.Items.AddRange(New Object() {"False = 0", "True = 1"})
+        Me.cmbSelfSwitchCompare.Location = New System.Drawing.Point(260, 113)
+        Me.cmbSelfSwitchCompare.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbSelfSwitchCompare.Name = "cmbSelfSwitchCompare"
+        Me.cmbSelfSwitchCompare.Size = New System.Drawing.Size(103, 24)
+        Me.cmbSelfSwitchCompare.TabIndex = 14
+        '
+        'DarkLabel4
+        '
+        Me.DarkLabel4.AutoSize = true
+        Me.DarkLabel4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel4.Location = New System.Drawing.Point(237, 117)
+        Me.DarkLabel4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel4.Name = "DarkLabel4"
+        Me.DarkLabel4.Size = New System.Drawing.Size(15, 15)
+        Me.DarkLabel4.TabIndex = 13
+        Me.DarkLabel4.Text = "is"
+        '
+        'cmbSelfSwitch
+        '
+        Me.cmbSelfSwitch.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbSelfSwitch.FormattingEnabled = true
+        Me.cmbSelfSwitch.Items.AddRange(New Object() {"None", "1 - A", "2 - B", "3 - C", "4 - D"})
+        Me.cmbSelfSwitch.Location = New System.Drawing.Point(126, 113)
+        Me.cmbSelfSwitch.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbSelfSwitch.Name = "cmbSelfSwitch"
+        Me.cmbSelfSwitch.Size = New System.Drawing.Size(103, 24)
+        Me.cmbSelfSwitch.TabIndex = 12
+        '
+        'chkSelfSwitch
+        '
+        Me.chkSelfSwitch.AutoSize = true
+        Me.chkSelfSwitch.Location = New System.Drawing.Point(7, 115)
+        Me.chkSelfSwitch.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.chkSelfSwitch.Name = "chkSelfSwitch"
+        Me.chkSelfSwitch.Size = New System.Drawing.Size(83, 19)
+        Me.chkSelfSwitch.TabIndex = 11
+        Me.chkSelfSwitch.Text = "Self Switch"
+        '
+        'cmbHasItem
+        '
+        Me.cmbHasItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbHasItem.FormattingEnabled = true
+        Me.cmbHasItem.Location = New System.Drawing.Point(126, 82)
+        Me.cmbHasItem.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbHasItem.Name = "cmbHasItem"
+        Me.cmbHasItem.Size = New System.Drawing.Size(237, 24)
+        Me.cmbHasItem.TabIndex = 10
+        '
+        'chkHasItem
+        '
+        Me.chkHasItem.AutoSize = true
+        Me.chkHasItem.Location = New System.Drawing.Point(7, 84)
+        Me.chkHasItem.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.chkHasItem.Name = "chkHasItem"
+        Me.chkHasItem.Size = New System.Drawing.Size(108, 19)
+        Me.chkHasItem.TabIndex = 9
+        Me.chkHasItem.Text = "Player Has Item"
+        '
+        'cmbPlayerSwitchCompare
+        '
+        Me.cmbPlayerSwitchCompare.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbPlayerSwitchCompare.FormattingEnabled = true
+        Me.cmbPlayerSwitchCompare.Items.AddRange(New Object() {"False = 0", "True = 1"})
+        Me.cmbPlayerSwitchCompare.Location = New System.Drawing.Point(260, 51)
+        Me.cmbPlayerSwitchCompare.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbPlayerSwitchCompare.Name = "cmbPlayerSwitchCompare"
+        Me.cmbPlayerSwitchCompare.Size = New System.Drawing.Size(103, 24)
+        Me.cmbPlayerSwitchCompare.TabIndex = 8
+        '
+        'DarkLabel3
+        '
+        Me.DarkLabel3.AutoSize = true
+        Me.DarkLabel3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel3.Location = New System.Drawing.Point(237, 54)
+        Me.DarkLabel3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel3.Name = "DarkLabel3"
+        Me.DarkLabel3.Size = New System.Drawing.Size(15, 15)
+        Me.DarkLabel3.TabIndex = 7
+        Me.DarkLabel3.Text = "is"
+        '
+        'cmbPlayerSwitch
+        '
+        Me.cmbPlayerSwitch.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbPlayerSwitch.FormattingEnabled = true
+        Me.cmbPlayerSwitch.Location = New System.Drawing.Point(126, 51)
+        Me.cmbPlayerSwitch.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbPlayerSwitch.Name = "cmbPlayerSwitch"
+        Me.cmbPlayerSwitch.Size = New System.Drawing.Size(103, 24)
+        Me.cmbPlayerSwitch.TabIndex = 6
+        '
+        'chkPlayerSwitch
+        '
+        Me.chkPlayerSwitch.AutoSize = true
+        Me.chkPlayerSwitch.Location = New System.Drawing.Point(7, 53)
+        Me.chkPlayerSwitch.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.chkPlayerSwitch.Name = "chkPlayerSwitch"
+        Me.chkPlayerSwitch.Size = New System.Drawing.Size(96, 19)
+        Me.chkPlayerSwitch.TabIndex = 5
+        Me.chkPlayerSwitch.Text = "Player Switch"
+        '
+        'nudPlayerVariable
+        '
+        Me.nudPlayerVariable.Location = New System.Drawing.Point(371, 21)
+        Me.nudPlayerVariable.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudPlayerVariable.Name = "nudPlayerVariable"
+        Me.nudPlayerVariable.Size = New System.Drawing.Size(65, 23)
+        Me.nudPlayerVariable.TabIndex = 4
+        '
+        'cmbPlayervarCompare
+        '
+        Me.cmbPlayervarCompare.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbPlayervarCompare.FormattingEnabled = true
+        Me.cmbPlayervarCompare.Items.AddRange(New Object() {"Equal To", "Great Than OrElse Equal To", "Less Than or Equal To", "Greater Than", "Less Than", "Does Not Equal"})
+        Me.cmbPlayervarCompare.Location = New System.Drawing.Point(260, 20)
+        Me.cmbPlayervarCompare.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbPlayervarCompare.Name = "cmbPlayervarCompare"
+        Me.cmbPlayervarCompare.Size = New System.Drawing.Size(103, 24)
+        Me.cmbPlayervarCompare.TabIndex = 3
+        '
+        'DarkLabel2
+        '
+        Me.DarkLabel2.AutoSize = true
+        Me.DarkLabel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel2.Location = New System.Drawing.Point(237, 27)
+        Me.DarkLabel2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel2.Name = "DarkLabel2"
+        Me.DarkLabel2.Size = New System.Drawing.Size(15, 15)
+        Me.DarkLabel2.TabIndex = 2
+        Me.DarkLabel2.Text = "is"
+        '
+        'cmbPlayerVar
+        '
+        Me.cmbPlayerVar.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbPlayerVar.FormattingEnabled = true
+        Me.cmbPlayerVar.Location = New System.Drawing.Point(126, 20)
+        Me.cmbPlayerVar.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbPlayerVar.Name = "cmbPlayerVar"
+        Me.cmbPlayerVar.Size = New System.Drawing.Size(103, 24)
+        Me.cmbPlayerVar.TabIndex = 1
+        '
+        'chkPlayerVar
+        '
+        Me.chkPlayerVar.AutoSize = true
+        Me.chkPlayerVar.Location = New System.Drawing.Point(7, 22)
+        Me.chkPlayerVar.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.chkPlayerVar.Name = "chkPlayerVar"
+        Me.chkPlayerVar.Size = New System.Drawing.Size(102, 19)
+        Me.chkPlayerVar.TabIndex = 0
+        Me.chkPlayerVar.Text = "Player Variable"
         '
         'fraGraphic
         '
@@ -996,92 +1480,9 @@ Partial Class FrmEditor_Events
         Me.DarkLabel11.Location = New System.Drawing.Point(24, 24)
         Me.DarkLabel11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel11.Name = "DarkLabel11"
-        Me.DarkLabel11.Size = New System.Drawing.Size(84, 15)
+        Me.DarkLabel11.Size = New System.Drawing.Size(83, 15)
         Me.DarkLabel11.TabIndex = 0
         Me.DarkLabel11.Text = "Graphics Type:"
-        '
-        'fraGraphicPic
-        '
-        Me.fraGraphicPic.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraGraphicPic.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.fraGraphicPic.Controls.Add(Me.picGraphic)
-        Me.fraGraphicPic.ForeColor = System.Drawing.Color.Gainsboro
-        Me.fraGraphicPic.Location = New System.Drawing.Point(4, 156)
-        Me.fraGraphicPic.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraGraphicPic.Name = "fraGraphicPic"
-        Me.fraGraphicPic.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraGraphicPic.Size = New System.Drawing.Size(202, 268)
-        Me.fraGraphicPic.TabIndex = 12
-        Me.fraGraphicPic.TabStop = False
-        Me.fraGraphicPic.Text = "Graphic"
-        '
-        'picGraphic
-        '
-        Me.picGraphic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.picGraphic.Location = New System.Drawing.Point(7, 22)
-        Me.picGraphic.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.picGraphic.Name = "picGraphic"
-        Me.picGraphic.Size = New System.Drawing.Size(188, 239)
-        Me.picGraphic.TabIndex = 1
-        Me.picGraphic.TabStop = False
-        '
-        'DarkGroupBox6
-        '
-        Me.DarkGroupBox6.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox6.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.DarkGroupBox6.Controls.Add(Me.chkShowName)
-        Me.DarkGroupBox6.Controls.Add(Me.chkWalkThrough)
-        Me.DarkGroupBox6.Controls.Add(Me.chkDirFix)
-        Me.DarkGroupBox6.Controls.Add(Me.chkWalkAnim)
-        Me.DarkGroupBox6.ForeColor = System.Drawing.Color.Gainsboro
-        Me.DarkGroupBox6.Location = New System.Drawing.Point(4, 430)
-        Me.DarkGroupBox6.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox6.Name = "DarkGroupBox6"
-        Me.DarkGroupBox6.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox6.Size = New System.Drawing.Size(205, 129)
-        Me.DarkGroupBox6.TabIndex = 10
-        Me.DarkGroupBox6.TabStop = False
-        Me.DarkGroupBox6.Text = "Options"
-        '
-        'chkShowName
-        '
-        Me.chkShowName.AutoSize = True
-        Me.chkShowName.Location = New System.Drawing.Point(8, 102)
-        Me.chkShowName.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.chkShowName.Name = "chkShowName"
-        Me.chkShowName.Size = New System.Drawing.Size(90, 19)
-        Me.chkShowName.TabIndex = 3
-        Me.chkShowName.Text = "Show Name"
-        '
-        'chkWalkThrough
-        '
-        Me.chkWalkThrough.AutoSize = True
-        Me.chkWalkThrough.Location = New System.Drawing.Point(8, 75)
-        Me.chkWalkThrough.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.chkWalkThrough.Name = "chkWalkThrough"
-        Me.chkWalkThrough.Size = New System.Drawing.Size(101, 19)
-        Me.chkWalkThrough.TabIndex = 2
-        Me.chkWalkThrough.Text = "Walk Through"
-        '
-        'chkDirFix
-        '
-        Me.chkDirFix.AutoSize = True
-        Me.chkDirFix.Location = New System.Drawing.Point(8, 48)
-        Me.chkDirFix.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.chkDirFix.Name = "chkDirFix"
-        Me.chkDirFix.Size = New System.Drawing.Size(104, 19)
-        Me.chkDirFix.TabIndex = 1
-        Me.chkDirFix.Text = "Direction Fixed"
-        '
-        'chkWalkAnim
-        '
-        Me.chkWalkAnim.AutoSize = True
-        Me.chkWalkAnim.Location = New System.Drawing.Point(8, 22)
-        Me.chkWalkAnim.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.chkWalkAnim.Name = "chkWalkAnim"
-        Me.chkWalkAnim.Size = New System.Drawing.Size(130, 19)
-        Me.chkWalkAnim.TabIndex = 0
-        Me.chkWalkAnim.Text = "No Walk Animation"
         '
         'fraCommands
         '
@@ -1092,7 +1493,7 @@ Partial Class FrmEditor_Events
         Me.fraCommands.Name = "fraCommands"
         Me.fraCommands.Size = New System.Drawing.Size(458, 556)
         Me.fraCommands.TabIndex = 6
-        Me.fraCommands.Visible = False
+        Me.fraCommands.Visible = false
         '
         'btnCancelCommand
         '
@@ -1104,10 +1505,23 @@ Partial Class FrmEditor_Events
         Me.btnCancelCommand.TabIndex = 2
         Me.btnCancelCommand.Text = "Cancel"
         '
+        'lstCommands
+        '
+        Me.lstCommands.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.lstCommands.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lstCommands.ForeColor = System.Drawing.Color.Gainsboro
+        Me.lstCommands.FormattingEnabled = true
+        Me.lstCommands.ItemHeight = 15
+        Me.lstCommands.Location = New System.Drawing.Point(454, 7)
+        Me.lstCommands.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.lstCommands.Name = "lstCommands"
+        Me.lstCommands.Size = New System.Drawing.Size(458, 497)
+        Me.lstCommands.TabIndex = 8
+        '
         'DarkGroupBox8
         '
-        Me.DarkGroupBox8.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox8.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.DarkGroupBox8.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.DarkGroupBox8.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.DarkGroupBox8.Controls.Add(Me.btnClearCommand)
         Me.DarkGroupBox8.Controls.Add(Me.btnDeleteCommand)
         Me.DarkGroupBox8.Controls.Add(Me.btnEditCommand)
@@ -1119,7 +1533,7 @@ Partial Class FrmEditor_Events
         Me.DarkGroupBox8.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DarkGroupBox8.Size = New System.Drawing.Size(458, 57)
         Me.DarkGroupBox8.TabIndex = 9
-        Me.DarkGroupBox8.TabStop = False
+        Me.DarkGroupBox8.TabStop = false
         Me.DarkGroupBox8.Text = "Commands"
         '
         'btnClearCommand
@@ -1162,420 +1576,6 @@ Partial Class FrmEditor_Events
         Me.btnAddCommand.TabIndex = 0
         Me.btnAddCommand.Text = "Add"
         '
-        'lstCommands
-        '
-        Me.lstCommands.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.lstCommands.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lstCommands.ForeColor = System.Drawing.Color.Gainsboro
-        Me.lstCommands.FormattingEnabled = True
-        Me.lstCommands.ItemHeight = 15
-        Me.lstCommands.Location = New System.Drawing.Point(454, 7)
-        Me.lstCommands.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.lstCommands.Name = "lstCommands"
-        Me.lstCommands.Size = New System.Drawing.Size(458, 497)
-        Me.lstCommands.TabIndex = 8
-        '
-        'DarkLabel10
-        '
-        Me.DarkLabel10.ForeColor = System.Drawing.Color.Red
-        Me.DarkLabel10.Location = New System.Drawing.Point(212, 528)
-        Me.DarkLabel10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel10.Name = "DarkLabel10"
-        Me.DarkLabel10.Size = New System.Drawing.Size(233, 35)
-        Me.DarkLabel10.TabIndex = 7
-        Me.DarkLabel10.Text = "** If global, only the first page will be processed. For shop keepers etc."
-        '
-        'DarkLabel9
-        '
-        Me.DarkLabel9.ForeColor = System.Drawing.Color.Red
-        Me.DarkLabel9.Location = New System.Drawing.Point(212, 489)
-        Me.DarkLabel9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel9.Name = "DarkLabel9"
-        Me.DarkLabel9.Size = New System.Drawing.Size(234, 39)
-        Me.DarkLabel9.TabIndex = 6
-        Me.DarkLabel9.Text = "* Self Switches are always global and will reset on server restart."
-        '
-        'DarkGroupBox7
-        '
-        Me.DarkGroupBox7.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox7.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.DarkGroupBox7.Controls.Add(Me.cmbEventQuest)
-        Me.DarkGroupBox7.Controls.Add(Me.DarkLabel8)
-        Me.DarkGroupBox7.ForeColor = System.Drawing.Color.Gainsboro
-        Me.DarkGroupBox7.Location = New System.Drawing.Point(212, 434)
-        Me.DarkGroupBox7.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox7.Name = "DarkGroupBox7"
-        Me.DarkGroupBox7.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox7.Size = New System.Drawing.Size(233, 52)
-        Me.DarkGroupBox7.TabIndex = 5
-        Me.DarkGroupBox7.TabStop = False
-        Me.DarkGroupBox7.Text = "Quest Icon"
-        '
-        'cmbEventQuest
-        '
-        Me.cmbEventQuest.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbEventQuest.FormattingEnabled = True
-        Me.cmbEventQuest.Location = New System.Drawing.Point(59, 20)
-        Me.cmbEventQuest.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbEventQuest.Name = "cmbEventQuest"
-        Me.cmbEventQuest.Size = New System.Drawing.Size(166, 24)
-        Me.cmbEventQuest.TabIndex = 1
-        '
-        'DarkLabel8
-        '
-        Me.DarkLabel8.AutoSize = True
-        Me.DarkLabel8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel8.Location = New System.Drawing.Point(8, 23)
-        Me.DarkLabel8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel8.Name = "DarkLabel8"
-        Me.DarkLabel8.Size = New System.Drawing.Size(41, 15)
-        Me.DarkLabel8.TabIndex = 0
-        Me.DarkLabel8.Text = "Quest:"
-        '
-        'DarkGroupBox5
-        '
-        Me.DarkGroupBox5.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox5.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.DarkGroupBox5.Controls.Add(Me.cmbTrigger)
-        Me.DarkGroupBox5.ForeColor = System.Drawing.Color.Gainsboro
-        Me.DarkGroupBox5.Location = New System.Drawing.Point(212, 370)
-        Me.DarkGroupBox5.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox5.Name = "DarkGroupBox5"
-        Me.DarkGroupBox5.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox5.Size = New System.Drawing.Size(233, 57)
-        Me.DarkGroupBox5.TabIndex = 4
-        Me.DarkGroupBox5.TabStop = False
-        Me.DarkGroupBox5.Text = "Trigger"
-        '
-        'cmbTrigger
-        '
-        Me.cmbTrigger.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbTrigger.FormattingEnabled = True
-        Me.cmbTrigger.Items.AddRange(New Object() {"Action Button", "Player Touch", "Parallel Process"})
-        Me.cmbTrigger.Location = New System.Drawing.Point(7, 22)
-        Me.cmbTrigger.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbTrigger.Name = "cmbTrigger"
-        Me.cmbTrigger.Size = New System.Drawing.Size(220, 24)
-        Me.cmbTrigger.TabIndex = 0
-        '
-        'DarkGroupBox4
-        '
-        Me.DarkGroupBox4.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.DarkGroupBox4.Controls.Add(Me.picGraphicSel)
-        Me.DarkGroupBox4.Controls.Add(Me.cmbPositioning)
-        Me.DarkGroupBox4.ForeColor = System.Drawing.Color.Gainsboro
-        Me.DarkGroupBox4.Location = New System.Drawing.Point(212, 308)
-        Me.DarkGroupBox4.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox4.Name = "DarkGroupBox4"
-        Me.DarkGroupBox4.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox4.Size = New System.Drawing.Size(233, 55)
-        Me.DarkGroupBox4.TabIndex = 3
-        Me.DarkGroupBox4.TabStop = False
-        Me.DarkGroupBox4.Text = "Positioning"
-        '
-        'picGraphicSel
-        '
-        Me.picGraphicSel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.picGraphicSel.Location = New System.Drawing.Point(-220, -338)
-        Me.picGraphicSel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.picGraphicSel.Name = "picGraphicSel"
-        Me.picGraphicSel.Size = New System.Drawing.Size(936, 593)
-        Me.picGraphicSel.TabIndex = 5
-        Me.picGraphicSel.TabStop = False
-        '
-        'cmbPositioning
-        '
-        Me.cmbPositioning.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbPositioning.FormattingEnabled = True
-        Me.cmbPositioning.Items.AddRange(New Object() {"Below Characters", "Same as Characters", "Above Characters"})
-        Me.cmbPositioning.Location = New System.Drawing.Point(7, 22)
-        Me.cmbPositioning.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbPositioning.Name = "cmbPositioning"
-        Me.cmbPositioning.Size = New System.Drawing.Size(220, 24)
-        Me.cmbPositioning.TabIndex = 0
-        '
-        'DarkGroupBox3
-        '
-        Me.DarkGroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox3.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.DarkGroupBox3.Controls.Add(Me.DarkLabel7)
-        Me.DarkGroupBox3.Controls.Add(Me.cmbMoveFreq)
-        Me.DarkGroupBox3.Controls.Add(Me.DarkLabel6)
-        Me.DarkGroupBox3.Controls.Add(Me.cmbMoveSpeed)
-        Me.DarkGroupBox3.Controls.Add(Me.btnMoveRoute)
-        Me.DarkGroupBox3.Controls.Add(Me.cmbMoveType)
-        Me.DarkGroupBox3.Controls.Add(Me.DarkLabel5)
-        Me.DarkGroupBox3.ForeColor = System.Drawing.Color.Gainsboro
-        Me.DarkGroupBox3.Location = New System.Drawing.Point(214, 159)
-        Me.DarkGroupBox3.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox3.Name = "DarkGroupBox3"
-        Me.DarkGroupBox3.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox3.Size = New System.Drawing.Size(233, 142)
-        Me.DarkGroupBox3.TabIndex = 2
-        Me.DarkGroupBox3.TabStop = False
-        Me.DarkGroupBox3.Text = "Movement"
-        '
-        'DarkLabel7
-        '
-        Me.DarkLabel7.AutoSize = True
-        Me.DarkLabel7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel7.Location = New System.Drawing.Point(7, 115)
-        Me.DarkLabel7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel7.Name = "DarkLabel7"
-        Me.DarkLabel7.Size = New System.Drawing.Size(62, 15)
-        Me.DarkLabel7.TabIndex = 6
-        Me.DarkLabel7.Text = "Frequency"
-        '
-        'cmbMoveFreq
-        '
-        Me.cmbMoveFreq.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbMoveFreq.FormattingEnabled = True
-        Me.cmbMoveFreq.Items.AddRange(New Object() {"Lowest", "Lower", "Normal", "Higher", "Highest"})
-        Me.cmbMoveFreq.Location = New System.Drawing.Point(80, 112)
-        Me.cmbMoveFreq.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbMoveFreq.Name = "cmbMoveFreq"
-        Me.cmbMoveFreq.Size = New System.Drawing.Size(145, 24)
-        Me.cmbMoveFreq.TabIndex = 5
-        '
-        'DarkLabel6
-        '
-        Me.DarkLabel6.AutoSize = True
-        Me.DarkLabel6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel6.Location = New System.Drawing.Point(7, 84)
-        Me.DarkLabel6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel6.Name = "DarkLabel6"
-        Me.DarkLabel6.Size = New System.Drawing.Size(42, 15)
-        Me.DarkLabel6.TabIndex = 4
-        Me.DarkLabel6.Text = "Speed:"
-        '
-        'cmbMoveSpeed
-        '
-        Me.cmbMoveSpeed.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbMoveSpeed.FormattingEnabled = True
-        Me.cmbMoveSpeed.Items.AddRange(New Object() {"8x Slower", "4x Slower", "2x Slower", "Normal", "2x Faster", "4x Faster"})
-        Me.cmbMoveSpeed.Location = New System.Drawing.Point(80, 81)
-        Me.cmbMoveSpeed.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbMoveSpeed.Name = "cmbMoveSpeed"
-        Me.cmbMoveSpeed.Size = New System.Drawing.Size(145, 24)
-        Me.cmbMoveSpeed.TabIndex = 3
-        '
-        'btnMoveRoute
-        '
-        Me.btnMoveRoute.Location = New System.Drawing.Point(139, 47)
-        Me.btnMoveRoute.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnMoveRoute.Name = "btnMoveRoute"
-        Me.btnMoveRoute.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnMoveRoute.Size = New System.Drawing.Size(88, 27)
-        Me.btnMoveRoute.TabIndex = 2
-        Me.btnMoveRoute.Text = "Move Route"
-        '
-        'cmbMoveType
-        '
-        Me.cmbMoveType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbMoveType.FormattingEnabled = True
-        Me.cmbMoveType.Items.AddRange(New Object() {"Fixed Position", "Random", "Move Route"})
-        Me.cmbMoveType.Location = New System.Drawing.Point(80, 16)
-        Me.cmbMoveType.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbMoveType.Name = "cmbMoveType"
-        Me.cmbMoveType.Size = New System.Drawing.Size(145, 24)
-        Me.cmbMoveType.TabIndex = 1
-        '
-        'DarkLabel5
-        '
-        Me.DarkLabel5.AutoSize = True
-        Me.DarkLabel5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel5.Location = New System.Drawing.Point(7, 20)
-        Me.DarkLabel5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel5.Name = "DarkLabel5"
-        Me.DarkLabel5.Size = New System.Drawing.Size(35, 15)
-        Me.DarkLabel5.TabIndex = 0
-        Me.DarkLabel5.Text = "Type:"
-        '
-        'DarkGroupBox1
-        '
-        Me.DarkGroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox1.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.DarkGroupBox1.Controls.Add(Me.cmbSelfSwitchCompare)
-        Me.DarkGroupBox1.Controls.Add(Me.DarkLabel4)
-        Me.DarkGroupBox1.Controls.Add(Me.cmbSelfSwitch)
-        Me.DarkGroupBox1.Controls.Add(Me.chkSelfSwitch)
-        Me.DarkGroupBox1.Controls.Add(Me.cmbHasItem)
-        Me.DarkGroupBox1.Controls.Add(Me.chkHasItem)
-        Me.DarkGroupBox1.Controls.Add(Me.cmbPlayerSwitchCompare)
-        Me.DarkGroupBox1.Controls.Add(Me.DarkLabel3)
-        Me.DarkGroupBox1.Controls.Add(Me.cmbPlayerSwitch)
-        Me.DarkGroupBox1.Controls.Add(Me.chkPlayerSwitch)
-        Me.DarkGroupBox1.Controls.Add(Me.nudPlayerVariable)
-        Me.DarkGroupBox1.Controls.Add(Me.cmbPlayervarCompare)
-        Me.DarkGroupBox1.Controls.Add(Me.DarkLabel2)
-        Me.DarkGroupBox1.Controls.Add(Me.cmbPlayerVar)
-        Me.DarkGroupBox1.Controls.Add(Me.chkPlayerVar)
-        Me.DarkGroupBox1.ForeColor = System.Drawing.Color.Gainsboro
-        Me.DarkGroupBox1.Location = New System.Drawing.Point(4, 7)
-        Me.DarkGroupBox1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox1.Name = "DarkGroupBox1"
-        Me.DarkGroupBox1.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox1.Size = New System.Drawing.Size(443, 145)
-        Me.DarkGroupBox1.TabIndex = 0
-        Me.DarkGroupBox1.TabStop = False
-        Me.DarkGroupBox1.Text = "Conditions"
-        '
-        'cmbSelfSwitchCompare
-        '
-        Me.cmbSelfSwitchCompare.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbSelfSwitchCompare.FormattingEnabled = True
-        Me.cmbSelfSwitchCompare.Items.AddRange(New Object() {"False = 0", "True = 1"})
-        Me.cmbSelfSwitchCompare.Location = New System.Drawing.Point(260, 113)
-        Me.cmbSelfSwitchCompare.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbSelfSwitchCompare.Name = "cmbSelfSwitchCompare"
-        Me.cmbSelfSwitchCompare.Size = New System.Drawing.Size(103, 24)
-        Me.cmbSelfSwitchCompare.TabIndex = 14
-        '
-        'DarkLabel4
-        '
-        Me.DarkLabel4.AutoSize = True
-        Me.DarkLabel4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel4.Location = New System.Drawing.Point(237, 117)
-        Me.DarkLabel4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel4.Name = "DarkLabel4"
-        Me.DarkLabel4.Size = New System.Drawing.Size(15, 15)
-        Me.DarkLabel4.TabIndex = 13
-        Me.DarkLabel4.Text = "is"
-        '
-        'cmbSelfSwitch
-        '
-        Me.cmbSelfSwitch.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbSelfSwitch.FormattingEnabled = True
-        Me.cmbSelfSwitch.Items.AddRange(New Object() {"None", "1 - A", "2 - B", "3 - C", "4 - D"})
-        Me.cmbSelfSwitch.Location = New System.Drawing.Point(126, 113)
-        Me.cmbSelfSwitch.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbSelfSwitch.Name = "cmbSelfSwitch"
-        Me.cmbSelfSwitch.Size = New System.Drawing.Size(103, 24)
-        Me.cmbSelfSwitch.TabIndex = 12
-        '
-        'chkSelfSwitch
-        '
-        Me.chkSelfSwitch.AutoSize = True
-        Me.chkSelfSwitch.Location = New System.Drawing.Point(7, 115)
-        Me.chkSelfSwitch.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.chkSelfSwitch.Name = "chkSelfSwitch"
-        Me.chkSelfSwitch.Size = New System.Drawing.Size(83, 19)
-        Me.chkSelfSwitch.TabIndex = 11
-        Me.chkSelfSwitch.Text = "Self Switch"
-        '
-        'cmbHasItem
-        '
-        Me.cmbHasItem.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbHasItem.FormattingEnabled = True
-        Me.cmbHasItem.Location = New System.Drawing.Point(126, 82)
-        Me.cmbHasItem.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbHasItem.Name = "cmbHasItem"
-        Me.cmbHasItem.Size = New System.Drawing.Size(237, 24)
-        Me.cmbHasItem.TabIndex = 10
-        '
-        'chkHasItem
-        '
-        Me.chkHasItem.AutoSize = True
-        Me.chkHasItem.Location = New System.Drawing.Point(7, 84)
-        Me.chkHasItem.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.chkHasItem.Name = "chkHasItem"
-        Me.chkHasItem.Size = New System.Drawing.Size(108, 19)
-        Me.chkHasItem.TabIndex = 9
-        Me.chkHasItem.Text = "Player Has Item"
-        '
-        'cmbPlayerSwitchCompare
-        '
-        Me.cmbPlayerSwitchCompare.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbPlayerSwitchCompare.FormattingEnabled = True
-        Me.cmbPlayerSwitchCompare.Items.AddRange(New Object() {"False = 0", "True = 1"})
-        Me.cmbPlayerSwitchCompare.Location = New System.Drawing.Point(260, 51)
-        Me.cmbPlayerSwitchCompare.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbPlayerSwitchCompare.Name = "cmbPlayerSwitchCompare"
-        Me.cmbPlayerSwitchCompare.Size = New System.Drawing.Size(103, 24)
-        Me.cmbPlayerSwitchCompare.TabIndex = 8
-        '
-        'DarkLabel3
-        '
-        Me.DarkLabel3.AutoSize = True
-        Me.DarkLabel3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel3.Location = New System.Drawing.Point(237, 54)
-        Me.DarkLabel3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel3.Name = "DarkLabel3"
-        Me.DarkLabel3.Size = New System.Drawing.Size(15, 15)
-        Me.DarkLabel3.TabIndex = 7
-        Me.DarkLabel3.Text = "is"
-        '
-        'cmbPlayerSwitch
-        '
-        Me.cmbPlayerSwitch.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbPlayerSwitch.FormattingEnabled = True
-        Me.cmbPlayerSwitch.Location = New System.Drawing.Point(126, 51)
-        Me.cmbPlayerSwitch.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbPlayerSwitch.Name = "cmbPlayerSwitch"
-        Me.cmbPlayerSwitch.Size = New System.Drawing.Size(103, 24)
-        Me.cmbPlayerSwitch.TabIndex = 6
-        '
-        'chkPlayerSwitch
-        '
-        Me.chkPlayerSwitch.AutoSize = True
-        Me.chkPlayerSwitch.Location = New System.Drawing.Point(7, 53)
-        Me.chkPlayerSwitch.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.chkPlayerSwitch.Name = "chkPlayerSwitch"
-        Me.chkPlayerSwitch.Size = New System.Drawing.Size(96, 19)
-        Me.chkPlayerSwitch.TabIndex = 5
-        Me.chkPlayerSwitch.Text = "Player Switch"
-        '
-        'nudPlayerVariable
-        '
-        Me.nudPlayerVariable.Location = New System.Drawing.Point(371, 21)
-        Me.nudPlayerVariable.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudPlayerVariable.Name = "nudPlayerVariable"
-        Me.nudPlayerVariable.Size = New System.Drawing.Size(65, 23)
-        Me.nudPlayerVariable.TabIndex = 4
-        '
-        'cmbPlayervarCompare
-        '
-        Me.cmbPlayervarCompare.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbPlayervarCompare.FormattingEnabled = True
-        Me.cmbPlayervarCompare.Items.AddRange(New Object() {"Equal To", "Great Than OrElse Equal To", "Less Than or Equal To", "Greater Than", "Less Than", "Does Not Equal"})
-        Me.cmbPlayervarCompare.Location = New System.Drawing.Point(260, 20)
-        Me.cmbPlayervarCompare.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbPlayervarCompare.Name = "cmbPlayervarCompare"
-        Me.cmbPlayervarCompare.Size = New System.Drawing.Size(103, 24)
-        Me.cmbPlayervarCompare.TabIndex = 3
-        '
-        'DarkLabel2
-        '
-        Me.DarkLabel2.AutoSize = True
-        Me.DarkLabel2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel2.Location = New System.Drawing.Point(237, 27)
-        Me.DarkLabel2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel2.Name = "DarkLabel2"
-        Me.DarkLabel2.Size = New System.Drawing.Size(15, 15)
-        Me.DarkLabel2.TabIndex = 2
-        Me.DarkLabel2.Text = "is"
-        '
-        'cmbPlayerVar
-        '
-        Me.cmbPlayerVar.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbPlayerVar.FormattingEnabled = True
-        Me.cmbPlayerVar.Location = New System.Drawing.Point(126, 20)
-        Me.cmbPlayerVar.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbPlayerVar.Name = "cmbPlayerVar"
-        Me.cmbPlayerVar.Size = New System.Drawing.Size(103, 24)
-        Me.cmbPlayerVar.TabIndex = 1
-        '
-        'chkPlayerVar
-        '
-        Me.chkPlayerVar.AutoSize = True
-        Me.chkPlayerVar.Location = New System.Drawing.Point(7, 22)
-        Me.chkPlayerVar.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.chkPlayerVar.Name = "chkPlayerVar"
-        Me.chkPlayerVar.Size = New System.Drawing.Size(102, 19)
-        Me.chkPlayerVar.TabIndex = 0
-        Me.chkPlayerVar.Text = "Player Variable"
-        '
         'btnLabeling
         '
         Me.btnLabeling.Location = New System.Drawing.Point(8, 669)
@@ -1608,8 +1608,8 @@ Partial Class FrmEditor_Events
         '
         'fraMoveRoute
         '
-        Me.fraMoveRoute.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraMoveRoute.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraMoveRoute.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraMoveRoute.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraMoveRoute.Controls.Add(Me.btnMoveRouteOk)
         Me.fraMoveRoute.Controls.Add(Me.btnMoveRouteCancel)
         Me.fraMoveRoute.Controls.Add(Me.chkRepeatRoute)
@@ -1624,9 +1624,9 @@ Partial Class FrmEditor_Events
         Me.fraMoveRoute.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraMoveRoute.Size = New System.Drawing.Size(108, 98)
         Me.fraMoveRoute.TabIndex = 0
-        Me.fraMoveRoute.TabStop = False
+        Me.fraMoveRoute.TabStop = false
         Me.fraMoveRoute.Text = "Move Route"
-        Me.fraMoveRoute.Visible = False
+        Me.fraMoveRoute.Visible = false
         '
         'btnMoveRouteOk
         '
@@ -1650,7 +1650,7 @@ Partial Class FrmEditor_Events
         '
         'chkRepeatRoute
         '
-        Me.chkRepeatRoute.AutoSize = True
+        Me.chkRepeatRoute.AutoSize = true
         Me.chkRepeatRoute.Location = New System.Drawing.Point(7, 524)
         Me.chkRepeatRoute.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.chkRepeatRoute.Name = "chkRepeatRoute"
@@ -1660,7 +1660,7 @@ Partial Class FrmEditor_Events
         '
         'chkIgnoreMove
         '
-        Me.chkIgnoreMove.AutoSize = True
+        Me.chkIgnoreMove.AutoSize = true
         Me.chkIgnoreMove.Location = New System.Drawing.Point(7, 497)
         Me.chkIgnoreMove.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.chkIgnoreMove.Name = "chkIgnoreMove"
@@ -1670,8 +1670,8 @@ Partial Class FrmEditor_Events
         '
         'DarkGroupBox10
         '
-        Me.DarkGroupBox10.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.DarkGroupBox10.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.DarkGroupBox10.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.DarkGroupBox10.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.DarkGroupBox10.Controls.Add(Me.lstvwMoveRoute)
         Me.DarkGroupBox10.ForeColor = System.Drawing.Color.Gainsboro
         Me.DarkGroupBox10.Location = New System.Drawing.Point(237, 12)
@@ -1680,12 +1680,12 @@ Partial Class FrmEditor_Events
         Me.DarkGroupBox10.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DarkGroupBox10.Size = New System.Drawing.Size(694, 479)
         Me.DarkGroupBox10.TabIndex = 3
-        Me.DarkGroupBox10.TabStop = False
+        Me.DarkGroupBox10.TabStop = false
         Me.DarkGroupBox10.Text = "Commands"
         '
         'lstvwMoveRoute
         '
-        Me.lstvwMoveRoute.AutoArrange = False
+        Me.lstvwMoveRoute.AutoArrange = false
         Me.lstvwMoveRoute.BackColor = System.Drawing.Color.DimGray
         Me.lstvwMoveRoute.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.lstvwMoveRoute.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3, Me.ColumnHeader4})
@@ -1758,14 +1758,14 @@ Partial Class FrmEditor_Events
         ListViewItem42.Group = ListViewGroup8
         ListViewItem43.Group = ListViewGroup9
         Me.lstvwMoveRoute.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7, ListViewItem8, ListViewItem9, ListViewItem10, ListViewItem11, ListViewItem12, ListViewItem13, ListViewItem14, ListViewItem15, ListViewItem16, ListViewItem17, ListViewItem18, ListViewItem19, ListViewItem20, ListViewItem21, ListViewItem22, ListViewItem23, ListViewItem24, ListViewItem25, ListViewItem26, ListViewItem27, ListViewItem28, ListViewItem29, ListViewItem30, ListViewItem31, ListViewItem32, ListViewItem33, ListViewItem34, ListViewItem35, ListViewItem36, ListViewItem37, ListViewItem38, ListViewItem39, ListViewItem40, ListViewItem41, ListViewItem42, ListViewItem43})
-        Me.lstvwMoveRoute.LabelWrap = False
+        Me.lstvwMoveRoute.LabelWrap = false
         Me.lstvwMoveRoute.Location = New System.Drawing.Point(4, 19)
         Me.lstvwMoveRoute.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.lstvwMoveRoute.MultiSelect = False
+        Me.lstvwMoveRoute.MultiSelect = false
         Me.lstvwMoveRoute.Name = "lstvwMoveRoute"
         Me.lstvwMoveRoute.Size = New System.Drawing.Size(686, 458)
         Me.lstvwMoveRoute.TabIndex = 5
-        Me.lstvwMoveRoute.UseCompatibleStateImageBehavior = False
+        Me.lstvwMoveRoute.UseCompatibleStateImageBehavior = false
         Me.lstvwMoveRoute.View = System.Windows.Forms.View.Tile
         '
         'ColumnHeader3
@@ -1780,10 +1780,10 @@ Partial Class FrmEditor_Events
         '
         'lstMoveRoute
         '
-        Me.lstMoveRoute.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.lstMoveRoute.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
         Me.lstMoveRoute.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lstMoveRoute.ForeColor = System.Drawing.Color.Gainsboro
-        Me.lstMoveRoute.FormattingEnabled = True
+        Me.lstMoveRoute.FormattingEnabled = true
         Me.lstMoveRoute.ItemHeight = 15
         Me.lstMoveRoute.Location = New System.Drawing.Point(7, 53)
         Me.lstMoveRoute.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -1794,7 +1794,7 @@ Partial Class FrmEditor_Events
         'cmbEvent
         '
         Me.cmbEvent.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbEvent.FormattingEnabled = True
+        Me.cmbEvent.FormattingEnabled = true
         Me.cmbEvent.Location = New System.Drawing.Point(7, 22)
         Me.cmbEvent.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbEvent.Name = "cmbEvent"
@@ -1803,7 +1803,7 @@ Partial Class FrmEditor_Events
         '
         'pnlGraphicSel
         '
-        Me.pnlGraphicSel.AutoScroll = True
+        Me.pnlGraphicSel.AutoScroll = true
         Me.pnlGraphicSel.Location = New System.Drawing.Point(4, 92)
         Me.pnlGraphicSel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.pnlGraphicSel.Name = "pnlGraphicSel"
@@ -1812,9 +1812,9 @@ Partial Class FrmEditor_Events
         '
         'fraDialogue
         '
-        Me.fraDialogue.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraDialogue.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.fraDialogue.Controls.Add(Me.fraPlayAnimation)
+        Me.fraDialogue.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraDialogue.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.fraDialogue.Controls.Add(Me.fraShowPic)
         Me.fraDialogue.Controls.Add(Me.fraMoveRouteWait)
         Me.fraDialogue.Controls.Add(Me.fraCustomScript)
         Me.fraDialogue.Controls.Add(Me.fraSetWeather)
@@ -1822,13 +1822,10 @@ Partial Class FrmEditor_Events
         Me.fraDialogue.Controls.Add(Me.fraGiveExp)
         Me.fraDialogue.Controls.Add(Me.fraEndQuest)
         Me.fraDialogue.Controls.Add(Me.fraSetAccess)
-        Me.fraDialogue.Controls.Add(Me.fraSetWait)
-        Me.fraDialogue.Controls.Add(Me.fraShowPic)
         Me.fraDialogue.Controls.Add(Me.fraOpenShop)
         Me.fraDialogue.Controls.Add(Me.fraChangeLevel)
         Me.fraDialogue.Controls.Add(Me.fraChangeGender)
         Me.fraDialogue.Controls.Add(Me.fraGoToLabel)
-        Me.fraDialogue.Controls.Add(Me.fraHidePic)
         Me.fraDialogue.Controls.Add(Me.fraBeginQuest)
         Me.fraDialogue.Controls.Add(Me.fraShowChoices)
         Me.fraDialogue.Controls.Add(Me.fraPlayerVariable)
@@ -1850,6 +1847,8 @@ Partial Class FrmEditor_Events
         Me.fraDialogue.Controls.Add(Me.fraChangeItems)
         Me.fraDialogue.Controls.Add(Me.fraPlayBGM)
         Me.fraDialogue.Controls.Add(Me.fraConditionalBranch)
+        Me.fraDialogue.Controls.Add(Me.fraPlayAnimation)
+        Me.fraDialogue.Controls.Add(Me.fraSetWait)
         Me.fraDialogue.ForeColor = System.Drawing.Color.Gainsboro
         Me.fraDialogue.Location = New System.Drawing.Point(1056, 14)
         Me.fraDialogue.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -1857,150 +1856,163 @@ Partial Class FrmEditor_Events
         Me.fraDialogue.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraDialogue.Size = New System.Drawing.Size(776, 687)
         Me.fraDialogue.TabIndex = 10
-        Me.fraDialogue.TabStop = False
-        Me.fraDialogue.Visible = False
+        Me.fraDialogue.TabStop = false
+        Me.fraDialogue.Visible = false
         '
-        'fraPlayAnimation
+        'fraShowPic
         '
-        Me.fraPlayAnimation.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraPlayAnimation.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.fraPlayAnimation.Controls.Add(Me.btnPlayAnimationOk)
-        Me.fraPlayAnimation.Controls.Add(Me.btnPlayAnimationCancel)
-        Me.fraPlayAnimation.Controls.Add(Me.lblPlayAnimY)
-        Me.fraPlayAnimation.Controls.Add(Me.lblPlayAnimX)
-        Me.fraPlayAnimation.Controls.Add(Me.cmbPlayAnimEvent)
-        Me.fraPlayAnimation.Controls.Add(Me.DarkLabel62)
-        Me.fraPlayAnimation.Controls.Add(Me.cmbAnimTargetType)
-        Me.fraPlayAnimation.Controls.Add(Me.nudPlayAnimTileY)
-        Me.fraPlayAnimation.Controls.Add(Me.nudPlayAnimTileX)
-        Me.fraPlayAnimation.Controls.Add(Me.DarkLabel61)
-        Me.fraPlayAnimation.Controls.Add(Me.cmbPlayAnim)
-        Me.fraPlayAnimation.ForeColor = System.Drawing.Color.Gainsboro
-        Me.fraPlayAnimation.Location = New System.Drawing.Point(468, 297)
-        Me.fraPlayAnimation.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraPlayAnimation.Name = "fraPlayAnimation"
-        Me.fraPlayAnimation.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraPlayAnimation.Size = New System.Drawing.Size(289, 187)
-        Me.fraPlayAnimation.TabIndex = 36
-        Me.fraPlayAnimation.TabStop = False
-        Me.fraPlayAnimation.Text = "Play Animation"
-        Me.fraPlayAnimation.Visible = False
+        Me.fraShowPic.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraShowPic.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.fraShowPic.Controls.Add(Me.btnShowPicOk)
+        Me.fraShowPic.Controls.Add(Me.btnShowPicCancel)
+        Me.fraShowPic.Controls.Add(Me.DarkLabel71)
+        Me.fraShowPic.Controls.Add(Me.DarkLabel70)
+        Me.fraShowPic.Controls.Add(Me.DarkLabel67)
+        Me.fraShowPic.Controls.Add(Me.DarkLabel68)
+        Me.fraShowPic.Controls.Add(Me.nudPicOffsetY)
+        Me.fraShowPic.Controls.Add(Me.nudPicOffsetX)
+        Me.fraShowPic.Controls.Add(Me.DarkLabel69)
+        Me.fraShowPic.Controls.Add(Me.cmbPicLoc)
+        Me.fraShowPic.Controls.Add(Me.nudShowPicture)
+        Me.fraShowPic.Controls.Add(Me.picShowPic)
+        Me.fraShowPic.ForeColor = System.Drawing.Color.Gainsboro
+        Me.fraShowPic.Location = New System.Drawing.Point(1, 1)
+        Me.fraShowPic.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraShowPic.Name = "fraShowPic"
+        Me.fraShowPic.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraShowPic.Size = New System.Drawing.Size(775, 686)
+        Me.fraShowPic.TabIndex = 40
+        Me.fraShowPic.TabStop = false
+        Me.fraShowPic.Text = "Show Picture"
+        Me.fraShowPic.Visible = false
         '
-        'btnPlayAnimationOk
+        'btnShowPicOk
         '
-        Me.btnPlayAnimationOk.Location = New System.Drawing.Point(100, 152)
-        Me.btnPlayAnimationOk.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnPlayAnimationOk.Name = "btnPlayAnimationOk"
-        Me.btnPlayAnimationOk.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnPlayAnimationOk.Size = New System.Drawing.Size(88, 27)
-        Me.btnPlayAnimationOk.TabIndex = 36
-        Me.btnPlayAnimationOk.Text = "Ok"
+        Me.btnShowPicOk.Location = New System.Drawing.Point(583, 651)
+        Me.btnShowPicOk.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.btnShowPicOk.Name = "btnShowPicOk"
+        Me.btnShowPicOk.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnShowPicOk.Size = New System.Drawing.Size(88, 27)
+        Me.btnShowPicOk.TabIndex = 55
+        Me.btnShowPicOk.Text = "Ok"
         '
-        'btnPlayAnimationCancel
+        'btnShowPicCancel
         '
-        Me.btnPlayAnimationCancel.Location = New System.Drawing.Point(195, 152)
-        Me.btnPlayAnimationCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnPlayAnimationCancel.Name = "btnPlayAnimationCancel"
-        Me.btnPlayAnimationCancel.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnPlayAnimationCancel.Size = New System.Drawing.Size(88, 27)
-        Me.btnPlayAnimationCancel.TabIndex = 35
-        Me.btnPlayAnimationCancel.Text = "Cancel"
+        Me.btnShowPicCancel.Location = New System.Drawing.Point(679, 651)
+        Me.btnShowPicCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.btnShowPicCancel.Name = "btnShowPicCancel"
+        Me.btnShowPicCancel.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnShowPicCancel.Size = New System.Drawing.Size(88, 27)
+        Me.btnShowPicCancel.TabIndex = 54
+        Me.btnShowPicCancel.Text = "Cancel"
         '
-        'lblPlayAnimY
+        'DarkLabel71
         '
-        Me.lblPlayAnimY.AutoSize = True
-        Me.lblPlayAnimY.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.lblPlayAnimY.Location = New System.Drawing.Point(153, 122)
-        Me.lblPlayAnimY.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblPlayAnimY.Name = "lblPlayAnimY"
-        Me.lblPlayAnimY.Size = New System.Drawing.Size(66, 15)
-        Me.lblPlayAnimY.TabIndex = 34
-        Me.lblPlayAnimY.Text = "Map Tile Y:"
+        Me.DarkLabel71.AutoSize = true
+        Me.DarkLabel71.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel71.Location = New System.Drawing.Point(287, 27)
+        Me.DarkLabel71.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel71.Name = "DarkLabel71"
+        Me.DarkLabel71.Size = New System.Drawing.Size(120, 15)
+        Me.DarkLabel71.TabIndex = 53
+        Me.DarkLabel71.Text = "Offset from Location:"
         '
-        'lblPlayAnimX
+        'DarkLabel70
         '
-        Me.lblPlayAnimX.AutoSize = True
-        Me.lblPlayAnimX.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.lblPlayAnimX.Location = New System.Drawing.Point(7, 122)
-        Me.lblPlayAnimX.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblPlayAnimX.Name = "lblPlayAnimX"
-        Me.lblPlayAnimX.Size = New System.Drawing.Size(66, 15)
-        Me.lblPlayAnimX.TabIndex = 33
-        Me.lblPlayAnimX.Text = "Map Tile X:"
+        Me.DarkLabel70.AutoSize = true
+        Me.DarkLabel70.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel70.Location = New System.Drawing.Point(130, 65)
+        Me.DarkLabel70.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel70.Name = "DarkLabel70"
+        Me.DarkLabel70.Size = New System.Drawing.Size(53, 15)
+        Me.DarkLabel70.TabIndex = 52
+        Me.DarkLabel70.Text = "Location"
         '
-        'cmbPlayAnimEvent
+        'DarkLabel67
         '
-        Me.cmbPlayAnimEvent.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbPlayAnimEvent.FormattingEnabled = True
-        Me.cmbPlayAnimEvent.Location = New System.Drawing.Point(97, 84)
-        Me.cmbPlayAnimEvent.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbPlayAnimEvent.Name = "cmbPlayAnimEvent"
-        Me.cmbPlayAnimEvent.Size = New System.Drawing.Size(185, 24)
-        Me.cmbPlayAnimEvent.TabIndex = 32
+        Me.DarkLabel67.AutoSize = true
+        Me.DarkLabel67.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel67.Location = New System.Drawing.Point(435, 54)
+        Me.DarkLabel67.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel67.Name = "DarkLabel67"
+        Me.DarkLabel67.Size = New System.Drawing.Size(17, 15)
+        Me.DarkLabel67.TabIndex = 51
+        Me.DarkLabel67.Text = "Y:"
         '
-        'DarkLabel62
+        'DarkLabel68
         '
-        Me.DarkLabel62.AutoSize = True
-        Me.DarkLabel62.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel62.Location = New System.Drawing.Point(5, 57)
-        Me.DarkLabel62.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel62.Name = "DarkLabel62"
-        Me.DarkLabel62.Size = New System.Drawing.Size(68, 15)
-        Me.DarkLabel62.TabIndex = 31
-        Me.DarkLabel62.Text = "Target Type"
+        Me.DarkLabel68.AutoSize = true
+        Me.DarkLabel68.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel68.Location = New System.Drawing.Point(287, 56)
+        Me.DarkLabel68.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel68.Name = "DarkLabel68"
+        Me.DarkLabel68.Size = New System.Drawing.Size(17, 15)
+        Me.DarkLabel68.TabIndex = 50
+        Me.DarkLabel68.Text = "X:"
         '
-        'cmbAnimTargetType
+        'nudPicOffsetY
         '
-        Me.cmbAnimTargetType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbAnimTargetType.FormattingEnabled = True
-        Me.cmbAnimTargetType.Items.AddRange(New Object() {"Player", "Event", "Tile"})
-        Me.cmbAnimTargetType.Location = New System.Drawing.Point(97, 53)
-        Me.cmbAnimTargetType.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbAnimTargetType.Name = "cmbAnimTargetType"
-        Me.cmbAnimTargetType.Size = New System.Drawing.Size(185, 24)
-        Me.cmbAnimTargetType.TabIndex = 30
+        Me.nudPicOffsetY.Location = New System.Drawing.Point(487, 52)
+        Me.nudPicOffsetY.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudPicOffsetY.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.nudPicOffsetY.Name = "nudPicOffsetY"
+        Me.nudPicOffsetY.Size = New System.Drawing.Size(66, 23)
+        Me.nudPicOffsetY.TabIndex = 49
         '
-        'nudPlayAnimTileY
+        'nudPicOffsetX
         '
-        Me.nudPlayAnimTileY.Location = New System.Drawing.Point(231, 120)
-        Me.nudPlayAnimTileY.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudPlayAnimTileY.Name = "nudPlayAnimTileY"
-        Me.nudPlayAnimTileY.Size = New System.Drawing.Size(51, 23)
-        Me.nudPlayAnimTileY.TabIndex = 29
+        Me.nudPicOffsetX.Location = New System.Drawing.Point(336, 52)
+        Me.nudPicOffsetX.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudPicOffsetX.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.nudPicOffsetX.Name = "nudPicOffsetX"
+        Me.nudPicOffsetX.Size = New System.Drawing.Size(66, 23)
+        Me.nudPicOffsetX.TabIndex = 48
         '
-        'nudPlayAnimTileX
+        'DarkLabel69
         '
-        Me.nudPlayAnimTileX.Location = New System.Drawing.Point(85, 120)
-        Me.nudPlayAnimTileX.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudPlayAnimTileX.Name = "nudPlayAnimTileX"
-        Me.nudPlayAnimTileX.Size = New System.Drawing.Size(51, 23)
-        Me.nudPlayAnimTileX.TabIndex = 28
+        Me.DarkLabel69.AutoSize = true
+        Me.DarkLabel69.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel69.Location = New System.Drawing.Point(130, 26)
+        Me.DarkLabel69.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel69.Name = "DarkLabel69"
+        Me.DarkLabel69.Size = New System.Drawing.Size(47, 15)
+        Me.DarkLabel69.TabIndex = 47
+        Me.DarkLabel69.Text = "Picture:"
         '
-        'DarkLabel61
+        'cmbPicLoc
         '
-        Me.DarkLabel61.AutoSize = True
-        Me.DarkLabel61.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel61.Location = New System.Drawing.Point(7, 25)
-        Me.DarkLabel61.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel61.Name = "DarkLabel61"
-        Me.DarkLabel61.Size = New System.Drawing.Size(66, 15)
-        Me.DarkLabel61.TabIndex = 1
-        Me.DarkLabel61.Text = "Animation:"
+        Me.cmbPicLoc.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbPicLoc.FormattingEnabled = true
+        Me.cmbPicLoc.Items.AddRange(New Object() {"Top Left of Screen", "Center Screen", "Centered on Event", "Centered on Player"})
+        Me.cmbPicLoc.Location = New System.Drawing.Point(133, 86)
+        Me.cmbPicLoc.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbPicLoc.Name = "cmbPicLoc"
+        Me.cmbPicLoc.Size = New System.Drawing.Size(144, 24)
+        Me.cmbPicLoc.TabIndex = 46
         '
-        'cmbPlayAnim
+        'nudShowPicture
         '
-        Me.cmbPlayAnim.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbPlayAnim.FormattingEnabled = True
-        Me.cmbPlayAnim.Location = New System.Drawing.Point(72, 22)
-        Me.cmbPlayAnim.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbPlayAnim.Name = "cmbPlayAnim"
-        Me.cmbPlayAnim.Size = New System.Drawing.Size(209, 24)
-        Me.cmbPlayAnim.TabIndex = 0
+        Me.nudShowPicture.Location = New System.Drawing.Point(185, 24)
+        Me.nudShowPicture.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudShowPicture.Name = "nudShowPicture"
+        Me.nudShowPicture.Size = New System.Drawing.Size(88, 23)
+        Me.nudShowPicture.TabIndex = 45
+        '
+        'picShowPic
+        '
+        Me.picShowPic.BackColor = System.Drawing.Color.Black
+        Me.picShowPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.picShowPic.Location = New System.Drawing.Point(9, 21)
+        Me.picShowPic.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.picShowPic.Name = "picShowPic"
+        Me.picShowPic.Size = New System.Drawing.Size(117, 107)
+        Me.picShowPic.TabIndex = 42
+        Me.picShowPic.TabStop = false
         '
         'fraMoveRouteWait
         '
-        Me.fraMoveRouteWait.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraMoveRouteWait.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraMoveRouteWait.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraMoveRouteWait.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraMoveRouteWait.Controls.Add(Me.btnMoveWaitCancel)
         Me.fraMoveRouteWait.Controls.Add(Me.btnMoveWaitOk)
         Me.fraMoveRouteWait.Controls.Add(Me.DarkLabel79)
@@ -2012,9 +2024,9 @@ Partial Class FrmEditor_Events
         Me.fraMoveRouteWait.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraMoveRouteWait.Size = New System.Drawing.Size(289, 87)
         Me.fraMoveRouteWait.TabIndex = 48
-        Me.fraMoveRouteWait.TabStop = False
+        Me.fraMoveRouteWait.TabStop = false
         Me.fraMoveRouteWait.Text = "Move Route Wait"
-        Me.fraMoveRouteWait.Visible = False
+        Me.fraMoveRouteWait.Visible = false
         '
         'btnMoveWaitCancel
         '
@@ -2038,8 +2050,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel79
         '
-        Me.DarkLabel79.AutoSize = True
-        Me.DarkLabel79.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel79.AutoSize = true
+        Me.DarkLabel79.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel79.Location = New System.Drawing.Point(8, 25)
         Me.DarkLabel79.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel79.Name = "DarkLabel79"
@@ -2050,7 +2062,7 @@ Partial Class FrmEditor_Events
         'cmbMoveWait
         '
         Me.cmbMoveWait.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbMoveWait.FormattingEnabled = True
+        Me.cmbMoveWait.FormattingEnabled = true
         Me.cmbMoveWait.Location = New System.Drawing.Point(59, 22)
         Me.cmbMoveWait.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbMoveWait.Name = "cmbMoveWait"
@@ -2059,8 +2071,8 @@ Partial Class FrmEditor_Events
         '
         'fraCustomScript
         '
-        Me.fraCustomScript.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraCustomScript.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraCustomScript.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraCustomScript.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraCustomScript.Controls.Add(Me.nudCustomScript)
         Me.fraCustomScript.Controls.Add(Me.DarkLabel78)
         Me.fraCustomScript.Controls.Add(Me.btnCustomScriptCancel)
@@ -2072,9 +2084,9 @@ Partial Class FrmEditor_Events
         Me.fraCustomScript.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraCustomScript.Size = New System.Drawing.Size(289, 110)
         Me.fraCustomScript.TabIndex = 47
-        Me.fraCustomScript.TabStop = False
+        Me.fraCustomScript.TabStop = false
         Me.fraCustomScript.Text = "Execute Custom Script"
-        Me.fraCustomScript.Visible = False
+        Me.fraCustomScript.Visible = false
         '
         'nudCustomScript
         '
@@ -2086,8 +2098,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel78
         '
-        Me.DarkLabel78.AutoSize = True
-        Me.DarkLabel78.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel78.AutoSize = true
+        Me.DarkLabel78.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel78.Location = New System.Drawing.Point(12, 24)
         Me.DarkLabel78.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel78.Name = "DarkLabel78"
@@ -2117,8 +2129,8 @@ Partial Class FrmEditor_Events
         '
         'fraSetWeather
         '
-        Me.fraSetWeather.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraSetWeather.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraSetWeather.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraSetWeather.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraSetWeather.Controls.Add(Me.btnSetWeatherOk)
         Me.fraSetWeather.Controls.Add(Me.btnSetWeatherCancel)
         Me.fraSetWeather.Controls.Add(Me.DarkLabel76)
@@ -2132,9 +2144,9 @@ Partial Class FrmEditor_Events
         Me.fraSetWeather.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraSetWeather.Size = New System.Drawing.Size(289, 110)
         Me.fraSetWeather.TabIndex = 44
-        Me.fraSetWeather.TabStop = False
+        Me.fraSetWeather.TabStop = false
         Me.fraSetWeather.Text = "Set Weather"
-        Me.fraSetWeather.Visible = False
+        Me.fraSetWeather.Visible = false
         '
         'btnSetWeatherOk
         '
@@ -2158,8 +2170,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel76
         '
-        Me.DarkLabel76.AutoSize = True
-        Me.DarkLabel76.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel76.AutoSize = true
+        Me.DarkLabel76.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel76.Location = New System.Drawing.Point(9, 51)
         Me.DarkLabel76.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel76.Name = "DarkLabel76"
@@ -2177,19 +2189,19 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel75
         '
-        Me.DarkLabel75.AutoSize = True
-        Me.DarkLabel75.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel75.AutoSize = true
+        Me.DarkLabel75.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel75.Location = New System.Drawing.Point(7, 21)
         Me.DarkLabel75.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel75.Name = "DarkLabel75"
-        Me.DarkLabel75.Size = New System.Drawing.Size(79, 15)
+        Me.DarkLabel75.Size = New System.Drawing.Size(78, 15)
         Me.DarkLabel75.TabIndex = 1
         Me.DarkLabel75.Text = "Weather Type"
         '
         'CmbWeather
         '
         Me.CmbWeather.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.CmbWeather.FormattingEnabled = True
+        Me.CmbWeather.FormattingEnabled = true
         Me.CmbWeather.Items.AddRange(New Object() {"None", "Rain", "Snow", "Hail", "Sand Storm", "Storm"})
         Me.CmbWeather.Location = New System.Drawing.Point(100, 17)
         Me.CmbWeather.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -2199,8 +2211,8 @@ Partial Class FrmEditor_Events
         '
         'fraSpawnNpc
         '
-        Me.fraSpawnNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraSpawnNpc.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraSpawnNpc.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraSpawnNpc.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraSpawnNpc.Controls.Add(Me.btnSpawnNpcOk)
         Me.fraSpawnNpc.Controls.Add(Me.btnSpawnNpcCancel)
         Me.fraSpawnNpc.Controls.Add(Me.cmbSpawnNpc)
@@ -2211,9 +2223,9 @@ Partial Class FrmEditor_Events
         Me.fraSpawnNpc.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraSpawnNpc.Size = New System.Drawing.Size(289, 89)
         Me.fraSpawnNpc.TabIndex = 46
-        Me.fraSpawnNpc.TabStop = False
+        Me.fraSpawnNpc.TabStop = false
         Me.fraSpawnNpc.Text = "Spawn Npc"
-        Me.fraSpawnNpc.Visible = False
+        Me.fraSpawnNpc.Visible = false
         '
         'btnSpawnNpcOk
         '
@@ -2238,7 +2250,7 @@ Partial Class FrmEditor_Events
         'cmbSpawnNpc
         '
         Me.cmbSpawnNpc.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbSpawnNpc.FormattingEnabled = True
+        Me.cmbSpawnNpc.FormattingEnabled = true
         Me.cmbSpawnNpc.Location = New System.Drawing.Point(7, 22)
         Me.cmbSpawnNpc.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbSpawnNpc.Name = "cmbSpawnNpc"
@@ -2247,8 +2259,8 @@ Partial Class FrmEditor_Events
         '
         'fraGiveExp
         '
-        Me.fraGiveExp.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraGiveExp.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraGiveExp.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraGiveExp.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraGiveExp.Controls.Add(Me.btnGiveExpOk)
         Me.fraGiveExp.Controls.Add(Me.btnGiveExpCancel)
         Me.fraGiveExp.Controls.Add(Me.nudGiveExp)
@@ -2260,9 +2272,9 @@ Partial Class FrmEditor_Events
         Me.fraGiveExp.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraGiveExp.Size = New System.Drawing.Size(289, 84)
         Me.fraGiveExp.TabIndex = 45
-        Me.fraGiveExp.TabStop = False
+        Me.fraGiveExp.TabStop = false
         Me.fraGiveExp.Text = "Give Experience"
-        Me.fraGiveExp.Visible = False
+        Me.fraGiveExp.Visible = false
         '
         'btnGiveExpOk
         '
@@ -2295,19 +2307,19 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel77
         '
-        Me.DarkLabel77.AutoSize = True
-        Me.DarkLabel77.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel77.AutoSize = true
+        Me.DarkLabel77.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel77.Location = New System.Drawing.Point(7, 24)
         Me.DarkLabel77.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel77.Name = "DarkLabel77"
-        Me.DarkLabel77.Size = New System.Drawing.Size(54, 15)
+        Me.DarkLabel77.Size = New System.Drawing.Size(55, 15)
         Me.DarkLabel77.TabIndex = 0
         Me.DarkLabel77.Text = "Give Exp:"
         '
         'fraEndQuest
         '
-        Me.fraEndQuest.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraEndQuest.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraEndQuest.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraEndQuest.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraEndQuest.Controls.Add(Me.btnEndQuestOk)
         Me.fraEndQuest.Controls.Add(Me.btnEndQuestCancel)
         Me.fraEndQuest.Controls.Add(Me.cmbEndQuest)
@@ -2318,9 +2330,9 @@ Partial Class FrmEditor_Events
         Me.fraEndQuest.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraEndQuest.Size = New System.Drawing.Size(289, 84)
         Me.fraEndQuest.TabIndex = 43
-        Me.fraEndQuest.TabStop = False
+        Me.fraEndQuest.TabStop = false
         Me.fraEndQuest.Text = "End Quest"
-        Me.fraEndQuest.Visible = False
+        Me.fraEndQuest.Visible = false
         '
         'btnEndQuestOk
         '
@@ -2345,7 +2357,7 @@ Partial Class FrmEditor_Events
         'cmbEndQuest
         '
         Me.cmbEndQuest.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbEndQuest.FormattingEnabled = True
+        Me.cmbEndQuest.FormattingEnabled = true
         Me.cmbEndQuest.Location = New System.Drawing.Point(38, 17)
         Me.cmbEndQuest.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbEndQuest.Name = "cmbEndQuest"
@@ -2354,8 +2366,8 @@ Partial Class FrmEditor_Events
         '
         'fraSetAccess
         '
-        Me.fraSetAccess.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraSetAccess.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraSetAccess.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraSetAccess.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraSetAccess.Controls.Add(Me.btnSetAccessOk)
         Me.fraSetAccess.Controls.Add(Me.btnSetAccessCancel)
         Me.fraSetAccess.Controls.Add(Me.cmbSetAccess)
@@ -2366,9 +2378,9 @@ Partial Class FrmEditor_Events
         Me.fraSetAccess.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraSetAccess.Size = New System.Drawing.Size(289, 92)
         Me.fraSetAccess.TabIndex = 42
-        Me.fraSetAccess.TabStop = False
+        Me.fraSetAccess.TabStop = false
         Me.fraSetAccess.Text = "Set Access"
-        Me.fraSetAccess.Visible = False
+        Me.fraSetAccess.Visible = false
         '
         'btnSetAccessOk
         '
@@ -2393,7 +2405,7 @@ Partial Class FrmEditor_Events
         'cmbSetAccess
         '
         Me.cmbSetAccess.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbSetAccess.FormattingEnabled = True
+        Me.cmbSetAccess.FormattingEnabled = true
         Me.cmbSetAccess.Items.AddRange(New Object() {"0: Player", "1: Monitor", "2: Mapper", "3: Developer", "4: Creator"})
         Me.cmbSetAccess.Location = New System.Drawing.Point(38, 22)
         Me.cmbSetAccess.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -2401,266 +2413,10 @@ Partial Class FrmEditor_Events
         Me.cmbSetAccess.Size = New System.Drawing.Size(219, 24)
         Me.cmbSetAccess.TabIndex = 0
         '
-        'fraSetWait
-        '
-        Me.fraSetWait.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraSetWait.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.fraSetWait.Controls.Add(Me.btnSetWaitOk)
-        Me.fraSetWait.Controls.Add(Me.btnSetWaitCancel)
-        Me.fraSetWait.Controls.Add(Me.DarkLabel74)
-        Me.fraSetWait.Controls.Add(Me.DarkLabel72)
-        Me.fraSetWait.Controls.Add(Me.DarkLabel73)
-        Me.fraSetWait.Controls.Add(Me.nudWaitAmount)
-        Me.fraSetWait.ForeColor = System.Drawing.Color.Gainsboro
-        Me.fraSetWait.Location = New System.Drawing.Point(468, 305)
-        Me.fraSetWait.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraSetWait.Name = "fraSetWait"
-        Me.fraSetWait.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraSetWait.Size = New System.Drawing.Size(289, 103)
-        Me.fraSetWait.TabIndex = 41
-        Me.fraSetWait.TabStop = False
-        Me.fraSetWait.Text = "Wait..."
-        Me.fraSetWait.Visible = False
-        '
-        'btnSetWaitOk
-        '
-        Me.btnSetWaitOk.Location = New System.Drawing.Point(58, 67)
-        Me.btnSetWaitOk.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnSetWaitOk.Name = "btnSetWaitOk"
-        Me.btnSetWaitOk.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnSetWaitOk.Size = New System.Drawing.Size(88, 27)
-        Me.btnSetWaitOk.TabIndex = 37
-        Me.btnSetWaitOk.Text = "Ok"
-        '
-        'btnSetWaitCancel
-        '
-        Me.btnSetWaitCancel.Location = New System.Drawing.Point(153, 67)
-        Me.btnSetWaitCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnSetWaitCancel.Name = "btnSetWaitCancel"
-        Me.btnSetWaitCancel.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnSetWaitCancel.Size = New System.Drawing.Size(88, 27)
-        Me.btnSetWaitCancel.TabIndex = 36
-        Me.btnSetWaitCancel.Text = "Cancel"
-        '
-        'DarkLabel74
-        '
-        Me.DarkLabel74.AutoSize = True
-        Me.DarkLabel74.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel74.Location = New System.Drawing.Point(82, 48)
-        Me.DarkLabel74.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel74.Name = "DarkLabel74"
-        Me.DarkLabel74.Size = New System.Drawing.Size(120, 15)
-        Me.DarkLabel74.TabIndex = 35
-        Me.DarkLabel74.Text = "Hint: 1000 Ms = 1 Sec"
-        '
-        'DarkLabel72
-        '
-        Me.DarkLabel72.AutoSize = True
-        Me.DarkLabel72.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel72.Location = New System.Drawing.Point(254, 27)
-        Me.DarkLabel72.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel72.Name = "DarkLabel72"
-        Me.DarkLabel72.Size = New System.Drawing.Size(23, 15)
-        Me.DarkLabel72.TabIndex = 34
-        Me.DarkLabel72.Text = "Ms"
-        '
-        'DarkLabel73
-        '
-        Me.DarkLabel73.AutoSize = True
-        Me.DarkLabel73.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel73.Location = New System.Drawing.Point(18, 27)
-        Me.DarkLabel73.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel73.Name = "DarkLabel73"
-        Me.DarkLabel73.Size = New System.Drawing.Size(31, 15)
-        Me.DarkLabel73.TabIndex = 33
-        Me.DarkLabel73.Text = "Wait"
-        '
-        'nudWaitAmount
-        '
-        Me.nudWaitAmount.Location = New System.Drawing.Point(58, 22)
-        Me.nudWaitAmount.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudWaitAmount.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
-        Me.nudWaitAmount.Name = "nudWaitAmount"
-        Me.nudWaitAmount.Size = New System.Drawing.Size(190, 23)
-        Me.nudWaitAmount.TabIndex = 32
-        '
-        'fraShowPic
-        '
-        Me.fraShowPic.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraShowPic.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.fraShowPic.Controls.Add(Me.btnShowPicOk)
-        Me.fraShowPic.Controls.Add(Me.btnShowPicCancel)
-        Me.fraShowPic.Controls.Add(Me.DarkLabel71)
-        Me.fraShowPic.Controls.Add(Me.DarkLabel70)
-        Me.fraShowPic.Controls.Add(Me.DarkLabel67)
-        Me.fraShowPic.Controls.Add(Me.DarkLabel68)
-        Me.fraShowPic.Controls.Add(Me.nudPicOffsetY)
-        Me.fraShowPic.Controls.Add(Me.nudPicOffsetX)
-        Me.fraShowPic.Controls.Add(Me.DarkLabel69)
-        Me.fraShowPic.Controls.Add(Me.cmbPicLoc)
-        Me.fraShowPic.Controls.Add(Me.nudShowPicture)
-        Me.fraShowPic.Controls.Add(Me.picShowPic)
-        Me.fraShowPic.Controls.Add(Me.cmbPicIndex)
-        Me.fraShowPic.Controls.Add(Me.DarkLabel66)
-        Me.fraShowPic.ForeColor = System.Drawing.Color.Gainsboro
-        Me.fraShowPic.Location = New System.Drawing.Point(468, 307)
-        Me.fraShowPic.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraShowPic.Name = "fraShowPic"
-        Me.fraShowPic.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraShowPic.Size = New System.Drawing.Size(289, 257)
-        Me.fraShowPic.TabIndex = 40
-        Me.fraShowPic.TabStop = False
-        Me.fraShowPic.Text = "Show Picture"
-        Me.fraShowPic.Visible = False
-        '
-        'btnShowPicOk
-        '
-        Me.btnShowPicOk.Location = New System.Drawing.Point(100, 224)
-        Me.btnShowPicOk.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnShowPicOk.Name = "btnShowPicOk"
-        Me.btnShowPicOk.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnShowPicOk.Size = New System.Drawing.Size(88, 27)
-        Me.btnShowPicOk.TabIndex = 55
-        Me.btnShowPicOk.Text = "Ok"
-        '
-        'btnShowPicCancel
-        '
-        Me.btnShowPicCancel.Location = New System.Drawing.Point(195, 224)
-        Me.btnShowPicCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnShowPicCancel.Name = "btnShowPicCancel"
-        Me.btnShowPicCancel.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnShowPicCancel.Size = New System.Drawing.Size(88, 27)
-        Me.btnShowPicCancel.TabIndex = 54
-        Me.btnShowPicCancel.Text = "Cancel"
-        '
-        'DarkLabel71
-        '
-        Me.DarkLabel71.AutoSize = True
-        Me.DarkLabel71.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel71.Location = New System.Drawing.Point(12, 160)
-        Me.DarkLabel71.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel71.Name = "DarkLabel71"
-        Me.DarkLabel71.Size = New System.Drawing.Size(120, 15)
-        Me.DarkLabel71.TabIndex = 53
-        Me.DarkLabel71.Text = "Offset from Location:"
-        '
-        'DarkLabel70
-        '
-        Me.DarkLabel70.AutoSize = True
-        Me.DarkLabel70.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel70.Location = New System.Drawing.Point(131, 92)
-        Me.DarkLabel70.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel70.Name = "DarkLabel70"
-        Me.DarkLabel70.Size = New System.Drawing.Size(53, 15)
-        Me.DarkLabel70.TabIndex = 52
-        Me.DarkLabel70.Text = "Location"
-        '
-        'DarkLabel67
-        '
-        Me.DarkLabel67.AutoSize = True
-        Me.DarkLabel67.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel67.Location = New System.Drawing.Point(160, 187)
-        Me.DarkLabel67.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel67.Name = "DarkLabel67"
-        Me.DarkLabel67.Size = New System.Drawing.Size(17, 15)
-        Me.DarkLabel67.TabIndex = 51
-        Me.DarkLabel67.Text = "Y:"
-        '
-        'DarkLabel68
-        '
-        Me.DarkLabel68.AutoSize = True
-        Me.DarkLabel68.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel68.Location = New System.Drawing.Point(12, 189)
-        Me.DarkLabel68.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel68.Name = "DarkLabel68"
-        Me.DarkLabel68.Size = New System.Drawing.Size(17, 15)
-        Me.DarkLabel68.TabIndex = 50
-        Me.DarkLabel68.Text = "X:"
-        '
-        'nudPicOffsetY
-        '
-        Me.nudPicOffsetY.Location = New System.Drawing.Point(212, 185)
-        Me.nudPicOffsetY.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudPicOffsetY.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
-        Me.nudPicOffsetY.Name = "nudPicOffsetY"
-        Me.nudPicOffsetY.Size = New System.Drawing.Size(66, 23)
-        Me.nudPicOffsetY.TabIndex = 49
-        '
-        'nudPicOffsetX
-        '
-        Me.nudPicOffsetX.Location = New System.Drawing.Point(61, 185)
-        Me.nudPicOffsetX.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudPicOffsetX.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
-        Me.nudPicOffsetX.Name = "nudPicOffsetX"
-        Me.nudPicOffsetX.Size = New System.Drawing.Size(66, 23)
-        Me.nudPicOffsetX.TabIndex = 48
-        '
-        'DarkLabel69
-        '
-        Me.DarkLabel69.AutoSize = True
-        Me.DarkLabel69.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel69.Location = New System.Drawing.Point(135, 53)
-        Me.DarkLabel69.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel69.Name = "DarkLabel69"
-        Me.DarkLabel69.Size = New System.Drawing.Size(47, 15)
-        Me.DarkLabel69.TabIndex = 47
-        Me.DarkLabel69.Text = "Picture:"
-        '
-        'cmbPicLoc
-        '
-        Me.cmbPicLoc.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbPicLoc.FormattingEnabled = True
-        Me.cmbPicLoc.Items.AddRange(New Object() {"Top Left of Screen", "Center Screen", "Centered on Player"})
-        Me.cmbPicLoc.Location = New System.Drawing.Point(134, 113)
-        Me.cmbPicLoc.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbPicLoc.Name = "cmbPicLoc"
-        Me.cmbPicLoc.Size = New System.Drawing.Size(144, 24)
-        Me.cmbPicLoc.TabIndex = 46
-        '
-        'nudShowPicture
-        '
-        Me.nudShowPicture.Location = New System.Drawing.Point(192, 51)
-        Me.nudShowPicture.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudShowPicture.Name = "nudShowPicture"
-        Me.nudShowPicture.Size = New System.Drawing.Size(88, 23)
-        Me.nudShowPicture.TabIndex = 45
-        '
-        'picShowPic
-        '
-        Me.picShowPic.BackColor = System.Drawing.Color.Black
-        Me.picShowPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.picShowPic.Location = New System.Drawing.Point(10, 50)
-        Me.picShowPic.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.picShowPic.Name = "picShowPic"
-        Me.picShowPic.Size = New System.Drawing.Size(117, 107)
-        Me.picShowPic.TabIndex = 42
-        Me.picShowPic.TabStop = False
-        '
-        'cmbPicIndex
-        '
-        Me.cmbPicIndex.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbPicIndex.FormattingEnabled = True
-        Me.cmbPicIndex.Location = New System.Drawing.Point(91, 20)
-        Me.cmbPicIndex.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbPicIndex.Name = "cmbPicIndex"
-        Me.cmbPicIndex.Size = New System.Drawing.Size(188, 24)
-        Me.cmbPicIndex.TabIndex = 1
-        '
-        'DarkLabel66
-        '
-        Me.DarkLabel66.AutoSize = True
-        Me.DarkLabel66.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel66.Location = New System.Drawing.Point(7, 23)
-        Me.DarkLabel66.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel66.Name = "DarkLabel66"
-        Me.DarkLabel66.Size = New System.Drawing.Size(78, 15)
-        Me.DarkLabel66.TabIndex = 0
-        Me.DarkLabel66.Text = "Picture Index:"
-        '
         'fraOpenShop
         '
-        Me.fraOpenShop.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraOpenShop.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraOpenShop.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraOpenShop.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraOpenShop.Controls.Add(Me.btnOpenShopOk)
         Me.fraOpenShop.Controls.Add(Me.btnOpenShopCancel)
         Me.fraOpenShop.Controls.Add(Me.cmbOpenShop)
@@ -2671,9 +2427,9 @@ Partial Class FrmEditor_Events
         Me.fraOpenShop.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraOpenShop.Size = New System.Drawing.Size(287, 91)
         Me.fraOpenShop.TabIndex = 39
-        Me.fraOpenShop.TabStop = False
+        Me.fraOpenShop.TabStop = false
         Me.fraOpenShop.Text = "Open Shop"
-        Me.fraOpenShop.Visible = False
+        Me.fraOpenShop.Visible = false
         '
         'btnOpenShopOk
         '
@@ -2698,7 +2454,7 @@ Partial Class FrmEditor_Events
         'cmbOpenShop
         '
         Me.cmbOpenShop.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbOpenShop.FormattingEnabled = True
+        Me.cmbOpenShop.FormattingEnabled = true
         Me.cmbOpenShop.Location = New System.Drawing.Point(10, 23)
         Me.cmbOpenShop.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbOpenShop.Name = "cmbOpenShop"
@@ -2707,8 +2463,8 @@ Partial Class FrmEditor_Events
         '
         'fraChangeLevel
         '
-        Me.fraChangeLevel.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraChangeLevel.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraChangeLevel.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraChangeLevel.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraChangeLevel.Controls.Add(Me.btnChangeLevelOk)
         Me.fraChangeLevel.Controls.Add(Me.btnChangeLevelCancel)
         Me.fraChangeLevel.Controls.Add(Me.DarkLabel65)
@@ -2720,9 +2476,9 @@ Partial Class FrmEditor_Events
         Me.fraChangeLevel.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraChangeLevel.Size = New System.Drawing.Size(289, 83)
         Me.fraChangeLevel.TabIndex = 38
-        Me.fraChangeLevel.TabStop = False
+        Me.fraChangeLevel.TabStop = false
         Me.fraChangeLevel.Text = "Change Level"
-        Me.fraChangeLevel.Visible = False
+        Me.fraChangeLevel.Visible = false
         '
         'btnChangeLevelOk
         '
@@ -2746,8 +2502,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel65
         '
-        Me.DarkLabel65.AutoSize = True
-        Me.DarkLabel65.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel65.AutoSize = true
+        Me.DarkLabel65.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel65.Location = New System.Drawing.Point(8, 24)
         Me.DarkLabel65.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel65.Name = "DarkLabel65"
@@ -2765,8 +2521,8 @@ Partial Class FrmEditor_Events
         '
         'fraChangeGender
         '
-        Me.fraChangeGender.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraChangeGender.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraChangeGender.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraChangeGender.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraChangeGender.Controls.Add(Me.btnChangeGenderOk)
         Me.fraChangeGender.Controls.Add(Me.btnChangeGenderCancel)
         Me.fraChangeGender.Controls.Add(Me.optChangeSexFemale)
@@ -2778,9 +2534,9 @@ Partial Class FrmEditor_Events
         Me.fraChangeGender.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraChangeGender.Size = New System.Drawing.Size(289, 83)
         Me.fraChangeGender.TabIndex = 37
-        Me.fraChangeGender.TabStop = False
+        Me.fraChangeGender.TabStop = false
         Me.fraChangeGender.Text = "Change Player Gender"
-        Me.fraChangeGender.Visible = False
+        Me.fraChangeGender.Visible = false
         '
         'btnChangeGenderOk
         '
@@ -2804,30 +2560,30 @@ Partial Class FrmEditor_Events
         '
         'optChangeSexFemale
         '
-        Me.optChangeSexFemale.AutoSize = True
+        Me.optChangeSexFemale.AutoSize = true
         Me.optChangeSexFemale.Location = New System.Drawing.Point(164, 22)
         Me.optChangeSexFemale.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optChangeSexFemale.Name = "optChangeSexFemale"
         Me.optChangeSexFemale.Size = New System.Drawing.Size(63, 19)
         Me.optChangeSexFemale.TabIndex = 1
-        Me.optChangeSexFemale.TabStop = True
+        Me.optChangeSexFemale.TabStop = true
         Me.optChangeSexFemale.Text = "Female"
         '
         'optChangeSexMale
         '
-        Me.optChangeSexMale.AutoSize = True
+        Me.optChangeSexMale.AutoSize = true
         Me.optChangeSexMale.Location = New System.Drawing.Point(61, 22)
         Me.optChangeSexMale.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optChangeSexMale.Name = "optChangeSexMale"
         Me.optChangeSexMale.Size = New System.Drawing.Size(51, 19)
         Me.optChangeSexMale.TabIndex = 0
-        Me.optChangeSexMale.TabStop = True
+        Me.optChangeSexMale.TabStop = true
         Me.optChangeSexMale.Text = "Male"
         '
         'fraGoToLabel
         '
-        Me.fraGoToLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraGoToLabel.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraGoToLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraGoToLabel.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraGoToLabel.Controls.Add(Me.btnGoToLabelOk)
         Me.fraGoToLabel.Controls.Add(Me.btnGoToLabelCancel)
         Me.fraGoToLabel.Controls.Add(Me.txtGotoLabel)
@@ -2839,9 +2595,9 @@ Partial Class FrmEditor_Events
         Me.fraGoToLabel.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraGoToLabel.Size = New System.Drawing.Size(289, 84)
         Me.fraGoToLabel.TabIndex = 35
-        Me.fraGoToLabel.TabStop = False
+        Me.fraGoToLabel.TabStop = false
         Me.fraGoToLabel.Text = "GoTo Label"
-        Me.fraGoToLabel.Visible = False
+        Me.fraGoToLabel.Visible = false
         '
         'btnGoToLabelOk
         '
@@ -2865,9 +2621,9 @@ Partial Class FrmEditor_Events
         '
         'txtGotoLabel
         '
-        Me.txtGotoLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtGotoLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
         Me.txtGotoLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtGotoLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtGotoLabel.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.txtGotoLabel.Location = New System.Drawing.Point(91, 21)
         Me.txtGotoLabel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.txtGotoLabel.Name = "txtGotoLabel"
@@ -2876,8 +2632,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel60
         '
-        Me.DarkLabel60.AutoSize = True
-        Me.DarkLabel60.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel60.AutoSize = true
+        Me.DarkLabel60.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel60.Location = New System.Drawing.Point(4, 23)
         Me.DarkLabel60.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel60.Name = "DarkLabel60"
@@ -2885,68 +2641,10 @@ Partial Class FrmEditor_Events
         Me.DarkLabel60.TabIndex = 0
         Me.DarkLabel60.Text = "Label Name:"
         '
-        'fraHidePic
-        '
-        Me.fraHidePic.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraHidePic.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
-        Me.fraHidePic.Controls.Add(Me.btnHidePicOk)
-        Me.fraHidePic.Controls.Add(Me.btnHidePicCancel)
-        Me.fraHidePic.Controls.Add(Me.nudHidePic)
-        Me.fraHidePic.Controls.Add(Me.DarkLabel59)
-        Me.fraHidePic.ForeColor = System.Drawing.Color.Gainsboro
-        Me.fraHidePic.Location = New System.Drawing.Point(468, 212)
-        Me.fraHidePic.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraHidePic.Name = "fraHidePic"
-        Me.fraHidePic.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.fraHidePic.Size = New System.Drawing.Size(289, 82)
-        Me.fraHidePic.TabIndex = 34
-        Me.fraHidePic.TabStop = False
-        Me.fraHidePic.Text = "Hide Picture"
-        Me.fraHidePic.Visible = False
-        '
-        'btnHidePicOk
-        '
-        Me.btnHidePicOk.Location = New System.Drawing.Point(100, 46)
-        Me.btnHidePicOk.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnHidePicOk.Name = "btnHidePicOk"
-        Me.btnHidePicOk.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnHidePicOk.Size = New System.Drawing.Size(88, 27)
-        Me.btnHidePicOk.TabIndex = 27
-        Me.btnHidePicOk.Text = "Ok"
-        '
-        'btnHidePicCancel
-        '
-        Me.btnHidePicCancel.Location = New System.Drawing.Point(195, 46)
-        Me.btnHidePicCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.btnHidePicCancel.Name = "btnHidePicCancel"
-        Me.btnHidePicCancel.Padding = New System.Windows.Forms.Padding(6)
-        Me.btnHidePicCancel.Size = New System.Drawing.Size(88, 27)
-        Me.btnHidePicCancel.TabIndex = 26
-        Me.btnHidePicCancel.Text = "Cancel"
-        '
-        'nudHidePic
-        '
-        Me.nudHidePic.Location = New System.Drawing.Point(98, 16)
-        Me.nudHidePic.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.nudHidePic.Name = "nudHidePic"
-        Me.nudHidePic.Size = New System.Drawing.Size(184, 23)
-        Me.nudHidePic.TabIndex = 1
-        '
-        'DarkLabel59
-        '
-        Me.DarkLabel59.AutoSize = True
-        Me.DarkLabel59.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.DarkLabel59.Location = New System.Drawing.Point(7, 18)
-        Me.DarkLabel59.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel59.Name = "DarkLabel59"
-        Me.DarkLabel59.Size = New System.Drawing.Size(78, 15)
-        Me.DarkLabel59.TabIndex = 0
-        Me.DarkLabel59.Text = "Picture Index:"
-        '
         'fraBeginQuest
         '
-        Me.fraBeginQuest.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraBeginQuest.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraBeginQuest.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraBeginQuest.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraBeginQuest.Controls.Add(Me.btnBeginQuestOk)
         Me.fraBeginQuest.Controls.Add(Me.btnBeginQuestCancel)
         Me.fraBeginQuest.Controls.Add(Me.cmbBeginQuest)
@@ -2958,9 +2656,9 @@ Partial Class FrmEditor_Events
         Me.fraBeginQuest.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraBeginQuest.Size = New System.Drawing.Size(289, 91)
         Me.fraBeginQuest.TabIndex = 33
-        Me.fraBeginQuest.TabStop = False
+        Me.fraBeginQuest.TabStop = false
         Me.fraBeginQuest.Text = "Begin Quest"
-        Me.fraBeginQuest.Visible = False
+        Me.fraBeginQuest.Visible = false
         '
         'btnBeginQuestOk
         '
@@ -2985,7 +2683,7 @@ Partial Class FrmEditor_Events
         'cmbBeginQuest
         '
         Me.cmbBeginQuest.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbBeginQuest.FormattingEnabled = True
+        Me.cmbBeginQuest.FormattingEnabled = true
         Me.cmbBeginQuest.Location = New System.Drawing.Point(58, 23)
         Me.cmbBeginQuest.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbBeginQuest.Name = "cmbBeginQuest"
@@ -2994,8 +2692,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel58
         '
-        Me.DarkLabel58.AutoSize = True
-        Me.DarkLabel58.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel58.AutoSize = true
+        Me.DarkLabel58.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel58.Location = New System.Drawing.Point(7, 27)
         Me.DarkLabel58.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel58.Name = "DarkLabel58"
@@ -3005,8 +2703,8 @@ Partial Class FrmEditor_Events
         '
         'fraShowChoices
         '
-        Me.fraShowChoices.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraShowChoices.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraShowChoices.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraShowChoices.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraShowChoices.Controls.Add(Me.txtChoices4)
         Me.fraShowChoices.Controls.Add(Me.txtChoices3)
         Me.fraShowChoices.Controls.Add(Me.txtChoices2)
@@ -3029,15 +2727,15 @@ Partial Class FrmEditor_Events
         Me.fraShowChoices.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraShowChoices.Size = New System.Drawing.Size(289, 384)
         Me.fraShowChoices.TabIndex = 32
-        Me.fraShowChoices.TabStop = False
+        Me.fraShowChoices.TabStop = false
         Me.fraShowChoices.Text = "Show Choices"
-        Me.fraShowChoices.Visible = False
+        Me.fraShowChoices.Visible = false
         '
         'txtChoices4
         '
-        Me.txtChoices4.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtChoices4.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
         Me.txtChoices4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtChoices4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtChoices4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.txtChoices4.Location = New System.Drawing.Point(164, 201)
         Me.txtChoices4.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.txtChoices4.Name = "txtChoices4"
@@ -3046,9 +2744,9 @@ Partial Class FrmEditor_Events
         '
         'txtChoices3
         '
-        Me.txtChoices3.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtChoices3.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
         Me.txtChoices3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtChoices3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtChoices3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.txtChoices3.Location = New System.Drawing.Point(7, 200)
         Me.txtChoices3.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.txtChoices3.Name = "txtChoices3"
@@ -3057,9 +2755,9 @@ Partial Class FrmEditor_Events
         '
         'txtChoices2
         '
-        Me.txtChoices2.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtChoices2.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
         Me.txtChoices2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtChoices2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtChoices2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.txtChoices2.Location = New System.Drawing.Point(164, 155)
         Me.txtChoices2.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.txtChoices2.Name = "txtChoices2"
@@ -3068,9 +2766,9 @@ Partial Class FrmEditor_Events
         '
         'txtChoices1
         '
-        Me.txtChoices1.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtChoices1.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
         Me.txtChoices1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtChoices1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtChoices1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.txtChoices1.Location = New System.Drawing.Point(7, 155)
         Me.txtChoices1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.txtChoices1.Name = "txtChoices1"
@@ -3079,8 +2777,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel56
         '
-        Me.DarkLabel56.AutoSize = True
-        Me.DarkLabel56.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel56.AutoSize = true
+        Me.DarkLabel56.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel56.Location = New System.Drawing.Point(161, 181)
         Me.DarkLabel56.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel56.Name = "DarkLabel56"
@@ -3090,8 +2788,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel57
         '
-        Me.DarkLabel57.AutoSize = True
-        Me.DarkLabel57.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel57.AutoSize = true
+        Me.DarkLabel57.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel57.Location = New System.Drawing.Point(8, 181)
         Me.DarkLabel57.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel57.Name = "DarkLabel57"
@@ -3101,8 +2799,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel55
         '
-        Me.DarkLabel55.AutoSize = True
-        Me.DarkLabel55.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel55.AutoSize = true
+        Me.DarkLabel55.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel55.Location = New System.Drawing.Point(161, 136)
         Me.DarkLabel55.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel55.Name = "DarkLabel55"
@@ -3112,8 +2810,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel54
         '
-        Me.DarkLabel54.AutoSize = True
-        Me.DarkLabel54.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel54.AutoSize = true
+        Me.DarkLabel54.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel54.Location = New System.Drawing.Point(7, 136)
         Me.DarkLabel54.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel54.Name = "DarkLabel54"
@@ -3123,8 +2821,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel52
         '
-        Me.DarkLabel52.AutoSize = True
-        Me.DarkLabel52.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel52.AutoSize = true
+        Me.DarkLabel52.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel52.Location = New System.Drawing.Point(8, 22)
         Me.DarkLabel52.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel52.Name = "DarkLabel52"
@@ -3134,12 +2832,12 @@ Partial Class FrmEditor_Events
         '
         'txtChoicePrompt
         '
-        Me.txtChoicePrompt.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtChoicePrompt.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
         Me.txtChoicePrompt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtChoicePrompt.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtChoicePrompt.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.txtChoicePrompt.Location = New System.Drawing.Point(10, 44)
         Me.txtChoicePrompt.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.txtChoicePrompt.Multiline = True
+        Me.txtChoicePrompt.Multiline = true
         Me.txtChoicePrompt.Name = "txtChoicePrompt"
         Me.txtChoicePrompt.Size = New System.Drawing.Size(266, 89)
         Me.txtChoicePrompt.TabIndex = 21
@@ -3163,7 +2861,7 @@ Partial Class FrmEditor_Events
         Me.picShowChoicesFace.Name = "picShowChoicesFace"
         Me.picShowChoicesFace.Size = New System.Drawing.Size(117, 107)
         Me.picShowChoicesFace.TabIndex = 2
-        Me.picShowChoicesFace.TabStop = False
+        Me.picShowChoicesFace.TabStop = false
         '
         'btnShowChoicesCancel
         '
@@ -3177,8 +2875,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel53
         '
-        Me.DarkLabel53.AutoSize = True
-        Me.DarkLabel53.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel53.AutoSize = true
+        Me.DarkLabel53.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel53.Location = New System.Drawing.Point(127, 316)
         Me.DarkLabel53.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel53.Name = "DarkLabel53"
@@ -3196,8 +2894,8 @@ Partial Class FrmEditor_Events
         '
         'fraPlayerVariable
         '
-        Me.fraPlayerVariable.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraPlayerVariable.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraPlayerVariable.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraPlayerVariable.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraPlayerVariable.Controls.Add(Me.nudVariableData2)
         Me.fraPlayerVariable.Controls.Add(Me.optVariableAction2)
         Me.fraPlayerVariable.Controls.Add(Me.btnPlayerVarOk)
@@ -3220,9 +2918,9 @@ Partial Class FrmEditor_Events
         Me.fraPlayerVariable.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraPlayerVariable.Size = New System.Drawing.Size(287, 178)
         Me.fraPlayerVariable.TabIndex = 31
-        Me.fraPlayerVariable.TabStop = False
+        Me.fraPlayerVariable.TabStop = false
         Me.fraPlayerVariable.Text = "Player Variable"
-        Me.fraPlayerVariable.Visible = False
+        Me.fraPlayerVariable.Visible = false
         '
         'nudVariableData2
         '
@@ -3234,13 +2932,13 @@ Partial Class FrmEditor_Events
         '
         'optVariableAction2
         '
-        Me.optVariableAction2.AutoSize = True
+        Me.optVariableAction2.AutoSize = true
         Me.optVariableAction2.Location = New System.Drawing.Point(7, 83)
         Me.optVariableAction2.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optVariableAction2.Name = "optVariableAction2"
         Me.optVariableAction2.Size = New System.Drawing.Size(69, 19)
         Me.optVariableAction2.TabIndex = 28
-        Me.optVariableAction2.TabStop = True
+        Me.optVariableAction2.TabStop = true
         Me.optVariableAction2.Text = "Subtract"
         '
         'btnPlayerVarOk
@@ -3265,8 +2963,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel51
         '
-        Me.DarkLabel51.AutoSize = True
-        Me.DarkLabel51.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel51.AutoSize = true
+        Me.DarkLabel51.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel51.Location = New System.Drawing.Point(88, 115)
         Me.DarkLabel51.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel51.Name = "DarkLabel51"
@@ -3276,8 +2974,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel50
         '
-        Me.DarkLabel50.AutoSize = True
-        Me.DarkLabel50.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel50.AutoSize = true
+        Me.DarkLabel50.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel50.Location = New System.Drawing.Point(184, 115)
         Me.DarkLabel50.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel50.Name = "DarkLabel50"
@@ -3303,24 +3001,24 @@ Partial Class FrmEditor_Events
         '
         'optVariableAction3
         '
-        Me.optVariableAction3.AutoSize = True
+        Me.optVariableAction3.AutoSize = true
         Me.optVariableAction3.Location = New System.Drawing.Point(7, 113)
         Me.optVariableAction3.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optVariableAction3.Name = "optVariableAction3"
         Me.optVariableAction3.Size = New System.Drawing.Size(70, 19)
         Me.optVariableAction3.TabIndex = 12
-        Me.optVariableAction3.TabStop = True
+        Me.optVariableAction3.TabStop = true
         Me.optVariableAction3.Text = "Random"
         '
         'optVariableAction1
         '
-        Me.optVariableAction1.AutoSize = True
+        Me.optVariableAction1.AutoSize = true
         Me.optVariableAction1.Location = New System.Drawing.Point(170, 53)
         Me.optVariableAction1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optVariableAction1.Name = "optVariableAction1"
         Me.optVariableAction1.Size = New System.Drawing.Size(47, 19)
         Me.optVariableAction1.TabIndex = 11
-        Me.optVariableAction1.TabStop = True
+        Me.optVariableAction1.TabStop = true
         Me.optVariableAction1.Text = "Add"
         '
         'nudVariableData1
@@ -3341,19 +3039,19 @@ Partial Class FrmEditor_Events
         '
         'optVariableAction0
         '
-        Me.optVariableAction0.AutoSize = True
+        Me.optVariableAction0.AutoSize = true
         Me.optVariableAction0.Location = New System.Drawing.Point(7, 53)
         Me.optVariableAction0.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optVariableAction0.Name = "optVariableAction0"
         Me.optVariableAction0.Size = New System.Drawing.Size(41, 19)
         Me.optVariableAction0.TabIndex = 2
-        Me.optVariableAction0.TabStop = True
+        Me.optVariableAction0.TabStop = true
         Me.optVariableAction0.Text = "Set"
         '
         'cmbVariable
         '
         Me.cmbVariable.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbVariable.FormattingEnabled = True
+        Me.cmbVariable.FormattingEnabled = true
         Me.cmbVariable.Location = New System.Drawing.Point(70, 22)
         Me.cmbVariable.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbVariable.Name = "cmbVariable"
@@ -3362,8 +3060,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel49
         '
-        Me.DarkLabel49.AutoSize = True
-        Me.DarkLabel49.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel49.AutoSize = true
+        Me.DarkLabel49.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel49.Location = New System.Drawing.Point(7, 25)
         Me.DarkLabel49.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel49.Name = "DarkLabel49"
@@ -3373,8 +3071,8 @@ Partial Class FrmEditor_Events
         '
         'fraChangeSprite
         '
-        Me.fraChangeSprite.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraChangeSprite.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraChangeSprite.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraChangeSprite.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraChangeSprite.Controls.Add(Me.btnChangeSpriteOk)
         Me.fraChangeSprite.Controls.Add(Me.btnChangeSpriteCancel)
         Me.fraChangeSprite.Controls.Add(Me.DarkLabel48)
@@ -3387,9 +3085,9 @@ Partial Class FrmEditor_Events
         Me.fraChangeSprite.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraChangeSprite.Size = New System.Drawing.Size(287, 135)
         Me.fraChangeSprite.TabIndex = 30
-        Me.fraChangeSprite.TabStop = False
+        Me.fraChangeSprite.TabStop = false
         Me.fraChangeSprite.Text = "Change Sprite"
-        Me.fraChangeSprite.Visible = False
+        Me.fraChangeSprite.Visible = false
         '
         'btnChangeSpriteOk
         '
@@ -3413,8 +3111,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel48
         '
-        Me.DarkLabel48.AutoSize = True
-        Me.DarkLabel48.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel48.AutoSize = true
+        Me.DarkLabel48.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel48.Location = New System.Drawing.Point(93, 77)
         Me.DarkLabel48.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel48.Name = "DarkLabel48"
@@ -3439,12 +3137,12 @@ Partial Class FrmEditor_Events
         Me.picChangeSprite.Name = "picChangeSprite"
         Me.picChangeSprite.Size = New System.Drawing.Size(82, 107)
         Me.picChangeSprite.TabIndex = 3
-        Me.picChangeSprite.TabStop = False
+        Me.picChangeSprite.TabStop = false
         '
         'fraSetSelfSwitch
         '
-        Me.fraSetSelfSwitch.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraSetSelfSwitch.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraSetSelfSwitch.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraSetSelfSwitch.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraSetSelfSwitch.Controls.Add(Me.btnSelfswitchOk)
         Me.fraSetSelfSwitch.Controls.Add(Me.btnSelfswitchCancel)
         Me.fraSetSelfSwitch.Controls.Add(Me.DarkLabel47)
@@ -3458,9 +3156,9 @@ Partial Class FrmEditor_Events
         Me.fraSetSelfSwitch.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraSetSelfSwitch.Size = New System.Drawing.Size(287, 115)
         Me.fraSetSelfSwitch.TabIndex = 29
-        Me.fraSetSelfSwitch.TabStop = False
+        Me.fraSetSelfSwitch.TabStop = false
         Me.fraSetSelfSwitch.Text = "Self Switches"
-        Me.fraSetSelfSwitch.Visible = False
+        Me.fraSetSelfSwitch.Visible = false
         '
         'btnSelfswitchOk
         '
@@ -3484,19 +3182,19 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel47
         '
-        Me.DarkLabel47.AutoSize = True
-        Me.DarkLabel47.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel47.AutoSize = true
+        Me.DarkLabel47.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel47.Location = New System.Drawing.Point(7, 57)
         Me.DarkLabel47.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel47.Name = "DarkLabel47"
-        Me.DarkLabel47.Size = New System.Drawing.Size(39, 15)
+        Me.DarkLabel47.Size = New System.Drawing.Size(38, 15)
         Me.DarkLabel47.TabIndex = 3
         Me.DarkLabel47.Text = "Set To"
         '
         'cmbSetSelfSwitchTo
         '
         Me.cmbSetSelfSwitchTo.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbSetSelfSwitchTo.FormattingEnabled = True
+        Me.cmbSetSelfSwitchTo.FormattingEnabled = true
         Me.cmbSetSelfSwitchTo.Items.AddRange(New Object() {"Off", "On"})
         Me.cmbSetSelfSwitchTo.Location = New System.Drawing.Point(84, 53)
         Me.cmbSetSelfSwitchTo.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -3506,8 +3204,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel46
         '
-        Me.DarkLabel46.AutoSize = True
-        Me.DarkLabel46.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel46.AutoSize = true
+        Me.DarkLabel46.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel46.Location = New System.Drawing.Point(7, 25)
         Me.DarkLabel46.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel46.Name = "DarkLabel46"
@@ -3518,7 +3216,7 @@ Partial Class FrmEditor_Events
         'cmbSetSelfSwitch
         '
         Me.cmbSetSelfSwitch.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbSetSelfSwitch.FormattingEnabled = True
+        Me.cmbSetSelfSwitch.FormattingEnabled = true
         Me.cmbSetSelfSwitch.Location = New System.Drawing.Point(84, 22)
         Me.cmbSetSelfSwitch.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbSetSelfSwitch.Name = "cmbSetSelfSwitch"
@@ -3527,8 +3225,8 @@ Partial Class FrmEditor_Events
         '
         'fraMapTint
         '
-        Me.fraMapTint.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraMapTint.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraMapTint.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraMapTint.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraMapTint.Controls.Add(Me.btnMapTintOk)
         Me.fraMapTint.Controls.Add(Me.btnMapTintCancel)
         Me.fraMapTint.Controls.Add(Me.DarkLabel42)
@@ -3546,9 +3244,9 @@ Partial Class FrmEditor_Events
         Me.fraMapTint.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraMapTint.Size = New System.Drawing.Size(287, 167)
         Me.fraMapTint.TabIndex = 28
-        Me.fraMapTint.TabStop = False
+        Me.fraMapTint.TabStop = false
         Me.fraMapTint.Text = "Map Tinting"
-        Me.fraMapTint.Visible = False
+        Me.fraMapTint.Visible = false
         '
         'btnMapTintOk
         '
@@ -3572,8 +3270,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel42
         '
-        Me.DarkLabel42.AutoSize = True
-        Me.DarkLabel42.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel42.AutoSize = true
+        Me.DarkLabel42.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel42.Location = New System.Drawing.Point(6, 107)
         Me.DarkLabel42.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel42.Name = "DarkLabel42"
@@ -3600,8 +3298,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel43
         '
-        Me.DarkLabel43.AutoSize = True
-        Me.DarkLabel43.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel43.AutoSize = true
+        Me.DarkLabel43.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel43.Location = New System.Drawing.Point(6, 76)
         Me.DarkLabel43.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel43.Name = "DarkLabel43"
@@ -3611,8 +3309,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel44
         '
-        Me.DarkLabel44.AutoSize = True
-        Me.DarkLabel44.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel44.AutoSize = true
+        Me.DarkLabel44.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel44.Location = New System.Drawing.Point(5, 50)
         Me.DarkLabel44.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel44.Name = "DarkLabel44"
@@ -3640,8 +3338,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel45
         '
-        Me.DarkLabel45.AutoSize = True
-        Me.DarkLabel45.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel45.AutoSize = true
+        Me.DarkLabel45.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel45.Location = New System.Drawing.Point(6, 18)
         Me.DarkLabel45.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel45.Name = "DarkLabel45"
@@ -3651,8 +3349,8 @@ Partial Class FrmEditor_Events
         '
         'fraShowChatBubble
         '
-        Me.fraShowChatBubble.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraShowChatBubble.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraShowChatBubble.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraShowChatBubble.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraShowChatBubble.Controls.Add(Me.btnShowChatBubbleOk)
         Me.fraShowChatBubble.Controls.Add(Me.btnShowChatBubbleCancel)
         Me.fraShowChatBubble.Controls.Add(Me.DarkLabel41)
@@ -3668,9 +3366,9 @@ Partial Class FrmEditor_Events
         Me.fraShowChatBubble.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraShowChatBubble.Size = New System.Drawing.Size(287, 163)
         Me.fraShowChatBubble.TabIndex = 27
-        Me.fraShowChatBubble.TabStop = False
+        Me.fraShowChatBubble.TabStop = false
         Me.fraShowChatBubble.Text = "Show ChatBubble"
-        Me.fraShowChatBubble.Visible = False
+        Me.fraShowChatBubble.Visible = false
         '
         'btnShowChatBubbleOk
         '
@@ -3694,19 +3392,19 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel41
         '
-        Me.DarkLabel41.AutoSize = True
-        Me.DarkLabel41.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel41.AutoSize = true
+        Me.DarkLabel41.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel41.Location = New System.Drawing.Point(7, 102)
         Me.DarkLabel41.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel41.Name = "DarkLabel41"
-        Me.DarkLabel41.Size = New System.Drawing.Size(38, 15)
+        Me.DarkLabel41.Size = New System.Drawing.Size(39, 15)
         Me.DarkLabel41.TabIndex = 29
         Me.DarkLabel41.Text = "Index:"
         '
         'cmbChatBubbleTarget
         '
         Me.cmbChatBubbleTarget.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbChatBubbleTarget.FormattingEnabled = True
+        Me.cmbChatBubbleTarget.FormattingEnabled = true
         Me.cmbChatBubbleTarget.Location = New System.Drawing.Point(94, 98)
         Me.cmbChatBubbleTarget.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbChatBubbleTarget.Name = "cmbChatBubbleTarget"
@@ -3716,7 +3414,7 @@ Partial Class FrmEditor_Events
         'cmbChatBubbleTargetType
         '
         Me.cmbChatBubbleTargetType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbChatBubbleTargetType.FormattingEnabled = True
+        Me.cmbChatBubbleTargetType.FormattingEnabled = true
         Me.cmbChatBubbleTargetType.Items.AddRange(New Object() {"Player", "Npc", "Event"})
         Me.cmbChatBubbleTargetType.Location = New System.Drawing.Point(94, 67)
         Me.cmbChatBubbleTargetType.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -3726,20 +3424,20 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel40
         '
-        Me.DarkLabel40.AutoSize = True
-        Me.DarkLabel40.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel40.AutoSize = true
+        Me.DarkLabel40.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel40.Location = New System.Drawing.Point(7, 70)
         Me.DarkLabel40.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel40.Name = "DarkLabel40"
-        Me.DarkLabel40.Size = New System.Drawing.Size(71, 15)
+        Me.DarkLabel40.Size = New System.Drawing.Size(69, 15)
         Me.DarkLabel40.TabIndex = 2
         Me.DarkLabel40.Text = "Target Type:"
         '
         'txtChatbubbleText
         '
-        Me.txtChatbubbleText.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtChatbubbleText.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
         Me.txtChatbubbleText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtChatbubbleText.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtChatbubbleText.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.txtChatbubbleText.Location = New System.Drawing.Point(7, 37)
         Me.txtChatbubbleText.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.txtChatbubbleText.Name = "txtChatbubbleText"
@@ -3748,8 +3446,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel39
         '
-        Me.DarkLabel39.AutoSize = True
-        Me.DarkLabel39.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel39.AutoSize = true
+        Me.DarkLabel39.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel39.Location = New System.Drawing.Point(7, 18)
         Me.DarkLabel39.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel39.Name = "DarkLabel39"
@@ -3759,8 +3457,8 @@ Partial Class FrmEditor_Events
         '
         'fraPlaySound
         '
-        Me.fraPlaySound.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraPlaySound.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraPlaySound.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraPlaySound.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraPlaySound.Controls.Add(Me.btnPlaySoundOk)
         Me.fraPlaySound.Controls.Add(Me.btnPlaySoundCancel)
         Me.fraPlaySound.Controls.Add(Me.cmbPlaySound)
@@ -3771,9 +3469,9 @@ Partial Class FrmEditor_Events
         Me.fraPlaySound.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraPlaySound.Size = New System.Drawing.Size(287, 88)
         Me.fraPlaySound.TabIndex = 26
-        Me.fraPlaySound.TabStop = False
+        Me.fraPlaySound.TabStop = false
         Me.fraPlaySound.Text = "Play Sound"
-        Me.fraPlaySound.Visible = False
+        Me.fraPlaySound.Visible = false
         '
         'btnPlaySoundOk
         '
@@ -3798,7 +3496,7 @@ Partial Class FrmEditor_Events
         'cmbPlaySound
         '
         Me.cmbPlaySound.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbPlaySound.FormattingEnabled = True
+        Me.cmbPlaySound.FormattingEnabled = true
         Me.cmbPlaySound.Location = New System.Drawing.Point(7, 22)
         Me.cmbPlaySound.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbPlaySound.Name = "cmbPlaySound"
@@ -3807,8 +3505,8 @@ Partial Class FrmEditor_Events
         '
         'fraChangePK
         '
-        Me.fraChangePK.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraChangePK.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraChangePK.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraChangePK.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraChangePK.Controls.Add(Me.btnChangePkOk)
         Me.fraChangePK.Controls.Add(Me.btnChangePkCancel)
         Me.fraChangePK.Controls.Add(Me.cmbSetPK)
@@ -3819,9 +3517,9 @@ Partial Class FrmEditor_Events
         Me.fraChangePK.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraChangePK.Size = New System.Drawing.Size(287, 87)
         Me.fraChangePK.TabIndex = 25
-        Me.fraChangePK.TabStop = False
+        Me.fraChangePK.TabStop = false
         Me.fraChangePK.Text = "Set Player PK"
-        Me.fraChangePK.Visible = False
+        Me.fraChangePK.Visible = false
         '
         'btnChangePkOk
         '
@@ -3846,7 +3544,7 @@ Partial Class FrmEditor_Events
         'cmbSetPK
         '
         Me.cmbSetPK.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbSetPK.FormattingEnabled = True
+        Me.cmbSetPK.FormattingEnabled = true
         Me.cmbSetPK.Items.AddRange(New Object() {"No", "Yes"})
         Me.cmbSetPK.Location = New System.Drawing.Point(12, 22)
         Me.cmbSetPK.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -3856,8 +3554,8 @@ Partial Class FrmEditor_Events
         '
         'fraCreateLabel
         '
-        Me.fraCreateLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraCreateLabel.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraCreateLabel.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraCreateLabel.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraCreateLabel.Controls.Add(Me.btnCreatelabelOk)
         Me.fraCreateLabel.Controls.Add(Me.btnCreatelabelCancel)
         Me.fraCreateLabel.Controls.Add(Me.txtLabelName)
@@ -3869,9 +3567,9 @@ Partial Class FrmEditor_Events
         Me.fraCreateLabel.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraCreateLabel.Size = New System.Drawing.Size(287, 85)
         Me.fraCreateLabel.TabIndex = 24
-        Me.fraCreateLabel.TabStop = False
+        Me.fraCreateLabel.TabStop = false
         Me.fraCreateLabel.Text = "Create Label"
-        Me.fraCreateLabel.Visible = False
+        Me.fraCreateLabel.Visible = false
         '
         'btnCreatelabelOk
         '
@@ -3895,9 +3593,9 @@ Partial Class FrmEditor_Events
         '
         'txtLabelName
         '
-        Me.txtLabelName.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtLabelName.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
         Me.txtLabelName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtLabelName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtLabelName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.txtLabelName.Location = New System.Drawing.Point(93, 22)
         Me.txtLabelName.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.txtLabelName.Name = "txtLabelName"
@@ -3906,8 +3604,8 @@ Partial Class FrmEditor_Events
         '
         'lblLabelName
         '
-        Me.lblLabelName.AutoSize = True
-        Me.lblLabelName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.lblLabelName.AutoSize = true
+        Me.lblLabelName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.lblLabelName.Location = New System.Drawing.Point(8, 24)
         Me.lblLabelName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblLabelName.Name = "lblLabelName"
@@ -3917,8 +3615,8 @@ Partial Class FrmEditor_Events
         '
         'fraChangeJob
         '
-        Me.fraChangeJob.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraChangeJob.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraChangeJob.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraChangeJob.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraChangeJob.Controls.Add(Me.btnChangeJobOk)
         Me.fraChangeJob.Controls.Add(Me.btnChangeJobCancel)
         Me.fraChangeJob.Controls.Add(Me.cmbChangeJob)
@@ -3930,9 +3628,9 @@ Partial Class FrmEditor_Events
         Me.fraChangeJob.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraChangeJob.Size = New System.Drawing.Size(287, 88)
         Me.fraChangeJob.TabIndex = 23
-        Me.fraChangeJob.TabStop = False
+        Me.fraChangeJob.TabStop = false
         Me.fraChangeJob.Text = "Change Player Job"
-        Me.fraChangeJob.Visible = False
+        Me.fraChangeJob.Visible = false
         '
         'btnChangeJobOk
         '
@@ -3957,7 +3655,7 @@ Partial Class FrmEditor_Events
         'cmbChangeJob
         '
         Me.cmbChangeJob.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbChangeJob.FormattingEnabled = True
+        Me.cmbChangeJob.FormattingEnabled = true
         Me.cmbChangeJob.Location = New System.Drawing.Point(57, 22)
         Me.cmbChangeJob.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbChangeJob.Name = "cmbChangeJob"
@@ -3966,8 +3664,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel38
         '
-        Me.DarkLabel38.AutoSize = True
-        Me.DarkLabel38.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel38.AutoSize = true
+        Me.DarkLabel38.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel38.Location = New System.Drawing.Point(9, 25)
         Me.DarkLabel38.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel38.Name = "DarkLabel38"
@@ -3977,8 +3675,8 @@ Partial Class FrmEditor_Events
         '
         'fraChangeSkills
         '
-        Me.fraChangeSkills.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraChangeSkills.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraChangeSkills.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraChangeSkills.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraChangeSkills.Controls.Add(Me.btnChangeSkillsOk)
         Me.fraChangeSkills.Controls.Add(Me.btnChangeSkillsCancel)
         Me.fraChangeSkills.Controls.Add(Me.optChangeSkillsRemove)
@@ -3992,9 +3690,9 @@ Partial Class FrmEditor_Events
         Me.fraChangeSkills.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraChangeSkills.Size = New System.Drawing.Size(287, 113)
         Me.fraChangeSkills.TabIndex = 22
-        Me.fraChangeSkills.TabStop = False
+        Me.fraChangeSkills.TabStop = false
         Me.fraChangeSkills.Text = "Change Player Skills"
-        Me.fraChangeSkills.Visible = False
+        Me.fraChangeSkills.Visible = false
         '
         'btnChangeSkillsOk
         '
@@ -4018,30 +3716,30 @@ Partial Class FrmEditor_Events
         '
         'optChangeSkillsRemove
         '
-        Me.optChangeSkillsRemove.AutoSize = True
+        Me.optChangeSkillsRemove.AutoSize = true
         Me.optChangeSkillsRemove.Location = New System.Drawing.Point(172, 51)
         Me.optChangeSkillsRemove.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optChangeSkillsRemove.Name = "optChangeSkillsRemove"
         Me.optChangeSkillsRemove.Size = New System.Drawing.Size(59, 19)
         Me.optChangeSkillsRemove.TabIndex = 3
-        Me.optChangeSkillsRemove.TabStop = True
+        Me.optChangeSkillsRemove.TabStop = true
         Me.optChangeSkillsRemove.Text = "Forget"
         '
         'optChangeSkillsAdd
         '
-        Me.optChangeSkillsAdd.AutoSize = True
+        Me.optChangeSkillsAdd.AutoSize = true
         Me.optChangeSkillsAdd.Location = New System.Drawing.Point(76, 51)
         Me.optChangeSkillsAdd.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optChangeSkillsAdd.Name = "optChangeSkillsAdd"
-        Me.optChangeSkillsAdd.Size = New System.Drawing.Size(56, 19)
+        Me.optChangeSkillsAdd.Size = New System.Drawing.Size(55, 19)
         Me.optChangeSkillsAdd.TabIndex = 2
-        Me.optChangeSkillsAdd.TabStop = True
+        Me.optChangeSkillsAdd.TabStop = true
         Me.optChangeSkillsAdd.Text = "Teach"
         '
         'cmbChangeSkills
         '
         Me.cmbChangeSkills.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbChangeSkills.FormattingEnabled = True
+        Me.cmbChangeSkills.FormattingEnabled = true
         Me.cmbChangeSkills.Location = New System.Drawing.Point(48, 20)
         Me.cmbChangeSkills.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbChangeSkills.Name = "cmbChangeSkills"
@@ -4050,8 +3748,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel37
         '
-        Me.DarkLabel37.AutoSize = True
-        Me.DarkLabel37.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel37.AutoSize = true
+        Me.DarkLabel37.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel37.Location = New System.Drawing.Point(7, 23)
         Me.DarkLabel37.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel37.Name = "DarkLabel37"
@@ -4061,8 +3759,8 @@ Partial Class FrmEditor_Events
         '
         'fraCompleteTask
         '
-        Me.fraCompleteTask.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraCompleteTask.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraCompleteTask.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraCompleteTask.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraCompleteTask.Controls.Add(Me.btnCompleteQuestTaskOk)
         Me.fraCompleteTask.Controls.Add(Me.btnCompleteQuestTaskCancel)
         Me.fraCompleteTask.Controls.Add(Me.DarkLabel35)
@@ -4076,9 +3774,9 @@ Partial Class FrmEditor_Events
         Me.fraCompleteTask.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraCompleteTask.Size = New System.Drawing.Size(287, 115)
         Me.fraCompleteTask.TabIndex = 20
-        Me.fraCompleteTask.TabStop = False
+        Me.fraCompleteTask.TabStop = false
         Me.fraCompleteTask.Text = "Complete Quest Task"
-        Me.fraCompleteTask.Visible = False
+        Me.fraCompleteTask.Visible = false
         '
         'btnCompleteQuestTaskOk
         '
@@ -4102,19 +3800,19 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel35
         '
-        Me.DarkLabel35.AutoSize = True
-        Me.DarkLabel35.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel35.AutoSize = true
+        Me.DarkLabel35.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel35.Location = New System.Drawing.Point(12, 58)
         Me.DarkLabel35.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel35.Name = "DarkLabel35"
-        Me.DarkLabel35.Size = New System.Drawing.Size(33, 15)
+        Me.DarkLabel35.Size = New System.Drawing.Size(32, 15)
         Me.DarkLabel35.TabIndex = 23
         Me.DarkLabel35.Text = "Task:"
         '
         'DarkLabel36
         '
-        Me.DarkLabel36.AutoSize = True
-        Me.DarkLabel36.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel36.AutoSize = true
+        Me.DarkLabel36.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel36.Location = New System.Drawing.Point(12, 25)
         Me.DarkLabel36.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel36.Name = "DarkLabel36"
@@ -4134,7 +3832,7 @@ Partial Class FrmEditor_Events
         'cmbCompleteQuest
         '
         Me.cmbCompleteQuest.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbCompleteQuest.FormattingEnabled = True
+        Me.cmbCompleteQuest.FormattingEnabled = true
         Me.cmbCompleteQuest.Location = New System.Drawing.Point(70, 22)
         Me.cmbCompleteQuest.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbCompleteQuest.Name = "cmbCompleteQuest"
@@ -4143,8 +3841,8 @@ Partial Class FrmEditor_Events
         '
         'fraPlayerWarp
         '
-        Me.fraPlayerWarp.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraPlayerWarp.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraPlayerWarp.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraPlayerWarp.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraPlayerWarp.Controls.Add(Me.btnPlayerWarpOk)
         Me.fraPlayerWarp.Controls.Add(Me.btnPlayerWarpCancel)
         Me.fraPlayerWarp.Controls.Add(Me.DarkLabel31)
@@ -4162,9 +3860,9 @@ Partial Class FrmEditor_Events
         Me.fraPlayerWarp.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraPlayerWarp.Size = New System.Drawing.Size(287, 112)
         Me.fraPlayerWarp.TabIndex = 19
-        Me.fraPlayerWarp.TabStop = False
+        Me.fraPlayerWarp.TabStop = false
         Me.fraPlayerWarp.Text = "Warp Player"
-        Me.fraPlayerWarp.Visible = False
+        Me.fraPlayerWarp.Visible = false
         '
         'btnPlayerWarpOk
         '
@@ -4188,8 +3886,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel31
         '
-        Me.DarkLabel31.AutoSize = True
-        Me.DarkLabel31.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel31.AutoSize = true
+        Me.DarkLabel31.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel31.Location = New System.Drawing.Point(9, 51)
         Me.DarkLabel31.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel31.Name = "DarkLabel31"
@@ -4200,7 +3898,7 @@ Partial Class FrmEditor_Events
         'cmbWarpPlayerDir
         '
         Me.cmbWarpPlayerDir.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbWarpPlayerDir.FormattingEnabled = True
+        Me.cmbWarpPlayerDir.FormattingEnabled = true
         Me.cmbWarpPlayerDir.Items.AddRange(New Object() {"Retain Direction", "Up", "Down", "Left", "Right"})
         Me.cmbWarpPlayerDir.Location = New System.Drawing.Point(112, 47)
         Me.cmbWarpPlayerDir.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -4218,8 +3916,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel32
         '
-        Me.DarkLabel32.AutoSize = True
-        Me.DarkLabel32.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel32.AutoSize = true
+        Me.DarkLabel32.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel32.Location = New System.Drawing.Point(206, 20)
         Me.DarkLabel32.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel32.Name = "DarkLabel32"
@@ -4237,8 +3935,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel33
         '
-        Me.DarkLabel33.AutoSize = True
-        Me.DarkLabel33.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel33.AutoSize = true
+        Me.DarkLabel33.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel33.Location = New System.Drawing.Point(125, 20)
         Me.DarkLabel33.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel33.Name = "DarkLabel33"
@@ -4256,8 +3954,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel34
         '
-        Me.DarkLabel34.AutoSize = True
-        Me.DarkLabel34.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel34.AutoSize = true
+        Me.DarkLabel34.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel34.Location = New System.Drawing.Point(7, 20)
         Me.DarkLabel34.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel34.Name = "DarkLabel34"
@@ -4267,8 +3965,8 @@ Partial Class FrmEditor_Events
         '
         'fraSetFog
         '
-        Me.fraSetFog.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraSetFog.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraSetFog.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraSetFog.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraSetFog.Controls.Add(Me.btnSetFogOk)
         Me.fraSetFog.Controls.Add(Me.btnSetFogCancel)
         Me.fraSetFog.Controls.Add(Me.DarkLabel30)
@@ -4284,9 +3982,9 @@ Partial Class FrmEditor_Events
         Me.fraSetFog.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraSetFog.Size = New System.Drawing.Size(287, 111)
         Me.fraSetFog.TabIndex = 18
-        Me.fraSetFog.TabStop = False
+        Me.fraSetFog.TabStop = false
         Me.fraSetFog.Text = "Set Fog"
-        Me.fraSetFog.Visible = False
+        Me.fraSetFog.Visible = false
         '
         'btnSetFogOk
         '
@@ -4310,8 +4008,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel30
         '
-        Me.DarkLabel30.AutoSize = True
-        Me.DarkLabel30.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel30.AutoSize = true
+        Me.DarkLabel30.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel30.Location = New System.Drawing.Point(145, 48)
         Me.DarkLabel30.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel30.Name = "DarkLabel30"
@@ -4321,8 +4019,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel29
         '
-        Me.DarkLabel29.AutoSize = True
-        Me.DarkLabel29.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel29.AutoSize = true
+        Me.DarkLabel29.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel29.Location = New System.Drawing.Point(8, 48)
         Me.DarkLabel29.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel29.Name = "DarkLabel29"
@@ -4332,8 +4030,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel28
         '
-        Me.DarkLabel28.AutoSize = True
-        Me.DarkLabel28.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel28.AutoSize = true
+        Me.DarkLabel28.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel28.Location = New System.Drawing.Point(8, 17)
         Me.DarkLabel28.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel28.Name = "DarkLabel28"
@@ -4368,8 +4066,8 @@ Partial Class FrmEditor_Events
         '
         'fraShowText
         '
-        Me.fraShowText.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraShowText.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraShowText.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraShowText.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraShowText.Controls.Add(Me.DarkLabel27)
         Me.fraShowText.Controls.Add(Me.txtShowText)
         Me.fraShowText.Controls.Add(Me.btnShowTextCancel)
@@ -4384,14 +4082,14 @@ Partial Class FrmEditor_Events
         Me.fraShowText.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraShowText.Size = New System.Drawing.Size(289, 328)
         Me.fraShowText.TabIndex = 17
-        Me.fraShowText.TabStop = False
+        Me.fraShowText.TabStop = false
         Me.fraShowText.Text = "Show Text"
-        Me.fraShowText.Visible = False
+        Me.fraShowText.Visible = false
         '
         'DarkLabel27
         '
-        Me.DarkLabel27.AutoSize = True
-        Me.DarkLabel27.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel27.AutoSize = true
+        Me.DarkLabel27.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel27.Location = New System.Drawing.Point(8, 22)
         Me.DarkLabel27.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel27.Name = "DarkLabel27"
@@ -4401,12 +4099,12 @@ Partial Class FrmEditor_Events
         '
         'txtShowText
         '
-        Me.txtShowText.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtShowText.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
         Me.txtShowText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtShowText.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtShowText.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.txtShowText.Location = New System.Drawing.Point(10, 44)
         Me.txtShowText.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.txtShowText.Multiline = True
+        Me.txtShowText.Multiline = true
         Me.txtShowText.Name = "txtShowText"
         Me.txtShowText.Size = New System.Drawing.Size(266, 121)
         Me.txtShowText.TabIndex = 21
@@ -4440,12 +4138,12 @@ Partial Class FrmEditor_Events
         Me.picShowTextFace.Name = "picShowTextFace"
         Me.picShowTextFace.Size = New System.Drawing.Size(117, 107)
         Me.picShowTextFace.TabIndex = 2
-        Me.picShowTextFace.TabStop = False
+        Me.picShowTextFace.TabStop = false
         '
         'DarkLabel26
         '
-        Me.DarkLabel26.AutoSize = True
-        Me.DarkLabel26.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel26.AutoSize = true
+        Me.DarkLabel26.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel26.Location = New System.Drawing.Point(128, 258)
         Me.DarkLabel26.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel26.Name = "DarkLabel26"
@@ -4463,8 +4161,8 @@ Partial Class FrmEditor_Events
         '
         'fraAddText
         '
-        Me.fraAddText.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraAddText.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraAddText.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraAddText.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraAddText.Controls.Add(Me.btnAddTextOk)
         Me.fraAddText.Controls.Add(Me.btnAddTextCancel)
         Me.fraAddText.Controls.Add(Me.optAddText_Global)
@@ -4480,9 +4178,9 @@ Partial Class FrmEditor_Events
         Me.fraAddText.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraAddText.Size = New System.Drawing.Size(272, 216)
         Me.fraAddText.TabIndex = 3
-        Me.fraAddText.TabStop = False
+        Me.fraAddText.TabStop = false
         Me.fraAddText.Text = "Add Text"
-        Me.fraAddText.Visible = False
+        Me.fraAddText.Visible = false
         '
         'btnAddTextOk
         '
@@ -4506,41 +4204,41 @@ Partial Class FrmEditor_Events
         '
         'optAddText_Global
         '
-        Me.optAddText_Global.AutoSize = True
+        Me.optAddText_Global.AutoSize = true
         Me.optAddText_Global.Location = New System.Drawing.Point(202, 153)
         Me.optAddText_Global.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optAddText_Global.Name = "optAddText_Global"
         Me.optAddText_Global.Size = New System.Drawing.Size(59, 19)
         Me.optAddText_Global.TabIndex = 5
-        Me.optAddText_Global.TabStop = True
+        Me.optAddText_Global.TabStop = true
         Me.optAddText_Global.Text = "Global"
         '
         'optAddText_Map
         '
-        Me.optAddText_Map.AutoSize = True
+        Me.optAddText_Map.AutoSize = true
         Me.optAddText_Map.Location = New System.Drawing.Point(141, 153)
         Me.optAddText_Map.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optAddText_Map.Name = "optAddText_Map"
         Me.optAddText_Map.Size = New System.Drawing.Size(49, 19)
         Me.optAddText_Map.TabIndex = 4
-        Me.optAddText_Map.TabStop = True
+        Me.optAddText_Map.TabStop = true
         Me.optAddText_Map.Text = "Map"
         '
         'optAddText_Player
         '
-        Me.optAddText_Player.AutoSize = True
+        Me.optAddText_Player.AutoSize = true
         Me.optAddText_Player.Location = New System.Drawing.Point(71, 153)
         Me.optAddText_Player.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optAddText_Player.Name = "optAddText_Player"
         Me.optAddText_Player.Size = New System.Drawing.Size(57, 19)
         Me.optAddText_Player.TabIndex = 3
-        Me.optAddText_Player.TabStop = True
+        Me.optAddText_Player.TabStop = true
         Me.optAddText_Player.Text = "Player"
         '
         'DarkLabel25
         '
-        Me.DarkLabel25.AutoSize = True
-        Me.DarkLabel25.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel25.AutoSize = true
+        Me.DarkLabel25.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel25.Location = New System.Drawing.Point(7, 156)
         Me.DarkLabel25.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel25.Name = "DarkLabel25"
@@ -4550,20 +4248,20 @@ Partial Class FrmEditor_Events
         '
         'txtAddText_Text
         '
-        Me.txtAddText_Text.BackColor = System.Drawing.Color.FromArgb(CType(CType(69, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(74, Byte), Integer))
+        Me.txtAddText_Text.BackColor = System.Drawing.Color.FromArgb(CType(CType(69,Byte),Integer), CType(CType(73,Byte),Integer), CType(CType(74,Byte),Integer))
         Me.txtAddText_Text.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtAddText_Text.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.txtAddText_Text.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.txtAddText_Text.Location = New System.Drawing.Point(7, 36)
         Me.txtAddText_Text.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.txtAddText_Text.Multiline = True
+        Me.txtAddText_Text.Multiline = true
         Me.txtAddText_Text.Name = "txtAddText_Text"
         Me.txtAddText_Text.Size = New System.Drawing.Size(259, 110)
         Me.txtAddText_Text.TabIndex = 1
         '
         'DarkLabel24
         '
-        Me.DarkLabel24.AutoSize = True
-        Me.DarkLabel24.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel24.AutoSize = true
+        Me.DarkLabel24.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel24.Location = New System.Drawing.Point(7, 17)
         Me.DarkLabel24.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel24.Name = "DarkLabel24"
@@ -4573,8 +4271,8 @@ Partial Class FrmEditor_Events
         '
         'fraPlayerSwitch
         '
-        Me.fraPlayerSwitch.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraPlayerSwitch.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraPlayerSwitch.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraPlayerSwitch.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraPlayerSwitch.Controls.Add(Me.btnSetPlayerSwitchOk)
         Me.fraPlayerSwitch.Controls.Add(Me.btnSetPlayerswitchCancel)
         Me.fraPlayerSwitch.Controls.Add(Me.cmbPlayerSwitchSet)
@@ -4588,9 +4286,9 @@ Partial Class FrmEditor_Events
         Me.fraPlayerSwitch.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraPlayerSwitch.Size = New System.Drawing.Size(212, 115)
         Me.fraPlayerSwitch.TabIndex = 2
-        Me.fraPlayerSwitch.TabStop = False
+        Me.fraPlayerSwitch.TabStop = false
         Me.fraPlayerSwitch.Text = "Change Items"
-        Me.fraPlayerSwitch.Visible = False
+        Me.fraPlayerSwitch.Visible = false
         '
         'btnSetPlayerSwitchOk
         '
@@ -4615,7 +4313,7 @@ Partial Class FrmEditor_Events
         'cmbPlayerSwitchSet
         '
         Me.cmbPlayerSwitchSet.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbPlayerSwitchSet.FormattingEnabled = True
+        Me.cmbPlayerSwitchSet.FormattingEnabled = true
         Me.cmbPlayerSwitchSet.Items.AddRange(New Object() {"False", "True"})
         Me.cmbPlayerSwitchSet.Location = New System.Drawing.Point(59, 47)
         Me.cmbPlayerSwitchSet.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -4625,8 +4323,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel23
         '
-        Me.DarkLabel23.AutoSize = True
-        Me.DarkLabel23.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel23.AutoSize = true
+        Me.DarkLabel23.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel23.Location = New System.Drawing.Point(7, 53)
         Me.DarkLabel23.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel23.Name = "DarkLabel23"
@@ -4637,7 +4335,7 @@ Partial Class FrmEditor_Events
         'cmbSwitch
         '
         Me.cmbSwitch.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbSwitch.FormattingEnabled = True
+        Me.cmbSwitch.FormattingEnabled = true
         Me.cmbSwitch.Location = New System.Drawing.Point(59, 15)
         Me.cmbSwitch.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbSwitch.Name = "cmbSwitch"
@@ -4646,8 +4344,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel22
         '
-        Me.DarkLabel22.AutoSize = True
-        Me.DarkLabel22.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel22.AutoSize = true
+        Me.DarkLabel22.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel22.Location = New System.Drawing.Point(7, 18)
         Me.DarkLabel22.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel22.Name = "DarkLabel22"
@@ -4657,8 +4355,8 @@ Partial Class FrmEditor_Events
         '
         'fraChangeItems
         '
-        Me.fraChangeItems.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraChangeItems.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraChangeItems.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraChangeItems.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraChangeItems.Controls.Add(Me.btnChangeItemsOk)
         Me.fraChangeItems.Controls.Add(Me.btnChangeItemsCancel)
         Me.fraChangeItems.Controls.Add(Me.nudChangeItemsAmount)
@@ -4674,9 +4372,9 @@ Partial Class FrmEditor_Events
         Me.fraChangeItems.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraChangeItems.Size = New System.Drawing.Size(218, 138)
         Me.fraChangeItems.TabIndex = 1
-        Me.fraChangeItems.TabStop = False
+        Me.fraChangeItems.TabStop = false
         Me.fraChangeItems.Text = "Change Items"
-        Me.fraChangeItems.Visible = False
+        Me.fraChangeItems.Visible = false
         '
         'btnChangeItemsOk
         '
@@ -4708,41 +4406,41 @@ Partial Class FrmEditor_Events
         '
         'optChangeItemRemove
         '
-        Me.optChangeItemRemove.AutoSize = True
+        Me.optChangeItemRemove.AutoSize = true
         Me.optChangeItemRemove.Location = New System.Drawing.Point(141, 48)
         Me.optChangeItemRemove.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optChangeItemRemove.Name = "optChangeItemRemove"
-        Me.optChangeItemRemove.Size = New System.Drawing.Size(49, 19)
+        Me.optChangeItemRemove.Size = New System.Drawing.Size(48, 19)
         Me.optChangeItemRemove.TabIndex = 4
-        Me.optChangeItemRemove.TabStop = True
+        Me.optChangeItemRemove.TabStop = true
         Me.optChangeItemRemove.Text = "Take"
         '
         'optChangeItemAdd
         '
-        Me.optChangeItemAdd.AutoSize = True
+        Me.optChangeItemAdd.AutoSize = true
         Me.optChangeItemAdd.Location = New System.Drawing.Point(79, 48)
         Me.optChangeItemAdd.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optChangeItemAdd.Name = "optChangeItemAdd"
         Me.optChangeItemAdd.Size = New System.Drawing.Size(48, 19)
         Me.optChangeItemAdd.TabIndex = 3
-        Me.optChangeItemAdd.TabStop = True
+        Me.optChangeItemAdd.TabStop = true
         Me.optChangeItemAdd.Text = "Give"
         '
         'optChangeItemSet
         '
-        Me.optChangeItemSet.AutoSize = True
+        Me.optChangeItemSet.AutoSize = true
         Me.optChangeItemSet.Location = New System.Drawing.Point(10, 48)
         Me.optChangeItemSet.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optChangeItemSet.Name = "optChangeItemSet"
         Me.optChangeItemSet.Size = New System.Drawing.Size(55, 19)
         Me.optChangeItemSet.TabIndex = 2
-        Me.optChangeItemSet.TabStop = True
+        Me.optChangeItemSet.TabStop = true
         Me.optChangeItemSet.Text = "Set to"
         '
         'cmbChangeItemIndex
         '
         Me.cmbChangeItemIndex.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbChangeItemIndex.FormattingEnabled = True
+        Me.cmbChangeItemIndex.FormattingEnabled = true
         Me.cmbChangeItemIndex.Location = New System.Drawing.Point(49, 15)
         Me.cmbChangeItemIndex.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbChangeItemIndex.Name = "cmbChangeItemIndex"
@@ -4751,8 +4449,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel21
         '
-        Me.DarkLabel21.AutoSize = True
-        Me.DarkLabel21.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel21.AutoSize = true
+        Me.DarkLabel21.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel21.Location = New System.Drawing.Point(7, 18)
         Me.DarkLabel21.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel21.Name = "DarkLabel21"
@@ -4762,8 +4460,8 @@ Partial Class FrmEditor_Events
         '
         'fraPlayBGM
         '
-        Me.fraPlayBGM.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraPlayBGM.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraPlayBGM.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraPlayBGM.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraPlayBGM.Controls.Add(Me.btnPlayBgmOk)
         Me.fraPlayBGM.Controls.Add(Me.btnPlayBgmCancel)
         Me.fraPlayBGM.Controls.Add(Me.cmbPlayBGM)
@@ -4774,9 +4472,9 @@ Partial Class FrmEditor_Events
         Me.fraPlayBGM.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraPlayBGM.Size = New System.Drawing.Size(287, 87)
         Me.fraPlayBGM.TabIndex = 21
-        Me.fraPlayBGM.TabStop = False
+        Me.fraPlayBGM.TabStop = false
         Me.fraPlayBGM.Text = "Play BGM"
-        Me.fraPlayBGM.Visible = False
+        Me.fraPlayBGM.Visible = false
         '
         'btnPlayBgmOk
         '
@@ -4801,7 +4499,7 @@ Partial Class FrmEditor_Events
         'cmbPlayBGM
         '
         Me.cmbPlayBGM.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbPlayBGM.FormattingEnabled = True
+        Me.cmbPlayBGM.FormattingEnabled = true
         Me.cmbPlayBGM.Location = New System.Drawing.Point(7, 22)
         Me.cmbPlayBGM.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbPlayBGM.Name = "cmbPlayBGM"
@@ -4810,8 +4508,8 @@ Partial Class FrmEditor_Events
         '
         'fraConditionalBranch
         '
-        Me.fraConditionalBranch.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraConditionalBranch.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraConditionalBranch.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraConditionalBranch.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraConditionalBranch.Controls.Add(Me.cmbCondition_Time)
         Me.fraConditionalBranch.Controls.Add(Me.optCondition9)
         Me.fraConditionalBranch.Controls.Add(Me.btnConditionalBranchOk)
@@ -4853,14 +4551,14 @@ Partial Class FrmEditor_Events
         Me.fraConditionalBranch.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraConditionalBranch.Size = New System.Drawing.Size(454, 516)
         Me.fraConditionalBranch.TabIndex = 0
-        Me.fraConditionalBranch.TabStop = False
+        Me.fraConditionalBranch.TabStop = false
         Me.fraConditionalBranch.Text = "Conditional Branch"
-        Me.fraConditionalBranch.Visible = False
+        Me.fraConditionalBranch.Visible = false
         '
         'cmbCondition_Time
         '
         Me.cmbCondition_Time.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
-        Me.cmbCondition_Time.FormattingEnabled = True
+        Me.cmbCondition_Time.FormattingEnabled = true
         Me.cmbCondition_Time.Items.AddRange(New Object() {"Day", "Night", "Dawn", "Dusk"})
         Me.cmbCondition_Time.Location = New System.Drawing.Point(279, 398)
         Me.cmbCondition_Time.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -4870,13 +4568,13 @@ Partial Class FrmEditor_Events
         '
         'optCondition9
         '
-        Me.optCondition9.AutoSize = True
+        Me.optCondition9.AutoSize = true
         Me.optCondition9.Location = New System.Drawing.Point(7, 399)
         Me.optCondition9.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optCondition9.Name = "optCondition9"
-        Me.optCondition9.Size = New System.Drawing.Size(103, 19)
+        Me.optCondition9.Size = New System.Drawing.Size(102, 19)
         Me.optCondition9.TabIndex = 32
-        Me.optCondition9.TabStop = True
+        Me.optCondition9.TabStop = true
         Me.optCondition9.Text = "Time of Day is:"
         '
         'btnConditionalBranchOk
@@ -4902,7 +4600,7 @@ Partial Class FrmEditor_Events
         'cmbCondition_Gender
         '
         Me.cmbCondition_Gender.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbCondition_Gender.FormattingEnabled = True
+        Me.cmbCondition_Gender.FormattingEnabled = true
         Me.cmbCondition_Gender.Items.AddRange(New Object() {"Male", "Female"})
         Me.cmbCondition_Gender.Location = New System.Drawing.Point(279, 367)
         Me.cmbCondition_Gender.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -4912,19 +4610,19 @@ Partial Class FrmEditor_Events
         '
         'optCondition8
         '
-        Me.optCondition8.AutoSize = True
+        Me.optCondition8.AutoSize = true
         Me.optCondition8.Location = New System.Drawing.Point(7, 368)
         Me.optCondition8.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optCondition8.Name = "optCondition8"
         Me.optCondition8.Size = New System.Drawing.Size(109, 19)
         Me.optCondition8.TabIndex = 28
-        Me.optCondition8.TabStop = True
+        Me.optCondition8.TabStop = true
         Me.optCondition8.Text = "Player Gender is"
         '
         'fraConditions_Quest
         '
-        Me.fraConditions_Quest.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.fraConditions_Quest.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.fraConditions_Quest.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraConditions_Quest.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.fraConditions_Quest.Controls.Add(Me.DarkLabel20)
         Me.fraConditions_Quest.Controls.Add(Me.nudCondition_QuestTask)
         Me.fraConditions_Quest.Controls.Add(Me.cmbCondition_General)
@@ -4938,13 +4636,13 @@ Partial Class FrmEditor_Events
         Me.fraConditions_Quest.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraConditions_Quest.Size = New System.Drawing.Size(439, 89)
         Me.fraConditions_Quest.TabIndex = 27
-        Me.fraConditions_Quest.TabStop = False
+        Me.fraConditions_Quest.TabStop = false
         Me.fraConditions_Quest.Text = "Quest Conditions"
         '
         'DarkLabel20
         '
-        Me.DarkLabel20.AutoSize = True
-        Me.DarkLabel20.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel20.AutoSize = true
+        Me.DarkLabel20.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel20.Location = New System.Drawing.Point(144, 54)
         Me.DarkLabel20.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel20.Name = "DarkLabel20"
@@ -4963,7 +4661,7 @@ Partial Class FrmEditor_Events
         'cmbCondition_General
         '
         Me.cmbCondition_General.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbCondition_General.FormattingEnabled = True
+        Me.cmbCondition_General.FormattingEnabled = true
         Me.cmbCondition_General.Items.AddRange(New Object() {"Not Started", "Started", "Completed", "Can Start", "Can End"})
         Me.cmbCondition_General.Location = New System.Drawing.Point(272, 21)
         Me.cmbCondition_General.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -4973,8 +4671,8 @@ Partial Class FrmEditor_Events
         '
         'DarkLabel19
         '
-        Me.DarkLabel19.AutoSize = True
-        Me.DarkLabel19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.DarkLabel19.AutoSize = true
+        Me.DarkLabel19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
         Me.DarkLabel19.Location = New System.Drawing.Point(144, 24)
         Me.DarkLabel19.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel19.Name = "DarkLabel19"
@@ -4984,11 +4682,11 @@ Partial Class FrmEditor_Events
         '
         'optCondition_Quest1
         '
-        Me.optCondition_Quest1.AutoSize = True
+        Me.optCondition_Quest1.AutoSize = true
         Me.optCondition_Quest1.Location = New System.Drawing.Point(7, 52)
         Me.optCondition_Quest1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optCondition_Quest1.Name = "optCondition_Quest1"
-        Me.optCondition_Quest1.Size = New System.Drawing.Size(48, 19)
+        Me.optCondition_Quest1.Size = New System.Drawing.Size(47, 19)
         Me.optCondition_Quest1.TabIndex = 1
         Me.optCondition_Quest1.TabStop = true
         Me.optCondition_Quest1.Text = "Task"
@@ -5283,6 +4981,226 @@ Partial Class FrmEditor_Events
         Me.optCondition0.TabStop = true
         Me.optCondition0.Text = "Player Variable"
         '
+        'fraPlayAnimation
+        '
+        Me.fraPlayAnimation.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraPlayAnimation.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.fraPlayAnimation.Controls.Add(Me.btnPlayAnimationOk)
+        Me.fraPlayAnimation.Controls.Add(Me.btnPlayAnimationCancel)
+        Me.fraPlayAnimation.Controls.Add(Me.lblPlayAnimY)
+        Me.fraPlayAnimation.Controls.Add(Me.lblPlayAnimX)
+        Me.fraPlayAnimation.Controls.Add(Me.cmbPlayAnimEvent)
+        Me.fraPlayAnimation.Controls.Add(Me.DarkLabel62)
+        Me.fraPlayAnimation.Controls.Add(Me.cmbAnimTargetType)
+        Me.fraPlayAnimation.Controls.Add(Me.nudPlayAnimTileY)
+        Me.fraPlayAnimation.Controls.Add(Me.nudPlayAnimTileX)
+        Me.fraPlayAnimation.Controls.Add(Me.DarkLabel61)
+        Me.fraPlayAnimation.Controls.Add(Me.cmbPlayAnim)
+        Me.fraPlayAnimation.ForeColor = System.Drawing.Color.Gainsboro
+        Me.fraPlayAnimation.Location = New System.Drawing.Point(468, 297)
+        Me.fraPlayAnimation.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraPlayAnimation.Name = "fraPlayAnimation"
+        Me.fraPlayAnimation.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraPlayAnimation.Size = New System.Drawing.Size(289, 187)
+        Me.fraPlayAnimation.TabIndex = 36
+        Me.fraPlayAnimation.TabStop = false
+        Me.fraPlayAnimation.Text = "Play Animation"
+        Me.fraPlayAnimation.Visible = false
+        '
+        'btnPlayAnimationOk
+        '
+        Me.btnPlayAnimationOk.Location = New System.Drawing.Point(100, 152)
+        Me.btnPlayAnimationOk.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.btnPlayAnimationOk.Name = "btnPlayAnimationOk"
+        Me.btnPlayAnimationOk.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnPlayAnimationOk.Size = New System.Drawing.Size(88, 27)
+        Me.btnPlayAnimationOk.TabIndex = 36
+        Me.btnPlayAnimationOk.Text = "Ok"
+        '
+        'btnPlayAnimationCancel
+        '
+        Me.btnPlayAnimationCancel.Location = New System.Drawing.Point(195, 152)
+        Me.btnPlayAnimationCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.btnPlayAnimationCancel.Name = "btnPlayAnimationCancel"
+        Me.btnPlayAnimationCancel.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnPlayAnimationCancel.Size = New System.Drawing.Size(88, 27)
+        Me.btnPlayAnimationCancel.TabIndex = 35
+        Me.btnPlayAnimationCancel.Text = "Cancel"
+        '
+        'lblPlayAnimY
+        '
+        Me.lblPlayAnimY.AutoSize = true
+        Me.lblPlayAnimY.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.lblPlayAnimY.Location = New System.Drawing.Point(153, 122)
+        Me.lblPlayAnimY.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblPlayAnimY.Name = "lblPlayAnimY"
+        Me.lblPlayAnimY.Size = New System.Drawing.Size(65, 15)
+        Me.lblPlayAnimY.TabIndex = 34
+        Me.lblPlayAnimY.Text = "Map Tile Y:"
+        '
+        'lblPlayAnimX
+        '
+        Me.lblPlayAnimX.AutoSize = true
+        Me.lblPlayAnimX.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.lblPlayAnimX.Location = New System.Drawing.Point(7, 122)
+        Me.lblPlayAnimX.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblPlayAnimX.Name = "lblPlayAnimX"
+        Me.lblPlayAnimX.Size = New System.Drawing.Size(65, 15)
+        Me.lblPlayAnimX.TabIndex = 33
+        Me.lblPlayAnimX.Text = "Map Tile X:"
+        '
+        'cmbPlayAnimEvent
+        '
+        Me.cmbPlayAnimEvent.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbPlayAnimEvent.FormattingEnabled = true
+        Me.cmbPlayAnimEvent.Location = New System.Drawing.Point(97, 84)
+        Me.cmbPlayAnimEvent.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbPlayAnimEvent.Name = "cmbPlayAnimEvent"
+        Me.cmbPlayAnimEvent.Size = New System.Drawing.Size(185, 24)
+        Me.cmbPlayAnimEvent.TabIndex = 32
+        '
+        'DarkLabel62
+        '
+        Me.DarkLabel62.AutoSize = true
+        Me.DarkLabel62.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel62.Location = New System.Drawing.Point(5, 57)
+        Me.DarkLabel62.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel62.Name = "DarkLabel62"
+        Me.DarkLabel62.Size = New System.Drawing.Size(66, 15)
+        Me.DarkLabel62.TabIndex = 31
+        Me.DarkLabel62.Text = "Target Type"
+        '
+        'cmbAnimTargetType
+        '
+        Me.cmbAnimTargetType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbAnimTargetType.FormattingEnabled = true
+        Me.cmbAnimTargetType.Items.AddRange(New Object() {"Player", "Event", "Tile"})
+        Me.cmbAnimTargetType.Location = New System.Drawing.Point(97, 53)
+        Me.cmbAnimTargetType.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbAnimTargetType.Name = "cmbAnimTargetType"
+        Me.cmbAnimTargetType.Size = New System.Drawing.Size(185, 24)
+        Me.cmbAnimTargetType.TabIndex = 30
+        '
+        'nudPlayAnimTileY
+        '
+        Me.nudPlayAnimTileY.Location = New System.Drawing.Point(231, 120)
+        Me.nudPlayAnimTileY.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudPlayAnimTileY.Name = "nudPlayAnimTileY"
+        Me.nudPlayAnimTileY.Size = New System.Drawing.Size(51, 23)
+        Me.nudPlayAnimTileY.TabIndex = 29
+        '
+        'nudPlayAnimTileX
+        '
+        Me.nudPlayAnimTileX.Location = New System.Drawing.Point(85, 120)
+        Me.nudPlayAnimTileX.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudPlayAnimTileX.Name = "nudPlayAnimTileX"
+        Me.nudPlayAnimTileX.Size = New System.Drawing.Size(51, 23)
+        Me.nudPlayAnimTileX.TabIndex = 28
+        '
+        'DarkLabel61
+        '
+        Me.DarkLabel61.AutoSize = true
+        Me.DarkLabel61.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel61.Location = New System.Drawing.Point(7, 25)
+        Me.DarkLabel61.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel61.Name = "DarkLabel61"
+        Me.DarkLabel61.Size = New System.Drawing.Size(66, 15)
+        Me.DarkLabel61.TabIndex = 1
+        Me.DarkLabel61.Text = "Animation:"
+        '
+        'cmbPlayAnim
+        '
+        Me.cmbPlayAnim.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbPlayAnim.FormattingEnabled = true
+        Me.cmbPlayAnim.Location = New System.Drawing.Point(72, 22)
+        Me.cmbPlayAnim.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbPlayAnim.Name = "cmbPlayAnim"
+        Me.cmbPlayAnim.Size = New System.Drawing.Size(209, 24)
+        Me.cmbPlayAnim.TabIndex = 0
+        '
+        'fraSetWait
+        '
+        Me.fraSetWait.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.fraSetWait.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.fraSetWait.Controls.Add(Me.btnSetWaitOk)
+        Me.fraSetWait.Controls.Add(Me.btnSetWaitCancel)
+        Me.fraSetWait.Controls.Add(Me.DarkLabel74)
+        Me.fraSetWait.Controls.Add(Me.DarkLabel72)
+        Me.fraSetWait.Controls.Add(Me.DarkLabel73)
+        Me.fraSetWait.Controls.Add(Me.nudWaitAmount)
+        Me.fraSetWait.ForeColor = System.Drawing.Color.Gainsboro
+        Me.fraSetWait.Location = New System.Drawing.Point(468, 305)
+        Me.fraSetWait.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraSetWait.Name = "fraSetWait"
+        Me.fraSetWait.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraSetWait.Size = New System.Drawing.Size(289, 103)
+        Me.fraSetWait.TabIndex = 41
+        Me.fraSetWait.TabStop = false
+        Me.fraSetWait.Text = "Wait..."
+        Me.fraSetWait.Visible = false
+        '
+        'btnSetWaitOk
+        '
+        Me.btnSetWaitOk.Location = New System.Drawing.Point(58, 67)
+        Me.btnSetWaitOk.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.btnSetWaitOk.Name = "btnSetWaitOk"
+        Me.btnSetWaitOk.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnSetWaitOk.Size = New System.Drawing.Size(88, 27)
+        Me.btnSetWaitOk.TabIndex = 37
+        Me.btnSetWaitOk.Text = "Ok"
+        '
+        'btnSetWaitCancel
+        '
+        Me.btnSetWaitCancel.Location = New System.Drawing.Point(153, 67)
+        Me.btnSetWaitCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.btnSetWaitCancel.Name = "btnSetWaitCancel"
+        Me.btnSetWaitCancel.Padding = New System.Windows.Forms.Padding(6)
+        Me.btnSetWaitCancel.Size = New System.Drawing.Size(88, 27)
+        Me.btnSetWaitCancel.TabIndex = 36
+        Me.btnSetWaitCancel.Text = "Cancel"
+        '
+        'DarkLabel74
+        '
+        Me.DarkLabel74.AutoSize = true
+        Me.DarkLabel74.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel74.Location = New System.Drawing.Point(82, 48)
+        Me.DarkLabel74.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel74.Name = "DarkLabel74"
+        Me.DarkLabel74.Size = New System.Drawing.Size(120, 15)
+        Me.DarkLabel74.TabIndex = 35
+        Me.DarkLabel74.Text = "Hint: 1000 Ms = 1 Sec"
+        '
+        'DarkLabel72
+        '
+        Me.DarkLabel72.AutoSize = true
+        Me.DarkLabel72.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel72.Location = New System.Drawing.Point(254, 27)
+        Me.DarkLabel72.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel72.Name = "DarkLabel72"
+        Me.DarkLabel72.Size = New System.Drawing.Size(23, 15)
+        Me.DarkLabel72.TabIndex = 34
+        Me.DarkLabel72.Text = "Ms"
+        '
+        'DarkLabel73
+        '
+        Me.DarkLabel73.AutoSize = true
+        Me.DarkLabel73.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
+        Me.DarkLabel73.Location = New System.Drawing.Point(18, 27)
+        Me.DarkLabel73.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.DarkLabel73.Name = "DarkLabel73"
+        Me.DarkLabel73.Size = New System.Drawing.Size(31, 15)
+        Me.DarkLabel73.TabIndex = 33
+        Me.DarkLabel73.Text = "Wait"
+        '
+        'nudWaitAmount
+        '
+        Me.nudWaitAmount.Location = New System.Drawing.Point(58, 22)
+        Me.nudWaitAmount.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudWaitAmount.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
+        Me.nudWaitAmount.Name = "nudWaitAmount"
+        Me.nudWaitAmount.Size = New System.Drawing.Size(190, 23)
+        Me.nudWaitAmount.TabIndex = 32
+        '
         'pnlVariableSwitches
         '
         Me.pnlVariableSwitches.Controls.Add(Me.FraRenaming)
@@ -5500,15 +5418,10 @@ Partial Class FrmEditor_Events
         Me.fraPageSetUp.PerformLayout
         Me.tabPages.ResumeLayout(false)
         Me.pnlTabPage.ResumeLayout(false)
-        Me.fraGraphic.ResumeLayout(false)
-        Me.fraGraphic.PerformLayout
-        CType(Me.nudGraphic,System.ComponentModel.ISupportInitialize).EndInit
         Me.fraGraphicPic.ResumeLayout(false)
         CType(Me.picGraphic,System.ComponentModel.ISupportInitialize).EndInit
         Me.DarkGroupBox6.ResumeLayout(false)
         Me.DarkGroupBox6.PerformLayout
-        Me.fraCommands.ResumeLayout(false)
-        Me.DarkGroupBox8.ResumeLayout(false)
         Me.DarkGroupBox7.ResumeLayout(false)
         Me.DarkGroupBox7.PerformLayout
         Me.DarkGroupBox5.ResumeLayout(false)
@@ -5519,14 +5432,21 @@ Partial Class FrmEditor_Events
         Me.DarkGroupBox1.ResumeLayout(false)
         Me.DarkGroupBox1.PerformLayout
         CType(Me.nudPlayerVariable,System.ComponentModel.ISupportInitialize).EndInit
+        Me.fraGraphic.ResumeLayout(false)
+        Me.fraGraphic.PerformLayout
+        CType(Me.nudGraphic,System.ComponentModel.ISupportInitialize).EndInit
+        Me.fraCommands.ResumeLayout(false)
+        Me.DarkGroupBox8.ResumeLayout(false)
         Me.fraMoveRoute.ResumeLayout(false)
         Me.fraMoveRoute.PerformLayout
         Me.DarkGroupBox10.ResumeLayout(false)
         Me.fraDialogue.ResumeLayout(false)
-        Me.fraPlayAnimation.ResumeLayout(false)
-        Me.fraPlayAnimation.PerformLayout
-        CType(Me.nudPlayAnimTileY,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudPlayAnimTileX,System.ComponentModel.ISupportInitialize).EndInit
+        Me.fraShowPic.ResumeLayout(false)
+        Me.fraShowPic.PerformLayout
+        CType(Me.nudPicOffsetY,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.nudPicOffsetX,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.nudShowPicture,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.picShowPic,System.ComponentModel.ISupportInitialize).EndInit
         Me.fraMoveRouteWait.ResumeLayout(false)
         Me.fraMoveRouteWait.PerformLayout
         Me.fraCustomScript.ResumeLayout(false)
@@ -5541,15 +5461,6 @@ Partial Class FrmEditor_Events
         CType(Me.nudGiveExp,System.ComponentModel.ISupportInitialize).EndInit
         Me.fraEndQuest.ResumeLayout(false)
         Me.fraSetAccess.ResumeLayout(false)
-        Me.fraSetWait.ResumeLayout(false)
-        Me.fraSetWait.PerformLayout
-        CType(Me.nudWaitAmount,System.ComponentModel.ISupportInitialize).EndInit
-        Me.fraShowPic.ResumeLayout(false)
-        Me.fraShowPic.PerformLayout
-        CType(Me.nudPicOffsetY,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudPicOffsetX,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.nudShowPicture,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.picShowPic,System.ComponentModel.ISupportInitialize).EndInit
         Me.fraOpenShop.ResumeLayout(false)
         Me.fraChangeLevel.ResumeLayout(false)
         Me.fraChangeLevel.PerformLayout
@@ -5558,9 +5469,6 @@ Partial Class FrmEditor_Events
         Me.fraChangeGender.PerformLayout
         Me.fraGoToLabel.ResumeLayout(false)
         Me.fraGoToLabel.PerformLayout
-        Me.fraHidePic.ResumeLayout(false)
-        Me.fraHidePic.PerformLayout
-        CType(Me.nudHidePic,System.ComponentModel.ISupportInitialize).EndInit
         Me.fraBeginQuest.ResumeLayout(false)
         Me.fraBeginQuest.PerformLayout
         Me.fraShowChoices.ResumeLayout(false)
@@ -5630,6 +5538,13 @@ Partial Class FrmEditor_Events
         CType(Me.nudCondition_LevelAmount,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.nudCondition_HasItem,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.nudCondition_PlayerVarCondition,System.ComponentModel.ISupportInitialize).EndInit
+        Me.fraPlayAnimation.ResumeLayout(false)
+        Me.fraPlayAnimation.PerformLayout
+        CType(Me.nudPlayAnimTileY,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.nudPlayAnimTileX,System.ComponentModel.ISupportInitialize).EndInit
+        Me.fraSetWait.ResumeLayout(false)
+        Me.fraSetWait.PerformLayout
+        CType(Me.nudWaitAmount,System.ComponentModel.ISupportInitialize).EndInit
         Me.pnlVariableSwitches.ResumeLayout(false)
         Me.FraRenaming.ResumeLayout(false)
         Me.fraRandom10.ResumeLayout(false)
@@ -5908,11 +5823,6 @@ End Sub
     Friend WithEvents DarkLabel58 As DarkUI.Controls.DarkLabel
     Friend WithEvents btnBeginQuestOk As DarkUI.Controls.DarkButton
     Friend WithEvents btnBeginQuestCancel As DarkUI.Controls.DarkButton
-    Friend WithEvents fraHidePic As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents nudHidePic As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel59 As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnHidePicOk As DarkUI.Controls.DarkButton
-    Friend WithEvents btnHidePicCancel As DarkUI.Controls.DarkButton
     Friend WithEvents fraGoToLabel As DarkUI.Controls.DarkGroupBox
     Friend WithEvents txtGotoLabel As DarkUI.Controls.DarkTextBox
     Friend WithEvents DarkLabel60 As DarkUI.Controls.DarkLabel
@@ -5945,8 +5855,6 @@ End Sub
     Friend WithEvents btnOpenShopOk As DarkUI.Controls.DarkButton
     Friend WithEvents btnOpenShopCancel As DarkUI.Controls.DarkButton
     Friend WithEvents fraShowPic As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbPicIndex As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel66 As DarkUI.Controls.DarkLabel
     Friend WithEvents DarkLabel67 As DarkUI.Controls.DarkLabel
     Friend WithEvents DarkLabel68 As DarkUI.Controls.DarkLabel
     Friend WithEvents nudPicOffsetY As DarkUI.Controls.DarkNumericUpDown

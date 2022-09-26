@@ -120,6 +120,17 @@ Module C_Database
 
     End Sub
 
+    Friend Sub CheckPictures()
+        Dim i As Integer
+        i = 1
+
+        While File.Exists(Paths.Graphics & "Pictures\" & i & GfxExt)
+            NumPictures = NumPictures + 1
+            i = i + 1
+        End While
+
+    End Sub
+
     Friend Sub CacheMusic()
         ReDim MusicCache(Directory.GetFiles(Paths.Music, "*.ogg").Count)
         Dim files As String() = Directory.GetFiles(Paths.Music, "*.ogg")
