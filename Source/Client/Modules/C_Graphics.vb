@@ -2974,6 +2974,7 @@ NextLoop:
 
         If Map.Moral = CByte(MapMoralType.Indoors) Then
             NightGfx.Clear(New Color(CByte(0), CByte(0), CByte(0), CByte(Map.Brightness)))
+            Exit Sub
         End If
 
         If Map.Brightness > 0 Then
