@@ -26,6 +26,7 @@ Friend Class frmEditor_Pet
     End Sub
 
     Private Sub LstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
+        If lstIndex.SelectedIndex = 0 Then lstIndex.SelectedIndex = 1
         PetEditorInit()
     End Sub
 
@@ -34,7 +35,7 @@ Friend Class frmEditor_Pet
 
         tmpindex = lstIndex.SelectedIndex
         Pet(Editorindex).Name = Trim$(txtName.Text)
-lstIndex.Items.RemoveAt(EditorIndex)
+        lstIndex.Items.RemoveAt(EditorIndex)
         lstIndex.Items.Insert(EditorIndex, Editorindex & ": " & Pet(Editorindex).Name)
         lstIndex.SelectedIndex = tmpindex
     End Sub

@@ -136,6 +136,7 @@ Friend Class frmEditor_Job
     End Sub
 
     Private Sub lstIndex_Click(sender As Object, e As EventArgs) Handles lstIndex.Click
+        If lstIndex.SelectedIndex = 0 Then lstIndex.SelectedIndex = 1
         JobEditorInit
     End Sub
 

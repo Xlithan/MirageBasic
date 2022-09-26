@@ -165,7 +165,7 @@ Module S_NetworkReceive
 
         If Not IsPlaying(index) AndAlso Not IsLoggedIn(index) Then
             'Get the Data
-            username = EKeyPair.DecryptString(buffer.ReadString)
+            username = EKeyPair.DecryptString(buffer.ReadString).ToLower
             password = EKeyPair.DecryptString(buffer.ReadString)
 
             ' Check versions
@@ -252,7 +252,7 @@ Module S_NetworkReceive
         AddDebug("Recieved CMSG: CDelChar")
 
         ' Get the data
-        Name = buffer.ReadString
+        Name = buffer.ReadString.ToLower
 
         If GetPlayerLogin(index) = Name.Trim Then
             PlayerMsg(index, "You cannot delete your own account while online!", ColorType.BrightRed)
@@ -297,7 +297,7 @@ Module S_NetworkReceive
                 End If
 
                 ' Get the data
-                name = EKeyPair.DecryptString(buffer.ReadString())
+                name = EKeyPair.DecryptString(buffer.ReadString()).ToLower
                 password = EKeyPair.DecryptString(buffer.ReadString())
 
                 ' Check versions
@@ -307,12 +307,12 @@ Module S_NetworkReceive
                 End If
 
                 If name.Trim.Length < MIN_STRING_LENGTH OrElse password.Trim.Length < MIN_STRING_LENGTH Then
-                    AlertMsg(index, "Your name and password must be at least three characters in length")
+                    AlertMsg(index, "Your name and password must be at least " & MIN_STRING_LENGTH & " characters in length")
                     Exit Sub
                 End If
 
                 If name.Trim.Length > MAX_STRING_LENGTH OrElse password.Trim.Length > MAX_STRING_LENGTH Then
-                    AlertMsg(index, "Your name and password must be 21 characters or less!")
+                    AlertMsg(index, "Your name and password must be " & MAX_STRING_LENGTH & " characters or less!")
                 End If
 
                 If Not AccountExist(name) Then

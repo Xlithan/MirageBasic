@@ -14,21 +14,21 @@ Namespace Paths
         ''' <summary> Returns contents directory </summary>
         Public ReadOnly Property Contents As String
             Get
-                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Contents\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "//Contents//"
             End Get
         End Property
 
         ''' <summary> Returns database directory </summary>
         Public ReadOnly Property Database As String
             Get
-                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "//Database//"
             End Get
         End Property
 
         ''' <summary> Returns configuration directory </summary>
         Public ReadOnly Property Config As String
             Get
-                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Configuration\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "//Configuration//"
             End Get
         End Property
 
@@ -67,7 +67,7 @@ Namespace Paths
         ''' <summary> Returns accounts directory <\summary>
         Public ReadOnly Property Accounts As String
             Get
-                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Accounts\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "//Database//Accounts//"
             End Get
         End Property
 
@@ -79,7 +79,7 @@ Namespace Paths
         ''' <summary> Returns animations directory <\summary>
         Public ReadOnly Property Animations As String
             Get
-                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Animations\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "//Database//Animations//"
             End Get
         End Property
 
@@ -91,7 +91,7 @@ Namespace Paths
         ''' <summary> Returns items directory <\summary>
         Public ReadOnly Property Items As String
             Get
-                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Items\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "//Database//Items//"
             End Get
         End Property
 
@@ -103,14 +103,14 @@ Namespace Paths
         ''' <summary> Returns logs directory <\summary>
         Public ReadOnly Property Logs As String
             Get
-                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Logs\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "//Logs//"
             End Get
         End Property
 
         ''' <summary> Returns maps directory <\summary>
         Public ReadOnly Property Maps As String
             Get
-                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Maps\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "//Database//Maps//"
             End Get
         End Property
 
@@ -127,7 +127,7 @@ Namespace Paths
         ''' <summary> Returns npcs directory <\summary>
         Public ReadOnly Property Npcs As String
             Get
-                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Npcs\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "//Database//Npcs//"
             End Get
         End Property
 
@@ -139,7 +139,7 @@ Namespace Paths
         ''' <summary> Returns pets directory <\summary>
         Public ReadOnly Property Pets As String
             Get
-                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Pets\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "//Database//Pets//"
             End Get
         End Property
 
@@ -151,7 +151,7 @@ Namespace Paths
         ''' <summary> Returns projectiles directory <\summary>
         Public ReadOnly Property Projectiles As String
             Get
-                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Projectiles\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "//Database//Projectiles//"
             End Get
         End Property
 
@@ -163,7 +163,7 @@ Namespace Paths
         ''' <summary> Returns quests directory <\summary>
         Public ReadOnly Property Quests As String
             Get
-                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Quests\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "//Database//Quests//"
             End Get
         End Property
 
@@ -175,7 +175,7 @@ Namespace Paths
         ''' <summary> Returns resources directory <\summary>
         Public ReadOnly Property Resources As String
             Get
-                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Resources\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "//Database//Resources//"
             End Get
         End Property
 
@@ -187,7 +187,7 @@ Namespace Paths
         ''' <summary> Returns shops directory <\summary>
         Public ReadOnly Property Shops As String
             Get
-                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Shops\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "//Database//Shops//"
             End Get
         End Property
 
@@ -199,7 +199,7 @@ Namespace Paths
         ''' <summary> Returns skills directory <\summary>
         Public ReadOnly Property Skills As String
             Get
-                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Skills\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "//Database//Skills//"
             End Get
         End Property
 
@@ -211,7 +211,7 @@ Namespace Paths
         ''' <summary> Returns jobs directory </summary>
         Public ReadOnly Property Jobs As String
             Get
-                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "\Database\Jobs\"
+                Return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) & "//Database//Jobs//"
             End Get
         End Property
 
