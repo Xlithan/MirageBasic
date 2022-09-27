@@ -10,7 +10,8 @@ Module C_General
     Friend Function GetTickCount() As Integer
         Return Environment.TickCount
     End Function
-Sub Startup()
+
+    Sub Startup()
         SetStatus(Language.Load.Loading) 
         FrmMenu.Text = Settings.GameName
         FrmMenu.Visible = True
@@ -22,6 +23,12 @@ Sub Startup()
     End Sub
 
     Friend Function LoadGame()
+        If Screen.PrimaryScreen.Bounds.Height < 1024 Or Screen.PrimaryScreen.Bounds.Width < 768 Then
+            MsgBox("The game requires a minimum system resolution of 1024x768.")
+            DestroyGame
+            Exit Function
+        End If
+
         LoadSettings()
         LoadLanguage()
         LoadInputs()
