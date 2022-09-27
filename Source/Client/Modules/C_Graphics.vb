@@ -178,6 +178,10 @@ Module C_Graphics
     Friend ExpBarSprite As Sprite
     Friend ExpBarGfxInfo As GraphicInfo
 
+    Friend XpBarPanelGfx As Texture
+    Friend XpBarPanelSprite As Sprite
+    Friend XpBarPanelGfxInfo As GraphicInfo
+
     Friend ActionPanelGfx As Texture
     Friend ActionPanelSprite As Sprite
     Friend ActionPanelGfxInfo As GraphicInfo
@@ -505,6 +509,17 @@ Module C_Graphics
             'Cache the width and height
             ExpBarGfxInfo.Width = ExpBarGfx.Size.X
             ExpBarGfxInfo.Height = ExpBarGfx.Size.Y
+        End If
+
+        XpBarPanelGfxInfo = New GraphicInfo
+        If File.Exists(Paths.Gui & "Main\xpbar" & GfxExt) Then
+            'Load texture first, dont care about memory streams (just use the filename)
+            XpBarPanelGfx = New Texture(Paths.Gui & "Main\xpbar" & GfxExt)
+            XpBarPanelSprite = New Sprite(XpBarPanelGfx)
+
+            'Cache the width and height
+            XpBarPanelGfxInfo.Width = XpBarPanelGfx.Size.X
+            XpBarPanelGfxInfo.Height = XpBarPanelGfx.Size.Y
         End If
 
         ActionPanelGfxInfo = New GraphicInfo
@@ -2197,6 +2212,7 @@ Module C_Graphics
             If Not DirectionsGfx Is Nothing Then DirectionsGfx.Dispose()
             If Not ActionPanelGfx Is Nothing Then ActionPanelGfx.Dispose()
             If Not InvPanelGfx Is Nothing Then InvPanelGfx.Dispose()
+            If Not XpBarPanelGfx Is Nothing Then XpBarPanelGfx.Dispose()
             If Not CharPanelGfx Is Nothing Then CharPanelGfx.Dispose()
             If Not CharPanelPlusGfx Is Nothing Then CharPanelPlusGfx.Dispose()
             If Not CharPanelMinGfx Is Nothing Then CharPanelMinGfx.Dispose()
@@ -2334,12 +2350,19 @@ Module C_Graphics
             .Width = curExp * ExpBarGfxInfo.Width / 100
         End With
 
-        RenderSprite(ExpBarSprite, GameWindow, HudWindowX + HudexpBarX, HudWindowY + HudexpBarY + 4, rec.X, rec.Y,
-                     rec.Width, rec.Height)
+        If GameWindow.Size.X >= 1336 Then
+            RenderSprite(XpBarPanelSprite, GameWindow, GameWindow.Size.X / 2 - XpBarPanelGfxInfo.Width / 2, GameWindow.Size.Y - XpBarPanelGfxInfo.Height, 0, 0, XpBarPanelGfxInfo.Width,
+                         XpBarPanelGfxInfo.Height)
 
-        'draw text onto that
-        DrawText(HudWindowX + 85, HudWindowY + 2, "Exp: " & GetPlayerExp(Myindex) & "/" & NextlevelExp, Color.White,
-                 Color.Black, GameWindow)
+            RenderSprite(ExpBarSprite, GameWindow, GameWindow.Size.X / 2 - ExpBarGfxInfo.Width / 2, GameWindow.Size.Y - ExpBarGfxInfo.Height - 7, rec.X, rec.Y,
+                         rec.Width, rec.Height)
+        Else
+            RenderSprite(XpBarPanelSprite, GameWindow, GameWindow.Size.X - XpBarPanelGfxInfo.Width, 0, 0, 0, XpBarPanelGfxInfo.Width,
+                         XpBarPanelGfxInfo.Height)
+
+            RenderSprite(ExpBarSprite, GameWindow, GameWindow.Size.X - ExpBarGfxInfo.Width - 12, 0 + ExpBarGfxInfo.Height, rec.X, rec.Y,
+                         rec.Width, rec.Height)
+        End If
     End Sub
 
     Sub DrawActionPanel()
@@ -2355,7 +2378,6 @@ Module C_Graphics
 
         RenderSprite(ActionPanelSprite, GameWindow, ActionPanelX + 20, ActionPanelY, rec.X, rec.Y, rec.Width, rec.Height)
     End Sub
-
 
     Friend Sub DrawInventoryItem(x As Integer, y As Integer)
         Dim rec As Rectangle

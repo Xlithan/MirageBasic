@@ -121,6 +121,9 @@
     <None Update="Contents\Graphics\Pictures\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Contents\Gui\Main\xpbar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Contents\Gui\Menu\btn_createacc.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
