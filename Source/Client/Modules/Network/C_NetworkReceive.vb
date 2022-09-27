@@ -182,6 +182,18 @@ Module C_NetworkReceive
     Private Sub Packet_LoadCharOk(ByRef data() As Byte)
         Dim buffer As New ByteStream(data)
 
+        ' save options
+        Settings.SavePass = ChkSavePassChecked
+        Settings.Username = Trim$(TempUserName)
+
+        If ChkSavePassChecked = False Then
+            Settings.Password = ""
+        Else
+            Settings.Password = Trim$(TempPassword)
+        End If
+
+        SaveSettings()
+
         ' Now we can receive game data
         Myindex = buffer.ReadInt32
 

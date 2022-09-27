@@ -317,14 +317,6 @@ Friend Class FrmMenu
     Private Sub ChkSavePass_CheckedChanged(sender As Object, e As EventArgs) Handles chkSavePass.CheckedChanged
         ChkSavePassChecked = chkSavePass.Checked
         Settings.SavePass = ChkSavePassChecked
-        If chkSavePass.Checked = true Then
-            Settings.Username = txtLogin.Text
-            Settings.Password = txtPassword.Text
-        Else
-            Settings.Username = ""
-            Settings.Password = ""
-        End If
-
         SaveSettings
     End Sub
 

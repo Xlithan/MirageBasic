@@ -367,8 +367,8 @@ Module C_Graphics
         ReDim ParallaxGfxInfo(NumParallax)
 
         ReDim PictureGfx(NumPictures)
-        ReDim PictureSprite(NumParallax)
-        ReDim PictureGfxInfo(NumParallax)
+        ReDim PictureSprite(NumPictures)
+        ReDim PictureGfxInfo(NumPictures)
 
         'sadly, gui shit is always needed, so we preload it :/
         CursorInfo = New GraphicInfo
