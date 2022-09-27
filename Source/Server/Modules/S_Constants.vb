@@ -9,5 +9,4 @@
     Friend Const ITEM_DESPAWN_TIME As Long = 90000 ' 1:30 seconds
 
     Friend Const STAT_PER_LEVEL As Byte = 5
-    Friend Const MAX_CHARACTERS As Byte = 3
 End Module

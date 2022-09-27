@@ -801,8 +801,8 @@ Public Module Types
     Public Structure CharSelStruct
         Dim Name As String
         Dim Sprite As Integer
-        Dim Gender As Integer
-        Dim ClassName As String
+        Dim Sex As Integer
+        Dim JobName As String
         Dim Level As Integer
     End Structure
 

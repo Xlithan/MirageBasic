@@ -33,7 +33,7 @@ Module S_NetworkReceive
         Socket.PacketId(ClientPackets.CMapGetItem) = AddressOf Packet_GetItem
         Socket.PacketId(ClientPackets.CMapDropItem) = AddressOf Packet_DropItem
         Socket.PacketId(ClientPackets.CMapRespawn) = AddressOf Packet_RespawnMap
-        Socket.PacketId(ClientPackets.CMapReport) = AddressOf Packet_MapReport 'Mapreport
+        Socket.PacketId(ClientPackets.CMapReport) = AddressOf Packet_MapReport
         Socket.PacketId(ClientPackets.CKickPlayer) = AddressOf Packet_KickPlayer
         Socket.PacketId(ClientPackets.CBanList) = AddressOf Packet_Banlist
         Socket.PacketId(ClientPackets.CBanDestroy) = AddressOf Packet_DestroyBans
@@ -219,20 +219,7 @@ Module S_NetworkReceive
                 Console.WriteLine("Account " & username & " has been created.")
                 Addlog("Account " & username & " has been created.", PLAYER_LOG)
                 Call SetPlayerLogin(index, username)
-
-                ' Load the player
-                LoadPlayer(index)
-
-                ' Check if character data has been created
-                If Player(index).Name.Trim.Length > 0 Then
-                    ' we have a char!
-                    HandleUseChar(index)
-                Else
-                    ' send new char shit
-                    If Not IsPlaying(index) Then
-                        SendNewCharJob(index)
-                    End If
-                End If
+                SendLoginOk(index)
 
                 ' Show the player up on the socket status
                 Addlog(GetPlayerLogin(index) & " has logged in from " & Socket.ClientIp(index) & ".", PLAYER_LOG)
@@ -332,19 +319,13 @@ Module S_NetworkReceive
 
                 ' Load the player
                 SetPlayerLogin(index, name)
-                LoadPlayer(index)
+                LoadAccount(index)
                 LoadBank(index)
 
                 ' Show the player up on the socket status
                 Addlog(GetPlayerLogin(index) & " has logged in from " & Socket.ClientIp(index) & ".", PLAYER_LOG)
                 Console.WriteLine(GetPlayerLogin(index) & " has logged in from " & Socket.ClientIp(index) & ".")
-
-                ' Check if character data has been created
-                If Player(index).Name.Trim.Length > 0 Then
-                    HandleUseChar(index)
-                Else
-                    SendNewCharJob(index)
-                End If
+                SendLoginOk(index)
             End If
         End If
     End Sub
@@ -360,11 +341,14 @@ Module S_NetworkReceive
 
                 slot = buffer.ReadInt32
 
+                If slot < 1 Or slot > MAX_CHARACTERS Then slot = 1
+
+                LoadCharacter(index, slot)
+
                 ' Check if character data has been created
                 If Len(Trim$(Player(index).Name)) > 0 Then
                     ' we have a char!
                     HandleUseChar(index)
-                    LoadBank(index)
                 Else
                     SendNewCharJob(index)
                 End If

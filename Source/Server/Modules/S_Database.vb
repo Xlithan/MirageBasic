@@ -1045,7 +1045,7 @@ Module modDatabase
         SaveCharacter(index, Account(index).Index)
     End Sub
 
-    Sub LoadPlayer(index As Integer)
+    Sub LoadAccount(index As Integer)
         Dim filename As String = Paths.Database & "Accounts\" & GetPlayerLogin(index) & ".bin"
         ClearPlayer(index)
         Dim reader As New ByteStream(100)
@@ -1059,8 +1059,6 @@ Module modDatabase
         For i = 1 To MAX_CHARACTERS
             SetPlayerCharName(index, i, reader.ReadString())
         Next
-
-        LoadCharacter(index, Account(index).Index)
     End Sub
 
     Sub ClearAccount(index As Integer)

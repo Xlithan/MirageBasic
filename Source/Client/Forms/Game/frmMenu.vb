@@ -553,7 +553,7 @@ Friend Class FrmMenu
 
         newSelectedChar = 0
 
-       For i = 0 To MaxChars
+       For i = 0 To MAX_CHARACTERS
             If CharSelection(i).Name = "" Then
                 newSelectedChar = i
                 Exit For
