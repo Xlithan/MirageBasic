@@ -197,8 +197,8 @@ Friend Module C_EventSystem
         InitEventEditorForm = True
         If TmpEvent.Pages(1).CommandListCount = 0 Then
             ReDim Preserve TmpEvent.Pages(1).CommandList(1)
-            TmpEvent.Pages(1).CommandListCount = 0
-            TmpEvent.Pages(1).CommandList(1).CommandCount = 0
+            TmpEvent.Pages(1).CommandListCount = 1
+            TmpEvent.Pages(1).CommandList(1).CommandCount = 1
             ReDim Preserve TmpEvent.Pages(1).CommandList(1).Commands(TmpEvent.Pages(1).CommandList(1).CommandCount)
         End If
     End Sub
@@ -813,9 +813,9 @@ newlist:
         Else
             curlist = EventList(FrmEditor_Events.lstCommands.SelectedIndex + 1).CommandList
         End If
-
-        ReDim Preserve TmpEvent.Pages(CurPageNum).CommandList(curlist)
+      
         TmpEvent.Pages(CurPageNum).CommandListCount = TmpEvent.Pages(CurPageNum).CommandListCount + 1
+        ReDim Preserve TmpEvent.Pages(CurPageNum).CommandList(TmpEvent.Pages(CurPageNum).CommandListCount)
         TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount + 1
         p = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
         ReDim Preserve TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(p)
