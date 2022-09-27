@@ -1024,10 +1024,10 @@ Module modDatabase
     End Sub
 
     Sub SavePlayer(index As Integer)
-        Dim filename As String = Paths.Database & "Accounts\" & GetPlayerLogin(index) & ".bin"
+        Dim filename As String = Paths.Database & "Accounts\\" & GetPlayerLogin(index) & ".bin"
 
         ' Create path to character folder
-        CheckDir(Paths.Database & "Accounts\" & GetPlayerLogin(index) & "\")
+        CheckDir(Paths.Database & "Accounts\\" & GetPlayerLogin(index) & "\\")
 
         Dim writer As New ByteStream(Account.Length)
 
@@ -1045,8 +1045,8 @@ Module modDatabase
         SaveCharacter(index, Account(index).Index)
     End Sub
 
-    Sub LoadPlayer(index As Integer)
-        Dim filename As String = Paths.Database & "Accounts\" & GetPlayerLogin(index) & ".bin"
+    Sub LoadAccount(index As Integer)
+        Dim filename As String = Paths.Database & "Accounts\\" & GetPlayerLogin(index) & ".bin"
         ClearPlayer(index)
         Dim reader As New ByteStream(100)
         ByteFile.Load(filename, reader)
@@ -1059,8 +1059,6 @@ Module modDatabase
         For i = 1 To MAX_CHARACTERS
             SetPlayerCharName(index, i, reader.ReadString())
         Next
-
-        LoadCharacter(index, Account(index).Index)
     End Sub
 
     Sub ClearAccount(index As Integer)
@@ -1301,7 +1299,7 @@ Module modDatabase
     End Sub
 
     Sub LoadCharacter(index As Integer, charNum As Integer)
-        Dim filename As String = Paths.Database & "Accounts\" & GetPlayerLogin(index) & "\" & GetCharName(index, charNum) & ".bin"
+        Dim filename As String = Paths.Database & "Accounts\\" & GetPlayerLogin(index) & "\\" & GetCharName(index, charNum) & ".bin"
 
         ClearCharacter(index)
 
@@ -1431,7 +1429,7 @@ Module modDatabase
     End Sub
 
     Sub SaveCharacter(index As Integer, charNum As Integer)
-        Dim filename As String = Paths.Database & "Accounts\" & GetPlayerLogin(index) & "\" & GetCharName(index, charNum) & ".bin"
+        Dim filename As String = Paths.Database & "Accounts\\" & GetPlayerLogin(index) & "\\" & GetCharName(index, charNum) & ".bin"
 
         Dim writer As New ByteStream(Player.Length)
 

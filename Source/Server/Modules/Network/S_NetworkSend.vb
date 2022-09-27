@@ -1,6 +1,7 @@
 ﻿Imports Mirage.Sharp.Asfw
 Imports Mirage.Sharp.Asfw.IO
 Imports Mirage.Basic.Engine
+Imports System.Reflection.Emit
 
 Module S_NetworkSend
 
@@ -44,8 +45,7 @@ Module S_NetworkSend
         Dim i As Integer, n As Integer
         Dim buffer As New ByteStream(4)
         buffer.WriteInt32(ServerPackets.SNewCharJob)
-
-        For i = 0 To MAX_JOBS
+For i = 0 To MAX_JOBS
             buffer.WriteString((job(i).Name.Trim()))
             buffer.WriteString((Trim$(Job(i).Desc)))
 
@@ -115,7 +115,7 @@ Module S_NetworkSend
         AddDebug("Sent SMSG: SInGame")
 
         Buffer.Dispose()
-    End Sub
+End Sub
 
     sub SendUpdateJobTo(index as Integer, jobNum as integer)
 
@@ -134,7 +134,7 @@ Module S_NetworkSend
 
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
         buffer.Dispose()
-    End Sub
+End Sub
 
     Sub SendJobToAll(jobNum as Integer)
         Dim i As Integer
@@ -541,16 +541,16 @@ Module S_NetworkSend
 
             For X = 0 To Map(mapNum).MaxX
                 For Y = 0 To Map(mapNum).MaxY
-                    buffer.WriteInt32(Map(mapNum).Tile(x, y).Data1)
-                    buffer.WriteInt32(Map(mapNum).Tile(x, y).Data2)
-                    buffer.WriteInt32(Map(mapNum).Tile(x, y).Data3)
+buffer.WriteInt32(Map(mapNum).Tile(x, y).Data1)
+buffer.WriteInt32(Map(mapNum).Tile(x, y).Data2)
+buffer.WriteInt32(Map(mapNum).Tile(x, y).Data3)
                     buffer.WriteInt32(Map(mapNum).Tile(x, y).DirBlock)
                     For i = 0 To LayerType.Count - 1
                         buffer.WriteInt32(Map(mapNum).Tile(x, y).Layer(i).Tileset)
-                        buffer.WriteInt32(Map(mapNum).Tile(x, y).Layer(i).X)
-                        buffer.WriteInt32(Map(mapNum).Tile(x, y).Layer(i).Y)
-                        buffer.WriteInt32(Map(mapNum).Tile(x, y).Layer(i).AutoTile)
-                    Next
+buffer.WriteInt32(Map(mapNum).Tile(x, y).Layer(i).X)
+buffer.WriteInt32(Map(mapNum).Tile(x, y).Layer(i).Y)
+buffer.WriteInt32(Map(mapNum).Tile(x, y).Layer(i).AutoTile)
+Next
                     buffer.WriteInt32(Map(mapNum).Tile(x, y).Type)
 
                 Next
@@ -943,9 +943,8 @@ Module S_NetworkSend
         Next
 
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
-
-        buffer.Dispose()
-    End Sub
+buffer.Dispose()
+End Sub
 
     Sub SendClearSkillBuffer(index As Integer)
         Dim buffer As New ByteStream(4)
@@ -1328,6 +1327,25 @@ Module S_NetworkSend
         SendDataToAll(Buffer.Data, Buffer.Head)
 
         Buffer.Dispose()
+    End Sub
+
+    Sub SendLoginOk(index As Integer)
+        Dim buffer As New ByteStream(4)
+        buffer.WriteInt32(Packets.ServerPackets.SLoginOk)
+        
+        For i = 1 To MAX_CHARACTERS
+            LoadCharacter(index, i)
+            buffer.WriteString(Player(index).Name.Trim)
+            buffer.WriteInt32(Player(index).Sprite)
+            buffer.WriteInt32(Player(index).Level)
+            buffer.WriteString(Job(Player(index).Job).Name.Trim)
+            buffer.WriteInt32(Player(index).Sex)
+        Next
+
+        Socket.SendDataTo(index, buffer.Data, buffer.Head)
+        AddDebug("Sent SMSG: SLoginOk")
+
+        buffer.Dispose()
     End Sub
 
 End Module

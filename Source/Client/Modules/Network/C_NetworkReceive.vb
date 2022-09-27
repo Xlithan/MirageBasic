@@ -107,7 +107,8 @@ Module C_NetworkReceive
         Socket.PacketId(ServerPackets.SMapEventData) = AddressOf Packet_MapEventData
         Socket.PacketId(ServerPackets.SChatBubble) = AddressOf Packet_ChatBubble
         Socket.PacketId(ServerPackets.SSpecialEffect) = AddressOf Packet_SpecialEffect
-        'SPic
+
+        Socket.PacketId(ServerPackets.SPic) = AddressOf Packet_Picture
         Socket.PacketId(ServerPackets.SHoldPlayer) = AddressOf Packet_HoldPlayer
 
         Socket.PacketId(ServerPackets.SUpdateProjectile) = AddressOf HandleUpdateProjectile
@@ -192,7 +193,7 @@ Module C_NetworkReceive
 
     Private Sub Packet_LoginOk(ByRef data() As Byte)
         Dim charName As String, sprite As Integer
-        Dim level As Integer, className As String, gender As Byte
+        Dim level As Integer, jobName As String, sex As Byte
 
         ' save options
         Settings.SavePass = ChkSavePassChecked
@@ -206,37 +207,31 @@ Module C_NetworkReceive
 
         SaveSettings()
 
-        ' Request Job.
-        SendRequestEditJob()
-
         Dim buffer As New ByteStream(data)
-        ' Now we can receive char data
-        MaxChars = buffer.ReadInt32
-        ReDim CharSelection(MaxChars)
 
         SelectedChar = 1
 
         'reset for deleting chars
-       For i = 0 To MaxChars
+       For i = 1 To MAX_CHARACTERS
             CharSelection(i).Name = ""
             CharSelection(i).Sprite = 0
             CharSelection(i).Level = 0
-            CharSelection(i).ClassName = ""
-            CharSelection(i).Gender = 0
+            CharSelection(i).JobName = ""
+            CharSelection(i).Sex = 0
         Next
 
-       For i = 0 To MaxChars
+       For i = 1 To MAX_CHARACTERS
             charName = buffer.ReadString
             sprite = buffer.ReadInt32
             level = buffer.ReadInt32
-            className = buffer.ReadString
-            gender = buffer.ReadInt32
+            jobName = buffer.ReadString
+            sex = buffer.ReadInt32
 
             CharSelection(i).Name = charName
             CharSelection(i).Sprite = sprite
             CharSelection(i).Level = level
-            CharSelection(i).ClassName = className
-            CharSelection(i).Gender = gender
+            CharSelection(i).JobName = jobName
+            CharSelection(i).Sex = sex
         Next
 
         buffer.Dispose()

@@ -197,6 +197,7 @@ Public Class FrmEditor_Events
         For i = 0 To TmpEvent.PageCount
             tabPages.TabPages.Add(Str(i))
         Next
+
         ' items
         cmbHasItem.Items.Clear()
         For i = 0 To MAX_ITEMS
@@ -224,6 +225,9 @@ Public Class FrmEditor_Events
 
         nudShowTextFace.Maximum = NumFaces
         nudShowChoicesFace.Maximum = NumFaces
+        nudShowPicture.Maximum = NumPictures
+
+        cmbPicLoc.SelectedIndex = 0
 
         fraDialogue.Visible = False
 
@@ -232,10 +236,14 @@ Public Class FrmEditor_Events
          ' Load page 1 to start off with
         CurPageNum = 1
         If TmpEvent.Name = Nothing Then TmpEvent.Name = ""
-        txtName.Text = TmpEvent.Name
+        txtName.Text = TmpEvent.Name 
 
         EventEditorLoadPage(CurPageNum) 
         EditorEvent_DrawGraphic()
+    End Sub
+
+    Private Sub FrmEditor_Events_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        TmpEvent = Nothing
     End Sub
 
     Private Sub BtnOK_Click(sender As Object, e As EventArgs) Handles btnOk.Click
@@ -639,12 +647,12 @@ Public Class FrmEditor_Events
             'Shop, bank etc
 
             'Open bank
-            Case "Open bank"
+            Case "Open Bank"
                 AddCommand(EventType.OpenBank)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Open shop
-            Case "Open shop"
+            Case "Open Shop"
                 fraDialogue.Visible = True
                 fraOpenShop.Visible = True
                 cmbOpenShop.SelectedIndex = 0
@@ -654,7 +662,7 @@ Public Class FrmEditor_Events
                 AddCommand(EventType.OpenMail)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
-        'cutscene options
+            'cutscene options
 
             'Fade in
             Case "Fade In"
@@ -667,14 +675,13 @@ Public Class FrmEditor_Events
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Flash white
-            Case 48
+            Case "Flash White"
                 AddCommand(EventType.FlashWhite)
                 fraCommands.Visible = False
                 fraDialogue.Visible = False
             'Show pic
-            Case 49
-                cmbPicIndex.SelectedIndex = 0
-                nudShowPicture.Value = 1
+            Case "Show Picture"
+                nudShowPicture.Value = 0
                 cmbPicLoc.SelectedIndex = 0
                 nudPicOffsetX.Value = 0
                 nudPicOffsetY.Value = 0
@@ -682,12 +689,10 @@ Public Class FrmEditor_Events
                 fraShowPic.Visible = True
                 fraCommands.Visible = False
             'Hide pic
-            Case 50
-                nudHidePic.Value = 0
-                fraDialogue.Visible = True
-                fraHidePic.Visible = True
+            Case "Hide Picture"
+                AddCommand(EventType.HidePicture)
                 fraCommands.Visible = False
-
+                fraDialogue.Visible = false
         End Select
     End Sub
 
@@ -1196,16 +1201,11 @@ Public Class FrmEditor_Events
     End Sub
 
     Private Sub BtnEditCommand_Click(sender As Object, e As EventArgs) Handles btnEditCommand.Click
-        If lstCommands.SelectedIndex > -1 Then
-            EditEventCommand()
-        End If
+        EditEventCommand()
     End Sub
 
     Private Sub BtnDeleteComand_Click(sender As Object, e As EventArgs) Handles btnDeleteCommand.Click
-        If lstCommands.SelectedIndex > -1 Then
-            DeleteEventCommand()
-        End If
-
+         DeleteEventCommand()
     End Sub
 
     Private Sub BtnClearCommand_Click(sender As Object, e As EventArgs) Handles btnClearCommand.Click
@@ -1231,13 +1231,13 @@ Public Class FrmEditor_Events
        For i = 0 To MAX_SWITCHES
             lstSwitches.Items.Add(CStr(i) & ". " & Trim$(Switches(i)))
         Next
-        lstSwitches.SelectedIndex = 0
+        lstSwitches.SelectedIndex = 1
         lstVariables.Items.Clear()
 
        For i = 0 To NAX_VARIABLES
             lstVariables.Items.Add(CStr(i) & ". " & Trim$(Variables(i)))
         Next
-        lstVariables.SelectedIndex = 0
+        lstVariables.SelectedIndex = 1
 
     End Sub
 
@@ -1303,6 +1303,10 @@ Public Class FrmEditor_Events
         TmpEvent.Name = Trim$(txtName.Text)
     End Sub
 
+    Private Sub lstVariables_Click(sender As Object, e As EventArgs) Handles lstVariables.Click
+        If lstVariables.SelectedIndex = 0 Then  lstVariables.SelectedIndex = 1
+    End Sub
+
     Private Sub LstVariables_DoubleClick(sender As Object, e As EventArgs) Handles lstVariables.DoubleClick
         If lstVariables.SelectedIndex > -1 AndAlso lstVariables.SelectedIndex < NAX_VARIABLES Then
             FraRenaming.Visible = True
@@ -1312,6 +1316,10 @@ Public Class FrmEditor_Events
             RenameType = 1
             Renameindex = lstVariables.SelectedIndex
         End If
+    End Sub
+
+    Private Sub lstSwitches_Click(sender As Object, e As EventArgs) Handles lstSwitches.Click
+        If lstSwitches.SelectedIndex = 0 Then  lstSwitches.SelectedIndex = 1
     End Sub
 
     Private Sub LstSwitches_DoubleClick(sender As Object, e As EventArgs) Handles lstSwitches.DoubleClick
@@ -2553,26 +2561,8 @@ Public Class FrmEditor_Events
         fraShowPic.Visible = False
     End Sub
 
-#End Region
-
-#Region "Hide Pic"
-
-    Private Sub BtnHidePicOK_Click(sender As Object, e As EventArgs) Handles btnHidePicOk.Click
-        If Not IsEdit Then
-            AddCommand(EventType.HidePicture)
-        Else
-            EditCommand()
-        End If
-        ' hide
-        fraDialogue.Visible = False
-        fraHidePic.Visible = False
-        fraCommands.Visible = False
-    End Sub
-
-    Private Sub BtnHidePicCancel_Click(sender As Object, e As EventArgs) Handles btnHidePicCancel.Click
-        If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
-        fraDialogue.Visible = False
-        fraHidePic.Visible = False
+    Private Sub nudShowPicture_Click(sender As Object, e As EventArgs) Handles nudShowPicture.Click
+        EditorEvent_DrawPicture()
     End Sub
 
 #End Region
@@ -2595,10 +2585,6 @@ Public Class FrmEditor_Events
         If Not IsEdit Then fraCommands.Visible = True Else fraCommands.Visible = False
         fraDialogue.Visible = False
         fraOpenShop.Visible = False
-    End Sub
-
-    Private Sub FrmEditor_Events_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        TmpEvent = Nothing
     End Sub
 
 #End Region

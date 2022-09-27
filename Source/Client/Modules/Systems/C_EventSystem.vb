@@ -60,6 +60,8 @@ Friend Module C_EventSystem
     Friend HoldPlayer As Boolean
     Friend InitEventEditorForm As Boolean
 
+    Friend Picture As PictureStruct
+
 #End Region
 
 #Region "EventEditor"
@@ -193,6 +195,12 @@ Friend Module C_EventSystem
         EditorEvent = EventNum
         TmpEvent = Map.Events(EventNum)
         InitEventEditorForm = True
+        If TmpEvent.Pages(1).CommandListCount = 0 Then
+            ReDim Preserve TmpEvent.Pages(1).CommandList(1)
+            TmpEvent.Pages(1).CommandListCount = 1
+            TmpEvent.Pages(1).CommandList(1).CommandCount = 1
+            ReDim Preserve TmpEvent.Pages(1).CommandList(1).Commands(TmpEvent.Pages(1).CommandList(1).CommandCount)
+        End If
     End Sub
 
     Sub EventEditorLoadPage(ByVal PageNum As Integer)
@@ -741,16 +749,18 @@ newlist:
                             Case EventType.QuestTask
                                 FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Complete Quest Task: " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & ". " & Trim$(Quest(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name) & " - Task# " & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2)
                             Case EventType.ShowPicture
-                                Select Case TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data3
+                                Select Case TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2
+                                    Case 0
+                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Picture " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & ": Pic=" & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2) & " Top Left, X: " & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data4) & " Y: " & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data5))
                                     Case 1
-                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Picture " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 + 1) & ": Pic=" & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2) & " Top Left, X: " & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data4) & " Y: " & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data5))
+                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Picture " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & ": Pic=" & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2) & " Center Screen, X: " & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data4) & " Y: " & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data5))
                                     Case 2
-                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Picture " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 + 1) & ": Pic=" & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2) & " Center Screen, X: " & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data4) & " Y: " & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data5))
+                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Picture " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & ": Pic=" & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2) & " On Event, X: " & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data4) & " Y: " & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data5))
                                     Case 3
-                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Picture " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 + 1) & ": Pic=" & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2) & " On Player, X: " & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data4) & " Y: " & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data5))
+                                        FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Show Picture " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1) & ": Pic=" & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data2) & " On Player, X: " & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data4) & " Y: " & Str(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data5))
                                 End Select
                             Case EventType.HidePicture
-                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Hide Picture " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 + 1))
+                                FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Hide Picture " & CStr(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1))
                             Case EventType.WaitMovement
                                 If TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 <= Map.EventCount Then
                                     FrmEditor_Events.lstCommands.Items.Add(indent & "@>" & "Wait for Event #" & TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1 & " [" & Trim$(Map.Events(TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i).Data1).Name) & "] to complete move route.")
@@ -798,28 +808,28 @@ newlist:
         Dim curlist As Integer, i As Integer, X As Integer, curslot As Integer, p As Integer
         Dim oldCommandList As CommandListStruct
 
-
         If FrmEditor_Events.lstCommands.SelectedIndex + 1 = FrmEditor_Events.lstCommands.Items.Count Then
             curlist = 1
         Else
             curlist = EventList(FrmEditor_Events.lstCommands.SelectedIndex + 1).CommandList
         End If
-
-        oldCommandList = TmpEvent.Pages(CurPageNum).CommandList(curlist)
+      
+        TmpEvent.Pages(CurPageNum).CommandListCount = TmpEvent.Pages(CurPageNum).CommandListCount + 1
+        ReDim Preserve TmpEvent.Pages(CurPageNum).CommandList(TmpEvent.Pages(CurPageNum).CommandListCount)
         TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount + 1
         p = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
-
-        TmpEvent.Pages(CurPageNum).CommandList(curlist).ParentList = oldCommandList.ParentList
-        TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount = p
-        ReDim Preserve TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(p + 1)
-
-        For i = 1 To p - 1
-            TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i) = oldCommandList.Commands(i)
-        Next
+        ReDim Preserve TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(p)
 
         If FrmEditor_Events.lstCommands.SelectedIndex + 1 = FrmEditor_Events.lstCommands.Items.Count Then
-            curslot = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount
+            curslot = TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount - 1
         Else
+            oldCommandList = TmpEvent.Pages(CurPageNum).CommandList(curlist)
+            TmpEvent.Pages(CurPageNum).CommandList(curlist).ParentList = oldCommandList.ParentList
+
+            For i = 1 To p - 1
+                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(i) = oldCommandList.Commands(i)
+            Next
+
             i = EventList(FrmEditor_Events.lstCommands.SelectedIndex + 1).CommandNum
             If i <= TmpEvent.Pages(CurPageNum).CommandList(curlist).CommandCount Then
 
@@ -1166,17 +1176,13 @@ newlist:
 
             Case EventType.ShowPicture
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbPicIndex.SelectedIndex
-                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data2 = FrmEditor_Events.nudShowPicture.Value
-
-                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data3 = FrmEditor_Events.cmbPicLoc.SelectedIndex
-
-                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data4 = FrmEditor_Events.nudPicOffsetX.Value
-                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data5 = FrmEditor_Events.nudPicOffsetY.Value
+                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.nudShowPicture.Value
+                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data2 = FrmEditor_Events.cmbPicLoc.SelectedIndex
+                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data3 = FrmEditor_Events.nudPicOffsetX.Value
+                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data4 = FrmEditor_Events.nudPicOffsetY.Value
 
             Case EventType.HidePicture
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Index = Index
-                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.nudHidePic.Value
 
             Case EventType.WaitMovement
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Index = Index
@@ -1188,6 +1194,7 @@ newlist:
             Case EventType.ReleasePlayer
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Index = Index
         End Select
+
         EventListCommands()
 
     End Sub
@@ -1700,22 +1707,16 @@ newlist:
                 FrmEditor_Events.fraCommands.Visible = False
             Case EventType.ShowPicture
                 IsEdit = True
-                FrmEditor_Events.cmbPicIndex.SelectedIndex = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1
-                FrmEditor_Events.nudShowPicture.Value = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data2
+                FrmEditor_Events.nudShowPicture.Value = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1
 
-                FrmEditor_Events.cmbPicLoc.SelectedIndex = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data3 - 1
+                FrmEditor_Events.cmbPicLoc.SelectedIndex = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data2
 
-                FrmEditor_Events.nudPicOffsetX.Value = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data4
-                FrmEditor_Events.nudPicOffsetY.Value = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data5
+                FrmEditor_Events.nudPicOffsetX.Value = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data3
+                FrmEditor_Events.nudPicOffsetY.Value = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data4
                 FrmEditor_Events.fraDialogue.Visible = True
                 FrmEditor_Events.fraShowPic.Visible = True
                 FrmEditor_Events.fraCommands.Visible = False
-            Case EventType.HidePicture
-                IsEdit = True
-                FrmEditor_Events.nudHidePic.Value = TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1
-                FrmEditor_Events.fraDialogue.Visible = True
-                FrmEditor_Events.fraHidePic.Visible = True
-                FrmEditor_Events.fraCommands.Visible = False
+                EditorEvent_DrawPicture()
             Case EventType.WaitMovement
                 IsEdit = True
                 FrmEditor_Events.fraDialogue.Visible = True
@@ -1795,11 +1796,9 @@ newlist:
     End Sub
 
     Public Sub ClearEventCommands()
-
-        ReDim TmpEvent.Pages(CurPageNum).CommandList(1)
+        ReDim TmpEvent.Pages(CurPageNum).CommandList(0)
         TmpEvent.Pages(CurPageNum).CommandListCount = 0
         EventListCommands()
-
     End Sub
 
     Public Sub EditCommand()
@@ -1982,7 +1981,6 @@ newlist:
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.nudGiveExp.Value
             Case EventType.ShowChatBubble
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Text1 = FrmEditor_Events.txtChatbubbleText.Text
-
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbChatBubbleTargetType.SelectedIndex 
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data2 = FrmEditor_Events.cmbChatBubbleTarget.SelectedIndex 
             Case EventType.Label
@@ -2013,15 +2011,12 @@ newlist:
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbCompleteQuest.SelectedIndex
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data2 = FrmEditor_Events.nudCompleteQuestTask.Value
             Case EventType.ShowPicture
-                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.cmbPicIndex.SelectedIndex
-                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data2 = FrmEditor_Events.nudShowPicture.Value
+                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.nudShowPicture.Value
 
-                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data3 = FrmEditor_Events.cmbPicLoc.SelectedIndex 
+                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data2 = FrmEditor_Events.cmbPicLoc.SelectedIndex 
 
-                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data4 = FrmEditor_Events.nudPicOffsetX.Value
-                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data5 = FrmEditor_Events.nudPicOffsetY.Value
-            Case EventType.HidePicture
-                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 = FrmEditor_Events.nudHidePic.Value
+                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data3 = FrmEditor_Events.nudPicOffsetX.Value
+                TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data4 = FrmEditor_Events.nudPicOffsetY.Value
             Case EventType.WaitMovement
                 TmpEvent.Pages(CurPageNum).CommandList(curlist).Commands(curslot).Data1 = ListOfEvents(FrmEditor_Events.cmbMoveWait.SelectedIndex)
         End Select
@@ -2312,6 +2307,42 @@ newlist:
 
     Sub Packet_EventEnd(ByRef data() As Byte)
         InEvent = False
+    End Sub
+
+    Sub Packet_Picture(ByRef data() As Byte)
+        Dim buffer As New ByteStream(data)
+        Dim picIndex As Integer, spriteType As Integer, xOffset As Integer, yOffset As Integer, eventid As Integer
+
+        eventid = buffer.ReadInt32
+        picIndex = buffer.ReadByte
+
+        If picIndex = 0 Then
+            Picture.Index = 0
+            Picture.EventId = 0
+            Picture.SpriteType = 0
+            Picture.xOffset = 0
+            Picture.yOffset = 0
+            Exit Sub
+        End If
+
+        spriteType = buffer.ReadByte
+        xOffset = buffer.ReadByte
+        yOffset = buffer.ReadByte
+
+        Picture.Index = picIndex
+        Picture.EventId = eventid
+        Picture.SpriteType = spriteType
+        Picture.xOffset = xOffset
+        Picture.yOffset = yOffset
+
+        buffer.Dispose()
+
+    End Sub
+
+    Sub Packet_HidePicture(ByRef data() as Byte)
+        Dim buffer As New ByteStream(data)
+
+        Picture = Nothing
     End Sub
 
     Sub Packet_HoldPlayer(ByRef data() As Byte)

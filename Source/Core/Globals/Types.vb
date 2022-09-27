@@ -801,8 +801,8 @@ Public Module Types
     Public Structure CharSelStruct
         Dim Name As String
         Dim Sprite As Integer
-        Dim Gender As Integer
-        Dim ClassName As String
+        Dim Sex As Integer
+        Dim JobName As String
         Dim Level As Integer
     End Structure
 
@@ -894,5 +894,13 @@ Public Module Types
         Dim State As Byte
         Dim Timer As Integer
         Dim Health As Byte
+    End Structure
+
+    Public Structure PictureStruct
+        Dim Index As Byte
+        Dim SpriteType As Byte
+        Dim xOffset As Byte
+        Dim yOffset As Byte
+        Dim EventId As Integer
     End Structure
 End Module

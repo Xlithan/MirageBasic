@@ -5,6 +5,7 @@ Imports SFML.Graphics
 Imports SFML.System
 Imports Mirage.Basic.Engine
 Imports Time = Mirage.Basic.Engine.Time
+Imports SFML.Window
 
 Module C_Graphics
 
@@ -108,11 +109,11 @@ Module C_Graphics
     Friend ParallaxSprite() As Sprite
     Friend ParallaxGfxInfo() As GraphicInfo
 
-    'Door
-    Friend DoorGfx As Texture
+    'Pictures
+    Friend PictureGfx() As Texture
 
-    Friend DoorSprite As Sprite
-    Friend DoorGfxInfo As GraphicInfo
+    Friend PictureSprite() As Sprite
+    Friend PictureGfxInfo() As GraphicInfo
 
     'Blood
     Friend BloodGfx As Texture
@@ -176,6 +177,10 @@ Module C_Graphics
     Friend ExpBarGfx As Texture
     Friend ExpBarSprite As Sprite
     Friend ExpBarGfxInfo As GraphicInfo
+
+    Friend XpBarPanelGfx As Texture
+    Friend XpBarPanelSprite As Sprite
+    Friend XpBarPanelGfxInfo As GraphicInfo
 
     Friend ActionPanelGfx As Texture
     Friend ActionPanelSprite As Sprite
@@ -254,14 +259,13 @@ Module C_Graphics
     Friend PetBarSprite As Sprite
     Friend PetbarGfxInfo As GraphicInfo
 
-    Friend MapTintGfx As New RenderTexture(1152, 864)
+    Friend MapTintGfx As New RenderTexture(3860, 2160)
     Friend MapTintSprite As Sprite
 
     Friend MapFadeSprite As Sprite
 
     ' Number of graphic files
     Friend NumTileSets As Integer
-
     Friend NumCharacters As Integer
     Friend NumPaperdolls As Integer
     Friend NumItems As Integer
@@ -273,6 +277,7 @@ Module C_Graphics
     Friend NumEmotes As Integer
     Friend NumPanorama As Integer
     Friend NumParallax As Integer
+    Friend NumPictures As Integer
 
     ' Day/Night
     Friend NightGfx As New RenderTexture(3860, 2160)
@@ -365,6 +370,10 @@ Module C_Graphics
         ReDim ParallaxSprite(NumParallax)
         ReDim ParallaxGfxInfo(NumParallax)
 
+        ReDim PictureGfx(NumPictures)
+        ReDim PictureSprite(NumPictures)
+        ReDim PictureGfxInfo(NumPictures)
+
         'sadly, gui shit is always needed, so we preload it :/
         CursorInfo = New GraphicInfo
         If File.Exists(Paths.Graphics & "Misc\Cursor" & GfxExt) Then
@@ -375,17 +384,6 @@ Module C_Graphics
             'Cache the width and height
             CursorInfo.Width = CursorGfx.Size.X
             CursorInfo.Height = CursorGfx.Size.Y
-        End If
-
-        DoorGfxInfo = New GraphicInfo
-        If File.Exists(Paths.Graphics & "Misc\Door" & GfxExt) Then
-            'Load texture first, dont care about memory streams (just use the filename)
-            DoorGfx = New Texture(Paths.Graphics & "Misc\Door" & GfxExt)
-            DoorSprite = New Sprite(DoorGfx)
-
-            'Cache the width and height
-            DoorGfxInfo.Width = DoorGfx.Size.X
-            DoorGfxInfo.Height = DoorGfx.Size.Y
         End If
 
         BloodGfxInfo = New GraphicInfo
@@ -511,6 +509,17 @@ Module C_Graphics
             'Cache the width and height
             ExpBarGfxInfo.Width = ExpBarGfx.Size.X
             ExpBarGfxInfo.Height = ExpBarGfx.Size.Y
+        End If
+
+        XpBarPanelGfxInfo = New GraphicInfo
+        If File.Exists(Paths.Gui & "Main\xpbar" & GfxExt) Then
+            'Load texture first, dont care about memory streams (just use the filename)
+            XpBarPanelGfx = New Texture(Paths.Gui & "Main\xpbar" & GfxExt)
+            XpBarPanelSprite = New Sprite(XpBarPanelGfx)
+
+            'Cache the width and height
+            XpBarPanelGfxInfo.Width = XpBarPanelGfx.Size.X
+            XpBarPanelGfxInfo.Height = XpBarPanelGfx.Size.Y
         End If
 
         ActionPanelGfxInfo = New GraphicInfo
@@ -930,6 +939,20 @@ Module C_Graphics
             With ParallaxGfxInfo(index)
                 .Width = ParallaxGfx(index).Size.X
                 .Height = ParallaxGfx(index).Size.Y
+                .IsLoaded = True
+                .TextureTimer = GetTickCount() + 100000
+            End With
+        ElseIf texType = 15 Then 'Pictures
+            If index <= 0 OrElse index > NumPictures Then Exit Sub
+
+            'Load texture first, dont care about memory streams (just use the filename)
+            PictureGfx(index) = New Texture(Paths.Graphics & "pictures\" & index & GfxExt)
+            PictureSprite(index) = New Sprite(PictureGfx(index))
+
+            'Cache the width and height
+            With PictureGfxInfo(index)
+                .Width = PictureGfx(index).Size.X
+                .Height = PictureGfx(index).Size.Y
                 .IsLoaded = True
                 .TextureTimer = GetTickCount() + 100000
             End With
@@ -1565,6 +1588,18 @@ Module C_Graphics
                 End If
             End If
         Next
+
+        'clear pictures
+        For i = 0 To NumPictures
+            If PictureGfxInfo(i).IsLoaded Then
+                If PictureGfxInfo(i).TextureTimer < GetTickCount() Then
+                    PictureGfx(i).Dispose()
+                    PictureSprite(i).Dispose()
+                    PictureGfxInfo(i).IsLoaded = False
+                    PictureGfxInfo(i).TextureTimer = 0
+                End If
+            End If
+        Next
     End Sub
 
     Friend Sub Render_Graphics()
@@ -1637,9 +1672,6 @@ Module C_Graphics
             Next
         End If
 
-        'Draw sum d00rs.
-        If GettingMap Then Exit Sub
-
         ' draw animations
         If NumAnimations > 0 Then
             For I = 0 To MAX_ANIMATIONS
@@ -1688,7 +1720,7 @@ Module C_Graphics
                     End If
                 End If
 
-                '                Draw the target icon
+                ' Draw the target icon
                 If MyTarget > 0 Then
                     If MyTargetType = TargetType.Player Then
                         DrawTarget(Player(MyTarget).X * 32 - 16 + Player(MyTarget).XOffset,
@@ -1702,7 +1734,7 @@ Module C_Graphics
                     End If
                 End If
 
-                For I = 0 To TotalOnline 'MAX_PLAYERS
+                For I = 0 To TotalOnline
                     If IsPlaying(I) Then
                         If Player(I).Map = Player(Myindex).Map Then
                             If CurX = Player(I).X AndAlso CurY = Player(I).Y Then
@@ -1771,7 +1803,6 @@ Module C_Graphics
         End If
 
         DrawNight()
-
         DrawWeather()
         DrawThunderEffect()
         DrawMapTint()
@@ -1835,6 +1866,8 @@ Module C_Graphics
             DrawFog()
         End If
 
+        DrawPicture()
+
         ' draw the messages
         For I = 0 To Byte.MaxValue
             If ChatBubble(I).Active Then
@@ -1856,8 +1889,6 @@ Module C_Graphics
             DrawEvents()
             EditorEvent_DrawGraphic()
         End If
-
-        If GettingMap Then Exit Sub
 
         'draw hp and casting bars
         DrawBars()
@@ -1915,6 +1946,46 @@ Module C_Graphics
         ParallaxSprite(index).Position = New Vector2f((horz * 2.5) - 50, (vert * 2.5) - 50)
 
         GameWindow.Draw(ParallaxSprite(index))
+    End Sub
+
+    Friend Sub DrawPicture()
+        Dim index As Integer
+
+        index = Picture.Index
+
+        If index < 1 Or index > NumPictures Then Exit Sub
+
+        If PictureGfxInfo(index).IsLoaded = False Then
+            LoadTexture(index, 15)
+        End If
+
+        ' we use it, lets update timer
+        With PictureGfxInfo(index)
+            .TextureTimer = GetTickCount() + 100000
+        End With
+
+        PictureSprite(index).TextureRect = New IntRect(0, 0, GameWindow.Size.X, GameWindow.Size.Y)
+
+        Select Case Picture.SpriteType
+            Case 0 ' Top Left
+                PictureSprite(index).Position = New Vector2f(0 - Picture.xOffset, 0 - Picture.yOffset)
+            Case 1 ' Center Screen
+                PictureSprite(index).Position = New Vector2f(GameWindow.Size.X / 2 - PictureGfxInfo(index).Width / 2 - Picture.xOffset, GameWindow.Size.Y / 2 - PictureGfxInfo(index).Height / 2)
+            Case 2 ' Center Event
+                If Map.CurrentEvents < Picture.EventId Then
+                    Picture.EventId = 0
+                    Picture.Index = 0
+                    Picture.SpriteType = 0
+                    Picture.xOffset = 0
+                    Picture.yOffset = 0
+                    Exit Sub
+                End If
+                PictureSprite(index).Position = New Vector2f(ConvertMapX(Map.MapEvents(Picture.EventId).X * 32) / 2 - Picture.xOffset, ConvertMapY(Map.MapEvents(Picture.EventId).Y * 32) / 2 - Picture.yOffset)
+            Case 3 ' Center Player
+                PictureSprite(index).Position = New Vector2f(ConvertMapX(Player(Myindex).X * 32) / 2 - Picture.xOffset, ConvertMapY(Player(Myindex).Y * 32) / 2 - Picture.yOffset)
+        End Select
+
+        GameWindow.Draw(PictureSprite(index))
     End Sub
 
     Friend Sub DrawBars()
@@ -2132,12 +2203,16 @@ Module C_Graphics
                 If Not ParallaxGfx(i) Is Nothing Then ParallaxGfx(i).Dispose()
             Next
 
+            For i = 0 To NumPictures
+                If Not PictureGfx(i) Is Nothing Then PictureGfx(i).Dispose()
+            Next
+
             If Not CursorGfx Is Nothing Then CursorGfx.Dispose()
-            If Not DoorGfx Is Nothing Then DoorGfx.Dispose()
             If Not BloodGfx Is Nothing Then BloodGfx.Dispose()
             If Not DirectionsGfx Is Nothing Then DirectionsGfx.Dispose()
             If Not ActionPanelGfx Is Nothing Then ActionPanelGfx.Dispose()
             If Not InvPanelGfx Is Nothing Then InvPanelGfx.Dispose()
+            If Not XpBarPanelGfx Is Nothing Then XpBarPanelGfx.Dispose()
             If Not CharPanelGfx Is Nothing Then CharPanelGfx.Dispose()
             If Not CharPanelPlusGfx Is Nothing Then CharPanelPlusGfx.Dispose()
             If Not CharPanelMinGfx Is Nothing Then CharPanelMinGfx.Dispose()
@@ -2275,12 +2350,19 @@ Module C_Graphics
             .Width = curExp * ExpBarGfxInfo.Width / 100
         End With
 
-        RenderSprite(ExpBarSprite, GameWindow, HudWindowX + HudexpBarX, HudWindowY + HudexpBarY + 4, rec.X, rec.Y,
-                     rec.Width, rec.Height)
+        If GameWindow.Size.X >= 1336 Then
+            RenderSprite(XpBarPanelSprite, GameWindow, GameWindow.Size.X / 2 - XpBarPanelGfxInfo.Width / 2, GameWindow.Size.Y - XpBarPanelGfxInfo.Height, 0, 0, XpBarPanelGfxInfo.Width,
+                         XpBarPanelGfxInfo.Height)
 
-        'draw text onto that
-        DrawText(HudWindowX + 85, HudWindowY + 2, "Exp: " & GetPlayerExp(Myindex) & "/" & NextlevelExp, Color.White,
-                 Color.Black, GameWindow)
+            RenderSprite(ExpBarSprite, GameWindow, GameWindow.Size.X / 2 - ExpBarGfxInfo.Width / 2, GameWindow.Size.Y - ExpBarGfxInfo.Height - 7, rec.X, rec.Y,
+                         rec.Width, rec.Height)
+        Else
+            RenderSprite(XpBarPanelSprite, GameWindow, GameWindow.Size.X - XpBarPanelGfxInfo.Width, 0, 0, 0, XpBarPanelGfxInfo.Width,
+                         XpBarPanelGfxInfo.Height)
+
+            RenderSprite(ExpBarSprite, GameWindow, GameWindow.Size.X - ExpBarGfxInfo.Width - 12, 0 + ExpBarGfxInfo.Height, rec.X, rec.Y,
+                         rec.Width, rec.Height)
+        End If
     End Sub
 
     Sub DrawActionPanel()
@@ -2296,7 +2378,6 @@ Module C_Graphics
 
         RenderSprite(ActionPanelSprite, GameWindow, ActionPanelX + 20, ActionPanelY, rec.X, rec.Y, rec.Width, rec.Height)
     End Sub
-
 
     Friend Sub DrawInventoryItem(x As Integer, y As Integer)
         Dim rec As Rectangle
@@ -2961,6 +3042,26 @@ NextLoop:
                 frmEditor_Resource.picExhaustedPic.BackgroundImage =
                     Drawing.Image.FromFile(Paths.Graphics & "resources\" & Sprite & GfxExt)
             End If
+        End If
+    End Sub
+
+    Friend Sub EditorEvent_DrawPicture()
+        Dim Sprite As Integer
+
+        Sprite = FrmEditor_Events.nudShowPicture.Value
+
+        If Sprite < 1 OrElse Sprite > NumPictures Then
+            FrmEditor_Events.picShowPic.BackgroundImage = Nothing
+            Exit Sub
+        End If
+
+        If File.Exists(Paths.Graphics & "pictures\" & Sprite & GfxExt) Then
+            FrmEditor_Events.picShowPic.Width =
+                Drawing.Image.FromFile(Paths.Graphics & "pictures\" & Sprite & GfxExt).Width
+            FrmEditor_Events.picShowPic.Height =
+                Drawing.Image.FromFile(Paths.Graphics & "pictures\" & Sprite & GfxExt).Height
+            FrmEditor_Events.picShowPic.BackgroundImage =
+                Drawing.Image.FromFile(Paths.Graphics & "pictures\" & Sprite & GfxExt)
         End If
     End Sub
 

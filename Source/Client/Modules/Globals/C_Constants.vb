@@ -28,7 +28,6 @@ Module C_Constants
 
     ' Menu states
     Friend Const MenuStateNewaccount As Byte = 0
-
     Friend Const MenuStateDelaccount As Byte = 1
     Friend Const MenuStateLogin As Byte = 2
     Friend Const MenuStateGetchars As Byte = 3

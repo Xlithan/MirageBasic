@@ -12,6 +12,7 @@ Friend Module S_EventLogic
                 mapNum = GetPlayerMap(i)
                 For x = 0 To TempPlayer(i).EventMap.CurrentEvents
                     id = TempPlayer(i).EventMap.EventPages(x).EventId
+                    If id > TempPlayer(i).EventMap.CurrentEvents Then Exit For
                     page = TempPlayer(i).EventMap.EventPages(x).PageId
 
                     If Map(mapNum).Events(id).PageCount >= page Then
@@ -1874,27 +1875,19 @@ Friend Module S_EventLogic
                                                         Case EventType.ShowPicture
                                                             buffer = New ByteStream(4)
                                                             buffer.WriteInt32(ServerPackets.SPic)
-                                                            buffer.WriteInt32(0)
-                                                            buffer.WriteInt32(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1 + 1)
-                                                            buffer.WriteInt32(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2)
-                                                            buffer.WriteInt32(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data3)
-                                                            buffer.WriteInt32(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data4)
-                                                            buffer.WriteInt32(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data5)
+                                                            buffer.WriteInt32(.EventId)
+                                                            buffer.WriteByte(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1)
+                                                            buffer.WriteByte(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data2)
+                                                            buffer.WriteByte(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data3)
+                                                            buffer.WriteByte(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data4)
                                                             Socket.SendDataTo(i, buffer.Data, buffer.Head)
-
-                                                            Addlog("Sent SMSG: SPic evShowPicture", PACKET_LOG)
-                                                            Console.WriteLine("Sent SMSG: SPic evShowPicture")
 
                                                             buffer.Dispose()
                                                         Case EventType.HidePicture
                                                             buffer = New ByteStream(4)
                                                             buffer.WriteInt32(ServerPackets.SPic)
-                                                            buffer.WriteInt32(1)
-                                                            buffer.WriteInt32(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1 + 1)
+                                                            buffer.WriteByte(0)
                                                             Socket.SendDataTo(i, buffer.Data, buffer.Head)
-
-                                                            Addlog("Sent SMSG: SPic evHidePicture", PACKET_LOG)
-                                                            Console.WriteLine("Sent SMSG: SPic evHidePicture")
 
                                                             buffer.Dispose()
                                                         Case EventType.WaitMovement
@@ -1915,18 +1908,12 @@ Friend Module S_EventLogic
                                                             buffer.WriteInt32(0)
                                                             Socket.SendDataTo(i, buffer.Data, buffer.Head)
 
-                                                            Addlog("Sent SMSG: SHoldPlayer", PACKET_LOG)
-                                                            Console.WriteLine("Sent SMSG: SHoldPlayer")
-
                                                             buffer.Dispose()
                                                         Case EventType.ReleasePlayer
                                                             buffer = New ByteStream(4)
                                                             buffer.WriteInt32(ServerPackets.SHoldPlayer)
                                                             buffer.WriteInt32(1)
                                                             Socket.SendDataTo(i, buffer.Data, buffer.Head)
-
-                                                            Addlog("Sent SMSG: SHoldPlayer Release", PACKET_LOG)
-                                                            Console.WriteLine("Sent SMSG: SHoldPlayer Release")
 
                                                             buffer.Dispose()
                                                     End Select
