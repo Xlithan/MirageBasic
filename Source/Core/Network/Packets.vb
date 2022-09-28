@@ -7,6 +7,7 @@
         CLogin
         CAddChar
         CUseChar
+        CDelChar
         CSayMsg
         CBroadcastMsg
         CPlayerMsg
@@ -89,9 +90,7 @@
         CRequestSwitchesAndVariables
 
         CRequestProjectiles
-        CClearProjectile
-
-        CRequestJob
+        CClearProjectile  
 
         'emotes
         CEmote

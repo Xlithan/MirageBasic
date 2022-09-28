@@ -14,6 +14,7 @@ Module S_NetworkReceive
         Socket.PacketId(ClientPackets.CLogin) = AddressOf Packet_Login
         Socket.PacketId(ClientPackets.CAddChar) = AddressOf Packet_AddChar
         Socket.PacketId(ClientPackets.CUseChar) = AddressOf Packet_UseChar
+        Socket.PacketId(ClientPackets.CDelChar) = AddressOf Packet_DelChar
         Socket.PacketId(ClientPackets.CSayMsg) = AddressOf Packet_SayMessage
         Socket.PacketId(ClientPackets.CBroadcastMsg) = AddressOf Packet_BroadCastMsg
         Socket.PacketId(ClientPackets.CPlayerMsg) = AddressOf Packet_PlayerMsg
@@ -103,8 +104,6 @@ Module S_NetworkReceive
 
         Socket.PacketId(ClientPackets.CRequestProjectiles) = AddressOf HandleRequestProjectile
         Socket.PacketId(ClientPackets.CClearProjectile) = AddressOf HandleClearProjectile
-
-        Socket.PacketId(ClientPackets.CRequestJob) = AddressOf Packet_RequestJob
 
         'emotes
         Socket.PacketId(ClientPackets.CEmote) = AddressOf Packet_Emote
@@ -218,7 +217,7 @@ Module S_NetworkReceive
 
                 Console.WriteLine("Account " & username & " has been created.")
                 Addlog("Account " & username & " has been created.", PLAYER_LOG)
-                Call SetPlayerLogin(index, username)
+                SendJobs(index)
                 SendLoginOk(index)
 
                 ' Show the player up on the socket status
@@ -325,6 +324,7 @@ Module S_NetworkReceive
                 ' Show the player up on the socket status
                 Addlog(GetPlayerLogin(index) & " has logged in from " & Socket.ClientIp(index) & ".", PLAYER_LOG)
                 Console.WriteLine(GetPlayerLogin(index) & " has logged in from " & Socket.ClientIp(index) & ".")
+                SendJobs(index)
                 SendLoginOk(index)
             End If
         End If
@@ -372,10 +372,8 @@ Module S_NetworkReceive
         If Not IsPlaying(index) Then
             slot = buffer.ReadInt32
             
-            If slot < 1 Or slot > MAX_CHARACTERS Then slot = 1
-
-            If Account(index).Character(slot) <> "" Then
-                AlertMsg(index, "Incorrect character slot.")
+            If slot < 1 Or slot > MAX_CHARACTERS Or Account(index).Character(slot) <> ""  Then
+                AlertMsg(index, "Invalid character slot. Please delete the character.")
                 Exit Sub
             End If
 
@@ -435,6 +433,32 @@ Module S_NetworkReceive
 
     End Sub
 
+    Private Sub Packet_DelChar(index As Integer, ByRef data() As Byte)
+        Dim slot As Byte
+        Dim buffer As New ByteStream(data)
+
+        AddDebug("Recieved CMSG: CDelChar")
+
+        If Not IsPlaying(index) Then
+            slot = buffer.ReadInt32
+            
+            If slot < 1 Or slot > MAX_CHARACTERS Then
+                AlertMsg(index, "Sorry, that charater slot is invalid.")
+                Exit Sub
+            End If
+
+            LoadCharacter(index, slot)
+            CharactersList.Remove(Player(index).Name)
+            CharactersList.Save()
+            ClearCharacter(index)
+            SaveCharacter(index, slot)
+            Account(index).Character(slot) = ""
+
+            SendLoginOk(index)
+            buffer.Dispose()
+        End If
+    End Sub
+                                                                                                                                                                
     Private Sub Packet_SayMessage(index As Integer, ByRef data() As Byte)
         Dim msg As String
         Dim buffer As New ByteStream(data)
@@ -2297,18 +2321,6 @@ Module S_NetworkReceive
 
         SendHotbar(index)
 
-    End Sub
-
-    Sub Packet_RequestJob(index As Integer, ByRef data() As Byte)
-        AddDebug("Recieved CMSG: CRequestJob")
-
-        Dim Buffer As New ByteStream(data), n as integer
-
-        n = Buffer.ReadInt32
- 
-        If n < 0 Or n > MAX_JOBS Then Exit Sub
-
-        SendUpdateJobTo(index, n)
     End Sub
 
     Sub Packet_RequestEditJob(index As Integer, ByRef data() As Byte)

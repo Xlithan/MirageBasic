@@ -31,7 +31,6 @@ Module S_NetworkSend
     Sub PlayerMsg(index As Integer, Msg As String, Colour As Integer)
         Dim buffer As New ByteStream(4)
         buffer.WriteInt32(ServerPackets.SPlayerMsg)
-        'buffer.Writestring((Msg)
         buffer.WriteString((Msg))
         buffer.WriteInt32(Colour)
 
@@ -45,7 +44,8 @@ Module S_NetworkSend
         Dim i As Integer, n As Integer
         Dim buffer As New ByteStream(4)
         buffer.WriteInt32(ServerPackets.SNewCharJob)
-For i = 0 To MAX_JOBS
+
+        For i = 0 To MAX_JOBS
             buffer.WriteString((job(i).Name.Trim()))
             buffer.WriteString((Trim$(Job(i).Desc)))
 
@@ -115,11 +115,7 @@ For i = 0 To MAX_JOBS
         AddDebug("Sent SMSG: SInGame")
 
         Buffer.Dispose()
-End Sub
-
-    sub SendUpdateJobTo(index as Integer, jobNum as integer)
-
-    End sub
+    End Sub
 
     Sub SendJobs(index As Integer)
         Dim i as Integer
@@ -134,7 +130,7 @@ End Sub
 
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
         buffer.Dispose()
-End Sub
+    End Sub
 
     Sub SendJobToAll(jobNum as Integer)
         Dim i As Integer

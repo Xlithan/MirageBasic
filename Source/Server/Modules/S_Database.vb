@@ -991,13 +991,13 @@ Module modDatabase
 #Region "Accounts"
 
     Function AccountExist(Name As String) As Boolean
-        Return File.Exists(Paths.Database & "Accounts\" & Name.Trim & ".bin")
+        Return File.Exists(Paths.Database & "Accounts//" & Name.Trim & ".bin")
     End Function
 
     Function PasswordOK(Name As String, Password As String) As Boolean
         If Not AccountExist(Name) Then Return False
         Dim reader As New ByteStream()
-        ByteFile.Load(Paths.Database & "Accounts\" & Name.Trim & ".bin", reader)
+        ByteFile.Load(Paths.Database & "Accounts//" & Name.Trim & ".bin", reader)
         If reader.ReadString().Trim <> Name.Trim Then Return False
         Return reader.ReadString().Trim.ToUpper = Password.Trim.ToUpper
     End Function
@@ -1024,10 +1024,10 @@ Module modDatabase
     End Sub
 
     Sub SavePlayer(index As Integer)
-        Dim filename As String = Paths.Database & "Accounts\\" & GetPlayerLogin(index) & ".bin"
+        Dim filename As String = Paths.Database & "Accounts//" & GetPlayerLogin(index) & ".bin"
 
         ' Create path to character folder
-        CheckDir(Paths.Database & "Accounts\\" & GetPlayerLogin(index) & "\\")
+        CheckDir(Paths.Database & "Accounts//" & GetPlayerLogin(index) & "//")
 
         Dim writer As New ByteStream(Account.Length)
 
@@ -1046,7 +1046,7 @@ Module modDatabase
     End Sub
 
     Sub LoadAccount(index As Integer)
-        Dim filename As String = Paths.Database & "Accounts\\" & GetPlayerLogin(index) & ".bin"
+        Dim filename As String = Paths.Database & "Accounts//" & GetPlayerLogin(index) & ".bin"
         ClearPlayer(index)
         Dim reader As New ByteStream(100)
         ByteFile.Load(filename, reader)
@@ -1094,7 +1094,7 @@ Module modDatabase
 #Region "Bank"
 
     Friend Sub LoadBank(index As Integer)
-        Dim filename As String = Paths.Database & "Accounts\" & GetPlayerLogin(index) & "_Bank.bin"
+        Dim filename As String = Paths.Database & "Accounts//" & GetPlayerLogin(index) & "_Bank.bin"
 
         ClearBank(index)
 
@@ -1123,7 +1123,7 @@ Module modDatabase
     End Sub
 
     Sub SaveBank(index As Integer)
-        Dim filename = Paths.Database & "Accounts\" & GetPlayerLogin(index) & "_Bank.bin"
+        Dim filename = Paths.Database & "Accounts//" & GetPlayerLogin(index) & "_Bank.bin"
         Dim writer As New ByteStream(Bank.Length)
 
         ClearBank(index)
@@ -1299,7 +1299,7 @@ Module modDatabase
     End Sub
 
     Sub LoadCharacter(index As Integer, charNum As Integer)
-        Dim filename As String = Paths.Database & "Accounts\\" & GetPlayerLogin(index) & "\\" & GetCharName(index, charNum) & ".bin"
+        Dim filename As String = Paths.Database & "Accounts//" & GetPlayerLogin(index) & "//" & GetCharName(index, charNum) & ".bin"
 
         ClearCharacter(index)
 
@@ -1429,7 +1429,7 @@ Module modDatabase
     End Sub
 
     Sub SaveCharacter(index As Integer, charNum As Integer)
-        Dim filename As String = Paths.Database & "Accounts\\" & GetPlayerLogin(index) & "\\" & GetCharName(index, charNum) & ".bin"
+        Dim filename As String = Paths.Database & "Accounts//" & GetPlayerLogin(index) & "//" & GetCharName(index, charNum) & ".bin"
 
         Dim writer As New ByteStream(Player.Length)
 

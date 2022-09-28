@@ -828,9 +828,6 @@
     <None Update="Contents\Graphics\Misc\Light.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Contents\Graphics\Misc\Shadow.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Contents\Graphics\Misc\Target.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
