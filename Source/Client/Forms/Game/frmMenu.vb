@@ -553,7 +553,7 @@ Friend Class FrmMenu
 
         newSelectedChar = 0
 
-       For i = 0 To MAX_CHARACTERS
+        For i = 0 To MAX_CHARACTERS
             If CharSelection(i).Name = "" Then
                 newSelectedChar = i
                 Exit For
@@ -587,6 +587,11 @@ Friend Class FrmMenu
     ''' Handles UseChar button press.
     ''' </summary>
     Private Sub BtnUseChar_Click(sender As Object, e As EventArgs) Handles btnUseChar.Click
+        If CharSelection(SelectedChar).Name.Trim = "" Then
+            MsgBox("Character slot empty.")
+            Exit SUb
+        End If
+
         Pnlloadvisible = True
         Frmmenuvisible = False
 

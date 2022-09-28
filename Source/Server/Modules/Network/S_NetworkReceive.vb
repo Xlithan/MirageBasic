@@ -104,8 +104,6 @@ Module S_NetworkReceive
         Socket.PacketId(ClientPackets.CRequestProjectiles) = AddressOf HandleRequestProjectile
         Socket.PacketId(ClientPackets.CClearProjectile) = AddressOf HandleClearProjectile
 
-        Socket.PacketId(ClientPackets.CRequestJob) = AddressOf Packet_RequestJob
-
         'emotes
         Socket.PacketId(ClientPackets.CEmote) = AddressOf Packet_Emote
 
@@ -218,7 +216,7 @@ Module S_NetworkReceive
 
                 Console.WriteLine("Account " & username & " has been created.")
                 Addlog("Account " & username & " has been created.", PLAYER_LOG)
-                Call SetPlayerLogin(index, username)
+                SendJobs(index)
                 SendLoginOk(index)
 
                 ' Show the player up on the socket status
@@ -325,6 +323,7 @@ Module S_NetworkReceive
                 ' Show the player up on the socket status
                 Addlog(GetPlayerLogin(index) & " has logged in from " & Socket.ClientIp(index) & ".", PLAYER_LOG)
                 Console.WriteLine(GetPlayerLogin(index) & " has logged in from " & Socket.ClientIp(index) & ".")
+                SendJobs(index)
                 SendLoginOk(index)
             End If
         End If
@@ -2297,18 +2296,6 @@ Module S_NetworkReceive
 
         SendHotbar(index)
 
-    End Sub
-
-    Sub Packet_RequestJob(index As Integer, ByRef data() As Byte)
-        AddDebug("Recieved CMSG: CRequestJob")
-
-        Dim Buffer As New ByteStream(data), n as integer
-
-        n = Buffer.ReadInt32
- 
-        If n < 0 Or n > MAX_JOBS Then Exit Sub
-
-        SendUpdateJobTo(index, n)
     End Sub
 
     Sub Packet_RequestEditJob(index As Integer, ByRef data() As Byte)

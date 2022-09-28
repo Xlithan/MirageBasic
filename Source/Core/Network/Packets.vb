@@ -89,9 +89,7 @@
         CRequestSwitchesAndVariables
 
         CRequestProjectiles
-        CClearProjectile
-
-        CRequestJob
+        CClearProjectile  
 
         'emotes
         CEmote
