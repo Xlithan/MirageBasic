@@ -605,6 +605,20 @@ Friend Class FrmMenu
     End Sub
 
     ''' <summary>
+    ''' Handles DelChar button press.
+    ''' </summary>
+
+    Private Sub btnDelChar_Click(sender As Object, e As EventArgs) Handles btnDelChar.Click
+        Dim buffer As ByteStream
+        buffer = New ByteStream(8)
+        buffer.WriteInt32(ClientPackets.CDelChar)
+        buffer.WriteInt32(SelectedChar)
+        Socket.SendData(buffer.Data, buffer.Head)
+
+        buffer.Dispose()
+    End Sub
+
+    ''' <summary>
     ''' Changes to hover state on button.
     ''' </summary>
     Private Sub BtnUseChar_MouseEnter(sender As Object, e As EventArgs) Handles btnUseChar.MouseEnter

@@ -7,6 +7,7 @@
         CLogin
         CAddChar
         CUseChar
+        CDelChar
         CSayMsg
         CBroadcastMsg
         CPlayerMsg
