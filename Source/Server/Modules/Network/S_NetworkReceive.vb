@@ -448,6 +448,7 @@ Module S_NetworkReceive
             End If
 
             LoadCharacter(index, slot)
+            CharactersList.Remove(Player(index).Name)
             ClearCharacter(index)
             SaveCharacter(index, slot)
             Account(index).Character(slot) = ""
