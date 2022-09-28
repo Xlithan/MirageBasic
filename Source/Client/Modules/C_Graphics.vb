@@ -287,9 +287,6 @@ Module C_Graphics
     Friend LightSprite As Sprite
     Friend LightDynamicSprite As Sprite
     Friend LightGfxInfo As GraphicInfo
-    Friend ShadowGfx As Texture
-    Friend ShadowSprite As Sprite
-    Friend ShadowGfxInfo As GraphicInfo
 
 #End Region
 
@@ -732,16 +729,6 @@ Module C_Graphics
             'Cache the width and height
             LightGfxInfo.Width = LightGfx.Size.X
             LightGfxInfo.Height = LightGfx.Size.Y
-        End If
-
-        ShadowGfxInfo = New GraphicInfo
-        If File.Exists(Paths.Graphics & "Misc\Shadow" & GfxExt) Then
-            ShadowGfx = New Texture(Paths.Graphics & "Misc\Shadow" & GfxExt)
-            ShadowSprite = New Sprite(ShadowGfx)
-
-            'Cache the width and height
-            ShadowGfxInfo.Width = ShadowGfx.Size.X
-            ShadowGfxInfo.Height = ShadowGfx.Size.Y
         End If
     End Sub
 
@@ -1281,7 +1268,6 @@ Module C_Graphics
         Dim y As Integer
         Dim width As Integer
         Dim height As Integer
-        'On Error Resume Next
 
         If sprite < 1 OrElse sprite > NumCharacters Then Exit Sub
 
@@ -1298,9 +1284,6 @@ Module C_Graphics
         y = ConvertMapY(y2)
         width = (rec.Width)
         height = (rec.Height)
-
-        'shadow first
-        RenderSprite(ShadowSprite, GameWindow, x - 1, y + 6, 0, 0, ShadowGfxInfo.Width, ShadowGfxInfo.Height)
 
         RenderSprite(CharacterSprite(sprite), GameWindow, x, y, rec.X, rec.Y, rec.Width, rec.Height)
     End Sub
