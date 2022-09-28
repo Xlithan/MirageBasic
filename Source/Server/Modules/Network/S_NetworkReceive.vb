@@ -448,6 +448,8 @@ Module S_NetworkReceive
             End If
 
             LoadCharacter(index, slot)
+            CharactersList.Remove(Player(index).Name)
+            CharactersList.Save()
             ClearCharacter(index)
             SaveCharacter(index, slot)
             Account(index).Character(slot) = ""
@@ -456,7 +458,7 @@ Module S_NetworkReceive
             buffer.Dispose()
         End If
     End Sub
-
+                                                                                                                                                                
     Private Sub Packet_SayMessage(index As Integer, ByRef data() As Byte)
         Dim msg As String
         Dim buffer As New ByteStream(data)
