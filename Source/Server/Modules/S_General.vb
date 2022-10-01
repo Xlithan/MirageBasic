@@ -50,22 +50,7 @@ Module S_General
         CheckDir(Paths.Quests)
 
         EKeyPair.GenerateKeys()
-        InitNetwork()
-                                                                                                                                                                                                    
-        'event
-        ReDim Switches(MAX_SWITCHES)
-        ReDim Variables(NAX_VARIABLES)
-        ReDim TempEventMap(MAX_CACHED_MAPS)
-
-        ReDim Shop(MAX_SHOPS).TradeItem(MAX_TRADES)
-
-        ReDim Animation(MAX_ANIMATIONS).Sprite(1)
-        ReDim Animation(MAX_ANIMATIONS).Frames(1)
-        ReDim Animation(MAX_ANIMATIONS).LoopCount(1)
-        ReDim Animation(MAX_ANIMATIONS).LoopTime(1)
-
-        ReDim MapProjectile(MAX_CACHED_MAPS, MAX_PROJECTILES)
-        ReDim Projectile(MAX_PROJECTILES)
+        InitNetwork()                                                                                                                                                                                                 
 
         ' Serves as a constructor
         ClearGameData()
@@ -251,7 +236,7 @@ Module S_General
                     Console.WriteLine("Server shutdown in " & (shutDownDuration - time) & " seconds!")
                 End If
 
-                If (shutDownDuration - time) = -1 Then
+                If (shutDownDuration - time) = 1 Then
                     DestroyServer()
                 End If
 

@@ -84,6 +84,7 @@ End Function
     Friend Function CheckPaths()
         CacheMusic()
         CacheSound()
+
         If Settings.Music = 1 AndAlso Len(Trim$(Settings.MenuMusic)) > 0 Then
             PlayMusic(Trim$(Settings.MenuMusic))
             MusicPlayer.Volume() = Settings.Volume

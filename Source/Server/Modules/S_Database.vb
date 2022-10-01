@@ -148,6 +148,10 @@ Module modDatabase
             ReDim Map(i).Npc(MAX_MAP_NPCS)
         Next
 
+        ReDim Switches(MAX_SWITCHES)
+        ReDim Variables(NAX_VARIABLES)
+        ReDim TempEventMap(MAX_CACHED_MAPS)
+
         For i = 0 To MAX_CACHED_MAPS
             ClearMap(i)
         Next
@@ -855,6 +859,8 @@ Module modDatabase
     End Sub
 
     Sub ClearShops()
+        ReDim Shop(MAX_SHOPS).TradeItem(MAX_TRADES)
+
         For i = 0 To MAX_SHOPS
             Call ClearShop(i)
         Next
