@@ -39,9 +39,28 @@ Module S_Console
                     Console.WriteLine("/access, Sets player access level, use with '/setadmin playername powerlvl' powerlevel goes from 0 for player, to 4 to creator.")
                     Console.WriteLine("/kick, Kicks user from server, use with '/kick playername'")
                     Console.WriteLine("/ban, Bans user from server, use with '/ban playername'")
+                    Console.WriteLine("/shutdown, Shuts down the server after 60 seconds")
 
 #End Region
+                Case "/shutdown"
+                    If parts.Length < 2 Then Continue While
 
+                    shutDownDuration = parts(1)
+
+                    If shutDownTimer.IsRunning
+                        shutDownTimer.Stop()
+                        Console.WriteLine("Server shutdown has been cancelled!")
+                        Call GlobalMsg("Server shutdown has been cancelled!")
+                    Else
+                        if shutDownTimer.ElapsedTicks > 0 Then
+                            shutDownTimer.Restart()
+                        Else
+                            shutDownTimer.Start()
+                        End If
+
+                        Console.WriteLine("Server shutdown in " & shutDownDuration & " seconds!")
+                        Call GlobalMsg("Server shutdown in " & shutDownDuration & " seconds!")
+                    End If
                 Case "/exit"
 
 #Region " Body "

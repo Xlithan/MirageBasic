@@ -110,15 +110,15 @@ Public Class LanguageDef
         Public Help4 As String = "![player] [message] = Player Message"
         Public Help5 As String = "Available Commands: /help, /info, 
                                   /who, /fps, /lps, /stats, /trade, 
-                                  /party, /join, /leave, /sellhouse, 
-                                  /houseinvite"
+                                  /party, /join, /leave"
+                              
 
         ' Admin-Only
         Public AccessAlert As String = "You need a higher access to do this!"
         Public AdminGblMsg As String = "''msghere = Global Admin Message"
         Public AdminPvtMsg As String = "= msghere = Private Admin Message"
         Public Admin1 As String = "Social Commands:"
-        Public Admin2 As String = "Available Commands: /access, /loc, 
+        Public Admin2 As String = "Available Commands: /admin, /access, /loc, 
                                    /warpmeto, /warptome, /warpto, 
                                    /sprite, /mapreport, /kick, 
                                    /ban, /respawn, /welcome, /questreset"

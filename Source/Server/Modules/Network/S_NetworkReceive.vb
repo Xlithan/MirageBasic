@@ -1,5 +1,4 @@
-﻿Imports System.IO
-Imports System.Net.Mime.MediaTypeNames
+﻿Imports System.Net.Mime.MediaTypeNames
 Imports System.Reflection.PortableExecutable
 Imports Mirage.Sharp.Asfw
 Imports Mirage.Sharp.Asfw.IO
@@ -449,6 +448,7 @@ Module S_NetworkReceive
 
             LoadCharacter(index, slot)
             CharactersList.Remove(Player(index).Name)
+            CharactersList.Save()
             ClearCharacter(index)
             SaveCharacter(index, slot)
             Account(index).Character(slot) = ""
@@ -457,7 +457,7 @@ Module S_NetworkReceive
             buffer.Dispose()
         End If
     End Sub
-
+                                                                                                                                                                
     Private Sub Packet_SayMessage(index As Integer, ByRef data() As Byte)
         Dim msg As String
         Dim buffer As New ByteStream(data)

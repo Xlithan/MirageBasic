@@ -22,6 +22,8 @@ Module modLoop
             ' Get all our online players.
             Dim onlinePlayers = TempPlayer.Where(Function(player) player.InGame).Select(Function(player, index) New With {Key .Index = index + 1, player}).ToArray()
 
+            CheckShutDownCountDown()
+
             If tick > tmr25 Then
                 ' Check if any of our players has completed casting and get their skill going if they have.
                 Dim playerskills = (

@@ -618,7 +618,7 @@ Module C_GameLogic
                     End If
 
                 ' Admin Help
-                Case "/access"
+                Case "/admin"
 
                     If GetPlayerAccess(Myindex) < AdminType.Monitor Then
                         AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
