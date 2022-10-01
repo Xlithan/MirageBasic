@@ -1,4 +1,5 @@
-﻿Imports System.Net.Mime.MediaTypeNames
+﻿Imports System.IO
+Imports System.Net.Mime.MediaTypeNames
 Imports System.Reflection.PortableExecutable
 Imports Mirage.Sharp.Asfw
 Imports Mirage.Sharp.Asfw.IO
