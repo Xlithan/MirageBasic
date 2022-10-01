@@ -556,6 +556,7 @@ Module C_GameLogic
                     buffer.WriteString((command(1)))
                     Socket.SendData(buffer.Data, buffer.Head)
                     buffer.Dispose()
+
                 ' Whos Online
                 Case "/who"
                     SendWhosOnline()
@@ -567,8 +568,10 @@ Module C_GameLogic
                 ' Checking fps
                 Case "/fps"
                     Bfps = Not Bfps
+
                 Case "/lps"
                     Blps = Not Blps
+
                 ' Request stats
                 Case "/stats"
                     buffer = New ByteStream(4)
@@ -618,7 +621,7 @@ Module C_GameLogic
                     End If
 
                 ' Admin Help
-                Case "/access"
+                Case "/admin"
 
                     If GetPlayerAccess(Myindex) < AdminType.Monitor Then
                         AddText(Language.Chat.AccessAlert, QColorType.AlertColor)

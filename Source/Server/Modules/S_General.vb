@@ -3,15 +3,18 @@ Imports System.Data
 Imports System.Diagnostics
 Imports System.IO
 Imports System.Net
+Imports System.Runtime.CompilerServices
 Imports System.Runtime.InteropServices
 Imports Mirage.Basic.Engine
 Imports Mirage.Basic.Engine.Database
 
 Module S_General
-    'Friend Declare Function GetQueueStatus Lib "user32" (fuFlags As Integer) As Integer
     Friend ServerDestroyed As Boolean
     Friend MyIPAddress As String
     Friend myStopWatch As New Stopwatch()
+    Friend shutDownTimer As New Stopwatch()
+    Friend shutDownLastTimer As Integer
+    Friend shutDownDuration As Integer
 
     Friend Function GetTimeMs() As Integer
         Return myStopWatch.ElapsedMilliseconds
@@ -47,22 +50,7 @@ Module S_General
         CheckDir(Paths.Quests)
 
         EKeyPair.GenerateKeys()
-        InitNetwork()
-                                                                                                                                                                                                    
-        'event
-        ReDim Switches(MAX_SWITCHES)
-        ReDim Variables(NAX_VARIABLES)
-        ReDim TempEventMap(MAX_CACHED_MAPS)
-
-        ReDim Shop(MAX_SHOPS).TradeItem(MAX_TRADES)
-
-        ReDim Animation(MAX_ANIMATIONS).Sprite(1)
-        ReDim Animation(MAX_ANIMATIONS).Frames(1)
-        ReDim Animation(MAX_ANIMATIONS).LoopCount(1)
-        ReDim Animation(MAX_ANIMATIONS).LoopTime(1)
-
-        ReDim MapProjectile(MAX_CACHED_MAPS, MAX_PROJECTILES)
-        ReDim Projectile(MAX_PROJECTILES)
+        InitNetwork()                                                                                                                                                                                                 
 
         ' Serves as a constructor
         ClearGameData()
@@ -193,13 +181,11 @@ Module S_General
 
     ' Used for checking validity of names
     Function IsNameLegal(sInput As Integer) As Boolean
-
         If (sInput >= 65 AndAlso sInput <= 90) OrElse (sInput >= 97 AndAlso sInput <= 122) OrElse (sInput = 95) OrElse (sInput = 32) OrElse (sInput >= 48 AndAlso sInput <= 57) Then
             Return True
         Else
             Return False
         End If
-
     End Function
 
     Friend Sub CheckDir(path As String)
@@ -238,7 +224,25 @@ Module S_General
             Addlog(Msg, PACKET_LOG)
             Console.WriteLine(Msg)
         End If
-
     End Sub
+
+    Friend Sub CheckShutDownCountDown()
+        If shutDownDuration > 0 Then
+            Dim time As Integer = shutDownTimer.Elapsed.Seconds
+
+            If shutDownLastTimer <> time Then
+                If shutDownDuration - time <= 10 Then
+                    S_NetworkSend.GlobalMsg("Server shutdown in " & (shutDownDuration - time) & " seconds!")
+                    Console.WriteLine("Server shutdown in " & (shutDownDuration - time) & " seconds!")
+                End If
+
+                If (shutDownDuration - time) = 1 Then
+                    DestroyServer()
+                End If
+
+                shutDownLastTimer = time
+            End If    
+        End If
+End Sub
 
 End Module

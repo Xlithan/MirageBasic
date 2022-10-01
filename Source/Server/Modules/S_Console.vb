@@ -31,7 +31,6 @@ Module S_Console
 
             Select Case parts(0).Trim().ToLower()
                 Case "/help"
-
 #Region " Body "
 
                     Console.WriteLine("/help, Shows this message.")
@@ -39,7 +38,32 @@ Module S_Console
                     Console.WriteLine("/access, Sets player access level, use with '/setadmin playername powerlvl' powerlevel goes from 0 for player, to 4 to creator.")
                     Console.WriteLine("/kick, Kicks user from server, use with '/kick playername'")
                     Console.WriteLine("/ban, Bans user from server, use with '/ban playername'")
+                    Console.WriteLine("/shutdown, Shuts down the server after 60 seconds or a value you specify")
 
+#End Region
+
+                Case "/shutdown"
+#Region "Body"
+                    If parts.Length < 2 Then
+                        shutDownDuration = 60
+                    Else
+                        shutDownDuration = parts(1)
+                    End If
+
+                    If shutDownTimer.IsRunning
+                        shutDownTimer.Stop()
+                        Console.WriteLine("Server shutdown has been cancelled!")
+                        Call GlobalMsg("Server shutdown has been cancelled!")
+                    Else
+                        if shutDownTimer.ElapsedTicks > 0 Then
+                            shutDownTimer.Restart()
+                        Else
+                            shutDownTimer.Start()
+                        End If
+
+                        Console.WriteLine("Server shutdown in " & shutDownDuration & " seconds!")
+                        Call GlobalMsg("Server shutdown in " & shutDownDuration & " seconds!")
+                    End If
 #End Region
 
                 Case "/exit"
@@ -51,9 +75,8 @@ Module S_Console
 #End Region
 
                 Case "/access"
+#Region "Body"
                     If parts.Length < 3 Then Continue While
-
-#Region " Body "
 
                     Dim Name As String = parts(1)
                     Dim Pindex As Integer = FindPlayer(Name)
@@ -96,9 +119,8 @@ Module S_Console
 #End Region
 
                 Case "/kick"
+#Region "Body"
                     If parts.Length < 2 Then Continue While
-
-#Region " Body "
 
                     Dim Name As String = parts(1)
                     Dim Pindex As Integer = FindPlayer(Name)
@@ -108,13 +130,11 @@ Module S_Console
                         AlertMsg(Pindex, "You have been kicked by the server owner!")
                         LeftGame(Pindex)
                     End If
-
 #End Region
 
                 Case "/ban"
+#Region "Body"
                     If parts.Length < 2 Then Continue While
-
-#Region " Body "
 
                     Dim Name As String = parts(1)
                     Dim Pindex As Integer = FindPlayer(Name)
@@ -124,9 +144,8 @@ Module S_Console
 #End Region
 
                 Case "/timespeed"
-                    If parts.Length < 2 Then Exit Sub
-
 #Region " Body "
+                    If parts.Length < 2 Then Exit Sub
 
                     Dim speed As Double
                     Double.TryParse(parts(1), speed)
