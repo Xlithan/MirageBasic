@@ -12,7 +12,6 @@ Module C_Constants
     Friend Const EffectTypeWeather As Integer = 5
     Friend Const EffectTypeTint As Integer = 6
 
-    Friend Const AllowEightDirectionalMovement As Boolean = true
     Friend Const UseSmoothDynamicLightRendering As Boolean = true
 
     ' Font variables
@@ -28,20 +27,15 @@ Module C_Constants
 
     ' Menu states
     Friend Const MenuStateNewaccount As Byte = 0
-    Friend Const MenuStateDelaccount As Byte = 1
-    Friend Const MenuStateLogin As Byte = 2
-    Friend Const MenuStateGetchars As Byte = 3
-    Friend Const MenuStateNewchar As Byte = 4
-    Friend Const MenuStateAddchar As Byte = 5
-    Friend Const MenuStateDelchar As Byte = 6
-    Friend Const MenuStateUsechar As Byte = 7
-    Friend Const MenuStateInit As Byte = 8
-
-    ' Number of tiles in width in tilesets
-    Friend Const TilesheetWidth As Integer = 15 ' * PicX pixels
+    Friend Const MenuStateLogin As Byte = 1
+    Friend Const MenuStateGetchars As Byte = 2
+    Friend Const MenuStateNewchar As Byte = 3
+    Friend Const MenuStateAddchar As Byte = 4
+    Friend Const MenuStateDelchar As Byte = 5
+    Friend Const MenuStateUsechar As Byte = 6
+    Friend Const MenuStateInit As Byte = 7
 
     Friend MapGrid As Boolean
-
     Friend EyeDropper As Boolean
 
     ' Speed moving vars
