@@ -189,7 +189,7 @@ namespace Mirage.Sharp.Asfw.Network
         }
         this.PacketHandler();
         this._receiveBuffer = new byte[this._packetSize];
-        this._socket.BeginReceive(this._receiveBuffer, 0, this._packetSize, SocketFlags.None, new AsyncCallback(this.DoReceive), (object) null);
+        this._socket?.BeginReceive(this._receiveBuffer, 0, this._packetSize, SocketFlags.None, new AsyncCallback(this.DoReceive), (object) null);
       }
     }
 
