@@ -81,6 +81,7 @@ Partial Class frmEditor_Map
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbFill = New System.Windows.Forms.ToolStripButton()
         Me.tsbClear = New System.Windows.Forms.ToolStripButton()
+        Me.tsbEyeDropper = New System.Windows.Forms.ToolStripButton()
         Me.tabpages = New System.Windows.Forms.TabControl()
         Me.tpTiles = New System.Windows.Forms.TabPage()
         Me.cmbAutoTile = New System.Windows.Forms.ComboBox()
@@ -730,7 +731,7 @@ Partial Class frmEditor_Map
         '
         'ToolStrip
         '
-        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear})
+        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear, Me.tsbEyeDropper})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip.Name = "ToolStrip"
         Me.ToolStrip.Size = New System.Drawing.Size(558, 25)
@@ -739,7 +740,7 @@ Partial Class frmEditor_Map
         '
         'tsbSave
         '
-        Me.tsbSave.Image = My.Resources.Resources.Save
+        Me.tsbSave.Image = Global.Mirage.Basic.Client.My.Resources.Resources.Save
         Me.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbSave.Name = "tsbSave"
         Me.tsbSave.Size = New System.Drawing.Size(51, 22)
@@ -747,7 +748,7 @@ Partial Class frmEditor_Map
         '
         'tsbDiscard
         '
-        Me.tsbDiscard.Image = My.Resources.Resources._Exit
+        Me.tsbDiscard.Image = Global.Mirage.Basic.Client.My.Resources.Resources._Exit
         Me.tsbDiscard.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbDiscard.Name = "tsbDiscard"
         Me.tsbDiscard.Size = New System.Drawing.Size(66, 22)
@@ -760,7 +761,7 @@ Partial Class frmEditor_Map
         '
         'tsbMapGrid
         '
-        Me.tsbMapGrid.Image = My.Resources.Resources.Grid
+        Me.tsbMapGrid.Image = Global.Mirage.Basic.Client.My.Resources.Resources.Grid
         Me.tsbMapGrid.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbMapGrid.Name = "tsbMapGrid"
         Me.tsbMapGrid.Size = New System.Drawing.Size(76, 22)
@@ -773,7 +774,7 @@ Partial Class frmEditor_Map
         '
         'tsbFill
         '
-        Me.tsbFill.Image = My.Resources.Resources.Fill
+        Me.tsbFill.Image = Global.Mirage.Basic.Client.My.Resources.Resources.Fill
         Me.tsbFill.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbFill.Name = "tsbFill"
         Me.tsbFill.Size = New System.Drawing.Size(73, 22)
@@ -782,11 +783,19 @@ Partial Class frmEditor_Map
         '
         'tsbClear
         '
-        Me.tsbClear.Image = My.Resources.Resources.Clear
+        Me.tsbClear.Image = Global.Mirage.Basic.Client.My.Resources.Resources.Clear
         Me.tsbClear.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbClear.Name = "tsbClear"
         Me.tsbClear.Size = New System.Drawing.Size(85, 22)
         Me.tsbClear.Text = "Clear Layer"
+        '
+        'tsbEyeDropper
+        '
+        Me.tsbEyeDropper.Image = Global.Mirage.Basic.Client.My.Resources.Resources.Wand
+        Me.tsbEyeDropper.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbEyeDropper.Name = "tsbEyeDropper"
+        Me.tsbEyeDropper.Size = New System.Drawing.Size(91, 22)
+        Me.tsbEyeDropper.Text = "Eye Dropper"
         '
         'tabpages
         '
@@ -1919,7 +1928,7 @@ End Sub
     Friend WithEvents tsbMapGrid As Windows.Forms.ToolStripButton
     Friend WithEvents btnPreview As Windows.Forms.Button
     Friend WithEvents tsbFill As Windows.Forms.ToolStripButton
-    Friend WithEvents tsbClear As Windows.Forms.ToolStripButton
+    Friend WithEvents tsbEyeDropper As Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator2 As Windows.Forms.ToolStripSeparator
     Friend WithEvents chkInstance As Windows.Forms.CheckBox
     Friend WithEvents optLight As Windows.Forms.RadioButton
@@ -1963,4 +1972,5 @@ End Sub
     Friend WithEvents lblMapBrightness As Label
     Friend WithEvents scrlMapBrightness As HScrollBar
     Friend WithEvents picBackSelect As PictureBox
+    Friend WithEvents tsbClear As ToolStripButton
 End Class

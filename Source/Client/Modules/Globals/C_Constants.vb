@@ -42,6 +42,8 @@ Module C_Constants
 
     Friend MapGrid As Boolean
 
+    Friend EyeDropper As Boolean
+
     ' Speed moving vars
     Friend Const WalkSpeed As Byte = 6
 
