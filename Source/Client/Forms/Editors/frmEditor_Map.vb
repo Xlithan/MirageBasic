@@ -575,7 +575,7 @@ End Sub
 
         cmbTileSets.Items.Clear()
         For i = 0 To NumTileSets
-            cmbTileSets.Items.Add("Tileset " & i)
+            cmbTileSets.Items.Add(i)
         Next
 
         cmbTileSets.SelectedIndex = 0
