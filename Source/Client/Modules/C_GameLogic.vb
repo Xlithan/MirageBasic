@@ -598,7 +598,7 @@ Module C_GameLogic
                 Case "/releasepet"
                     SendReleasePet()
 
-                ' // Monitor Admin Commands //
+                ' // Moderator Admin Commands //
 
                 Case "/questreset"
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
@@ -623,7 +623,7 @@ Module C_GameLogic
                 ' Admin Help
                 Case "/admin"
 
-                    If GetPlayerAccess(Myindex) < AdminType.Monitor Then
+                    If GetPlayerAccess(Myindex) < AdminType.Moderator Then
                         AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
                         GoTo Continue1
                     End If
@@ -635,7 +635,7 @@ Module C_GameLogic
                 ' Kicking a player
                 Case "/kick"
 
-                    If GetPlayerAccess(Myindex) < AdminType.Monitor Then
+                    If GetPlayerAccess(Myindex) < AdminType.Moderator Then
                         AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
                         GoTo Continue1
                     End If

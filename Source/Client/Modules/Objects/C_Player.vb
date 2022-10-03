@@ -692,7 +692,7 @@ Module C_Player
                 Case AdminType.Player
                     color = SFML.Graphics.Color.Red
                     backcolor = SFML.Graphics.Color.Black
-                Case AdminType.Monitor
+                Case AdminType.Moderator
                     color = SFML.Graphics.Color.Black
                     backcolor = SFML.Graphics.Color.White
                 Case AdminType.Mapper

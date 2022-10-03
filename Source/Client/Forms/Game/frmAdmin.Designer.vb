@@ -312,7 +312,7 @@ Partial Class FrmAdmin
         'cmbAccess
         '
         Me.cmbAccess.FormattingEnabled = true
-        Me.cmbAccess.Items.AddRange(New Object() {"Normal Player", "Monitor (GM)", "Mapper", "Developer", "Creator"})
+        Me.cmbAccess.Items.AddRange(New Object() {"Normal Player", "Moderator (GM)", "Mapper", "Developer", "Creator"})
         Me.cmbAccess.Location = New System.Drawing.Point(66, 140)
         Me.cmbAccess.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbAccess.Name = "cmbAccess"

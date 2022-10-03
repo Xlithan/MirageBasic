@@ -2406,7 +2406,7 @@ Partial Class FrmEditor_Events
         '
         Me.cmbSetAccess.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbSetAccess.FormattingEnabled = true
-        Me.cmbSetAccess.Items.AddRange(New Object() {"0: Player", "1: Monitor", "2: Mapper", "3: Developer", "4: Creator"})
+        Me.cmbSetAccess.Items.AddRange(New Object() {"0: Player", "1: Moderator", "2: Mapper", "3: Developer", "4: Creator"})
         Me.cmbSetAccess.Location = New System.Drawing.Point(38, 22)
         Me.cmbSetAccess.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbSetAccess.Name = "cmbSetAccess"

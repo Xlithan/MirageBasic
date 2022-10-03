@@ -264,7 +264,7 @@ Module modLoop
 
                                     For i = 0 To GetPlayersOnline()
                                         If IsPlaying(i) Then
-                                            If GetPlayerMap(i) = mapNum AndAlso MapNpc(mapNum).Npc(x).Target = 0 AndAlso GetPlayerAccess(i) <= AdminType.Monitor Then
+                                            If GetPlayerMap(i) = mapNum AndAlso MapNpc(mapNum).Npc(x).Target = 0 AndAlso GetPlayerAccess(i) <= AdminType.Moderator Then
                                                 If PetAlive(i) Then
                                                     n = Npc(npcNum).Range
                                                     distanceX = MapNpc(mapNum).Npc(x).X - Player(i).Pet.X
