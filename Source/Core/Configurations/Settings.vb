@@ -16,7 +16,7 @@ Public Class SettingsDef
     Public Volume As Single = 100.0F
 
     Public ScreenSize As String = "1024x768"
-    Public Vsync As Byte = 0
+    Public Vsync As Byte = 1
     Public ShowNpcBar As Byte = 1
     Public CameraType As Byte = 0
     Public Fullscreen As Byte = 1
