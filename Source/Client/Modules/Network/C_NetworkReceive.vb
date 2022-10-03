@@ -172,6 +172,7 @@ Module C_NetworkReceive
         MsgBox(msg, vbOKOnly, Settings.GameName)
         DestroyGame()
     End Sub
+
     Private Sub Packet_KeyPair(ByRef data() As Byte)
         Dim buffer As New ByteStream(data)
 

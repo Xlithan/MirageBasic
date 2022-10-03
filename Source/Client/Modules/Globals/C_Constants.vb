@@ -1,4 +1,5 @@
 ﻿Imports System.Drawing
+Imports Mirage.Basic.Engine.Types
 
 Module C_Constants
 
@@ -35,11 +36,12 @@ Module C_Constants
 
     Friend MapGrid As Boolean
     Friend EyeDropper As Boolean
+    Friend HistoryIndex As Integer
 
     ' Speed moving vars
     Friend Const WalkSpeed As Byte = 6
 
-    Friend Const RunSpeed As Byte = 10
+    Friend Const RunSpeed As Byte = 12
 
     ' Tile size constants
     Friend Const PicX As Integer = 32
@@ -60,6 +62,8 @@ Module C_Constants
 
     Friend ScreenMapy As Byte = 26
 
+    Friend MaxHistory As Byte = 50
+
     Friend ItemRarityColor0 = SFML.Graphics.Color.White ' white
     Friend ItemRarityColor1 = New SFML.Graphics.Color(102, 255, 0) ' green
     Friend ItemRarityColor2 = New SFML.Graphics.Color(73, 151, 208) ' blue
@@ -77,6 +81,9 @@ Module C_Constants
     Public EditorShop As Integer
     Public EditorTileSelStart As Point
     Public EditorTileSelEnd As Point
+    Public CopyMap As Boolean
+    Public TmpTile(,) As TileStruct
+    Public TileHistory(MaxHistory) as TileHistoryStruct
 
     Friend HalfX As Integer = ((ScreenMapx + 1) \ 2) * PicX
     Friend HalfY As Integer = ((ScreenMapy + 1) \ 2) * PicY

@@ -16,7 +16,7 @@ Public Class SettingsDef
     Public Volume As Single = 100.0F
 
     Public ScreenSize As String = "1024x768"
-    Public Vsync As Byte = 0
+    Public Vsync As Byte = 1
     Public ShowNpcBar As Byte = 1
     Public CameraType As Byte = 0
     Public Fullscreen As Byte = 1
@@ -29,7 +29,7 @@ Public Class SettingsDef
     <XmlIgnore()> Public GameName As String = "MirageBasic"
     <XmlIgnore()> Public Website As String = "https://miragebasic.net/"
 
-    <XmlIgnore()> Public Version As String = "1.4.0"
+    <XmlIgnore()> Public Version As String = "1.4.4"
 
     Public Welcome As String = "Welcome to MirageBasic, enjoy your stay!"
 End Class

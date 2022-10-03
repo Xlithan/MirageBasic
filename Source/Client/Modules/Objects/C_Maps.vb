@@ -95,6 +95,11 @@ Module C_Maps
         Dim AttackTimer As Integer
         Dim Steps As Integer
     End Structure
+
+    Public Structure TileHistoryStruct
+        Dim Tile(,) As TileStruct
+        Dim Index As Integer
+    End Structure
 #End Region
 
 #Region "Database"
@@ -107,11 +112,14 @@ Module C_Maps
             NumTileSets = NumTileSets + 1
             i = i + 1
         End While
-
-        If NumTileSets = 0 Then Exit Sub
     End Sub
 
     Sub ClearMap()
+        HistoryIndex = 0
+        For i = 1 To 50
+            TileHistory(i).Tile = TileHistory(0).Tile
+            TileHistory(i).Index = 0
+        Next
         Map.Name = ""
         Map.Tileset = 1
         Map.MaxX = ScreenMapx
@@ -216,10 +224,11 @@ Module C_Maps
                 frmEditor_Map.MapEditorCancel()
             End If
         End If
+
         GettingMap = True
 
         ' Erase all players except self
-       For i = 0 To TotalOnline 'MAX_PLAYERS
+       For i = 1 To TotalOnline 'MAX_PLAYERS
             If i <> Myindex Then
                 SetPlayerMap(i, 0)
             End If
@@ -234,6 +243,7 @@ Module C_Maps
 
         ' Get map num
         x = buffer.ReadInt32
+
         ' Get revision
         y = buffer.ReadInt32
 
@@ -467,7 +477,6 @@ Module C_Maps
         End If
 
         buffer.Dispose()
-
 
         InitAutotiles()
 
@@ -793,7 +802,7 @@ Module C_Maps
         If Map.Tile Is Nothing Then Exit Sub
         If MapData = False Then Exit Sub
 
-        For i = LayerType.Ground To LayerType.Mask2
+        For i = LayerType.Ground To LayerType.Cover
             If Map.Tile(x, y).Layer Is Nothing Then Exit Sub
             ' skip tile if tileset isn't set
             If Map.Tile(x, y).Layer(i).Tileset > 0 AndAlso Map.Tile(x, y).Layer(i).Tileset <= NumTileSets Then
@@ -835,7 +844,7 @@ Module C_Maps
         If Map.Tile Is Nothing Then Exit Sub
         If MapData = False Then Exit Sub
 
-        For i = LayerType.Fringe To LayerType.Fringe2
+        For i = LayerType.Fringe To LayerType.Roof
             If Map.Tile(x, y).Layer Is Nothing Then Exit Sub
             ' skip tile if tileset isn't set
             If Map.Tile(x, y).Layer(i).Tileset > 0 AndAlso Map.Tile(x, y).Layer(i).Tileset <= NumTileSets Then

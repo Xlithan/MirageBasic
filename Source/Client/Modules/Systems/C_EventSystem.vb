@@ -69,13 +69,12 @@ Friend Module C_EventSystem
         Dim count As Integer, i As Integer
 
         count = Map.EventCount
+
         If count = 0 Then Exit Sub
         For i = 0 To count
             If Map.Events(i).X = X AndAlso Map.Events(i).Y = Y Then
                 ' copy it
                 CopyEvent = Map.Events(i)
-
-                ' exit
                 Exit Sub
             End If
         Next
@@ -86,6 +85,7 @@ Friend Module C_EventSystem
         Dim count As Integer, i As Integer, EventNum As Integer
 
         count = Map.EventCount
+
         If count > 0 Then
             For i = 0 To count
                 If Map.Events(i).X = X AndAlso Map.Events(i).Y = Y Then
@@ -107,7 +107,6 @@ Friend Module C_EventSystem
         ' set position
         Map.Events(EventNum).X = X
         Map.Events(EventNum).Y = Y
-
     End Sub
 
     Sub DeleteEvent(ByVal X As Integer, ByVal Y As Integer)
@@ -117,6 +116,7 @@ Friend Module C_EventSystem
         If FrmEditor_Events.Visible = True Then Exit Sub
 
         count = Map.EventCount
+
         For i = 0 To count
             If Map.Events(i).X = X AndAlso Map.Events(i).Y = Y Then
                 ' delete it

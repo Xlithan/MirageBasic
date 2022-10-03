@@ -6,8 +6,6 @@ Friend Module C_HotBar
     Friend SelHotbarSlot As Integer
     Friend SelSkillSlot As Boolean
 
-    Friend Const MaxHotbar As Byte = 7
-
     'hotbar constants
     Friend Const HotbarTop As Byte = 2
 
@@ -25,11 +23,11 @@ Friend Module C_HotBar
 
         IsHotBarSlot = 0
 
-        For i = 0 To MaxHotbar
+        For i = 0 To MAX_HOTBAR
             With tempRec
                 .Top = HotbarY + HotbarTop
                 .Bottom = .Top + PicY
-                .Left = HotbarX + HotbarLeft + ((HotbarOffsetX + 32) * (((i - 1) Mod MaxHotbar)))
+                .Left = HotbarX + HotbarLeft + ((HotbarOffsetX + 32) * (((i - 1) Mod MAX_HOTBAR)))
                 .Right = .Left + PicX
             End With
 
@@ -46,7 +44,7 @@ Friend Module C_HotBar
     Friend Sub Packet_Hotbar(ByRef data() As Byte)
         Dim i As Integer
         Dim buffer As New ByteStream(data)
-        For i = 0 To MaxHotbar
+        For i = 0 To MAX_HOTBAR
             Player(Myindex).Hotbar(i).Slot = buffer.ReadInt32
             Player(Myindex).Hotbar(i).SlotType = buffer.ReadInt32
         Next
@@ -94,7 +92,7 @@ Friend Module C_HotBar
 
         RenderSprite(HotBarSprite, GameWindow, HotbarX, HotbarY, 0, 0, HotBarGfxInfo.Width, HotBarGfxInfo.Height)
 
-        For i = 0 To MaxHotbar
+        For i = 0 To MAX_HOTBAR
             If Player(Myindex).Hotbar(i).SlotType = 1 Then
                 num = Player(Myindex).Skill(Player(Myindex).Hotbar(i).Slot).Num
 

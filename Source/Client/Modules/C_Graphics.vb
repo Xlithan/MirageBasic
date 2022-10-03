@@ -1367,7 +1367,7 @@ Module C_Graphics
         endX = startX + (ScreenMapx + 1) + 1
         endY = startY + (ScreenMapy + 1) + 1
 
-        If endX > Map.MaxX Then
+        If endX >= Map.MaxX Then
             offsetX = 32
 
             If endX = Map.MaxX Then
@@ -1380,7 +1380,7 @@ Module C_Graphics
             startX = endX - ScreenMapx - 1
         End If
 
-        If endY > Map.MaxY Then
+        If endY >= Map.MaxY Then
             offsetY = 32
 
             If endY = Map.MaxY Then
@@ -1398,7 +1398,7 @@ Module C_Graphics
             .Bottom = endY
             .Left = startX
             .Right = endX
-        End With
+        End With                                                                                                                                                                                                                            
 
         With Camera
             .Y = offsetY
@@ -1632,7 +1632,6 @@ Module C_Graphics
         ' events
         If Editor <> EditorType.Map Then
             If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
-
                 For I = 0 To Map.CurrentEvents
                     If Map.MapEvents(I).Position = 0 Then
                         DrawEvent(I)

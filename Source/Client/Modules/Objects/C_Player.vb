@@ -88,7 +88,7 @@ Module C_Player
         Next
 
         ReDim Player(i).PlayerQuest(MAX_QUESTS)
-        ReDim Player(i).Hotbar(MaxHotbar)
+        ReDim Player(i).Hotbar(MAX_HOTBAR)
         ReDim Player(i).GatherSkills(ResourceSkills.Count - 1)
         ReDim Player(i).GatherSkills(ResourceSkills.Count - 1)
 

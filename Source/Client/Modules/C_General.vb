@@ -71,7 +71,7 @@ End Function
         ClearBank()
         ClearParty()
 
-        For i = 1 To MAX_PLAYERS
+        For i = 0 To MAX_PLAYERS
             ClearPlayer(i)
         Next
 
@@ -295,10 +295,6 @@ End Function
     Friend Sub DestroyGame()
         ' break out of GameLoop
         InGame = False
-
-        DestroyGraphics()
-        GameDestroyed = True
-        DestroyNetwork()
         Application.Exit()
         End
     End Sub

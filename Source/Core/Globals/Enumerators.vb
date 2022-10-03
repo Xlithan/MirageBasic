@@ -187,9 +187,9 @@
     Public Enum LayerType As Byte
         Ground
         Mask
-        Mask2
+        Cover
         Fringe
-        Fringe2
+        Roof
 
         Count
     End Enum
