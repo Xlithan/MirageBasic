@@ -295,10 +295,6 @@ End Function
     Friend Sub DestroyGame()
         ' break out of GameLoop
         InGame = False
-
-        DestroyGraphics()
-        GameDestroyed = True
-        DestroyNetwork()
         Application.Exit()
         End
     End Sub
