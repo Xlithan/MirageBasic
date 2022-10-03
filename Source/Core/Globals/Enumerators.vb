@@ -108,7 +108,7 @@
     ''' <Summary> Admin Constant </Summary>
     Enum AdminType As Byte
         Player
-        Monitor
+        Moderator
         Mapper
         Developer
         Creator

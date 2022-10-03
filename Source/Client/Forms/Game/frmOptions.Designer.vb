@@ -37,6 +37,7 @@ Partial Class FrmOptions
         Me.chkNpcBars = New System.Windows.Forms.CheckBox()
         Me.chkFullscreen = New System.Windows.Forms.CheckBox()
         Me.chkOpenAdminPanelOnLogin = New System.Windows.Forms.CheckBox()
+        Me.chkDynamicLighting = New System.Windows.Forms.CheckBox()
         Me.GroupBox2.SuspendLayout
         Me.GroupBox1.SuspendLayout
         Me.SuspendLayout
@@ -44,7 +45,7 @@ Partial Class FrmOptions
         'btnSaveSettings
         '
         Me.btnSaveSettings.ForeColor = System.Drawing.Color.Black
-        Me.btnSaveSettings.Location = New System.Drawing.Point(13, 242)
+        Me.btnSaveSettings.Location = New System.Drawing.Point(14, 272)
         Me.btnSaveSettings.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnSaveSettings.Name = "btnSaveSettings"
         Me.btnSaveSettings.Size = New System.Drawing.Size(239, 27)
@@ -175,9 +176,9 @@ Partial Class FrmOptions
         Me.chkVsync.Location = New System.Drawing.Point(14, 165)
         Me.chkVsync.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.chkVsync.Name = "chkVsync"
-        Me.chkVsync.Size = New System.Drawing.Size(62, 19)
+        Me.chkVsync.Size = New System.Drawing.Size(57, 19)
         Me.chkVsync.TabIndex = 15
-        Me.chkVsync.Text = "Vsync?"
+        Me.chkVsync.Text = "Vsync"
         Me.chkVsync.UseVisualStyleBackColor = true
         '
         'chkNpcBars
@@ -186,9 +187,9 @@ Partial Class FrmOptions
         Me.chkNpcBars.Location = New System.Drawing.Point(13, 192)
         Me.chkNpcBars.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.chkNpcBars.Name = "chkNpcBars"
-        Me.chkNpcBars.Size = New System.Drawing.Size(110, 19)
+        Me.chkNpcBars.Size = New System.Drawing.Size(105, 19)
         Me.chkNpcBars.TabIndex = 16
-        Me.chkNpcBars.Text = "Show Npc Bars?"
+        Me.chkNpcBars.Text = "Show Npc Bars"
         Me.chkNpcBars.UseVisualStyleBackColor = true
         '
         'chkFullscreen
@@ -197,28 +198,40 @@ Partial Class FrmOptions
         Me.chkFullscreen.Location = New System.Drawing.Point(168, 165)
         Me.chkFullscreen.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.chkFullscreen.Name = "chkFullscreen"
-        Me.chkFullscreen.Size = New System.Drawing.Size(90, 19)
+        Me.chkFullscreen.Size = New System.Drawing.Size(85, 19)
         Me.chkFullscreen.TabIndex = 17
-        Me.chkFullscreen.Text = "Fullscreeen?"
+        Me.chkFullscreen.Text = "Fullscreeen"
         Me.chkFullscreen.UseVisualStyleBackColor = true
         '
         'chkOpenAdminPanelOnLogin
         '
         Me.chkOpenAdminPanelOnLogin.AutoSize = true
-        Me.chkOpenAdminPanelOnLogin.Location = New System.Drawing.Point(13, 217)
+        Me.chkOpenAdminPanelOnLogin.Location = New System.Drawing.Point(14, 242)
         Me.chkOpenAdminPanelOnLogin.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.chkOpenAdminPanelOnLogin.Name = "chkOpenAdminPanelOnLogin"
-        Me.chkOpenAdminPanelOnLogin.Size = New System.Drawing.Size(183, 19)
+        Me.chkOpenAdminPanelOnLogin.Size = New System.Drawing.Size(178, 19)
         Me.chkOpenAdminPanelOnLogin.TabIndex = 18
-        Me.chkOpenAdminPanelOnLogin.Text = "Open Admin Panel On Login?"
+        Me.chkOpenAdminPanelOnLogin.Text = "Open Admin Panel On Login"
         Me.chkOpenAdminPanelOnLogin.UseVisualStyleBackColor = true
+        '
+        'chkDynamicLighting
+        '
+        Me.chkDynamicLighting.AutoSize = true
+        Me.chkDynamicLighting.Location = New System.Drawing.Point(13, 217)
+        Me.chkDynamicLighting.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.chkDynamicLighting.Name = "chkDynamicLighting"
+        Me.chkDynamicLighting.Size = New System.Drawing.Size(127, 19)
+        Me.chkDynamicLighting.TabIndex = 19
+        Me.chkDynamicLighting.Text = "Dynamic Lightning"
+        Me.chkDynamicLighting.UseVisualStyleBackColor = true
         '
         'FrmOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = true
-        Me.ClientSize = New System.Drawing.Size(271, 278)
+        Me.ClientSize = New System.Drawing.Size(271, 305)
+        Me.Controls.Add(Me.chkDynamicLighting)
         Me.Controls.Add(Me.chkOpenAdminPanelOnLogin)
         Me.Controls.Add(Me.chkFullscreen)
         Me.Controls.Add(Me.chkNpcBars)
@@ -260,4 +273,5 @@ End Sub
     Friend WithEvents chkNpcBars As Windows.Forms.CheckBox
     Friend WithEvents chkFullscreen As CheckBox
     Friend WithEvents chkOpenAdminPanelOnLogin As CheckBox
+    Friend WithEvents chkDynamicLighting As CheckBox
 End Class

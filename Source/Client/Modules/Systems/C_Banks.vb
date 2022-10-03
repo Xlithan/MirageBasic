@@ -117,6 +117,9 @@ Module C_Banks
         Dim sRect As Rectangle, dRect As Rectangle
         Dim sprite As Integer, colour As SFML.Graphics.Color
 
+        BankWindowX =  GameWindow.Size.X / 2 - BankPanelGfxInfo.Width / 2
+        BankWindowY = GameWindow.Size.Y / 2 - BankPanelGfxInfo.Height / 2
+
         'first render panel
         RenderSprite(BankPanelSprite, GameWindow, BankWindowX, BankWindowY, 0, 0, BankPanelGfxInfo.Width, BankPanelGfxInfo.Height)
 

@@ -447,7 +447,9 @@ Module S_NetworkSend
         Dim n As Integer
         Dim i As Integer
 
-        For i = 0 To GetPlayersOnline()
+        If GetPlayerAccess(index) < AdminType.Moderator Then Exit Sub
+
+        For i = 1 To GetPlayersOnline()
 
             If IsPlaying(i) Then
                 If i <> index Then

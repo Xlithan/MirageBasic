@@ -360,8 +360,8 @@ Friend Class frmEditor_Item
         Item(Editorindex).Ammo = cmbAmmo.SelectedIndex
     End Sub
 
-    Private Sub nudSpanwAmount_ValueChanged(sender As Object, e As EventArgs) Handles nudSpanwAmount.ValueChanged
-
+    Private Sub btnSpawn_Click(sender As Object, e As EventArgs) Handles btnSpawn.Click
+        SendSpawnItem(Editorindex, nudSpanwAmount.Value)
     End Sub
 
 #End Region

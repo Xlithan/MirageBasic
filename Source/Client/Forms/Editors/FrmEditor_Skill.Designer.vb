@@ -721,7 +721,7 @@ Partial Class frmEditor_Skill
         '
         Me.cmbAccessReq.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cmbAccessReq.FormattingEnabled = true
-        Me.cmbAccessReq.Items.AddRange(New Object() {"Player", "Monitor", "Mapper", "Developer", "Creator"})
+        Me.cmbAccessReq.Items.AddRange(New Object() {"Player", "Moderator", "Mapper", "Developer", "Creator"})
         Me.cmbAccessReq.Location = New System.Drawing.Point(281, 21)
         Me.cmbAccessReq.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.cmbAccessReq.Name = "cmbAccessReq"

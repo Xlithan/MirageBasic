@@ -75,16 +75,16 @@ Public Class LanguageDef
 
     Public Game As New GameDef
     Public Class GameDef
-        Public MapName As String = "Map : "
-        Public Time As String = "Time : "
-        Public Fps As String = "Fps : "
-        Public Lps As String = "Lps : "
+        Public MapName As String = ""
+        Public Time As String = "Time: "
+        Public Fps As String = "Fps: "
+        Public Lps As String = "Lps: "
 
-        Public Ping As String = "Ping : "
+        Public Ping As String = "Ping: "
         Public PingSync As String = "Sync"
         Public PingLocal As String = "Local"
 
-        Public MapReceive As String = "Recieving Map..."
+        Public MapReceive As String = "Recieving map..."
         Public DataReceive As String = "Receiving game data..."
 
         Public MapCurMap As String = "Map # {0}"
@@ -109,7 +109,7 @@ Public Class LanguageDef
         Public Help3 As String = "-[message] = Party Message"
         Public Help4 As String = "![player] [message] = Player Message"
         Public Help5 As String = "Available Commands: /help, /info, 
-                                  /who, /fps, /lps, /stats, /trade, 
+                                  /fps, /lps, /stats, /trade, 
                                   /party, /join, /leave"
                               
 
@@ -118,7 +118,7 @@ Public Class LanguageDef
         Public AdminGblMsg As String = "''msghere = Global Admin Message"
         Public AdminPvtMsg As String = "= msghere = Private Admin Message"
         Public Admin1 As String = "Social Commands:"
-        Public Admin2 As String = "Available Commands: /admin, /access, /loc, 
+        Public Admin2 As String = "Available Commands: /admin, /who, /access, /loc, 
                                    /warpmeto, /warptome, /warpto, 
                                    /sprite, /mapreport, /kick, 
                                    /ban, /respawn, /welcome, /questreset"

@@ -1805,7 +1805,12 @@ Module C_Graphics
             Next
         End If
 
-        If Editor = EditorType.Map Then frmEditor_Map.DrawTileOutline()
+        If Editor = EditorType.Map Then
+            DrawTileOutline()
+            If EyeDropper = True Then 
+                DrawEyeDropper()
+            End If
+        End If
 
         ' draw cursor, player X and Y locations
         If BLoc Then
@@ -2101,6 +2106,69 @@ Module C_Graphics
                 End If
             Next
         Next
+    End Sub
+
+    Friend Sub DrawTileOutline()
+        Dim rec As Rectangle
+        If frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpDirBlock Then Exit Sub
+
+        With rec
+            .Y = 0
+            .Height = PicY
+            .X = 0
+            .Width = PicX
+        End With
+
+        Dim rec2 As New RectangleShape With {
+            .OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Blue),
+            .OutlineThickness = 0.6,
+            .FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
+        }
+
+        If frmEditor_Map.tabpages.SelectedTab Is frmEditor_Map.tpAttributes Then
+            rec2.Size = New Vector2f(rec.Width, rec.Height)
+        Else
+            If TileSetTextureInfo(frmEditor_Map.cmbTileSets.SelectedIndex).IsLoaded = False Then
+                LoadTexture(frmEditor_Map.cmbTileSets.SelectedIndex, 1)
+            End If
+            ' we use it, lets update timer
+            With TileSetTextureInfo(frmEditor_Map.cmbTileSets.SelectedIndex)
+                .TextureTimer = GetTickCount() + 100000
+            End With
+
+            If EditorTileWidth = 1 AndAlso EditorTileHeight = 1 Then
+                RenderSprite(TileSetSprite(frmEditor_Map.cmbTileSets.SelectedIndex), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, rec.Width, rec.Height)
+
+                rec2.Size = New Vector2f(rec.Width, rec.Height)
+            Else
+                If frmEditor_Map.cmbAutoTile.SelectedIndex > 0 Then
+                    RenderSprite(TileSetSprite(frmEditor_Map.cmbTileSets.SelectedIndex), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, rec.Width, rec.Height)
+
+                    rec2.Size = New Vector2f(rec.Width, rec.Height)
+                Else
+                    RenderSprite(TileSetSprite(frmEditor_Map.cmbTileSets.SelectedIndex), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, EditorTileSelEnd.X * PicX, EditorTileSelEnd.Y * PicY)
+
+                    rec2.Size = New Vector2f(EditorTileSelEnd.X * PicX, EditorTileSelEnd.Y * PicY)
+                End If
+
+            End If
+
+        End If
+
+        rec2.Position = New Vector2f(ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY))
+        GameWindow.Draw(rec2)
+    End Sub
+
+    Friend Sub DrawEyeDropper()
+        Dim rec As New RectangleShape With {
+        .OutlineColor = New Color(Color.Cyan),
+        .OutlineThickness = 0.6,
+        .FillColor = New Color(Color.Transparent),
+        .Size = New Vector2f((PicX), (PicX)),
+        .Position = New Vector2f(ConvertMapX((CurX) * PicX), ConvertMapY((CurY) * PicY))
+        }
+
+        GameWindow.Draw(rec)
     End Sub
 
     Friend Sub DrawMapTint()
@@ -3096,7 +3164,7 @@ NextLoop:
                                     scale = New Vector2f(0.35F, 0.35F)
                                 End If
 
-                                If UseSmoothDynamicLightRendering Then
+                                If Settings.DynamicLightRendering Then
 
                                     For Each tile As Vector2i In tiles
                                         LightSprite.Scale = scale

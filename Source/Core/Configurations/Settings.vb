@@ -21,6 +21,7 @@ Public Class SettingsDef
     Public CameraType As Byte = 0
     Public Fullscreen As Byte = 1
     Public OpenAdminPanelOnLogin As Byte = 1
+    Public DynamicLightRendering As Byte = 1
 
     <XmlIgnore()> Public Ip As String = "127.0.0.1"
     <XmlIgnore()> Public Port As Integer = 7001

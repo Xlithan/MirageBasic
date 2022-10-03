@@ -55,6 +55,7 @@ Friend Class FrmGame
 
     Private Sub FrmMainGame_KeyUp(sender As Object, e As KeyEventArgs) Handles MyBase.KeyUp
         Dim skillnum As Integer
+
         If Inputs.MoveUp(e.KeyCode) Then VbKeyUp = False
         If Inputs.MoveDown(e.KeyCode) Then VbKeyDown = False
         If Inputs.MoveLeft(e.KeyCode) Then VbKeyLeft = False
@@ -70,6 +71,7 @@ Friend Class FrmGame
                 PlayerCastSkill(skillnum)
             End If
         End If
+
         If Inputs.HotBar2(e.KeyCode) Then
             skillnum = Player(Myindex).Hotbar(2).Slot
 
@@ -77,6 +79,7 @@ Friend Class FrmGame
                 PlayerCastSkill(skillnum)
             End If
         End If
+
         If Inputs.HotBar3(e.KeyCode) Then
             skillnum = Player(Myindex).Hotbar(3).Slot
 
@@ -84,6 +87,7 @@ Friend Class FrmGame
                 PlayerCastSkill(skillnum)
             End If
         End If
+
         If Inputs.HotBar4(e.KeyCode) Then
             skillnum = Player(Myindex).Hotbar(4).Slot
 
@@ -91,6 +95,7 @@ Friend Class FrmGame
                 PlayerCastSkill(skillnum)
             End If
         End If
+
         If Inputs.HotBar5(e.KeyCode) Then
             skillnum = Player(Myindex).Hotbar(5).Slot
 
@@ -98,6 +103,7 @@ Friend Class FrmGame
                 PlayerCastSkill(skillnum)
             End If
         End If
+
         If Inputs.HotBar6(e.KeyCode) Then
             skillnum = Player(Myindex).Hotbar(6).Slot
 
@@ -105,6 +111,7 @@ Friend Class FrmGame
                 PlayerCastSkill(skillnum)
             End If
         End If
+
         If Inputs.HotBar7(e.KeyCode) Then
             skillnum = Player(Myindex).Hotbar(7).Slot
 
@@ -119,6 +126,7 @@ Friend Class FrmGame
                 SendRequestAdmin()
             End If
         End If
+        
         'hide gui
         If Inputs.HudToggle(e.KeyCode) Then
             HideGui = Not HideGui

@@ -4,9 +4,9 @@ Imports SFML.Graphics
 Imports SFML.Window
 Imports Mirage.Basic.Engine
 Imports SFML.System
+Imports Mirage.Basic.Engine.Enumerations
 
 Public Class frmEditor_Map
-    Dim picbacktop As Integer, picbackleft As Integer
 #Region "Frm"
 
     Private Sub FrmEditor_Map_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
@@ -93,7 +93,7 @@ Public Class frmEditor_Map
                         End If
                     End If
                 Next
-            Next
+Next
         End With
 
         MapEditorSend()      
@@ -103,10 +103,14 @@ Public Class frmEditor_Map
 
     Private Sub TsbFill_Click(sender As Object, e As EventArgs) Handles tsbFill.Click
         MapEditorFillLayer(cmbAutoTile.SelectedIndex)
+End Sub
+
+    Private Sub TsbClear_Click(sender As Object, e As EventArgs) Handles  tsbClear.Click
+        MapEditorClearLayer()
     End Sub
 
-    Private Sub TsbClear_Click(sender As Object, e As EventArgs) Handles tsbClear.Click
-        MapEditorClearLayer()
+    Private Sub TsbEyeDropper_Click(sender As Object, e As EventArgs) Handles tsbEyeDropper.Click
+        EyeDropper = Not EyeDropper  
     End Sub
 
     Private Sub TsbDiscard_Click(sender As Object, e As EventArgs) Handles tsbDiscard.Click
@@ -121,7 +125,6 @@ Public Class frmEditor_Map
 #End Region
 
 #Region "Tiles"
-
     Private Sub PicBackSelect_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles picBackSelect.MouseDown
         MapEditorChooseTile(e.Button, e.X, e.Y)
     End Sub
@@ -505,15 +508,12 @@ Public Class frmEditor_Map
         txtBootMap.Text = Map.BootMap
         txtBootX.Text = Map.BootX
         txtBootY.Text = Map.BootY
-
         lstMapNpc.Items.Clear()
-        
         For x = 0 To MAX_MAP_NPCS
              lstMapNpc.Items.Add(X & ": " & Trim$(Npc(Map.Npc(X)).Name))
         Next
 
         cmbNpcList.Items.Clear()
-
         For y = 0 To MAX_NPCS
             cmbNpcList.Items.Add(Y & ": " & Trim$(Npc(Y).Name))
         Next
@@ -574,8 +574,8 @@ Public Class frmEditor_Map
         optBlocked.Checked = True
 
         cmbTileSets.Items.Clear()
-       For i = 0 To NumTileSets
-            cmbTileSets.Items.Add("Tileset " & i)
+        For i = 0 To NumTileSets
+            cmbTileSets.Items.Add(i)
         Next
 
         cmbTileSets.SelectedIndex = 0
@@ -613,8 +613,8 @@ Public Class frmEditor_Map
                 End Select
             End If
 
-            EditorTileX = (picbackleft \ PicX) + (X \ PicX)
-            EditorTileY = (picbacktop \ PicY) + (Y \ PicY)
+            EditorTileX = X \ PicX
+            EditorTileY = Y \ PicY
 
             EditorTileSelStart = New Point(EditorTileX, EditorTileY)
             EditorTileSelEnd = New Point(EditorTileX + EditorTileWidth, EditorTileY + EditorTileHeight)
@@ -660,6 +660,11 @@ Public Class frmEditor_Map
 
         CurLayer = cmbLayers.SelectedIndex
 
+        If EyeDropper Then
+            MapEditorEyeDropper() 
+            Exit Sub
+        End If
+
         If Not IsInBounds() Then Exit Sub
         If Button = MouseButtons.Left Then
             If tabpages.SelectedTab Is tpTiles Then
@@ -677,6 +682,7 @@ Public Class frmEditor_Map
                 With Map.Tile(CurX, CurY)
                     ' blocked tile
                     If optBlocked.Checked = True Then .Type = TileType.Blocked
+
                     ' warp tile
                     If optWarp.Checked = True Then
                         .Type = TileType.Warp
@@ -684,6 +690,7 @@ Public Class frmEditor_Map
                         .Data2 = EditorWarpX
                         .Data3 = EditorWarpY
                     End If
+
                     ' item spawn
                     If optItem.Checked = True Then
                         .Type = TileType.Item
@@ -691,6 +698,7 @@ Public Class frmEditor_Map
                         .Data2 = ItemEditorValue
                         .Data3 = 0
                     End If
+
                     ' npc avoid
                     If optNPCAvoid.Checked = True Then
                         .Type = TileType.NpcAvoid
@@ -698,6 +706,7 @@ Public Class frmEditor_Map
                         .Data2 = 0
                         .Data3 = 0
                     End If
+
                     ' resource
                     If optResource.Checked = True Then
                         .Type = TileType.Resource
@@ -705,6 +714,7 @@ Public Class frmEditor_Map
                         .Data2 = 0
                         .Data3 = 0
                     End If
+
                     ' npc spawn
                     If optNPCSpawn.Checked = True Then
                         .Type = TileType.NpcSpawn
@@ -712,6 +722,7 @@ Public Class frmEditor_Map
                         .Data2 = SpawnNpcDir
                         .Data3 = 0
                     End If
+
                     ' shop
                     If optShop.Checked = True Then
                         .Type = TileType.Shop
@@ -719,6 +730,7 @@ Public Class frmEditor_Map
                         .Data2 = 0
                         .Data3 = 0
                     End If
+
                     ' bank
                     If optBank.Checked = True Then
                         .Type = TileType.Bank
@@ -726,6 +738,7 @@ Public Class frmEditor_Map
                         .Data2 = 0
                         .Data3 = 0
                     End If
+
                     ' heal
                     If optHeal.Checked = True Then
                         .Type = TileType.Heal
@@ -733,6 +746,7 @@ Public Class frmEditor_Map
                         .Data2 = MapEditorHealAmount
                         .Data3 = 0
                     End If
+
                     ' trap
                     If optTrap.Checked = True Then
                         .Type = TileType.Trap
@@ -740,6 +754,7 @@ Public Class frmEditor_Map
                         .Data2 = 0
                         .Data3 = 0
                     End If
+
                     'light
                     If optLight.Checked Then
                         .Type = TileType.Light
@@ -754,7 +769,7 @@ Public Class frmEditor_Map
                 X -= ((X \ PicX) * PicX)
                 Y -= ((Y \ PicY) * PicY)
                 ' see if it hits an arrow
-               For i = 0 To 4
+                For i = 0 To 4
                     If X >= DirArrowX(i) AndAlso X <= DirArrowX(i) + 8 Then
                         If Y >= DirArrowY(i) AndAlso Y <= DirArrowY(i) + 8 Then
                             ' flip the value.
@@ -804,7 +819,6 @@ Public Class frmEditor_Map
 
     Public Sub MapEditorCancel()
         If Editor <> EditorType.Map Then Exit sub
-
         Dim Buffer As ByteStream
         Buffer = New ByteStream(4)
         Buffer.WriteInt32(ClientPackets.CNeedMap)
@@ -845,7 +859,7 @@ Public Class frmEditor_Map
                 Else
                     .Layer(CurLayer).Tileset = cmbTileSets.SelectedIndex
                 End If
-                 .Layer(CurLayer).AutoTile = theAutotile
+                .Layer(CurLayer).AutoTile = theAutotile
                 CacheRenderState(X, Y, CurLayer)
             End With
             ' do a re-init so we can see our changes
@@ -952,6 +966,22 @@ Public Class frmEditor_Map
         End If
     End Sub
 
+    Public Sub MapEditorEyeDropper()
+        Dim CurLayer As Integer
+
+        CurLayer = cmbLayers.SelectedIndex
+
+        With Map.Tile(CurX, CurY)
+            If .Layer(CurLayer).Tileset > 0 Then
+                cmbTileSets.SelectedIndex = .Layer(CurLayer).Tileset
+            Else
+                cmbTileSets.SelectedIndex = 1
+            End If
+            MapEditorChooseTile(MouseButtons.Left, .Layer(CurLayer).X * PicX, .Layer(CurLayer).Y * PicY)
+            EyeDropper = Not EyeDropper
+        End With
+    End Sub
+
     Public Sub ClearAttributeDialogue()
         fraNpcSpawn.Visible = False
         fraResource.Visible = False
@@ -1046,14 +1076,14 @@ Public Class frmEditor_Map
             End Select
         End If
 
-        If TileSetTextureInfo(tileset).Width - picbackleft < picBackSelect.Width Or TileSetTextureInfo(tileset).Height - picbacktop < picBackSelect.Height Then
-            RenderSprite(TileSetSprite(tileset), TilesetWindow, 0, 0, picbackleft, picbacktop, TileSetTextureInfo(tileset).Width - picbackleft, TileSetTextureInfo(tileset).Height - picbacktop)
+        If TileSetTextureInfo(tileset).Width < picBackSelect.Width Or TileSetTextureInfo(tileset).Height < picBackSelect.Height Then
+            RenderSprite(TileSetSprite(tileset), TilesetWindow, 0, 0, 0, 0, TileSetTextureInfo(tileset).Width, TileSetTextureInfo(tileset).Height)
         Else
-            RenderSprite(TileSetSprite(tileset), TilesetWindow, 0, 0, picbackleft, picbacktop, picbackleft + picBackSelect.Width, picbacktop + picBackSelect.Height)
+            RenderSprite(TileSetSprite(tileset), TilesetWindow, 0, 0, 0, 0, picBackSelect.Width, picBackSelect.Height)
         End If
 
         rec2.Size = New Vector2f(EditorTileWidth * PicX, EditorTileHeight * PicY)
-        rec2.Position = New Vector2f((EditorTileSelStart.X * PicX - picbackleft), (EditorTileSelStart.Y * PicY - picbacktop))
+        rec2.Position = New Vector2f((EditorTileSelStart.X * PicX), (EditorTileSelStart.Y * PicY))
 
         'Me.picBackSelect.BackgroundImage = Drawing.Image.FromFile(Paths.Graphics & "tilesets\" & tileset * GfxExt)
         TilesetWindow.Draw(rec2)
@@ -1079,57 +1109,6 @@ Public Class frmEditor_Map
 
     Private Sub lstMapNpc_Click(sender As Object, e As EventArgs) Handles lstMapNpc.Click
         If lstMapNpc.SelectedIndex = 0 Then lstMapNpc.SelectedIndex = 1
-    End Sub
-
-    Friend Sub DrawTileOutline()
-        Dim rec As Rectangle
-        If Me.tabpages.SelectedTab Is Me.tpDirBlock Then Exit Sub
-
-        With rec
-            .Y = 0
-            .Height = PicY
-            .X = 0
-            .Width = PicX
-        End With
-
-        Dim rec2 As New RectangleShape With {
-            .OutlineColor = New SFML.Graphics.Color(SFML.Graphics.Color.Blue),
-            .OutlineThickness = 0.6,
-            .FillColor = New SFML.Graphics.Color(SFML.Graphics.Color.Transparent)
-        }
-
-        If Me.tabpages.SelectedTab Is Me.tpAttributes Then
-            rec2.Size = New Vector2f(rec.Width, rec.Height)
-        Else
-            If TileSetTextureInfo(Me.cmbTileSets.SelectedIndex).IsLoaded = False Then
-                LoadTexture(Me.cmbTileSets.SelectedIndex, 1)
-            End If
-            ' we use it, lets update timer
-            With TileSetTextureInfo(Me.cmbTileSets.SelectedIndex)
-                .TextureTimer = GetTickCount() + 100000
-            End With
-
-            If EditorTileWidth = 1 AndAlso EditorTileHeight = 1 Then
-                RenderSprite(TileSetSprite(Me.cmbTileSets.SelectedIndex), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, rec.Width, rec.Height)
-
-                rec2.Size = New Vector2f(rec.Width, rec.Height)
-            Else
-                If Me.cmbAutoTile.SelectedIndex > 0 Then
-                    RenderSprite(TileSetSprite(Me.cmbTileSets.SelectedIndex), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, rec.Width, rec.Height)
-
-                    rec2.Size = New Vector2f(rec.Width, rec.Height)
-                Else
-                    RenderSprite(TileSetSprite(Me.cmbTileSets.SelectedIndex), GameWindow, ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY), EditorTileSelStart.X * PicX, EditorTileSelStart.Y * PicY, EditorTileSelEnd.X * PicX, EditorTileSelEnd.Y * PicY)
-
-                    rec2.Size = New Vector2f(EditorTileSelEnd.X * PicX, EditorTileSelEnd.Y * PicY)
-                End If
-
-            End If
-
-        End If
-
-        rec2.Position = New Vector2f(ConvertMapX(CurX * PicX), ConvertMapY(CurY * PicY))
-        GameWindow.Draw(rec2)
     End Sub
 
 

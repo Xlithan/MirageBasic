@@ -10,7 +10,6 @@ Module S_NetworkReceive
     Friend Sub PacketRouter()
         Socket.PacketId(ClientPackets.CCheckPing) = AddressOf Packet_Ping
         Socket.PacketId(ClientPackets.CNewAccount) = AddressOf Packet_NewAccount
-        Socket.PacketId(ClientPackets.CDelAccount) = AddressOf Packet_DeleteAccount
         Socket.PacketId(ClientPackets.CLogin) = AddressOf Packet_Login
         Socket.PacketId(ClientPackets.CAddChar) = AddressOf Packet_AddChar
         Socket.PacketId(ClientPackets.CUseChar) = AddressOf Packet_UseChar
@@ -229,30 +228,6 @@ Module S_NetworkReceive
 
             buffer.Dispose()
         End If
-    End Sub
-
-    Private Sub Packet_DeleteAccount(index As Integer, ByRef data() As Byte)
-        Dim Name As String
-        Dim buffer As New ByteStream(data)
-
-        AddDebug("Recieved CMSG: CDelChar")
-
-        ' Get the data
-        Name = buffer.ReadString.ToLower
-
-        If GetPlayerLogin(index) = Name.Trim Then
-            PlayerMsg(index, "You cannot delete your own account while online!", ColorType.BrightRed)
-            Exit Sub
-        End If
-
-        For i = 0 To GetPlayersOnline()
-            If IsPlaying(i) Then
-                If GetPlayerLogin(i) = Name.Trim Then
-                    AlertMsg(i, "Your account has been removed by an admin!")
-                    ClearPlayer(i)
-                End If
-            End If
-        Next
     End Sub
 
     Private Sub Packet_Login(index As Integer, ByRef data() As Byte)
@@ -721,7 +696,7 @@ Module S_NetworkReceive
         If i > 0 Then
             PlayerMsg(index, "Account:  " & GetPlayerLogin(i) & ", Name: " & GetPlayerName(i), ColorType.Yellow)
 
-            If GetPlayerAccess(index) > AdminType.Monitor Then
+            If GetPlayerAccess(index) > AdminType.Moderator Then
                 PlayerMsg(index, " Stats for " & GetPlayerName(i) & " ", ColorType.Yellow)
                 PlayerMsg(index, "Level: " & GetPlayerLevel(i) & "  Exp: " & GetPlayerExp(i) & "/" & GetPlayerNextLevel(i), ColorType.Yellow)
                 PlayerMsg(index, "HP: " & GetPlayerVital(i, VitalType.HP) & "/" & GetPlayerMaxVital(i, VitalType.HP) & "  MP: " & GetPlayerVital(i, VitalType.MP) & "/" & GetPlayerMaxVital(i, VitalType.MP) & "  SP: " & GetPlayerVital(i, VitalType.SP) & "/" & GetPlayerMaxVital(i, VitalType.SP), ColorType.Yellow)

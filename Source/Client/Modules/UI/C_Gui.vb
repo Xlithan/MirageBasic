@@ -961,6 +961,7 @@ Friend Module C_Gui
                             AddText("Click on the item in the shop you wish to buy.", ColorType.Yellow)
                         End If
                     End If
+
                     ' check for sell button
                     If x > ShopWindowX + ShopButtonSellX AndAlso x < ShopWindowX + ShopButtonSellX + ButtonGfxInfo.Width Then
                         If y > ShopWindowY + ShopButtonSellY AndAlso y < ShopWindowY + ShopButtonSellY + ButtonGfxInfo.Height Then
@@ -969,6 +970,7 @@ Friend Module C_Gui
                             AddText("Double-click on the item in your inventory you wish to sell.", ColorType.Yellow)
                         End If
                     End If
+
                     ' check for close button
                     If x > ShopWindowX + ShopButtonCloseX AndAlso x < ShopWindowX + ShopButtonCloseX + ButtonGfxInfo.Width Then
                         If y > ShopWindowY + ShopButtonCloseY AndAlso y < ShopWindowY + ShopButtonCloseY + ButtonGfxInfo.Height Then
@@ -992,6 +994,7 @@ Friend Module C_Gui
                     ScrollMod += 1
                 End If
             End If
+
             If AboveChatScrollDown(x, y) Then
                 If ScrollMod - 1 >= 0 Then
                     ScrollMod -= 1

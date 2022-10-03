@@ -94,7 +94,7 @@ Module S_Console
                             Case 1
                                 SetPlayerAccess(Pindex, Power)
                                 SendPlayerData(Pindex)
-                                PlayerMsg(Pindex, "Your PowerLevel has been set to Monitor Rank!", ColorType.BrightCyan)
+                                PlayerMsg(Pindex, "Your PowerLevel has been set to Moderator Rank!", ColorType.BrightCyan)
                                 Console.WriteLine("Successfully set the power level to " & Power & " for player " & Name)
                             Case 2
                                 SetPlayerAccess(Pindex, Power)
