@@ -322,8 +322,6 @@ Friend Module C_AutoTiles
     Friend Sub CacheRenderState(x As Integer, y As Integer, layerNum As Integer)
         Dim quarterNum As Integer
 
-        ' exit out early
-
         If x < 0 OrElse x > Map.MaxX OrElse y < 0 OrElse y > Map.MaxY Then Exit Sub
 
         With Map.Tile(x, y)
@@ -335,7 +333,6 @@ Friend Module C_AutoTiles
 
             ' check if it needs to be rendered as an autotile
             If .Layer(layerNum).AutoTile = AutotileNone OrElse .Layer(layerNum).AutoTile = AutotileFake Then
-                'ReDim Autotile(X, Y).Layer(MapLayer.Count - 1)
                 ' default to... default
                 Autotile(x, y).Layer(layerNum).RenderState = RenderStateNormal
             Else
@@ -347,7 +344,6 @@ Friend Module C_AutoTiles
                 Next
             End If
         End With
-        ' End If
 
     End Sub
 

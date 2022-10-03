@@ -83,6 +83,8 @@ Partial Class frmEditor_Map
         Me.tsbClear = New System.Windows.Forms.ToolStripButton()
         Me.tsbEyeDropper = New System.Windows.Forms.ToolStripButton()
         Me.tsbCopyMap = New System.Windows.Forms.ToolStripButton()
+        Me.tsbUndo = New System.Windows.Forms.ToolStripButton()
+        Me.tsbRedo = New System.Windows.Forms.ToolStripButton()
         Me.tabpages = New System.Windows.Forms.TabControl()
         Me.tpTiles = New System.Windows.Forms.TabPage()
         Me.cmbAutoTile = New System.Windows.Forms.ComboBox()
@@ -732,7 +734,7 @@ Partial Class frmEditor_Map
         '
         'ToolStrip
         '
-        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear, Me.tsbEyeDropper, Me.tsbCopyMap})
+        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear, Me.tsbEyeDropper, Me.tsbCopyMap, Me.tsbUndo, Me.tsbRedo})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip.Name = "ToolStrip"
         Me.ToolStrip.Size = New System.Drawing.Size(558, 25)
@@ -795,10 +797,26 @@ Partial Class frmEditor_Map
         'tsbCopyMap
         '
         Me.tsbCopyMap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbCopyMap.Image = Global.Mirage.Basic.Client.My.Resources.Resources.ScreenShot
+        Me.tsbCopyMap.Image = Global.Mirage.Basic.Client.My.Resources.Resources.Clipboard
         Me.tsbCopyMap.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbCopyMap.Name = "tsbCopyMap"
         Me.tsbCopyMap.Size = New System.Drawing.Size(23, 22)
+        '
+        'tsbUndo
+        '
+        Me.tsbUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbUndo.Image = Global.Mirage.Basic.Client.My.Resources.Resources.Undo
+        Me.tsbUndo.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbUndo.Name = "tsbUndo"
+        Me.tsbUndo.Size = New System.Drawing.Size(23, 22)
+        '
+        'tsbRedo
+        '
+        Me.tsbRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbRedo.Image = Global.Mirage.Basic.Client.My.Resources.Resources.Redo
+        Me.tsbRedo.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbRedo.Name = "tsbRedo"
+        Me.tsbRedo.Size = New System.Drawing.Size(23, 22)
         '
         'tabpages
         '
@@ -1977,4 +1995,6 @@ End Sub
     Friend WithEvents picBackSelect As PictureBox
     Friend WithEvents tsbClear As ToolStripButton
     Friend WithEvents tsbCopyMap As ToolStripButton
+    Friend WithEvents tsbUndo As ToolStripButton
+    Friend WithEvents tsbRedo As ToolStripButton
 End Class

@@ -405,7 +405,7 @@ Partial Class FrmAdmin
         Me.btnQuest.Size = New System.Drawing.Size(131, 29)
         Me.btnQuest.TabIndex = 62
         Me.btnQuest.Text = "Quest Editor"
-        Me.btnQuest.UseVisualStyleBackColor = True
+        Me.btnQuest.UseVisualStyleBackColor = true
         '
         'btnMapEditor
         '
@@ -415,7 +415,7 @@ Partial Class FrmAdmin
         Me.btnMapEditor.Size = New System.Drawing.Size(131, 29)
         Me.btnMapEditor.TabIndex = 55
         Me.btnMapEditor.Text = "Map Editor"
-        Me.btnMapEditor.UseVisualStyleBackColor = True
+        Me.btnMapEditor.UseVisualStyleBackColor = true
         '
         'btnItemEditor
         '
@@ -425,7 +425,7 @@ Partial Class FrmAdmin
         Me.btnItemEditor.Size = New System.Drawing.Size(131, 29)
         Me.btnItemEditor.TabIndex = 56
         Me.btnItemEditor.Text = "Item Editor"
-        Me.btnItemEditor.UseVisualStyleBackColor = True
+        Me.btnItemEditor.UseVisualStyleBackColor = true
         '
         'btnResourceEditor
         '
@@ -435,7 +435,7 @@ Partial Class FrmAdmin
         Me.btnResourceEditor.Size = New System.Drawing.Size(131, 29)
         Me.btnResourceEditor.TabIndex = 57
         Me.btnResourceEditor.Text = "Resource Editor"
-        Me.btnResourceEditor.UseVisualStyleBackColor = True
+        Me.btnResourceEditor.UseVisualStyleBackColor = true
         '
         'btnNPCEditor
         '
@@ -445,7 +445,7 @@ Partial Class FrmAdmin
         Me.btnNPCEditor.Size = New System.Drawing.Size(131, 29)
         Me.btnNPCEditor.TabIndex = 58
         Me.btnNPCEditor.Text = "NPC Editor"
-        Me.btnNPCEditor.UseVisualStyleBackColor = True
+        Me.btnNPCEditor.UseVisualStyleBackColor = true
         '
         'btnSkillEditor
         '
@@ -455,7 +455,7 @@ Partial Class FrmAdmin
         Me.btnSkillEditor.Size = New System.Drawing.Size(131, 29)
         Me.btnSkillEditor.TabIndex = 59
         Me.btnSkillEditor.Text = "Skill Editor"
-        Me.btnSkillEditor.UseVisualStyleBackColor = True
+        Me.btnSkillEditor.UseVisualStyleBackColor = true
         '
         'btnShopEditor
         '
@@ -465,7 +465,7 @@ Partial Class FrmAdmin
         Me.btnShopEditor.Size = New System.Drawing.Size(131, 29)
         Me.btnShopEditor.TabIndex = 60
         Me.btnShopEditor.Text = "Shop Editor"
-        Me.btnShopEditor.UseVisualStyleBackColor = True
+        Me.btnShopEditor.UseVisualStyleBackColor = true
         '
         'btnAnimationEditor
         '
@@ -475,11 +475,11 @@ Partial Class FrmAdmin
         Me.btnAnimationEditor.Size = New System.Drawing.Size(131, 29)
         Me.btnAnimationEditor.TabIndex = 61
         Me.btnAnimationEditor.Text = "Animation Editor"
-        Me.btnAnimationEditor.UseVisualStyleBackColor = True
+        Me.btnAnimationEditor.UseVisualStyleBackColor = true
         '
         'FrmAdmin
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(305, 299)
         Me.Controls.Add(Me.TabControl1)

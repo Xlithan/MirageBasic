@@ -8,7 +8,6 @@ Imports Mirage.Basic.Engine.Enumerations
 
 Public Class frmEditor_Map
 #Region "Frm"
-
     Private Sub FrmEditor_Map_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         cmbTileSets.SelectedIndex = 0
         pnlAttributes.BringToFront()
@@ -93,7 +92,7 @@ Public Class frmEditor_Map
                         End If
                     End If
                 Next
-Next
+            Next
         End With
 
         MapEditorSend()      
@@ -103,7 +102,7 @@ Next
 
     Private Sub TsbFill_Click(sender As Object, e As EventArgs) Handles tsbFill.Click
         MapEditorFillLayer(cmbAutoTile.SelectedIndex)
-End Sub
+    End Sub
 
     Private Sub TsbClear_Click(sender As Object, e As EventArgs) Handles  tsbClear.Click
         MapEditorClearLayer()
@@ -483,7 +482,6 @@ End Sub
         txtName.Text = Trim$(Map.Name)
 
         ' find the music we have set
-
         lstMusic.Items.Clear()
         lstMusic.Items.Add("None")
 
@@ -509,6 +507,7 @@ End Sub
         txtBootX.Text = Map.BootX
         txtBootY.Text = Map.BootY
         lstMapNpc.Items.Clear()
+
         For x = 0 To MAX_MAP_NPCS
              lstMapNpc.Items.Add(X & ": " & Trim$(Npc(Map.Npc(X)).Name))
         Next
@@ -629,23 +628,19 @@ End Sub
             ' convert the pixel number to tile number
             X = (X \ PicX) + 1
             Y = (Y \ PicY) + 1
+
             ' check it's not out of bounds
             If X < 0 Then X = 0
             If X > picBackSelect.Width / PicX Then X = picBackSelect.Width / PicX
             If Y < 0 Then Y = 0
             If Y > picBackSelect.Height / PicY Then Y = picBackSelect.Height / PicY
+
             ' find out what to set the width + height of map editor to
             If X > EditorTileX Then ' drag right
-                'EditorTileWidth = X
                 EditorTileWidth = X - EditorTileX
-            Else ' drag left
-                ' TO DO
             End If
             If Y > EditorTileY Then ' drag down
-                'EditorTileHeight = Y
                 EditorTileHeight = Y - EditorTileY
-            Else ' drag up
-                ' TO DO
             End If
 
             EditorTileSelStart = New Point(EditorTileX, EditorTileY)
@@ -665,11 +660,21 @@ End Sub
             Exit Sub
         End If
 
+        If HistoryIndex = MaxHistory then
+            For i = 1 To MaxHistory - 1
+                TileHistory(i) = TileHistory(i + 1)
+            Next
+        Else
+            HistoryIndex = HistoryIndex + 1
+        End If
+
+        TileHistory(HistoryIndex).Index = HistoryIndex - 1
+        TileHistory(HistoryIndex).Tile = Map.Tile 
+
         If Not IsInBounds() Then Exit Sub
         If Button = MouseButtons.Left Then
             If tabpages.SelectedTab Is tpTiles Then
                 If EditorTileWidth = 1 AndAlso EditorTileHeight = 1 Then 'single tile
-
                     MapEditorSetTile(CurX, CurY, CurLayer, False, cmbAutoTile.SelectedIndex)
                 Else ' multi tile!
                     If cmbAutoTile.SelectedIndex = 0 Then
@@ -677,7 +682,7 @@ End Sub
                     Else
                         MapEditorSetTile(CurX, CurY, CurLayer, , cmbAutoTile.SelectedIndex)
                     End If
-                End If
+                End If 
             ElseIf tabpages.SelectedTab Is tpAttributes Then
                 With Map.Tile(CurX, CurY)
                     ' blocked tile
@@ -982,6 +987,22 @@ End Sub
         End With
     End Sub
 
+    Public sub MapEditorUndo()
+        If HistoryIndex <= 1 Then Exit Sub
+        If TileHistory(HistoryIndex - 1).Index = 0 Then Exit Sub
+
+        HistoryIndex = HistoryIndex - 1
+        Map.Tile = TileHistory(HistoryIndex).Tile
+    End sub
+
+    Public Sub MapEditorRedo()
+        If HistoryIndex >= MaxHistory Then Exit Sub
+        If TileHistory(HistoryIndex + 1).Index = 0 Then Exit Sub
+
+        HistoryIndex = HistoryIndex + 1
+        Map.Tile = TileHistory(HistoryIndex).Tile
+    End Sub
+
     Public Sub ClearAttributeDialogue()
         fraNpcSpawn.Visible = False
         fraResource.Visible = False
@@ -1116,51 +1137,20 @@ End Sub
 
         If CopyMap = False Then
             TmpTile = Map.Tile
-
-            For X = 0 To Map.MaxX
-                For Y = 0 To Map.MaxY                   
-                    TmpTile(X,Y).Data1 = Map.Tile(x, y).Data1
-                    TmpTile(X,Y).Data2 = Map.Tile(x, y).Data2
-                    TmpTile(X,Y).Data3 = Map.Tile(x, y).Data3
-                    TmpTile(X,Y).DirBlock = Map.Tile(x, y).DirBlock
-
-                    For i = 0 To LayerType.Count - 1
-                        TmpTile(X,Y).Layer(i).Tileset = Map.Tile(x, y).Layer(i).Tileset
-                        TmpTile(X,Y).Layer(i).X = Map.Tile(x, y).Layer(i).X
-                        TmpTile(X,Y).Layer(i).Y = Map.Tile(x, y).Layer(i).Y
-                        TmpTile(X,Y).Layer(i).AutoTile = Map.Tile(x, y).Layer(i).AutoTile
-                    Next
-                    TmpTile(X,Y).Type = Map.Tile(x, y).Type
-                Next
-            Next
             CopyMap = True
         Else
             Map.Tile = TmpTile
-
-            For X = 0 To Map.MaxX
-                For Y = 0 To Map.MaxY
-                    Map.Tile(x, y).Data1 = TmpTile(X,Y).Data1
-                    Map.Tile(x, y).Data2 = TmpTile(X,Y).Data2
-                    Map.Tile(x, y).Data3 = TmpTile(X,Y).Data3
-                    Map.Tile(x, y).DirBlock = TmpTile(X,Y).DirBlock
-
-                    For i = 0 To LayerType.Count - 1
-                        Map.Tile(x, y).Layer(i).Tileset = TmpTile(X,Y).Layer(i).Tileset
-                        Map.Tile(x, y).Layer(i).X = TmpTile(X,Y).Layer(i).X
-                        Map.Tile(x, y).Layer(i).Y = TmpTile(X,Y).Layer(i).Y
-                        Map.Tile(x, y).Layer(i).AutoTile = TmpTile(X,Y).Layer(i).AutoTile
-                        CacheRenderState(X,Y, i)
-                    Next
-                    Map.Tile(x, y).Type = TmpTile(X,Y).Type
-                Next
-            Next
-             ' do a re-init so we can see our changes
-            InitAutotiles()
             CopyMap = False
         End If
     End Sub
 
+    Private Sub tsbUndo_Click(sender As Object, e As EventArgs) Handles tsbUndo.Click
+        MapEditorUndo()
+    End Sub
 
+    Private Sub tsbRedo_Click(sender As Object, e As EventArgs) Handles tsbRedo.Click
+        MapEditorRedo()
+    End Sub
 #End Region
 
 End Class
