@@ -1,4 +1,5 @@
-﻿Imports Mirage.Basic.Engine
+﻿Imports System.Configuration
+Imports Mirage.Basic.Engine
 Module C_UpdateUI
 
 #Region "Defines"
@@ -640,6 +641,12 @@ Module C_UpdateUI
                 FrmOptions.chkFullscreen.Checked = True
             Else
                 FrmOptions.chkFullscreen.Checked = False
+            End If
+
+            If Settings.DynamicLightRendering = 1 Then
+                FrmOptions.chkDynamicLighting.Checked = True
+            Else
+                FrmOptions.chkDynamicLighting.Checked = False
             End If
 
             If Settings.OpenAdminPanelOnLogin = 1 Then

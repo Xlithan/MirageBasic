@@ -3164,7 +3164,7 @@ NextLoop:
                                     scale = New Vector2f(0.35F, 0.35F)
                                 End If
 
-                                If UseSmoothDynamicLightRendering Then
+                                If Settings.DynamicLightRendering Then
 
                                     For Each tile As Vector2i In tiles
                                         LightSprite.Scale = scale

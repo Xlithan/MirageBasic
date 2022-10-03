@@ -1,4 +1,5 @@
-﻿Imports Mirage.Basic.Engine
+﻿Imports System.Configuration
+Imports Mirage.Basic.Engine
 
 Friend Class FrmOptions
 
@@ -70,6 +71,12 @@ Friend Class FrmOptions
             End If
 
             Settings.Fullscreen = 0
+        End If
+
+        If chkDynamicLighting.Checked Then
+            Settings.DynamicLightRendering = 1
+        Else
+            Settings.DynamicLightRendering = 0
         End If
 
         If chkOpenAdminPanelOnLogin.Checked Then

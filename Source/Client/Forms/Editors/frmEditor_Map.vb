@@ -682,6 +682,7 @@ End Sub
                 With Map.Tile(CurX, CurY)
                     ' blocked tile
                     If optBlocked.Checked = True Then .Type = TileType.Blocked
+
                     ' warp tile
                     If optWarp.Checked = True Then
                         .Type = TileType.Warp
@@ -689,6 +690,7 @@ End Sub
                         .Data2 = EditorWarpX
                         .Data3 = EditorWarpY
                     End If
+
                     ' item spawn
                     If optItem.Checked = True Then
                         .Type = TileType.Item
@@ -696,6 +698,7 @@ End Sub
                         .Data2 = ItemEditorValue
                         .Data3 = 0
                     End If
+
                     ' npc avoid
                     If optNPCAvoid.Checked = True Then
                         .Type = TileType.NpcAvoid
@@ -703,6 +706,7 @@ End Sub
                         .Data2 = 0
                         .Data3 = 0
                     End If
+
                     ' resource
                     If optResource.Checked = True Then
                         .Type = TileType.Resource
@@ -710,6 +714,7 @@ End Sub
                         .Data2 = 0
                         .Data3 = 0
                     End If
+
                     ' npc spawn
                     If optNPCSpawn.Checked = True Then
                         .Type = TileType.NpcSpawn
@@ -717,6 +722,7 @@ End Sub
                         .Data2 = SpawnNpcDir
                         .Data3 = 0
                     End If
+
                     ' shop
                     If optShop.Checked = True Then
                         .Type = TileType.Shop
@@ -724,6 +730,7 @@ End Sub
                         .Data2 = 0
                         .Data3 = 0
                     End If
+
                     ' bank
                     If optBank.Checked = True Then
                         .Type = TileType.Bank
@@ -731,6 +738,7 @@ End Sub
                         .Data2 = 0
                         .Data3 = 0
                     End If
+
                     ' heal
                     If optHeal.Checked = True Then
                         .Type = TileType.Heal
@@ -738,6 +746,7 @@ End Sub
                         .Data2 = MapEditorHealAmount
                         .Data3 = 0
                     End If
+
                     ' trap
                     If optTrap.Checked = True Then
                         .Type = TileType.Trap
@@ -745,6 +754,7 @@ End Sub
                         .Data2 = 0
                         .Data3 = 0
                     End If
+
                     'light
                     If optLight.Checked Then
                         .Type = TileType.Light

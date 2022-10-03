@@ -1141,6 +1141,7 @@ Continue1:
         End If
 
     End Sub
+
     Friend Sub UpdateDrawMapName()
         Dim g As Graphics = Graphics.FromImage(New Bitmap(1, 1))
         'Dim width As Integer

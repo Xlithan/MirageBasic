@@ -12,8 +12,6 @@ Module C_Constants
     Friend Const EffectTypeWeather As Integer = 5
     Friend Const EffectTypeTint As Integer = 6
 
-    Friend Const UseSmoothDynamicLightRendering As Boolean = true
-
     ' Font variables
     Friend Const FontName As String = "Arial.ttf"
 
