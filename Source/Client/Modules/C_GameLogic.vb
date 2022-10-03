@@ -282,7 +282,7 @@ Module C_GameLogic
             If Settings.Vsync Then
                 If rendertmr < tick Then
                     rendertmr = tick + 5
-                    renderFrame =  True
+                    renderFrame = True
                     tmpfps = tmpfps + 1
                 Else
                     renderFrame = False
@@ -294,9 +294,11 @@ Module C_GameLogic
 
             If renderFrame Then
                 Render_Graphics
+                Thread.Yield()
+            Else
+                Thread.Sleep(1)
             End If
 
-            Thread.Sleep(1)
             Application.DoEvents()
         Loop
     End Sub

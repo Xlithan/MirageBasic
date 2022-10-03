@@ -1,4 +1,5 @@
 ﻿Imports System.Drawing
+Imports Mirage.Basic.Engine.Types
 
 Module C_Constants
 
@@ -77,6 +78,8 @@ Module C_Constants
     Public EditorShop As Integer
     Public EditorTileSelStart As Point
     Public EditorTileSelEnd As Point
+    Public CopyMap As Boolean
+    Public TmpTile(,) As TileStruct
 
     Friend HalfX As Integer = ((ScreenMapx + 1) \ 2) * PicX
     Friend HalfY As Integer = ((ScreenMapy + 1) \ 2) * PicY

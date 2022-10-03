@@ -332,6 +332,7 @@ Friend Module C_AutoTiles
                 Autotile(x, y).Layer(layerNum).RenderState = RenderStateNone
                 Exit Sub
             End If
+
             ' check if it needs to be rendered as an autotile
             If .Layer(layerNum).AutoTile = AutotileNone OrElse .Layer(layerNum).AutoTile = AutotileFake Then
                 'ReDim Autotile(X, Y).Layer(MapLayer.Count - 1)

@@ -145,7 +145,7 @@ Public Class FrmEditor_Events
         cmbPlaySound.SelectedIndex = 0
         cmbOpenShop.Items.Clear()
 
-       For i = 0 To MAX_SHOPS
+        For i = 0 To MAX_SHOPS
             cmbOpenShop.Items.Add(i & ". " & Trim$(Shop(i).Name))
         Next
         cmbOpenShop.SelectedIndex = 0
@@ -173,6 +173,7 @@ Public Class FrmEditor_Events
         cmbSpawnNpc.SelectedIndex = 0
         nudFogData0.Maximum = NumFogs
         cmbEventQuest.Items.Clear()
+
        For i = 0 To MAX_QUESTS
             cmbEventQuest.Items.Add(i & ". " & Trim$(Quest(i).Name))
         Next

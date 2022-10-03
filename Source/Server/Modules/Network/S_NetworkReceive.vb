@@ -1043,7 +1043,6 @@ Module S_NetworkReceive
                 End If
             Next
         End If
-        'End Event Data
 
         ' Save the map
         SaveMap(mapNum)

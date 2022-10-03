@@ -82,6 +82,7 @@ Partial Class frmEditor_Map
         Me.tsbFill = New System.Windows.Forms.ToolStripButton()
         Me.tsbClear = New System.Windows.Forms.ToolStripButton()
         Me.tsbEyeDropper = New System.Windows.Forms.ToolStripButton()
+        Me.tsbCopyMap = New System.Windows.Forms.ToolStripButton()
         Me.tabpages = New System.Windows.Forms.TabControl()
         Me.tpTiles = New System.Windows.Forms.TabPage()
         Me.cmbAutoTile = New System.Windows.Forms.ComboBox()
@@ -731,7 +732,7 @@ Partial Class frmEditor_Map
         '
         'ToolStrip
         '
-        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear, Me.tsbEyeDropper})
+        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear, Me.tsbEyeDropper, Me.tsbCopyMap})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip.Name = "ToolStrip"
         Me.ToolStrip.Size = New System.Drawing.Size(558, 25)
@@ -743,16 +744,14 @@ Partial Class frmEditor_Map
         Me.tsbSave.Image = Global.Mirage.Basic.Client.My.Resources.Resources.Save
         Me.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbSave.Name = "tsbSave"
-        Me.tsbSave.Size = New System.Drawing.Size(51, 22)
-        Me.tsbSave.Text = "Save"
+        Me.tsbSave.Size = New System.Drawing.Size(23, 22)
         '
         'tsbDiscard
         '
         Me.tsbDiscard.Image = Global.Mirage.Basic.Client.My.Resources.Resources._Exit
         Me.tsbDiscard.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbDiscard.Name = "tsbDiscard"
-        Me.tsbDiscard.Size = New System.Drawing.Size(66, 22)
-        Me.tsbDiscard.Text = "Discard"
+        Me.tsbDiscard.Size = New System.Drawing.Size(23, 22)
         '
         'ToolStripSeparator1
         '
@@ -764,8 +763,7 @@ Partial Class frmEditor_Map
         Me.tsbMapGrid.Image = Global.Mirage.Basic.Client.My.Resources.Resources.Grid
         Me.tsbMapGrid.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbMapGrid.Name = "tsbMapGrid"
-        Me.tsbMapGrid.Size = New System.Drawing.Size(76, 22)
-        Me.tsbMapGrid.Text = "Map Grid"
+        Me.tsbMapGrid.Size = New System.Drawing.Size(23, 22)
         '
         'ToolStripSeparator2
         '
@@ -777,8 +775,7 @@ Partial Class frmEditor_Map
         Me.tsbFill.Image = Global.Mirage.Basic.Client.My.Resources.Resources.Fill
         Me.tsbFill.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbFill.Name = "tsbFill"
-        Me.tsbFill.Size = New System.Drawing.Size(73, 22)
-        Me.tsbFill.Text = "Fill Layer"
+        Me.tsbFill.Size = New System.Drawing.Size(23, 22)
         Me.tsbFill.ToolTipText = "Fill Layer"
         '
         'tsbClear
@@ -786,16 +783,22 @@ Partial Class frmEditor_Map
         Me.tsbClear.Image = Global.Mirage.Basic.Client.My.Resources.Resources.Clear
         Me.tsbClear.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbClear.Name = "tsbClear"
-        Me.tsbClear.Size = New System.Drawing.Size(85, 22)
-        Me.tsbClear.Text = "Clear Layer"
+        Me.tsbClear.Size = New System.Drawing.Size(23, 22)
         '
         'tsbEyeDropper
         '
         Me.tsbEyeDropper.Image = Global.Mirage.Basic.Client.My.Resources.Resources.Wand
         Me.tsbEyeDropper.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbEyeDropper.Name = "tsbEyeDropper"
-        Me.tsbEyeDropper.Size = New System.Drawing.Size(91, 22)
-        Me.tsbEyeDropper.Text = "Eye Dropper"
+        Me.tsbEyeDropper.Size = New System.Drawing.Size(23, 22)
+        '
+        'tsbCopyMap
+        '
+        Me.tsbCopyMap.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbCopyMap.Image = Global.Mirage.Basic.Client.My.Resources.Resources.ScreenShot
+        Me.tsbCopyMap.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbCopyMap.Name = "tsbCopyMap"
+        Me.tsbCopyMap.Size = New System.Drawing.Size(23, 22)
         '
         'tabpages
         '
@@ -1973,4 +1976,5 @@ End Sub
     Friend WithEvents scrlMapBrightness As HScrollBar
     Friend WithEvents picBackSelect As PictureBox
     Friend WithEvents tsbClear As ToolStripButton
+    Friend WithEvents tsbCopyMap As ToolStripButton
 End Class

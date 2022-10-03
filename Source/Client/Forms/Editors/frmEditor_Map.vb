@@ -1111,6 +1111,55 @@ End Sub
         If lstMapNpc.SelectedIndex = 0 Then lstMapNpc.SelectedIndex = 1
     End Sub
 
+    Private Sub tsbCopyMap_Click(sender As Object, e As EventArgs) Handles tsbCopyMap.Click
+        Dim i As Integer, X As Integer, Y As Integer
+
+        If CopyMap = False Then
+            TmpTile = Map.Tile
+
+            For X = 0 To Map.MaxX
+                For Y = 0 To Map.MaxY                   
+                    TmpTile(X,Y).Data1 = Map.Tile(x, y).Data1
+                    TmpTile(X,Y).Data2 = Map.Tile(x, y).Data2
+                    TmpTile(X,Y).Data3 = Map.Tile(x, y).Data3
+                    TmpTile(X,Y).DirBlock = Map.Tile(x, y).DirBlock
+
+                    For i = 0 To LayerType.Count - 1
+                        TmpTile(X,Y).Layer(i).Tileset = Map.Tile(x, y).Layer(i).Tileset
+                        TmpTile(X,Y).Layer(i).X = Map.Tile(x, y).Layer(i).X
+                        TmpTile(X,Y).Layer(i).Y = Map.Tile(x, y).Layer(i).Y
+                        TmpTile(X,Y).Layer(i).AutoTile = Map.Tile(x, y).Layer(i).AutoTile
+                    Next
+                    TmpTile(X,Y).Type = Map.Tile(x, y).Type
+                Next
+            Next
+            CopyMap = True
+        Else
+            Map.Tile = TmpTile
+
+            For X = 0 To Map.MaxX
+                For Y = 0 To Map.MaxY
+                    Map.Tile(x, y).Data1 = TmpTile(X,Y).Data1
+                    Map.Tile(x, y).Data2 = TmpTile(X,Y).Data2
+                    Map.Tile(x, y).Data3 = TmpTile(X,Y).Data3
+                    Map.Tile(x, y).DirBlock = TmpTile(X,Y).DirBlock
+
+                    For i = 0 To LayerType.Count - 1
+                        Map.Tile(x, y).Layer(i).Tileset = TmpTile(X,Y).Layer(i).Tileset
+                        Map.Tile(x, y).Layer(i).X = TmpTile(X,Y).Layer(i).X
+                        Map.Tile(x, y).Layer(i).Y = TmpTile(X,Y).Layer(i).Y
+                        Map.Tile(x, y).Layer(i).AutoTile = TmpTile(X,Y).Layer(i).AutoTile
+                        CacheRenderState(X,Y, i)
+                    Next
+                    Map.Tile(x, y).Type = TmpTile(X,Y).Type
+                Next
+            Next
+             ' do a re-init so we can see our changes
+            InitAutotiles()
+            CopyMap = False
+        End If
+    End Sub
+
 
 #End Region
 

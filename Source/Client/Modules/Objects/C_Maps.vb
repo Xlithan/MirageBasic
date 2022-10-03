@@ -219,7 +219,7 @@ Module C_Maps
         GettingMap = True
 
         ' Erase all players except self
-       For i = 0 To TotalOnline 'MAX_PLAYERS
+       For i = 1 To TotalOnline 'MAX_PLAYERS
             If i <> Myindex Then
                 SetPlayerMap(i, 0)
             End If
