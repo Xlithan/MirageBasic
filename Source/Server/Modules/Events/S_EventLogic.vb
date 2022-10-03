@@ -2548,6 +2548,8 @@ Friend Module S_EventLogic
     End Sub
 
     Function TriggerEvent(Index As Integer, i As Integer, triggerType As Byte, x As Integer, y As Integer)
+        If TempPlayer(Index).InGame = False Then Exit Function
+
         If TempPlayer(index).EventMap.CurrentEvents > 0 Then
             For z = 0 To TempPlayer(index).EventMap.CurrentEvents
                 If TempPlayer(index).EventMap.EventPages(z).EventId = i Then
