@@ -119,19 +119,19 @@ Module C_UpdateUI
 
     Friend ActionPanelY As Integer = 755
 
-    Friend InvBtnX As Integer = 22
-    Friend InvBtnY As Integer = 4
-    Friend SkillBtnX As Integer = 81
-    Friend SkillBtnY As Integer = 4
-    Friend CharBtnX As Integer = 140
-    Friend CharBtnY As Integer = 4
+    Friend InvBtnX As Integer = 23
+    Friend InvBtnY As Integer = 5
+    Friend SkillBtnX As Integer = 82
+    Friend SkillBtnY As Integer = 5
+    Friend CharBtnX As Integer = 141
+    Friend CharBtnY As Integer = 5
 
-    Friend QuestBtnX As Integer = 22
-    Friend QuestBtnY As Integer = 58
-    Friend OptBtnX As Integer = 81
-    Friend OptBtnY As Integer = 58
-    Friend ExitBtnX As Integer = 140
-    Friend ExitBtnY As Integer = 58
+    Friend QuestBtnX As Integer = 23
+    Friend QuestBtnY As Integer = 59
+    Friend OptBtnX As Integer = 82
+    Friend OptBtnY As Integer = 59
+    Friend ExitBtnX As Integer = 141
+    Friend ExitBtnY As Integer = 59
 
     'Character window Coordinates
     Friend CharWindowX As Integer = 943
