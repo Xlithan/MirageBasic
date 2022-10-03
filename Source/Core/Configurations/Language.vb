@@ -75,16 +75,16 @@ Public Class LanguageDef
 
     Public Game As New GameDef
     Public Class GameDef
-        Public MapName As String = "Map : "
-        Public Time As String = "Time : "
-        Public Fps As String = "Fps : "
-        Public Lps As String = "Lps : "
+        Public MapName As String = ""
+        Public Time As String = "Time: "
+        Public Fps As String = "Fps: "
+        Public Lps As String = "Lps: "
 
-        Public Ping As String = "Ping : "
+        Public Ping As String = "Ping: "
         Public PingSync As String = "Sync"
         Public PingLocal As String = "Local"
 
-        Public MapReceive As String = "Recieving Map..."
+        Public MapReceive As String = "Recieving map..."
         Public DataReceive As String = "Receiving game data..."
 
         Public MapCurMap As String = "Map # {0}"
