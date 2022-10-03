@@ -487,7 +487,7 @@ Partial Class frmEditor_Item
         Me.picItem.Location = New System.Drawing.Point(479, 16)
         Me.picItem.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.picItem.Name = "picItem"
-        Me.picItem.Size = New System.Drawing.Size(37, 37)
+        Me.picItem.Size = New System.Drawing.Size(32, 32)
         Me.picItem.TabIndex = 7
         Me.picItem.TabStop = false
         '
