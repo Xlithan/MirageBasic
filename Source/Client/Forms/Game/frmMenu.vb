@@ -164,7 +164,7 @@ Friend Class FrmMenu
             Dim charwidth As Integer, charheight As Integer
 
             'first
-            If CharSelection(1).Sprite > 0 Then
+            If CharSelection(1).Sprite > 0 And NumCharacters >= CharSelection(1).Sprite Then
                 g = picChar1.CreateGraphics
 
                 filename = Paths.Graphics & "characters\" & CharSelection(1).Sprite & GfxExt
@@ -193,7 +193,7 @@ Friend Class FrmMenu
             End If
 
             'second
-            If CharSelection(2).Sprite > 0 Then
+            If CharSelection(2).Sprite > 0 And NumCharacters >= CharSelection(2).Sprite Then
                 g = picChar2.CreateGraphics
 
                 filename = Paths.Graphics & "characters\" & CharSelection(2).Sprite & GfxExt
@@ -222,7 +222,7 @@ Friend Class FrmMenu
             End If
 
             'third
-            If CharSelection(3).Sprite > 0 Then
+            If CharSelection(3).Sprite > 0 And NumCharacters >= CharSelection(3).Sprite Then
                 g = picChar3.CreateGraphics
 
                 filename = Paths.Graphics & "characters\" & CharSelection(3).Sprite & GfxExt
