@@ -78,6 +78,10 @@ Public Class frmEditor_Map
             ReDim Map.Tile(.MaxX, .MaxY)
             ReDim Autotile(.MaxX, .MaxY)
 
+            For i = 0 To MaxHistory
+                ReDim TileHistory(i).Tile(.MaxX, .MaxY)
+            Next
+
             If x2 > .MaxX Then x2 = .MaxX
             If y2 > .MaxY Then y2 = .MaxY
 
@@ -85,6 +89,10 @@ Public Class frmEditor_Map
                 For Y = 0 To .MaxY
                     ReDim .Tile(X, Y).Layer(LayerType.Count - 1)
                     ReDim Autotile(X, Y).Layer(LayerType.Count - 1)
+
+                    For i = 0 To MaxHistory
+                        ReDim TileHistory(i).Tile(X,y).Layer(LayerType.Count - 1)
+                    Next
 
                     If X <= x2 Then
                         If Y <= y2 Then
@@ -660,16 +668,20 @@ Public Class frmEditor_Map
             Exit Sub
         End If
 
-        If HistoryIndex = MaxHistory then
-            For i = 1 To MaxHistory - 1
-                TileHistory(i) = TileHistory(i + 1)
-            Next
-        Else
-            HistoryIndex = HistoryIndex + 1
-        End If
+        MapEditorHistory()
 
-        TileHistory(HistoryIndex).Index = HistoryIndex - 1
-        TileHistory(HistoryIndex).Tile = Map.Tile 
+        For x = 0 To Map.MaxX
+            For y = 0 To Map.MaxY
+                For i = 0 To LayerType.Count - 1
+                    With Map.Tile(X,Y)
+                        TileHistory(HistoryIndex).Tile(X,Y).Layer(CurLayer).X = .Layer(CurLayer).X 
+                        TileHistory(HistoryIndex).Tile(X,Y).Layer(CurLayer).Y = .Layer(CurLayer).Y
+                        TileHistory(HistoryIndex).Tile(X,Y).Layer(CurLayer).Tileset = .Layer(CurLayer).Tileset
+                        TileHistory(HistoryIndex).Tile(X,Y).Layer(CurLayer).AutoTile = .Layer(CurLayer).AutoTile
+                    End With
+                Next
+            Next
+        Next
 
         If Not IsInBounds() Then Exit Sub
         If Button = MouseButtons.Left Then
@@ -867,6 +879,7 @@ Public Class frmEditor_Map
                 .Layer(CurLayer).AutoTile = theAutotile
                 CacheRenderState(X, Y, CurLayer)
             End With
+
             ' do a re-init so we can see our changes
             InitAutotiles()
             Exit Sub
@@ -893,6 +906,7 @@ Public Class frmEditor_Map
                     If X >= 0 AndAlso X <= Map.MaxX Then
                         If Y >= 0 AndAlso Y <= Map.MaxY Then
                             With Map.Tile(X, Y)
+
                                 .Layer(CurLayer).X = newTileX + x2
                                 .Layer(CurLayer).Y = newTileY + y2
                                 If eraseTile Then
@@ -910,6 +924,19 @@ Public Class frmEditor_Map
                 y2 += 1
             Next
         End If
+    End Sub
+
+    Public Sub MapEditorHistory()
+        If HistoryIndex = MaxHistory then
+            For i = 1 To MaxHistory - 1
+                TileHistory(i) = TileHistory(i + 1)
+                TileHistory(MaxHistory).Filled = False
+            Next
+        Else
+            HistoryIndex = HistoryIndex + 1
+        End If
+
+        TileHistory(HistoryIndex).Filled = True
     End Sub
 
     Public Sub MapEditorClearLayer()
@@ -988,19 +1015,43 @@ Public Class frmEditor_Map
     End Sub
 
     Public sub MapEditorUndo()
-        If HistoryIndex <= 1 Then Exit Sub
-        If TileHistory(HistoryIndex - 1).Index = 0 Then Exit Sub
+        If HistoryIndex = 0 Or TileHistory(HistoryIndex).Filled = False Then Exit Sub
+
+        For x = 0 To Map.MaxX
+            For y = 0 To Map.MaxY
+                For i = 0 To LayerType.Count - 1
+                    With Map.Tile(x,y)
+                        .Layer(i).X = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).X
+                        .Layer(i).Y = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).Y
+                        .Layer(i).Tileset = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).Tileset
+                        .Layer(i).AutoTile = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).AutoTile
+                        CacheRenderState(x,y, i)
+                    End With
+                Next
+            Next
+        Next
 
         HistoryIndex = HistoryIndex - 1
-        Map.Tile = TileHistory(HistoryIndex).Tile
     End sub
 
     Public Sub MapEditorRedo()
-        If HistoryIndex >= MaxHistory Then Exit Sub
-        If TileHistory(HistoryIndex + 1).Index = 0 Then Exit Sub
+        If HistoryIndex = MaxHistory Or TileHistory(HistoryIndex).Filled = False Then Exit Sub
+
+        For x = 0 To Map.MaxX
+            For y = 0 To Map.MaxY
+                For i = 0 To LayerType.Count - 1
+                    With Map.Tile(x,y)
+                        .Layer(i).X = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).X
+                        .Layer(i).Y = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).Y
+                        .Layer(i).Tileset = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).Tileset
+                        .Layer(i).AutoTile = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).AutoTile
+                        CacheRenderState(x,y, i)
+                    End With
+                Next
+            Next
+        Next
 
         HistoryIndex = HistoryIndex + 1
-        Map.Tile = TileHistory(HistoryIndex).Tile
     End Sub
 
     Public Sub ClearAttributeDialogue()

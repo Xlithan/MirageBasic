@@ -98,7 +98,7 @@ Module C_Maps
 
     Public Structure TileHistoryStruct
         Dim Tile(,) As TileStruct
-        Dim Index As Integer
+        Dim Filled As Boolean
     End Structure
 #End Region
 
@@ -115,11 +115,8 @@ Module C_Maps
     End Sub
 
     Sub ClearMap()
-        HistoryIndex = 0
-        For i = 1 To 50
-            TileHistory(i).Tile = TileHistory(0).Tile
-            TileHistory(i).Index = 0
-        Next
+        Dim i As Integer, x As Integer, y As Integer
+
         Map.Name = ""
         Map.Tileset = 1
         Map.MaxX = ScreenMapx
@@ -137,20 +134,35 @@ Module C_Maps
 
         ReDim Map.Npc(MAX_MAP_NPCS)
         ReDim Map.Tile(Map.MaxX, Map.MaxY)
+        For i = 0 To MaxHistory
+            ReDim TileHistory(i).Tile(Map.MaxX, Map.MaxY)
+        Next
 
         For X = 0 To ScreenMapx
             For Y = 0 To ScreenMapy
                 ReDim Map.Tile(x, y).Layer(LayerType.Count - 1)
+
+                For i = 0 To MaxHistory
+                    ReDim TileHistory(i).Tile(x,y).Layer(LayerType.Count - 1)
+                Next
+
                 For l = 0 To LayerType.Count - 1
                     Map.Tile(x, y).Layer(l).Tileset = 0
                     Map.Tile(x, y).Layer(l).X = 0
                     Map.Tile(x, y).Layer(l).Y = 0
                     Map.Tile(x, y).Layer(l).AutoTile = 0
+
+                    For i = 0 To MaxHistory
+                        TileHistory(i).Tile(x,y).Layer(l).Tileset = 0
+                         TileHistory(i).Tile(x,y).Layer(l).X = 0
+                         TileHistory(i).Tile(x,y).Layer(l).Y = 0
+                         TileHistory(i).Tile(x,y).Layer(l).AutoTile = 0
+                    Next
                 Next
 
             Next
         Next
-
+        
         ClearMapEvents
 
     End Sub
@@ -259,7 +271,7 @@ Module C_Maps
     End Sub
 
     Sub Packet_MapData(ByRef data() As Byte)
-        Dim x As Integer, y As Integer, i As Integer, mapNum As Integer
+        Dim x As Integer, y As Integer, i As Integer, j As Integer, mapNum As Integer
         Dim buffer As New ByteStream(Compression.DecompressBytes(data))
 
         MapData = False
@@ -298,6 +310,9 @@ Module C_Maps
             Map.Brightness = buffer.ReadByte
 
             ReDim Map.Tile(Map.MaxX, Map.MaxY)
+            For i = 0 To MaxHistory
+                ReDim TileHistory(i).Tile(Map.MaxX, Map.MaxY)
+            Next
 
             For x = 0 To MAX_MAP_NPCS
                 Map.Npc(x) = buffer.ReadInt32
@@ -311,12 +326,21 @@ Module C_Maps
                     Map.Tile(x, y).DirBlock = buffer.ReadInt32
 
                     ReDim Map.Tile(x, y).Layer(LayerType.Count - 1)
+                    For i = 0 To MaxHistory
+                        ReDim TileHistory(i).Tile(x,y).Layer(LayerType.Count - 1)
+                    Next
 
                     For i = 0 To LayerType.Count - 1
                         Map.Tile(x, y).Layer(i).Tileset = buffer.ReadInt32
                         Map.Tile(x, y).Layer(i).X = buffer.ReadInt32
                         Map.Tile(x, y).Layer(i).Y = buffer.ReadInt32
                         Map.Tile(x, y).Layer(i).AutoTile = buffer.ReadInt32
+                        For j = 0 To MaxHistory
+                            TileHistory(j).Tile(x,y).Layer(i).Tileset = 0
+                             TileHistory(j).Tile(x,y).Layer(i).X = 0
+                             TileHistory(j).Tile(x,y).Layer(i).Y = 0
+                             TileHistory(j).Tile(x,y).Layer(i).AutoTile = 0
+                        Next
                     Next
                     Map.Tile(x, y).Type = buffer.ReadInt32
                 Next
