@@ -20,8 +20,6 @@ Friend Class FrmMenu
     Private Sub Frmmenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         LoadMenuGraphics()
-        pnlLoad.Width = Width
-        pnlLoad.Height = Height
         chkSavePass.Checked = Settings.SavePass
         txtLogin.Text = Settings.Username
         txtPassword.Text = Settings.Password
