@@ -155,9 +155,9 @@ Module C_Maps
 
                     For i = 0 To MaxHistory
                         TileHistory(i).Tile(x,y).Layer(l).Tileset = 0
-                         TileHistory(i).Tile(x,y).Layer(l).X = 0
-                         TileHistory(i).Tile(x,y).Layer(l).Y = 0
-                         TileHistory(i).Tile(x,y).Layer(l).AutoTile = 0
+                        TileHistory(i).Tile(x,y).Layer(l).X = 0
+                        TileHistory(i).Tile(x,y).Layer(l).Y = 0
+                        TileHistory(i).Tile(x,y).Layer(l).AutoTile = 0
                     Next
                 Next
 
@@ -326,6 +326,14 @@ Module C_Maps
                     Map.Tile(x, y).Data3 = buffer.ReadInt32
                     Map.Tile(x, y).DirBlock = buffer.ReadInt32
 
+                    For j = 0 To MaxHistory
+                        TileHistory(j).Tile(x,y).Data1 = Map.Tile(x, y).Data1
+                        TileHistory(j).Tile(x,y).Data2 = Map.Tile(x, y).Data2
+                        TileHistory(j).Tile(x,y).Data3 =  Map.Tile(x, y).Data3
+                        TileHistory(j).Tile(x,y).DirBlock = Map.Tile(x, y).DirBlock
+                        TileHistory(j).Tile(x,y).Type = Map.Tile(x, y).Type
+                    Next
+
                     ReDim Map.Tile(x, y).Layer(LayerType.Count - 1)
                     For i = 0 To MaxHistory
                         ReDim TileHistory(i).Tile(x,y).Layer(LayerType.Count - 1)
@@ -336,11 +344,12 @@ Module C_Maps
                         Map.Tile(x, y).Layer(i).X = buffer.ReadInt32
                         Map.Tile(x, y).Layer(i).Y = buffer.ReadInt32
                         Map.Tile(x, y).Layer(i).AutoTile = buffer.ReadInt32
+
                         For j = 0 To MaxHistory
-                            TileHistory(j).Tile(x,y).Layer(i).Tileset = 0
-                             TileHistory(j).Tile(x,y).Layer(i).X = 0
-                             TileHistory(j).Tile(x,y).Layer(i).Y = 0
-                             TileHistory(j).Tile(x,y).Layer(i).AutoTile = 0
+                            TileHistory(j).Tile(x,y).Layer(i).Tileset = Map.Tile(x, y).Layer(i).Tileset 
+                            TileHistory(j).Tile(x,y).Layer(i).X = Map.Tile(x, y).Layer(i).X
+                            TileHistory(j).Tile(x,y).Layer(i).Y = Map.Tile(x, y).Layer(i).Y
+                            TileHistory(j).Tile(x,y).Layer(i).AutoTile = Map.Tile(x, y).Layer(i).AutoTile
                         Next
                     Next
                     Map.Tile(x, y).Type = buffer.ReadInt32

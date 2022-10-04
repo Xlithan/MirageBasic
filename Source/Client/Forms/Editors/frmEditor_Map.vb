@@ -672,14 +672,20 @@ Public Class frmEditor_Map
 
         For x = 0 To Map.MaxX
             For y = 0 To Map.MaxY
-                For i = 0 To LayerType.Count - 1
-                    With Map.Tile(X,Y)
+                With Map.Tile(X,Y)
+                    TileHistory(HistoryIndex).Tile(X,Y).Data1 = .Data1
+                    TileHistory(HistoryIndex).Tile(X,Y).Data2 = .Data2
+                    TileHistory(HistoryIndex).Tile(X,Y).Data3 = .Data3
+                    TileHistory(HistoryIndex).Tile(X,Y).Type = .Type
+                    TileHistory(HistoryIndex).Tile(X,Y).DirBlock = .DirBlock
+
+                    For i = 0 To LayerType.Count - 1
                         TileHistory(HistoryIndex).Tile(X,Y).Layer(CurLayer).X = .Layer(CurLayer).X 
                         TileHistory(HistoryIndex).Tile(X,Y).Layer(CurLayer).Y = .Layer(CurLayer).Y
                         TileHistory(HistoryIndex).Tile(X,Y).Layer(CurLayer).Tileset = .Layer(CurLayer).Tileset
                         TileHistory(HistoryIndex).Tile(X,Y).Layer(CurLayer).AutoTile = .Layer(CurLayer).AutoTile
-                    End With
-                Next
+                    Next
+                End With
             Next
         Next
 
@@ -906,7 +912,6 @@ Public Class frmEditor_Map
                     If X >= 0 AndAlso X <= Map.MaxX Then
                         If Y >= 0 AndAlso Y <= Map.MaxY Then
                             With Map.Tile(X, Y)
-
                                 .Layer(CurLayer).X = newTileX + x2
                                 .Layer(CurLayer).Y = newTileY + y2
                                 If eraseTile Then
@@ -931,9 +936,11 @@ Public Class frmEditor_Map
             For i = 1 To MaxHistory - 1
                 TileHistory(i) = TileHistory(i + 1)
                 TileHistory(MaxHistory).Filled = False
+                TileHistoryHighIndex = TileHistoryHighIndex - 1
             Next
         Else
             HistoryIndex = HistoryIndex + 1
+            TileHistoryHighIndex = TileHistoryHighIndex  + 1
         End If
 
         TileHistory(HistoryIndex).Filled = True
@@ -1020,7 +1027,13 @@ Public Class frmEditor_Map
         For x = 0 To Map.MaxX
             For y = 0 To Map.MaxY
                 For i = 0 To LayerType.Count - 1
-                    With Map.Tile(x,y)
+                    With Map.Tile(X,Y)
+                        .Data1 = TileHistory(HistoryIndex).Tile(X,Y).Data1
+                        .Data2 = TileHistory(HistoryIndex).Tile(X,Y).Data2
+                        .Data3 = TileHistory(HistoryIndex).Tile(X,Y).Data3
+                        .Type = TileHistory(HistoryIndex).Tile(X,Y).Type
+                        .DirBlock = TileHistory(HistoryIndex).Tile(X,Y).DirBlock
+
                         .Layer(i).X = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).X
                         .Layer(i).Y = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).Y
                         .Layer(i).Tileset = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).Tileset
@@ -1035,7 +1048,7 @@ Public Class frmEditor_Map
     End sub
 
     Public Sub MapEditorRedo()
-        If HistoryIndex = MaxHistory Then Exit Sub
+        If TileHistoryHighIndex <= HistoryIndex Or HistoryIndex = MaxHistory Then Exit Sub
 
         HistoryIndex = HistoryIndex + 1
 
@@ -1045,6 +1058,12 @@ Public Class frmEditor_Map
             For y = 0 To Map.MaxY
                 For i = 0 To LayerType.Count - 1
                     With Map.Tile(x,y)
+                        .Data1 = TileHistory(HistoryIndex).Tile(X,Y).Data1
+                        .Data2 = TileHistory(HistoryIndex).Tile(X,Y).Data2
+                        .Data3 = TileHistory(HistoryIndex).Tile(X,Y).Data3
+                        .Type = TileHistory(HistoryIndex).Tile(X,Y).Type
+                        .DirBlock = TileHistory(HistoryIndex).Tile(X,Y).DirBlock
+
                         .Layer(i).X = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).X
                         .Layer(i).Y = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).Y
                         .Layer(i).Tileset = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).Tileset
@@ -1189,10 +1208,61 @@ Public Class frmEditor_Map
         Dim i As Integer, X As Integer, Y As Integer
 
         If CopyMap = False Then
-            TmpTile = Map.Tile
+            ReDim TmpTile(Map.MaxX, Map.MaxY)
+            TmpMaxX = Map.MaxX
+            TmpMaxY = Map.MaxY
+
+            For X = 0 To Map.MaxX
+                For Y = 0 To Map.MaxY
+                    With Map.Tile(X,Y)
+                        ReDim TmpTile(X,Y).Layer(LayerType.Count - 1)
+
+                        TmpTile(X,Y).Data1 = .Data1
+                        TmpTile(X,Y).Data2 = .Data2
+                        TmpTile(X,Y).Data3 = .Data3
+                        TmpTile(X,Y).Type = .Type
+                        TmpTile(X,Y).DirBlock = .DirBlock
+
+                        For i = 0 To LayerType.Count - 1 
+                            TmpTile(X,Y).Layer(i).X = .Layer(i).X
+                            TmpTile(X,Y).Layer(i).Y = .Layer(i).Y
+                            TmpTile(X,Y).Layer(i).Tileset = .Layer(i).Tileset
+                            TmpTile(X,Y).Layer(i).AutoTile = .Layer(i).AutoTile
+                        Next
+                    End With
+                Next
+            Next
+
             CopyMap = True
+            MsgBox("Map copied. Go to another map to paste it.")
         Else
-            Map.Tile = TmpTile
+            ReDim Map.Tile(TmpMaxX, TmpMaxY)
+            ReDim Autotile(TmpMaxX, TmpMaxY)
+            Map.MaxX = TmpMaxX
+            Map.MaxY = TmpMaxY            
+
+            For X = 0 To Map.MaxX
+                For Y = 0 To Map.MaxY
+                    With Map.Tile(X,Y)
+                        ReDim Map.Tile(X,Y).Layer(LayerType.Count - 1)
+                        ReDim Autotile(X, Y).Layer(LayerType.Count - 1)
+
+                        .Data1 = TmpTile(X,Y).Data1
+                        .Data2 =  TmpTile(X,Y).Data2
+                        .Data3 = TmpTile(X,Y).Data3
+                        .Type = TmpTile(X,Y).Type
+                        .DirBlock = TmpTile(X,Y).DirBlock
+
+                        For i = 0 To LayerType.Count - 1 
+                            .Layer(i).X = TmpTile(X,Y).Layer(i).X
+                            .Layer(i).Y = TmpTile(X,Y).Layer(i).Y
+                            .Layer(i).Tileset = TmpTile(X,Y).Layer(i).Tileset
+                            .Layer(i).AutoTile = TmpTile(X,Y).Layer(i).AutoTile
+                            CacheRenderState(X,Y,i)
+                        Next
+                    End With
+                Next
+            Next 
             CopyMap = False
         End If
     End Sub
