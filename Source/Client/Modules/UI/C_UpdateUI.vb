@@ -511,10 +511,6 @@ Module C_UpdateUI
             UpdateCharacterPanel = False
         End If
 
-        If Pnlloadvisible <> FrmMenu.pnlLoad.Visible Then
-            FrmMenu.pnlLoad.Visible = Pnlloadvisible
-        End If
-
         If UpdateMapnames = True Then
             Dim x As Integer
 

@@ -73,8 +73,6 @@ Partial Class FrmMenu
         Me.picChar1 = New System.Windows.Forms.PictureBox()
         Me.lblCharSelect = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.pnlLoad = New System.Windows.Forms.Panel()
-        Me.lblStatus = New System.Windows.Forms.Label()
         Me.btnPlay = New System.Windows.Forms.PictureBox()
         Me.btnRegister = New System.Windows.Forms.PictureBox()
         Me.btnExit = New System.Windows.Forms.PictureBox()
@@ -96,7 +94,6 @@ Partial Class FrmMenu
         CType(Me.picChar3,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.picChar2,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.picChar1,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.pnlLoad.SuspendLayout
         CType(Me.btnPlay,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.btnRegister,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.btnExit,System.ComponentModel.ISupportInitialize).BeginInit
@@ -642,30 +639,6 @@ Partial Class FrmMenu
         Me.Label16.TabIndex = 17
         Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'pnlLoad
-        '
-        Me.pnlLoad.BackColor = System.Drawing.Color.FromArgb(CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(64,Byte),Integer))
-        Me.pnlLoad.BackgroundImage = CType(resources.GetObject("pnlLoad.BackgroundImage"),System.Drawing.Image)
-        Me.pnlLoad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pnlLoad.Controls.Add(Me.lblStatus)
-        Me.pnlLoad.Location = New System.Drawing.Point(0, 0)
-        Me.pnlLoad.Name = "pnlLoad"
-        Me.pnlLoad.Size = New System.Drawing.Size(58, 52)
-        Me.pnlLoad.TabIndex = 58
-        '
-        'lblStatus
-        '
-        Me.lblStatus.BackColor = System.Drawing.Color.Transparent
-        Me.lblStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
-        Me.lblStatus.ForeColor = System.Drawing.Color.White
-        Me.lblStatus.Location = New System.Drawing.Point(257, 281)
-        Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Size = New System.Drawing.Size(280, 28)
-        Me.lblStatus.TabIndex = 1
-        Me.lblStatus.Text = "Loading text"
-        Me.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'btnPlay
         '
         Me.btnPlay.BackColor = System.Drawing.Color.Transparent
@@ -717,7 +690,6 @@ Partial Class FrmMenu
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(784, 561)
-        Me.Controls.Add(Me.pnlLoad)
         Me.Controls.Add(Me.lblServerStatus)
         Me.Controls.Add(Me.lblStatusHeader)
         Me.Controls.Add(Me.picLogo)
@@ -763,7 +735,6 @@ Partial Class FrmMenu
         CType(Me.picChar3,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.picChar2,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.picChar1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.pnlLoad.ResumeLayout(false)
         CType(Me.btnPlay,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.btnRegister,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.btnExit,System.ComponentModel.ISupportInitialize).EndInit
@@ -815,8 +786,6 @@ End Sub
     Friend WithEvents picChar1 As Windows.Forms.PictureBox
     Friend WithEvents txtDescription As Windows.Forms.TextBox
     Friend WithEvents lblNewCharSprite As Windows.Forms.Label
-    Friend WithEvents pnlLoad As Windows.Forms.Panel
-    Friend WithEvents lblStatus As Windows.Forms.Label
     Friend WithEvents btnPlay As PictureBox
     Friend WithEvents btnRegister As PictureBox
     Friend WithEvents btnExit As PictureBox

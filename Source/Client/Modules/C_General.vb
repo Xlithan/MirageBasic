@@ -145,7 +145,7 @@ End Function
     End Sub
 
     Friend Sub SetStatus(caption As String)
-        FrmMenu.lblStatus.Text = caption
+
     End Sub
 
     Friend Sub MenuState(state As Integer)
