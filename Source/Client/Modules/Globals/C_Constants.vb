@@ -86,7 +86,7 @@ Module C_Constants
     Public TmpMaxY As Byte
     Public TmpTile(,) As TileStruct
     Public TileHistory(MaxHistory) as TileHistoryStruct
-    Public TileHistoryHighIndex As Byte
+    Public TileHistoryHighIndex As Integer
 
     Friend HalfX As Integer = ((ScreenMapx + 1) \ 2) * PicX
     Friend HalfY As Integer = ((ScreenMapy + 1) \ 2) * PicY
