@@ -153,8 +153,6 @@ Module C_NetworkReceive
         Dim msg As String
         Dim buffer As New ByteStream(data)
 
-        Pnlloadvisible = False
-
         If FrmMenu.Visible = False Then
             Frmmenuvisible = True
             Frmmaingamevisible = False
@@ -187,9 +185,6 @@ Module C_NetworkReceive
         Myindex = buffer.ReadInt32
 
         buffer.Dispose()
-
-        Pnlloadvisible = True
-        SetStatus(Language.Game.DataReceive)
     End Sub
 
     Private Sub Packet_LoginOk(ByRef data() As Byte)
@@ -239,7 +234,6 @@ Module C_NetworkReceive
 
         ' Used for if the player is creating a new character
         Frmmenuvisible = True
-        Pnlloadvisible = False
         PnlCreditsVisible = False
         PnlRegisterVisible = False
         PnlCharCreateVisible = False
@@ -287,7 +281,6 @@ Module C_NetworkReceive
 
         ' Used for if the player is creating a new character
         Frmmenuvisible = True
-        Pnlloadvisible = False
         PnlCreditsVisible = False
         PnlRegisterVisible = False
         PnlCharCreateVisible = True

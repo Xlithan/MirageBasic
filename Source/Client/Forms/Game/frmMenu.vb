@@ -590,7 +590,6 @@ Friend Class FrmMenu
             Exit SUb
         End If
 
-        Pnlloadvisible = True
         Frmmenuvisible = False
 
         Dim buffer As ByteStream

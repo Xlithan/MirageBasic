@@ -12,7 +12,6 @@ Module C_UpdateUI
     Friend PnlCreditsVisible As Boolean
     Friend Frmmenuvisible As Boolean
     Friend Frmmaingamevisible As Boolean
-    Friend Pnlloadvisible As Boolean
     Friend Lblnextcharleft As Integer
     Friend CmbJob() As String
     Friend TxtChatAdd As String
