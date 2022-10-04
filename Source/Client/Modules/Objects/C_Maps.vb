@@ -829,7 +829,7 @@ Module C_Maps
 #Region "Drawing"
 
     Friend Sub DrawMapTile(x As Integer, y As Integer)
-        Dim i As Integer
+        Dim i As Integer, alpha As Byte
         Dim srcrect As New Rectangle(0, 0, 0, 0)
 
         If GettingMap Then Exit Sub
@@ -855,7 +855,17 @@ Module C_Maps
                         .Height = 32
                     End With
 
-                    RenderSprite(TileSetSprite(Map.Tile(x, y).Layer(i).Tileset), GameWindow, ConvertMapX(x * PicX), ConvertMapY(y * PicY), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+                    If Editor = EditorType.Map Then
+                        If i = frmEditor_Map.cmbLayers.SelectedIndex Then
+                            alpha = 255
+                        Else
+                            alpha = 127
+                        End If
+                    Else
+                        alpha = 255
+                    End If
+
+                    RenderSprite(TileSetSprite(Map.Tile(x, y).Layer(i).Tileset), GameWindow, ConvertMapX(x * PicX), ConvertMapY(y * PicY), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height, , , , alpha)
 
                 ElseIf Autotile(x, y).Layer(i).RenderState = RenderStateAutotile Then
                     ' Draw autotiles
@@ -870,7 +880,7 @@ Module C_Maps
     End Sub
 
     Friend Sub DrawMapFringeTile(x As Integer, y As Integer)
-        Dim i As Integer
+        Dim i As Integer, alpha As Integer
         Dim srcrect As New Rectangle(0, 0, 0, 0)
         'Dim dest As Rectangle = New Rectangle(FrmMainGame.PointToScreen(FrmMainGame.picscreen.Location), New Size(32, 32))
 
@@ -900,7 +910,17 @@ Module C_Maps
                         .Height = 32
                     End With
 
-                    RenderSprite(TileSetSprite(Map.Tile(x, y).Layer(i).Tileset), GameWindow, ConvertMapX(x * PicX), ConvertMapY(y * PicY), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height)
+                    If Editor = EditorType.Map Then
+                        If i = frmEditor_Map.cmbLayers.SelectedIndex Then
+                            alpha = 255
+                        Else
+                            alpha = 127
+                        End If
+                    Else   
+                        alpha = 255
+                    End If
+
+                    RenderSprite(TileSetSprite(Map.Tile(x, y).Layer(i).Tileset), GameWindow, ConvertMapX(x * PicX), ConvertMapY(y * PicY), srcrect.X, srcrect.Y, srcrect.Width, srcrect.Height, , , , alpha)
 
                 ElseIf Autotile(x, y).Layer(i).RenderState = RenderStateAutotile Then
                     ' Draw autotiles

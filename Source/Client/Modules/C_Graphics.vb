@@ -1045,12 +1045,13 @@ Module C_Graphics
 
     Friend Sub RenderSprite(tmpSprite As Sprite, target As RenderWindow, destX As Integer, destY As Integer,
                             sourceX As Integer, sourceY As Integer,
-                            sourceWidth As Integer, sourceHeight As Integer)
+                            sourceWidth As Integer, sourceHeight As Integer, Optional red As Byte = 255, Optional green As Byte = 255, Optional blue As Byte = 255, Optional alpha As Byte = 255)
 
         If tmpSprite Is Nothing Then Exit Sub
 
         tmpSprite.TextureRect = New IntRect(sourceX, sourceY, sourceWidth, sourceHeight)
         tmpSprite.Position = New Vector2f(destX, destY)
+        tmpSprite.Color = New Color(red, green, blue, alpha)
         target.Draw(tmpSprite)
     End Sub
 
