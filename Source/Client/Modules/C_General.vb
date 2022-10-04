@@ -12,7 +12,6 @@ Module C_General
     End Function
 
     Sub Startup()
-        SetStatus(Language.Load.Loading) 
         FrmMenu.Text = Settings.GameName
         FrmMenu.Visible = True
         Application.DoEvents()
@@ -32,23 +31,14 @@ Module C_General
         LoadSettings()
         LoadLanguage()
         LoadInputs()
-
-        SetStatus(Language.Load.Graphics)
-        Application.DoEvents()
         LoadGraphics()
-
-        SetStatus(Language.Load.Network)
-        Application.DoEvents()
         InitNetwork()
         Ping = -1
     End Function
 
     Friend Function LoadGraphics()
-        SetStatus(Language.Load.Starting)
-        Application.DoEvents()
         Started = True
         Frmmenuvisible = True
-        Pnlloadvisible = False
 
         CheckPaths()
         InitGraphics()
@@ -128,8 +118,6 @@ End Function
     End Function
 
     Sub GameInit()
-        Pnlloadvisible = False
-
         ' Set the focus
         FrmGame.picscreen.Focus()
 
@@ -144,12 +132,7 @@ End Function
         StopMusic()
     End Sub
 
-    Friend Sub SetStatus(caption As String)
-        FrmMenu.lblStatus.Text = caption
-    End Sub
-
     Friend Sub MenuState(state As Integer)
-        Pnlloadvisible = True
         Frmmenuvisible = False
         Select Case state
             Case MenuStateAddchar
@@ -159,8 +142,6 @@ End Function
                 PnlCreditsVisible = False
 
                 If ConnectToServer(1) Then
-                    SetStatus(Language.MainMenu.SendNewCharacter)
-
                     If FrmMenu.rdoMale.Checked = True Then
                         SendAddChar(SelectedChar, FrmMenu.txtCharName.Text, SexType.Male, FrmMenu.cmbJob.SelectedIndex)
                     Else
@@ -175,7 +156,6 @@ End Function
                 PnlCreditsVisible = False
 
                 If ConnectToServer(1) Then
-                    SetStatus(Language.MainMenu.SendRegister)
                     SendNewAccount(FrmMenu.txtRuser.Text, FrmMenu.txtRPass.Text)
                 End If
 
@@ -188,7 +168,6 @@ End Function
                 TempPassword = FrmMenu.txtPassword.Text
 
                 If ConnectToServer(1) Then
-                    SetStatus(Language.MainMenu.SendLogin)
                     SendLogin(FrmMenu.txtLogin.Text, FrmMenu.txtPassword.Text)
                     Exit Sub
                 End If
@@ -210,8 +189,6 @@ End Function
         until = GetTickCount() + 3500
 
         Connect()
-
-        SetStatus(String.Format(Language.MainMenu.ConnectToServer, i))
 
         ' Wait until connected or a few seconds have passed and report the server being down
         Do While (Not Socket.IsConnected()) AndAlso (GetTickCount() <= until)

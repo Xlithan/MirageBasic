@@ -382,7 +382,6 @@ Module C_GameLogic
         If MapData = False Then Exit Function
         If PlayerData = False Then Exit Function
         GameStarted = True
-        Pnlloadvisible = False
     End Function
 
     Friend Sub CreateActionMsg(message As String, color As Integer, msgType As Byte, x As Integer, y As Integer)

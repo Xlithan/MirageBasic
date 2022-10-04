@@ -12,7 +12,6 @@ Module C_UpdateUI
     Friend PnlCreditsVisible As Boolean
     Friend Frmmenuvisible As Boolean
     Friend Frmmaingamevisible As Boolean
-    Friend Pnlloadvisible As Boolean
     Friend Lblnextcharleft As Integer
     Friend CmbJob() As String
     Friend TxtChatAdd As String
@@ -509,10 +508,6 @@ Module C_UpdateUI
 
         If UpdateCharacterPanel = True Then
             UpdateCharacterPanel = False
-        End If
-
-        If Pnlloadvisible <> FrmMenu.pnlLoad.Visible Then
-            FrmMenu.pnlLoad.Visible = Pnlloadvisible
         End If
 
         If UpdateMapnames = True Then
