@@ -137,6 +137,7 @@ Module C_Maps
         For i = 0 To MaxHistory
             ReDim TileHistory(i).Tile(Map.MaxX, Map.MaxY)
         Next
+        HistoryIndex = 0
 
         For X = 0 To ScreenMapx
             For Y = 0 To ScreenMapy

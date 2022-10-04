@@ -1035,7 +1035,11 @@ Public Class frmEditor_Map
     End sub
 
     Public Sub MapEditorRedo()
-        If HistoryIndex = MaxHistory Or TileHistory(HistoryIndex).Filled = False Then Exit Sub
+        If HistoryIndex = MaxHistory Then Exit Sub
+
+        HistoryIndex = HistoryIndex + 1
+
+        If TileHistory(HistoryIndex).Filled = False Then Exit Sub
 
         For x = 0 To Map.MaxX
             For y = 0 To Map.MaxY
@@ -1049,9 +1053,7 @@ Public Class frmEditor_Map
                     End With
                 Next
             Next
-        Next
-
-        HistoryIndex = HistoryIndex + 1
+        Next  
     End Sub
 
     Public Sub ClearAttributeDialogue()
