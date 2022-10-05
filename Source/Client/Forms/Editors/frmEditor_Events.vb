@@ -192,6 +192,9 @@ Public Class FrmEditor_Events
         fraMoveRoute.Top = 0
         fraMoveRoute.Left = 0
 
+        cmbEvent.Items.Add("This Event")
+        cmbEvent.SelectedIndex = 0
+
         ' set the tabs
         tabPages.TabPages.Clear()
 
@@ -886,7 +889,7 @@ Public Class FrmEditor_Events
         GraphicSelType = 0
     End Sub
 
-    Private Sub CmbGraphic_SelectedIndexChanged(sender As Object, e As EventArgs) 
+    Private Sub CmbGraphic_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbGraphic.SelectedIndexChanged
         If cmbGraphic.SelectedIndex = -1 Then Exit Sub
         TmpEvent.Pages(CurPageNum).GraphicType = cmbGraphic.SelectedIndex
         ' set the max on the scrollbar
@@ -988,7 +991,7 @@ Public Class FrmEditor_Events
 
         'Will it let me do this?
         TempMoveRoute = TmpEvent.Pages(CurPageNum).MoveRoute
-       For i = 0 To TempMoveRouteCount
+       For i = 1 To TempMoveRouteCount
             Select Case TempMoveRoute(i).Index
                 Case 1
                     lstMoveRoute.Items.Add("Move Up")

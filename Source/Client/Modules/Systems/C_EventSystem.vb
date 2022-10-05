@@ -1447,8 +1447,6 @@ newlist:
                 FrmEditor_Events.cmbEvent.Items.Clear()
                 ReDim ListOfEvents(0 To Map.EventCount)
                 ListOfEvents(0) = EditorEvent
-                FrmEditor_Events.cmbEvent.Items.Add("This Event")
-                FrmEditor_Events.cmbEvent.SelectedIndex = 0
                 FrmEditor_Events.cmbEvent.Enabled = True
                 For i = 0 To Map.EventCount 
                     If i <> EditorEvent Then
