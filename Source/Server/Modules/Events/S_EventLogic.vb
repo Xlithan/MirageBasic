@@ -7,7 +7,7 @@ Friend Module S_EventLogic
     Friend Sub RemoveDeadEvents()
         Dim i As Integer, mapNum As Integer, x As Integer, id As Integer, page As Integer, compare As Integer
 
-        For i = 0 To GetPlayersOnline()
+        For i = 1 To GetPlayersOnline()
             If TempPlayer(i).EventMap.CurrentEvents > 0 And TempPlayer(i).GettingMap = False Then
                 mapNum = GetPlayerMap(i)
                 For x = 0 To TempPlayer(i).EventMap.CurrentEvents
@@ -128,7 +128,7 @@ Friend Module S_EventLogic
         Dim pageID As Integer, id As Integer, compare As Integer, i As Integer, mapNum As Integer
         Dim n As Integer, x As Integer, z As Integer, spawnevent As Boolean, p As Integer
 
-        For i = 0 To GetPlayersOnline()
+        For i = 1 To GetPlayersOnline()
             If TempPlayer(i).EventMap.CurrentEvents > 0 Then
                 mapNum = GetPlayerMap(i)
                 For x = 0 To TempPlayer(i).EventMap.CurrentEvents
@@ -139,7 +139,7 @@ Friend Module S_EventLogic
                         If TempPlayer(i).EventMap.EventPages(x).Visible = 0 Then pageID = 0
 
                         'If (Map(MapNum).Events Is Nothing) Then Continue For
-                        For z = Map(mapNum).Events(id).PageCount To 0 Step -1
+                        For z = Map(mapNum).Events(id).PageCount To 1 Step -1
 
                             spawnevent = True
 
