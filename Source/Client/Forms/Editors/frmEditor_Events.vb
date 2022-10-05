@@ -115,12 +115,10 @@ Public Class FrmEditor_Events
         cmbChangeSkills.SelectedIndex = 0
         cmbChangeJob.Items.Clear()
 
-        If MAX_JOBS > 0 Then
-           For i = 0 To MAX_JOBS
-                cmbChangeJob.Items.Add(Trim$(Job(i).Name))
-            Next
-            cmbChangeJob.SelectedIndex = 0
-        End If
+        For i = 0 To MAX_JOBS
+            cmbChangeJob.Items.Add(Trim$(Job(i).Name))
+        Next
+        cmbChangeJob.SelectedIndex = 0
         nudChangeSprite.Maximum = NumCharacters
         cmbPlayAnim.Items.Clear()
 
