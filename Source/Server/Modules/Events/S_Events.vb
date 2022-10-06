@@ -88,8 +88,6 @@ Friend Module S_Events
 
         CanEventMove = True
 
-        If index = 0 Then Exit Function
-
         Select Case dir
             Case DirectionType.Up
 
@@ -114,7 +112,7 @@ Friend Module S_Events
                     End If
 
                     ' Check to make sure that there is not a player in the way
-                    For i = 0 To Socket.HighIndex
+                    For i = 1 To Socket.HighIndex
                         If IsPlaying(i) Then
                             If (GetPlayerMap(i) = mapNum) AndAlso (GetPlayerX(i) = x) AndAlso (GetPlayerY(i) = y - 1) Then
                                 CanEventMove = False
@@ -199,7 +197,7 @@ Friend Module S_Events
                     End If
 
                     ' Check to make sure that there is not a player in the way
-                    For i = 0 To Socket.HighIndex
+                    For i = 1 To Socket.HighIndex
                         If IsPlaying(i) Then
                             If (GetPlayerMap(i) = mapNum) AndAlso (GetPlayerX(i) = x) AndAlso (GetPlayerY(i) = y + 1) Then
                                 CanEventMove = False
@@ -285,7 +283,7 @@ Friend Module S_Events
                     End If
 
                     ' Check to make sure that there is not a player in the way
-                    For i = 0 To Socket.HighIndex
+                    For i = 1 To Socket.HighIndex
                         If IsPlaying(i) Then
                             If (GetPlayerMap(i) = mapNum) AndAlso (GetPlayerX(i) = x - 1) AndAlso (GetPlayerY(i) = y) Then
                                 CanEventMove = False
@@ -371,7 +369,7 @@ Friend Module S_Events
                     End If
 
                     ' Check to make sure that there is not a player in the way
-                    For i = 0 To Socket.HighIndex
+                    For i = 1 To Socket.HighIndex
                         If IsPlaying(i) Then
                             If (GetPlayerMap(i) = mapNum) AndAlso (GetPlayerX(i) = x + 1) AndAlso (GetPlayerY(i) = y) Then
                                 CanEventMove = False

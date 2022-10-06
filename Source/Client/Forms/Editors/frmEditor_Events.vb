@@ -162,7 +162,7 @@ Public Class FrmEditor_Events
         cmbCompleteQuest.Items.Clear()
         cmbEndQuest.Items.Clear()
 
-       For i = 0 To MAX_QUESTS
+        For i = 0 To MAX_QUESTS
             cmbBeginQuest.Items.Add(i & ". " & Trim$(Quest(i).Name))
             cmbCompleteQuest.Items.Add(i & ". " & Trim$(Quest(i).Name))
             cmbEndQuest.Items.Add(i & ". " & Trim$(Quest(i).Name))
@@ -172,7 +172,7 @@ Public Class FrmEditor_Events
         nudFogData0.Maximum = NumFogs
         cmbEventQuest.Items.Clear()
 
-       For i = 0 To MAX_QUESTS
+        For i = 0 To MAX_QUESTS
             cmbEventQuest.Items.Add(i & ". " & Trim$(Quest(i).Name))
         Next
 
@@ -470,12 +470,8 @@ Public Class FrmEditor_Events
             Case "Set Move Route"
                 fraMoveRoute.Visible = True
                 lstMoveRoute.Items.Clear()
-                cmbEvent.Items.Clear()
                 ReDim ListOfEvents(0 To Map.EventCount)
-                ListOfEvents(0) = EditorEvent
-                cmbEvent.Items.Add("This Event")
-                cmbEvent.SelectedIndex = 0
-                cmbEvent.Enabled = True
+                ListOfEvents(0) = EditorEvent              
                For i = 0 To Map.EventCount
                     If i <> EditorEvent Then
                         cmbEvent.Items.Add(Trim$(Map.Events(i).Name))
@@ -978,10 +974,6 @@ Public Class FrmEditor_Events
     Private Sub BtnMoveRoute_Click(sender As Object, e As EventArgs) Handles btnMoveRoute.Click
         fraMoveRoute.BringToFront()
         lstMoveRoute.Items.Clear()
-        cmbEvent.Items.Clear()
-        cmbEvent.Items.Add("This Event")
-        cmbEvent.SelectedIndex = 0
-        cmbEvent.Enabled = False
         IsMoveRouteCommand = False
         chkIgnoreMove.Checked = TmpEvent.Pages(CurPageNum).IgnoreMoveRoute
         chkRepeatRoute.Checked = TmpEvent.Pages(CurPageNum).RepeatMoveRoute

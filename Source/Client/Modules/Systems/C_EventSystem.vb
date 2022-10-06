@@ -1444,10 +1444,8 @@ newlist:
                 FrmEditor_Events.fraMoveRoute.Visible = True
                 FrmEditor_Events.fraMoveRoute.BringToFront()
                 FrmEditor_Events.lstMoveRoute.Items.Clear()
-                FrmEditor_Events.cmbEvent.Items.Clear()
                 ReDim ListOfEvents(0 To Map.EventCount)
                 ListOfEvents(0) = EditorEvent
-                FrmEditor_Events.cmbEvent.Enabled = True
                 For i = 0 To Map.EventCount 
                     If i <> EditorEvent Then
                         FrmEditor_Events.cmbEvent.Items.Add(Trim$(Map.Events(i).Name))
