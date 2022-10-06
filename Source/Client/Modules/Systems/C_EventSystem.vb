@@ -1447,8 +1447,6 @@ newlist:
                 FrmEditor_Events.cmbEvent.Items.Clear()
                 ReDim ListOfEvents(0 To Map.EventCount)
                 ListOfEvents(0) = EditorEvent
-                FrmEditor_Events.cmbEvent.Items.Add("This Event")
-                FrmEditor_Events.cmbEvent.SelectedIndex = 0
                 FrmEditor_Events.cmbEvent.Enabled = True
                 For i = 0 To Map.EventCount 
                     If i <> EditorEvent Then
@@ -1545,11 +1543,11 @@ newlist:
                         Case 39
                             FrmEditor_Events.lstMoveRoute.Items.Add("Turn Off Walk Through")
                         Case 40
-                            FrmEditor_Events.lstMoveRoute.Items.Add("Set Position Below Player")
+                            FrmEditor_Events.lstMoveRoute.Items.Add("Set Position Below Characters")
                         Case 41
-                            FrmEditor_Events.lstMoveRoute.Items.Add("Set Position at Player Level")
+                            FrmEditor_Events.lstMoveRoute.Items.Add("Set Position Same as Characters")
                         Case 42
-                            FrmEditor_Events.lstMoveRoute.Items.Add("Set Position Above Player")
+                            FrmEditor_Events.lstMoveRoute.Items.Add("Set Position Above Characters")
                         Case 43
                             FrmEditor_Events.lstMoveRoute.Items.Add("Set Graphic")
                     End Select

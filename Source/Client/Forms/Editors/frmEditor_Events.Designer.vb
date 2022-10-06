@@ -150,6 +150,8 @@ Partial Class FrmEditor_Events
         Me.tabPages = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.pnlTabPage = New System.Windows.Forms.Panel()
+        Me.DarkGroupBox2 = New DarkUI.Controls.DarkGroupBox()
+        Me.cmbPositioning = New DarkUI.Controls.DarkComboBox()
         Me.fraGraphicPic = New DarkUI.Controls.DarkGroupBox()
         Me.picGraphic = New System.Windows.Forms.PictureBox()
         Me.DarkGroupBox6 = New DarkUI.Controls.DarkGroupBox()
@@ -157,8 +159,6 @@ Partial Class FrmEditor_Events
         Me.chkWalkThrough = New DarkUI.Controls.DarkCheckBox()
         Me.chkDirFix = New DarkUI.Controls.DarkCheckBox()
         Me.chkWalkAnim = New DarkUI.Controls.DarkCheckBox()
-        Me.DarkLabel10 = New DarkUI.Controls.DarkLabel()
-        Me.DarkLabel9 = New DarkUI.Controls.DarkLabel()
         Me.DarkGroupBox7 = New DarkUI.Controls.DarkGroupBox()
         Me.cmbEventQuest = New DarkUI.Controls.DarkComboBox()
         Me.DarkLabel8 = New DarkUI.Controls.DarkLabel()
@@ -166,7 +166,6 @@ Partial Class FrmEditor_Events
         Me.cmbTrigger = New DarkUI.Controls.DarkComboBox()
         Me.DarkGroupBox4 = New DarkUI.Controls.DarkGroupBox()
         Me.picGraphicSel = New System.Windows.Forms.PictureBox()
-        Me.cmbPositioning = New DarkUI.Controls.DarkComboBox()
         Me.DarkGroupBox3 = New DarkUI.Controls.DarkGroupBox()
         Me.DarkLabel7 = New DarkUI.Controls.DarkLabel()
         Me.cmbMoveFreq = New DarkUI.Controls.DarkComboBox()
@@ -527,6 +526,7 @@ Partial Class FrmEditor_Events
         Me.fraPageSetUp.SuspendLayout
         Me.tabPages.SuspendLayout
         Me.pnlTabPage.SuspendLayout
+        Me.DarkGroupBox2.SuspendLayout
         Me.fraGraphicPic.SuspendLayout
         CType(Me.picGraphic,System.ComponentModel.ISupportInitialize).BeginInit
         Me.DarkGroupBox6.SuspendLayout
@@ -887,10 +887,9 @@ Partial Class FrmEditor_Events
         '
         'pnlTabPage
         '
+        Me.pnlTabPage.Controls.Add(Me.DarkGroupBox2)
         Me.pnlTabPage.Controls.Add(Me.fraGraphicPic)
         Me.pnlTabPage.Controls.Add(Me.DarkGroupBox6)
-        Me.pnlTabPage.Controls.Add(Me.DarkLabel10)
-        Me.pnlTabPage.Controls.Add(Me.DarkLabel9)
         Me.pnlTabPage.Controls.Add(Me.DarkGroupBox7)
         Me.pnlTabPage.Controls.Add(Me.DarkGroupBox5)
         Me.pnlTabPage.Controls.Add(Me.DarkGroupBox4)
@@ -905,6 +904,32 @@ Partial Class FrmEditor_Events
         Me.pnlTabPage.Name = "pnlTabPage"
         Me.pnlTabPage.Size = New System.Drawing.Size(923, 573)
         Me.pnlTabPage.TabIndex = 4
+        '
+        'DarkGroupBox2
+        '
+        Me.DarkGroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
+        Me.DarkGroupBox2.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
+        Me.DarkGroupBox2.Controls.Add(Me.cmbPositioning)
+        Me.DarkGroupBox2.ForeColor = System.Drawing.Color.Gainsboro
+        Me.DarkGroupBox2.Location = New System.Drawing.Point(213, 440)
+        Me.DarkGroupBox2.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.DarkGroupBox2.Name = "DarkGroupBox2"
+        Me.DarkGroupBox2.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.DarkGroupBox2.Size = New System.Drawing.Size(233, 57)
+        Me.DarkGroupBox2.TabIndex = 15
+        Me.DarkGroupBox2.TabStop = false
+        Me.DarkGroupBox2.Text = "Poisition"
+        '
+        'cmbPositioning
+        '
+        Me.cmbPositioning.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbPositioning.FormattingEnabled = true
+        Me.cmbPositioning.Items.AddRange(New Object() {"Below Characters", "Same as Characters", "Above Characters"})
+        Me.cmbPositioning.Location = New System.Drawing.Point(8, 22)
+        Me.cmbPositioning.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbPositioning.Name = "cmbPositioning"
+        Me.cmbPositioning.Size = New System.Drawing.Size(220, 24)
+        Me.cmbPositioning.TabIndex = 1
         '
         'fraGraphicPic
         '
@@ -989,26 +1014,6 @@ Partial Class FrmEditor_Events
         Me.chkWalkAnim.TabIndex = 0
         Me.chkWalkAnim.Text = "No Walk Animation"
         '
-        'DarkLabel10
-        '
-        Me.DarkLabel10.ForeColor = System.Drawing.Color.Red
-        Me.DarkLabel10.Location = New System.Drawing.Point(212, 528)
-        Me.DarkLabel10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel10.Name = "DarkLabel10"
-        Me.DarkLabel10.Size = New System.Drawing.Size(233, 35)
-        Me.DarkLabel10.TabIndex = 7
-        Me.DarkLabel10.Text = "** If global, only the first page will be processed. For shop keepers etc."
-        '
-        'DarkLabel9
-        '
-        Me.DarkLabel9.ForeColor = System.Drawing.Color.Red
-        Me.DarkLabel9.Location = New System.Drawing.Point(212, 489)
-        Me.DarkLabel9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel9.Name = "DarkLabel9"
-        Me.DarkLabel9.Size = New System.Drawing.Size(234, 39)
-        Me.DarkLabel9.TabIndex = 6
-        Me.DarkLabel9.Text = "* Self Switches are always global and will reset on server restart."
-        '
         'DarkGroupBox7
         '
         Me.DarkGroupBox7.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
@@ -1016,7 +1021,7 @@ Partial Class FrmEditor_Events
         Me.DarkGroupBox7.Controls.Add(Me.cmbEventQuest)
         Me.DarkGroupBox7.Controls.Add(Me.DarkLabel8)
         Me.DarkGroupBox7.ForeColor = System.Drawing.Color.Gainsboro
-        Me.DarkGroupBox7.Location = New System.Drawing.Point(212, 434)
+        Me.DarkGroupBox7.Location = New System.Drawing.Point(214, 507)
         Me.DarkGroupBox7.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DarkGroupBox7.Name = "DarkGroupBox7"
         Me.DarkGroupBox7.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -1052,7 +1057,7 @@ Partial Class FrmEditor_Events
         Me.DarkGroupBox5.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.DarkGroupBox5.Controls.Add(Me.cmbTrigger)
         Me.DarkGroupBox5.ForeColor = System.Drawing.Color.Gainsboro
-        Me.DarkGroupBox5.Location = New System.Drawing.Point(212, 370)
+        Me.DarkGroupBox5.Location = New System.Drawing.Point(217, 374)
         Me.DarkGroupBox5.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DarkGroupBox5.Name = "DarkGroupBox5"
         Me.DarkGroupBox5.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -1077,7 +1082,6 @@ Partial Class FrmEditor_Events
         Me.DarkGroupBox4.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
         Me.DarkGroupBox4.BorderColor = System.Drawing.Color.FromArgb(CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer), CType(CType(90,Byte),Integer))
         Me.DarkGroupBox4.Controls.Add(Me.picGraphicSel)
-        Me.DarkGroupBox4.Controls.Add(Me.cmbPositioning)
         Me.DarkGroupBox4.ForeColor = System.Drawing.Color.Gainsboro
         Me.DarkGroupBox4.Location = New System.Drawing.Point(212, 308)
         Me.DarkGroupBox4.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
@@ -1097,17 +1101,6 @@ Partial Class FrmEditor_Events
         Me.picGraphicSel.Size = New System.Drawing.Size(936, 593)
         Me.picGraphicSel.TabIndex = 5
         Me.picGraphicSel.TabStop = false
-        '
-        'cmbPositioning
-        '
-        Me.cmbPositioning.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
-        Me.cmbPositioning.FormattingEnabled = true
-        Me.cmbPositioning.Items.AddRange(New Object() {"Below Characters", "Same as Characters", "Above Characters"})
-        Me.cmbPositioning.Location = New System.Drawing.Point(7, 22)
-        Me.cmbPositioning.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.cmbPositioning.Name = "cmbPositioning"
-        Me.cmbPositioning.Size = New System.Drawing.Size(220, 24)
-        Me.cmbPositioning.TabIndex = 0
         '
         'DarkGroupBox3
         '
@@ -5418,6 +5411,7 @@ Partial Class FrmEditor_Events
         Me.fraPageSetUp.PerformLayout
         Me.tabPages.ResumeLayout(false)
         Me.pnlTabPage.ResumeLayout(false)
+        Me.DarkGroupBox2.ResumeLayout(false)
         Me.fraGraphicPic.ResumeLayout(false)
         CType(Me.picGraphic,System.ComponentModel.ISupportInitialize).EndInit
         Me.DarkGroupBox6.ResumeLayout(false)
@@ -5593,14 +5587,11 @@ End Sub
     Friend WithEvents cmbMoveFreq As DarkUI.Controls.DarkComboBox
     Friend WithEvents DarkLabel7 As DarkUI.Controls.DarkLabel
     Friend WithEvents DarkGroupBox4 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbPositioning As DarkUI.Controls.DarkComboBox
     Friend WithEvents DarkGroupBox5 As DarkUI.Controls.DarkGroupBox
     Friend WithEvents cmbTrigger As DarkUI.Controls.DarkComboBox
     Friend WithEvents DarkGroupBox7 As DarkUI.Controls.DarkGroupBox
     Friend WithEvents cmbEventQuest As DarkUI.Controls.DarkComboBox
     Friend WithEvents DarkLabel8 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel10 As DarkUI.Controls.DarkLabel
-    Friend WithEvents DarkLabel9 As DarkUI.Controls.DarkLabel
     Friend WithEvents lstCommands As ListBox
     Friend WithEvents DarkGroupBox8 As DarkUI.Controls.DarkGroupBox
     Friend WithEvents btnAddCommand As DarkUI.Controls.DarkButton
@@ -5942,4 +5933,6 @@ End Sub
     Friend WithEvents DarkLabel12 As DarkUI.Controls.DarkLabel
     Friend WithEvents cmbGraphic As DarkUI.Controls.DarkComboBox
     Friend WithEvents DarkLabel11 As DarkUI.Controls.DarkLabel
+    Friend WithEvents DarkGroupBox2 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents cmbPositioning As DarkUI.Controls.DarkComboBox
 End Class
