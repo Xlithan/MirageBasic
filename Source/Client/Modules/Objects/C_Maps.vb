@@ -98,7 +98,6 @@ Module C_Maps
 
     Public Structure TileHistoryStruct
         Dim Tile(,) As TileStruct
-        Dim Filled As Boolean
     End Structure
 #End Region
 
@@ -138,6 +137,7 @@ Module C_Maps
             ReDim TileHistory(i).Tile(Map.MaxX, Map.MaxY)
         Next
         HistoryIndex = 0
+        TileHistoryHighIndex = 0
 
         For X = 0 To ScreenMapx
             For Y = 0 To ScreenMapy
@@ -152,12 +152,22 @@ Module C_Maps
                     Map.Tile(x, y).Layer(l).X = 0
                     Map.Tile(x, y).Layer(l).Y = 0
                     Map.Tile(x, y).Layer(l).AutoTile = 0
+                    Map.Tile(x,y).Data1 = 0
+                    Map.Tile(x,y).Data2 = 0
+                    Map.Tile(x,y).Data3 = 0
+                    Map.Tile(x,y).Type = 0
+                    Map.Tile(x,y).DirBlock = 0
 
                     For i = 0 To MaxHistory
                         TileHistory(i).Tile(x,y).Layer(l).Tileset = 0
                         TileHistory(i).Tile(x,y).Layer(l).X = 0
                         TileHistory(i).Tile(x,y).Layer(l).Y = 0
                         TileHistory(i).Tile(x,y).Layer(l).AutoTile = 0
+                        TileHistory(i).Tile(x,y).Data1 = 0
+                        TileHistory(i).Tile(x,y).Data2 = 0
+                        TileHistory(i).Tile(x,y).Data3 = 0
+                        TileHistory(i).Tile(x,y).Type = 0
+                        TileHistory(i).Tile(x,y).DirBlock = 0
                     Next
                 Next
 
