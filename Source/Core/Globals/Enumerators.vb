@@ -150,7 +150,7 @@
         Screen
     End Enum
 
-    ''' <Summary> Stats used by Players, Npcs and Class </Summary>
+    ''' <Summary> Stats used by Players, Npcs and Job </Summary>
     Public Enum StatType As Byte
         Strength
         Endurance
@@ -162,7 +162,7 @@
         Count
     End Enum
 
-    ''' <Summary> Vitals used by Players, Npcs, and Class </Summary>
+    ''' <Summary> Vitals used by Players, Npcs, and Job </Summary>
     Public Enum VitalType As Byte
         HP
         MP
