@@ -22,12 +22,6 @@ Module C_General
     End Sub
 
     Friend Function LoadGame()
-        If Screen.PrimaryScreen.Bounds.Height < 1024 Or Screen.PrimaryScreen.Bounds.Width < 768 Then
-            MsgBox("The game requires a minimum system resolution of 1024x768.")
-            DestroyGame
-            Exit Function
-        End If
-
         LoadSettings()
         LoadLanguage()
         LoadInputs()
