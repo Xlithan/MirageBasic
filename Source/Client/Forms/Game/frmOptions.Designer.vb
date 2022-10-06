@@ -220,9 +220,9 @@ Partial Class FrmOptions
         Me.chkDynamicLighting.Location = New System.Drawing.Point(13, 217)
         Me.chkDynamicLighting.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.chkDynamicLighting.Name = "chkDynamicLighting"
-        Me.chkDynamicLighting.Size = New System.Drawing.Size(127, 19)
+        Me.chkDynamicLighting.Size = New System.Drawing.Size(120, 19)
         Me.chkDynamicLighting.TabIndex = 19
-        Me.chkDynamicLighting.Text = "Dynamic Lightning"
+        Me.chkDynamicLighting.Text = "Dynamic Lighting"
         Me.chkDynamicLighting.UseVisualStyleBackColor = true
         '
         'FrmOptions
