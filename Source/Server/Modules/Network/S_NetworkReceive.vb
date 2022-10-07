@@ -216,6 +216,7 @@ Module S_NetworkReceive
 
                 Console.WriteLine("Account " & username & " has been created.")
                 Addlog("Account " & username & " has been created.", PLAYER_LOG)
+
                 SendJobs(index)
                 SendLoginOk(index)
 

@@ -23,7 +23,7 @@ Friend Module C_HotBar
 
         IsHotBarSlot = 0
 
-        For i = 0 To MAX_HOTBAR
+        For i = 1 To MAX_HOTBAR
             With tempRec
                 .Top = HotbarY + HotbarTop
                 .Bottom = .Top + PicY

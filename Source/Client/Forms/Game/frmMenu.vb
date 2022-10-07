@@ -18,7 +18,6 @@ Friend Class FrmMenu
     ''' On load, get GUI ready.
     ''' </summary>
     Private Sub Frmmenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         LoadMenuGraphics()
         chkSavePass.Checked = Settings.SavePass
         txtLogin.Text = Settings.Username
@@ -27,7 +26,6 @@ Friend Class FrmMenu
         If Started = False Then Call Startup()
 
         Connect()
-
     End Sub
 
     ''' <summary>

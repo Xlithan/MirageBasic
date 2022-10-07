@@ -14,7 +14,6 @@ Module C_General
     Sub Startup()
         FrmMenu.Text = Settings.GameName
         FrmMenu.Visible = True
-        Application.DoEvents()
 
         LoadGame()
         ClearGameData()
@@ -22,12 +21,6 @@ Module C_General
     End Sub
 
     Friend Function LoadGame()
-        If Screen.PrimaryScreen.Bounds.Height < 1024 Or Screen.PrimaryScreen.Bounds.Width < 768 Then
-            MsgBox("The game requires a minimum system resolution of 1024x768.")
-            DestroyGame
-            Exit Function
-        End If
-
         LoadSettings()
         LoadLanguage()
         LoadInputs()
@@ -277,11 +270,9 @@ End Function
     End Sub
 
     Friend Sub CheckDir(dirPath As String)
-
         If Not IO.Directory.Exists(dirPath) Then
             IO.Directory.CreateDirectory(dirPath)
         End If
-
     End Sub
 
     Friend Function GetExceptionInfo(ex As Exception) As String

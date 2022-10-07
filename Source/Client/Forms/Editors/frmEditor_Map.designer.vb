@@ -171,6 +171,8 @@ Partial Class frmEditor_Map
         Me.lblFogIndex = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.cmbWeather = New System.Windows.Forms.ComboBox()
+        Me.tsbLight = New System.Windows.Forms.ToolStripButton()
+        Me.tsbOpacity = New System.Windows.Forms.ToolStripButton()
         Me.pnlBack.SuspendLayout
         CType(Me.picBackSelect,System.ComponentModel.ISupportInitialize).BeginInit
         Me.pnlAttributes.SuspendLayout
@@ -734,7 +736,7 @@ Partial Class frmEditor_Map
         '
         'ToolStrip
         '
-        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear, Me.tsbEyeDropper, Me.tsbCopyMap, Me.tsbUndo, Me.tsbRedo})
+        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.tsbOpacity, Me.tsbLight, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear, Me.tsbEyeDropper, Me.tsbCopyMap, Me.tsbUndo, Me.tsbRedo})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip.Name = "ToolStrip"
         Me.ToolStrip.Size = New System.Drawing.Size(558, 25)
@@ -1777,6 +1779,25 @@ Partial Class frmEditor_Map
         Me.cmbWeather.Size = New System.Drawing.Size(168, 23)
         Me.cmbWeather.TabIndex = 0
         '
+        'tsbLight
+        '
+        Me.tsbLight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbLight.Image = CType(resources.GetObject("tsbLight.Image"),System.Drawing.Image)
+        Me.tsbLight.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbLight.Name = "tsbLight"
+        Me.tsbLight.Size = New System.Drawing.Size(23, 22)
+        Me.tsbLight.ToolTipText = "Light"
+        '
+        'tsbOpacity
+        '
+        Me.tsbOpacity.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbOpacity.Image = Global.Mirage.Basic.Client.My.Resources.Resources.Opacity
+        Me.tsbOpacity.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbOpacity.Name = "tsbOpacity"
+        Me.tsbOpacity.Size = New System.Drawing.Size(23, 22)
+        Me.tsbOpacity.Text = "ToolStripButton1"
+        Me.tsbOpacity.ToolTipText = "Opacity"
+        '
         'frmEditor_Map
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
@@ -1997,4 +2018,6 @@ End Sub
     Friend WithEvents tsbCopyMap As ToolStripButton
     Friend WithEvents tsbUndo As ToolStripButton
     Friend WithEvents tsbRedo As ToolStripButton
+    Friend WithEvents tsbOpacity As ToolStripButton
+    Friend WithEvents tsbLight As ToolStripButton
 End Class

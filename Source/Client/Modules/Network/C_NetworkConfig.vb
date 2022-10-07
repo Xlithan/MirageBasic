@@ -6,7 +6,7 @@ Friend Module C_NetworkConfig
 
     Friend Sub InitNetwork()
         If Not Socket Is Nothing Then Return
-        Socket = New NetworkClient(ServerPackets.COUNT, 4096)
+        Socket = New NetworkClient(ServerPackets.COUNT, 8192)
         PacketRouter()
     End Sub
 

@@ -1022,7 +1022,7 @@ Module modDatabase
 #Region "Players"
 
     Sub SaveAllPlayersOnline()
-        For i = 0 To GetPlayersOnline()
+        For i = 1 To GetPlayersOnline()
             If Not IsPlaying(i) Then Continue For
             SavePlayer(i)
             SaveBank(i)
@@ -1068,6 +1068,7 @@ Module modDatabase
     End Sub
 
     Sub ClearAccount(index As Integer)
+        Account(index).Access = 0
         SetPlayerLogin(index, "")
         SetPlayerPassword(index, "")
         ReDim Account(index).Character(MAX_CHARACTERS)
