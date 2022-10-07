@@ -514,7 +514,7 @@ namespace Mirage.Sharp.Asfw.Network
       byte[] numArray = new byte[head + 4];
       Buffer.BlockCopy((Array) BitConverter.GetBytes(head), 0, (Array) numArray, 0, 4);
       Buffer.BlockCopy((Array) data, 0, (Array) numArray, 4, head);
-      for (int index1 = 0; index1 <= this.HighIndex; ++index1)
+      for (int index1 = 0                                                                                                                                                                                   ; index1 <= this.HighIndex; ++index1)
       {
         if (this._socket.ContainsKey(index1) && index1 != index)
           this.SendDataTo(index1, numArray);

@@ -232,7 +232,6 @@ Friend Module C_Gui
                         PlaySound("Click.ogg")
                         FrmAdmin.Dispose()
                         SendLeaveGame()
-                        'DestroyGame()
 
                         CheckGuiClick = True
                     End If

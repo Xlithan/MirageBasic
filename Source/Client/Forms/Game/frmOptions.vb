@@ -95,6 +95,11 @@ Friend Class FrmOptions
         optSOn.Checked = Settings.Sound
         lblVolume.Text = "Volume: " & Settings.Volume
         scrlVolume.Value = Settings.Volume
+        If GetPlayerAccess(Myindex) > 0 Then
+            chkOpenAdminPanelOnLogin.Visible = True
+        Else
+            chkOpenAdminPanelOnLogin.Visible = False
+        End If
         TopMost = True
     End Sub
 

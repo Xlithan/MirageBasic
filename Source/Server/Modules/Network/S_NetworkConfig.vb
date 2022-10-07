@@ -7,7 +7,7 @@ Friend Module S_NetworkConfig
     Friend Sub InitNetwork()
         If Not Socket Is Nothing Then Return
         ' Establish some Rulez
-        Socket = New NetworkServer(Packets.ClientPackets.Count, 4096, MAX_PLAYERS) With {
+        Socket = New NetworkServer(Packets.ClientPackets.Count, 8192, MAX_PLAYERS) With {
             .BufferLimit = 2048000, ' <- this is 2mb max data storage
             .MinimumIndex = 1, ' <- this prevents the network from giving us 0 as an index
             .PacketAcceptLimit = 500, ' Dunno what is a reasonable cap right now so why not? :P
@@ -43,23 +43,21 @@ Friend Module S_NetworkConfig
 
     Friend Sub SendDataToAll(ByRef data() As Byte, head As Integer)
         For i As Integer = 1 To GetPlayersOnline()
-            If IsPlaying(i) Then
-                Socket.SendDataTo(i, data, head)
-            End If
+            Socket.SendDataTo(i, data, head)
         Next
     End Sub
 
     Sub SendDataToAllBut(index As Integer, ByRef data() As Byte, head As Integer)
-        For i As Integer = 0 To GetPlayersOnline()
-            If IsPlaying(i) AndAlso i <> index Then
+        For i As Integer = 1 To GetPlayersOnline()
+            If i <> index Then
                 Socket.SendDataTo(i, data, head)
             End If
         Next
     End Sub
 
     Sub SendDataToMapBut(index As Integer, mapNum As Integer, ByRef data() As Byte, head As Integer)
-        For i As Integer = 0 To GetPlayersOnline()
-            If IsPlaying(i) AndAlso GetPlayerMap(i) = mapNum AndAlso i <> index Then
+        For i As Integer = 1 To GetPlayersOnline()
+            If GetPlayerMap(i) = mapNum AndAlso i <> index Then
                 Socket.SendDataTo(i, data, head)
             End If
         Next
@@ -68,12 +66,10 @@ Friend Module S_NetworkConfig
     Sub SendDataToMap(mapNum As Integer, ByRef data() As Byte, head As Integer)
         Dim i As Integer
 
-       For i = 0 To GetPlayersOnline()
+       For i = 1 To GetPlayersOnline()
 
-            If IsPlaying(i) Then
-                If GetPlayerMap(i) = mapNum Then
-                    Socket.SendDataTo(i, data, head)
-                End If
+            If GetPlayerMap(i) = mapNum Then
+                Socket.SendDataTo(i, data, head)
             End If
 
         Next

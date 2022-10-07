@@ -893,6 +893,8 @@ Module S_Players
 
     Friend Sub HandleUseChar(index As Integer)
         If Not IsPlaying(index) Then
+            ' Send an ok to client to start receiving in game data
+            SendLoadCharOk(index)
             JoinGame(index)
             Dim text = String.Format("{0} | {1} has began playing {2}.", GetPlayerLogin(index), GetPlayerName(index), Settings.GameName)
             Addlog(text, PLAYER_LOG)
@@ -2329,11 +2331,10 @@ Module S_Players
         ' Notify everyone that a player has joined the game.
         GlobalMsg(String.Format("{0} has joined {1}!", GetPlayerName(index), Settings.GameName))
 
-        ' Send an ok to client to start receiving in game data
-        SendLoadCharOk(index)
+         ' Warp the player to his saved location
+        PlayerWarp(index, GetPlayerMap(index), GetPlayerX(index), GetPlayerY(index))
 
         ' Send all the required game data to the user.
-        SendTotalOnlineTo(index)
         CheckEquippedItems(index)
         SendInventory(index)
         SendWornEquipment(index)
@@ -2349,11 +2350,6 @@ Module S_Players
         SendUpdatePlayerPet(index, True)
         SendTimeTo(index)
         SendGameClockTo(index)
-        SendResources(index)
-        SendTotalOnlineToAll()
-
-        ' Warp the player to his saved location
-        PlayerWarp(index, GetPlayerMap(index), GetPlayerX(index), GetPlayerY(index))
 
         ' Send welcome messages
         SendWelcome(index)

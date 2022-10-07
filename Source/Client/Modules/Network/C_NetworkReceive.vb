@@ -168,7 +168,7 @@ Module C_NetworkReceive
         buffer.Dispose()
 
         MsgBox(msg, vbOKOnly, Settings.GameName)
-        DestroyGame()
+        DestroyGame
     End Sub
 
     Private Sub Packet_KeyPair(ByRef data() As Byte)
@@ -208,7 +208,7 @@ Module C_NetworkReceive
         SelectedChar = 1
 
         'reset for deleting chars
-       For i = 1 To MAX_CHARACTERS
+        For i = 1 To MAX_CHARACTERS
             CharSelection(i).Name = ""
             CharSelection(i).Sprite = 0
             CharSelection(i).Level = 0
@@ -247,7 +247,7 @@ Module C_NetworkReceive
 
     End Sub
 
-        Sub Packet_NewCharJob(ByRef data() As Byte)
+    Sub Packet_NewCharJob(ByRef data() As Byte)
         Dim i As Integer, z As Integer, x As Integer
         Dim buffer As New ByteStream(data)
 

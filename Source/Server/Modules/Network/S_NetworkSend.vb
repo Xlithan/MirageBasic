@@ -451,11 +451,9 @@ Module S_NetworkSend
 
         For i = 1 To GetPlayersOnline()
 
-            If IsPlaying(i) Then
-                If i <> index Then
-                    s = s & GetPlayerName(i) & ", "
-                    n = n + 1
-                End If
+            If i <> index Then
+                s = s & GetPlayerName(i) & ", "
+                n = n + 1
             End If
 
         Next
@@ -539,16 +537,16 @@ Module S_NetworkSend
 
             For X = 0 To Map(mapNum).MaxX
                 For Y = 0 To Map(mapNum).MaxY
-buffer.WriteInt32(Map(mapNum).Tile(x, y).Data1)
-buffer.WriteInt32(Map(mapNum).Tile(x, y).Data2)
-buffer.WriteInt32(Map(mapNum).Tile(x, y).Data3)
+                    buffer.WriteInt32(Map(mapNum).Tile(x, y).Data1)
+                    buffer.WriteInt32(Map(mapNum).Tile(x, y).Data2)
+                    buffer.WriteInt32(Map(mapNum).Tile(x, y).Data3)
                     buffer.WriteInt32(Map(mapNum).Tile(x, y).DirBlock)
                     For i = 0 To LayerType.Count - 1
                         buffer.WriteInt32(Map(mapNum).Tile(x, y).Layer(i).Tileset)
-buffer.WriteInt32(Map(mapNum).Tile(x, y).Layer(i).X)
-buffer.WriteInt32(Map(mapNum).Tile(x, y).Layer(i).Y)
-buffer.WriteInt32(Map(mapNum).Tile(x, y).Layer(i).AutoTile)
-Next
+                        buffer.WriteInt32(Map(mapNum).Tile(x, y).Layer(i).X)
+                        buffer.WriteInt32(Map(mapNum).Tile(x, y).Layer(i).Y)
+                        buffer.WriteInt32(Map(mapNum).Tile(x, y).Layer(i).AutoTile)
+                    Next
                     buffer.WriteInt32(Map(mapNum).Tile(x, y).Type)
 
                 Next
@@ -712,13 +710,11 @@ Next
         Dim data As Byte()
 
         ' Send all players on current map to index
-        For i = 0 To GetPlayersOnline()
-            If IsPlaying(i) Then
-                If i <> index Then
-                    If GetPlayerMap(i) = GetPlayerMap(index) Then
-                        data = PlayerData(i)
-                        Socket.SendDataTo(index, data, data.Length)
-                    End If
+        For i = i To GetPlayersOnline()
+            If i <> index Then
+                If GetPlayerMap(i) = GetPlayerMap(index) Then
+                    data = PlayerData(i)
+                    Socket.SendDataTo(index, data, data.Length)
                 End If
             End If
         Next
@@ -733,7 +729,7 @@ Next
 
         buffer.WriteInt32(ServerPackets.SPlayerData)
         buffer.WriteInt32(index)
-        buffer.WriteString(GetPlayerName(index).Trim)
+        buffer.WriteString(GetPlayerName(index))
         buffer.WriteInt32(GetPlayerJob(index))
         buffer.WriteInt32(GetPlayerLevel(index))
         buffer.WriteInt32(GetPlayerPOINTS(index))
@@ -744,8 +740,6 @@ Next
         buffer.WriteInt32(GetPlayerDir(index))
         buffer.WriteInt32(GetPlayerAccess(index))
         buffer.WriteInt32(GetPlayerPK(index))
-
-        AddDebug("Sent SMSG: SPlayerData")
 
         For i = 0 To StatType.Count - 1
             buffer.WriteInt32(GetPlayerStat(index, i))
@@ -758,6 +752,8 @@ Next
         Next
 
         PlayerData = buffer.ToArray()
+
+        AddDebug("Sent SMSG: SPlayerData")
 
         buffer.Dispose()
     End Function
@@ -846,11 +842,6 @@ Next
         buffer.Dispose()
     End Sub
 
-    Sub SendPlayerData(index As Integer)
-        Dim data = PlayerData(index)
-        SendDataToMap(GetPlayerMap(index), data, data.Length)
-    End Sub
-
     Sub SayMsg_Global(index As Integer, Message As String, SayColour As Integer)
         Dim buffer As New ByteStream(4)
 
@@ -867,6 +858,11 @@ Next
         SendDataToAll(buffer.Data, buffer.Head)
 
         buffer.Dispose()
+    End Sub
+
+     Sub SendPlayerData(index As Integer)
+        Dim data = PlayerData(index)
+        SendDataToMap(GetPlayerMap(index), data, data.Length)
     End Sub
 
     Sub SendInventoryUpdate(index As Integer, InvSlot As Integer)

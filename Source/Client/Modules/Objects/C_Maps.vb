@@ -251,7 +251,7 @@ Module C_Maps
         GettingMap = True
 
         ' Erase all players except self
-       For i = 1 To TotalOnline 'MAX_PLAYERS
+       For i = 1 To MAX_PLAYERS
             If i <> Myindex Then
                 SetPlayerMap(i, 0)
             End If
@@ -865,7 +865,7 @@ Module C_Maps
                         .Height = 32
                     End With
 
-                    If Editor = EditorType.Map Then
+                    If Editor = EditorType.Map and HideLayers Then
                         If i = frmEditor_Map.cmbLayers.SelectedIndex Then
                             alpha = 255
                         Else
@@ -920,7 +920,7 @@ Module C_Maps
                         .Height = 32
                     End With
 
-                    If Editor = EditorType.Map Then
+                    If Editor = EditorType.Map And HideLayers Then
                         If i = frmEditor_Map.cmbLayers.SelectedIndex Then
                             alpha = 255
                         Else

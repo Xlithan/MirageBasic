@@ -563,6 +563,7 @@ Public Class frmEditor_Map
     Public Sub MapEditorInit()
         ' we're in the map editor
         Editor = EditorType.Map
+        HideGui = True
 
         ' set the scrolly bars
         If Map.Tileset = 0 Then Map.Tileset = 1
@@ -625,13 +626,10 @@ Public Class frmEditor_Map
 
             EditorTileSelStart = New Point(EditorTileX, EditorTileY)
             EditorTileSelEnd = New Point(EditorTileX + EditorTileWidth, EditorTileY + EditorTileHeight)
-
         End If
-
     End Sub
 
     Public Sub MapEditorDrag(ByVal Button As Integer, ByVal X As Single, ByVal Y As Single)
-
         If Button = MouseButtons.Left Then 'Left Mouse Button
             ' convert the pixel number to tile number
             X = (X \ PicX) + 1
@@ -848,6 +846,7 @@ Public Class frmEditor_Map
         Buffer.WriteInt32(1)
         Socket?.SendData(Buffer.Data, Buffer.Head)
         Editor = -1
+        HideGui = False
         GettingMap = True
         SendCloseEditor()
 
@@ -1295,6 +1294,14 @@ Public Class frmEditor_Map
 
     Private Sub tsbRedo_Click(sender As Object, e As EventArgs) Handles tsbRedo.Click
         MapEditorRedo()
+    End Sub
+
+    Private Sub tsbOpacity_Click(sender As Object, e As EventArgs) Handles tsbOpacity.Click
+        HideLayers = Not HideLayers
+    End Sub
+
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles tsbLight.Click
+        Night = Not Night
     End Sub
 #End Region
 
