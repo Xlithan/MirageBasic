@@ -1399,7 +1399,7 @@ Module C_Graphics
             .Bottom = endY
             .Left = startX
             .Right = endX
-        End With                                                                                                                                                                                                                            
+        End With
 
         With Camera
             .Y = offsetY
@@ -1669,7 +1669,7 @@ Module C_Graphics
 
             If NumCharacters > 0 Then
                 ' Players
-                For I = 0 To TotalOnline 'MAX_PLAYERS
+                For I = 1 To MAX_PLAYERS
                     If IsPlaying(I) AndAlso GetPlayerMap(I) = GetPlayerMap(Myindex) Then
                         If Player(I).Y = y Then
                             DrawPlayer(I)
@@ -1717,7 +1717,7 @@ Module C_Graphics
                     End If
                 End If
 
-                For I = 0 To TotalOnline
+                For I = 1 To MAX_PLAYERS
                     If IsPlaying(I) Then
                         If Player(I).Map = Player(Myindex).Map Then
                             If CurX = Player(I).X AndAlso CurY = Player(I).Y Then
@@ -1825,7 +1825,7 @@ Module C_Graphics
         End If
 
         ' draw player names
-        For I = 0 To TotalOnline 'MAX_PLAYERS
+        For I = 1 To MAX_PLAYERS
             If IsPlaying(I) AndAlso GetPlayerMap(I) = GetPlayerMap(Myindex) Then
                 DrawPlayerName(I)
                 If PetAlive(I) Then
@@ -3123,6 +3123,7 @@ NextLoop:
         If InGame = False Then Exit Sub
         If NightGfx Is Nothing Then Exit Sub
         If GettingMap Then Exit Sub
+        If Editor = EditorType.Map And Night = False Then Exit Sub
 
         If Map.Moral = CByte(MapMoralType.Indoors) Then
             NightGfx.Clear(New Color(CByte(0), CByte(0), CByte(0), CByte(Map.Brightness)))

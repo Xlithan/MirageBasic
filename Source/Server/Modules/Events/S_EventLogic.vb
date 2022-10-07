@@ -723,160 +723,142 @@ Friend Module S_EventLogic
         Dim donotprocessmoveroute As Boolean
 
         For i = 1 To GetPlayersOnline()
-            If IsPlaying(i) Then
-                playerID = i
-                If TempPlayer(i).EventMap.CurrentEvents > 0 Then
-                    For x = 0 To TempPlayer(i).EventMap.CurrentEvents
-                        If TempPlayer(i).EventMap.EventPages(x).EventId > UBound(Map(GetPlayerMap(i)).Events) Then Exit For
-                        If Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Globals = 0 Then
-                            If TempPlayer(i).EventMap.EventPages(x).Visible = 1 Then
-                                If TempPlayer(i).EventMap.EventPages(x).MoveTimer <= GetTimeMs() Then
-                                    'Real event! Lets process it!
-                                    Select Case TempPlayer(i).EventMap.EventPages(x).MoveType
-                                        Case 0
-                                            'Nothing, fixed position
-                                        Case 1 'Random, move randomly if possible...
-                                            rand = Random(0, 3)
+            playerID = i
+            If TempPlayer(i).EventMap.CurrentEvents > 0 Then
+                For x = 0 To TempPlayer(i).EventMap.CurrentEvents
+                    If TempPlayer(i).EventMap.EventPages(x).EventId > UBound(Map(GetPlayerMap(i)).Events) Then Exit For
+                    If Map(GetPlayerMap(i)).Events(TempPlayer(i).EventMap.EventPages(x).EventId).Globals = 0 Then
+                        If TempPlayer(i).EventMap.EventPages(x).Visible = 1 Then
+                            If TempPlayer(i).EventMap.EventPages(x).MoveTimer <= GetTimeMs() Then
+                                'Real event! Lets process it!
+                                Select Case TempPlayer(i).EventMap.EventPages(x).MoveType
+                                    Case 0
+                                        'Nothing, fixed position
+                                    Case 1 'Random, move randomly if possible...
+                                        rand = Random(0, 3)
+                                        playerID = i
+                                        If CanEventMove(i, GetPlayerMap(i), TempPlayer(i).EventMap.EventPages(x).X, TempPlayer(i).EventMap.EventPages(x).Y, x, TempPlayer(i).EventMap.EventPages(x).WalkThrough, rand, False) Then
+                                            Select Case TempPlayer(i).EventMap.EventPages(x).MoveSpeed
+                                                Case 0
+                                                    EventMove(i, GetPlayerMap(i), x, rand, 2, False)
+                                                Case 1
+                                                    EventMove(i, GetPlayerMap(i), x, rand, 3, False)
+                                                Case 2
+                                                    EventMove(i, GetPlayerMap(i), x, rand, 4, False)
+                                                Case 3
+                                                    EventMove(i, GetPlayerMap(i), x, rand, 6, False)
+                                                Case 4
+                                                    EventMove(i, GetPlayerMap(i), x, rand, 12, False)
+                                                Case 5
+                                                    EventMove(i, GetPlayerMap(i), x, rand, 24, False)
+                                            End Select
+                                        Else
+                                            EventDir(0, GetPlayerMap(i), x, rand, True)
+                                        End If
+                                    Case 2 'Move Route
+                                        With TempPlayer(i).EventMap.EventPages(x)
+                                            isglobal = False
+                                            sendupdate = False
+                                            mapNum = GetPlayerMap(i)
                                             playerID = i
-                                            If CanEventMove(i, GetPlayerMap(i), TempPlayer(i).EventMap.EventPages(x).X, TempPlayer(i).EventMap.EventPages(x).Y, x, TempPlayer(i).EventMap.EventPages(x).WalkThrough, rand, False) Then
-                                                Select Case TempPlayer(i).EventMap.EventPages(x).MoveSpeed
-                                                    Case 0
-                                                        EventMove(i, GetPlayerMap(i), x, rand, 2, False)
-                                                    Case 1
-                                                        EventMove(i, GetPlayerMap(i), x, rand, 3, False)
-                                                    Case 2
-                                                        EventMove(i, GetPlayerMap(i), x, rand, 4, False)
-                                                    Case 3
-                                                        EventMove(i, GetPlayerMap(i), x, rand, 6, False)
-                                                    Case 4
-                                                        EventMove(i, GetPlayerMap(i), x, rand, 12, False)
-                                                    Case 5
-                                                        EventMove(i, GetPlayerMap(i), x, rand, 24, False)
-                                                End Select
-                                            Else
-                                                EventDir(0, GetPlayerMap(i), x, rand, True)
-                                            End If
-                                        Case 2 'Move Route
-                                            With TempPlayer(i).EventMap.EventPages(x)
-                                                isglobal = False
-                                                sendupdate = False
-                                                mapNum = GetPlayerMap(i)
-                                                playerID = i
-                                                eventID = x
-                                                WalkThrough = .WalkThrough
-                                                If TempPlayer(i).EventMap.EventPages(x).MoveRouteCount > 0 Then
-                                                    If TempPlayer(i).EventMap.EventPages(x).MoveRouteStep >= TempPlayer(i).EventMap.EventPages(x).MoveRouteCount AndAlso TempPlayer(i).EventMap.EventPages(x).RepeatMoveRoute = 1 Then
-                                                        .MoveRouteStep = 0
-                                                        .MoveRouteComplete = 1
-                                                    ElseIf .MoveRouteStep >= .MoveRouteCount AndAlso .RepeatMoveRoute = 0 Then
-                                                        donotprocessmoveroute = True
-                                                        .MoveRouteComplete = 1
-                                                    Else
-                                                        .MoveRouteComplete = 0
-                                                    End If
-                                                    If donotprocessmoveroute = False Then
+                                            eventID = x
+                                            WalkThrough = .WalkThrough
+                                            If TempPlayer(i).EventMap.EventPages(x).MoveRouteCount > 0 Then
+                                                If TempPlayer(i).EventMap.EventPages(x).MoveRouteStep >= TempPlayer(i).EventMap.EventPages(x).MoveRouteCount AndAlso TempPlayer(i).EventMap.EventPages(x).RepeatMoveRoute = 1 Then
+                                                    .MoveRouteStep = 0
+                                                    .MoveRouteComplete = 1
+                                                ElseIf .MoveRouteStep >= .MoveRouteCount AndAlso .RepeatMoveRoute = 0 Then
+                                                    donotprocessmoveroute = True
+                                                    .MoveRouteComplete = 1
+                                                Else
+                                                    .MoveRouteComplete = 0
+                                                End If
+                                                If donotprocessmoveroute = False Then
 
-                                                        Select Case TempPlayer(i).EventMap.EventPages(x).MoveSpeed
-                                                            Case 0
-                                                                actualmovespeed = 2
-                                                            Case 1
-                                                                actualmovespeed = 3
-                                                            Case 2
-                                                                actualmovespeed = 4
-                                                            Case 3
-                                                                actualmovespeed = 6
-                                                            Case 4
-                                                                actualmovespeed = 12
-                                                            Case 5
-                                                                actualmovespeed = 24
-                                                        End Select
-                                                        TempPlayer(i).EventMap.EventPages(x).MoveRouteStep = TempPlayer(i).EventMap.EventPages(x).MoveRouteStep + 1
-                                                        Select Case TempPlayer(i).EventMap.EventPages(x).MoveRoute(TempPlayer(i).EventMap.EventPages(x).MoveRouteStep).Index
-                                                            Case 1
-                                                                If CanEventMove(playerID, mapNum, .X, .Y, eventID, WalkThrough, DirectionType.Up, isglobal) Then
-                                                                    EventMove(playerID, mapNum, eventID, DirectionType.Up, actualmovespeed, isglobal)
-                                                                Else
-                                                                    If TempPlayer(i).EventMap.EventPages(x).IgnoreIfCannotMove = 0 Then
-                                                                        .MoveRouteStep = .MoveRouteStep - 1
-                                                                    End If
+                                                    Select Case TempPlayer(i).EventMap.EventPages(x).MoveSpeed
+                                                        Case 0
+                                                            actualmovespeed = 2
+                                                        Case 1
+                                                            actualmovespeed = 3
+                                                        Case 2
+                                                            actualmovespeed = 4
+                                                        Case 3
+                                                            actualmovespeed = 6
+                                                        Case 4
+                                                            actualmovespeed = 12
+                                                        Case 5
+                                                            actualmovespeed = 24
+                                                    End Select
+                                                    TempPlayer(i).EventMap.EventPages(x).MoveRouteStep = TempPlayer(i).EventMap.EventPages(x).MoveRouteStep + 1
+                                                    Select Case TempPlayer(i).EventMap.EventPages(x).MoveRoute(TempPlayer(i).EventMap.EventPages(x).MoveRouteStep).Index
+                                                        Case 1
+                                                            If CanEventMove(playerID, mapNum, .X, .Y, eventID, WalkThrough, DirectionType.Up, isglobal) Then
+                                                                EventMove(playerID, mapNum, eventID, DirectionType.Up, actualmovespeed, isglobal)
+                                                            Else
+                                                                If TempPlayer(i).EventMap.EventPages(x).IgnoreIfCannotMove = 0 Then
+                                                                    .MoveRouteStep = .MoveRouteStep - 1
                                                                 End If
-                                                            Case 2
-                                                                If CanEventMove(playerID, mapNum, .X, .Y, eventID, WalkThrough, DirectionType.Down, isglobal) Then
-                                                                    EventMove(playerID, mapNum, eventID, DirectionType.Down, actualmovespeed, isglobal)
-                                                                Else
-                                                                    If .IgnoreIfCannotMove = 0 Then
-                                                                        .MoveRouteStep = .MoveRouteStep - 1
-                                                                    End If
+                                                            End If
+                                                        Case 2
+                                                            If CanEventMove(playerID, mapNum, .X, .Y, eventID, WalkThrough, DirectionType.Down, isglobal) Then
+                                                                EventMove(playerID, mapNum, eventID, DirectionType.Down, actualmovespeed, isglobal)
+                                                            Else
+                                                                If .IgnoreIfCannotMove = 0 Then
+                                                                    .MoveRouteStep = .MoveRouteStep - 1
                                                                 End If
-                                                            Case 3
-                                                                If CanEventMove(playerID, mapNum, .X, .Y, eventID, WalkThrough, DirectionType.Left, isglobal) Then
-                                                                    EventMove(playerID, mapNum, eventID, DirectionType.Left, actualmovespeed, isglobal)
-                                                                Else
-                                                                    If .IgnoreIfCannotMove = 0 Then
-                                                                        .MoveRouteStep = .MoveRouteStep - 1
-                                                                    End If
+                                                            End If
+                                                        Case 3
+                                                            If CanEventMove(playerID, mapNum, .X, .Y, eventID, WalkThrough, DirectionType.Left, isglobal) Then
+                                                                EventMove(playerID, mapNum, eventID, DirectionType.Left, actualmovespeed, isglobal)
+                                                            Else
+                                                                If .IgnoreIfCannotMove = 0 Then
+                                                                    .MoveRouteStep = .MoveRouteStep - 1
                                                                 End If
-                                                            Case 4
-                                                                If CanEventMove(playerID, mapNum, .X, .Y, eventID, WalkThrough, DirectionType.Right, isglobal) Then
-                                                                    EventMove(playerID, mapNum, eventID, DirectionType.Right, actualmovespeed, isglobal)
-                                                                Else
-                                                                    If .IgnoreIfCannotMove = 0 Then
-                                                                        .MoveRouteStep = .MoveRouteStep - 1
-                                                                    End If
+                                                            End If
+                                                        Case 4
+                                                            If CanEventMove(playerID, mapNum, .X, .Y, eventID, WalkThrough, DirectionType.Right, isglobal) Then
+                                                                EventMove(playerID, mapNum, eventID, DirectionType.Right, actualmovespeed, isglobal)
+                                                            Else
+                                                                If .IgnoreIfCannotMove = 0 Then
+                                                                    .MoveRouteStep = .MoveRouteStep - 1
                                                                 End If
-                                                            Case 5
-                                                                z = Random(0, 3)
-                                                                If CanEventMove(playerID, mapNum, .X, .Y, eventID, WalkThrough, z, isglobal) Then
-                                                                    EventMove(playerID, mapNum, eventID, z, actualmovespeed, isglobal)
-                                                                Else
-                                                                    If .IgnoreIfCannotMove = 0 Then
-                                                                        .MoveRouteStep = .MoveRouteStep - 1
-                                                                    End If
+                                                            End If
+                                                        Case 5
+                                                            z = Random(0, 3)
+                                                            If CanEventMove(playerID, mapNum, .X, .Y, eventID, WalkThrough, z, isglobal) Then
+                                                                EventMove(playerID, mapNum, eventID, z, actualmovespeed, isglobal)
+                                                            Else
+                                                                If .IgnoreIfCannotMove = 0 Then
+                                                                    .MoveRouteStep = .MoveRouteStep - 1
                                                                 End If
-                                                            Case 6
-                                                                If isglobal = False Then
-                                                                    If IsOneBlockAway(.X, .Y, GetPlayerX(playerID), GetPlayerY(playerID)) = True Then
-                                                                        EventDir(playerID, GetPlayerMap(playerID), eventID, GetDirToPlayer(playerID, GetPlayerMap(playerID), eventID), False)
-                                                                        'Lets do cool stuff!
-                                                                        If Map(GetPlayerMap(playerID)).Events(eventID).Pages(TempPlayer(playerID).EventMap.EventPages(eventID).PageId).Trigger = 1 Then
-                                                                            If Map(mapNum).Events(eventID).Pages(TempPlayer(playerID).EventMap.EventPages(eventID).PageId).CommandListCount > 0 Then
-                                                                                TempPlayer(playerID).EventProcessing(eventID).Active = 1
-                                                                                TempPlayer(playerID).EventProcessing(eventID).ActionTimer = GetTimeMs()
-                                                                                TempPlayer(playerID).EventProcessing(eventID).CurList = 1
-                                                                                TempPlayer(playerID).EventProcessing(eventID).CurSlot = 1
-                                                                                TempPlayer(playerID).EventProcessing(eventID).EventId = eventID
-                                                                                TempPlayer(playerID).EventProcessing(eventID).PageId = TempPlayer(playerID).EventMap.EventPages(eventID).PageId
-                                                                                TempPlayer(playerID).EventProcessing(eventID).WaitingForResponse = 0
-                                                                                ReDim TempPlayer(playerID).EventProcessing(eventID).ListLeftOff(Map(GetPlayerMap(playerID)).Events(TempPlayer(playerID).EventMap.EventPages(eventID).EventId).Pages(TempPlayer(playerID).EventMap.EventPages(eventID).PageId).CommandListCount)
-                                                                            End If
+                                                            End If
+                                                        Case 6
+                                                            If isglobal = False Then
+                                                                If IsOneBlockAway(.X, .Y, GetPlayerX(playerID), GetPlayerY(playerID)) = True Then
+                                                                    EventDir(playerID, GetPlayerMap(playerID), eventID, GetDirToPlayer(playerID, GetPlayerMap(playerID), eventID), False)
+                                                                    'Lets do cool stuff!
+                                                                    If Map(GetPlayerMap(playerID)).Events(eventID).Pages(TempPlayer(playerID).EventMap.EventPages(eventID).PageId).Trigger = 1 Then
+                                                                        If Map(mapNum).Events(eventID).Pages(TempPlayer(playerID).EventMap.EventPages(eventID).PageId).CommandListCount > 0 Then
+                                                                            TempPlayer(playerID).EventProcessing(eventID).Active = 1
+                                                                            TempPlayer(playerID).EventProcessing(eventID).ActionTimer = GetTimeMs()
+                                                                            TempPlayer(playerID).EventProcessing(eventID).CurList = 1
+                                                                            TempPlayer(playerID).EventProcessing(eventID).CurSlot = 1
+                                                                            TempPlayer(playerID).EventProcessing(eventID).EventId = eventID
+                                                                            TempPlayer(playerID).EventProcessing(eventID).PageId = TempPlayer(playerID).EventMap.EventPages(eventID).PageId
+                                                                            TempPlayer(playerID).EventProcessing(eventID).WaitingForResponse = 0
+                                                                            ReDim TempPlayer(playerID).EventProcessing(eventID).ListLeftOff(Map(GetPlayerMap(playerID)).Events(TempPlayer(playerID).EventMap.EventPages(eventID).EventId).Pages(TempPlayer(playerID).EventMap.EventPages(eventID).PageId).CommandListCount)
                                                                         End If
+                                                                    End If
+                                                                    If .IgnoreIfCannotMove = 0 Then
+                                                                        .MoveRouteStep = .MoveRouteStep - 1
+                                                                    End If
+                                                                Else
+                                                                    z = CanEventMoveTowardsPlayer(playerID, mapNum, eventID)
+                                                                    If z >= 4 Then
+                                                                        'No
                                                                         If .IgnoreIfCannotMove = 0 Then
                                                                             .MoveRouteStep = .MoveRouteStep - 1
                                                                         End If
-                                                                    Else
-                                                                        z = CanEventMoveTowardsPlayer(playerID, mapNum, eventID)
-                                                                        If z >= 4 Then
-                                                                            'No
-                                                                            If .IgnoreIfCannotMove = 0 Then
-                                                                                .MoveRouteStep = .MoveRouteStep - 1
-                                                                            End If
-                                                                        Else
-                                                                            'i is the direct, lets go...
-                                                                            If CanEventMove(playerID, mapNum, .X, .Y, eventID, WalkThrough, z, isglobal) Then
-                                                                                EventMove(playerID, mapNum, eventID, z, actualmovespeed, isglobal)
-                                                                            Else
-                                                                                If .IgnoreIfCannotMove = 0 Then
-                                                                                    .MoveRouteStep = .MoveRouteStep - 1
-                                                                                End If
-                                                                            End If
-                                                                        End If
-                                                                    End If
-                                                                End If
-                                                            Case 7
-                                                                If isglobal = False Then
-                                                                    z = CanEventMoveAwayFromPlayer(playerID, mapNum, eventID)
-                                                                    If z >= 5 Then
-                                                                        'No
                                                                     Else
                                                                         'i is the direct, lets go...
                                                                         If CanEventMove(playerID, mapNum, .X, .Y, eventID, WalkThrough, z, isglobal) Then
@@ -888,221 +870,237 @@ Friend Module S_EventLogic
                                                                         End If
                                                                     End If
                                                                 End If
-                                                            Case 8
-                                                                If CanEventMove(playerID, mapNum, .X, .Y, eventID, WalkThrough, .Dir, isglobal) Then
-                                                                    EventMove(playerID, mapNum, eventID, .Dir, actualmovespeed, isglobal)
+                                                            End If
+                                                        Case 7
+                                                            If isglobal = False Then
+                                                                z = CanEventMoveAwayFromPlayer(playerID, mapNum, eventID)
+                                                                If z >= 5 Then
+                                                                    'No
                                                                 Else
-                                                                    If .IgnoreIfCannotMove = 0 Then
-                                                                        .MoveRouteStep = .MoveRouteStep - 1
+                                                                    'i is the direct, lets go...
+                                                                    If CanEventMove(playerID, mapNum, .X, .Y, eventID, WalkThrough, z, isglobal) Then
+                                                                        EventMove(playerID, mapNum, eventID, z, actualmovespeed, isglobal)
+                                                                    Else
+                                                                        If .IgnoreIfCannotMove = 0 Then
+                                                                            .MoveRouteStep = .MoveRouteStep - 1
+                                                                        End If
                                                                     End If
                                                                 End If
-                                                            Case 9
-                                                                Select Case .Dir
-                                                                    Case DirectionType.Up
-                                                                        z = DirectionType.Down
-                                                                    Case DirectionType.Down
-                                                                        z = DirectionType.Up
-                                                                    Case DirectionType.Left
-                                                                        z = DirectionType.Right
-                                                                    Case DirectionType.Right
-                                                                        z = DirectionType.Left
-                                                                End Select
-                                                                If CanEventMove(playerID, mapNum, .X, .Y, eventID, WalkThrough, z, isglobal) Then
-                                                                    EventMove(playerID, mapNum, eventID, z, actualmovespeed, isglobal)
-                                                                Else
-                                                                    If .IgnoreIfCannotMove = 0 Then
-                                                                        .MoveRouteStep = .MoveRouteStep - 1
-                                                                    End If
+                                                            End If
+                                                        Case 8
+                                                            If CanEventMove(playerID, mapNum, .X, .Y, eventID, WalkThrough, .Dir, isglobal) Then
+                                                                EventMove(playerID, mapNum, eventID, .Dir, actualmovespeed, isglobal)
+                                                            Else
+                                                                If .IgnoreIfCannotMove = 0 Then
+                                                                    .MoveRouteStep = .MoveRouteStep - 1
                                                                 End If
-                                                            Case 10
-                                                                .MoveTimer = GetTimeMs() + 100
-                                                            Case 11
-                                                                .MoveTimer = GetTimeMs() + 500
-                                                            Case 12
-                                                                .MoveTimer = GetTimeMs() + 1000
-                                                            Case 13
-                                                                EventDir(playerID, mapNum, eventID, DirectionType.Up, isglobal)
-                                                            Case 14
-                                                                EventDir(playerID, mapNum, eventID, DirectionType.Down, isglobal)
-                                                            Case 15
-                                                                EventDir(playerID, mapNum, eventID, DirectionType.Left, isglobal)
-                                                            Case 16
-                                                                EventDir(playerID, mapNum, eventID, DirectionType.Right, isglobal)
-                                                            Case 17
-                                                                Select Case .Dir
-                                                                    Case DirectionType.Up
-                                                                        z = DirectionType.Right
-                                                                    Case DirectionType.Right
-                                                                        z = DirectionType.Down
-                                                                    Case DirectionType.Left
-                                                                        z = DirectionType.Up
-                                                                    Case DirectionType.Down
-                                                                        z = DirectionType.Left
-                                                                End Select
-                                                                EventDir(playerID, mapNum, eventID, z, isglobal)
-                                                            Case 18
-                                                                Select Case .Dir
-                                                                    Case DirectionType.Up
-                                                                        z = DirectionType.Left
-                                                                    Case DirectionType.Right
-                                                                        z = DirectionType.Up
-                                                                    Case DirectionType.Left
-                                                                        z = DirectionType.Down
-                                                                    Case DirectionType.Down
-                                                                        z = DirectionType.Right
-                                                                End Select
-                                                                EventDir(playerID, mapNum, eventID, z, isglobal)
-                                                            Case 19
-                                                                Select Case .Dir
-                                                                    Case DirectionType.Up
-                                                                        z = DirectionType.Down
-                                                                    Case DirectionType.Right
-                                                                        z = DirectionType.Left
-                                                                    Case DirectionType.Left
-                                                                        z = DirectionType.Right
-                                                                    Case DirectionType.Down
-                                                                        z = DirectionType.Up
-                                                                End Select
-                                                                EventDir(playerID, mapNum, eventID, z, isglobal)
-                                                            Case 20
-                                                                z = Random(0, 3)
-                                                                EventDir(playerID, mapNum, eventID, z, isglobal)
-                                                            Case 21
-                                                                If isglobal = False Then
-                                                                    z = GetDirToPlayer(playerID, mapNum, eventID)
-                                                                    EventDir(playerID, mapNum, eventID, z, isglobal)
+                                                            End If
+                                                        Case 9
+                                                            Select Case .Dir
+                                                                Case DirectionType.Up
+                                                                    z = DirectionType.Down
+                                                                Case DirectionType.Down
+                                                                    z = DirectionType.Up
+                                                                Case DirectionType.Left
+                                                                    z = DirectionType.Right
+                                                                Case DirectionType.Right
+                                                                    z = DirectionType.Left
+                                                            End Select
+                                                            If CanEventMove(playerID, mapNum, .X, .Y, eventID, WalkThrough, z, isglobal) Then
+                                                                EventMove(playerID, mapNum, eventID, z, actualmovespeed, isglobal)
+                                                            Else
+                                                                If .IgnoreIfCannotMove = 0 Then
+                                                                    .MoveRouteStep = .MoveRouteStep - 1
                                                                 End If
-                                                            Case 22
-                                                                If isglobal = False Then
-                                                                    z = GetDirAwayFromPlayer(playerID, mapNum, eventID)
-                                                                    EventDir(playerID, mapNum, eventID, z, isglobal)
-                                                                End If
-                                                            Case 23
-                                                                .MoveSpeed = 0
-                                                            Case 24
-                                                                .MoveSpeed = 1
-                                                            Case 25
-                                                                .MoveSpeed = 2
-                                                            Case 26
-                                                                .MoveSpeed = 3
-                                                            Case 27
-                                                                .MoveSpeed = 4
-                                                            Case 28
-                                                                .MoveSpeed = 5
-                                                            Case 29
-                                                                .MoveFreq = 0
-                                                            Case 30
-                                                                .MoveFreq = 1
-                                                            Case 31
-                                                                .MoveFreq = 2
-                                                            Case 32
-                                                                .MoveFreq = 3
-                                                            Case 33
-                                                                .MoveFreq = 4
-                                                            Case 34
-                                                                .WalkingAnim = 1
-                                                                'Need to send update to client
-                                                                sendupdate = True
-                                                            Case 35
-                                                                .WalkingAnim = 0
-                                                                'Need to send update to client
-                                                                sendupdate = True
-                                                            Case 36
-                                                                .FixedDir = 1
-                                                                'Need to send update to client
-                                                                sendupdate = True
-                                                            Case 37
-                                                                .FixedDir = 0
-                                                                'Need to send update to client
-                                                                sendupdate = True
-                                                            Case 38
-                                                                .WalkThrough = 1
-                                                            Case 39
-                                                                .WalkThrough = 0
-                                                            Case 40
-                                                                .Position = 0
-                                                                'Need to send update to client
-                                                                sendupdate = True
-                                                            Case 41
-                                                                .Position = 1
-                                                                'Need to send update to client
-                                                                sendupdate = True
-                                                            Case 42
-                                                                .Position = 2
-                                                                'Need to send update to client
-                                                                sendupdate = True
-                                                            Case 43
-                                                                .GraphicType = .MoveRoute(.MoveRouteStep).Data1
-                                                                .Graphic = .MoveRoute(.MoveRouteStep).Data2
-                                                                .GraphicX = .MoveRoute(.MoveRouteStep).Data3
-                                                                .GraphicX2 = .MoveRoute(.MoveRouteStep).Data4
-                                                                .GraphicY = .MoveRoute(.MoveRouteStep).Data5
-                                                                .GraphicY2 = .MoveRoute(.MoveRouteStep).Data6
-                                                                If .GraphicType = 1 Then
-                                                                    Select Case .GraphicY
-                                                                        Case 0
-                                                                            .Dir = DirectionType.Down
-                                                                        Case 1
-                                                                            .Dir = DirectionType.Left
-                                                                        Case 2
-                                                                            .Dir = DirectionType.Right
-                                                                        Case 3
-                                                                            .Dir = DirectionType.Up
-                                                                    End Select
-                                                                End If
-                                                                'Need to Send Update to client
-                                                                sendupdate = True
-                                                        End Select
+                                                            End If
+                                                        Case 10
+                                                            .MoveTimer = GetTimeMs() + 100
+                                                        Case 11
+                                                            .MoveTimer = GetTimeMs() + 500
+                                                        Case 12
+                                                            .MoveTimer = GetTimeMs() + 1000
+                                                        Case 13
+                                                            EventDir(playerID, mapNum, eventID, DirectionType.Up, isglobal)
+                                                        Case 14
+                                                            EventDir(playerID, mapNum, eventID, DirectionType.Down, isglobal)
+                                                        Case 15
+                                                            EventDir(playerID, mapNum, eventID, DirectionType.Left, isglobal)
+                                                        Case 16
+                                                            EventDir(playerID, mapNum, eventID, DirectionType.Right, isglobal)
+                                                        Case 17
+                                                            Select Case .Dir
+                                                                Case DirectionType.Up
+                                                                    z = DirectionType.Right
+                                                                Case DirectionType.Right
+                                                                    z = DirectionType.Down
+                                                                Case DirectionType.Left
+                                                                    z = DirectionType.Up
+                                                                Case DirectionType.Down
+                                                                    z = DirectionType.Left
+                                                            End Select
+                                                            EventDir(playerID, mapNum, eventID, z, isglobal)
+                                                        Case 18
+                                                            Select Case .Dir
+                                                                Case DirectionType.Up
+                                                                    z = DirectionType.Left
+                                                                Case DirectionType.Right
+                                                                    z = DirectionType.Up
+                                                                Case DirectionType.Left
+                                                                    z = DirectionType.Down
+                                                                Case DirectionType.Down
+                                                                    z = DirectionType.Right
+                                                            End Select
+                                                            EventDir(playerID, mapNum, eventID, z, isglobal)
+                                                        Case 19
+                                                            Select Case .Dir
+                                                                Case DirectionType.Up
+                                                                    z = DirectionType.Down
+                                                                Case DirectionType.Right
+                                                                    z = DirectionType.Left
+                                                                Case DirectionType.Left
+                                                                    z = DirectionType.Right
+                                                                Case DirectionType.Down
+                                                                    z = DirectionType.Up
+                                                            End Select
+                                                            EventDir(playerID, mapNum, eventID, z, isglobal)
+                                                        Case 20
+                                                            z = Random(0, 3)
+                                                            EventDir(playerID, mapNum, eventID, z, isglobal)
+                                                        Case 21
+                                                            If isglobal = False Then
+                                                                z = GetDirToPlayer(playerID, mapNum, eventID)
+                                                                EventDir(playerID, mapNum, eventID, z, isglobal)
+                                                            End If
+                                                        Case 22
+                                                            If isglobal = False Then
+                                                                z = GetDirAwayFromPlayer(playerID, mapNum, eventID)
+                                                                EventDir(playerID, mapNum, eventID, z, isglobal)
+                                                            End If
+                                                        Case 23
+                                                            .MoveSpeed = 0
+                                                        Case 24
+                                                            .MoveSpeed = 1
+                                                        Case 25
+                                                            .MoveSpeed = 2
+                                                        Case 26
+                                                            .MoveSpeed = 3
+                                                        Case 27
+                                                            .MoveSpeed = 4
+                                                        Case 28
+                                                            .MoveSpeed = 5
+                                                        Case 29
+                                                            .MoveFreq = 0
+                                                        Case 30
+                                                            .MoveFreq = 1
+                                                        Case 31
+                                                            .MoveFreq = 2
+                                                        Case 32
+                                                            .MoveFreq = 3
+                                                        Case 33
+                                                            .MoveFreq = 4
+                                                        Case 34
+                                                            .WalkingAnim = 1
+                                                            'Need to send update to client
+                                                            sendupdate = True
+                                                        Case 35
+                                                            .WalkingAnim = 0
+                                                            'Need to send update to client
+                                                            sendupdate = True
+                                                        Case 36
+                                                            .FixedDir = 1
+                                                            'Need to send update to client
+                                                            sendupdate = True
+                                                        Case 37
+                                                            .FixedDir = 0
+                                                            'Need to send update to client
+                                                            sendupdate = True
+                                                        Case 38
+                                                            .WalkThrough = 1
+                                                        Case 39
+                                                            .WalkThrough = 0
+                                                        Case 40
+                                                            .Position = 0
+                                                            'Need to send update to client
+                                                            sendupdate = True
+                                                        Case 41
+                                                            .Position = 1
+                                                            'Need to send update to client
+                                                            sendupdate = True
+                                                        Case 42
+                                                            .Position = 2
+                                                            'Need to send update to client
+                                                            sendupdate = True
+                                                        Case 43
+                                                            .GraphicType = .MoveRoute(.MoveRouteStep).Data1
+                                                            .Graphic = .MoveRoute(.MoveRouteStep).Data2
+                                                            .GraphicX = .MoveRoute(.MoveRouteStep).Data3
+                                                            .GraphicX2 = .MoveRoute(.MoveRouteStep).Data4
+                                                            .GraphicY = .MoveRoute(.MoveRouteStep).Data5
+                                                            .GraphicY2 = .MoveRoute(.MoveRouteStep).Data6
+                                                            If .GraphicType = 1 Then
+                                                                Select Case .GraphicY
+                                                                    Case 0
+                                                                        .Dir = DirectionType.Down
+                                                                    Case 1
+                                                                        .Dir = DirectionType.Left
+                                                                    Case 2
+                                                                        .Dir = DirectionType.Right
+                                                                    Case 3
+                                                                        .Dir = DirectionType.Up
+                                                                End Select
+                                                            End If
+                                                            'Need to Send Update to client
+                                                            sendupdate = True
+                                                    End Select
 
-                                                        If sendupdate And TempPlayer(playerID).EventMap.EventPages(eventID).EventId > 0 Then
-                                                            Buffer = New ByteStream(4)
-                                                            Buffer.WriteInt32(ServerPackets.SSpawnEvent)
-                                                            Buffer.WriteInt32(TempPlayer(playerID).EventMap.EventPages(eventID).EventId)
-                                                            With TempPlayer(playerID).EventMap.EventPages(eventID)
-                                                                Buffer.WriteString((Trim(Map(GetPlayerMap(playerID)).Events(TempPlayer(playerID).EventMap.EventPages(eventID).EventId).Name)))
-                                                                Buffer.WriteInt32(.Dir)
-                                                                Buffer.WriteByte(.GraphicType)
-                                                                Buffer.WriteInt32(.Graphic)
-                                                                Buffer.WriteInt32(.GraphicX)
-                                                                Buffer.WriteInt32(.GraphicX2)
-                                                                Buffer.WriteInt32(.GraphicY)
-                                                                Buffer.WriteInt32(.GraphicY2)
-                                                                Buffer.WriteInt32(.MoveSpeed)
-                                                                Buffer.WriteInt32(.X)
-                                                                Buffer.WriteInt32(.Y)
-                                                                Buffer.WriteByte(.Position)
-                                                                Buffer.WriteInt32(.Visible)
-                                                                Buffer.WriteInt32(.WalkingAnim)
-                                                                Buffer.WriteInt32(.FixedDir)
-                                                                Buffer.WriteInt32(.WalkThrough)
-                                                                Buffer.WriteInt32(.ShowName)
-                                                                Buffer.WriteInt32(.QuestNum)
-                                                            End With
-                                                            Socket.SendDataTo(playerID, Buffer.Data, Buffer.Head)
-                                                            Buffer.Dispose()
-                                                        End If
+                                                    If sendupdate And TempPlayer(playerID).EventMap.EventPages(eventID).EventId > 0 Then
+                                                        Buffer = New ByteStream(4)
+                                                        Buffer.WriteInt32(ServerPackets.SSpawnEvent)
+                                                        Buffer.WriteInt32(TempPlayer(playerID).EventMap.EventPages(eventID).EventId)
+                                                        With TempPlayer(playerID).EventMap.EventPages(eventID)
+                                                            Buffer.WriteString((Trim(Map(GetPlayerMap(playerID)).Events(TempPlayer(playerID).EventMap.EventPages(eventID).EventId).Name)))
+                                                            Buffer.WriteInt32(.Dir)
+                                                            Buffer.WriteByte(.GraphicType)
+                                                            Buffer.WriteInt32(.Graphic)
+                                                            Buffer.WriteInt32(.GraphicX)
+                                                            Buffer.WriteInt32(.GraphicX2)
+                                                            Buffer.WriteInt32(.GraphicY)
+                                                            Buffer.WriteInt32(.GraphicY2)
+                                                            Buffer.WriteInt32(.MoveSpeed)
+                                                            Buffer.WriteInt32(.X)
+                                                            Buffer.WriteInt32(.Y)
+                                                            Buffer.WriteByte(.Position)
+                                                            Buffer.WriteInt32(.Visible)
+                                                            Buffer.WriteInt32(.WalkingAnim)
+                                                            Buffer.WriteInt32(.FixedDir)
+                                                            Buffer.WriteInt32(.WalkThrough)
+                                                            Buffer.WriteInt32(.ShowName)
+                                                            Buffer.WriteInt32(.QuestNum)
+                                                        End With
+                                                        Socket.SendDataTo(playerID, Buffer.Data, Buffer.Head)
+                                                        Buffer.Dispose()
                                                     End If
-                                                    donotprocessmoveroute = False
                                                 End If
-                                            End With
-                                    End Select
-                                    Select Case TempPlayer(playerID).EventMap.EventPages(x).MoveFreq
-                                        Case 0
-                                            TempPlayer(playerID).EventMap.EventPages(x).MoveTimer = GetTimeMs() + 4000
-                                        Case 1
-                                            TempPlayer(playerID).EventMap.EventPages(x).MoveTimer = GetTimeMs() + 2000
-                                        Case 2
-                                            TempPlayer(playerID).EventMap.EventPages(x).MoveTimer = GetTimeMs() + 1000
-                                        Case 3
-                                            TempPlayer(playerID).EventMap.EventPages(x).MoveTimer = GetTimeMs() + 500
-                                        Case 4
-                                            TempPlayer(playerID).EventMap.EventPages(x).MoveTimer = GetTimeMs() + 250
-                                    End Select
-                                End If
+                                                donotprocessmoveroute = False
+                                            End If
+                                        End With
+                                End Select
+                                Select Case TempPlayer(playerID).EventMap.EventPages(x).MoveFreq
+                                    Case 0
+                                        TempPlayer(playerID).EventMap.EventPages(x).MoveTimer = GetTimeMs() + 4000
+                                    Case 1
+                                        TempPlayer(playerID).EventMap.EventPages(x).MoveTimer = GetTimeMs() + 2000
+                                    Case 2
+                                        TempPlayer(playerID).EventMap.EventPages(x).MoveTimer = GetTimeMs() + 1000
+                                    Case 3
+                                        TempPlayer(playerID).EventMap.EventPages(x).MoveTimer = GetTimeMs() + 500
+                                    Case 4
+                                        TempPlayer(playerID).EventMap.EventPages(x).MoveTimer = GetTimeMs() + 250
+                                End Select
                             End If
                         End If
-                    Next
-                End If
+                    End If
+                Next
             End If
         Next
 

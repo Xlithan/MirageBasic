@@ -120,10 +120,8 @@ Module modLoop
             Console.WriteLine("Saving all online players...")
 
             For i = 1 To GetPlayersOnline()
-                If IsPlaying(i) Then
-                    SavePlayer(i)
-                    SaveBank(i)
-                End If
+                SavePlayer(i)
+                SaveBank(i)
             Next
 
         End If
@@ -160,15 +158,12 @@ Module modLoop
         Dim i As Integer
 
         For i = 1 To GetPlayersOnline()
-
-            If IsPlaying(i) Then
-                For x = 0 To VitalType.Count - 1
-                    If GetPlayerVital(i, x) <> GetPlayerMaxVital(i, x) Then
-                        SetPlayerVital(i, x, GetPlayerVital(i, x) + GetPlayerVitalRegen(i, x))
-                        SendVital(i, x)
-                    End If
-                Next
-            End If
+            For x = 0 To VitalType.Count - 1
+                If GetPlayerVital(i, x) <> GetPlayerMaxVital(i, x) Then
+                    SetPlayerVital(i, x, GetPlayerVital(i, x) + GetPlayerVitalRegen(i, x))
+                    SendVital(i, x)
+                End If
+            Next
 
             ' send vitals to party if in one
             If TempPlayer(i).InParty > 0 Then SendPartyVitals(TempPlayer(i).InParty, i)
@@ -549,7 +544,6 @@ Module modLoop
 
         ' Make sure we reset the timer for door closing
         If GetTimeMs() > KeyTimer + 15000 Then KeyTimer = GetTimeMs()
-
     End Sub
 
     Function GetNpcVitalRegen(npcNum As Integer, vital As VitalType) As Integer

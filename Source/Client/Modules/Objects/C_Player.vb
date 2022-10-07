@@ -404,7 +404,7 @@ Module C_Player
         Dim movementSpeed As Integer
 
         ' Check if player is walking, and if so process moving them over
-        Select Case Player(MyIndex).Moving
+        Select Case Player(index).Moving
             Case MovementType.Walking : movementSpeed = ((ElapsedTime / 1000) * (WalkSpeed * SizeX))
             Case MovementType.Running : movementSpeed = ((ElapsedTime / 1000) * (RunSpeed * SizeX))
             Case Else : Exit Sub
@@ -412,37 +412,37 @@ Module C_Player
 
         Select Case GetPlayerDir(index)
             Case DirectionType.Up
-                Player(MyIndex).YOffset = Player(MyIndex).YOffset - movementSpeed
-                If Player(MyIndex).YOffset < 0 Then Player(MyIndex).YOffset = 0
+                Player(Index).YOffset = Player(Index).YOffset - movementSpeed
+                If Player(Index).YOffset < 0 Then Player(Index).YOffset = 0
             Case DirectionType.Down
-                Player(MyIndex).YOffset = Player(MyIndex).YOffset + movementSpeed
-                If Player(MyIndex).YOffset > 0 Then Player(MyIndex).YOffset = 0
+                Player(Index).YOffset = Player(Index).YOffset + movementSpeed
+                If Player(Index).YOffset > 0 Then Player(Index).YOffset = 0
             Case DirectionType.Left
-                Player(MyIndex).XOffset = Player(MyIndex).XOffset - movementSpeed
-                If Player(MyIndex).XOffset < 0 Then Player(MyIndex).XOffset = 0
+                Player(Index).XOffset = Player(Index).XOffset - movementSpeed
+                If Player(Index).XOffset < 0 Then Player(Index).XOffset = 0
             Case DirectionType.Right
-                Player(MyIndex).XOffset = Player(MyIndex).XOffset + movementSpeed
-                If Player(MyIndex).XOffset > 0 Then Player(MyIndex).XOffset = 0
+                Player(Index).XOffset = Player(Index).XOffset + movementSpeed
+                If Player(Index).XOffset > 0 Then Player(Index).XOffset = 0
         End Select
 
         ' Check if completed walking over to the next tile
-        If Player(MyIndex).Moving > 0 Then
-            If GetPlayerDir(index) = DirectionType.Right OrElse GetPlayerDir(index) = DirectionType.Down Then
-                If (Player(MyIndex).XOffset >= 0) AndAlso (Player(MyIndex).YOffset >= 0) Then
-                    Player(MyIndex).Moving = 0
-                    If Player(MyIndex).Steps = 1 Then
-                        Player(MyIndex).Steps = 3
+        If Player(Index).Moving > 0 Then
+            If GetPlayerDir(Index) = DirectionType.Right OrElse GetPlayerDir(Index) = DirectionType.Down Then
+                If (Player(Index).XOffset >= 0) AndAlso (Player(Index).YOffset >= 0) Then
+                    Player(Index).Moving = 0
+                    If Player(Index).Steps = 1 Then
+                        Player(Index).Steps = 3
                     Else
-                        Player(MyIndex).Steps = 1
+                        Player(Index).Steps = 1
                     End If
                 End If
             Else
-                If (Player(MyIndex).XOffset <= 0) AndAlso (Player(MyIndex).YOffset <= 0) Then
-                    Player(MyIndex).Moving = 0
-                    If Player(MyIndex).Steps = 1 Then
-                        Player(MyIndex).Steps = 3
+                If (Player(Index).XOffset <= 0) AndAlso (Player(Index).YOffset <= 0) Then
+                    Player(Index).Moving = 0
+                    If Player(Index).Steps = 1 Then
+                        Player(Index).Steps = 3
                     Else
-                        Player(MyIndex).Steps = 1
+                        Player(Index).Steps = 1
                     End If
                 End If
             End If
@@ -450,11 +450,6 @@ Module C_Player
 
     End Sub
 
-    Function GetPlayerDir(index As Integer) As Integer
-
-        If index > MAX_PLAYERS Then Exit Function
-        GetPlayerDir = Player(MyIndex).Dir
-    End Function
 #End Region
 
 #Region "Attacking"
@@ -582,8 +577,8 @@ Module C_Player
         anim = 0
 
         ' Check for attacking animation
-        If Player(MyIndex).AttackTimer + (attackspeed / 2) > GetTickCount() Then
-            If Player(MyIndex).Attacking = 1 Then
+        If Player(index).AttackTimer + (attackspeed / 2) > GetTickCount() Then
+            If Player(index).Attacking = 1 Then
                 If attackSprite = 1 Then
                     anim = 4
                 Else
@@ -595,16 +590,16 @@ Module C_Player
             Select Case GetPlayerDir(index)
                 Case DirectionType.Up
 
-                    If (Player(MyIndex).YOffset > 8) Then anim = Player(MyIndex).Steps
+                    If (Player(index).YOffset > 8) Then anim = Player(index).Steps
                 Case DirectionType.Down
 
-                    If (Player(MyIndex).YOffset < -8) Then anim = Player(MyIndex).Steps
+                    If (Player(index).YOffset < -8) Then anim = Player(index).Steps
                 Case DirectionType.Left
 
-                    If (Player(MyIndex).XOffset > 8) Then anim = Player(MyIndex).Steps
+                    If (Player(index).XOffset > 8) Then anim = Player(index).Steps
                 Case DirectionType.Right
 
-                    If (Player(MyIndex).XOffset < -8) Then anim = Player(MyIndex).Steps
+                    If (Player(index).XOffset < -8) Then anim = Player(index).Steps
             End Select
 
         End If
@@ -638,18 +633,18 @@ Module C_Player
 
         ' Calculate the X
         If attackSprite = 1 Then
-            x = GetPlayerX(index) * PicX + Player(MyIndex).XOffset - ((CharacterGfxInfo(spritenum).Width / 5 - 32) / 2)
+            x = GetPlayerX(index) * PicX + Player(index).XOffset - ((CharacterGfxInfo(spritenum).Width / 5 - 32) / 2)
         Else
-            x = GetPlayerX(index) * PicX + Player(MyIndex).XOffset - ((CharacterGfxInfo(spritenum).Width / 4 - 32) / 2)
+            x = GetPlayerX(index) * PicX + Player(index).XOffset - ((CharacterGfxInfo(spritenum).Width / 4 - 32) / 2)
         End If
 
         ' Is the player's height more than 32..?
         If (CharacterGfxInfo(spritenum).Height) > 32 Then
             ' Create a 32 pixel offset for larger sprites
-            y = GetPlayerY(index) * PicY + Player(MyIndex).YOffset - ((CharacterGfxInfo(spritenum).Height / 4) - 32)
+            y = GetPlayerY(index) * PicY + Player(index).YOffset - ((CharacterGfxInfo(spritenum).Height / 4) - 32)
         Else
             ' Proceed as normal
-            y = GetPlayerY(index) * PicY + Player(MyIndex).YOffset
+            y = GetPlayerY(index) * PicY + Player(index).YOffset
         End If
 
         ' render the actual sprite
@@ -709,15 +704,15 @@ Module C_Player
             color = SFML.Graphics.Color.Red
         End If
 
-        name = Trim$(Player(MyIndex).Name)
+        name = Trim$(Player(index).Name)
         ' calc pos
-        textX = ConvertMapX(GetPlayerX(index) * PicX) + Player(MyIndex).XOffset + (PicX \ 2) - 2
+        textX = ConvertMapX(GetPlayerX(index) * PicX) + Player(index).XOffset + (PicX \ 2) - 2
         textX = textX - (GetTextWidth((Trim$(name))) / 2)
         If GetPlayerSprite(index) < 0 OrElse GetPlayerSprite(index) > NumCharacters Then
             textY = ConvertMapY(GetPlayerY(index) * PicY) + Player(MyIndex).YOffset - 16
         Else
             ' Determine location for text
-            textY = ConvertMapY(GetPlayerY(index) * PicY) + Player(MyIndex).YOffset - (CharacterGfxInfo(GetPlayerSprite(index)).Height / 4) + 16
+            textY = ConvertMapY(GetPlayerY(index) * PicY) + Player(index).YOffset - (CharacterGfxInfo(GetPlayerSprite(index)).Height / 4) + 16
         End If
 
         ' Draw name
@@ -940,7 +935,7 @@ Module C_Player
         SetPlayerPk(i, buffer.ReadInt32)
 
         For X = 0 To StatType.Count - 1
-            SetPlayerStat(i, x, buffer.ReadInt32)
+            SetPlayerStat(i, x, buffer.ReadInt32)       
         Next
 
         For X = 0 To ResourceSkills.Count - 1
@@ -948,6 +943,11 @@ Module C_Player
             Player(i).GatherSkills(x).SkillCurExp = buffer.ReadInt32
             Player(i).GatherSkills(x).SkillNextLvlExp = buffer.ReadInt32
         Next
+
+        ' Make sure they aren't walking
+        Player(i).Moving = 0
+        Player(i).XOffset = 0
+        Player(i).YOffset = 0
 
         ' Check if the player is the client player
         If i = Myindex Then
@@ -958,14 +958,9 @@ Module C_Player
             DirRight = False
 
             UpdateCharacterPanel = True
+
+            PlayerData = True
         End If
-
-        ' Make sure they aren't walking
-        Player(i).Moving = 0
-        Player(i).XOffset = 0
-        Player(i).YOffset = 0
-
-        If i = Myindex Then PlayerData = True
 
         buffer.Dispose()
     End Sub

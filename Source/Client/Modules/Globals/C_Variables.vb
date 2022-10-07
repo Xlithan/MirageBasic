@@ -6,8 +6,6 @@ Module C_Variables
     'char creation/selecting
     Friend SelectedChar As Byte
 
-    Friend TotalOnline As Integer
-
     ' for directional blocking
     Friend DirArrowX(4) As Byte
 

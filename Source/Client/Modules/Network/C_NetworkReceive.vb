@@ -81,7 +81,6 @@ Module C_NetworkReceive
         Socket.PacketId(ServerPackets.SCritical) = AddressOf Packet_Critical
         Socket.PacketId(ServerPackets.SNews) = AddressOf Packet_News
         Socket.PacketId(ServerPackets.SrClick) = AddressOf Packet_RClick
-        Socket.PacketId(ServerPackets.STotalOnline) = AddressOf Packet_TotalOnline
 
         'quests
         Socket.PacketId(ServerPackets.SUpdateQuest) = AddressOf Packet_UpdateQuest
@@ -168,7 +167,7 @@ Module C_NetworkReceive
         buffer.Dispose()
 
         MsgBox(msg, vbOKOnly, Settings.GameName)
-        DestroyGame()
+        DestroyGame
     End Sub
 
     Private Sub Packet_KeyPair(ByRef data() As Byte)
@@ -208,7 +207,7 @@ Module C_NetworkReceive
         SelectedChar = 1
 
         'reset for deleting chars
-       For i = 1 To MAX_CHARACTERS
+        For i = 1 To MAX_CHARACTERS
             CharSelection(i).Name = ""
             CharSelection(i).Sprite = 0
             CharSelection(i).Level = 0
@@ -247,7 +246,7 @@ Module C_NetworkReceive
 
     End Sub
 
-        Sub Packet_NewCharJob(ByRef data() As Byte)
+    Sub Packet_NewCharJob(ByRef data() As Byte)
         Dim i As Integer, z As Integer, x As Integer
         Dim buffer As New ByteStream(data)
 
@@ -1132,13 +1131,6 @@ Module C_NetworkReceive
 
     Private Sub Packet_RClick(ByRef data() As Byte)
         ShowRClick = True
-    End Sub
-
-    Private Sub Packet_TotalOnline(ByRef data() As Byte)
-        Dim buffer As New ByteStream(data)
-        TotalOnline = buffer.ReadInt32
-
-        buffer.Dispose()
     End Sub
 
     Private Sub Packet_Emote(ByRef data() As Byte)

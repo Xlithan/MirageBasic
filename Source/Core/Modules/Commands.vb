@@ -258,12 +258,14 @@
 
     Public Function IsEditorLocked(index As Integer, id As Integer) As String
         For i = 1 To MAX_PLAYERS
-            If i <> index Then
-                if TempPlayer(i).Editor = id then
-                    IsEditorLocked = GetPlayerName(i)
-                    Exit Function
-                End if
-            End If
+            If IsPlaying(i) Then
+                If i <> index Then
+                    if TempPlayer(i).Editor = id Then
+                        IsEditorLocked = GetPlayerName(i)
+                        Exit Function
+                    End if
+                End If
+            End If 
         Next
 
         IsEditorLocked = ""

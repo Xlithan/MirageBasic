@@ -14,7 +14,6 @@ Module C_General
     Sub Startup()
         FrmMenu.Text = Settings.GameName
         FrmMenu.Visible = True
-        Application.DoEvents()
 
         LoadGame()
         ClearGameData()
@@ -271,11 +270,9 @@ End Function
     End Sub
 
     Friend Sub CheckDir(dirPath As String)
-
         If Not IO.Directory.Exists(dirPath) Then
             IO.Directory.CreateDirectory(dirPath)
         End If
-
     End Sub
 
     Friend Function GetExceptionInfo(ex As Exception) As String
