@@ -676,6 +676,12 @@ Friend Module C_Quest
                 .chkEnd.Checked = False
             End If
 
+            .cmbNpc.Enabled = False
+            .cmbItem.Enabled = False
+            .cmbMap.Enabled = False
+            .cmbResource.Enabled = False
+            .nudAmount.Enabled = False
+
             Select Case TaskToLoad.Order
                 Case 0 'Nothing
 

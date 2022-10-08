@@ -44,12 +44,6 @@ Friend Class frmEditor_Quest
         cmbResource.SelectedIndex = 0
         nudAmount.Value = 0
 
-        cmbNpc.Enabled = False
-        cmbItem.Enabled = False
-        cmbMap.Enabled = False
-        cmbResource.Enabled = False
-        nudAmount.Enabled = False
-
         lstIndex.Items.Clear()
         cmbQuestReq.Items.Clear()
 
