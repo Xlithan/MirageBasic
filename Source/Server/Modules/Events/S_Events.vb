@@ -468,9 +468,6 @@ Friend Module S_Events
         buffer.WriteInt32(ServerPackets.SEventDir)
         buffer.WriteInt32(eventId)
 
-        Addlog("Sent SMSG: SEventDir", PACKET_LOG)
-        Console.WriteLine("Sent SMSG: SEventDir")
-
         If globalevent Then
             buffer.WriteInt32(TempEventMap(mapNum).Events(eventId).Dir)
         Else
@@ -527,9 +524,6 @@ Friend Module S_Events
                     buffer.WriteInt32(TempEventMap(mapNum).Events(eventindex).Dir)
                     buffer.WriteInt32(movementspeed)
 
-                    Addlog("Sent SMSG: SEventMove Dir Up GlobalEvent", PACKET_LOG)
-                    Console.WriteLine("Sent SMSG: SEventMove Dir Up GlobalEvent")
-
                     If globalevent Then
                         SendDataToMap(mapNum, buffer.Data, buffer.Head)
                     Else
@@ -545,9 +539,6 @@ Friend Module S_Events
                     buffer.WriteInt32(dir)
                     buffer.WriteInt32(TempPlayer(index).EventMap.EventPages(eventindex).Dir)
                     buffer.WriteInt32(movementspeed)
-
-                    Addlog("Sent SMSG: SEventMove Dir Up", PACKET_LOG)
-                    Console.WriteLine("Sent SMSG: SEventMove Dir Up")
 
                     If globalevent Then
                         SendDataToMap(mapNum, buffer.Data, buffer.Head)
@@ -568,9 +559,6 @@ Friend Module S_Events
                     buffer.WriteInt32(TempEventMap(mapNum).Events(eventindex).Dir)
                     buffer.WriteInt32(movementspeed)
 
-                    Addlog("Sent SMSG: SEventMove Down GlobalEvent", PACKET_LOG)
-                    Console.WriteLine("Sent SMSG: SEventMove Down GlobalEvent")
-
                     If globalevent Then
                         SendDataToMap(mapNum, buffer.Data, buffer.Head)
                     Else
@@ -586,9 +574,6 @@ Friend Module S_Events
                     buffer.WriteInt32(dir)
                     buffer.WriteInt32(TempPlayer(index).EventMap.EventPages(eventindex).Dir)
                     buffer.WriteInt32(movementspeed)
-
-                    Addlog("Sent SMSG: SEventMove", PACKET_LOG)
-                    Console.WriteLine("Sent SMSG: SEventMove")
 
                     If globalevent Then
                         SendDataToMap(mapNum, buffer.Data, buffer.Head)
@@ -608,9 +593,6 @@ Friend Module S_Events
                     buffer.WriteInt32(TempEventMap(mapNum).Events(eventindex).Dir)
                     buffer.WriteInt32(movementspeed)
 
-                    Addlog("Sent SMSG: SEventMove Left GlobalEvent", PACKET_LOG)
-                    Console.WriteLine("Sent SMSG: SEventMove Left GlobalEvent")
-
                     If globalevent Then
                         SendDataToMap(mapNum, buffer.Data, buffer.Head)
                     Else
@@ -626,9 +608,6 @@ Friend Module S_Events
                     buffer.WriteInt32(dir)
                     buffer.WriteInt32(TempPlayer(index).EventMap.EventPages(eventindex).Dir)
                     buffer.WriteInt32(movementspeed)
-
-                    Addlog("Sent SMSG: SEventMove", PACKET_LOG)
-                    Console.WriteLine("Sent SMSG: SEventMove")
 
                     If globalevent Then
                         SendDataToMap(mapNum, buffer.Data, buffer.Head)
@@ -648,9 +627,6 @@ Friend Module S_Events
                     buffer.WriteInt32(TempEventMap(mapNum).Events(eventindex).Dir)
                     buffer.WriteInt32(movementspeed)
 
-                    Addlog("Sent SMSG: SEventMove GlobalEvent", PACKET_LOG)
-                    Console.WriteLine("Sent SMSG: SEventMove GlobalEvent")
-
                     If globalevent Then
                         SendDataToMap(mapNum, buffer.Data, buffer.Head)
                     Else
@@ -666,9 +642,6 @@ Friend Module S_Events
                     buffer.WriteInt32(dir)
                     buffer.WriteInt32(TempPlayer(index).EventMap.EventPages(eventindex).Dir)
                     buffer.WriteInt32(movementspeed)
-
-                    Addlog("Sent SMSG: SEventMove", PACKET_LOG)
-                    Console.WriteLine("Sent SMSG: SEventMove")
 
                     If globalevent Then
                         SendDataToMap(mapNum, buffer.Data, buffer.Head)

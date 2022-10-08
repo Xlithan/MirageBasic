@@ -31,9 +31,6 @@ Module S_Parties
         Dim buffer As New ByteStream(4)
         buffer.WriteInt32(Packets.ServerPackets.SPartyInvite)
 
-        Addlog("Sent SMSG: SPartyInvite", PACKET_LOG)
-        Console.WriteLine("Sent SMSG: SPartyInvite")
-
         buffer.WriteString((Trim$(Player(target).Name)))
 
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
@@ -43,9 +40,6 @@ Module S_Parties
     Sub SendPartyUpdate(partyNum As Integer)
         Dim buffer As New ByteStream(4)
         buffer.WriteInt32(ServerPackets.SPartyUpdate)
-
-        Addlog("Sent SMSG: SPartyUpdate", PACKET_LOG)
-        Console.WriteLine("Sent SMSG: SPartyUpdate")
 
         buffer.WriteInt32(1)
         buffer.WriteInt32(Party(partyNum).Leader)
@@ -62,9 +56,6 @@ Module S_Parties
         Dim buffer As New ByteStream(4), i As Integer, partyNum As Integer
 
         buffer.WriteInt32(ServerPackets.SPartyUpdate)
-
-        Addlog("Sent SMSG: SPartyUpdate To Players", PACKET_LOG)
-        Console.WriteLine("Sent SMSG: SPartyUpdate To Players")
 
         ' check if we're in a party
         partyNum = TempPlayer(index).InParty
@@ -91,9 +82,6 @@ Module S_Parties
         buffer = New ByteStream(4)
         buffer.WriteInt32(ServerPackets.SPartyVitals)
         buffer.WriteInt32(index)
-
-        Addlog("Sent SMSG: SPartyVitals", PACKET_LOG)
-        Console.WriteLine("Sent SMSG: SPartyVitals")
 
         For i = 0 To VitalType.Count - 1
             buffer.WriteInt32(Player(index).Vital(i))
