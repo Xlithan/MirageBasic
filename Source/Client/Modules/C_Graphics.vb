@@ -2009,7 +2009,7 @@ Module C_Graphics
             ' check for hp bar
             For i = 0 To MAX_MAP_NPCS
                 If Map.Npc Is Nothing Then Exit Sub
-                If Map.Npc(i) > 0 Then
+                If Map.Npc(i) > 0 And Map.Npc(i) <= MAX_NPCS And MapNpc(i).Num > 0 And MapNpc(i).Num <= MAX_NPCS Then
                     If _
                         Npc(MapNpc(i).Num).Behaviour = NpcBehavior.AttackOnSight OrElse
                         Npc(MapNpc(i).Num).Behaviour = NpcBehavior.AttackWhenAttacked OrElse

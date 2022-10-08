@@ -133,7 +133,8 @@ Module C_Maps
 
         ReDim Map.Npc(MAX_MAP_NPCS)
         ReDim Map.Tile(Map.MaxX, Map.MaxY)
-        For i = 0 To MaxHistory
+        ReDim TileHistory(MaxTileHistory)
+        For i = 0 To MaxTileHistory
             ReDim TileHistory(i).Tile(Map.MaxX, Map.MaxY)
         Next
         HistoryIndex = 0
@@ -143,7 +144,7 @@ Module C_Maps
             For Y = 0 To ScreenMapy
                 ReDim Map.Tile(x, y).Layer(LayerType.Count - 1)
 
-                For i = 0 To MaxHistory
+                For i = 0 To MaxTileHistory
                     ReDim TileHistory(i).Tile(x,y).Layer(LayerType.Count - 1)
                 Next
 
@@ -158,7 +159,7 @@ Module C_Maps
                     Map.Tile(x,y).Type = 0
                     Map.Tile(x,y).DirBlock = 0
 
-                    For i = 0 To MaxHistory
+                    For i = 0 To MaxTileHistory
                         TileHistory(i).Tile(x,y).Layer(l).Tileset = 0
                         TileHistory(i).Tile(x,y).Layer(l).X = 0
                         TileHistory(i).Tile(x,y).Layer(l).Y = 0
@@ -321,7 +322,7 @@ Module C_Maps
             Map.Brightness = buffer.ReadByte
 
             ReDim Map.Tile(Map.MaxX, Map.MaxY)
-            For i = 0 To MaxHistory
+            For i = 0 To MaxTileHistory
                 ReDim TileHistory(i).Tile(Map.MaxX, Map.MaxY)
             Next
 
@@ -336,7 +337,7 @@ Module C_Maps
                     Map.Tile(x, y).Data3 = buffer.ReadInt32
                     Map.Tile(x, y).DirBlock = buffer.ReadInt32
 
-                    For j = 0 To MaxHistory
+                    For j = 0 To MaxTileHistory
                         TileHistory(j).Tile(x,y).Data1 = Map.Tile(x, y).Data1
                         TileHistory(j).Tile(x,y).Data2 = Map.Tile(x, y).Data2
                         TileHistory(j).Tile(x,y).Data3 =  Map.Tile(x, y).Data3
@@ -345,7 +346,7 @@ Module C_Maps
                     Next
 
                     ReDim Map.Tile(x, y).Layer(LayerType.Count - 1)
-                    For i = 0 To MaxHistory
+                    For i = 0 To MaxTileHistory
                         ReDim TileHistory(i).Tile(x,y).Layer(LayerType.Count - 1)
                     Next
 
@@ -355,7 +356,7 @@ Module C_Maps
                         Map.Tile(x, y).Layer(i).Y = buffer.ReadInt32
                         Map.Tile(x, y).Layer(i).AutoTile = buffer.ReadInt32
 
-                        For j = 0 To MaxHistory
+                        For j = 0 To MaxTileHistory
                             TileHistory(j).Tile(x,y).Layer(i).Tileset = Map.Tile(x, y).Layer(i).Tileset 
                             TileHistory(j).Tile(x,y).Layer(i).X = Map.Tile(x, y).Layer(i).X
                             TileHistory(j).Tile(x,y).Layer(i).Y = Map.Tile(x, y).Layer(i).Y
