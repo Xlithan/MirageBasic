@@ -65,7 +65,6 @@ Partial Class frmEditor_Quest
         Me.optTask4 = New DarkUI.Controls.DarkRadioButton()
         Me.optTask3 = New DarkUI.Controls.DarkRadioButton()
         Me.optTask2 = New DarkUI.Controls.DarkRadioButton()
-        Me.DarkLabel16 = New DarkUI.Controls.DarkLabel()
         Me.optTask1 = New DarkUI.Controls.DarkRadioButton()
         Me.optTask0 = New DarkUI.Controls.DarkRadioButton()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -578,19 +577,18 @@ Partial Class frmEditor_Quest
         Me.Panel2.Controls.Add(Me.optTask4)
         Me.Panel2.Controls.Add(Me.optTask3)
         Me.Panel2.Controls.Add(Me.optTask2)
-        Me.Panel2.Controls.Add(Me.DarkLabel16)
         Me.Panel2.Controls.Add(Me.optTask1)
         Me.Panel2.Controls.Add(Me.optTask0)
         Me.Panel2.Location = New System.Drawing.Point(300, 22)
         Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(180, 227)
+        Me.Panel2.Size = New System.Drawing.Size(180, 212)
         Me.Panel2.TabIndex = 1
         '
         'optTask7
         '
         Me.optTask7.AutoSize = true
-        Me.optTask7.Location = New System.Drawing.Point(7, 202)
+        Me.optTask7.Location = New System.Drawing.Point(8, 180)
         Me.optTask7.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optTask7.Name = "optTask7"
         Me.optTask7.Size = New System.Drawing.Size(124, 19)
@@ -601,7 +599,7 @@ Partial Class frmEditor_Quest
         'optTask6
         '
         Me.optTask6.AutoSize = true
-        Me.optTask6.Location = New System.Drawing.Point(7, 175)
+        Me.optTask6.Location = New System.Drawing.Point(8, 155)
         Me.optTask6.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optTask6.Name = "optTask6"
         Me.optTask6.Size = New System.Drawing.Size(116, 19)
@@ -612,7 +610,7 @@ Partial Class frmEditor_Quest
         'optTask5
         '
         Me.optTask5.AutoSize = true
-        Me.optTask5.Location = New System.Drawing.Point(7, 149)
+        Me.optTask5.Location = New System.Drawing.Point(8, 131)
         Me.optTask5.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optTask5.Name = "optTask5"
         Me.optTask5.Size = New System.Drawing.Size(114, 19)
@@ -623,7 +621,7 @@ Partial Class frmEditor_Quest
         'optTask4
         '
         Me.optTask4.AutoSize = true
-        Me.optTask4.Location = New System.Drawing.Point(7, 122)
+        Me.optTask4.Location = New System.Drawing.Point(8, 106)
         Me.optTask4.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optTask4.Name = "optTask4"
         Me.optTask4.Size = New System.Drawing.Size(84, 19)
@@ -634,7 +632,7 @@ Partial Class frmEditor_Quest
         'optTask3
         '
         Me.optTask3.AutoSize = true
-        Me.optTask3.Location = New System.Drawing.Point(7, 96)
+        Me.optTask3.Location = New System.Drawing.Point(8, 81)
         Me.optTask3.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optTask3.Name = "optTask3"
         Me.optTask3.Size = New System.Drawing.Size(85, 19)
@@ -645,7 +643,7 @@ Partial Class frmEditor_Quest
         'optTask2
         '
         Me.optTask2.AutoSize = true
-        Me.optTask2.Location = New System.Drawing.Point(7, 69)
+        Me.optTask2.Location = New System.Drawing.Point(8, 56)
         Me.optTask2.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optTask2.Name = "optTask2"
         Me.optTask2.Size = New System.Drawing.Size(92, 19)
@@ -653,21 +651,10 @@ Partial Class frmEditor_Quest
         Me.optTask2.TabStop = true
         Me.optTask2.Text = "Gather Items"
         '
-        'DarkLabel16
-        '
-        Me.DarkLabel16.AutoSize = true
-        Me.DarkLabel16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel16.Location = New System.Drawing.Point(4, 29)
-        Me.DarkLabel16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.DarkLabel16.Name = "DarkLabel16"
-        Me.DarkLabel16.Size = New System.Drawing.Size(237, 15)
-        Me.DarkLabel16.TabIndex = 2
-        Me.DarkLabel16.Text = "----------------------------------------------"
-        '
         'optTask1
         '
         Me.optTask1.AutoSize = true
-        Me.optTask1.Location = New System.Drawing.Point(7, 43)
+        Me.optTask1.Location = New System.Drawing.Point(8, 31)
         Me.optTask1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optTask1.Name = "optTask1"
         Me.optTask1.Size = New System.Drawing.Size(92, 19)
@@ -678,7 +665,7 @@ Partial Class frmEditor_Quest
         'optTask0
         '
         Me.optTask0.AutoSize = true
-        Me.optTask0.Location = New System.Drawing.Point(7, 6)
+        Me.optTask0.Location = New System.Drawing.Point(8, 6)
         Me.optTask0.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.optTask0.Name = "optTask0"
         Me.optTask0.Size = New System.Drawing.Size(69, 19)
@@ -907,12 +894,12 @@ Partial Class frmEditor_Quest
         Me.fraRequirements.Controls.Add(Me.rdbItemReq)
         Me.fraRequirements.Controls.Add(Me.rdbNoneReq)
         Me.fraRequirements.ForeColor = System.Drawing.Color.Gainsboro
-        Me.fraRequirements.Location = New System.Drawing.Point(1, 0)
+        Me.fraRequirements.Location = New System.Drawing.Point(0, 0)
         Me.fraRequirements.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraRequirements.Name = "fraRequirements"
         Me.fraRequirements.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.fraRequirements.Size = New System.Drawing.Size(480, 573)
-        Me.fraRequirements.TabIndex = 6
+        Me.fraRequirements.TabIndex = 8
         Me.fraRequirements.TabStop = false
         Me.fraRequirements.Text = "Requirements"
         Me.fraRequirements.Visible = false
@@ -936,14 +923,14 @@ Partial Class frmEditor_Quest
         Me.DarkGroupBox6.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.DarkGroupBox6.Name = "DarkGroupBox6"
         Me.DarkGroupBox6.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.DarkGroupBox6.Size = New System.Drawing.Size(394, 332)
+        Me.DarkGroupBox6.Size = New System.Drawing.Size(465, 332)
         Me.DarkGroupBox6.TabIndex = 10
         Me.DarkGroupBox6.TabStop = false
         Me.DarkGroupBox6.Text = "Items Needed For Quest"
         '
         'btnRequirementCancel
         '
-        Me.btnRequirementCancel.Location = New System.Drawing.Point(300, 299)
+        Me.btnRequirementCancel.Location = New System.Drawing.Point(369, 299)
         Me.btnRequirementCancel.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnRequirementCancel.Name = "btnRequirementCancel"
         Me.btnRequirementCancel.Padding = New System.Windows.Forms.Padding(6)
@@ -953,7 +940,7 @@ Partial Class frmEditor_Quest
         '
         'btnRequirementSave
         '
-        Me.btnRequirementSave.Location = New System.Drawing.Point(205, 299)
+        Me.btnRequirementSave.Location = New System.Drawing.Point(273, 299)
         Me.btnRequirementSave.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.btnRequirementSave.Name = "btnRequirementSave"
         Me.btnRequirementSave.Padding = New System.Windows.Forms.Padding(6)
@@ -973,7 +960,7 @@ Partial Class frmEditor_Quest
         '
         Me.DarkLabel23.AutoSize = true
         Me.DarkLabel23.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel23.Location = New System.Drawing.Point(245, 87)
+        Me.DarkLabel23.Location = New System.Drawing.Point(247, 87)
         Me.DarkLabel23.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel23.Name = "DarkLabel23"
         Me.DarkLabel23.Size = New System.Drawing.Size(54, 15)
@@ -994,7 +981,7 @@ Partial Class frmEditor_Quest
         '
         Me.DarkLabel24.AutoSize = true
         Me.DarkLabel24.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel24.Location = New System.Drawing.Point(7, 87)
+        Me.DarkLabel24.Location = New System.Drawing.Point(9, 87)
         Me.DarkLabel24.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel24.Name = "DarkLabel24"
         Me.DarkLabel24.Size = New System.Drawing.Size(60, 15)
@@ -1013,7 +1000,7 @@ Partial Class frmEditor_Quest
         '
         Me.DarkLabel22.AutoSize = true
         Me.DarkLabel22.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel22.Location = New System.Drawing.Point(245, 36)
+        Me.DarkLabel22.Location = New System.Drawing.Point(247, 36)
         Me.DarkLabel22.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel22.Name = "DarkLabel22"
         Me.DarkLabel22.Size = New System.Drawing.Size(54, 15)
@@ -1034,7 +1021,7 @@ Partial Class frmEditor_Quest
         '
         Me.DarkLabel21.AutoSize = true
         Me.DarkLabel21.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel21.Location = New System.Drawing.Point(7, 36)
+        Me.DarkLabel21.Location = New System.Drawing.Point(9, 36)
         Me.DarkLabel21.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel21.Name = "DarkLabel21"
         Me.DarkLabel21.Size = New System.Drawing.Size(60, 15)
@@ -1055,7 +1042,7 @@ Partial Class frmEditor_Quest
         '
         Me.DarkLabel20.AutoSize = true
         Me.DarkLabel20.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel20.Location = New System.Drawing.Point(93, 150)
+        Me.DarkLabel20.Location = New System.Drawing.Point(95, 150)
         Me.DarkLabel20.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel20.Name = "DarkLabel20"
         Me.DarkLabel20.Size = New System.Drawing.Size(99, 15)
@@ -1065,7 +1052,7 @@ Partial Class frmEditor_Quest
         'rdbJobReq
         '
         Me.rdbJobReq.AutoSize = true
-        Me.rdbJobReq.Location = New System.Drawing.Point(12, 148)
+        Me.rdbJobReq.Location = New System.Drawing.Point(14, 148)
         Me.rdbJobReq.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.rdbJobReq.Name = "rdbJobReq"
         Me.rdbJobReq.Size = New System.Drawing.Size(43, 19)
@@ -1087,7 +1074,7 @@ Partial Class frmEditor_Quest
         '
         Me.DarkLabel19.AutoSize = true
         Me.DarkLabel19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel19.Location = New System.Drawing.Point(93, 108)
+        Me.DarkLabel19.Location = New System.Drawing.Point(95, 108)
         Me.DarkLabel19.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel19.Name = "DarkLabel19"
         Me.DarkLabel19.Size = New System.Drawing.Size(112, 15)
@@ -1097,7 +1084,7 @@ Partial Class frmEditor_Quest
         'rdbQuestReq
         '
         Me.rdbQuestReq.AutoSize = true
-        Me.rdbQuestReq.Location = New System.Drawing.Point(12, 106)
+        Me.rdbQuestReq.Location = New System.Drawing.Point(14, 106)
         Me.rdbQuestReq.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.rdbQuestReq.Name = "rdbQuestReq"
         Me.rdbQuestReq.Size = New System.Drawing.Size(56, 19)
@@ -1119,7 +1106,7 @@ Partial Class frmEditor_Quest
         '
         Me.DarkLabel18.AutoSize = true
         Me.DarkLabel18.ForeColor = System.Drawing.Color.FromArgb(CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer), CType(CType(220,Byte),Integer))
-        Me.DarkLabel18.Location = New System.Drawing.Point(93, 67)
+        Me.DarkLabel18.Location = New System.Drawing.Point(95, 67)
         Me.DarkLabel18.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.DarkLabel18.Name = "DarkLabel18"
         Me.DarkLabel18.Size = New System.Drawing.Size(105, 15)
@@ -1129,7 +1116,7 @@ Partial Class frmEditor_Quest
         'rdbItemReq
         '
         Me.rdbItemReq.AutoSize = true
-        Me.rdbItemReq.Location = New System.Drawing.Point(12, 65)
+        Me.rdbItemReq.Location = New System.Drawing.Point(14, 65)
         Me.rdbItemReq.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.rdbItemReq.Name = "rdbItemReq"
         Me.rdbItemReq.Size = New System.Drawing.Size(49, 19)
@@ -1140,7 +1127,7 @@ Partial Class frmEditor_Quest
         'rdbNoneReq
         '
         Me.rdbNoneReq.AutoSize = true
-        Me.rdbNoneReq.Location = New System.Drawing.Point(12, 24)
+        Me.rdbNoneReq.Location = New System.Drawing.Point(14, 24)
         Me.rdbNoneReq.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
         Me.rdbNoneReq.Name = "rdbNoneReq"
         Me.rdbNoneReq.Size = New System.Drawing.Size(54, 19)
@@ -1163,7 +1150,7 @@ Partial Class frmEditor_Quest
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7!, 15!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(45,Byte),Integer), CType(CType(45,Byte),Integer), CType(CType(48,Byte),Integer))
-        Me.ClientSize = New System.Drawing.Size(841, 534)
+        Me.ClientSize = New System.Drawing.Size(840, 534)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
@@ -1249,7 +1236,6 @@ End Sub
     Friend WithEvents lblTaskNum As DarkUI.Controls.DarkLabel
     Friend WithEvents Panel2 As Windows.Forms.Panel
     Friend WithEvents optTask0 As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents DarkLabel16 As DarkUI.Controls.DarkLabel
     Friend WithEvents optTask1 As DarkUI.Controls.DarkRadioButton
     Friend WithEvents optTask2 As DarkUI.Controls.DarkRadioButton
     Friend WithEvents optTask3 As DarkUI.Controls.DarkRadioButton
@@ -1258,28 +1244,6 @@ End Sub
     Friend WithEvents optTask6 As DarkUI.Controls.DarkRadioButton
     Friend WithEvents optTask7 As DarkUI.Controls.DarkRadioButton
     Friend WithEvents DarkLabel17 As DarkUI.Controls.DarkLabel
-    Friend WithEvents fraRequirements As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents rdbNoneReq As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents rdbItemReq As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents cmbItemReq As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel18 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbQuestReq As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel19 As DarkUI.Controls.DarkLabel
-    Friend WithEvents rdbQuestReq As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents cmbJobReq As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel20 As DarkUI.Controls.DarkLabel
-    Friend WithEvents rdbJobReq As DarkUI.Controls.DarkRadioButton
-    Friend WithEvents DarkGroupBox6 As DarkUI.Controls.DarkGroupBox
-    Friend WithEvents cmbStartItem As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel21 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudGiveAmount As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel22 As DarkUI.Controls.DarkLabel
-    Friend WithEvents nudTakeAmount As DarkUI.Controls.DarkNumericUpDown
-    Friend WithEvents DarkLabel23 As DarkUI.Controls.DarkLabel
-    Friend WithEvents cmbEndItem As DarkUI.Controls.DarkComboBox
-    Friend WithEvents DarkLabel24 As DarkUI.Controls.DarkLabel
-    Friend WithEvents btnRequirementSave As DarkUI.Controls.DarkButton
-    Friend WithEvents btnRequirementCancel As DarkUI.Controls.DarkButton
     Friend WithEvents btnCancelTask As DarkUI.Controls.DarkButton
     Friend WithEvents btnSaveTask As DarkUI.Controls.DarkButton
     Friend WithEvents cmbResource As DarkUI.Controls.DarkComboBox
@@ -1287,4 +1251,26 @@ End Sub
     Friend WithEvents cmbItem As DarkUI.Controls.DarkComboBox
     Friend WithEvents cmbNpc As DarkUI.Controls.DarkComboBox
     Friend WithEvents btnDelete As DarkUI.Controls.DarkButton
+    Friend WithEvents fraRequirements As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents DarkGroupBox6 As DarkUI.Controls.DarkGroupBox
+    Friend WithEvents btnRequirementCancel As DarkUI.Controls.DarkButton
+    Friend WithEvents btnRequirementSave As DarkUI.Controls.DarkButton
+    Friend WithEvents nudTakeAmount As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel23 As DarkUI.Controls.DarkLabel
+    Friend WithEvents cmbEndItem As DarkUI.Controls.DarkComboBox
+    Friend WithEvents DarkLabel24 As DarkUI.Controls.DarkLabel
+    Friend WithEvents nudGiveAmount As DarkUI.Controls.DarkNumericUpDown
+    Friend WithEvents DarkLabel22 As DarkUI.Controls.DarkLabel
+    Friend WithEvents cmbStartItem As DarkUI.Controls.DarkComboBox
+    Friend WithEvents DarkLabel21 As DarkUI.Controls.DarkLabel
+    Friend WithEvents cmbJobReq As DarkUI.Controls.DarkComboBox
+    Friend WithEvents DarkLabel20 As DarkUI.Controls.DarkLabel
+    Friend WithEvents rdbJobReq As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents cmbQuestReq As DarkUI.Controls.DarkComboBox
+    Friend WithEvents DarkLabel19 As DarkUI.Controls.DarkLabel
+    Friend WithEvents rdbQuestReq As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents cmbItemReq As DarkUI.Controls.DarkComboBox
+    Friend WithEvents DarkLabel18 As DarkUI.Controls.DarkLabel
+    Friend WithEvents rdbItemReq As DarkUI.Controls.DarkRadioButton
+    Friend WithEvents rdbNoneReq As DarkUI.Controls.DarkRadioButton
 End Class

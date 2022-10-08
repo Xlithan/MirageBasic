@@ -110,10 +110,6 @@ Friend Module S_EventLogic
                                     Buffer.WriteInt32(.QuestNum)
                                 End With
                                 Socket.SendDataTo(i, Buffer.Data, Buffer.Head)
-
-                                Addlog("Sent SMSG: SSpawnEvent Remove Dead Events", PACKET_LOG)
-                                Console.WriteLine("Sent SMSG: SSpawnEvent Remove Dead Events")
-
                                 Buffer.Dispose()
                             End If
                         End If
@@ -684,10 +680,6 @@ Friend Module S_EventLogic
                                                             Buffer.WriteInt32(.QuestNum)
                                                         End With
                                                         SendDataToMap(i, Buffer.Data, Buffer.Head)
-
-                                                        Addlog("Sent SMSG: SSpawnEvent Process Event Movement", PACKET_LOG)
-                                                        Console.WriteLine("Sent SMSG: SSpawnEvent Process Event Movement")
-
                                                         Buffer.Dispose()
                                                     End If
                                                 End If
@@ -1770,38 +1762,22 @@ Friend Module S_EventLogic
                                                             buffer.WriteInt32(ServerPackets.SPlayBGM)
                                                             buffer.WriteString((Trim(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Text1)))
                                                             Socket.SendDataTo(i, buffer.Data, buffer.Head)
-
-                                                            Addlog("Sent SMSG: SPlayBGM", PACKET_LOG)
-                                                            Console.WriteLine("Sent SMSG: SPlayBGM")
-
                                                             buffer.Dispose()
                                                         Case EventType.FadeoutBgm
                                                             buffer = New ByteStream(4)
                                                             buffer.WriteInt32(ServerPackets.SFadeoutBGM)
                                                             Socket.SendDataTo(i, buffer.Data, buffer.Head)
-
-                                                            Addlog("Sent SMSG: SFadeoutBGM", PACKET_LOG)
-                                                            Console.WriteLine("Sent SMSG: SFadeoutBGM")
-
                                                             buffer.Dispose()
                                                         Case EventType.PlaySound
                                                             buffer = New ByteStream(4)
                                                             buffer.WriteInt32(ServerPackets.SPlaySound)
                                                             buffer.WriteString((Trim(Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Text1)))
                                                             Socket.SendDataTo(i, buffer.Data, buffer.Head)
-
-                                                            Addlog("Sent SMSG: SPlaySound", PACKET_LOG)
-                                                            Console.WriteLine("Sent SMSG: SPlaySound")
-
                                                             buffer.Dispose()
                                                         Case EventType.StopSound
                                                             buffer = New ByteStream(4)
                                                             buffer.WriteInt32(ServerPackets.SStopSound)
                                                             Socket.SendDataTo(i, buffer.Data, buffer.Head)
-
-                                                            Addlog("Sent SMSG: SStopSound", PACKET_LOG)
-                                                            Console.WriteLine("Sent SMSG: SStopSound")
-
                                                             buffer.Dispose()
                                                         Case EventType.SetAccess
                                                             SetPlayerAccess(i, Map(GetPlayerMap(i)).Events(.EventId).Pages(.PageId).CommandList(.CurList).Commands(.CurSlot).Data1)
