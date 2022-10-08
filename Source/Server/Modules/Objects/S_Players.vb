@@ -2415,7 +2415,6 @@ Module S_Players
             ReDim TempPlayer(i).TradeOffer(MAX_INV)
         End If
 
-        SendTotalOnlineToAll()
         ClearPlayer(index)
         UpdateCaption()
     End Sub

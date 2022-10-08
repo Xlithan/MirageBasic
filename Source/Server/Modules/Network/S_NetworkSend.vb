@@ -1297,32 +1297,6 @@ End Sub
         Buffer.Dispose()
     End Sub
 
-    Sub SendTotalOnlineTo(index As Integer)
-        Dim Buffer As New ByteStream(4)
-
-        Buffer.WriteInt32(ServerPackets.STotalOnline)
-
-        AddDebug("Sent SMSG: STotalOnline")
-
-        Buffer.WriteInt32(GetPlayersOnline)
-        Socket.SendDataTo(index, Buffer.Data, Buffer.Head)
-
-        Buffer.Dispose()
-    End Sub
-
-    Sub SendTotalOnlineToAll()
-        Dim Buffer As New ByteStream(4)
-
-        Buffer.WriteInt32(ServerPackets.STotalOnline)
-
-        AddDebug("Sent SMSG: STotalOnline To All")
-
-        Buffer.WriteInt32(GetPlayersOnline)
-        SendDataToAll(Buffer.Data, Buffer.Head)
-
-        Buffer.Dispose()
-    End Sub
-
     Sub SendLoginOk(index As Integer)
         Dim buffer As New ByteStream(4)
         buffer.WriteInt32(Packets.ServerPackets.SLoginOk)

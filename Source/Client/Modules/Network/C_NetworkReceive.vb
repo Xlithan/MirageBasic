@@ -81,7 +81,6 @@ Module C_NetworkReceive
         Socket.PacketId(ServerPackets.SCritical) = AddressOf Packet_Critical
         Socket.PacketId(ServerPackets.SNews) = AddressOf Packet_News
         Socket.PacketId(ServerPackets.SrClick) = AddressOf Packet_RClick
-        Socket.PacketId(ServerPackets.STotalOnline) = AddressOf Packet_TotalOnline
 
         'quests
         Socket.PacketId(ServerPackets.SUpdateQuest) = AddressOf Packet_UpdateQuest
@@ -1132,13 +1131,6 @@ Module C_NetworkReceive
 
     Private Sub Packet_RClick(ByRef data() As Byte)
         ShowRClick = True
-    End Sub
-
-    Private Sub Packet_TotalOnline(ByRef data() As Byte)
-        Dim buffer As New ByteStream(data)
-        TotalOnline = buffer.ReadInt32
-
-        buffer.Dispose()
     End Sub
 
     Private Sub Packet_Emote(ByRef data() As Byte)

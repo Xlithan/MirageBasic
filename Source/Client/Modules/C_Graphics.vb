@@ -1399,7 +1399,7 @@ Module C_Graphics
             .Bottom = endY
             .Left = startX
             .Right = endX
-        End With                                                                                                                                                                                                                            
+        End With
 
         With Camera
             .Y = offsetY

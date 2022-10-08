@@ -50,7 +50,7 @@ Module S_General
         CheckDir(Paths.Quests)
 
         EKeyPair.GenerateKeys()
-        InitNetwork()                                                                                                                                                                                                 
+        InitNetwork()
 
         ' Serves as a constructor
         ClearGameData()
