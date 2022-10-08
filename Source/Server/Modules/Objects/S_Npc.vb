@@ -327,9 +327,6 @@ Module S_Npc
                 buffer.WriteInt32(MapNpc(mapNum).Npc(MapNpcNum).Dir)
                 buffer.WriteInt32(Movement)
 
-                Addlog("Sent SMSG: SNpcMove Up", PACKET_LOG)
-                Console.WriteLine("Sent SMSG: SNpcMove Up")
-
                 SendDataToMap(mapNum, buffer.Data, buffer.Head)
             Case DirectionType.Down
                 MapNpc(mapNum).Npc(MapNpcNum).Y = MapNpc(mapNum).Npc(MapNpcNum).Y + 1
@@ -340,9 +337,6 @@ Module S_Npc
                 buffer.WriteInt32(MapNpc(mapNum).Npc(MapNpcNum).Y)
                 buffer.WriteInt32(MapNpc(mapNum).Npc(MapNpcNum).Dir)
                 buffer.WriteInt32(Movement)
-
-                Addlog("Sent SMSG: SNpcMove Down", PACKET_LOG)
-                Console.WriteLine("Sent SMSG: SNpcMove Down")
 
                 SendDataToMap(mapNum, buffer.Data, buffer.Head)
             Case DirectionType.Left
@@ -355,9 +349,6 @@ Module S_Npc
                 buffer.WriteInt32(MapNpc(mapNum).Npc(MapNpcNum).Dir)
                 buffer.WriteInt32(Movement)
 
-                Addlog("Sent SMSG: SNpcMove Left", PACKET_LOG)
-                Console.WriteLine("Sent SMSG: SNpcMove Left")
-
                 SendDataToMap(mapNum, buffer.Data, buffer.Head)
             Case DirectionType.Right
                 MapNpc(mapNum).Npc(MapNpcNum).X = MapNpc(mapNum).Npc(MapNpcNum).X + 1
@@ -368,9 +359,6 @@ Module S_Npc
                 buffer.WriteInt32(MapNpc(mapNum).Npc(MapNpcNum).Y)
                 buffer.WriteInt32(MapNpc(mapNum).Npc(MapNpcNum).Dir)
                 buffer.WriteInt32(Movement)
-
-                Addlog("Sent SMSG: SNpcMove Right", PACKET_LOG)
-                Console.WriteLine("Sent SMSG: SNpcMove Right")
 
                 SendDataToMap(mapNum, buffer.Data, buffer.Head)
         End Select
@@ -391,9 +379,6 @@ Module S_Npc
         buffer.WriteInt32(ServerPackets.SNpcDir)
         buffer.WriteInt32(MapNpcNum)
         buffer.WriteInt32(Dir)
-
-        Addlog("Sent SMSG: SNpcDir", PACKET_LOG)
-        Console.WriteLine("Sent SMSG: SNpcDir")
 
         SendDataToMap(mapNum, buffer.Data, buffer.Head)
 
