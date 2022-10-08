@@ -64,8 +64,6 @@ Module C_Constants
 
     Friend ScreenMapy As Byte = 26
 
-    Friend MaxHistory As Byte = 50
-
     Friend ItemRarityColor0 = SFML.Graphics.Color.White ' white
     Friend ItemRarityColor1 = New SFML.Graphics.Color(102, 255, 0) ' green
     Friend ItemRarityColor2 = New SFML.Graphics.Color(73, 151, 208) ' blue
@@ -87,8 +85,9 @@ Module C_Constants
     Public TmpMaxX As Byte
     Public TmpMaxY As Byte
     Public TmpTile(,) As TileStruct
-    Public TileHistory(MaxHistory) as TileHistoryStruct
+    Public TileHistory() as TileHistoryStruct
     Public TileHistoryHighIndex As Integer
+    Public MaxTileHistory As Byte = 50
 
     Friend HalfX As Integer = ((ScreenMapx + 1) \ 2) * PicX
     Friend HalfY As Integer = ((ScreenMapy + 1) \ 2) * PicY
