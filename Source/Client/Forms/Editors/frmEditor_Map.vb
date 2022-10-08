@@ -78,7 +78,7 @@ Public Class frmEditor_Map
             ReDim Map.Tile(.MaxX, .MaxY)
             ReDim Autotile(.MaxX, .MaxY)
 
-            For i = 0 To MaxHistory
+            For i = 0 To MaxTileHistory
                 ReDim TileHistory(i).Tile(.MaxX, .MaxY)
             Next
 
@@ -90,7 +90,7 @@ Public Class frmEditor_Map
                     ReDim .Tile(X, Y).Layer(LayerType.Count - 1)
                     ReDim Autotile(X, Y).Layer(LayerType.Count - 1)
 
-                    For i = 0 To MaxHistory
+                    For i = 0 To MaxTileHistory
                         ReDim TileHistory(i).Tile(X,y).Layer(LayerType.Count - 1)
                     Next
 
@@ -658,6 +658,7 @@ Public Class frmEditor_Map
     Public Sub MapEditorMouseDown(ByVal Button As Integer, ByVal X As Integer, ByVal Y As Integer, Optional ByVal movedMouse As Boolean = True)
         Dim i As Integer
         Dim CurLayer As Integer
+        Dim tileChanged As Boolean
 
         CurLayer = cmbLayers.SelectedIndex
 
@@ -666,23 +667,26 @@ Public Class frmEditor_Map
             Exit Sub
         End If
 
-        MapEditorHistory()
-
         For x = 0 To Map.MaxX
             For y = 0 To Map.MaxY
                 With Map.Tile(X,Y)
-                    TileHistory(HistoryIndex).Tile(X,Y).Data1 = .Data1
-                    TileHistory(HistoryIndex).Tile(X,Y).Data2 = .Data2
-                    TileHistory(HistoryIndex).Tile(X,Y).Data3 = .Data3
-                    TileHistory(HistoryIndex).Tile(X,Y).Type = .Type
-                    TileHistory(HistoryIndex).Tile(X,Y).DirBlock = .DirBlock
+                    If .Layer(CurLayer).Tileset > 0 Then
+                        If Not tileChanged Then
+                            MapEditorHistory()
+                            tileChanged = True
+                        End If
 
-                    For i = 0 To LayerType.Count - 1
+                        TileHistory(HistoryIndex).Tile(X,Y).Data1 = .Data1
+                        TileHistory(HistoryIndex).Tile(X,Y).Data2 = .Data2
+                        TileHistory(HistoryIndex).Tile(X,Y).Data3 = .Data3
+                        TileHistory(HistoryIndex).Tile(X,Y).Type = .Type
+                        TileHistory(HistoryIndex).Tile(X,Y).DirBlock = .DirBlock
+
                         TileHistory(HistoryIndex).Tile(X,Y).Layer(CurLayer).X = .Layer(CurLayer).X 
                         TileHistory(HistoryIndex).Tile(X,Y).Layer(CurLayer).Y = .Layer(CurLayer).Y
                         TileHistory(HistoryIndex).Tile(X,Y).Layer(CurLayer).Tileset = .Layer(CurLayer).Tileset
                         TileHistory(HistoryIndex).Tile(X,Y).Layer(CurLayer).AutoTile = .Layer(CurLayer).AutoTile
-                    Next
+                    End If
                 End With
             Next
         Next
@@ -933,8 +937,8 @@ Public Class frmEditor_Map
     Public Sub MapEditorHistory()
         Dim x As Integer, y As Integer, j As Integer
 
-        If HistoryIndex = MaxHistory then
-            For i = 1 To MaxHistory - 1
+        If HistoryIndex = MaxTileHistory then
+            For i = 1 To MaxTileHistory - 1
                 TileHistory(i) = TileHistory(i + 1)
                 TileHistoryHighIndex = TileHistoryHighIndex - 1
             Next
@@ -1061,9 +1065,11 @@ Public Class frmEditor_Map
     Public Sub MapEditorRedo()
         Dim tileChanged As Boolean
 
-        If TileHistoryHighIndex > 0 And (TileHistoryHighIndex = HistoryIndex Or HistoryIndex = MaxHistory) Then
+        If TileHistoryHighIndex > 0 And (TileHistoryHighIndex = HistoryIndex Or HistoryIndex = MaxTileHistory) Then
             Exit Sub
-        End If 
+        End If
+
+        HistoryIndex = HistoryIndex + 1
 
         For x = 0 To Map.MaxX
             For y = 0 To Map.MaxY
@@ -1088,8 +1094,6 @@ Public Class frmEditor_Map
                 Next
             Next
         Next
-
-        HistoryIndex = HistoryIndex + 1
 
         If Not tileChanged Then
             MapEditorRedo()

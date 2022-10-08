@@ -416,7 +416,6 @@ Friend Module C_Quest
     ' ////////////////////////
     ' // Visual Interaction //
     ' ////////////////////////
-
     Friend Sub LoadQuestlogBox()
         Dim questNum As Integer, curTask As Integer, I As Integer
 
@@ -670,44 +669,6 @@ Friend Module C_Quest
 
             'Load textboxes
             .txtTaskLog.Text = "" & Trim$(TaskToLoad.TaskLog)
-
-            'Populate combo boxes
-            .cmbNpc.Items.Clear()
-
-            For i = 0 To MAX_NPCS
-                .cmbNpc.Items.Add(i & ": " & Npc(i).Name)
-            Next
-
-            .cmbItem.Items.Clear()
-
-            For i = 0 To MAX_ITEMS
-                .cmbItem.Items.Add(i & ": " & Item(i).Name)
-            Next
-
-            .cmbMap.Items.Clear()
-
-            For i = 0 To MAX_MAPS
-                .cmbMap.Items.Add(i)
-            Next
-
-            .cmbResource.Items.Clear()
-
-            For i = 0 To MAX_RESOURCES
-                .cmbResource.Items.Add(i & ": " & Resource(i).Name)
-            Next
-
-            'Set combo to 0 and disable them so they can be enabled when needed
-            .cmbNpc.SelectedIndex = 0
-            .cmbItem.SelectedIndex = 0
-            .cmbMap.SelectedIndex = 0
-            .cmbResource.SelectedIndex = 0
-            .nudAmount.Value = 0
-
-            .cmbNpc.Enabled = False
-            .cmbItem.Enabled = False
-            .cmbMap.Enabled = False
-            .cmbResource.Enabled = False
-            .nudAmount.Enabled = False
 
             If TaskToLoad.QuestEnd = 1 Then
                 .chkEnd.Checked = True

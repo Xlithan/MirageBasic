@@ -5,13 +5,50 @@ Friend Class frmEditor_Quest
 
     Private Sub FrmEditor_Quest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         fraRequirements.Location = fraQuestList.Location
-        fraRequirements.Visible = False
         fraTasks.Location = fraQuestList.Location
         fraTasks.Visible = False
-        nudAmount.Maximum = 999999
+        nudAmount.Maximum = Integer.MaxValue
         nudGiveAmount.Maximum = Byte.MaxValue
         nudTakeAmount.Maximum = Byte.MaxValue
-        nudItemRewValue.Maximum = 999999
+        nudItemRewValue.Maximum = Integer.MaxValue
+
+        'Populate combo boxes
+        cmbNpc.Items.Clear()
+
+        For i = 0 To MAX_NPCS
+            cmbNpc.Items.Add(i & ": " & Npc(i).Name)
+        Next
+
+        cmbItem.Items.Clear()
+
+        For i = 0 To MAX_ITEMS
+            cmbItem.Items.Add(i & ": " & Item(i).Name)
+        Next
+
+        cmbMap.Items.Clear()
+
+        For i = 0 To MAX_MAPS
+            cmbMap.Items.Add(i)
+        Next
+
+        cmbResource.Items.Clear()
+
+        For i = 0 To MAX_RESOURCES
+            cmbResource.Items.Add(i & ": " & Resource(i).Name)
+        Next
+
+        'Set combo to 0 and disable them so they can be enabled when needed
+        cmbNpc.SelectedIndex = 0
+        cmbItem.SelectedIndex = 0
+        cmbMap.SelectedIndex = 0
+        cmbResource.SelectedIndex = 0
+        nudAmount.Value = 0
+
+        cmbNpc.Enabled = False
+        cmbItem.Enabled = False
+        cmbMap.Enabled = False
+        cmbResource.Enabled = False
+        nudAmount.Enabled = False
 
         lstIndex.Items.Clear()
         cmbQuestReq.Items.Clear()
@@ -120,9 +157,11 @@ Friend Class frmEditor_Quest
         ReDim tmpRewardItemIndex(Quest(Editorindex).RewardCount - 1)
 
        For i = 0 To Quest(Editorindex).RewardCount
-            If Not i = lstRewards.SelectedIndex Then
-                tmpRewardItem(i) = Quest(Editorindex).RewardItem(i)
-                tmpRewardItemIndex(i) = Quest(Editorindex).RewardItemAmount(i)
+            if lstRewards.SelectedIndex  > -1 Then
+                If Not i = lstRewards.SelectedIndex Then
+                    tmpRewardItem(i) = Quest(Editorindex).RewardItem(i)
+                    tmpRewardItemIndex(i) = Quest(Editorindex).RewardItemAmount(i)
+                End If
             End If
         Next
 
@@ -131,13 +170,13 @@ Friend Class frmEditor_Quest
         ReDim Quest(Editorindex).RewardItem(Quest(Editorindex).RewardCount)
         ReDim Quest(Editorindex).RewardItemAmount(Quest(Editorindex).RewardCount)
 
-       For i = 0 To Quest(Editorindex).RewardCount
+        For i = 0 To Quest(Editorindex).RewardCount
             Quest(Editorindex).RewardItem(i) = tmpRewardItem(i)
             Quest(Editorindex).RewardItemAmount(i) = tmpRewardItemIndex(i)
         Next
 
         lstRewards.Items.Clear()
-       For i = 0 To Quest(Editorindex).RewardCount
+        For i = 0 To Quest(Editorindex).RewardCount
             lstRewards.Items.Add(i & ":" & Quest(Editorindex).RewardItemAmount(i) & " X " & Trim(Item(Quest(Editorindex).RewardItem(i)).Name))
         Next
 
@@ -152,6 +191,7 @@ Friend Class frmEditor_Quest
 
         SelectedTask = lstTasks.SelectedIndex
         LoadTask(Editorindex, SelectedTask)
+        fraRequirements.Visible = False
         fraTasks.Visible = True
         fraTasks.BringToFront()
     End Sub
@@ -177,7 +217,7 @@ Friend Class frmEditor_Quest
 
         ReDim tmptask(Quest(Editorindex).TaskCount - 1)
 
-       For i = 0 To Quest(Editorindex).TaskCount
+        For i = 0 To Quest(Editorindex).TaskCount
             If Not i = lstTasks.SelectedIndex Then
                 tmptask(i) = Quest(Editorindex).Task(i)
             End If
@@ -187,75 +227,78 @@ Friend Class frmEditor_Quest
 
         ReDim Quest(Editorindex).Task(Quest(Editorindex).TaskCount)
 
-       For i = 0 To Quest(Editorindex).TaskCount
+        For i = 0 To Quest(Editorindex).TaskCount
             If Not i = lstTasks.SelectedIndex Then
                 Quest(Editorindex).Task(i) = tmptask(i)
             End If
         Next
 
         lstTasks.Items.Clear()
-       For i = 0 To Quest(Editorindex).TaskCount
+        For i = 0 To Quest(Editorindex).TaskCount
             lstTasks.Items.Add(i & ":" & Quest(Editorindex).Task(i).TaskLog)
         Next
 
     End Sub
 
     Private Sub BtnSaveTask_Click(sender As Object, e As EventArgs) Handles btnSaveTask.Click
-
         If lstTasks.SelectedIndex < 0 Then
             SelectedTask = Quest(Editorindex).TaskCount
         Else
             SelectedTask = lstTasks.SelectedIndex
         End If
 
-        Quest(Editorindex).Task(SelectedTask).TaskLog = Trim$(txtTaskLog.Text)
-        Quest(Editorindex).Task(SelectedTask).Speech = txtTaskSpeech.Text
+        If SelectedTask > 0 Then
+            Quest(Editorindex).Task(SelectedTask).TaskLog = Trim$(txtTaskLog.Text)
+            Quest(Editorindex).Task(SelectedTask).Speech = Trim$(txtTaskSpeech.Text)
 
-        If chkEnd.Checked = True Then
-            Quest(Editorindex).Task(SelectedTask).QuestEnd = 1
-        Else
-            Quest(Editorindex).Task(SelectedTask).QuestEnd = 0
+            If chkEnd.Checked = True Then
+                Quest(Editorindex).Task(SelectedTask).QuestEnd = 1
+            Else
+                Quest(Editorindex).Task(SelectedTask).QuestEnd = 0
+            End If
+            Quest(Editorindex).Task(SelectedTask).Npc = cmbNpc.SelectedIndex
+            Quest(Editorindex).Task(SelectedTask).Item = cmbItem.SelectedIndex
+            Quest(Editorindex).Task(SelectedTask).Map = cmbMap.SelectedIndex
+            Quest(Editorindex).Task(SelectedTask).Resource = cmbResource.SelectedIndex
+            Quest(Editorindex).Task(SelectedTask).Amount = nudAmount.Value
+
+            If optTask0.Checked = True Then
+                Quest(Editorindex).Task(SelectedTask).Order = 0
+            ElseIf optTask1.Checked = True Then
+                Quest(Editorindex).Task(SelectedTask).Order = 1
+            ElseIf optTask2.Checked = True Then
+                Quest(Editorindex).Task(SelectedTask).Order = 2
+            ElseIf optTask3.Checked = True Then
+                Quest(Editorindex).Task(SelectedTask).Order = 3
+            ElseIf optTask4.Checked = True Then
+                Quest(Editorindex).Task(SelectedTask).Order = 4
+            ElseIf optTask5.Checked = True Then
+                Quest(Editorindex).Task(SelectedTask).Order = 5
+            ElseIf optTask6.Checked = True Then
+                Quest(Editorindex).Task(SelectedTask).Order = 6
+            ElseIf optTask7.Checked = True Then
+                Quest(Editorindex).Task(SelectedTask).Order = 7
+            End If
+
+            lstTasks.Items.Clear()
+            For i = 0 To Quest(Editorindex).TaskCount
+                lstTasks.Items.Add(i & ":" & Quest(Editorindex).Task(i).TaskLog)
+            Next
         End If
-
-        Quest(Editorindex).Task(SelectedTask).Npc = cmbNpc.SelectedIndex
-        Quest(Editorindex).Task(SelectedTask).Item = cmbItem.SelectedIndex
-        Quest(Editorindex).Task(SelectedTask).Map = cmbMap.SelectedIndex
-        Quest(Editorindex).Task(SelectedTask).Resource = cmbResource.SelectedIndex
-        Quest(Editorindex).Task(SelectedTask).Amount = nudAmount.Value
-
-        If optTask0.Checked = True Then
-            Quest(Editorindex).Task(SelectedTask).Order = 0
-        ElseIf optTask1.Checked = True Then
-            Quest(Editorindex).Task(SelectedTask).Order = 1
-        ElseIf optTask2.Checked = True Then
-            Quest(Editorindex).Task(SelectedTask).Order = 2
-        ElseIf optTask3.Checked = True Then
-            Quest(Editorindex).Task(SelectedTask).Order = 3
-        ElseIf optTask4.Checked = True Then
-            Quest(Editorindex).Task(SelectedTask).Order = 4
-        ElseIf optTask5.Checked = True Then
-            Quest(Editorindex).Task(SelectedTask).Order = 5
-        ElseIf optTask6.Checked = True Then
-            Quest(Editorindex).Task(SelectedTask).Order = 6
-        ElseIf optTask7.Checked = True Then
-            Quest(Editorindex).Task(SelectedTask).Order = 7
-        End If
-
-        lstTasks.Items.Clear()
-       For i = 0 To Quest(Editorindex).TaskCount
-            lstTasks.Items.Add(i & ":" & Quest(Editorindex).Task(i).TaskLog)
-        Next
 
         fraTasks.Visible = False
     End Sub
 
     Private Sub BtnCancelTask_Click(sender As Object, e As EventArgs) Handles btnCancelTask.Click
-        Quest(Editorindex).TaskCount = Quest(Editorindex).TaskCount - 1
+        If Quest(Editorindex).TaskCount > 0 Then
+            Quest(Editorindex).TaskCount = Quest(Editorindex).TaskCount - 1
+        End If
 
         ReDim Quest(Editorindex).Task(Quest(Editorindex).TaskCount)
 
         SelectedTask = Quest(Editorindex).TaskCount
         fraTasks.Visible = False
+        fraRequirements.Visible = False
     End Sub
 
     Private Sub OptTask0_CheckedChanged(sender As Object, e As EventArgs) Handles optTask0.CheckedChanged
@@ -353,7 +396,9 @@ Friend Class frmEditor_Quest
         ReDim Quest(Editorindex).Requirement(Quest(Editorindex).ReqCount)
         ReDim Quest(Editorindex).RequirementIndex(Quest(Editorindex).ReqCount)
 
-        fraRequirements.Visible = True
+        fraTasks.Visible = True 
+        fraTasks.BringToFront()
+        fraRequirements.Visible = True 
         fraRequirements.BringToFront()
     End Sub
 
@@ -364,9 +409,11 @@ Friend Class frmEditor_Quest
         ReDim tmpRequirementIndex(Quest(Editorindex).ReqCount - 1)
 
        For i = 0 To Quest(Editorindex).ReqCount
-            If Not i = lstRequirements.SelectedIndex Then
-                tmpRequirement(i) = Quest(Editorindex).Requirement(i)
-                tmpRequirementIndex(i) = Quest(Editorindex).RequirementIndex(i)
+            If lstRewards.SelectedIndex > -1 Then
+                If Not i = lstRequirements.SelectedIndex Then
+                    tmpRequirement(i) = Quest(Editorindex).Requirement(i)
+                    tmpRequirementIndex(i) = Quest(Editorindex).RequirementIndex(i)
+                End If
             End If
         Next
 
@@ -438,6 +485,7 @@ Friend Class frmEditor_Quest
     End Sub
 
     Private Sub BtnRequirementCancel_Click(sender As Object, e As EventArgs) Handles btnRequirementCancel.Click
+        fraTasks.Visible = False
         fraRequirements.Visible = False
     End Sub
 
