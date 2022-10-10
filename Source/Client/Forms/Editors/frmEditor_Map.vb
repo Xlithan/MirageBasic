@@ -5,6 +5,7 @@ Imports SFML.Window
 Imports Mirage.Basic.Engine
 Imports SFML.System
 Imports Mirage.Basic.Engine.Enumerations
+Imports System.Drawing.Imaging
 
 Public Class frmEditor_Map
 #Region "Frm"
@@ -91,7 +92,7 @@ Public Class frmEditor_Map
                     ReDim Autotile(X, Y).Layer(LayerType.Count - 1)
 
                     For i = 0 To MaxTileHistory
-                        ReDim TileHistory(i).Tile(X,y).Layer(LayerType.Count - 1)
+                        ReDim TileHistory(i).Tile(X, Y).Layer(LayerType.Count - 1)
                     Next
 
                     If X <= x2 Then
@@ -103,7 +104,7 @@ Public Class frmEditor_Map
             Next
         End With
 
-        MapEditorSend()      
+        MapEditorSend()
         GettingMap = True
         Dispose()
     End Sub
@@ -112,12 +113,12 @@ Public Class frmEditor_Map
         MapEditorFillLayer(cmbAutoTile.SelectedIndex)
     End Sub
 
-    Private Sub TsbClear_Click(sender As Object, e As EventArgs) Handles  tsbClear.Click
+    Private Sub TsbClear_Click(sender As Object, e As EventArgs) Handles tsbClear.Click
         MapEditorClearLayer()
     End Sub
 
     Private Sub TsbEyeDropper_Click(sender As Object, e As EventArgs) Handles tsbEyeDropper.Click
-        EyeDropper = Not EyeDropper  
+        EyeDropper = Not EyeDropper
     End Sub
 
     Private Sub TsbDiscard_Click(sender As Object, e As EventArgs) Handles tsbDiscard.Click
@@ -516,12 +517,12 @@ Public Class frmEditor_Map
         txtBootY.Text = Map.BootY
         lstMapNpc.Items.Clear()
 
-        For x = 0 To MAX_MAP_NPCS
-             lstMapNpc.Items.Add(X & ": " & Trim$(Npc(Map.Npc(X)).Name))
+        For X = 0 To MAX_MAP_NPCS
+            lstMapNpc.Items.Add(X & ": " & Trim$(Npc(Map.Npc(X)).Name))
         Next
 
         cmbNpcList.Items.Clear()
-        For y = 0 To MAX_NPCS
+        For Y = 0 To MAX_NPCS
             cmbNpcList.Items.Add(Y & ": " & Trim$(Npc(Y).Name))
         Next
 
@@ -542,12 +543,12 @@ Public Class frmEditor_Map
         lblIntensity.Text = "Intensity: " & scrlIntensity.Value
 
         cmbPanorama.Items.Clear()
-       For i = 0 To NumPanorama
+        For i = 0 To NumPanorama
             cmbPanorama.Items.Add(i)
         Next
 
         cmbParallax.Items.Clear()
-       For i = 0 To NumParallax
+        For i = 0 To NumParallax
             cmbParallax.Items.Add(i)
         Next
 
@@ -663,29 +664,29 @@ Public Class frmEditor_Map
         CurLayer = cmbLayers.SelectedIndex
 
         If EyeDropper Then
-            MapEditorEyeDropper() 
+            MapEditorEyeDropper()
             Exit Sub
         End If
 
-        For x = 0 To Map.MaxX
-            For y = 0 To Map.MaxY
-                With Map.Tile(X,Y)
+        For X = 0 To Map.MaxX
+            For Y = 0 To Map.MaxY
+                With Map.Tile(X, Y)
                     If .Layer(CurLayer).Tileset > 0 Then
                         If Not tileChanged Then
                             MapEditorHistory()
                             tileChanged = True
                         End If
 
-                        TileHistory(HistoryIndex).Tile(X,Y).Data1 = .Data1
-                        TileHistory(HistoryIndex).Tile(X,Y).Data2 = .Data2
-                        TileHistory(HistoryIndex).Tile(X,Y).Data3 = .Data3
-                        TileHistory(HistoryIndex).Tile(X,Y).Type = .Type
-                        TileHistory(HistoryIndex).Tile(X,Y).DirBlock = .DirBlock
+                        TileHistory(HistoryIndex).Tile(X, Y).Data1 = .Data1
+                        TileHistory(HistoryIndex).Tile(X, Y).Data2 = .Data2
+                        TileHistory(HistoryIndex).Tile(X, Y).Data3 = .Data3
+                        TileHistory(HistoryIndex).Tile(X, Y).Type = .Type
+                        TileHistory(HistoryIndex).Tile(X, Y).DirBlock = .DirBlock
 
-                        TileHistory(HistoryIndex).Tile(X,Y).Layer(CurLayer).X = .Layer(CurLayer).X 
-                        TileHistory(HistoryIndex).Tile(X,Y).Layer(CurLayer).Y = .Layer(CurLayer).Y
-                        TileHistory(HistoryIndex).Tile(X,Y).Layer(CurLayer).Tileset = .Layer(CurLayer).Tileset
-                        TileHistory(HistoryIndex).Tile(X,Y).Layer(CurLayer).AutoTile = .Layer(CurLayer).AutoTile
+                        TileHistory(HistoryIndex).Tile(X, Y).Layer(CurLayer).X = .Layer(CurLayer).X
+                        TileHistory(HistoryIndex).Tile(X, Y).Layer(CurLayer).Y = .Layer(CurLayer).Y
+                        TileHistory(HistoryIndex).Tile(X, Y).Layer(CurLayer).Tileset = .Layer(CurLayer).Tileset
+                        TileHistory(HistoryIndex).Tile(X, Y).Layer(CurLayer).AutoTile = .Layer(CurLayer).AutoTile
                     End If
                 End With
             Next
@@ -702,7 +703,7 @@ Public Class frmEditor_Map
                     Else
                         MapEditorSetTile(CurX, CurY, CurLayer, , cmbAutoTile.SelectedIndex)
                     End If
-                End If 
+                End If
             ElseIf tabpages.SelectedTab Is tpAttributes Then
                 With Map.Tile(CurX, CurY)
                     ' blocked tile
@@ -843,7 +844,7 @@ Public Class frmEditor_Map
     End Sub
 
     Public Sub MapEditorCancel()
-        If Editor <> EditorType.Map Then Exit sub
+        If Editor <> EditorType.Map Then Exit Sub
         Dim Buffer As ByteStream
         Buffer = New ByteStream(4)
         Buffer.WriteInt32(ClientPackets.CNeedMap)
@@ -866,7 +867,7 @@ Public Class frmEditor_Map
     End Sub
 
     Public Sub MapEditorSetTile(ByVal X As Integer, ByVal Y As Integer, ByVal CurLayer As Integer, Optional ByVal multitile As Boolean = False, Optional ByVal theAutotile As Byte = 0, Optional eraseTile As Byte = 0)
-        Dim x2 As Integer, y2 As Integer, newTileX As Integer, newTileY As integer
+        Dim x2 As Integer, y2 As Integer, newTileX As Integer, newTileY As Integer
 
         newTileX = EditorTileX
         newTileY = EditorTileY
@@ -938,14 +939,14 @@ Public Class frmEditor_Map
     Public Sub MapEditorHistory()
         Dim x As Integer, y As Integer, j As Integer
 
-        If HistoryIndex = MaxTileHistory then
+        If HistoryIndex = MaxTileHistory Then
             For i = 1 To MaxTileHistory - 1
                 TileHistory(i) = TileHistory(i + 1)
                 TileHistoryHighIndex = TileHistoryHighIndex - 1
             Next
         Else
             HistoryIndex = HistoryIndex + 1
-            TileHistoryHighIndex = TileHistoryHighIndex  + 1
+            TileHistoryHighIndex = TileHistoryHighIndex + 1
             If TileHistoryHighIndex > HistoryIndex Then
                 TileHistoryHighIndex = HistoryIndex
             End If
@@ -1026,7 +1027,7 @@ Public Class frmEditor_Map
         End With
     End Sub
 
-    Public sub MapEditorUndo()
+    Public Sub MapEditorUndo()
         Dim tileChanged As Boolean
 
         If HistoryIndex = 0 Then
@@ -1038,21 +1039,21 @@ Public Class frmEditor_Map
         For x = 0 To Map.MaxX
             For y = 0 To Map.MaxY
                 For i = 0 To LayerType.Count - 1
-                    With Map.Tile(X,Y)
-                        If Not (Map.Tile(x,y).Type = TileHistory(HistoryIndex).Tile(x,y).Type) Or (Not .Layer(i).X = TileHistory(HistoryIndex).Tile(x,y).Layer(i).X Or Not .Layer(i).Y = TileHistory(HistoryIndex).Tile(x,y).Layer(i).Y Or Not  .Layer(i).Tileset = TileHistory(HistoryIndex).Tile(x,y).Layer(i).Tileset) Then
+                    With Map.Tile(x, y)
+                        If Not (Map.Tile(x, y).Type = TileHistory(HistoryIndex).Tile(x, y).Type) Or (Not .Layer(i).X = TileHistory(HistoryIndex).Tile(x, y).Layer(i).X Or Not .Layer(i).Y = TileHistory(HistoryIndex).Tile(x, y).Layer(i).Y Or Not .Layer(i).Tileset = TileHistory(HistoryIndex).Tile(x, y).Layer(i).Tileset) Then
                             tileChanged = True
                         End If
 
-                        .Data1 = TileHistory(HistoryIndex).Tile(X,Y).Data1
-                        .Data2 = TileHistory(HistoryIndex).Tile(X,Y).Data2
-                        .Data3 = TileHistory(HistoryIndex).Tile(X,Y).Data3
-                        .Type = TileHistory(HistoryIndex).Tile(X,Y).Type
-                        .DirBlock = TileHistory(HistoryIndex).Tile(X,Y).DirBlock
-                        .Layer(i).X = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).X
-                        .Layer(i).Y = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).Y
-                        .Layer(i).Tileset = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).Tileset
-                        .Layer(i).AutoTile = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).AutoTile
-                        CacheRenderState(x,y, i)
+                        .Data1 = TileHistory(HistoryIndex).Tile(x, y).Data1
+                        .Data2 = TileHistory(HistoryIndex).Tile(x, y).Data2
+                        .Data3 = TileHistory(HistoryIndex).Tile(x, y).Data3
+                        .Type = TileHistory(HistoryIndex).Tile(x, y).Type
+                        .DirBlock = TileHistory(HistoryIndex).Tile(x, y).DirBlock
+                        .Layer(i).X = TileHistory(HistoryIndex).Tile(x, y).Layer(i).X
+                        .Layer(i).Y = TileHistory(HistoryIndex).Tile(x, y).Layer(i).Y
+                        .Layer(i).Tileset = TileHistory(HistoryIndex).Tile(x, y).Layer(i).Tileset
+                        .Layer(i).AutoTile = TileHistory(HistoryIndex).Tile(x, y).Layer(i).AutoTile
+                        CacheRenderState(x, y, i)
                     End With
                 Next
             Next
@@ -1061,7 +1062,7 @@ Public Class frmEditor_Map
         If Not tileChanged Then
             MapEditorUndo()
         End If
-    End sub
+    End Sub
 
     Public Sub MapEditorRedo()
         Dim tileChanged As Boolean
@@ -1075,22 +1076,22 @@ Public Class frmEditor_Map
         For x = 0 To Map.MaxX
             For y = 0 To Map.MaxY
                 For i = 0 To LayerType.Count - 1
-                     With Map.Tile(x,y)
-                        If Not (Map.Tile(x,y).Type = TileHistory(HistoryIndex).Tile(x,y).Type) Or (Not .Layer(i).X = TileHistory(HistoryIndex).Tile(x,y).Layer(i).X Or Not .Layer(i).Y = TileHistory(HistoryIndex).Tile(x,y).Layer(i).Y Or Not  .Layer(i).Tileset = TileHistory(HistoryIndex).Tile(x,y).Layer(i).Tileset) Then
+                    With Map.Tile(x, y)
+                        If Not (Map.Tile(x, y).Type = TileHistory(HistoryIndex).Tile(x, y).Type) Or (Not .Layer(i).X = TileHistory(HistoryIndex).Tile(x, y).Layer(i).X Or Not .Layer(i).Y = TileHistory(HistoryIndex).Tile(x, y).Layer(i).Y Or Not .Layer(i).Tileset = TileHistory(HistoryIndex).Tile(x, y).Layer(i).Tileset) Then
                             tileChanged = True
                         End If
 
-                        .Data1 = TileHistory(HistoryIndex).Tile(X,Y).Data1
-                        .Data2 = TileHistory(HistoryIndex).Tile(X,Y).Data2
-                        .Data3 = TileHistory(HistoryIndex).Tile(X,Y).Data3
-                        .Type = TileHistory(HistoryIndex).Tile(X,Y).Type
-                        .DirBlock = TileHistory(HistoryIndex).Tile(X,Y).DirBlock
+                        .Data1 = TileHistory(HistoryIndex).Tile(x, y).Data1
+                        .Data2 = TileHistory(HistoryIndex).Tile(x, y).Data2
+                        .Data3 = TileHistory(HistoryIndex).Tile(x, y).Data3
+                        .Type = TileHistory(HistoryIndex).Tile(x, y).Type
+                        .DirBlock = TileHistory(HistoryIndex).Tile(x, y).DirBlock
 
-                        .Layer(i).X = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).X
-                        .Layer(i).Y = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).Y
-                        .Layer(i).Tileset = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).Tileset
-                        .Layer(i).AutoTile = TileHistory(HistoryIndex).Tile(X,Y).Layer(i).AutoTile
-                        CacheRenderState(x,y, i)
+                        .Layer(i).X = TileHistory(HistoryIndex).Tile(x, y).Layer(i).X
+                        .Layer(i).Y = TileHistory(HistoryIndex).Tile(x, y).Layer(i).Y
+                        .Layer(i).Tileset = TileHistory(HistoryIndex).Tile(x, y).Layer(i).Tileset
+                        .Layer(i).AutoTile = TileHistory(HistoryIndex).Tile(x, y).Layer(i).AutoTile
+                        CacheRenderState(x, y, i)
                     End With
                 Next
             Next
@@ -1240,20 +1241,20 @@ Public Class frmEditor_Map
 
             For X = 0 To Map.MaxX
                 For Y = 0 To Map.MaxY
-                    With Map.Tile(X,Y)
-                        ReDim TmpTile(X,Y).Layer(LayerType.Count - 1)
+                    With Map.Tile(X, Y)
+                        ReDim TmpTile(X, Y).Layer(LayerType.Count - 1)
 
-                        TmpTile(X,Y).Data1 = .Data1
-                        TmpTile(X,Y).Data2 = .Data2
-                        TmpTile(X,Y).Data3 = .Data3
-                        TmpTile(X,Y).Type = .Type
-                        TmpTile(X,Y).DirBlock = .DirBlock
+                        TmpTile(X, Y).Data1 = .Data1
+                        TmpTile(X, Y).Data2 = .Data2
+                        TmpTile(X, Y).Data3 = .Data3
+                        TmpTile(X, Y).Type = .Type
+                        TmpTile(X, Y).DirBlock = .DirBlock
 
-                        For i = 0 To LayerType.Count - 1 
-                            TmpTile(X,Y).Layer(i).X = .Layer(i).X
-                            TmpTile(X,Y).Layer(i).Y = .Layer(i).Y
-                            TmpTile(X,Y).Layer(i).Tileset = .Layer(i).Tileset
-                            TmpTile(X,Y).Layer(i).AutoTile = .Layer(i).AutoTile
+                        For i = 0 To LayerType.Count - 1
+                            TmpTile(X, Y).Layer(i).X = .Layer(i).X
+                            TmpTile(X, Y).Layer(i).Y = .Layer(i).Y
+                            TmpTile(X, Y).Layer(i).Tileset = .Layer(i).Tileset
+                            TmpTile(X, Y).Layer(i).AutoTile = .Layer(i).AutoTile
                         Next
                     End With
                 Next
@@ -1265,30 +1266,30 @@ Public Class frmEditor_Map
             ReDim Map.Tile(TmpMaxX, TmpMaxY)
             ReDim Autotile(TmpMaxX, TmpMaxY)
             Map.MaxX = TmpMaxX
-            Map.MaxY = TmpMaxY            
+            Map.MaxY = TmpMaxY
 
             For X = 0 To Map.MaxX
                 For Y = 0 To Map.MaxY
-                    With Map.Tile(X,Y)
-                        ReDim Map.Tile(X,Y).Layer(LayerType.Count - 1)
+                    With Map.Tile(X, Y)
+                        ReDim Map.Tile(X, Y).Layer(LayerType.Count - 1)
                         ReDim Autotile(X, Y).Layer(LayerType.Count - 1)
 
-                        .Data1 = TmpTile(X,Y).Data1
-                        .Data2 =  TmpTile(X,Y).Data2
-                        .Data3 = TmpTile(X,Y).Data3
-                        .Type = TmpTile(X,Y).Type
-                        .DirBlock = TmpTile(X,Y).DirBlock
+                        .Data1 = TmpTile(X, Y).Data1
+                        .Data2 = TmpTile(X, Y).Data2
+                        .Data3 = TmpTile(X, Y).Data3
+                        .Type = TmpTile(X, Y).Type
+                        .DirBlock = TmpTile(X, Y).DirBlock
 
-                        For i = 0 To LayerType.Count - 1 
-                            .Layer(i).X = TmpTile(X,Y).Layer(i).X
-                            .Layer(i).Y = TmpTile(X,Y).Layer(i).Y
-                            .Layer(i).Tileset = TmpTile(X,Y).Layer(i).Tileset
-                            .Layer(i).AutoTile = TmpTile(X,Y).Layer(i).AutoTile
-                            CacheRenderState(X,Y,i)
+                        For i = 0 To LayerType.Count - 1
+                            .Layer(i).X = TmpTile(X, Y).Layer(i).X
+                            .Layer(i).Y = TmpTile(X, Y).Layer(i).Y
+                            .Layer(i).Tileset = TmpTile(X, Y).Layer(i).Tileset
+                            .Layer(i).AutoTile = TmpTile(X, Y).Layer(i).AutoTile
+                            CacheRenderState(X, Y, i)
                         Next
                     End With
                 Next
-            Next 
+            Next
             CopyMap = False
         End If
     End Sub
@@ -1308,6 +1309,18 @@ Public Class frmEditor_Map
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles tsbLight.Click
         Night = Not Night
     End Sub
+
+    Private Sub tsbScreenshot_Click(sender As Object, e As EventArgs) Handles tsbScreenshot.Click
+        If Map.Name = "" Then
+            MsgBox("Screenshot is done only if map has a valid name.")
+            Exit Sub
+        End If
+
+        Dim image As Image
+        image = GameWindow.Capture()
+        image.SaveToFile(Map.Name & GfxExt)
+    End Sub
+
 #End Region
 
 End Class

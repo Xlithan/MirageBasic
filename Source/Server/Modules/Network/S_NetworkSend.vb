@@ -1222,7 +1222,7 @@ End Sub
         AddDebug("Sent SMSG: SNews")
 
         buffer.WriteString(Settings.GameName.Trim)
-        buffer.WriteString(GetFileContents(Paths.Database & "news.txt").Trim)
+        buffer.WriteString(GetFileContents(Paths.Database & "News.txt").Trim)
 
         Socket.SendDataTo(index, buffer.Data, buffer.Head)
 

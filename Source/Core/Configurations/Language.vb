@@ -237,7 +237,7 @@ Public Class LanguageDef
     Public Class CharacterDef
 
         Public PName As String = "Name: "
-        Public ClassType As String = "Class: "
+        Public JobType As String = "Job: "
         Public Level As String = "Lv: "
         Public Exp As String = "Exp: "
 

@@ -521,11 +521,9 @@ Partial Class FrmMenu
         Me.lblNews.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
         Me.lblNews.Location = New System.Drawing.Point(17, 55)
         Me.lblNews.Name = "lblNews"
+        Me.lblNews.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.lblNews.Size = New System.Drawing.Size(366, 121)
         Me.lblNews.TabIndex = 37
-        Me.lblNews.Text = "Welcome to the MirageBasic Client. This is a free open source VB.Net game engine!"& _ 
-    " "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"For help or support please visit our site at http://forums.miragegaming.net"& _ 
-    ""
         Me.lblNews.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'picLogo
@@ -697,12 +695,12 @@ Partial Class FrmMenu
         Me.Controls.Add(Me.btnRegister)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.pnlMainMenu)
         Me.Controls.Add(Me.pnlCharSelect)
         Me.Controls.Add(Me.pnlNewChar)
         Me.Controls.Add(Me.pnlCredits)
         Me.Controls.Add(Me.pnlRegister)
         Me.Controls.Add(Me.pnlLogin)
-        Me.Controls.Add(Me.pnlMainMenu)
         Me.DoubleBuffered = true
         Me.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
         Me.ForeColor = System.Drawing.Color.Black

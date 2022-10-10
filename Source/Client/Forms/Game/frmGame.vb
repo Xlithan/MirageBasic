@@ -217,6 +217,16 @@ Friend Class FrmGame
 
     End Sub
 
+    Private Sub PicScreen_MouseWheel(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picscreen.MouseWheel
+        If Editor = EditorType.Map Then
+            If e.Delta > 0 Then
+                FrmEditor_map.cmbTileSets.SelectedIndex = FrmEditor_map.cmbTileSets.SelectedIndex - 1
+            Else
+                FrmEditor_map.cmbTileSets.SelectedIndex = FrmEditor_map.cmbTileSets.SelectedIndex + 1
+            End If 
+        End If
+    End Sub
+
     Private Sub Picscreen_DoubleClick(sender As Object, e As MouseEventArgs) Handles picscreen.DoubleClick
         If Not CheckGuiDoubleClick(e.X, e.Y, e) And IsDescWindowActive(e.X, e.y) = False Then
             If GetPlayerAccess(Myindex) >= 2 Then AdminWarp(CurX, CurY)

@@ -87,6 +87,7 @@ Partial Class frmEditor_Map
         Me.tsbCopyMap = New System.Windows.Forms.ToolStripButton()
         Me.tsbUndo = New System.Windows.Forms.ToolStripButton()
         Me.tsbRedo = New System.Windows.Forms.ToolStripButton()
+        Me.tsbScreenshot = New System.Windows.Forms.ToolStripButton()
         Me.tabpages = New System.Windows.Forms.TabControl()
         Me.tpTiles = New System.Windows.Forms.TabPage()
         Me.cmbAutoTile = New System.Windows.Forms.ComboBox()
@@ -736,7 +737,7 @@ Partial Class frmEditor_Map
         '
         'ToolStrip
         '
-        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.tsbOpacity, Me.tsbLight, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear, Me.tsbEyeDropper, Me.tsbCopyMap, Me.tsbUndo, Me.tsbRedo})
+        Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.tsbOpacity, Me.tsbLight, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear, Me.tsbEyeDropper, Me.tsbCopyMap, Me.tsbUndo, Me.tsbRedo, Me.tsbScreenshot})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip.Name = "ToolStrip"
         Me.ToolStrip.Size = New System.Drawing.Size(558, 25)
@@ -847,6 +848,15 @@ Partial Class frmEditor_Map
         Me.tsbRedo.Name = "tsbRedo"
         Me.tsbRedo.Size = New System.Drawing.Size(23, 22)
         Me.tsbRedo.ToolTipText = "Redo"
+        '
+        'tsbScreenshot
+        '
+        Me.tsbScreenshot.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbScreenshot.Image = Global.Mirage.Basic.Client.My.Resources.Resources.ScreenShot
+        Me.tsbScreenshot.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbScreenshot.Name = "tsbScreenshot"
+        Me.tsbScreenshot.Size = New System.Drawing.Size(23, 22)
+        Me.tsbScreenshot.ToolTipText = "Screenshot"
         '
         'tabpages
         '
@@ -2029,4 +2039,5 @@ End Sub
     Friend WithEvents tsbRedo As ToolStripButton
     Friend WithEvents tsbOpacity As ToolStripButton
     Friend WithEvents tsbLight As ToolStripButton
+    Friend WithEvents tsbScreenshot As ToolStripButton
 End Class
