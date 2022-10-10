@@ -16,6 +16,7 @@ Module C_GameLogic
         Dim tmr10000 As Integer, tmr1000 As Integer, tmrweather As Integer
         Dim tmr100 As Integer, tmr500 As Integer, tmrconnect As Integer
         Dim fadetmr As Integer, renderFrame As Boolean, rendertmr As Integer
+        Dim animationtmr As Integer
 
         starttime = GetTickCount()
 
@@ -84,7 +85,26 @@ Module C_GameLogic
                     ShowAnimTimer = tick + 500
                 End If
 
-               For i = 0 To MAX_ANIMATIONS
+                If animationtmr < tick Then
+                    For x = 0 To Map.MaxX
+                        For y = 0 To Map.MaxY
+                            If IsValidMapPoint(x, y) Then
+                                If Map.Tile(x, y).Type = CByte(TileType.Animation) Then
+                                    If Map.Tile(x,y).Data1 > 0 Then
+                                        CreateAnimation(Map.Tile(x,y).Data1, x, y)
+                                        If Animation(Map.Tile(x,y).Data1).LoopTime(0) > 0 Then
+                                            animationtmr = tick + Animation(Map.Tile(x,y).Data1).LoopTime(0) * Animation(Map.Tile(x,y).Data1).Frames(0) * Animation(Map.Tile(x,y).Data1).LoopCount(0)
+                                        Else
+                                            animationtmr = tick + Animation(Map.Tile(x,y).Data1).LoopTime(1) * Animation(Map.Tile(x,y).Data1).Frames(1) * Animation(Map.Tile(x,y).Data1).LoopCount(1)
+                                        End If
+                                    End If
+                                End If
+                            End If
+                        Next
+                    Next
+                End If
+
+               For i = 0 To Byte.MaxValue
                     CheckAnimInstance(i)
                 Next
 
@@ -200,7 +220,7 @@ Module C_GameLogic
                         ProcessEventMovement(i)
                     Next
 
-                    walkTimer = tick + 30 ' edit this value to change WalkTimer
+                    walkTimer = tick + 25 ' edit this value to change WalkTimer
                 End If
 
                 ' fog scrolling

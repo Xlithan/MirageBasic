@@ -38,6 +38,9 @@ Partial Class frmEditor_Map
         Me.picBackSelect = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.pnlAttributes = New System.Windows.Forms.Panel()
+        Me.fraAnimation = New System.Windows.Forms.GroupBox()
+        Me.cmbAnimation = New System.Windows.Forms.ComboBox()
+        Me.brnAnimation = New System.Windows.Forms.Button()
         Me.fraMapWarp = New System.Windows.Forms.GroupBox()
         Me.btnMapWarp = New System.Windows.Forms.Button()
         Me.scrlMapWarpY = New System.Windows.Forms.HScrollBar()
@@ -97,6 +100,7 @@ Partial Class frmEditor_Map
         Me.Label9 = New System.Windows.Forms.Label()
         Me.cmbTileSets = New System.Windows.Forms.ComboBox()
         Me.tpAttributes = New System.Windows.Forms.TabPage()
+        Me.optAnimation = New System.Windows.Forms.RadioButton()
         Me.optLight = New System.Windows.Forms.RadioButton()
         Me.tpNpcs = New System.Windows.Forms.TabPage()
         Me.fraNpcs = New System.Windows.Forms.GroupBox()
@@ -177,6 +181,7 @@ Partial Class frmEditor_Map
         Me.pnlBack.SuspendLayout
         CType(Me.picBackSelect,System.ComponentModel.ISupportInitialize).BeginInit
         Me.pnlAttributes.SuspendLayout
+        Me.fraAnimation.SuspendLayout
         Me.fraMapWarp.SuspendLayout
         Me.fraNpcSpawn.SuspendLayout
         Me.fraHeal.SuspendLayout
@@ -360,6 +365,7 @@ Partial Class frmEditor_Map
         '
         'pnlAttributes
         '
+        Me.pnlAttributes.Controls.Add(Me.fraAnimation)
         Me.pnlAttributes.Controls.Add(Me.fraMapWarp)
         Me.pnlAttributes.Controls.Add(Me.fraNpcSpawn)
         Me.pnlAttributes.Controls.Add(Me.fraHeal)
@@ -373,6 +379,40 @@ Partial Class frmEditor_Map
         Me.pnlAttributes.Size = New System.Drawing.Size(586, 567)
         Me.pnlAttributes.TabIndex = 12
         Me.pnlAttributes.Visible = false
+        '
+        'fraAnimation
+        '
+        Me.fraAnimation.Controls.Add(Me.cmbAnimation)
+        Me.fraAnimation.Controls.Add(Me.brnAnimation)
+        Me.fraAnimation.Location = New System.Drawing.Point(312, 427)
+        Me.fraAnimation.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraAnimation.Name = "fraAnimation"
+        Me.fraAnimation.Padding = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.fraAnimation.Size = New System.Drawing.Size(203, 130)
+        Me.fraAnimation.TabIndex = 17
+        Me.fraAnimation.TabStop = false
+        Me.fraAnimation.Text = "Animation"
+        '
+        'cmbAnimation
+        '
+        Me.cmbAnimation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbAnimation.FormattingEnabled = true
+        Me.cmbAnimation.Items.AddRange(New Object() {"Heal HP", "Heal MP"})
+        Me.cmbAnimation.Location = New System.Drawing.Point(7, 22)
+        Me.cmbAnimation.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.cmbAnimation.Name = "cmbAnimation"
+        Me.cmbAnimation.Size = New System.Drawing.Size(180, 23)
+        Me.cmbAnimation.TabIndex = 37
+        '
+        'brnAnimation
+        '
+        Me.brnAnimation.Location = New System.Drawing.Point(43, 88)
+        Me.brnAnimation.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.brnAnimation.Name = "brnAnimation"
+        Me.brnAnimation.Size = New System.Drawing.Size(105, 32)
+        Me.brnAnimation.TabIndex = 6
+        Me.brnAnimation.Text = "Accept"
+        Me.brnAnimation.UseVisualStyleBackColor = true
         '
         'fraMapWarp
         '
@@ -740,7 +780,7 @@ Partial Class frmEditor_Map
         Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbSave, Me.tsbDiscard, Me.ToolStripSeparator1, Me.tsbMapGrid, Me.tsbOpacity, Me.tsbLight, Me.ToolStripSeparator2, Me.tsbFill, Me.tsbClear, Me.tsbEyeDropper, Me.tsbCopyMap, Me.tsbUndo, Me.tsbRedo, Me.tsbScreenshot})
         Me.ToolStrip.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip.Name = "ToolStrip"
-        Me.ToolStrip.Size = New System.Drawing.Size(558, 25)
+        Me.ToolStrip.Size = New System.Drawing.Size(544, 25)
         Me.ToolStrip.TabIndex = 13
         Me.ToolStrip.Text = "ToolStrip1"
         '
@@ -957,6 +997,7 @@ Partial Class frmEditor_Map
         '
         'tpAttributes
         '
+        Me.tpAttributes.Controls.Add(Me.optAnimation)
         Me.tpAttributes.Controls.Add(Me.optLight)
         Me.tpAttributes.Controls.Add(Me.btnClearAttribute)
         Me.tpAttributes.Controls.Add(Me.optTrap)
@@ -977,6 +1018,17 @@ Partial Class frmEditor_Map
         Me.tpAttributes.TabIndex = 3
         Me.tpAttributes.Text = "Attributes"
         Me.tpAttributes.UseVisualStyleBackColor = true
+        '
+        'optAnimation
+        '
+        Me.optAnimation.AutoSize = true
+        Me.optAnimation.Location = New System.Drawing.Point(448, 58)
+        Me.optAnimation.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.optAnimation.Name = "optAnimation"
+        Me.optAnimation.Size = New System.Drawing.Size(81, 19)
+        Me.optAnimation.TabIndex = 19
+        Me.optAnimation.Text = "Animation"
+        Me.optAnimation.UseVisualStyleBackColor = true
         '
         'optLight
         '
@@ -1823,7 +1875,7 @@ Partial Class frmEditor_Map
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = true
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(558, 658)
+        Me.ClientSize = New System.Drawing.Size(544, 658)
         Me.Controls.Add(Me.tabpages)
         Me.Controls.Add(Me.ToolStrip)
         Me.Controls.Add(Me.pnlAttributes)
@@ -1835,6 +1887,7 @@ Partial Class frmEditor_Map
         Me.pnlBack.ResumeLayout(false)
         CType(Me.picBackSelect,System.ComponentModel.ISupportInitialize).EndInit
         Me.pnlAttributes.ResumeLayout(false)
+        Me.fraAnimation.ResumeLayout(false)
         Me.fraMapWarp.ResumeLayout(false)
         Me.fraMapWarp.PerformLayout
         Me.fraNpcSpawn.ResumeLayout(false)
@@ -2040,4 +2093,8 @@ End Sub
     Friend WithEvents tsbOpacity As ToolStripButton
     Friend WithEvents tsbLight As ToolStripButton
     Friend WithEvents tsbScreenshot As ToolStripButton
+    Friend WithEvents optAnimation As RadioButton
+    Friend WithEvents fraAnimation As GroupBox
+    Friend WithEvents cmbAnimation As ComboBox
+    Friend WithEvents brnAnimation As Button
 End Class

@@ -1244,6 +1244,7 @@ Module S_NetworkReceive
         End If
 
         SendNpcs(index)
+        SendAnimations(index)
 
         TempPlayer(index).Editor = EditorType.Map
 

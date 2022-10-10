@@ -167,10 +167,10 @@ Module C_Text
                                     DrawText(tX, tY, "H", (Color.Green), (Color.Black), GameWindow)
                                 Case TileType.Trap
                                     DrawText(tX, tY, "T", (Color.Red), (Color.Black), GameWindow)
-                                Case TileType.Craft
-                                    DrawText(tX, tY, "C", (Color.Green), (Color.Black), GameWindow)
                                 Case TileType.Light
                                     DrawText(tX, tY, "L", (Color.Yellow), (Color.Black), GameWindow)
+                                Case TileType.Animation
+                                    DrawText(tX, tY, "A", (Color.Red), (Color.Black), GameWindow)
                             End Select
                         End With
                     End If

@@ -923,7 +923,6 @@ Public Class FrmEditor_Events
         Dim selH As Integer = Math.Ceiling(Y \ PicY) - GraphicSelY
 
         If Me.cmbGraphic.SelectedIndex = 2 Then
-            'Tileset... hard one....
             If Control.ModifierKeys = Keys.Shift Then
                 If GraphicSelX > -1 AndAlso GraphicSelY > -1 Then
                     If selW >= 0 AndAlso selH >= 0 Then

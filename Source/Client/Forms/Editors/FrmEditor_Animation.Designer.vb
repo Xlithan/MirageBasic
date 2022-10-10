@@ -164,6 +164,7 @@ Partial Class FrmEditor_Animation
         '
         Me.nudLoopTime1.Location = New System.Drawing.Point(102, 159)
         Me.nudLoopTime1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudLoopTime1.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudLoopTime1.Name = "nudLoopTime1"
         Me.nudLoopTime1.Size = New System.Drawing.Size(140, 23)
         Me.nudLoopTime1.TabIndex = 33
@@ -273,6 +274,7 @@ Partial Class FrmEditor_Animation
         '
         Me.nudLoopTime0.Location = New System.Drawing.Point(102, 159)
         Me.nudLoopTime0.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudLoopTime0.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudLoopTime0.Name = "nudLoopTime0"
         Me.nudLoopTime0.Size = New System.Drawing.Size(140, 23)
         Me.nudLoopTime0.TabIndex = 33

@@ -79,6 +79,7 @@ Module C_Constants
     Public EditorWarpX As Integer
     Public EditorWarpY As Integer
     Public EditorShop As Integer
+    Public EditorAnimation As Integer
     Public EditorTileSelStart As Point
     Public EditorTileSelEnd As Point
     Public CopyMap As Boolean

@@ -103,10 +103,10 @@ Module modLoop
                 lastUpdateMapSpawnItems = GetTimeMs() + 60000
             End If
 
-            ' Checks to save players every 1 minute
+            ' Checks to save players every 5 minutes
             If tick > lastUpdateSavePlayers Then
                 UpdateSavePlayers()
-                lastUpdateSavePlayers = GetTimeMs() + 60000
+                lastUpdateSavePlayers = GetTimeMs() + 300000
             End If
 
             Thread.Sleep(1)

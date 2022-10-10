@@ -7,7 +7,7 @@ Module C_Animations
 #Region "Globals"
 
     Friend AnimationIndex As Byte
-    Friend AnimInstance(Byte.MaxValue) As AnimInstanceStruct
+    Friend AnimInstance() As AnimInstanceStruct
 
 #End Region
 
@@ -45,9 +45,9 @@ Module C_Animations
     Sub ClearAnimInstances()
         Dim i As Integer
 
-        ReDim AnimInstance(MAX_ANIMATIONS)
+        ReDim AnimInstance(Byte.MaxValue)
 
-        For i = 0 To MAX_ANIMATIONS
+        For i = 0 To Byte.MaxValue
             For X = 0 To 1
                 ReDim AnimInstance(i).Timer(x)
             Next
@@ -85,7 +85,7 @@ Module C_Animations
     End Sub
 
     Sub StreamAnimation(animationNum As Integer)
-        If animationNum > 0 and Item(animationNum).Name = "" And Animation_Loaded(animationNum) = False Then
+        If animationNum > 0 and Animation(animationNum).Name = "" And Animation_Loaded(animationNum) = False Then
             Animation_Loaded(animationNum) = True
             SendRequestAnimation(animationNum)
         End If
@@ -176,8 +176,6 @@ Module C_Animations
             ClearAnimInstance(index)
             Exit Sub
         End If
-
-        streamanimation(AnimInstance(index).Animation)
 
         sprite = Animation(AnimInstance(index).Animation).Sprite(layer)
 
@@ -291,7 +289,9 @@ Module C_Animations
 
         ' if doesn't exist then exit sub
         If AnimInstance(index).Animation <= 0 Then Exit Sub
-        If AnimInstance(index).Animation >= MAX_ANIMATIONS Then Exit Sub
+        If AnimInstance(index).Animation > MAX_ANIMATIONS Then Exit Sub
+
+        StreamAnimation(AnimInstance(index).Animation)
 
         sound = Animation(AnimInstance(index).Animation).Sound
 
@@ -328,6 +328,21 @@ Module C_Animations
         Else
             If sound <> "" Then PlaySound(sound)
         End If
+    End Sub
+
+    Friend Sub CreateAnimation(animationNum As Integer, x As Byte, y As Byte)
+        AnimationIndex = AnimationIndex + 1
+        If AnimationIndex >= Byte.MaxValue Then AnimationIndex = 1
+
+        With AnimInstance(AnimationIndex)
+            .Animation = animationNum
+            .X = x
+            .Y = y
+            .LockType = 0
+            .lockindex = 0
+            .Used(0) = True
+            .Used(1) = True
+        End With
     End Sub
 
 #End Region

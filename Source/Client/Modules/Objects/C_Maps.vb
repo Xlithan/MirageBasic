@@ -241,14 +241,6 @@ Module C_Maps
         Dim needMap As Byte
         Dim buffer As New ByteStream(data)
 
-        If Editor = EditorType.Map Then
-            If MsgBox("Save changes to current map?", vbYesNo) = vbYes Then
-                frmEditor_Map.MapEditorSend()
-            Else
-                frmEditor_Map.MapEditorCancel()
-            End If
-        End If
-
         GettingMap = True
 
         ' Erase all players except self
