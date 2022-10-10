@@ -526,6 +526,11 @@ Public Class frmEditor_Map
             cmbNpcList.Items.Add(Y & ": " & Trim$(Npc(Y).Name))
         Next
 
+        cmbAnimation.Items.Clear()
+        For y = 0 To MAX_ANIMATIONS
+            cmbAnimation.Items.Add(Y & ": " & Trim$(Animation(Y).Name))
+        Next
+
         lblMap.Text = "Current Map: " & "?"
         txtMaxX.Text = Map.MaxX
         txtMaxY.Text = Map.MaxY
@@ -693,6 +698,7 @@ Public Class frmEditor_Map
         Next
 
         If Not IsInBounds() Then Exit Sub
+
         If Button = MouseButtons.Left Then
             If tabpages.SelectedTab Is tpTiles Then
                 If EditorTileWidth = 1 AndAlso EditorTileHeight = 1 Then 'single tile
@@ -781,19 +787,29 @@ Public Class frmEditor_Map
                         .Data3 = 0
                     End If
 
-                    'light
+                    ' light
                     If optLight.Checked Then
                         .Type = TileType.Light
                         .Data1 = 0
                         .Data2 = 0
                         .Data3 = 0
                     End If
+
+                    ' Animation
+                    If optAnimation.Checked = True Then
+                        .Type = TileType.Animation
+                        .Data1 = EditorAnimation
+                        .Data2 = 0
+                        .Data3 = 0
+                    End If
                 End With
             ElseIf tabpages.SelectedTab Is tpDirBlock Then
                 If movedMouse Then Exit Sub
+
                 ' find what tile it is
                 X -= ((X \ PicX) * PicX)
                 Y -= ((Y \ PicY) * PicY)
+
                 ' see if it hits an arrow
                 For i = 0 To 4
                     If X >= DirArrowX(i) AndAlso X <= DirArrowX(i) + 8 Then
@@ -1319,6 +1335,20 @@ Public Class frmEditor_Map
         Dim image As Image
         image = GameWindow.Capture()
         image.SaveToFile(Map.Name & GfxExt)
+    End Sub
+
+    Private Sub optAnimation_CheckedChanged(sender As Object, e As EventArgs) Handles optAnimation.CheckedChanged
+        If optAnimation.Checked = False Then Exit Sub
+
+        ClearAttributeDialogue()
+        pnlAttributes.Visible = True
+        fraAnimation.Visible = True
+    End Sub
+
+    Private Sub brnAnimation_Click(sender As Object, e As EventArgs) Handles brnAnimation.Click
+        EditorAnimation = cmbAnimation.SelectedIndex
+        pnlAttributes.Visible = False
+        fraAnimation.Visible = False
     End Sub
 
 #End Region

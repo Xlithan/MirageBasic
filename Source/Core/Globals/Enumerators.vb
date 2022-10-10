@@ -62,8 +62,8 @@
         Bank
         Heal
         Trap
-        Craft
         Light
+        Animation
 
         Count
     End Enum

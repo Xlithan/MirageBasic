@@ -220,9 +220,26 @@ Friend Class FrmGame
     Private Sub PicScreen_MouseWheel(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picscreen.MouseWheel
         If Editor = EditorType.Map Then
             If e.Delta > 0 Then
-                FrmEditor_map.cmbTileSets.SelectedIndex = FrmEditor_map.cmbTileSets.SelectedIndex - 1
+                If Control.ModifierKeys = Keys.Shift Then
+                    If FrmEditor_Map.cmbLayers.SelectedIndex > 0 Then
+                         FrmEditor_Map.cmbLayers.SelectedIndex =  FrmEditor_Map.cmbLayers.SelectedIndex - 1
+                    End If
+                Else
+                    If FrmEditor_map.cmbTileSets.SelectedIndex > 0 Then
+                        frmEditor_Map.cmbTileSets.SelectedIndex = FrmEditor_map.cmbTileSets.SelectedIndex - 1
+                    End If
+                End If
+                
             Else
-                FrmEditor_map.cmbTileSets.SelectedIndex = FrmEditor_map.cmbTileSets.SelectedIndex + 1
+                If Control.ModifierKeys = Keys.Shift Then
+                    If FrmEditor_Map.cmbLayers.SelectedIndex < LayerType.Count - 1 Then
+                         FrmEditor_Map.cmbLayers.SelectedIndex =  FrmEditor_Map.cmbLayers.SelectedIndex + 1
+                    End If
+                Else
+                    If FrmEditor_map.cmbTileSets.SelectedIndex < NumTileSets Then
+                        frmEditor_Map.cmbTileSets.SelectedIndex = FrmEditor_map.cmbTileSets.SelectedIndex + 1
+                    End If
+                End If
             End If 
         End If
     End Sub

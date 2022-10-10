@@ -45,7 +45,7 @@ Namespace Database
         Function Load() As CharacterList
             Dim json As New JsonSerializer(Of List(Of String))
 
-            names = json.Read(Paths.Database & "charlist.json")
+            names = json.Read(Paths.Database & "Charlist.json")
 
             If names Is Nothing Then Clear().Save()
 
@@ -55,7 +55,7 @@ Namespace Database
         Function Save() As CharacterList
             Dim json As New JsonSerializer(Of List(Of String))
 
-            json.Write(Paths.Database & "charlist.json", names)
+            json.Write(Paths.Database & "Charlist.json", names)
 
             Return Me
         End Function

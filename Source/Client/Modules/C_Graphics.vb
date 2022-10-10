@@ -1593,8 +1593,6 @@ Module C_Graphics
         If FrmGame.WindowState = FormWindowState.Minimized Then Exit Sub
         If GettingMap Then Exit Sub
 
-        'lets get going
-
         'update view around player
         UpdateCamera()
 
