@@ -1598,9 +1598,6 @@ Module C_Graphics
         'update view around player
         UpdateCamera()
 
-        'let program do other things
-        Application.DoEvents()
-
         'Clear each of our render targets
         GameWindow.DispatchEvents()
         GameWindow.Clear(Color.Black)

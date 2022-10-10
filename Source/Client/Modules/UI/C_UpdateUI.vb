@@ -293,7 +293,7 @@ Module C_UpdateUI
         End If
 
         If UpdateNews = True Then
-            'FrmMenu.lblNews.Text = News
+            FrmMenu.lblNews.Text = News
             FrmMenu.Text = Settings.GameName
             FrmGame.Text = Settings.GameName
             UpdateNews = False

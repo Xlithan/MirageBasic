@@ -364,6 +364,7 @@ Friend Class FrmMenu
             PnlLoginVisible = True
             PnlCharCreateVisible = False
             PnlCreditsVisible = False
+            pnlMainMenu.Visible = False
             txtLogin.Focus()
             If Settings.SavePass = True Then
                 txtLogin.Text = Settings.Username
