@@ -860,6 +860,7 @@ Public Class frmEditor_Map
     Public Sub MapEditorSend()
         SendMap()
         Editor = -1
+        HideGui = False
         GettingMap = True
         SendCloseEditor()
     End Sub
