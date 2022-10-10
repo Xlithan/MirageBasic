@@ -78,6 +78,8 @@ Partial Class frmEditor_Map
         Me.tsbDiscard = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbMapGrid = New System.Windows.Forms.ToolStripButton()
+        Me.tsbOpacity = New System.Windows.Forms.ToolStripButton()
+        Me.tsbLight = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbFill = New System.Windows.Forms.ToolStripButton()
         Me.tsbClear = New System.Windows.Forms.ToolStripButton()
@@ -171,8 +173,6 @@ Partial Class frmEditor_Map
         Me.lblFogIndex = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.cmbWeather = New System.Windows.Forms.ComboBox()
-        Me.tsbLight = New System.Windows.Forms.ToolStripButton()
-        Me.tsbOpacity = New System.Windows.Forms.ToolStripButton()
         Me.pnlBack.SuspendLayout
         CType(Me.picBackSelect,System.ComponentModel.ISupportInitialize).BeginInit
         Me.pnlAttributes.SuspendLayout
@@ -749,6 +749,7 @@ Partial Class frmEditor_Map
         Me.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbSave.Name = "tsbSave"
         Me.tsbSave.Size = New System.Drawing.Size(23, 22)
+        Me.tsbSave.ToolTipText = "Save"
         '
         'tsbDiscard
         '
@@ -756,6 +757,7 @@ Partial Class frmEditor_Map
         Me.tsbDiscard.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbDiscard.Name = "tsbDiscard"
         Me.tsbDiscard.Size = New System.Drawing.Size(23, 22)
+        Me.tsbDiscard.ToolTipText = "Discard"
         '
         'ToolStripSeparator1
         '
@@ -768,6 +770,26 @@ Partial Class frmEditor_Map
         Me.tsbMapGrid.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbMapGrid.Name = "tsbMapGrid"
         Me.tsbMapGrid.Size = New System.Drawing.Size(23, 22)
+        Me.tsbMapGrid.Tag = "Map Grid"
+        '
+        'tsbOpacity
+        '
+        Me.tsbOpacity.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbOpacity.Image = Global.Mirage.Basic.Client.My.Resources.Resources.Opacity
+        Me.tsbOpacity.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbOpacity.Name = "tsbOpacity"
+        Me.tsbOpacity.Size = New System.Drawing.Size(23, 22)
+        Me.tsbOpacity.Text = "ToolStripButton1"
+        Me.tsbOpacity.ToolTipText = "Opacity"
+        '
+        'tsbLight
+        '
+        Me.tsbLight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbLight.Image = CType(resources.GetObject("tsbLight.Image"),System.Drawing.Image)
+        Me.tsbLight.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbLight.Name = "tsbLight"
+        Me.tsbLight.Size = New System.Drawing.Size(23, 22)
+        Me.tsbLight.ToolTipText = "Light"
         '
         'ToolStripSeparator2
         '
@@ -780,6 +802,7 @@ Partial Class frmEditor_Map
         Me.tsbFill.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbFill.Name = "tsbFill"
         Me.tsbFill.Size = New System.Drawing.Size(23, 22)
+        Me.tsbFill.Tag = "Fill"
         Me.tsbFill.ToolTipText = "Fill Layer"
         '
         'tsbClear
@@ -788,6 +811,7 @@ Partial Class frmEditor_Map
         Me.tsbClear.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbClear.Name = "tsbClear"
         Me.tsbClear.Size = New System.Drawing.Size(23, 22)
+        Me.tsbClear.ToolTipText = "Erase"
         '
         'tsbEyeDropper
         '
@@ -795,6 +819,7 @@ Partial Class frmEditor_Map
         Me.tsbEyeDropper.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbEyeDropper.Name = "tsbEyeDropper"
         Me.tsbEyeDropper.Size = New System.Drawing.Size(23, 22)
+        Me.tsbEyeDropper.ToolTipText = "Eye Dropper"
         '
         'tsbCopyMap
         '
@@ -803,6 +828,7 @@ Partial Class frmEditor_Map
         Me.tsbCopyMap.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbCopyMap.Name = "tsbCopyMap"
         Me.tsbCopyMap.Size = New System.Drawing.Size(23, 22)
+        Me.tsbCopyMap.ToolTipText = "Copy"
         '
         'tsbUndo
         '
@@ -811,6 +837,7 @@ Partial Class frmEditor_Map
         Me.tsbUndo.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbUndo.Name = "tsbUndo"
         Me.tsbUndo.Size = New System.Drawing.Size(23, 22)
+        Me.tsbUndo.ToolTipText = "Undo"
         '
         'tsbRedo
         '
@@ -819,6 +846,7 @@ Partial Class frmEditor_Map
         Me.tsbRedo.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbRedo.Name = "tsbRedo"
         Me.tsbRedo.Size = New System.Drawing.Size(23, 22)
+        Me.tsbRedo.ToolTipText = "Redo"
         '
         'tabpages
         '
@@ -1778,25 +1806,6 @@ Partial Class frmEditor_Map
         Me.cmbWeather.Name = "cmbWeather"
         Me.cmbWeather.Size = New System.Drawing.Size(168, 23)
         Me.cmbWeather.TabIndex = 0
-        '
-        'tsbLight
-        '
-        Me.tsbLight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbLight.Image = CType(resources.GetObject("tsbLight.Image"),System.Drawing.Image)
-        Me.tsbLight.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbLight.Name = "tsbLight"
-        Me.tsbLight.Size = New System.Drawing.Size(23, 22)
-        Me.tsbLight.ToolTipText = "Light"
-        '
-        'tsbOpacity
-        '
-        Me.tsbOpacity.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbOpacity.Image = Global.Mirage.Basic.Client.My.Resources.Resources.Opacity
-        Me.tsbOpacity.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbOpacity.Name = "tsbOpacity"
-        Me.tsbOpacity.Size = New System.Drawing.Size(23, 22)
-        Me.tsbOpacity.Text = "ToolStripButton1"
-        Me.tsbOpacity.ToolTipText = "Opacity"
         '
         'frmEditor_Map
         '
