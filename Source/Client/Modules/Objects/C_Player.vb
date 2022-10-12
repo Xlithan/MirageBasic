@@ -214,10 +214,8 @@ Module C_Player
             Exit Function
         End If
 
-        ' not in bank
-        If InBank > 0 Then
-            CanMove = False
-            Exit Function
+        If InBank Then
+            CloseBank()
         End If
 
         d = GetPlayerDir(Myindex)
