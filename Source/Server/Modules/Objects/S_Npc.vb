@@ -131,7 +131,7 @@ Module S_Npc
         NpcTileIsOpen = True
 
         If PlayersOnMap(mapNum) Then
-            For LoopI = 0 To Socket.HighIndex
+            For LoopI = 1 To Socket.HighIndex
                 If GetPlayerMap(LoopI) = mapNum AndAlso GetPlayerX(LoopI) = x AndAlso GetPlayerY(LoopI) = y Then
                     NpcTileIsOpen = False
                     Exit Function
@@ -139,7 +139,7 @@ Module S_Npc
             Next
         End If
 
-        For LoopI = 0 To MAX_MAP_NPCS
+        For LoopI = 1 To MAX_MAP_NPCS
             If MapNpc(mapNum).Npc(LoopI).Num > 0 AndAlso MapNpc(mapNum).Npc(LoopI).X = x AndAlso MapNpc(mapNum).Npc(LoopI).Y = y Then
                 NpcTileIsOpen = False
                 Exit Function
