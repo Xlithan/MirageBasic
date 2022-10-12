@@ -29,7 +29,7 @@ Public Class SettingsDef
     <XmlIgnore()> Public GameName As String = "MirageBasic"
     <XmlIgnore()> Public Website As String = "https://miragebasic.net/"
 
-    <XmlIgnore()> Public Version As String = "1.5.0"
+    <XmlIgnore()> Public Version As String = "1.5.1"
 
     Public Welcome As String = "Welcome to MirageBasic, enjoy your stay!"
 End Class

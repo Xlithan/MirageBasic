@@ -473,7 +473,7 @@ Partial Class FrmMenu
         Me.lblStatusHeader.BackColor = System.Drawing.Color.Transparent
         Me.lblStatusHeader.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
         Me.lblStatusHeader.ForeColor = System.Drawing.Color.White
-        Me.lblStatusHeader.Location = New System.Drawing.Point(3, 537)
+        Me.lblStatusHeader.Location = New System.Drawing.Point(12, 570)
         Me.lblStatusHeader.Name = "lblStatusHeader"
         Me.lblStatusHeader.Size = New System.Drawing.Size(114, 21)
         Me.lblStatusHeader.TabIndex = 44
@@ -485,7 +485,7 @@ Partial Class FrmMenu
         Me.lblServerStatus.BackColor = System.Drawing.Color.Transparent
         Me.lblServerStatus.Font = New System.Drawing.Font("Segoe UI", 12!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
         Me.lblServerStatus.ForeColor = System.Drawing.Color.Red
-        Me.lblServerStatus.Location = New System.Drawing.Point(110, 537)
+        Me.lblServerStatus.Location = New System.Drawing.Point(119, 570)
         Me.lblServerStatus.Name = "lblServerStatus"
         Me.lblServerStatus.Size = New System.Drawing.Size(63, 21)
         Me.lblServerStatus.TabIndex = 45
@@ -687,7 +687,7 @@ Partial Class FrmMenu
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(784, 561)
+        Me.ClientSize = New System.Drawing.Size(800, 600)
         Me.Controls.Add(Me.lblServerStatus)
         Me.Controls.Add(Me.lblStatusHeader)
         Me.Controls.Add(Me.picLogo)

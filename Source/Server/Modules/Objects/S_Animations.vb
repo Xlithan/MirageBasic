@@ -105,14 +105,11 @@ Friend Module S_Animations
         ReDim Animation(index).Frames(1)
         ReDim Animation(index).LoopCount(1)
         ReDim Animation(index).LoopTime(1)
+        Animation(index).LoopCount(0) = 1
+        Animation(index).LoopCount(1) = 1
     End Sub
 
     Sub ClearAnimations()
-        ReDim Animation(MAX_ANIMATIONS).Sprite(1)
-        ReDim Animation(MAX_ANIMATIONS).Frames(1)
-        ReDim Animation(MAX_ANIMATIONS).LoopCount(1)
-        ReDim Animation(MAX_ANIMATIONS).LoopTime(1)
-
          For i = 0 To MAX_ANIMATIONS
             ClearAnimation(i)
         Next

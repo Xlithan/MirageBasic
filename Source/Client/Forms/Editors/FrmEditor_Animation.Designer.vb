@@ -181,9 +181,11 @@ Partial Class FrmEditor_Animation
         '
         Me.nudLoopCount1.Location = New System.Drawing.Point(102, 70)
         Me.nudLoopCount1.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudLoopCount1.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudLoopCount1.Name = "nudLoopCount1"
         Me.nudLoopCount1.Size = New System.Drawing.Size(140, 23)
         Me.nudLoopCount1.TabIndex = 31
+        Me.nudLoopCount1.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'nudSprite1
         '
@@ -291,9 +293,11 @@ Partial Class FrmEditor_Animation
         '
         Me.nudLoopCount0.Location = New System.Drawing.Point(102, 70)
         Me.nudLoopCount0.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
+        Me.nudLoopCount0.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudLoopCount0.Name = "nudLoopCount0"
         Me.nudLoopCount0.Size = New System.Drawing.Size(140, 23)
         Me.nudLoopCount0.TabIndex = 31
+        Me.nudLoopCount0.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'nudSprite0
         '

@@ -89,14 +89,12 @@ Module C_GameLogic
                     For x = 0 To Map.MaxX
                         For y = 0 To Map.MaxY
                             If IsValidMapPoint(x, y) Then
-                                If Map.Tile(x, y).Type = CByte(TileType.Animation) Then
-                                    If Map.Tile(x,y).Data1 > 0 Then
-                                        CreateAnimation(Map.Tile(x,y).Data1, x, y)
-                                        If Animation(Map.Tile(x,y).Data1).LoopTime(0) > 0 Then
-                                            animationtmr = tick + Animation(Map.Tile(x,y).Data1).LoopTime(0) * Animation(Map.Tile(x,y).Data1).Frames(0) * Animation(Map.Tile(x,y).Data1).LoopCount(0)
-                                        Else
-                                            animationtmr = tick + Animation(Map.Tile(x,y).Data1).LoopTime(1) * Animation(Map.Tile(x,y).Data1).Frames(1) * Animation(Map.Tile(x,y).Data1).LoopCount(1)
-                                        End If
+                                If  Map.Tile(x,y).Data1 > 0 And Map.Tile(x, y).Type = CByte(TileType.Animation) Then
+                                    CreateAnimation(Map.Tile(x,y).Data1, x, y)                                                                                    
+                                    If Animation(Map.Tile(x,y).Data1).LoopTime(0) > 0 Then
+                                        animationtmr = tick + Animation(Map.Tile(x,y).Data1).LoopTime(0) * Animation(Map.Tile(x,y).Data1).Frames(0) * Animation(Map.Tile(x,y).Data1).LoopCount(0)
+                                    Else
+                                        animationtmr = tick + Animation(Map.Tile(x,y).Data1).LoopTime(1) * Animation(Map.Tile(x,y).Data1).Frames(1) * Animation(Map.Tile(x,y).Data1).LoopCount(1)
                                     End If
                                 End If
                             End If

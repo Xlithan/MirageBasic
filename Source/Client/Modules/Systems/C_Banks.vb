@@ -11,7 +11,7 @@ Module C_Banks
     ' Stores the last bank item we showed in desc
     Friend LastBankDesc As Integer
 
-    Friend InBank As Integer
+    Friend InBank As Boolean
 
     ' bank drag + drop
     Friend DragBankSlotNum As Integer

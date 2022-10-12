@@ -1133,8 +1133,6 @@ Module modDatabase
         Dim filename = Paths.Database & "Accounts//" & GetPlayerLogin(index) & "_Bank.bin"
         Dim writer As New ByteStream(Bank.Length)
 
-        ClearBank(index)
-
         For i = 1 To MAX_BANK
             writer.WriteByte(Bank(index).Item(i).Num)
             writer.WriteInt32(Bank(index).Item(i).Value)
