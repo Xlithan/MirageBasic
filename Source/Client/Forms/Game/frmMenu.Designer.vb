@@ -687,7 +687,7 @@ Partial Class FrmMenu
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer), CType(CType(224,Byte),Integer))
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(784, 561)
+        Me.ClientSize = New System.Drawing.Size(800, 600)
         Me.Controls.Add(Me.lblServerStatus)
         Me.Controls.Add(Me.lblStatusHeader)
         Me.Controls.Add(Me.picLogo)
