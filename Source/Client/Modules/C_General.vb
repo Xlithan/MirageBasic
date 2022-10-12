@@ -26,13 +26,12 @@ Module C_General
         LoadInputs()
         LoadGraphics()
         InitNetwork()
+        Frmmenuvisible = True
         Ping = -1
     End Function
 
     Friend Function LoadGraphics()
         Started = True
-        Frmmenuvisible = True
-
         CheckPaths()
         InitGraphics()
 End Function
