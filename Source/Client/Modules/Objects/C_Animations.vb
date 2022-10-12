@@ -29,6 +29,8 @@ Module C_Animations
             ReDim Animation(index).LoopTime(x)
         Next
         Animation(index).Name = ""
+        Animation(index).LoopCount(0) = 1
+        Animation(index).LoopCount(1) = 1
     End Sub
 
     Sub ClearAnimations()

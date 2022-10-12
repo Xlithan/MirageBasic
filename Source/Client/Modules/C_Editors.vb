@@ -25,11 +25,13 @@ Module C_Editors
 
             FrmEditor_Animation.nudSprite0.Value = .Sprite(0)
             FrmEditor_Animation.nudFrameCount0.Value = .Frames(0)
+            If Animation(Editorindex).LoopCount(0) = 0 Then Animation(Editorindex).LoopCount(0) = 1
             FrmEditor_Animation.nudLoopCount0.Value = .LoopCount(0)
             FrmEditor_Animation.nudLoopTime0.Value = .LoopTime(0)
 
             FrmEditor_Animation.nudSprite1.Value = .Sprite(1)
             FrmEditor_Animation.nudFrameCount1.Value = .Frames(1)
+            If Animation(Editorindex).LoopCount(1) = 0 Then Animation(Editorindex).LoopCount(1) = 1
             FrmEditor_Animation.nudLoopCount1.Value = .LoopCount(1)
             FrmEditor_Animation.nudLoopTime1.Value = .LoopTime(1)
         End With

@@ -1652,7 +1652,7 @@ Module C_Graphics
 
         ' draw animations
         If NumAnimations > 0 Then
-            For I = 0 To MAX_ANIMATIONS
+            For I = 0 To Byte.MaxValue
                 If AnimInstance(I).Used(0) Then
                     DrawAnimation(I, 0)
                 End If
@@ -1744,7 +1744,7 @@ Module C_Graphics
 
         ' animations
         If NumAnimations > 0 Then
-            For I = 0 To MAX_ANIMATIONS
+            For I = 0 To Byte.MaxValue
                 If AnimInstance(I).Used(1) Then
                     DrawAnimation(I, 1)
                 End If
