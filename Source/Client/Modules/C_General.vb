@@ -12,11 +12,8 @@ Module C_General
     End Function
 
     Sub Startup()
-        FrmMenu.Text = Settings.GameName
-        FrmMenu.Visible = True
-
-        LoadGame()
         ClearGameData()
+        LoadGame()
         GameLoop()
     End Sub
 
@@ -26,6 +23,8 @@ Module C_General
         LoadInputs()
         LoadGraphics()
         InitNetwork()
+        FrmMenu.Text = Settings.GameName
+        FrmMenu.Visible = True
         Frmmenuvisible = True
         Ping = -1
     End Function
