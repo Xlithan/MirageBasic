@@ -15,10 +15,14 @@ Module C_Player
         Next
     End Sub
 
-    Sub ClearPlayer(i As Integer)
+    Sub ClearAccount(i As Integer)
         Account(i).Access = 0
         Account(i).Login = ""
         Account(i).Password = ""
+    End Sub
+
+    Sub ClearPlayer(i As Integer)
+        ClearAccount(i)
 
         Player(i).Name = ""
         Player(i).Attacking = 0

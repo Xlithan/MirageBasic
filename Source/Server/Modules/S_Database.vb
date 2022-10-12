@@ -1053,8 +1053,10 @@ Module modDatabase
 
     Sub LoadAccount(index As Integer)
         Dim filename As String = Paths.Database & "Accounts//" & GetPlayerLogin(index) & ".bin"
-        ClearPlayer(index)
         Dim reader As New ByteStream(100)
+
+        ClearPlayer(index)
+        
         ByteFile.Load(filename, reader)
 
         SetPlayerLogin(index, reader.ReadString())
