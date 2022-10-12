@@ -28,6 +28,8 @@ Module S_General
 
         LoadSettings()
 
+        Time.Instance.GameSpeed = Settings.TimeSpeed
+
         Console.Title = "MirageBasic Server"
 
         time1 = GetTimeMs()

@@ -23,15 +23,17 @@ Public Class SettingsDef
     Public OpenAdminPanelOnLogin As Byte = 1
     Public DynamicLightRendering As Byte = 1
 
-    <XmlIgnore()> Public Ip As String = "127.0.0.1"
-    <XmlIgnore()> Public Port As Integer = 7001
+    Public Ip As String = "127.0.0.1"
+    Public Port As Integer = 7001
 
     <XmlIgnore()> Public GameName As String = "MirageBasic"
     <XmlIgnore()> Public Website As String = "https://miragebasic.net/"
 
-    <XmlIgnore()> Public Version As String = "1.5.1"
+    <XmlIgnore()> Public Version As String = "1.5.2"
 
     Public Welcome As String = "Welcome to MirageBasic, enjoy your stay!"
+
+    Public TimeSpeed As Integer = 1
 End Class
 
 Public Module modSettings
