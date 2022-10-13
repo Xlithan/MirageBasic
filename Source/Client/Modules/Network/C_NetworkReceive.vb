@@ -1122,6 +1122,7 @@ Module C_NetworkReceive
     Private Sub Packet_News(ByRef data() As Byte)
         Dim buffer As New ByteStream(data)
         Settings.GameName = buffer.ReadString
+        Settings.Website = buffer.ReadString
         News = buffer.ReadString
 
         UpdateNews = True

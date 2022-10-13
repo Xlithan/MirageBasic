@@ -2,6 +2,7 @@
 Imports Mirage.Sharp.Asfw.IO
 Imports Mirage.Basic.Engine
 Imports System.Reflection.Emit
+Imports System.Buffers
 
 Module S_NetworkSend
 
@@ -1222,6 +1223,7 @@ End Sub
         AddDebug("Sent SMSG: SNews")
 
         buffer.WriteString(Settings.GameName.Trim)
+        buffer.WriteString(Settings.Website.Trim)
         buffer.WriteString(GetFileContents(Paths.Database & "News.txt").Trim)
 
         Socket.SendDataTo(index, buffer.Data, buffer.Head)

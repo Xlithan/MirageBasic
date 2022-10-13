@@ -63,7 +63,7 @@ Friend Module S_Projectiles
 
     End Sub
 
-    Sub LoadProjectile()
+    Sub LoadProjectiles()
         Dim filename As String
         Dim i As Integer
 
@@ -99,7 +99,6 @@ Friend Module S_Projectiles
         Dim y As Integer
 
         ReDim MapProjectile(MAX_CACHED_MAPS, MAX_PROJECTILES)
-        ReDim Projectile(MAX_PROJECTILES)
 
         For x = 0 To MAX_MAPS
             For y = 0 To MAX_PROJECTILES

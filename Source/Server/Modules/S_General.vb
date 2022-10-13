@@ -28,6 +28,8 @@ Module S_General
 
         LoadSettings()
 
+        Time.Instance.GameSpeed = Settings.TimeSpeed
+
         Console.Title = "MirageBasic Server"
 
         time1 = GetTimeMs()
@@ -141,6 +143,7 @@ Module S_General
 
         For i = 0 To MAX_PLAYERS
             ClearPlayer(i)
+            ClearBank(i)
         Next
 
         ClearParties()
@@ -174,7 +177,7 @@ Module S_General
         Console.WriteLine("Loading Switches...") : LoadSwitches()
         Console.WriteLine("Loading Variables...") : LoadVariables()
         Console.WriteLine("Spawning Global Events...") : SpawnAllMapGlobalEvents()
-        Console.WriteLine("Loading Projectiles...") : LoadProjectile()
+        Console.WriteLine("Loading Projectiles...") : LoadProjectiles()
         Console.WriteLine("Loading Pets...") : LoadPets()
         Console.WriteLine("Loading Character List...") : CharactersList = New CharacterList().Load()
     End Sub

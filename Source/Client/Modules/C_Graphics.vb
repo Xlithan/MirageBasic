@@ -2935,8 +2935,6 @@ NextLoop:
         DrawText(RClickX + (RClickGfxInfo.Width \ 2) - (GetTextWidth("Invite to Party") \ 2), RClickY + 60,
                  "Invite to Party", Color.White, Color.Black, GameWindow)
 
-        DrawText(RClickX + (RClickGfxInfo.Width \ 2) - (GetTextWidth("Invite to House") \ 2), RClickY + 85,
-                 "Invite to House", Color.White, Color.Black, GameWindow)
     End Sub
 
     Friend Sub DrawGui()

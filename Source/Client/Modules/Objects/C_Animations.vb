@@ -319,6 +319,7 @@ Module C_Animations
                     Else
                         AnimInstance(index).FrameIndex(layer) = AnimInstance(index).FrameIndex(layer) + 1
                     End If
+                    If sound <> "" Then PlaySound(sound)
                     AnimInstance(index).Timer(layer) = GetTickCount()
                 End If
             End If
@@ -327,8 +328,6 @@ Module C_Animations
         ' if neither layer is used, clear
         If AnimInstance(index).Used(0) = False AndAlso AnimInstance(index).Used(1) = False Then
             ClearAnimInstance(index)
-        Else
-            If sound <> "" Then PlaySound(sound)
         End If
     End Sub
 
