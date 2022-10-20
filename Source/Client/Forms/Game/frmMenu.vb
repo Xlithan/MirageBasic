@@ -5,6 +5,15 @@ Imports Mirage.Basic.Engine
 Friend Class FrmMenu
     Inherits Form
 
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+
+    End Sub
+
 #Region "Form Functions"
 
     ''' <summary>
@@ -51,29 +60,24 @@ Friend Class FrmMenu
         'main menu buttons
         If File.Exists(Paths.Gui & "Menu/button" & GfxExt) Then
             btnExit.Image = Image.FromFile(Paths.Gui & "Menu/button_exit" & GfxExt)
-            btnLogin.Image = Image.FromFile(Paths.Gui & "Menu/btn_login" & GfxExt)
+            btnLogin.Image = Image.FromFile(Paths.Gui & "Menu/Button" & GfxExt)
             btnPlay.Image = Image.FromFile(Paths.Gui & "Menu/button_play" & GfxExt)
             btnRegister.Image = Image.FromFile(Paths.Gui & "Menu/button_register" & GfxExt)
-            btnNewChar.Image = Image.FromFile(Paths.Gui & "Menu/btn_newchar" & GfxExt)
-            btnUseChar.Image = Image.FromFile(Paths.Gui & "Menu/btn_usechar" & GfxExt)
-            btnDelChar.Image = Image.FromFile(Paths.Gui & "Menu/btn_deletechar" & GfxExt)
-            btnCreateAccount.Image = Image.FromFile(Paths.Gui & "Menu/btn_createacc" & GfxExt)
+            btnNewChar.Image = Image.FromFile(Paths.Gui & "Menu/Button" & GfxExt)
+            btnUseChar.Image = Image.FromFile(Paths.Gui & "Menu/Button" & GfxExt)
+            btnDelChar.Image = Image.FromFile(Paths.Gui & "Menu/Button" & GfxExt)
+            btnCreateAccount.Image = Image.FromFile(Paths.Gui & "Menu/Button" & GfxExt)
         End If
 
         'main menu panels
-        If File.Exists(Paths.Gui & "Menu\panel" & GfxExt) Then
-            pnlMainMenu.BackgroundImage = Image.FromFile(Paths.Gui & "Menu\panel" & GfxExt)
-            pnlLogin.BackgroundImage = Image.FromFile(Paths.Gui & "Menu\panel" & GfxExt)
-            pnlNewChar.BackgroundImage = Image.FromFile(Paths.Gui & "Menu\panel" & GfxExt)
-            pnlCharSelect.BackgroundImage = Image.FromFile(Paths.Gui & "Menu\panel" & GfxExt)
-            pnlRegister.BackgroundImage = Image.FromFile(Paths.Gui & "Menu\panel" & GfxExt)
-            pnlCredits.BackgroundImage = Image.FromFile(Paths.Gui & "Menu\panel" & GfxExt)
-        End If
-
-        'logo
-        If File.Exists(Paths.Gui & "Menu\logo" & GfxExt) Then
-            picLogo.BackgroundImage = Image.FromFile(Paths.Gui & "Menu\logo" & GfxExt)
-        End If
+        'If File.Exists(Paths.Gui & "Menu\panel" & GfxExt) Then
+        'pnlMainMenu.BackgroundImage = Image.FromFile(Paths.Gui & "Menu\panel" & GfxExt)
+        'pnlLogin.BackgroundImage = Image.FromFile(Paths.Gui & "Menu\panel" & GfxExt)
+        'pnlNewChar.BackgroundImage = Image.FromFile(Paths.Gui & "Menu\panel" & GfxExt)
+        'pnlCharSelect.BackgroundImage = Image.FromFile(Paths.Gui & "Menu\panel" & GfxExt)
+        'pnlRegister.BackgroundImage = Image.FromFile(Paths.Gui & "Menu\panel" & GfxExt)
+        'pnlCredits.BackgroundImage = Image.FromFile(Paths.Gui & "Menu\panel" & GfxExt)
+        'End If
 
         ' Main
         lblStatusHeader.Text = Language.MainMenu.ServerStatus
@@ -364,7 +368,6 @@ Friend Class FrmMenu
             PnlLoginVisible = True
             PnlCharCreateVisible = False
             PnlCreditsVisible = False
-            pnlMainMenu.Visible = False
             txtLogin.Focus()
             If Settings.SavePass = True Then
                 txtLogin.Text = Settings.Username
@@ -372,6 +375,10 @@ Friend Class FrmMenu
                 chkSavePass.Checked = True
             End If
         End If
+
+        btnPlay.Visible = False
+        btnRegister.Visible = False
+        btnExit.Visible = False
     End Sub
 
     ''' <summary>
@@ -399,6 +406,10 @@ Friend Class FrmMenu
             PnlCharCreateVisible = False
             PnlCreditsVisible = False
         End If
+
+        btnPlay.Visible = False
+        btnRegister.Visible = False
+        btnExit.Visible = False
     End Sub
 
     ''' <summary>
@@ -447,20 +458,6 @@ Friend Class FrmMenu
     End Sub
 
     ''' <summary>
-    ''' Changes to hover state on button.
-    ''' </summary>
-    Private Sub BtnLogin_MouseEnter(sender As Object, e As EventArgs) Handles btnLogin.MouseEnter
-        btnLogin.Image = Image.FromFile(Paths.Gui & "Menu\btn_login_hover" & GfxExt)
-    End Sub
-
-    ''' <summary>
-    ''' Changes to normal state on button.
-    ''' </summary>
-    Private Sub BtnLogin_MouseLeave(sender As Object, e As EventArgs) Handles btnLogin.MouseLeave
-        btnLogin.Image = Image.FromFile(Paths.Gui & "Menu\btn_login" & GfxExt)
-    End Sub
-
-    ''' <summary>
     ''' Handles CreateAccount button press.
     ''' </summary>
     Private Sub BtnCreateAccount_Click(sender As Object, e As EventArgs) Handles btnCreateAccount.Click
@@ -484,38 +481,10 @@ Friend Class FrmMenu
     End Sub
 
     ''' <summary>
-    ''' Changes to hover state on button.
-    ''' </summary>
-    Private Sub BtnCreateAccount_MouseEnter(sender As Object, e As EventArgs) Handles btnCreateAccount.MouseEnter
-        btnCreateAccount.Image = Image.FromFile(Paths.Gui & "Menu\btn_createacc_hover" & GfxExt)
-    End Sub
-
-    ''' <summary>
-    ''' Changes to normal state on button.
-    ''' </summary>
-    Private Sub BtnCreateAccount_MouseLeave(sender As Object, e As EventArgs) Handles btnCreateAccount.MouseLeave
-        btnCreateAccount.Image = Image.FromFile(Paths.Gui & "Menu\btn_createacc" & GfxExt)
-    End Sub
-
-    ''' <summary>
     ''' Handles CreateCharacter button press.
     ''' </summary>
     Private Sub BtnCreateCharacter_Click(sender As Object, e As EventArgs) Handles btnCreateCharacter.Click
         MenuState(MenuStateAddchar)
-    End Sub
-
-    ''' <summary>
-    ''' Changes to hover state on button.
-    ''' </summary>
-    Private Sub BtnCreateCharacter_MouseEnter(sender As Object, e As EventArgs) Handles btnCreateCharacter.MouseEnter
-        btnCreateCharacter.Image = Image.FromFile(Paths.Gui & "Menu\btn_createchar_hover" & GfxExt)
-    End Sub
-
-    ''' <summary>
-    ''' Changes to normal state on button.
-    ''' </summary>
-    Private Sub BtnCreateCharacter_MouseLeave(sender As Object, e As EventArgs) Handles btnCreateCharacter.MouseLeave
-        btnCreateCharacter.Image = Image.FromFile(Paths.Gui & "Menu\btn_createchar" & GfxExt)
     End Sub
 
     ''' <summary>
@@ -567,20 +536,6 @@ Friend Class FrmMenu
     End Sub
 
     ''' <summary>
-    ''' Changes to hover state on button.
-    ''' </summary>
-    Private Sub BtnNewChar_MouseEnter(sender As Object, e As EventArgs) Handles btnNewChar.MouseEnter
-        btnNewChar.Image = Image.FromFile(Paths.Gui & "Menu\btn_newchar_hover" & GfxExt)
-    End Sub
-
-    ''' <summary>
-    ''' Changes to normal state on button.
-    ''' </summary>
-    Private Sub BtnNewChar_MouseLeave(sender As Object, e As EventArgs) Handles btnNewChar.MouseLeave
-        btnNewChar.Image = Image.FromFile(Paths.Gui & "Menu\btn_newchar" & GfxExt)
-    End Sub
-
-    ''' <summary>
     ''' Handles UseChar button press.
     ''' </summary>
     Private Sub BtnUseChar_Click(sender As Object, e As EventArgs) Handles btnUseChar.Click
@@ -612,34 +567,6 @@ Friend Class FrmMenu
         Socket.SendData(buffer.Data, buffer.Head)
 
         buffer.Dispose()
-    End Sub
-
-    ''' <summary>
-    ''' Changes to hover state on button.
-    ''' </summary>
-    Private Sub BtnUseChar_MouseEnter(sender As Object, e As EventArgs) Handles btnUseChar.MouseEnter
-        btnUseChar.Image = Image.FromFile(Paths.Gui & "Menu\btn_usechar_hover" & GfxExt)
-    End Sub
-
-    ''' <summary>
-    ''' Changes to normal state on button.
-    ''' </summary>
-    Private Sub BtnUseChar_MouseLeave(sender As Object, e As EventArgs) Handles btnUseChar.MouseLeave
-        btnUseChar.Image = Image.FromFile(Paths.Gui & "Menu\btn_usechar" & GfxExt)
-    End Sub
-
-    ''' <summary>
-    ''' Changes to hover state on button.
-    ''' </summary>
-    Private Sub BtnDelChar_MouseEnter(sender As Object, e As EventArgs) Handles btnDelChar.MouseEnter
-        btnDelChar.Image = Image.FromFile(Paths.Gui & "Menu\btn_deletechar_hover" & GfxExt)
-    End Sub
-
-    ''' <summary>
-    ''' Changes to normal state on button.
-    ''' </summary>
-    Private Sub BtnDelChar_MouseLeave(sender As Object, e As EventArgs) Handles btnDelChar.MouseLeave
-        btnDelChar.Image = Image.FromFile(Paths.Gui & "Menu\btn_deletechar" & GfxExt)
     End Sub
 
 #End Region
