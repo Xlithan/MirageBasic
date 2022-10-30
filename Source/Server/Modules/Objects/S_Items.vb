@@ -295,7 +295,7 @@ Friend Module S_Items
 
         i = MapItemSlot
 
-        If i <> -1 Then
+        If i <> 0 Then
             MapItem(mapNum, i).Num = itemNum
             MapItem(mapNum, i).Value = ItemVal
             MapItem(mapNum, i).X = x

@@ -197,14 +197,14 @@ End Function
 
     End Function
 
-    Friend Sub RePositionGui(width As Integer, height As Integer)        
-        ScreenMapx = (width / 32) - 1
-        ScreenMapy = (height / 32) - 1
+    Friend Sub RePositionGui(width As Integer, height As Integer)
+        ScreenMapx = 24 '(width / 32) - 1
+        ScreenMapy = 18 '(height / 32) - 1
 
         'then the window
-        FrmGame.ClientSize = New Drawing.Size((ScreenMapx) * PicX + PicX, (ScreenMapy) * PicY + PicY)
-        FrmGame.picscreen.Width = (ScreenMapx) * PicX + PicX
-        FrmGame.picscreen.Height = (ScreenMapy) * PicY + PicY
+        'FrmGame.ClientSize = New Drawing.Size((ScreenMapx) * PicX + PicX, (ScreenMapy) * PicY + PicY)
+        FrmGame.picscreen.Width = 800 '(ScreenMapx) * PicX + PicX
+        FrmGame.picscreen.Height = 608 '(ScreenMapy) * PicY + PicY
 
         HalfX = ((ScreenMapx) \ 2) * PicX
         HalfY = ((ScreenMapy) \ 2) * PicY

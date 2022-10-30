@@ -15,7 +15,7 @@ Friend Class FrmGame
         Else
             FormBorderStyle = 0
         End If
-       
+
         RePositionGui(screenWidth, screenHeight)
     End Sub
 

@@ -245,17 +245,30 @@ Module C_Text
         Return WidthTester.GetLocalBounds().Width
     End Function
 
-    Friend Sub AddText(msg As String, color As Integer)
+    Friend Sub AddText(msg As String, colour As Integer)
+        Dim s As String
+
         If TxtChatAdd = "" Then
             TxtChatAdd = TxtChatAdd & msg
-            AddChatRec(msg, color)
+            AddChatRec(msg, colour)
         Else
             For Each str As String In WordWrap(msg, MyChatWindowGfxInfo.Width - ChatboxPadding, WrapMode.Font)
                 TxtChatAdd = TxtChatAdd & vbNewLine & str
-                AddChatRec(str, color)
+                AddChatRec(str, colour)
             Next
 
         End If
+
+        With FrmGame.txtChat
+            .Text = "Welcome to MirageBasic" '.Text + msg + vbCrLf
+            .AppendText(TxtChatAdd)
+
+            .SelectionStart = Len(.Text) - 1
+
+
+            ' Prevent players from name spoofing
+            '.MaxLength = 80
+        End With
     End Sub
 
     Friend Sub AddChatRec(msg As String, color As Integer)
