@@ -29,22 +29,8 @@ Partial Class FrmGame
         Me.lblCurrencyOk = New System.Windows.Forms.Label()
         Me.txtCurrency = New System.Windows.Forms.TextBox()
         Me.lblCurrency = New System.Windows.Forms.Label()
-        Me.pnlMain = New System.Windows.Forms.Panel()
-        Me.PictureBox5 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.txtInput = New System.Windows.Forms.TextBox()
-        Me.txtChat = New System.Windows.Forms.TextBox()
         CType(Me.picscreen, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlCurrency.SuspendLayout()
-        Me.pnlMain.SuspendLayout()
-        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'picscreen
@@ -117,91 +103,6 @@ Partial Class FrmGame
         Me.lblCurrency.Text = "How many do you want to drop?"
         Me.lblCurrency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'pnlMain
-        '
-        Me.pnlMain.BackgroundImage = CType(resources.GetObject("pnlMain.BackgroundImage"), System.Drawing.Image)
-        Me.pnlMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.pnlMain.Controls.Add(Me.PictureBox5)
-        Me.pnlMain.Controls.Add(Me.PictureBox4)
-        Me.pnlMain.Controls.Add(Me.PictureBox3)
-        Me.pnlMain.Controls.Add(Me.PictureBox2)
-        Me.pnlMain.Controls.Add(Me.PictureBox1)
-        Me.pnlMain.Location = New System.Drawing.Point(806, 6)
-        Me.pnlMain.Name = "pnlMain"
-        Me.pnlMain.Size = New System.Drawing.Size(130, 385)
-        Me.pnlMain.TabIndex = 17
-        '
-        'PictureBox5
-        '
-        Me.PictureBox5.Image = CType(resources.GetObject("PictureBox5.Image"), System.Drawing.Image)
-        Me.PictureBox5.Location = New System.Drawing.Point(66, 311)
-        Me.PictureBox5.Name = "PictureBox5"
-        Me.PictureBox5.Size = New System.Drawing.Size(46, 46)
-        Me.PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.PictureBox5.TabIndex = 4
-        Me.PictureBox5.TabStop = False
-        '
-        'PictureBox4
-        '
-        Me.PictureBox4.Image = CType(resources.GetObject("PictureBox4.Image"), System.Drawing.Image)
-        Me.PictureBox4.Location = New System.Drawing.Point(66, 259)
-        Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(46, 46)
-        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.PictureBox4.TabIndex = 3
-        Me.PictureBox4.TabStop = False
-        '
-        'PictureBox3
-        '
-        Me.PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), System.Drawing.Image)
-        Me.PictureBox3.Location = New System.Drawing.Point(14, 259)
-        Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(46, 46)
-        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.PictureBox3.TabIndex = 2
-        Me.PictureBox3.TabStop = False
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(66, 207)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(46, 46)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.PictureBox2.TabIndex = 1
-        Me.PictureBox2.TabStop = False
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(14, 207)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(46, 46)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
-        '
-        'txtInput
-        '
-        Me.txtInput.BackColor = System.Drawing.Color.DimGray
-        Me.txtInput.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtInput.Location = New System.Drawing.Point(3, 614)
-        Me.txtInput.Name = "txtInput"
-        Me.txtInput.Size = New System.Drawing.Size(797, 16)
-        Me.txtInput.TabIndex = 19
-        '
-        'txtChat
-        '
-        Me.txtChat.BackColor = System.Drawing.Color.DimGray
-        Me.txtChat.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtChat.ForeColor = System.Drawing.Color.White
-        Me.txtChat.Location = New System.Drawing.Point(3, 636)
-        Me.txtChat.Multiline = True
-        Me.txtChat.Name = "txtChat"
-        Me.txtChat.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtChat.Size = New System.Drawing.Size(797, 150)
-        Me.txtChat.TabIndex = 20
-        '
         'FrmGame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -209,10 +110,7 @@ Partial Class FrmGame
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.SystemColors.ControlDark
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(942, 788)
-        Me.Controls.Add(Me.txtChat)
-        Me.Controls.Add(Me.txtInput)
-        Me.Controls.Add(Me.pnlMain)
+        Me.ClientSize = New System.Drawing.Size(801, 608)
         Me.Controls.Add(Me.pnlCurrency)
         Me.Controls.Add(Me.picscreen)
         Me.DoubleBuffered = True
@@ -226,15 +124,7 @@ Partial Class FrmGame
         CType(Me.picscreen, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlCurrency.ResumeLayout(False)
         Me.pnlCurrency.PerformLayout()
-        Me.pnlMain.ResumeLayout(False)
-        Me.pnlMain.PerformLayout()
-        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents picscreen As System.Windows.Forms.PictureBox
@@ -243,12 +133,4 @@ Partial Class FrmGame
     Friend WithEvents lblCurrencyCancel As System.Windows.Forms.Label
     Friend WithEvents lblCurrencyOk As System.Windows.Forms.Label
     Friend WithEvents txtCurrency As System.Windows.Forms.TextBox
-    Friend WithEvents pnlMain As Panel
-    Friend WithEvents PictureBox5 As PictureBox
-    Friend WithEvents PictureBox4 As PictureBox
-    Friend WithEvents PictureBox3 As PictureBox
-    Friend WithEvents PictureBox2 As PictureBox
-    Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents txtInput As TextBox
-    Public WithEvents txtChat As TextBox
 End Class

@@ -258,17 +258,6 @@ Module C_Text
             Next
 
         End If
-
-        With FrmGame.txtChat
-            .Text = "Welcome to MirageBasic" '.Text + msg + vbCrLf
-            .AppendText(TxtChatAdd)
-
-            .SelectionStart = Len(.Text) - 1
-
-
-            ' Prevent players from name spoofing
-            '.MaxLength = 80
-        End With
     End Sub
 
     Friend Sub AddChatRec(msg As String, color As Integer)

@@ -2942,12 +2942,12 @@ NextLoop:
         If HideGui = True Then Exit Sub
 
         If HudVisible = True Then
-            'DrawHud()
-            'DrawActionPanel()
-            'DrawChat()
+            DrawHud()
+            DrawActionPanel()
+            DrawChat()
             'DrawHotbar()
-            'DrawPetBar()
-            'DrawPetStats()
+            DrawPetBar()
+            DrawPetStats()
         End If
 
         If PnlCharacterVisible = True Then
