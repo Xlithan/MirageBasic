@@ -74,6 +74,12 @@ Partial Class FrmMenu
         Me.Label16 = New System.Windows.Forms.Label()
         Me.lblNewsHeader = New System.Windows.Forms.Label()
         Me.lblNews = New System.Windows.Forms.Label()
+        Me.lblCharSubmit = New System.Windows.Forms.Label()
+        Me.lblNewChatBtn = New System.Windows.Forms.Label()
+        Me.lblUseCharBtn = New System.Windows.Forms.Label()
+        Me.lblCharCancelBtn = New System.Windows.Forms.Label()
+        Me.lblNewAccSubmit = New System.Windows.Forms.Label()
+        Me.lblLoginBtn = New System.Windows.Forms.Label()
         Me.pnlLogin.SuspendLayout()
         CType(Me.btnLogin, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlRegister.SuspendLayout()
@@ -99,6 +105,7 @@ Partial Class FrmMenu
         Me.pnlLogin.BackColor = System.Drawing.Color.Transparent
         Me.pnlLogin.BackgroundImage = CType(resources.GetObject("pnlLogin.BackgroundImage"), System.Drawing.Image)
         Me.pnlLogin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnlLogin.Controls.Add(Me.lblLoginBtn)
         Me.pnlLogin.Controls.Add(Me.btnLogin)
         Me.pnlLogin.Controls.Add(Me.chkSavePass)
         Me.pnlLogin.Controls.Add(Me.txtPassword)
@@ -187,6 +194,7 @@ Partial Class FrmMenu
         Me.pnlRegister.BackColor = System.Drawing.Color.Transparent
         Me.pnlRegister.BackgroundImage = CType(resources.GetObject("pnlRegister.BackgroundImage"), System.Drawing.Image)
         Me.pnlRegister.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnlRegister.Controls.Add(Me.lblNewAccSubmit)
         Me.pnlRegister.Controls.Add(Me.txtRPass2)
         Me.pnlRegister.Controls.Add(Me.btnCreateAccount)
         Me.pnlRegister.Controls.Add(Me.lblNewAccPass2)
@@ -283,6 +291,7 @@ Partial Class FrmMenu
         Me.pnlNewChar.BackColor = System.Drawing.Color.Transparent
         Me.pnlNewChar.BackgroundImage = CType(resources.GetObject("pnlNewChar.BackgroundImage"), System.Drawing.Image)
         Me.pnlNewChar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnlNewChar.Controls.Add(Me.lblCharSubmit)
         Me.pnlNewChar.Controls.Add(Me.btnCreateCharacter)
         Me.pnlNewChar.Controls.Add(Me.txtDescription)
         Me.pnlNewChar.Controls.Add(Me.lblNewCharSprite)
@@ -526,6 +535,9 @@ Partial Class FrmMenu
         Me.pnlCharSelect.BackColor = System.Drawing.Color.Transparent
         Me.pnlCharSelect.BackgroundImage = CType(resources.GetObject("pnlCharSelect.BackgroundImage"), System.Drawing.Image)
         Me.pnlCharSelect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pnlCharSelect.Controls.Add(Me.lblCharCancelBtn)
+        Me.pnlCharSelect.Controls.Add(Me.lblUseCharBtn)
+        Me.pnlCharSelect.Controls.Add(Me.lblNewChatBtn)
         Me.pnlCharSelect.Controls.Add(Me.btnDelChar)
         Me.pnlCharSelect.Controls.Add(Me.btnUseChar)
         Me.pnlCharSelect.Controls.Add(Me.btnNewChar)
@@ -647,6 +659,84 @@ Partial Class FrmMenu
         Me.lblNews.TabIndex = 37
         Me.lblNews.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'lblCharSubmit
+        '
+        Me.lblCharSubmit.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblCharSubmit.AutoSize = True
+        Me.lblCharSubmit.Location = New System.Drawing.Point(182, 224)
+        Me.lblCharSubmit.Name = "lblCharSubmit"
+        Me.lblCharSubmit.Size = New System.Drawing.Size(46, 13)
+        Me.lblCharSubmit.TabIndex = 46
+        Me.lblCharSubmit.Text = "SUBMIT"
+        Me.lblCharSubmit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblNewChatBtn
+        '
+        Me.lblNewChatBtn.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblNewChatBtn.AutoSize = True
+        Me.lblNewChatBtn.Location = New System.Drawing.Point(93, 131)
+        Me.lblNewChatBtn.Name = "lblNewChatBtn"
+        Me.lblNewChatBtn.Size = New System.Drawing.Size(73, 13)
+        Me.lblNewChatBtn.TabIndex = 56
+        Me.lblNewChatBtn.Text = "CREATE NEW"
+        Me.lblNewChatBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblUseCharBtn
+        '
+        Me.lblUseCharBtn.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblUseCharBtn.AutoSize = True
+        Me.lblUseCharBtn.Location = New System.Drawing.Point(115, 179)
+        Me.lblUseCharBtn.Name = "lblUseCharBtn"
+        Me.lblUseCharBtn.Size = New System.Drawing.Size(29, 13)
+        Me.lblUseCharBtn.TabIndex = 58
+        Me.lblUseCharBtn.Text = "PLAY"
+        Me.lblUseCharBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblCharCancelBtn
+        '
+        Me.lblCharCancelBtn.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblCharCancelBtn.AutoSize = True
+        Me.lblCharCancelBtn.Location = New System.Drawing.Point(106, 224)
+        Me.lblCharCancelBtn.Name = "lblCharCancelBtn"
+        Me.lblCharCancelBtn.Size = New System.Drawing.Size(47, 13)
+        Me.lblCharCancelBtn.TabIndex = 59
+        Me.lblCharCancelBtn.Text = "CANCEL"
+        Me.lblCharCancelBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblNewAccSubmit
+        '
+        Me.lblNewAccSubmit.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblNewAccSubmit.AutoSize = True
+        Me.lblNewAccSubmit.Location = New System.Drawing.Point(183, 224)
+        Me.lblNewAccSubmit.Name = "lblNewAccSubmit"
+        Me.lblNewAccSubmit.Size = New System.Drawing.Size(46, 13)
+        Me.lblNewAccSubmit.TabIndex = 58
+        Me.lblNewAccSubmit.Text = "SUBMIT"
+        Me.lblNewAccSubmit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblLoginBtn
+        '
+        Me.lblLoginBtn.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblLoginBtn.AutoSize = True
+        Me.lblLoginBtn.Location = New System.Drawing.Point(185, 224)
+        Me.lblLoginBtn.Name = "lblLoginBtn"
+        Me.lblLoginBtn.Size = New System.Drawing.Size(40, 13)
+        Me.lblLoginBtn.TabIndex = 58
+        Me.lblLoginBtn.Text = "LOGIN"
+        Me.lblLoginBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'FrmMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -660,14 +750,14 @@ Partial Class FrmMenu
         Me.Controls.Add(Me.lblServerStatus)
         Me.Controls.Add(Me.lblNews)
         Me.Controls.Add(Me.lblStatusHeader)
-        Me.Controls.Add(Me.pnlNewChar)
         Me.Controls.Add(Me.pnlCharSelect)
         Me.Controls.Add(Me.pnlCredits)
         Me.Controls.Add(Me.pnlRegister)
         Me.Controls.Add(Me.pnlLogin)
-        Me.Controls.Add(Me.btnPlay)
-        Me.Controls.Add(Me.btnRegister)
         Me.Controls.Add(Me.btnExit)
+        Me.Controls.Add(Me.btnRegister)
+        Me.Controls.Add(Me.btnPlay)
+        Me.Controls.Add(Me.pnlNewChar)
         Me.DoubleBuffered = True
         Me.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point)
         Me.ForeColor = System.Drawing.Color.Black
@@ -754,4 +844,10 @@ End Sub
     Friend WithEvents btnCreateCharacter As PictureBox
     Friend WithEvents btnCreateAccount As PictureBox
     Friend WithEvents btnLogin As PictureBox
+    Friend WithEvents lblCharSubmit As Label
+    Friend WithEvents lblNewChatBtn As Label
+    Friend WithEvents lblLoginBtn As Label
+    Friend WithEvents lblNewAccSubmit As Label
+    Friend WithEvents lblCharCancelBtn As Label
+    Friend WithEvents lblUseCharBtn As Label
 End Class
