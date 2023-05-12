@@ -8,7 +8,7 @@ Module C_GameLogic
 
     Sub GameLoop()
         Dim i As Integer
-        Dim dest As Point = New Point(FrmGame.PointToScreen(FrmGame.picscreen.Location))
+        Dim dest As Point = New Point(FrmGame.PointToScreen(FrmGame.rtbChat.Location))
         Dim g As Graphics = FrmGame.picscreen.CreateGraphics
         Dim starttime As Integer, tick As Integer, fogtmr As Integer
         Dim tmpfps As Integer, tmplps As Integer, walkTimer As Integer, frameTime As Integer
@@ -155,7 +155,7 @@ Module C_GameLogic
                 ' check if trade timed out
                 If TradeRequest = True Then
                     If TradeTimer < tick Then
-                        AddText(Language.Trade.Timeout, ColorType.Yellow)
+                        AddText(Language.Trade.Timeout, Color.Yellow)
                         TradeRequest = False
                         TradeTimer = 0
                     End If
@@ -482,7 +482,7 @@ Module C_GameLogic
         Dim n As Integer
         Dim command() As String
         Dim buffer As ByteStream
-        chatText = Trim$(ChatInput.CurrentMessage)
+        chatText = FrmGame.txtText.Text.Trim() 'Trim$(ChatInput.CurrentMessage)
         name = ""
 
         If Len(chatText) = 0 Then Exit Sub
@@ -550,7 +550,7 @@ Module C_GameLogic
                 ' Send the message to the player
                 PlayerMsg(ChatInput.CurrentMessage, name)
             Else
-                AddText(Language.Chat.PlayerMsg, ColorType.Yellow)
+                AddText(Language.Chat.PlayerMsg, Color.Yellow)
             End If
 
             GoTo Continue1
@@ -563,24 +563,24 @@ Module C_GameLogic
                 Case "/emote"
                     ' Checks to make sure we have more than one string in the array
                     If UBound(command) < 1 OrElse Not IsNumeric(command(1)) Then
-                        AddText(Language.Chat.Emote, ColorType.Yellow)
+                        AddText(Language.Chat.Emote, Color.Yellow)
                         GoTo Continue1
                     End If
 
                     SendUseEmote(command(1))
 
                 Case "/help"
-                    AddText(Language.Chat.Help1, ColorType.Yellow)
-                    AddText(Language.Chat.Help2, ColorType.Yellow)
-                    AddText(Language.Chat.Help3, ColorType.Yellow)
-                    AddText(Language.Chat.Help4, ColorType.Yellow)
-                    AddText(Language.Chat.Help5, ColorType.Yellow)
+                    AddText(Language.Chat.Help1, Color.Yellow)
+                    AddText(Language.Chat.Help2, Color.Yellow)
+                    AddText(Language.Chat.Help3, Color.Yellow)
+                    AddText(Language.Chat.Help4, Color.Yellow)
+                    AddText(Language.Chat.Help5, Color.Yellow)
 
                 Case "/houseinvite"
 
                     ' Checks to make sure we have more than one string in the array
                     If UBound(command) < 1 OrElse IsNumeric(command(1)) Then
-                        AddText(Language.Chat.HouseInvite, ColorType.Yellow)
+                        AddText(Language.Chat.HouseInvite, Color.Yellow)
                         GoTo Continue1
                     End If
 
@@ -595,7 +595,7 @@ Module C_GameLogic
 
                     ' Checks to make sure we have more than one string in the array
                     If UBound(command) < 1 OrElse IsNumeric(command(1)) Then
-                        AddText(Language.Chat.Info, ColorType.Yellow)
+                        AddText(Language.Chat.Info, Color.Yellow)
                         GoTo Continue1
                     End If
 
@@ -626,7 +626,7 @@ Module C_GameLogic
                 Case "/party"
                     ' Make sure they are actually sending something
                     If UBound(command) < 1 OrElse IsNumeric(command(1)) Then
-                        AddText(Language.Chat.Party, ColorType.Yellow)
+                        AddText(Language.Chat.Party, Color.Yellow)
                         GoTo Continue1
                     End If
 
@@ -647,12 +647,12 @@ Module C_GameLogic
 
                 Case "/questreset"
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, Color.OrangeRed)
                         GoTo Continue1
                     End If
 
                     If UBound(command) < 1 OrElse Not IsNumeric(command(1)) Then
-                        AddText(Language.Chat.ResetQuest, ColorType.Yellow)
+                        AddText(Language.Chat.ResetQuest, Color.Yellow)
                         GoTo Continue1
                     End If
 
@@ -662,31 +662,31 @@ Module C_GameLogic
                     If n > 0 AndAlso n <= MaxQuests Then
                         QuestReset(n)
                     Else
-                        AddText(Language.Chat.InvalidQuest, QColorType.AlertColor)
+                        AddText(Language.Chat.InvalidQuest, Color.OrangeRed)
                     End If
 
                 ' Admin Help
                 Case "/admin"
 
                     If GetPlayerAccess(Myindex) < AdminType.Monitor Then
-                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, Color.OrangeRed)
                         GoTo Continue1
                     End If
 
-                    AddText(Language.Chat.Admin1, ColorType.Yellow)
-                    AddText(Language.Chat.Admin2, ColorType.Yellow)
-                    AddText(Language.Chat.AdminGblMsg, ColorType.Yellow)
-                    AddText(Language.Chat.AdminPvtMsg, ColorType.Yellow)
+                    AddText(Language.Chat.Admin1, Color.Yellow)
+                    AddText(Language.Chat.Admin2, Color.Yellow)
+                    AddText(Language.Chat.AdminGblMsg, Color.Yellow)
+                    AddText(Language.Chat.AdminPvtMsg, Color.Yellow)
                 ' Kicking a player
                 Case "/kick"
 
                     If GetPlayerAccess(Myindex) < AdminType.Monitor Then
-                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, Color.OrangeRed)
                         GoTo Continue1
                     End If
 
                     If UBound(command) < 1 OrElse IsNumeric(command(1)) Then
-                        AddText(Language.Chat.Kick, ColorType.Yellow)
+                        AddText(Language.Chat.Kick, Color.Yellow)
                         GoTo Continue1
                     End If
 
@@ -696,7 +696,7 @@ Module C_GameLogic
                 Case "/loc"
 
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, Color.OrangeRed)
                         GoTo Continue1
                     End If
 
@@ -705,12 +705,12 @@ Module C_GameLogic
                 Case "/warpmeto"
 
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, Color.OrangeRed)
                         GoTo Continue1
                     End If
 
                     If UBound(command) < 1 OrElse IsNumeric(command(1)) Then
-                        AddText(Language.Chat.WarpMeTo, ColorType.Yellow)
+                        AddText(Language.Chat.WarpMeTo, Color.Yellow)
                         GoTo Continue1
                     End If
 
@@ -719,12 +719,12 @@ Module C_GameLogic
                 Case "/warptome"
 
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, Color.OrangeRed)
                         GoTo Continue1
                     End If
 
                     If UBound(command) < 1 OrElse IsNumeric(command(1)) Then
-                        AddText(Language.Chat.WarpToMe, ColorType.Yellow)
+                        AddText(Language.Chat.WarpToMe, Color.Yellow)
                         GoTo Continue1
                     End If
 
@@ -733,12 +733,12 @@ Module C_GameLogic
                 Case "/warpto"
 
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, Color.OrangeRed)
                         GoTo Continue1
                     End If
 
                     If UBound(command) < 1 OrElse Not IsNumeric(command(1)) Then
-                        AddText(Language.Chat.WarpTo, ColorType.Yellow)
+                        AddText(Language.Chat.WarpTo, Color.Yellow)
                         GoTo Continue1
                     End If
 
@@ -748,19 +748,19 @@ Module C_GameLogic
                     If n > 0 AndAlso n <= MAX_MAPS Then
                         WarpTo(n)
                     Else
-                        AddText(Language.Chat.InvalidMap, QColorType.AlertColor)
+                        AddText(Language.Chat.InvalidMap, Color.OrangeRed)
                     End If
 
                 ' Setting sprite
                 Case "/sprite"
 
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, Color.OrangeRed)
                         GoTo Continue1
                     End If
 
                     If UBound(command) < 1 OrElse Not IsNumeric(command(1)) Then
-                        AddText(Language.Chat.Sprite, ColorType.Yellow)
+                        AddText(Language.Chat.Sprite, Color.Yellow)
                         GoTo Continue1
                     End If
 
@@ -769,7 +769,7 @@ Module C_GameLogic
                 Case "/mapreport"
 
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, Color.OrangeRed)
                         GoTo Continue1
                     End If
 
@@ -778,7 +778,7 @@ Module C_GameLogic
                 Case "/respawn"
 
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, Color.OrangeRed)
                         GoTo Continue1
                     End If
 
@@ -787,12 +787,12 @@ Module C_GameLogic
                 Case "/welcome"
 
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, Color.OrangeRed)
                         GoTo Continue1
                     End If
 
                     If UBound(command) < 1 Then
-                        AddText(Language.Chat.Welcome, ColorType.Yellow)
+                        AddText(Language.Chat.Welcome, Color.Yellow)
                         GoTo Continue1
                     End If
 
@@ -801,7 +801,7 @@ Module C_GameLogic
                 Case "/banlist"
 
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, Color.OrangeRed)
                         GoTo Continue1
                     End If
 
@@ -810,12 +810,12 @@ Module C_GameLogic
                 Case "/ban"
 
                     If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, Color.OrangeRed)
                         GoTo Continue1
                     End If
 
                     If UBound(command) < 1 Then
-                        AddText(Language.Chat.Ban, ColorType.Yellow)
+                        AddText(Language.Chat.Ban, Color.Yellow)
                         GoTo Continue1
                     End If
 
@@ -827,20 +827,20 @@ Module C_GameLogic
                 Case "/access"
 
                     If GetPlayerAccess(Myindex) < AdminType.Creator Then
-                        AddText(Language.Chat.AccessAlert, QColorType.AlertColor)
+                        AddText(Language.Chat.AccessAlert, Color.OrangeRed)
                         GoTo Continue1
                     End If
 
                     If UBound(command) < 2 OrElse
                         IsNumeric(command(1)) OrElse
                         Not IsNumeric(command(2)) Then
-                        AddText(Language.Chat.Access, ColorType.Yellow)
+                        AddText(Language.Chat.Access, Color.Yellow)
                         GoTo Continue1
                     End If
 
                     SendSetAccess(command(1), CLng(command(2)))
                 Case Else
-                    AddText(Language.Chat.InvalidCmd, QColorType.AlertColor)
+                    AddText(Language.Chat.InvalidCmd, Color.OrangeRed)
             End Select
 
         ElseIf Len(chatText) > 0 Then ' Say message

@@ -269,7 +269,7 @@ Friend Module C_GuiFunctions
                         Socket.SendData(buffer.Data, buffer.Head)
                         buffer.Dispose()
                         PnlSkillsVisible = True
-                        AddText("Click on the skill you want to place here", QColorType.TellColor)
+                        AddText("Click on the skill you want to place here", Color.YellowGreen)
                         SelSkillSlot = True
                         SelHotbarSlot = IsHotBarSlot(e.Location.X, e.Location.Y)
                     End If
@@ -725,9 +725,9 @@ Friend Module C_GuiFunctions
                                 multiplier = Shop(InShop).BuyRate / 100
                                 value = Item(GetPlayerInvItemNum(Myindex, invNum)).Price * multiplier
                                 If value > 0 Then
-                                    AddText("You can sell this item for " & value & " gold.", QColorType.TellColor)
+                                    AddText("You can sell this item for " & value & " gold.", Color.YellowGreen)
                                 Else
-                                    AddText("The shop does not want this item.", QColorType.AlertColor)
+                                    AddText("The shop does not want this item.", Color.OrangeRed)
                                 End If
                             Case 2 ' 2 = sell
                                 SellItem(invNum)
@@ -1059,7 +1059,7 @@ Friend Module C_GuiFunctions
                     Select Case ShopAction
                         Case 0 ' no action, give cost
                             With Shop(InShop).TradeItem(shopItem)
-                                AddText("You can buy this item for " & .CostValue & " " & Trim$(Item(.CostItem).Name) & ".", ColorType.Yellow)
+                                AddText("You can buy this item for " & .CostValue & " " & Trim$(Item(.CostItem).Name) & ".", Color.Yellow)
                             End With
                         Case 1 ' buy item
                             ' buy item code
@@ -1071,7 +1071,7 @@ Friend Module C_GuiFunctions
                         If y > ShopWindowY + ShopButtonBuyY AndAlso y < ShopWindowY + ShopButtonBuyY + ButtonGfxInfo.Height Then
                             If ShopAction = 1 Then Exit Function
                             ShopAction = 1 ' buying an item
-                            AddText("Click on the item in the shop you wish to buy.", ColorType.Yellow)
+                            AddText("Click on the item in the shop you wish to buy.", Color.Yellow)
                         End If
                     End If
                     ' check for sell button
@@ -1079,7 +1079,7 @@ Friend Module C_GuiFunctions
                         If y > ShopWindowY + ShopButtonSellY AndAlso y < ShopWindowY + ShopButtonSellY + ButtonGfxInfo.Height Then
                             If ShopAction = 2 Then Exit Function
                             ShopAction = 2 ' selling an item
-                            AddText("Double-click on the item in your inventory you wish to sell.", ColorType.Yellow)
+                            AddText("Double-click on the item in your inventory you wish to sell.", Color.Yellow)
                         End If
                     End If
                     ' check for close button

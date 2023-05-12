@@ -1,5 +1,6 @@
 ﻿Imports SFML.Graphics
 Imports SFML.Window
+Imports System.Runtime.CompilerServices
 
 Module C_Text
     Friend Const MaxChatDisplayLines As Byte = 11
@@ -238,7 +239,7 @@ Module C_Text
         y = ConvertMapY(y)
 
         If GetTickCount() < ActionMsg(index).Created + time Then
-            DrawText(x, y, ActionMsg(index).Message, GetSfmlColor(ActionMsg(index).Color), (Color.Black), GameWindow)
+            'DrawText(x, y, ActionMsg(index).Message, GetSfmlColor(ActionMsg(index).Color), (Color.Black), GameWindow)
         Else
             ClearActionMsg(index)
         End If
@@ -253,14 +254,20 @@ Module C_Text
         Return WidthTester.GetLocalBounds().Width
     End Function
 
-    Friend Sub AddText(msg As String, color As Integer)
+    Friend Sub AddText(msg As String, color As System.Drawing.Color)
         If TxtChatAdd = "" Then
             TxtChatAdd = TxtChatAdd & msg
-            AddChatRec(msg, color)
+            FrmGame.rtbChat.AppendText(msg, color)
+            FrmGame.rtbChat.AppendText(Environment.NewLine)
+            FrmGame.rtbChat.ScrollToCaret()
+            'AddChatRec(msg, color)
         Else
             For Each str As String In WordWrap(msg, MyChatWindowGfxInfo.Width - ChatboxPadding, WrapMode.Font)
                 TxtChatAdd = TxtChatAdd & vbNewLine & str
-                AddChatRec(str, color)
+                FrmGame.rtbChat.AppendText(str, color)
+                FrmGame.rtbChat.AppendText(Environment.NewLine)
+                FrmGame.rtbChat.ScrollToCaret()
+                'AddChatRec(str, color)
             Next
 
         End If
@@ -273,44 +280,44 @@ Module C_Text
         Chat.Add(struct)
     End Sub
 
-    Friend Function GetSfmlColor(color As Byte) As Color
-        Select Case color
-            Case ColorType.Black
-                Return SFML.Graphics.Color.Black
-            Case ColorType.Blue
-                Return New Color(73, 151, 208)
-            Case ColorType.Green
-                Return New Color(102, 255, 0, 180)
-            Case ColorType.Cyan
-                Return New Color(0, 139, 139)
-            Case ColorType.Red
-                Return New Color(255, 0, 0, 180)
-            Case ColorType.Magenta
-                Return SFML.Graphics.Color.Magenta
-            Case ColorType.Brown
-                Return New Color(139, 69, 19)
-            Case ColorType.Gray
-                Return New Color(211, 211, 211)
-            Case ColorType.DarkGray
-                Return New Color(169, 169, 169)
-            Case ColorType.BrightBlue
-                Return New Color(0, 191, 255)
-            Case ColorType.BrightGreen
-                Return New Color(0, 255, 0)
-            Case ColorType.BrightCyan
-                Return New Color(0, 255, 255)
-            Case ColorType.BrightRed
-                Return New Color(255, 0, 0)
-            Case ColorType.Pink
-                Return New Color(255, 192, 203)
-            Case ColorType.Yellow
-                Return SFML.Graphics.Color.Yellow
-            Case ColorType.White
-                Return SFML.Graphics.Color.White
-            Case Else
-                Return SFML.Graphics.Color.White
-        End Select
-    End Function
+    'Friend Function GetSfmlColor(color As Byte) As Color
+    '    Select Case color
+    '        Case color.Black
+    '            Return SFML.Graphics.Color.Black
+    '        Case color.Blue
+    '            Return New Color(73, 151, 208)
+    '        Case color.Green
+    '            Return New Color(102, 255, 0, 180)
+    '        Case color.Cyan
+    '            Return New Color(0, 139, 139)
+    '        Case color.Red
+    '            Return New Color(255, 0, 0, 180)
+    '        Case color.Magenta
+    '            Return SFML.Graphics.Color.Magenta
+    '        Case color.Brown
+    '            Return New Color(139, 69, 19)
+    '        Case color.Gray
+    '            Return New Color(211, 211, 211)
+    '        Case color.DarkGray
+    '            Return New Color(169, 169, 169)
+    '        Case color.BrightBlue
+    '            Return New Color(0, 191, 255)
+    '        Case color.BrightGreen
+    '            Return New Color(0, 255, 0)
+    '        Case color.BrightCyan
+    '            Return New Color(0, 255, 255)
+    '        Case color.BrightRed
+    '            Return New Color(255, 0, 0)
+    '        Case color.Pink
+    '            Return New Color(255, 192, 203)
+    '        Case color.Yellow
+    '            Return SFML.Graphics.Color.Yellow
+    '        Case color.White
+    '            Return SFML.Graphics.Color.White
+    '        Case Else
+    '            Return SFML.Graphics.Color.White
+    '    End Select
+    'End Function
 
     Friend SplitChars As Char() = New Char() {" "c, "-"c, ControlChars.Tab}
 
@@ -517,4 +524,15 @@ Module C_Text
 
     End Sub
 
+End Module
+
+Module RichTextBoxExtensions
+    <Extension()>
+    Sub AppendText(ByVal box As RichTextBox, ByVal text As String, ByVal color As System.Drawing.Color)
+        box.SelectionStart = box.TextLength
+        box.SelectionLength = 0
+        box.SelectionColor = color
+        box.AppendText(text)
+        box.SelectionColor = box.ForeColor
+    End Sub
 End Module

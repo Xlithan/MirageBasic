@@ -216,19 +216,19 @@ Module C_General
     Friend Sub RePositionGui()
 
         'first change the tiles
-        If Settings.ScreenSize = 0 Then ' 800x600
-            ScreenMapx = 25
-            ScreenMapy = 19
-        ElseIf Settings.ScreenSize = 1 Then '1024x768
-            ScreenMapx = 31
-            ScreenMapy = 24
-        ElseIf Settings.ScreenSize = 2 Then
-            ScreenMapx = 35
-            ScreenMapy = 26
-        End If
+        'If Settings.ScreenSize = 0 Then ' 800x600
+        '    ScreenMapx = 25
+        '    ScreenMapy = 19
+        'ElseIf Settings.ScreenSize = 1 Then '1024x768
+        '   ScreenMapx = 31
+        '   ScreenMapy = 24
+        'ElseIf Settings.ScreenSize = 2 Then
+        '    ScreenMapx = 35
+        '    ScreenMapy = 26
+        'End If
 
         'then the window
-        FrmGame.ClientSize = New Drawing.Size((ScreenMapx) * PicX + PicX, (ScreenMapy) * PicY + PicY)
+        FrmGame.ClientSize = New Drawing.Size(1080, 600)
         FrmGame.picscreen.Width = (ScreenMapx) * PicX + PicX
         FrmGame.picscreen.Height = (ScreenMapy) * PicY + PicY
 
@@ -242,11 +242,11 @@ Module C_General
         'Then we can recalculate the positions
 
         'chatwindow
-        ChatWindowX = 1
-        ChatWindowY = FrmGame.Height - ChatWindowGfxInfo.Height - 65
+        ChatWindowX = 300
+        ChatWindowY = 50
 
-        MyChatX = 24
-        MyChatY = FrmGame.Height - 60
+        MyChatX = 324
+        MyChatY = ChatWindowGfxInfo.Height + 55
 
         'hotbar
         'If Settings.ScreenSize = 0 Then

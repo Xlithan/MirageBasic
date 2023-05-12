@@ -87,9 +87,9 @@ Module C_Trade
         Select Case tradestatus
             Case 0 ' clear
             Case 1 ' they've accepted
-                AddText(Language.Trade.StatusOther, ColorType.White)
+                AddText(Language.Trade.StatusOther, Color.White)
             Case 2 ' you've accepted
-                AddText(Language.Trade.StatusSelf, ColorType.White)
+                AddText(Language.Trade.StatusSelf, Color.White)
         End Select
 
         buffer.Dispose()

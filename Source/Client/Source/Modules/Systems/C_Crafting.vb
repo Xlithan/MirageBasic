@@ -207,7 +207,7 @@ Friend Module C_Crafting
         'enough ingredients?
         For i = 1 To MAX_INGREDIENT
             If Recipe(recipeindex).Ingredients(i).ItemNum > 0 AndAlso HasItem(Myindex, Recipe(recipeindex).Ingredients(i).ItemNum) < (amount * Recipe(recipeindex).Ingredients(i).Value) Then
-                AddText(Language.Crafting.NotEnough, ColorType.Red)
+                AddText(Language.Crafting.NotEnough, Color.Red)
                 Exit Sub
             End If
         Next

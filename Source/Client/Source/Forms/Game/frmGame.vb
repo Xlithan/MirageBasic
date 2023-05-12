@@ -4,15 +4,15 @@ Friend Class FrmGame
 
 #Region "Frm Code"
 
-    Private Const CpNocloseButton As Integer = &H200
+    'Private Const CpNocloseButton As Integer = &H200
 
-    Protected Overrides ReadOnly Property CreateParams() As CreateParams
-        Get
-            Dim myCp As CreateParams = MyBase.CreateParams
-            myCp.ClassStyle = myCp.ClassStyle Or CpNocloseButton
-            Return myCp
-        End Get
-    End Property
+    'Protected Overrides ReadOnly Property CreateParams() As CreateParams
+    '    Get
+    '        Dim myCp As CreateParams = MyBase.CreateParams
+    '        myCp.ClassStyle = myCp.ClassStyle Or CpNocloseButton
+    '        Return myCp
+    '    End Get
+    'End Property
 
     Private Sub FrmMainGame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         RePositionGui()
@@ -132,7 +132,7 @@ Friend Class FrmGame
 
     End Sub
 
-    Private Sub LblCurrencyOk_Click(sender As Object, e As EventArgs) Handles lblCurrencyOk.Click
+    Private Sub LblCurrencyOk_Click(sender As Object, e As EventArgs)
         If IsNumeric(txtCurrency.Text) Then
             Select Case CurrencyMenu
                 Case 1 ' drop item
@@ -150,6 +150,35 @@ Friend Class FrmGame
         TmpCurrencyItem = 0
         txtCurrency.Text = ""
         CurrencyMenu = 0 ' clear
+    End Sub
+
+    Private Sub BtnInventory_Click(sender As Object, e As EventArgs) Handles BtnInventory.Click
+        'C_General.UpdateInvList()
+
+        BtnInventory.BackColor = System.Drawing.Color.FromArgb((CInt(((CByte((48)))))), (CInt(((CByte((164)))))), (CInt(((CByte((95)))))))
+        BtnSkills.BackColor = System.Drawing.Color.FromArgb((CInt(((CByte((27)))))), (CInt(((CByte((59)))))), (CInt(((CByte((40)))))))
+        lstInv.Show()
+        lstSkills.Hide()
+    End Sub
+
+    Private Sub BtnSkills_Click(sender As Object, e As EventArgs) Handles BtnSkills.Click
+        'C_General.UpdateSkillList()
+
+        BtnInventory.BackColor = System.Drawing.Color.FromArgb((CInt(((CByte((27)))))), (CInt(((CByte((59)))))), (CInt(((CByte((40)))))))
+        BtnSkills.BackColor = System.Drawing.Color.FromArgb((CInt(((CByte((48)))))), (CInt(((CByte((164)))))), (CInt(((CByte((95)))))))
+        lstInv.Hide()
+        lstSkills.Show()
+    End Sub
+
+    Private Sub BtnAction5_Click(sender As Object, e As EventArgs) Handles BtnAction5.Click
+        pnlDialog.Location = New System.Drawing.Point(205, 31)
+        pnlDialog.Visible = True
+        pnlRoomDesc.Visible = False
+    End Sub
+
+    Private Sub BtnDialogClose_Click(sender As Object, e As EventArgs) Handles BtnDialogClose.Click
+        pnlDialog.Visible = False
+        pnlRoomDesc.Visible = True
     End Sub
 
 #End Region

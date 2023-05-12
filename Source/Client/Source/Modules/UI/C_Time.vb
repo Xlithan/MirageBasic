@@ -17,19 +17,19 @@ Friend Module C_Time
 
         Select Case Time.Instance.TimeOfDay
             Case TimeOfDay.Dawn
-                AddText("A chilling, refreshing, breeze has come with the morning.", ColorType.BrightBlue)
+                AddText("A chilling, refreshing, breeze has come with the morning.", Color.AliceBlue)
                 Exit Select
 
             Case TimeOfDay.Day
-                AddText("Day has dawned in this region.", ColorType.Yellow)
+                AddText("Day has dawned in this region.", Color.Yellow)
                 Exit Select
 
             Case TimeOfDay.Dusk
-                AddText("Dusk has begun darkening the skies...", ColorType.BrightRed)
+                AddText("Dusk has begun darkening the skies...", Color.AliceBlue)
                 Exit Select
 
             Case Else
-                AddText("Night has fallen upon the weary travelers.", ColorType.DarkGray)
+                AddText("Night has fallen upon the weary travelers.", Color.DarkGray)
                 Exit Select
         End Select
 

@@ -103,6 +103,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Source\Controls\customButton.Designer.vb">
+      <DependentUpon>customButton.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Source\Controls\customButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Source\Forms\Editors\FrmEditor_Animation.Designer.vb">
       <DependentUpon>FrmEditor_Animation.vb</DependentUpon>
     </Compile>

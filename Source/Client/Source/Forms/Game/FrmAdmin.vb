@@ -15,7 +15,7 @@
     Private Sub BtnAdminWarpTo_Click(sender As Object, e As EventArgs) Handles btnAdminWarpTo.Click
 
         If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -23,13 +23,13 @@
         If nudAdminMap.Value > 0 AndAlso nudAdminMap.Value <= MAX_MAPS Then
             WarpTo(nudAdminMap.Value)
         Else
-            AddText("Invalid map number.", ColorType.BrightRed)
+            AddText("Invalid map number.", Color.PaleVioletRed)
         End If
     End Sub
 
     Private Sub BtnAdminBan_Click(sender As Object, e As EventArgs) Handles btnAdminBan.Click
         If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -40,7 +40,7 @@
 
     Private Sub BtnAdminKick_Click(sender As Object, e As EventArgs) Handles btnAdminKick.Click
         If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -51,7 +51,7 @@
 
     Private Sub BtnAdminWarp2Me_Click(sender As Object, e As EventArgs) Handles btnAdminWarp2Me.Click
         If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -64,7 +64,7 @@
 
     Private Sub BtnAdminWarpMe2_Click(sender As Object, e As EventArgs) Handles btnAdminWarpMe2.Click
         If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -81,7 +81,7 @@
 
     Private Sub BtnAdminSetAccess_Click(sender As Object, e As EventArgs) Handles btnAdminSetAccess.Click
         If GetPlayerAccess(Myindex) < AdminType.Creator Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -98,7 +98,7 @@
 
     Private Sub BtnAdminSetSprite_Click(sender As Object, e As EventArgs) Handles btnAdminSetSprite.Click
         If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -113,7 +113,7 @@
 
     Private Sub btnAnimationEditor_Click(sender As Object, e As EventArgs) Handles btnAnimationEditor.Click
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -123,7 +123,7 @@
 
     Private Sub btnClassEditor_Click(sender As Object, e As EventArgs) Handles btnClassEditor.Click
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -133,7 +133,7 @@
 
     Private Sub btnhouseEditor_Click(sender As Object, e As EventArgs) Handles btnhouseEditor.Click
         If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -142,7 +142,7 @@
 
     Private Sub btnItemEditor_Click(sender As Object, e As EventArgs) Handles btnItemEditor.Click
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -152,7 +152,7 @@
 
     Private Sub btnMapAuto_Click(sender As Object, e As EventArgs) Handles btnAutoMapper.Click
         If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -161,7 +161,7 @@
 
     Private Sub BtnMapEditor_Click(sender As Object, e As EventArgs) Handles btnMapEditor.Click
         If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -170,7 +170,7 @@
 
     Private Sub btnNPCEditor_Click(sender As Object, e As EventArgs) Handles btnNPCEditor.Click
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -180,7 +180,7 @@
 
     Private Sub btnPetEditor_Click(sender As Object, e As EventArgs) Handles btnPetEditor.Click
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -190,7 +190,7 @@
 
     Private Sub btnProjectiles_Click(sender As Object, e As EventArgs) Handles btnProjectiles.Click
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -200,7 +200,7 @@
 
     Private Sub btnQuest_Click(sender As Object, e As EventArgs) Handles btnQuest.Click
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -210,7 +210,7 @@
 
     Private Sub btnRecipeEditor_Click(sender As Object, e As EventArgs) Handles btnRecipeEditor.Click
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -220,7 +220,7 @@
 
     Private Sub btnResourceEditor_Click(sender As Object, e As EventArgs) Handles btnResourceEditor.Click
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -230,7 +230,7 @@
 
     Private Sub btnShopEditor_Click(sender As Object, e As EventArgs) Handles btnShopEditor.Click
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -240,7 +240,7 @@
 
     Private Sub btnSkillEditor_Click(sender As Object, e As EventArgs) Handles btnSkillEditor.Click
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -254,7 +254,7 @@
 
     Private Sub BtnMapReport_Click(sender As Object, e As EventArgs) Handles btnMapReport.Click
         If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
         SendRequestMapreport()
@@ -262,7 +262,7 @@
 
     Private Sub LstMaps_DoubleClick(sender As Object, e As EventArgs) Handles lstMaps.DoubleClick
         If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -270,7 +270,7 @@
         If lstMaps.FocusedItem.Index + 1 > 0 AndAlso lstMaps.FocusedItem.Index + 1 <= MAX_MAPS Then
             WarpTo(lstMaps.FocusedItem.Index + 1)
         Else
-            AddText("Invalid map number: " & lstMaps.FocusedItem.Index + 1, QColorType.AlertColor)
+            AddText("Invalid map number: " & lstMaps.FocusedItem.Index + 1, Color.OrangeRed)
         End If
     End Sub
 
@@ -288,7 +288,7 @@
 
     Private Sub BtnSpawnItem_Click(sender As Object, e As EventArgs) Handles btnSpawnItem.Click
         If GetPlayerAccess(Myindex) < AdminType.Creator Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -297,7 +297,7 @@
 
     Private Sub BtnLevelUp_Click(sender As Object, e As EventArgs) Handles btnLevelUp.Click
         If GetPlayerAccess(Myindex) < AdminType.Developer Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -307,7 +307,7 @@
 
     Private Sub BtnALoc_Click(sender As Object, e As EventArgs) Handles btnALoc.Click
         If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 
@@ -316,7 +316,7 @@
 
     Private Sub BtnRespawn_Click(sender As Object, e As EventArgs) Handles btnRespawn.Click
         If GetPlayerAccess(Myindex) < AdminType.Mapper Then
-            AddText("You need to be a high enough staff member to do this!", QColorType.AlertColor)
+            AddText("You need to be a high enough staff member to do this!", Color.OrangeRed)
             Exit Sub
         End If
 

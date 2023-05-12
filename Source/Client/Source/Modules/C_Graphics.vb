@@ -1020,7 +1020,7 @@ Module C_Graphics
             text = Chat(i).Text
 
             If text <> "" Then ' or not
-                DrawText(ChatWindowX + x, ChatWindowY + y, text, GetSfmlColor(Chat(i).Color), SFML.Graphics.Color.Black, GameWindow)
+                'DrawText(ChatWindowX + x, ChatWindowY + y, text, GetSfmlColor(Chat(i).Color), SFML.Graphics.Color.Black, GameWindow)
                 y = y + ChatLineSpacing + 1
             End If
 
@@ -1588,7 +1588,7 @@ Module C_Graphics
     End Sub
 
     Friend Sub Render_Graphics()
-        Dim x As Integer, y As Integer, I As Integer
+        Dim x As Integer, y As Integer ', I As Integer
 
         'Don't Render IF
         If FrmGame.WindowState = FormWindowState.Minimized Then Exit Sub
@@ -1597,7 +1597,7 @@ Module C_Graphics
         'lets get going
 
         'update view around player
-        UpdateCamera()
+        'UpdateCamera()
 
         'let program do other things
         Application.DoEvents()
@@ -1612,219 +1612,219 @@ Module C_Graphics
         '    End If
         'End If
 
-        If NumPanorama > 0 AndAlso Map.Panorama > 0 Then
-            DrawPanorama(Map.Panorama)
-        End If
+        'If NumPanorama > 0 AndAlso Map.Panorama > 0 Then
+        'DrawPanorama(Map.Panorama)
+        'End If
 
-        If NumParallax > 0 AndAlso Map.Parallax > 0 Then
-            DrawParallax(Map.Parallax)
-        End If
+        'If NumParallax > 0 AndAlso Map.Parallax > 0 Then
+        'DrawParallax(Map.Parallax)
+        'End If
 
         ' blit lower tiles
-        If NumTileSets > 0 Then
+        'If NumTileSets > 0 Then
 
-            For x = TileView.Left To TileView.Right + 1
-                For y = TileView.Top To TileView.Bottom + 1
-                    If IsValidMapPoint(x, y) Then
-                        DrawMapTile(x, y)
-                    End If
-                Next
-            Next
-        End If
+        '    For x = TileView.Left To TileView.Right + 1
+        '        For y = TileView.Top To TileView.Bottom + 1
+        '            If IsValidMapPoint(x, y) Then
+        '                DrawMapTile(x, y)
+        '            End If
+        '        Next
+        '    Next
+        'End If
 
         ' Furniture
-        If FurnitureHouse > 0 Then
-            If FurnitureHouse = Player(Myindex).InHouse Then
-                If FurnitureCount > 0 Then
-                    For I = 1 To FurnitureCount
-                        If Furniture(I).ItemNum > 0 Then
-                            DrawFurniture(I, 0)
-                        End If
-                    Next
-                End If
-            End If
-        End If
+        'If FurnitureHouse > 0 Then
+        '    If FurnitureHouse = Player(Myindex).InHouse Then
+        '        If FurnitureCount > 0 Then
+        '            For I = 1 To FurnitureCount
+        '                If Furniture(I).ItemNum > 0 Then
+        '                    DrawFurniture(I, 0)
+        '                End If
+        '            Next
+        '        End If
+        '    End If
+        'End If
 
         ' events
-        If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
+        'If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
 
-            For I = 1 To Map.CurrentEvents
-                If Map.MapEvents(I).Position = 0 Then
-                    DrawEvent(I)
-                End If
-            Next
-        End If
+        '    For I = 1 To Map.CurrentEvents
+        '        If Map.MapEvents(I).Position = 0 Then
+        '            DrawEvent(I)
+        '        End If
+        '    Next
+        'End If
 
         'blood
-        For I = 1 To Byte.MaxValue
-            DrawBlood(I)
-        Next
+        'For I = 1 To Byte.MaxValue
+        '    DrawBlood(I)
+        'Next
 
         ' Draw out the items
-        If NumItems > 0 Then
-            For I = 1 To MAX_MAP_ITEMS
-                If MapItem(I).Num > 0 Then
-                    DrawItem(I)
-                End If
-            Next
-        End If
+        'If NumItems > 0 Then
+        '    For I = 1 To MAX_MAP_ITEMS
+        '        If MapItem(I).Num > 0 Then
+        '            DrawItem(I)
+        '        End If
+        '    Next
+        'End If
 
         'Draw sum d00rs.
         If GettingMap Then Exit Sub
 
-        For x = TileView.Left To TileView.Right
-            For y = TileView.Top To TileView.Bottom
-                If IsValidMapPoint(x, y) Then
-                    If Map.Tile Is Nothing Then Exit Sub
-                    If Map.Tile(x, y).Type = TileType.Door Then
-                        DrawDoor(x, y)
-                    End If
-                End If
-            Next
-        Next
+        'For x = TileView.Left To TileView.Right
+        '    For y = TileView.Top To TileView.Bottom
+        '        If IsValidMapPoint(x, y) Then
+        '            If Map.Tile Is Nothing Then Exit Sub
+        '            If Map.Tile(x, y).Type = TileType.Door Then
+        '                DrawDoor(x, y)
+        '            End If
+        '        End If
+        '    Next
+        'Next
 
         ' draw animations
-        If NumAnimations > 0 Then
-            For I = 1 To Byte.MaxValue
-                If AnimInstance(I).Used(0) Then
-                    DrawAnimation(I, 0)
-                End If
-            Next
-        End If
+        'If NumAnimations > 0 Then
+        '    For I = 1 To Byte.MaxValue
+        '        If AnimInstance(I).Used(0) Then
+        '            DrawAnimation(I, 0)
+        '        End If
+        '    Next
+        'End If
 
         ' Y-based render. Renders Players, Npcs and Resources based on Y-axis.
-        For y = 0 To Map.MaxY
+        'For y = 0 To Map.MaxY
 
-            If NumCharacters > 0 Then
-                ' Players
-                For I = 1 To TotalOnline 'MAX_PLAYERS
-                    If IsPlaying(I) AndAlso GetPlayerMap(I) = GetPlayerMap(Myindex) Then
-                        If Player(I).Y = y Then
-                            DrawPlayer(I)
-                        End If
-                        If PetAlive(I) Then
-                            If Player(I).Pet.Y = y Then
-                                DrawPet(I)
-                            End If
-                        End If
-                    End If
-                Next
+        '    If NumCharacters > 0 Then
+        '        ' Players
+        '        For I = 1 To TotalOnline 'MAX_PLAYERS
+        '            If IsPlaying(I) AndAlso GetPlayerMap(I) = GetPlayerMap(Myindex) Then
+        '                If Player(I).Y = y Then
+        '                    DrawPlayer(I)
+        '                End If
+        '                If PetAlive(I) Then
+        '                    If Player(I).Pet.Y = y Then
+        '                        DrawPet(I)
+        '                    End If
+        '                End If
+        '            End If
+        '        Next
 
-                ' Npcs
-                For I = 1 To MAX_MAP_NPCS
-                    If MapNpc(I).Y = y Then
-                        DrawNpc(I)
-                    End If
-                Next
+        '        ' Npcs
+        '        For I = 1 To MAX_MAP_NPCS
+        '            If MapNpc(I).Y = y Then
+        '                DrawNpc(I)
+        '            End If
+        '        Next
 
-                ' events
-                If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
-                    For I = 1 To Map.CurrentEvents
-                        If Map.MapEvents(I).Position = 1 Then
-                            If y = Map.MapEvents(I).Y Then
-                                DrawEvent(I)
-                            End If
-                        End If
-                    Next
-                End If
+        '        ' events
+        '        If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
+        '            For I = 1 To Map.CurrentEvents
+        '                If Map.MapEvents(I).Position = 1 Then
+        '                    If y = Map.MapEvents(I).Y Then
+        '                        DrawEvent(I)
+        '                    End If
+        '                End If
+        '            Next
+        '        End If
 
-                ' Draw the target icon
-                If MyTarget > 0 Then
-                    If MyTargetType = TargetType.Player Then
-                        DrawTarget(Player(MyTarget).X * 32 - 16 + Player(MyTarget).XOffset, Player(MyTarget).Y * 32 + Player(MyTarget).YOffset)
-                    ElseIf MyTargetType = TargetType.Npc Then
-                        DrawTarget(MapNpc(MyTarget).X * 32 - 16 + MapNpc(MyTarget).XOffset, MapNpc(MyTarget).Y * 32 + MapNpc(MyTarget).YOffset)
-                    ElseIf MyTargetType = TargetType.Pet Then
-                        DrawTarget(Player(MyTarget).Pet.X * 32 - 16 + Player(MyTarget).Pet.XOffset, (Player(MyTarget).Pet.Y * 32) + Player(MyTarget).Pet.YOffset)
-                    End If
-                End If
+        '        ' Draw the target icon
+        '        If MyTarget > 0 Then
+        '            If MyTargetType = TargetType.Player Then
+        '                DrawTarget(Player(MyTarget).X * 32 - 16 + Player(MyTarget).XOffset, Player(MyTarget).Y * 32 + Player(MyTarget).YOffset)
+        '            ElseIf MyTargetType = TargetType.Npc Then
+        '                DrawTarget(MapNpc(MyTarget).X * 32 - 16 + MapNpc(MyTarget).XOffset, MapNpc(MyTarget).Y * 32 + MapNpc(MyTarget).YOffset)
+        '            ElseIf MyTargetType = TargetType.Pet Then
+        '                DrawTarget(Player(MyTarget).Pet.X * 32 - 16 + Player(MyTarget).Pet.XOffset, (Player(MyTarget).Pet.Y * 32) + Player(MyTarget).Pet.YOffset)
+        '            End If
+        '        End If
 
-                For I = 1 To TotalOnline 'MAX_PLAYERS
-                    If IsPlaying(I) Then
-                        If Player(I).Map = Player(Myindex).Map Then
-                            If CurX = Player(I).X AndAlso CurY = Player(I).Y Then
-                                If MyTargetType = TargetType.Player AndAlso MyTarget = I Then
-                                    ' dont render lol
-                                Else
-                                    DrawHover(Player(I).X * 32 - 16, Player(I).Y * 32 + Player(I).YOffset)
-                                End If
-                            End If
+        '        For I = 1 To TotalOnline 'MAX_PLAYERS
+        '            If IsPlaying(I) Then
+        '                If Player(I).Map = Player(Myindex).Map Then
+        '                    If CurX = Player(I).X AndAlso CurY = Player(I).Y Then
+        '                        If MyTargetType = TargetType.Player AndAlso MyTarget = I Then
+        '                            ' dont render lol
+        '                        Else
+        '                            DrawHover(Player(I).X * 32 - 16, Player(I).Y * 32 + Player(I).YOffset)
+        '                        End If
+        '                    End If
 
-                        End If
-                    End If
-                Next
-            End If
+        '                End If
+        '            End If
+        '        Next
+        '    End If
 
-            ' Resources
-            If NumResources > 0 Then
-                If ResourcesInit Then
-                    If ResourceIndex > 0 Then
-                        For I = 1 To ResourceIndex
-                            If MapResource(I).Y = y Then
-                                DrawMapResource(I)
-                            End If
-                        Next
-                    End If
-                End If
-            End If
-        Next
+        '    ' Resources
+        '    If NumResources > 0 Then
+        '        If ResourcesInit Then
+        '            If ResourceIndex > 0 Then
+        '                For I = 1 To ResourceIndex
+        '                    If MapResource(I).Y = y Then
+        '                        DrawMapResource(I)
+        '                    End If
+        '                Next
+        '            End If
+        '        End If
+        '    End If
+        'Next
 
         ' animations
-        If NumAnimations > 0 Then
-            For I = 1 To Byte.MaxValue
-                If AnimInstance(I - 1).Used(1) Then
-                    DrawAnimation(I - 1, 1)
-                End If
-            Next
-        End If
+        'If NumAnimations > 0 Then
+        '    For I = 1 To Byte.MaxValue
+        '        If AnimInstance(I - 1).Used(1) Then
+        '            DrawAnimation(I - 1, 1)
+        '        End If
+        '    Next
+        'End If
 
         'projectiles
-        If NumProjectiles > 0 Then
-            For I = 1 To MaxProjectiles
-                If MapProjectiles(I).ProjectileNum > 0 Then
-                    DrawProjectile(I)
-                End If
-            Next
-        End If
+        'If NumProjectiles > 0 Then
+        '    For I = 1 To MaxProjectiles
+        '        If MapProjectiles(I).ProjectileNum > 0 Then
+        '            DrawProjectile(I)
+        '        End If
+        '    Next
+        'End If
 
         'events
-        If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
-            For I = 1 To Map.CurrentEvents
-                If Map.MapEvents(I).Position = 2 Then
-                    DrawEvent(I)
-                End If
-            Next
-        End If
+        'If Map.CurrentEvents > 0 AndAlso Map.CurrentEvents <= Map.EventCount Then
+        '    For I = 1 To Map.CurrentEvents
+        '        If Map.MapEvents(I).Position = 2 Then
+        '            DrawEvent(I)
+        '        End If
+        '    Next
+        'End If
 
         ' blit out upper tiles
-        If NumTileSets > 0 Then
-            For x = TileView.Left To TileView.Right + 1
-                For y = TileView.Top To TileView.Bottom + 1
-                    If IsValidMapPoint(x, y) Then
-                        DrawMapFringeTile(x, y)
-                    End If
-                Next
-            Next
-        End If
+        'If NumTileSets > 0 Then
+        '    For x = TileView.Left To TileView.Right + 1
+        '        For y = TileView.Top To TileView.Bottom + 1
+        '            If IsValidMapPoint(x, y) Then
+        '                DrawMapFringeTile(x, y)
+        '            End If
+        '        Next
+        '    Next
+        'End If
 
         ' Furniture
-        If FurnitureHouse > 0 Then
-            If FurnitureHouse = Player(Myindex).InHouse Then
-                If FurnitureCount > 0 Then
-                    For I = 1 To FurnitureCount
-                        If Furniture(I).ItemNum > 0 Then
-                            DrawFurniture(I, 1)
-                        End If
-                    Next
-                End If
-            End If
-        End If
+        'If FurnitureHouse > 0 Then
+        '    If FurnitureHouse = Player(Myindex).InHouse Then
+        '        If FurnitureCount > 0 Then
+        '            For I = 1 To FurnitureCount
+        '                If Furniture(I).ItemNum > 0 Then
+        '                    DrawFurniture(I, 1)
+        '                End If
+        '            Next
+        '        End If
+        '    End If
+        'End If
 
-        DrawNight()
+        'DrawNight()
 
-        DrawWeather()
-        DrawThunderEffect()
-        DrawMapTint()
+        'DrawWeather()
+        'DrawThunderEffect()
+        'DrawMapTint()
 
         ' Draw out a square at mouse cursor
         If MapGrid = True AndAlso InMapEditor Then
@@ -1844,11 +1844,11 @@ Module C_Graphics
         If InMapEditor Then FrmEditor_MapEditor.DrawTileOutline()
 
         'furniture
-        If FurnitureSelected > 0 Then
-            If Player(Myindex).InHouse = Myindex Then
-                DrawFurnitureOutline()
-            End If
-        End If
+        'If FurnitureSelected > 0 Then
+        '    If Player(Myindex).InHouse = Myindex Then
+        '        DrawFurnitureOutline()
+        '    End If
+        'End If
 
         ' draw cursor, player X and Y locations
         If BLoc Then
@@ -1858,46 +1858,46 @@ Module C_Graphics
         End If
 
         ' draw player names
-        For I = 1 To TotalOnline 'MAX_PLAYERS
-            If IsPlaying(I) AndAlso GetPlayerMap(I) = GetPlayerMap(Myindex) Then
-                DrawPlayerName(I)
-                If PetAlive(I) Then
-                    DrawPlayerPetName(I)
-                End If
-            End If
-        Next
+        'For I = 1 To TotalOnline 'MAX_PLAYERS
+        '    If IsPlaying(I) AndAlso GetPlayerMap(I) = GetPlayerMap(Myindex) Then
+        '        DrawPlayerName(I)
+        '        If PetAlive(I) Then
+        '            DrawPlayerPetName(I)
+        '        End If
+        '    End If
+        'Next
 
         'draw event names
-        For I = 1 To Map.CurrentEvents
-            If Map.MapEvents(I).Visible = 1 Then
-                If Map.MapEvents(I).ShowName = 1 Then
-                    DrawEventName(I)
-                End If
-            End If
-        Next
+        'For I = 1 To Map.CurrentEvents
+        '    If Map.MapEvents(I).Visible = 1 Then
+        '        If Map.MapEvents(I).ShowName = 1 Then
+        '            DrawEventName(I)
+        '        End If
+        '    End If
+        'Next
 
         ' draw npc names
-        For I = 1 To MAX_MAP_NPCS
-            If MapNpc(I).Num > 0 Then
-                DrawNpcName(I)
-            End If
-        Next
+        'For I = 1 To MAX_MAP_NPCS
+        '    If MapNpc(I).Num > 0 Then
+        '        DrawNpcName(I)
+        '    End If
+        'Next
 
-        If CurrentFog > 0 Then
-            DrawFog()
-        End If
+        'If CurrentFog > 0 Then
+        '    DrawFog()
+        'End If
 
         ' draw the messages
-        For I = 1 To Byte.MaxValue
-            If ChatBubble(I).Active Then
-                DrawChatBubble(I)
-            End If
-        Next
+        'For I = 1 To Byte.MaxValue
+        '    If ChatBubble(I).Active Then
+        '        DrawChatBubble(I)
+        '    End If
+        'Next
 
         'action msg
-        For I = 1 To Byte.MaxValue
-            DrawActionMsg(I)
-        Next
+        'For I = 1 To Byte.MaxValue
+        '    DrawActionMsg(I)
+        'Next
 
         ' Blit out map attributes
         If InMapEditor Then
@@ -1912,7 +1912,7 @@ Module C_Graphics
         If GettingMap Then Exit Sub
 
         'draw hp and casting bars
-        DrawBars()
+        'DrawBars()
 
         'party
         DrawParty()
@@ -1920,7 +1920,7 @@ Module C_Graphics
         'Render GUI
         DrawGui()
 
-        DrawMapFade()
+        'DrawMapFade()
 
         'and finally show everything on screen
         GameWindow.Display()

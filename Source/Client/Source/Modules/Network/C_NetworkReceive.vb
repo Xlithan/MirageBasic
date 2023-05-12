@@ -443,7 +443,7 @@ Module C_NetworkReceive
 
         buffer.Dispose()
 
-        AddText(msg, QColorType.GlobalColor)
+        AddText(msg, Color.GreenYellow)
     End Sub
 
     Private Sub Packet_MapMessage(ByRef data() As Byte)
@@ -454,7 +454,7 @@ Module C_NetworkReceive
 
         buffer.Dispose()
 
-        AddText(msg, QColorType.BroadcastColor)
+        AddText(msg, Color.GreenYellow)
 
     End Sub
 
@@ -475,12 +475,12 @@ Module C_NetworkReceive
     End Sub
 
     Private Sub Packet_PlayerMessage(ByRef data() As Byte)
-        Dim msg As String, colour As Integer
+        Dim msg As String, colour As System.Drawing.Color
         Dim buffer As New ByteStream(data)
 
         msg = Trim(buffer.ReadString)
 
-        colour = buffer.ReadInt32
+        colour = buffer.ReadObject
 
         buffer.Dispose()
 
@@ -728,7 +728,7 @@ Module C_NetworkReceive
         message = Trim(buffer.ReadString)
         header = Trim(buffer.ReadString)
 
-        AddText(header & name & ": " & message, QColorType.SayColor)
+        AddText(header & name & ": " & message, Color.WhiteSmoke)
 
         buffer.Dispose()
     End Sub
