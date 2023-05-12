@@ -1,6 +1,5 @@
 Thumbs.db
 *.obj
-*.exe
 *.pdb
 *.user
 *.aps
@@ -30,8 +29,22 @@ _ReSharper*/
 $tf*/
 *.db
 [Tt]est*/
-Build/
-Source/Editors/Source/Forms/Forms.rar
-Source/Server/My Project/app.manifest
-/.vs/Orion+ Game Engine/v16/Server/sqlite3/db.lock
-/.vs/Orion+ Game Engine/v16/Server/sqlite3/storage.ide
+/build/
+*.bin
+*.dat
+*.vsidx
+*.v2
+*.v1
+*.lock
+*.opendb
+*.db-shm
+*.db-wal
+*.DS_Store
+*.v5
+*.1
+*.txt
+*.pubxml
+*.json
+*.xml
+*.idea
+*.vs
